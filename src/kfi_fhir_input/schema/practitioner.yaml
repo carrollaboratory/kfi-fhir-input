@@ -1,0 +1,36 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+name: kfi-fhir-input-practitioner 
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  Practitioner:
+    title: FHIR Practitioner Resource Content
+    description: For our purposes, this will be an investigator.
+    is_a: Record
+    slots:
+      - name 
+      - email 
+      - institution
+      - title
+slots:
+  name:
+    title: Name
+    description: Name of the entity.
+    range: string
+    required: false
+  email:
+    title: Email Address
+    description: An email address to reach the entity.
+    range: string
+    required: false
+  institution:
+    title: Institution
+    description: Name of the institution this record is associated with.
+    range: string
+    required: false
+  title:
+    title: Title 
+    description: The title of the Investigator, eg, "Assistant Professor"
+    range: string
+    required: false

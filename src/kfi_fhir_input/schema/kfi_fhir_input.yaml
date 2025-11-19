@@ -1,0 +1,50 @@
+---
+id: https://carrollaboratory.github.io/kif-fhir-input
+name: kfi-fhir-input
+title: KF/Include FHIR Input Model
+description: |-
+  DBT Output Schema for FHIR Ingest
+license: MIT
+see_also:
+  - https://carrollaboratory.github.io/kif-fhir-input
+
+prefixes:
+  kfi_fhir_sparks: https://carrollaboratory.github.io/kif-fhir-input
+  linkml: https://w3id.org/linkml/
+  # I think the linter is wrong on this one, but we'll use the recommendation
+  # to quiet the warnings. 
+  # biolink: https://biolink.github.io/biolink-model/
+  biolink: https://w3id.org/biolink/vocab/
+
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: http://www.example.org/rdf#
+default_prefix: kfi_fhir_sparks
+default_range: string
+
+imports:
+  - linkml:types
+  - practitioner
+
+classes:
+  Record:
+    description: One row / entity within the database
+    title: Record
+    abstract: true
+    slots:
+    - id 
+    - external_id
+slots:
+  id:
+    title: ID
+    description: Global ID for this record
+    identifier: true
+    required: true
+    range: string
+    multivalued: false 
+  external_id: 
+    title: External Identifiers
+    description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
+    required: false 
+    range: uriorcurie 
+    multivalued: true 

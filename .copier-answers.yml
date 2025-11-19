@@ -1,0 +1,15 @@
+# Changes here will be overwritten by Copier
+_commit: v0.4.1
+_src_path: https://github.com/linkml/linkml-project-copier
+add_example: true
+copyright_year: '2025'
+email: eric.s.torstenson@vumc.org
+full_name: Eric Torstenson
+gh_action_docs_preview: false
+gh_action_pypi: false
+github_org: carrollaboratory
+license: MIT
+project_description: Source table for FHIR ETL for KF and INCLUDE
+project_name: kfi-fhir-input
+project_slug: kfi_fhir_input
+
