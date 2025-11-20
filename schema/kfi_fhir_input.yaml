@@ -7,6 +7,7 @@ id: https://carrollaboratory.github.io/kif-fhir-input
 imports:
 - linkml:types
 - practitioner
+- associated_party
 - kfi_fhir_input
 - institution
 license: MIT
@@ -14,6 +15,9 @@ prefixes:
   kfi_fhir_sparks:
     prefix_prefix: kfi_fhir_sparks
     prefix_reference: https://carrollaboratory.github.io/kif-fhir-input
+  hl7_rsp_role:
+    prefix_prefix: hl7_rsp_role
+    prefix_reference: http://hl7.org/fhir/research-study-party-role
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
@@ -300,6 +304,66 @@ types:
     base: str
     uri: xsd:string
     repr: str
+enums:
+  EnumResearchStudyPartyOrganizationType:
+    name: EnumResearchStudyPartyOrganizationType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyOrganizationType
+    description: Research Study Party Organization Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    permissible_values:
+      nih:
+        text: nih
+        meaning: hl7_rsp_org_type:nih
+        title: NIH
+      fda:
+        text: fda
+        meaning: hl7_rsp_org_type:fda
+        title: fda
+  EnumResearchStudyPartyRole:
+    name: EnumResearchStudyPartyRole
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyRole
+    description: This is a ResearchStudy's party role.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    permissible_values:
+      sponsor:
+        text: sponsor
+        meaning: hl7_rsp_role:sponsor
+        title: sponsor
+      lead_sponsor:
+        text: lead_sponsor
+        meaning: hl7_rsp_role:lead-sponsor
+        title: lead-sponsor
+      sponsor_investigator:
+        text: sponsor_investigator
+        meaning: hl7_rsp_role:sponsor-investigator
+      primary_investigator:
+        text: primary_investigator
+        meaning: hl7_rsp_role:primary-investigator
+      collaborator:
+        text: collaborator
+        meaning: hl7_rsp_role:collaborator
+      funding_source:
+        text: funding_source
+        meaning: hl7_rsp_role:funding-source
+      general_contact:
+        text: general_contact
+        meaning: hl7_rsp_role:general=contact
+      recruitment_contact:
+        text: recruitment_contact
+        meaning: hl7_rsp_role:recruitment-contact
+      sub_investigator:
+        text: sub_investigator
+        meaning: hl7_rsp_role:sub-investigator
+      study_director:
+        text: study_director
+        meaning: hl7_rsp_role:study-director
+      study_chair:
+        text: study_chair
+        meaning: hl7_rsp_role:study-chair
+      irb:
+        text: irb
+        meaning: hl7_rsp_role:irb
+        title: Institutional Review Board
 slots:
   id:
     name: id
@@ -339,6 +403,7 @@ slots:
     owner: Institution
     domain_of:
     - Practitioner
+    - AssociatedParty
     - Institution
     range: string
     required: false
@@ -394,7 +459,84 @@ slots:
     - Practitioner
     range: string
     required: false
+  role:
+    name: role
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/role
+    description: Research Study Party Role
+    title: Role
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/role
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: EnumResearchStudyPartyRole
+    required: false
+  period_start:
+    name: period_start
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_start
+    description: Start attribute for a FHIR period data type.
+    title: Period Start
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_start
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: datetime
+    required: false
+    multivalued: true
+  period_end:
+    name: period_end
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_end
+    description: End attribute for a FHIR period data type.
+    title: Period End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_end
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: datetime
+    required: false
+    multivalued: true
+  classifier:
+    name: classifier
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/classifier
+    description: Research Study Party Organization Type (what type of institution
+      is party)
+    title: Classifier
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/classifier
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: EnumResearchStudyPartyOrganizationType
+    required: false
+    multivalued: true
+  party:
+    name: party
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/party
+    description: Individual or organization associated with study
+    title: Associated Party
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/party
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: Any
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: Practitioner
+    - range: Institution
 classes:
+  Any:
+    name: Any
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputAny
+    description: This is a placeholder for the experimental linkml:any behavior for
+      unions
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    mappings:
+    - linkml:Any
+    class_uri: linkml:Any
   Record:
     name: Record
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputRecord
@@ -426,13 +568,35 @@ classes:
     - description
     - title
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/Practitioner
+  AssociatedParty:
+    name: AssociatedParty
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/AssociatedParty
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
+    description: Sponsors, collaborators, and other parties affiliated with a research
+      study.
+    title: Associated Party
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    is_a: Record
+    slots:
+    - id
+    - external_id
+    - name
+    - role
+    - period_start
+    - period_end
+    - classifier
+    - party
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/AssociatedParty
   Institution:
     name: Institution
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
     annotations:
       fhir_resource:
         tag: fhir_resource
-        value: Institution
+        value: Organization
     description: Institution related to study or research personnel
     title: Research Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
@@ -444,7 +608,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-20T21:01:56'
-source_file_size: 1395
-generation_date: '2025-11-20T21:02:06'
+source_file_date: '2025-11-20T22:18:42'
+source_file_size: 1601
+generation_date: '2025-11-20T22:18:50'
 

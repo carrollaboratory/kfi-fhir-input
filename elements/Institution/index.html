@@ -347,6 +347,12 @@
 <td>range</td>
 <td><a href="./">Institution</a></td>
 </tr>
+<tr>
+<td><a href="../AssociatedParty/">AssociatedParty</a></td>
+<td><a href="../party/">party</a></td>
+<td>any_of[range]</td>
+<td><a href="./">Institution</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -361,7 +367,7 @@
 <tbody>
 <tr>
 <td>fhir_resource</td>
-<td>Institution</td>
+<td>Organization</td>
 </tr>
 </tbody>
 </table>
@@ -396,7 +402,7 @@
 annotations:
   fhir_resource:
     tag: fhir_resource
-    value: Institution
+    value: Organization
 description: Institution related to study or research personnel
 title: Research Institution
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -412,7 +418,7 @@ slots:
 annotations:
   fhir_resource:
     tag: fhir_resource
-    value: Institution
+    value: Organization
 description: Institution related to study or research personnel
 title: Research Institution
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -429,6 +435,7 @@ attributes:
     domain_of:
     - Practitioner
     - Institution
+    - AssociatedParty
     range: string
     required: false
   id:

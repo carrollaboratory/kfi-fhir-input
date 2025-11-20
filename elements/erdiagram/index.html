@@ -173,6 +173,18 @@
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
 <div class="mermaid">erDiagram
+Any {
+
+}
+AssociatedParty {
+    string name  
+    EnumResearchStudyPartyRole role  
+    datetimeList period_start  
+    datetimeList period_end  
+    EnumResearchStudyPartyOrganizationTypeList classifier  
+    string id  
+    uriorcurieList external_id  
+}
 Institution {
     string name  
     string id  
@@ -191,6 +203,7 @@ Record {
     uriorcurieList external_id  
 }
 
+AssociatedParty ||--|o Any : "party"
 Practitioner ||--|o Institution : "institution_id"
 
 </div>
