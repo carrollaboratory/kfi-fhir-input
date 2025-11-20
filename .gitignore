@@ -5,8 +5,10 @@
 
 # Derived schemas, generated from the schema.yaml
 tmp/
-project/
+project/*
+!project/sqlschema/
 !project/README.md
+!project/data-dictionary
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
