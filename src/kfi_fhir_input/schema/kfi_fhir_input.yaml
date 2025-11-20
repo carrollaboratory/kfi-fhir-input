@@ -48,3 +48,8 @@ slots:
     required: false 
     range: uriorcurie 
     multivalued: true 
+  name:
+    title: Name
+    description: Name of the entity.
+    range: string
+    required: false

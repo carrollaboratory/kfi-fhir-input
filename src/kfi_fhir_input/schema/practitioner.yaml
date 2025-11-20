@@ -3,21 +3,25 @@ name: kfi-fhir-input-practitioner
 imports:
   - linkml:types 
   - kfi_fhir_input
+  - institution
 classes:
   Practitioner:
     title: FHIR Practitioner Resource Content
     description: For our purposes, this will be an investigator.
     is_a: Record
+    annotations:
+      fhir_resource: Practitioner 
     slots:
       - name 
       - email 
       - institution
+      - description
       - title
 slots:
-  name:
-    title: Name
-    description: Name of the entity.
-    range: string
+  description:
+    title: Description 
+    description: Note relating to who this person is in relation to the study 
+    range: string 
     required: false
   email:
     title: Email Address
@@ -26,8 +30,11 @@ slots:
     required: false
   institution:
     title: Institution
-    description: Name of the institution this record is associated with.
-    range: string
+    description: The institution this record is associated with.
+    range: Institution 
+    annotations: 
+      db_column: institution_id 
+      target_slot: id 
     required: false
   title:
     title: Title 

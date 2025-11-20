@@ -1,0 +1,14 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/institution
+name: kfi-fhir-input-institution 
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  Institution:
+    title: Research Institution 
+    description: Institution related to study or research personnel
+    is_a: Record 
+    annotations:
+      fhir_resource: Institution
+    slots:
+      - name          # Institution.name
