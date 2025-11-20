@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-20T14:32:52
+# Generation date: 2025-11-20T15:41:22
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -66,6 +66,7 @@ version = None
 PATO = CurieNamespace('PATO', 'http://purl.obolibrary.org/obo/PATO_')
 BIOLINK = CurieNamespace('biolink', 'https://w3id.org/biolink/vocab/')
 EXAMPLE = CurieNamespace('example', 'http://www.example.org/rdf#')
+HL7_RSP_ROLE = CurieNamespace('hl7_rsp_role', 'http://hl7.org/fhir/research-study-party-role')
 KFI_FHIR_SPARKS = CurieNamespace('kfi_fhir_sparks', 'https://carrollaboratory.github.io/kif-fhir-input')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 SCHEMA = CurieNamespace('schema', 'http://schema.org/')
@@ -130,7 +131,7 @@ class Practitioner(Record):
     id: Union[str, PractitionerId] = None
     name: Optional[str] = None
     email: Optional[str] = None
-    institution: Optional[Union[str, InstitutionId]] = None
+    institution_id: Optional[Union[str, InstitutionId]] = None
     description: Optional[str] = None
     title: Optional[str] = None
 
@@ -146,8 +147,8 @@ class Practitioner(Record):
         if self.email is not None and not isinstance(self.email, str):
             self.email = str(self.email)
 
-        if self.institution is not None and not isinstance(self.institution, InstitutionId):
-            self.institution = InstitutionId(self.institution)
+        if self.institution_id is not None and not isinstance(self.institution_id, InstitutionId):
+            self.institution_id = InstitutionId(self.institution_id)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -207,8 +208,8 @@ slots.description = Slot(uri="str(uriorcurie)", name="description", curie=None,
 slots.email = Slot(uri="str(uriorcurie)", name="email", curie=None,
                    model_uri=KFI_FHIR_SPARKS.email, domain=None, range=Optional[str])
 
-slots.institution = Slot(uri="str(uriorcurie)", name="institution", curie=None,
-                   model_uri=KFI_FHIR_SPARKS.institution, domain=None, range=Optional[Union[str, InstitutionId]])
+slots.institution_id = Slot(uri="str(uriorcurie)", name="institution_id", curie=None,
+                   model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionId]])
 
 slots.title = Slot(uri="str(uriorcurie)", name="title", curie=None,
                    model_uri=KFI_FHIR_SPARKS.title, domain=None, range=Optional[str])

@@ -9,6 +9,6 @@ classes:
     description: Institution related to study or research personnel
     is_a: Record 
     annotations:
-      fhir_resource: Institution
+      fhir_resource: Organization
     slots:
       - name          # Institution.name

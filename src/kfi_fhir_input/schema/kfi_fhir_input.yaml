@@ -10,6 +10,7 @@ see_also:
 
 prefixes:
   kfi_fhir_sparks: https://carrollaboratory.github.io/kif-fhir-input
+  hl7_rsp_role: http://hl7.org/fhir/research-study-party-role
   linkml: https://w3id.org/linkml/
   # I think the linter is wrong on this one, but we'll use the recommendation
   # to quiet the warnings. 
@@ -25,8 +26,11 @@ default_range: string
 imports:
   - linkml:types
   - practitioner
-
+  - associated_party
 classes:
+  Any:
+    class_uri: linkml:Any
+    description: This is a placeholder for the experimental linkml:any behavior for unions
   Record:
     description: One row / entity within the database
     title: Record

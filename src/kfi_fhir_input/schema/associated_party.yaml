@@ -1,0 +1,92 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+name: kfi-fhir-input- 
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+  - practitioner 
+  - institution
+classes:
+  AssociatedParty:
+    title: Associated Party 
+    description: Sponsors, collaborators, and other parties affiliated with a research study.
+    is_a: Record 
+    annotations:
+      fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
+    slots:
+      - name 
+      - role 
+      - period_start
+      - period_end 
+      - classifier
+      - party 
+slots: 
+  role: 
+    title: Role 
+    description: Research Study Party Role 
+    range: EnumResearchStudyPartyRole
+    required: false 
+  period_start: 
+    title: Period Start 
+    description: Start attribute for a FHIR period data type. 
+    range: datetime
+    required: false
+    multivalued: true 
+  period_end: 
+    title: Period End 
+    description: End attribute for a FHIR period data type. 
+    range: datetime
+    required: false
+    multivalued: true 
+  classifier: 
+    title: Classifier 
+    description: Research Study Party Organization Type (what type of institution is party)
+    range: EnumResearchStudyPartyOrganizationType
+    required: false 
+    multivalued: true 
+  party:
+    title: Associated Party 
+    description: Individual or organization associated with study 
+    range: Any
+    any_of: 
+      - range: Practitioner 
+      - range: Institution
+enums:
+  EnumResearchStudyPartyOrganizationType:
+    description: Research Study Party Organization Type 
+    permissible_values:
+      nih: 
+        title: NIH 
+        meaning: hl7_rsp_org_type:nih 
+      fda: 
+        title: fda
+        meaning: hl7_rsp_org_type:fda 
+  EnumResearchStudyPartyRole:
+    description: This is a ResearchStudy's party role.
+    permissible_values:
+      sponsor:
+        title: sponsor 
+        meaning: hl7_rsp_role:sponsor
+      lead_sponsor:
+        title: lead-sponsor
+        meaning: hl7_rsp_role:lead-sponsor
+      sponsor_investigator:
+        meaning: hl7_rsp_role:sponsor-investigator
+      primary_investigator:
+        meaning: hl7_rsp_role:primary-investigator
+      collaborator:
+        meaning: hl7_rsp_role:collaborator
+      funding_source:
+        meaning: hl7_rsp_role:funding-source
+      general_contact:
+        meaning: hl7_rsp_role:general=contact
+      recruitment_contact:
+        meaning: hl7_rsp_role:recruitment-contact
+      sub_investigator:
+        meaning: hl7_rsp_role:sub-investigator
+      study_director:
+        meaning: hl7_rsp_role:study-director
+      study_chair:
+        meaning: hl7_rsp_role:study-chair
+      irb:
+        title: Institutional Review Board
+        meaning: hl7_rsp_role:irb

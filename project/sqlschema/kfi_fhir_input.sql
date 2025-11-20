@@ -56,4 +56,4 @@ CREATE TABLE "Practitioner_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("Practitioner_id", external_id),
 	FOREIGN KEY("Practitioner_id") REFERENCES "Practitioner" (id)
-);CREATE INDEX "ix_Practitioner_external_id_Practitioner_id" ON "Practitioner_external_id" ("Practitioner_id");CREATE INDEX "ix_Practitioner_external_id_external_id" ON "Practitioner_external_id" (external_id);
+);CREATE INDEX "ix_Practitioner_external_id_external_id" ON "Practitioner_external_id" (external_id);CREATE INDEX "ix_Practitioner_external_id_Practitioner_id" ON "Practitioner_external_id" ("Practitioner_id");

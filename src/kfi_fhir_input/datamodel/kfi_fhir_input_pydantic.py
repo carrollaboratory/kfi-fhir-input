@@ -91,6 +91,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                               'prefix_reference': 'https://w3id.org/biolink/vocab/'},
                   'example': {'prefix_prefix': 'example',
                               'prefix_reference': 'http://www.example.org/rdf#'},
+                  'hl7_rsp_role': {'prefix_prefix': 'hl7_rsp_role',
+                                   'prefix_reference': 'http://hl7.org/fhir/research-study-party-role'},
                   'kfi_fhir_sparks': {'prefix_prefix': 'kfi_fhir_sparks',
                                       'prefix_reference': 'https://carrollaboratory.github.io/kif-fhir-input'},
                   'linkml': {'prefix_prefix': 'linkml',
@@ -125,8 +127,7 @@ class Practitioner(Record):
 
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution']} })
     email: Optional[str] = Field(default=None, title="Email Address", description="""An email address to reach the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
-    institution: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'institution_id'},
-                         'target_slot': {'tag': 'target_slot', 'value': 'id'}},
+    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot', 'value': 'id'}},
          'domain_of': ['Practitioner']} })
     description: Optional[str] = Field(default=None, title="Description", description="""Note relating to who this person is in relation to the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
@@ -139,7 +140,7 @@ class Institution(Record):
     Institution related to study or research personnel
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'Institution'}},
+                                           'value': 'Organization'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/institution',
          'title': 'Research Institution'})
 
