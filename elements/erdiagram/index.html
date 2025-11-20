@@ -5,10 +5,12 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/Record/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/erdiagram/" rel="canonical"/>
+<link href="../" rel="prev"/>
+<link href="../../about/" rel="next"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>Class: Record (Record) - kfi-fhir-input</title>
+<title>ER Diagram - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,9 +25,6 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-record-record">
-          Skip to content
-        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -47,7 +46,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Record (Record)
+              ER Diagram
             
           </span>
 </div>
@@ -132,8 +131,9 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="../erdiagram/">
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<a class="md-nav__link md-nav__link--active" href="./">
 <span class="md-ellipsis">
     
   
@@ -165,229 +165,35 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
-<label class="md-nav__title" for="__toc">
-<span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#slots">
-<span class="md-ellipsis">
-      
-        Slots
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#identifier-and-mapping-information">
-<span class="md-ellipsis">
-      
-        Identifier and Mapping Information
-      
-    </span>
-</a>
-<nav aria-label="Identifier and Mapping Information" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#schema-source">
-<span class="md-ellipsis">
-      
-        Schema Source
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#mappings">
-<span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#linkml-source">
-<span class="md-ellipsis">
-      
-        LinkML Source
-      
-    </span>
-</a>
-<nav aria-label="LinkML Source" class="md-nav">
-<ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#direct">
-<span class="md-ellipsis">
-      
-        Direct
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="#induced">
-<span class="md-ellipsis">
-      
-        Induced
-      
-    </span>
-</a>
-</li>
-</ul>
-</nav>
-</li>
-</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-record-record">Class: Record (Record)</h1>
-<p><em>One row / entity within the database</em></p>
-<ul>
-<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
-</ul>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputRecord">kfi_fhir_sparks:Record</a></p>
-<div class="mermaid"> classDiagram
-    class Record
-    click Record href "../Record/"
-      Record &lt;|-- Practitioner
-        click Practitioner href "../Practitioner/"
-      Record &lt;|-- Institution
-        click Institution href "../Institution/"
+<h1>ER Diagram</h1>
+<div class="mermaid">erDiagram
+Institution {
+    string name  
+    string id  
+    uriorcurieList external_id  
+}
+Practitioner {
+    string name  
+    string email  
+    string description  
+    string title  
+    string id  
+    uriorcurieList external_id  
+}
+Record {
+    string id  
+    uriorcurieList external_id  
+}
 
-      Record : external_id
-
-      Record : id
-
+Practitioner ||--|o Institution : "institution"
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><strong>Record</strong><ul>
-<li><a href="../Practitioner/">Practitioner</a></li>
-<li><a href="../Institution/">Institution</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="slots">Slots</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Cardinality and Range</th>
-<th>Description</th>
-<th>Inheritance</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Global ID for this record</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="schema-source">Schema Source</h3>
-<ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
-</ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:Record</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:Record</td>
-</tr>
-</tbody>
-</table>
-<h2 id="linkml-source">LinkML Source</h2>
-<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
-<h3 id="direct">Direct</h3>
-<details>
-<pre><code class="language-yaml">name: Record
-description: One row / entity within the database
-title: Record
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
-abstract: true
-slots:
-- id
-- external_id
-
-</code></pre>
-</details>
-<h3 id="induced">Induced</h3>
-<details>
-<pre><code class="language-yaml">name: Record
-description: One row / entity within the database
-title: Record
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
-abstract: true
-attributes:
-  id:
-    name: id
-    description: Global ID for this record
-    title: ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    identifier: true
-    alias: id
-    owner: Record
-    domain_of:
-    - Record
-    range: string
-    required: true
-    multivalued: false
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: external_id
-    owner: Record
-    domain_of:
-    - Record
-    range: uriorcurie
-    required: false
-    multivalued: true
-
-</code></pre>
-</details>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
