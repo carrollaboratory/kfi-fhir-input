@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Institution (institution) - kfi-fhir-input</title>
+        <title>Slot: Institution (institution_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-institution-institution" class="md-skip">
+        <a href="#slot-institution-institution_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Institution (institution)
+              Slot: Institution (institution_id)
             
           </span>
         </div>
@@ -427,10 +427,10 @@
   
 
 
-<h1 id="slot-institution-institution">Slot: Institution (institution)</h1>
+<h1 id="slot-institution-institution_id">Slot: Institution (institution_id)</h1>
 <p><em>The institution this record is associated with.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution">kfi_fhir_sparks:institution</a>
-Alias: institution</p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution_id">kfi_fhir_sparks:institution_id</a>
+Alias: institution_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -465,10 +465,6 @@ Alias: institution</p>
 </thead>
 <tbody>
 <tr>
-<td>db_column</td>
-<td>institution_id</td>
-</tr>
-<tr>
 <td>target_slot</td>
 <td>id</td>
 </tr>
@@ -489,22 +485,19 @@ Alias: institution</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:institution</td>
+<td>kfi_fhir_sparks:institution_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:institution</td>
+<td>kfi_fhir_sparks:institution_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: institution
+<pre><code class="language-yaml">name: institution_id
 annotations:
-  db_column:
-    tag: db_column
-    value: institution_id
   target_slot:
     tag: target_slot
     value: id
@@ -512,7 +505,7 @@ description: The institution this record is associated with.
 title: Institution
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: institution
+alias: institution_id
 domain_of:
 - Practitioner
 range: Institution

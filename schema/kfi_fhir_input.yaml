@@ -366,20 +366,17 @@ slots:
     - Practitioner
     range: string
     required: false
-  institution:
-    name: institution
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/institution
+  institution_id:
+    name: institution_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/institution_id
     annotations:
-      db_column:
-        tag: db_column
-        value: institution_id
       target_slot:
         tag: target_slot
         value: id
     description: The institution this record is associated with.
     title: Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/institution
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/institution_id
     owner: Practitioner
     domain_of:
     - Practitioner
@@ -425,7 +422,7 @@ classes:
     - external_id
     - name
     - email
-    - institution
+    - institution_id
     - description
     - title
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/Practitioner
@@ -447,7 +444,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-20T20:50:37'
+source_file_date: '2025-11-20T21:01:56'
 source_file_size: 1395
-generation_date: '2025-11-20T20:50:49'
+generation_date: '2025-11-20T21:02:06'
 

@@ -283,13 +283,13 @@
 
       Practitioner : id
 
-      Practitioner : institution
+      Practitioner : institution_id
 
 
 
 
 
-        Practitioner --&gt; "0..1" Institution : institution
+        Practitioner --&gt; "0..1" Institution : institution_id
         click Institution href "../Institution/"
 
 
@@ -331,7 +331,7 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../institution/">institution</a></td>
+<td><a href="../institution_id/">institution_id</a></td>
 <td>0..1 <br/> <a href="../Institution/">Institution</a></td>
 <td>The institution this record is associated with</td>
 <td>direct</td>
@@ -417,7 +417,7 @@ is_a: Record
 slots:
 - name
 - email
-- institution
+- institution_id
 - description
 - title
 
@@ -460,12 +460,9 @@ attributes:
     - Practitioner
     range: string
     required: false
-  institution:
-    name: institution
+  institution_id:
+    name: institution_id
     annotations:
-      db_column:
-        tag: db_column
-        value: institution_id
       target_slot:
         tag: target_slot
         value: id
@@ -473,7 +470,7 @@ attributes:
     title: Institution
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: institution
+    alias: institution_id
     owner: Practitioner
     domain_of:
     - Practitioner
