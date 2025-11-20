@@ -11,15 +11,17 @@ see_also:
 prefixes:
   kfi_fhir_sparks: https://carrollaboratory.github.io/kif-fhir-input
   hl7_rsp_role: http://hl7.org/fhir/research-study-party-role
+  hl7_rsp_org_type: http://hl7.org/fhir/research-study-party-organization-type
+  kfi: https://carrollaboratory.github.io/kfi-fhir-input/
   linkml: https://w3id.org/linkml/
   # I think the linter is wrong on this one, but we'll use the recommendation
   # to quiet the warnings. 
   # biolink: https://biolink.github.io/biolink-model/
-  biolink: https://w3id.org/biolink/vocab/
+  #biolink: https://w3id.org/biolink/vocab/
 
-  schema: http://schema.org/
-  PATO: http://purl.obolibrary.org/obo/PATO_
-  example: http://www.example.org/rdf#
+  #schema: http://schema.org/
+  #PATO: http://purl.obolibrary.org/obo/PATO_
+  #example: http://www.example.org/rdf#
 default_prefix: kfi_fhir_sparks
 default_range: string
 
@@ -31,6 +33,7 @@ classes:
   Any:
     class_uri: linkml:Any
     description: This is a placeholder for the experimental linkml:any behavior for unions
+    abstract: true
   Record:
     description: One row / entity within the database
     title: Record

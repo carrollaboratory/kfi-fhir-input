@@ -82,26 +82,48 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
      'default_range': 'string',
      'description': 'DBT Output Schema for FHIR Ingest',
      'id': 'https://carrollaboratory.github.io/kif-fhir-input',
-     'imports': ['linkml:types', 'practitioner'],
+     'imports': ['linkml:types', 'practitioner', 'associated_party'],
      'license': 'MIT',
      'name': 'kfi-fhir-input',
-     'prefixes': {'PATO': {'prefix_prefix': 'PATO',
-                           'prefix_reference': 'http://purl.obolibrary.org/obo/PATO_'},
-                  'biolink': {'prefix_prefix': 'biolink',
-                              'prefix_reference': 'https://w3id.org/biolink/vocab/'},
-                  'example': {'prefix_prefix': 'example',
-                              'prefix_reference': 'http://www.example.org/rdf#'},
+     'prefixes': {'hl7_rsp_org_type': {'prefix_prefix': 'hl7_rsp_org_type',
+                                       'prefix_reference': 'http://hl7.org/fhir/research-study-party-organization-type'},
                   'hl7_rsp_role': {'prefix_prefix': 'hl7_rsp_role',
                                    'prefix_reference': 'http://hl7.org/fhir/research-study-party-role'},
+                  'kfi': {'prefix_prefix': 'kfi',
+                          'prefix_reference': 'https://carrollaboratory.github.io/kfi-fhir-input/'},
                   'kfi_fhir_sparks': {'prefix_prefix': 'kfi_fhir_sparks',
                                       'prefix_reference': 'https://carrollaboratory.github.io/kif-fhir-input'},
                   'linkml': {'prefix_prefix': 'linkml',
-                             'prefix_reference': 'https://w3id.org/linkml/'},
-                  'schema': {'prefix_prefix': 'schema',
-                             'prefix_reference': 'http://schema.org/'}},
+                             'prefix_reference': 'https://w3id.org/linkml/'}},
      'see_also': ['https://carrollaboratory.github.io/kif-fhir-input'],
      'source_file': 'src/kfi_fhir_input/schema/kfi_fhir_input.yaml',
      'title': 'KF/Include FHIR Input Model'} )
+
+class EnumResearchStudyPartyOrganizationType(str, Enum):
+    """
+    Research Study Party Organization Type
+    """
+    NIH = "nih"
+    fda = "fda"
+
+
+class EnumResearchStudyPartyRole(str, Enum):
+    """
+    This is a ResearchStudy's party role.
+    """
+    sponsor = "sponsor"
+    lead_sponsor = "lead_sponsor"
+    sponsor_investigator = "sponsor_investigator"
+    primary_investigator = "primary_investigator"
+    collaborator = "collaborator"
+    funding_source = "funding_source"
+    general_contact = "general_contact"
+    recruitment_contact = "recruitment_contact"
+    sub_investigator = "sub_investigator"
+    study_director = "study_director"
+    study_chair = "study_chair"
+    Institutional_Review_Board = "irb"
+
 
 
 class Record(ConfiguredBaseModel):
@@ -125,7 +147,7 @@ class Practitioner(Record):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner',
          'title': 'FHIR Practitioner Resource Content'})
 
-    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution']} })
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'AssociatedParty']} })
     email: Optional[str] = Field(default=None, title="Email Address", description="""An email address to reach the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot', 'value': 'id'}},
          'domain_of': ['Practitioner']} })
@@ -144,7 +166,27 @@ class Institution(Record):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/institution',
          'title': 'Research Institution'})
 
-    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution']} })
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'AssociatedParty']} })
+    id: str = Field(default=..., title="ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+
+
+class AssociatedParty(Record):
+    """
+    Sponsors, collaborators, and other parties affiliated with a research study.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/associated_party',
+         'title': 'Associated Party'})
+
+    name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'AssociatedParty']} })
+    role: Optional[EnumResearchStudyPartyRole] = Field(default=None, title="Role", description="""Research Study Party Role""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
+    period_start: Optional[list[datetime ]] = Field(default=[], title="Period Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
+    period_end: Optional[list[datetime ]] = Field(default=[], title="Period End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
+    classifier: Optional[list[EnumResearchStudyPartyOrganizationType]] = Field(default=[], title="Classifier", description="""Research Study Party Organization Type (what type of institution is party)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
+    party: Optional[str] = Field(default=None, title="Associated Party", description="""Individual or organization associated with study""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'Practitioner'}, {'range': 'Institution'}],
+         'domain_of': ['AssociatedParty']} })
     id: str = Field(default=..., title="ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
@@ -154,3 +196,4 @@ class Institution(Record):
 Record.model_rebuild()
 Practitioner.model_rebuild()
 Institution.model_rebuild()
+AssociatedParty.model_rebuild()

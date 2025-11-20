@@ -18,21 +18,15 @@ prefixes:
   hl7_rsp_role:
     prefix_prefix: hl7_rsp_role
     prefix_reference: http://hl7.org/fhir/research-study-party-role
+  hl7_rsp_org_type:
+    prefix_prefix: hl7_rsp_org_type
+    prefix_reference: http://hl7.org/fhir/research-study-party-organization-type
+  kfi:
+    prefix_prefix: kfi
+    prefix_reference: https://carrollaboratory.github.io/kfi-fhir-input/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
-  biolink:
-    prefix_prefix: biolink
-    prefix_reference: https://w3id.org/biolink/vocab/
-  schema:
-    prefix_prefix: schema
-    prefix_reference: http://schema.org/
-  PATO:
-    prefix_prefix: PATO
-    prefix_reference: http://purl.obolibrary.org/obo/PATO_
-  example:
-    prefix_prefix: example
-    prefix_reference: http://www.example.org/rdf#
 default_prefix: kfi_fhir_sparks
 default_range: string
 types:
@@ -536,6 +530,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     mappings:
     - linkml:Any
+    abstract: true
     class_uri: linkml:Any
   Record:
     name: Record
@@ -608,7 +603,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-20T16:14:16'
-source_file_size: 1601
-generation_date: '2025-11-20T16:16:15'
+source_file_date: '2025-11-20T16:31:18'
+source_file_size: 1761
+generation_date: '2025-11-20T16:31:25'
 
