@@ -3,7 +3,7 @@
 -- # Class: Practitioner Description: For our purposes, this will be an investigator.
 --     * Slot: name Description: Name of the entity.
 --     * Slot: email Description: An email address to reach the entity.
---     * Slot: institution Description: The institution this record is associated with.
+--     * Slot: institution_id Description: The institution this record is associated with.
 --     * Slot: description Description: Note relating to who this person is in relation to the study
 --     * Slot: title Description: The title of the Investigator, eg, "Assistant Professor"
 --     * Slot: id Description: Global ID for this record
@@ -32,12 +32,12 @@ CREATE TABLE "Institution" (
 CREATE TABLE "Practitioner" (
 	name TEXT,
 	email TEXT,
-	institution TEXT,
+	institution_id TEXT,
 	description TEXT,
 	title TEXT,
 	id TEXT NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY(institution) REFERENCES "Institution" (id)
+	FOREIGN KEY(institution_id) REFERENCES "Institution" (id)
 );CREATE INDEX "ix_Practitioner_id" ON "Practitioner" (id);
 CREATE TABLE "Record_external_id" (
 	"Record_id" TEXT,
@@ -56,4 +56,4 @@ CREATE TABLE "Practitioner_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("Practitioner_id", external_id),
 	FOREIGN KEY("Practitioner_id") REFERENCES "Practitioner" (id)
-);CREATE INDEX "ix_Practitioner_external_id_external_id" ON "Practitioner_external_id" (external_id);CREATE INDEX "ix_Practitioner_external_id_Practitioner_id" ON "Practitioner_external_id" ("Practitioner_id");
+);CREATE INDEX "ix_Practitioner_external_id_Practitioner_id" ON "Practitioner_external_id" ("Practitioner_id");CREATE INDEX "ix_Practitioner_external_id_external_id" ON "Practitioner_external_id" (external_id);

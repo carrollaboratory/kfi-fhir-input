@@ -14,7 +14,7 @@ classes:
     slots:
       - name 
       - email 
-      - institution
+      - institution_id
       - description
       - title
 slots:
@@ -28,12 +28,11 @@ slots:
     description: An email address to reach the entity.
     range: string
     required: false
-  institution:
+  institution_id:
     title: Institution
     description: The institution this record is associated with.
     range: Institution 
     annotations: 
-      db_column: institution_id 
       target_slot: id 
     required: false
   title:
