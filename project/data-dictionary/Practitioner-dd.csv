@@ -1,7 +1,7 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
 name,Name of the entity.,string,,,,,
 email,An email address to reach the entity.,string,,,,,
-institution,The institution this record is associated with.,string,,,,,Foreign Key: Institution.id
+institution_id,The institution this record is associated with.,string,,,,,Foreign Key: Institution.id
 description,Note relating to who this person is in relation to the study,string,,,,,
 title,"The title of the Investigator, eg, ""Assistant Professor""",string,,,,,
 id,Global ID for this record,string,,,,,
