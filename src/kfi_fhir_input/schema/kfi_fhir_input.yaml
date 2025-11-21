@@ -29,6 +29,10 @@ imports:
   - linkml:types
   - practitioner
   - associated_party
+  - institution
+  - period 
+  - practitioner_role 
+  - practitioner
 classes:
   Any:
     class_uri: linkml:Any
@@ -65,4 +69,11 @@ slots:
     title: Name
     description: Name of the entity.
     range: string
+    required: false
+  practitioner_role_id:
+    title: Practitioner Role ID
+    description: Global ID for this record
+    range: PractitionerRole  
+    annotations: 
+      target_slot: practitioner_role_id 
     required: false

@@ -8,9 +8,11 @@ imports:
 - linkml:types
 - practitioner
 - associated_party
-- kfi_fhir_input
 - institution
 - period
+- practitioner_role
+- practitioner
+- kfi_fhir_input
 license: MIT
 prefixes:
   kfi_fhir_sparks:
@@ -402,6 +404,22 @@ slots:
     - Institution
     range: string
     required: false
+  practitioner_role_id:
+    name: practitioner_role_id
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputpractitioner_role_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: practitioner_role_id
+    description: Global ID for this record
+    title: Practitioner Role ID
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:practitioner_role_id
+    owner: Practitioner
+    domain_of:
+    - Practitioner
+    range: PractitionerRole
+    required: false
   description:
     name: description
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/description
@@ -421,19 +439,6 @@ slots:
     title: Email Address
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/email
-    owner: Practitioner
-    domain_of:
-    - Practitioner
-    range: string
-    required: false
-  practitioner_role_id:
-    name: practitioner_role_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_role_id
-    description: The Global ID for the PractitionerRole that links a Practitioner
-      to their Institution.
-    title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_role_id
     owner: Practitioner
     domain_of:
     - Practitioner
@@ -459,6 +464,9 @@ slots:
     title: Practitioner ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    owner: PractitionerRole
+    domain_of:
+    - PractitionerRole
     range: string
     required: false
   role:
@@ -514,9 +522,10 @@ slots:
     title: Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
-    owner: Practitioner
+    owner: PractitionerRole
     domain_of:
     - Practitioner
+    - PractitionerRole
     range: Institution
     required: false
   period_id:
@@ -527,9 +536,10 @@ slots:
     title: Period
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    owner: AssociatedParty
+    owner: PractitionerRole
     domain_of:
     - AssociatedParty
+    - PractitionerRole
     range: Period
     required: false
   practitioner__practitioner_id:
@@ -596,6 +606,19 @@ slots:
     - Period
     range: datetime
     required: false
+  practitionerRole__practitioner_role_id:
+    name: practitionerRole__practitioner_role_id
+    description: Global ID for this record
+    title: Practitioner Role ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
+    identifier: true
+    alias: practitioner_role_id
+    owner: PractitionerRole
+    domain_of:
+    - PractitionerRole
+    range: string
+    required: true
   AssociatedParty_period_id:
     name: AssociatedParty_period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -755,9 +778,34 @@ classes:
         range: datetime
         required: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/Period
+  PractitionerRole:
+    name: PractitionerRole
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/PractitionerRole
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: PractitionerRole
+    description: PractitionerRole covers the recording of the location and types of
+      services that Practitioners are able to provide for an organization.
+    title: Practitioner Role
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
+    slots:
+    - institution_id
+    - practitioner_id
+    - period_id
+    - practitionerRole__practitioner_role_id
+    attributes:
+      practitioner_role_id:
+        name: practitioner_role_id
+        description: Global ID for this record
+        title: Practitioner Role ID
+        identifier: true
+        range: string
+        required: true
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/PractitionerRole
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-21T13:53:18'
-source_file_size: 1888
-generation_date: '2025-11-21T13:57:09'
+source_file_date: '2025-11-21T14:15:19'
+source_file_size: 2164
+generation_date: '2025-11-21T14:15:56'
 

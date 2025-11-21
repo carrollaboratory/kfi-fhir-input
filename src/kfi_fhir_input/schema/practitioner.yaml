@@ -4,6 +4,7 @@ imports:
   - linkml:types 
   - kfi_fhir_input
   - institution
+  - practitioner_role
 classes:
   Practitioner:
     title: FHIR Practitioner Resource Content
@@ -35,11 +36,6 @@ slots:
     title: Email Address
     description: An email address to reach the entity.
     range: string
-    required: false
-  practitioner_role_id:
-    title: Practitioner Role ID 
-    description: The Global ID for the PractitionerRole that links a Practitioner to their Institution. 
-    range: string 
     required: false
   title:
     title: Title 

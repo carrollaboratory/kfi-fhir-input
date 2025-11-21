@@ -24,11 +24,3 @@ classes:
       - practitioner_id 
       - period_id 
       # - practitioner_role 
-slots:
-  practitioner_role_id:
-    title: Practitioner Role ID
-    description: Global ID for this record
-    range: PractitionerRole  
-    annotations: 
-      target_slot: practitioner_id 
-    required: false
