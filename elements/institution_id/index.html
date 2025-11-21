@@ -444,6 +444,11 @@ Alias: institution_id</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../Institution/">Institution</a></td>
+<td>Institution related to study or research personnel</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Practitioner/">Practitioner</a></td>
 <td>For our purposes, this will be an investigator</td>
 <td>no</td>
@@ -466,7 +471,7 @@ Alias: institution_id</p>
 <tbody>
 <tr>
 <td>target_slot</td>
-<td>id</td>
+<td>institution_id</td>
 </tr>
 </tbody>
 </table>
@@ -500,7 +505,7 @@ Alias: institution_id</p>
 annotations:
   target_slot:
     tag: target_slot
-    value: id
+    value: institution_id
 description: The institution this record is associated with.
 title: Institution
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -508,6 +513,7 @@ rank: 1000
 alias: institution_id
 domain_of:
 - Practitioner
+- Institution
 range: Institution
 required: false
 
