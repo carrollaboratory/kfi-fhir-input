@@ -636,7 +636,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-21T16:44:04'
+source_file_date: '2025-11-21T17:17:43'
 source_file_size: 1761
-generation_date: '2025-11-21T16:44:14'
+generation_date: '2025-11-21T17:17:53'
 
