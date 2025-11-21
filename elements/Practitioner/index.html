@@ -307,6 +307,15 @@
 
       Practitioner : practitioner_role_id
 
+
+
+
+
+        Practitioner --&gt; "0..1" PractitionerRole : practitioner_role_id
+        click PractitionerRole href "../PractitionerRole/"
+
+
+
       Practitioner : title
 
 
@@ -349,8 +358,8 @@
 </tr>
 <tr>
 <td><a href="../practitioner_role_id/">practitioner_role_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The Global ID for the PractitionerRole that links a Practitioner to their Ins...</td>
+<td>0..1 <br/> <a href="../PractitionerRole/">PractitionerRole</a></td>
+<td>Global ID for this record</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -466,6 +475,7 @@ attributes:
     identifier: true
     domain_of:
     - Practitioner
+    - PractitionerRole
     range: string
     required: true
 
@@ -493,6 +503,7 @@ attributes:
     owner: Practitioner
     domain_of:
     - Practitioner
+    - PractitionerRole
     range: string
     required: true
   name:
@@ -505,8 +516,8 @@ attributes:
     owner: Practitioner
     domain_of:
     - Practitioner
-    - Institution
     - AssociatedParty
+    - Institution
     range: string
     required: false
   email:
@@ -536,12 +547,16 @@ attributes:
     domain_of:
     - Practitioner
     - Institution
+    - PractitionerRole
     range: Institution
     required: false
   practitioner_role_id:
     name: practitioner_role_id
-    description: The Global ID for the PractitionerRole that links a Practitioner
-      to their Institution.
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: practitioner_role_id
+    description: Global ID for this record
     title: Practitioner Role ID
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
@@ -549,7 +564,8 @@ attributes:
     owner: Practitioner
     domain_of:
     - Practitioner
-    range: string
+    - PractitionerRole
+    range: PractitionerRole
     required: false
   description:
     name: description

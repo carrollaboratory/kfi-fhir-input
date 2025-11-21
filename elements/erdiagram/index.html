@@ -197,11 +197,14 @@ Period {
 Practitioner {
     string name  
     string email  
-    string practitioner_role_id  
     string description  
     string title  
     string practitioner_id  
     uriorcurieList external_id  
+}
+PractitionerRole {
+    string practitioner_id  
+    string practitioner_role_id  
 }
 Record {
     string id  
@@ -211,6 +214,9 @@ Record {
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--}o Period : "period_id"
 Practitioner ||--|o Institution : "institution_id"
+Practitioner ||--|o PractitionerRole : "practitioner_role_id"
+PractitionerRole ||--|o Institution : "institution_id"
+PractitionerRole ||--|o Period : "period_id"
 
 </div>
 </article>

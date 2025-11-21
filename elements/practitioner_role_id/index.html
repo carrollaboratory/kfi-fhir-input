@@ -359,6 +359,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -417,7 +428,7 @@
 
 
 <h1 id="slot-practitioner-role-id-practitioner_role_id">Slot: Practitioner Role ID (practitioner_role_id)</h1>
-<p><em>The Global ID for the PractitionerRole that links a Practitioner to their Institution.</em></p>
+<p><em>Global ID for this record</em></p>
 <p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputpractitioner_role_id">kfi_fhir_sparks:practitioner_role_id</a>
 Alias: practitioner_role_id</p>
 <!-- no inheritance hierarchy -->
@@ -433,6 +444,11 @@ Alias: practitioner_role_id</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../PractitionerRole/">PractitionerRole</a></td>
+<td>PractitionerRole covers the recording of the location and types of services t...</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Practitioner/">Practitioner</a></td>
 <td>For our purposes, this will be an investigator</td>
 <td>no</td>
@@ -441,9 +457,24 @@ Alias: practitioner_role_id</p>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../PractitionerRole/">PractitionerRole</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target_slot</td>
+<td>practitioner_role_id</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -471,15 +502,19 @@ Alias: practitioner_role_id</p>
 <details>
 
 <pre><code class="language-yaml">name: practitioner_role_id
-description: The Global ID for the PractitionerRole that links a Practitioner to their
-  Institution.
+annotations:
+  target_slot:
+    tag: target_slot
+    value: practitioner_role_id
+description: Global ID for this record
 title: Practitioner Role ID
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
 alias: practitioner_role_id
 domain_of:
 - Practitioner
-range: string
+- PractitionerRole
+range: PractitionerRole
 required: false
 
 </code></pre>

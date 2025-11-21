@@ -353,6 +353,12 @@
 <td>any_of[range]</td>
 <td><a href="./">Institution</a></td>
 </tr>
+<tr>
+<td><a href="../PractitionerRole/">PractitionerRole</a></td>
+<td><a href="../institution_id/">institution_id</a></td>
+<td>range</td>
+<td><a href="./">Institution</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -419,6 +425,7 @@ attributes:
     domain_of:
     - Practitioner
     - Institution
+    - PractitionerRole
     range: string
     required: true
 
@@ -447,6 +454,7 @@ attributes:
     domain_of:
     - Practitioner
     - Institution
+    - PractitionerRole
     range: string
     required: true
   name:
@@ -459,8 +467,8 @@ attributes:
     owner: Institution
     domain_of:
     - Practitioner
-    - Institution
     - AssociatedParty
+    - Institution
     range: string
     required: false
   external_id:
