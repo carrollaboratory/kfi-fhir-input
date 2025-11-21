@@ -1,42 +1,33 @@
 id: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
-name: kfi-fhir-input- 
+name: kfi-fhir-input-associated-party
 imports:
   - linkml:types 
   - kfi_fhir_input
   - practitioner 
   - institution
+  - period 
 classes:
   AssociatedParty:
     title: Associated Party 
     description: Sponsors, collaborators, and other parties affiliated with a research study.
-    is_a: Record 
+    # is_a: HasExternalId 
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
     slots:
       - name 
       - role 
-      - period_start
-      - period_end 
+      - period_id 
       - classifier
       - party 
+    slot_usage:
+      period_id:
+        multivalued: true
 slots: 
   role: 
     title: Role 
     description: Research Study Party Role 
     range: EnumResearchStudyPartyRole
     required: false 
-  period_start: 
-    title: Period Start 
-    description: Start attribute for a FHIR period data type. 
-    range: datetime
-    required: false
-    multivalued: true 
-  period_end: 
-    title: Period End 
-    description: End attribute for a FHIR period data type. 
-    range: datetime
-    required: false
-    multivalued: true 
   classifier: 
     title: Classifier 
     description: Research Study Party Organization Type (what type of institution is party)

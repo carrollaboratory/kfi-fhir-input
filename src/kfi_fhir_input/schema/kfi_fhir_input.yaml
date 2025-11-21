@@ -34,13 +34,19 @@ classes:
     class_uri: linkml:Any
     description: This is a placeholder for the experimental linkml:any behavior for unions
     abstract: true
+  HasExternalId:
+    description: Has an external ID 
+    title: Has
+    abstract: true
+    slots: 
+      - external_id
   Record:
     description: One row / entity within the database
     title: Record
+    is_a: HasExternalId 
     abstract: true
     slots:
     - id 
-    - external_id
 slots:
   id:
     title: ID

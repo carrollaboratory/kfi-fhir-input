@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-21T10:40:10
+# Generation date: 2025-11-21T13:57:16
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -78,11 +78,7 @@ class RecordId(extended_str):
     pass
 
 
-class PractitionerId(RecordId):
-    pass
-
-
-class AssociatedPartyId(RecordId):
+class PractitionerPractitionerId(extended_str):
     pass
 
 
@@ -90,10 +86,36 @@ class InstitutionInstitutionId(extended_str):
     pass
 
 
+class PeriodPeriodId(extended_str):
+    pass
+
+
 Any = Any
 
 @dataclass(repr=False)
-class Record(YAMLRoot):
+class HasExternalId(YAMLRoot):
+    """
+    Has an external ID
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS["HasExternalId"]
+    class_class_curie: ClassVar[str] = "kfi_fhir_sparks:HasExternalId"
+    class_name: ClassVar[str] = "HasExternalId"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.HasExternalId
+
+    external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if not isinstance(self.external_id, list):
+            self.external_id = [self.external_id] if self.external_id is not None else []
+        self.external_id = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.external_id]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Record(HasExternalId):
     """
     One row / entity within the database
     """
@@ -105,7 +127,6 @@ class Record(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Record
 
     id: Union[str, RecordId] = None
-    external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -113,15 +134,11 @@ class Record(YAMLRoot):
         if not isinstance(self.id, RecordId):
             self.id = RecordId(self.id)
 
-        if not isinstance(self.external_id, list):
-            self.external_id = [self.external_id] if self.external_id is not None else []
-        self.external_id = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.external_id]
-
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class Practitioner(Record):
+class Practitioner(HasExternalId):
     """
     For our purposes, this will be an investigator.
     """
@@ -132,7 +149,7 @@ class Practitioner(Record):
     class_name: ClassVar[str] = "Practitioner"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Practitioner
 
-    id: Union[str, PractitionerId] = None
+    practitioner_id: Union[str, PractitionerPractitionerId] = None
     name: Optional[str] = None
     email: Optional[str] = None
     institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
@@ -141,10 +158,10 @@ class Practitioner(Record):
     title: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PractitionerId):
-            self.id = PractitionerId(self.id)
+        if self._is_empty(self.practitioner_id):
+            self.MissingRequiredField("practitioner_id")
+        if not isinstance(self.practitioner_id, PractitionerPractitionerId):
+            self.practitioner_id = PractitionerPractitionerId(self.practitioner_id)
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
@@ -168,7 +185,7 @@ class Practitioner(Record):
 
 
 @dataclass(repr=False)
-class AssociatedParty(Record):
+class AssociatedParty(YAMLRoot):
     """
     Sponsors, collaborators, and other parties affiliated with a research study.
     """
@@ -179,33 +196,22 @@ class AssociatedParty(Record):
     class_name: ClassVar[str] = "AssociatedParty"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AssociatedParty
 
-    id: Union[str, AssociatedPartyId] = None
     name: Optional[str] = None
     role: Optional[Union[str, "EnumResearchStudyPartyRole"]] = None
-    period_start: Optional[Union[Union[str, XSDDateTime], list[Union[str, XSDDateTime]]]] = empty_list()
-    period_end: Optional[Union[Union[str, XSDDateTime], list[Union[str, XSDDateTime]]]] = empty_list()
+    period_id: Optional[Union[Union[str, PeriodPeriodId], list[Union[str, PeriodPeriodId]]]] = empty_list()
     classifier: Optional[Union[Union[str, "EnumResearchStudyPartyOrganizationType"], list[Union[str, "EnumResearchStudyPartyOrganizationType"]]]] = empty_list()
     party: Optional[Union[dict, Any]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, AssociatedPartyId):
-            self.id = AssociatedPartyId(self.id)
-
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
 
         if self.role is not None and not isinstance(self.role, EnumResearchStudyPartyRole):
             self.role = EnumResearchStudyPartyRole(self.role)
 
-        if not isinstance(self.period_start, list):
-            self.period_start = [self.period_start] if self.period_start is not None else []
-        self.period_start = [v if isinstance(v, XSDDateTime) else XSDDateTime(v) for v in self.period_start]
-
-        if not isinstance(self.period_end, list):
-            self.period_end = [self.period_end] if self.period_end is not None else []
-        self.period_end = [v if isinstance(v, XSDDateTime) else XSDDateTime(v) for v in self.period_end]
+        if not isinstance(self.period_id, list):
+            self.period_id = [self.period_id] if self.period_id is not None else []
+        self.period_id = [v if isinstance(v, PeriodPeriodId) else PeriodPeriodId(v) for v in self.period_id]
 
         if not isinstance(self.classifier, list):
             self.classifier = [self.classifier] if self.classifier is not None else []
@@ -215,7 +221,7 @@ class AssociatedParty(Record):
 
 
 @dataclass(repr=False)
-class Institution(YAMLRoot):
+class Institution(HasExternalId):
     """
     Institution related to study or research personnel
     """
@@ -237,6 +243,37 @@ class Institution(YAMLRoot):
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Period(YAMLRoot):
+    """
+    Time period associated with some FHIR resource
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["period/Period"]
+    class_class_curie: ClassVar[str] = "kfi:period/Period"
+    class_name: ClassVar[str] = "Period"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Period
+
+    period_id: Union[str, PeriodPeriodId] = None
+    start: Optional[Union[str, XSDDateTime]] = None
+    end: Optional[Union[str, XSDDateTime]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.period_id):
+            self.MissingRequiredField("period_id")
+        if not isinstance(self.period_id, PeriodPeriodId):
+            self.period_id = PeriodPeriodId(self.period_id)
+
+        if self.start is not None and not isinstance(self.start, XSDDateTime):
+            self.start = XSDDateTime(self.start)
+
+        if self.end is not None and not isinstance(self.end, XSDDateTime):
+            self.end = XSDDateTime(self.end)
 
         super().__post_init__(**kwargs)
 
@@ -328,23 +365,17 @@ slots.description = Slot(uri=KFI['practitioner/description'], name="description"
 slots.email = Slot(uri=KFI['practitioner/email'], name="email", curie=KFI.curie('practitioner/email'),
                    model_uri=KFI_FHIR_SPARKS.email, domain=None, range=Optional[str])
 
-slots.institution_id = Slot(uri=KFI['practitioner/institution_id'], name="institution_id", curie=KFI.curie('practitioner/institution_id'),
-                   model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
-
 slots.practitioner_role_id = Slot(uri=KFI['practitioner/practitioner_role_id'], name="practitioner_role_id", curie=KFI.curie('practitioner/practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner_role_id, domain=None, range=Optional[str])
 
 slots.title = Slot(uri=KFI['practitioner/title'], name="title", curie=KFI.curie('practitioner/title'),
                    model_uri=KFI_FHIR_SPARKS.title, domain=None, range=Optional[str])
 
+slots.practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
+                   model_uri=KFI_FHIR_SPARKS.practitioner_id, domain=None, range=Optional[str])
+
 slots.role = Slot(uri=KFI['associated_party/role'], name="role", curie=KFI.curie('associated_party/role'),
                    model_uri=KFI_FHIR_SPARKS.role, domain=None, range=Optional[Union[str, "EnumResearchStudyPartyRole"]])
-
-slots.period_start = Slot(uri=KFI['associated_party/period_start'], name="period_start", curie=KFI.curie('associated_party/period_start'),
-                   model_uri=KFI_FHIR_SPARKS.period_start, domain=None, range=Optional[Union[Union[str, XSDDateTime], list[Union[str, XSDDateTime]]]])
-
-slots.period_end = Slot(uri=KFI['associated_party/period_end'], name="period_end", curie=KFI.curie('associated_party/period_end'),
-                   model_uri=KFI_FHIR_SPARKS.period_end, domain=None, range=Optional[Union[Union[str, XSDDateTime], list[Union[str, XSDDateTime]]]])
 
 slots.classifier = Slot(uri=KFI['associated_party/classifier'], name="classifier", curie=KFI.curie('associated_party/classifier'),
                    model_uri=KFI_FHIR_SPARKS.classifier, domain=None, range=Optional[Union[Union[str, "EnumResearchStudyPartyOrganizationType"], list[Union[str, "EnumResearchStudyPartyOrganizationType"]]]])
@@ -352,5 +383,26 @@ slots.classifier = Slot(uri=KFI['associated_party/classifier'], name="classifier
 slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.curie('associated_party/party'),
                    model_uri=KFI_FHIR_SPARKS.party, domain=None, range=Optional[Union[dict, Any]])
 
+slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institution_id", curie=KFI.curie('institution/institution_id'),
+                   model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
+
+slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
+                   model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
+
+slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
+                   model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)
+
 slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], name="institution__institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution__institution_id, domain=None, range=URIRef)
+
+slots.period__period_id = Slot(uri=KFI['period/period_id'], name="period__period_id", curie=KFI.curie('period/period_id'),
+                   model_uri=KFI_FHIR_SPARKS.period__period_id, domain=None, range=URIRef)
+
+slots.period__start = Slot(uri=KFI['period/start'], name="period__start", curie=KFI.curie('period/start'),
+                   model_uri=KFI_FHIR_SPARKS.period__start, domain=None, range=Optional[Union[str, XSDDateTime]])
+
+slots.period__end = Slot(uri=KFI['period/end'], name="period__end", curie=KFI.curie('period/end'),
+                   model_uri=KFI_FHIR_SPARKS.period__end, domain=None, range=Optional[Union[str, XSDDateTime]])
+
+slots.AssociatedParty_period_id = Slot(uri=KFI['period/period_id'], name="AssociatedParty_period_id", curie=KFI.curie('period/period_id'),
+                   model_uri=KFI_FHIR_SPARKS.AssociatedParty_period_id, domain=AssociatedParty, range=Optional[Union[Union[str, PeriodPeriodId], list[Union[str, PeriodPeriodId]]]])

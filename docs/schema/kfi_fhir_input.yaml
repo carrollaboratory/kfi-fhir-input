@@ -10,6 +10,7 @@ imports:
 - associated_party
 - kfi_fhir_input
 - institution
+- period
 license: MIT
 prefixes:
   kfi_fhir_sparks:
@@ -381,9 +382,9 @@ slots:
     title: External Identifiers
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     slot_uri: kfi_fhir_sparks:external_id
-    owner: Record
+    owner: HasExternalId
     domain_of:
-    - Record
+    - HasExternalId
     range: uriorcurie
     required: false
     multivalued: true
@@ -425,22 +426,6 @@ slots:
     - Practitioner
     range: string
     required: false
-  institution_id:
-    name: institution_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/institution_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: institution_id
-    description: The institution this record is associated with.
-    title: Institution
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/institution_id
-    owner: Practitioner
-    domain_of:
-    - Practitioner
-    range: Institution
-    required: false
   practitioner_role_id:
     name: practitioner_role_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_role_id
@@ -466,6 +451,16 @@ slots:
     - Practitioner
     range: string
     required: false
+  practitioner_id:
+    name: practitioner_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    description: The Global ID for the PractitionerRole that links a Practitioner
+      to their Institution.
+    title: Practitioner ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    range: string
+    required: false
   role:
     name: role
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/role
@@ -478,32 +473,6 @@ slots:
     - AssociatedParty
     range: EnumResearchStudyPartyRole
     required: false
-  period_start:
-    name: period_start
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_start
-    description: Start attribute for a FHIR period data type.
-    title: Period Start
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_start
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
-    range: datetime
-    required: false
-    multivalued: true
-  period_end:
-    name: period_end
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_end
-    description: End attribute for a FHIR period data type.
-    title: Period End
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/period_end
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
-    range: datetime
-    required: false
-    multivalued: true
   classifier:
     name: classifier
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/classifier
@@ -534,6 +503,48 @@ slots:
     any_of:
     - range: Practitioner
     - range: Institution
+  institution_id:
+    name: institution_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: institution_id
+    description: The institution this record is associated with.
+    title: Institution
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
+    owner: Practitioner
+    domain_of:
+    - Practitioner
+    range: Institution
+    required: false
+  period_id:
+    name: period_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    description: Reference to a time period which defines a Start and End datatime
+      period.
+    title: Period
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: Period
+    required: false
+  practitioner__practitioner_id:
+    name: practitioner__practitioner_id
+    description: The Global ID for the Practitioner.
+    title: Practitioner ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    identifier: true
+    alias: practitioner_id
+    owner: Practitioner
+    domain_of:
+    - Practitioner
+    range: string
+    required: true
   institution__institution_id:
     name: institution__institution_id
     description: Global ID for this record
@@ -547,6 +558,63 @@ slots:
     - Institution
     range: string
     required: true
+  period__period_id:
+    name: period__period_id
+    description: Database ID for this record. This is not a global ID, is a global
+      identifier
+    title: Period ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    identifier: true
+    alias: period_id
+    owner: Period
+    domain_of:
+    - Period
+    range: string
+    required: true
+  period__start:
+    name: period__start
+    description: Start attribute for a FHIR period data type.
+    title: Start
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/start
+    alias: start
+    owner: Period
+    domain_of:
+    - Period
+    range: datetime
+    required: false
+  period__end:
+    name: period__end
+    description: End attribute for a FHIR period data type.
+    title: End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/end
+    alias: end
+    owner: Period
+    domain_of:
+    - Period
+    range: datetime
+    required: false
+  AssociatedParty_period_id:
+    name: AssociatedParty_period_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    description: Reference to a time period which defines a Start and End datatime
+      period.
+    title: Period
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    is_a: period_id
+    domain: AssociatedParty
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    alias: period_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    is_usage_slot: true
+    usage_slot_name: period_id
+    range: Period
+    required: false
+    multivalued: true
 classes:
   Any:
     name: Any
@@ -558,16 +626,27 @@ classes:
     - linkml:Any
     abstract: true
     class_uri: linkml:Any
+  HasExternalId:
+    name: HasExternalId
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputHasExternalId
+    description: Has an external ID
+    title: Has
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    abstract: true
+    slots:
+    - external_id
+    class_uri: kfi_fhir_sparks:HasExternalId
   Record:
     name: Record
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputRecord
     description: One row / entity within the database
     title: Record
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    is_a: HasExternalId
     abstract: true
     slots:
-    - id
     - external_id
+    - id
     class_uri: kfi_fhir_sparks:Record
   Practitioner:
     name: Practitioner
@@ -579,9 +658,8 @@ classes:
     description: For our purposes, this will be an investigator.
     title: FHIR Practitioner Resource Content
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    is_a: Record
+    is_a: HasExternalId
     slots:
-    - id
     - external_id
     - name
     - email
@@ -589,6 +667,15 @@ classes:
     - practitioner_role_id
     - description
     - title
+    - practitioner__practitioner_id
+    attributes:
+      practitioner_id:
+        name: practitioner_id
+        description: The Global ID for the Practitioner.
+        title: Practitioner ID
+        identifier: true
+        range: string
+        required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/Practitioner
   AssociatedParty:
     name: AssociatedParty
@@ -601,16 +688,16 @@ classes:
       study.
     title: Associated Party
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
-    is_a: Record
     slots:
-    - id
-    - external_id
     - name
     - role
-    - period_start
-    - period_end
+    - AssociatedParty_period_id
     - classifier
     - party
+    slot_usage:
+      period_id:
+        name: period_id
+        multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/AssociatedParty
   Institution:
     name: Institution
@@ -622,7 +709,9 @@ classes:
     description: Institution related to study or research personnel
     title: Research Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
+    is_a: HasExternalId
     slots:
+    - external_id
     - name
     - institution__institution_id
     attributes:
@@ -634,9 +723,41 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
+  Period:
+    name: Period
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/Period
+    description: Time period associated with some FHIR resource
+    title: Period
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    slots:
+    - period__period_id
+    - period__start
+    - period__end
+    attributes:
+      period_id:
+        name: period_id
+        description: Database ID for this record. This is not a global ID, is a global
+          identifier
+        title: Period ID
+        identifier: true
+        range: string
+        required: true
+      start:
+        name: start
+        description: Start attribute for a FHIR period data type.
+        title: Start
+        range: datetime
+        required: false
+      end:
+        name: end
+        description: End attribute for a FHIR period data type.
+        title: End
+        range: datetime
+        required: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/Period
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-20T16:43:20'
-source_file_size: 1761
-generation_date: '2025-11-21T10:40:23'
+source_file_date: '2025-11-21T13:53:18'
+source_file_size: 1888
+generation_date: '2025-11-21T13:57:09'
 

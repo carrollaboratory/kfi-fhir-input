@@ -1,5 +1,5 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
+id,,integer,,,,,
 name,Name of the entity.,string,,,,,
 role,Research Study Party Role,enumeration,,,,sponsor=sponsor;lead_sponsor=lead-sponsor;sponsor_investigator;primary_investigator;collaborator;funding_source;general_contact;recruitment_contact;sub_investigator;study_director;study_chair;irb=Institutional Review Board,
-id,Global ID for this record,string,,,,,
 party_id,Individual or organization associated with study,integer,,,,,Foreign Key: Any.id

@@ -1,6 +1,6 @@
 # Example data object
 ---
-id: "pt-00001"
+practitioner_id: "pt-00001"
 name: Robert Carrol
 email: rcarol@carollab.org
 title: Principle Investigator

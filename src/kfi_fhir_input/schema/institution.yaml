@@ -7,7 +7,7 @@ classes:
   Institution:
     title: Research Institution 
     description: Institution related to study or research personnel
-    # is_a: Record 
+    is_a: HasExternalId 
     annotations:
       fhir_resource: Organization
     attributes:
@@ -19,3 +19,11 @@ classes:
         range: string
     slots:
       - name          # Institution.name
+slots: 
+  institution_id:
+    title: Institution
+    description: The institution this record is associated with.
+    range: Institution 
+    annotations: 
+      target_slot: institution_id 
+    required: false

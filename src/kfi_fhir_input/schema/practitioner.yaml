@@ -8,9 +8,16 @@ classes:
   Practitioner:
     title: FHIR Practitioner Resource Content
     description: For our purposes, this will be an investigator.
-    is_a: Record
+    is_a: HasExternalId 
     annotations:
       fhir_resource: Practitioner 
+    attributes:
+      practitioner_id:
+        title: Practitioner ID 
+        description: The Global ID for the Practitioner.
+        range: string         
+        identifier: true
+        required: true
     slots:
       - name 
       - email 
@@ -29,13 +36,6 @@ slots:
     description: An email address to reach the entity.
     range: string
     required: false
-  institution_id:
-    title: Institution
-    description: The institution this record is associated with.
-    range: Institution 
-    annotations: 
-      target_slot: institution_id 
-    required: false
   practitioner_role_id:
     title: Practitioner Role ID 
     description: The Global ID for the PractitionerRole that links a Practitioner to their Institution. 
@@ -45,4 +45,9 @@ slots:
     title: Title 
     description: The title of the Investigator, eg, "Assistant Professor"
     range: string
+    required: false
+  practitioner_id:
+    title: Practitioner ID 
+    description: The Global ID for the PractitionerRole that links a Practitioner to their Institution. 
+    range: string 
     required: false
