@@ -149,15 +149,17 @@ class Practitioner(Record):
 
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'AssociatedParty']} })
     email: Optional[str] = Field(default=None, title="Email Address", description="""An email address to reach the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
-    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot', 'value': 'id'}},
-         'domain_of': ['Practitioner']} })
+    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'institution_id'}},
+         'domain_of': ['Practitioner', 'Institution']} })
+    practitioner_role_id: Optional[str] = Field(default=None, title="Practitioner Role ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     description: Optional[str] = Field(default=None, title="Description", description="""Note relating to who this person is in relation to the study""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     id: str = Field(default=..., title="ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
-class Institution(Record):
+class Institution(ConfiguredBaseModel):
     """
     Institution related to study or research personnel
     """
@@ -167,8 +169,7 @@ class Institution(Record):
          'title': 'Research Institution'})
 
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'AssociatedParty']} })
-    id: str = Field(default=..., title="ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    institution_id: str = Field(default=..., title="Institution ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution']} })
 
 
 class AssociatedParty(Record):

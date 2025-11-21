@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-20T16:31:32
+# Generation date: 2025-11-21T10:40:10
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -86,7 +86,7 @@ class AssociatedPartyId(RecordId):
     pass
 
 
-class InstitutionId(RecordId):
+class InstitutionInstitutionId(extended_str):
     pass
 
 
@@ -135,7 +135,8 @@ class Practitioner(Record):
     id: Union[str, PractitionerId] = None
     name: Optional[str] = None
     email: Optional[str] = None
-    institution_id: Optional[Union[str, InstitutionId]] = None
+    institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
+    practitioner_role_id: Optional[str] = None
     description: Optional[str] = None
     title: Optional[str] = None
 
@@ -151,8 +152,11 @@ class Practitioner(Record):
         if self.email is not None and not isinstance(self.email, str):
             self.email = str(self.email)
 
-        if self.institution_id is not None and not isinstance(self.institution_id, InstitutionId):
-            self.institution_id = InstitutionId(self.institution_id)
+        if self.institution_id is not None and not isinstance(self.institution_id, InstitutionInstitutionId):
+            self.institution_id = InstitutionInstitutionId(self.institution_id)
+
+        if self.practitioner_role_id is not None and not isinstance(self.practitioner_role_id, str):
+            self.practitioner_role_id = str(self.practitioner_role_id)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -211,7 +215,7 @@ class AssociatedParty(Record):
 
 
 @dataclass(repr=False)
-class Institution(Record):
+class Institution(YAMLRoot):
     """
     Institution related to study or research personnel
     """
@@ -222,14 +226,14 @@ class Institution(Record):
     class_name: ClassVar[str] = "Institution"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Institution
 
-    id: Union[str, InstitutionId] = None
+    institution_id: Union[str, InstitutionInstitutionId] = None
     name: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, InstitutionId):
-            self.id = InstitutionId(self.id)
+        if self._is_empty(self.institution_id):
+            self.MissingRequiredField("institution_id")
+        if not isinstance(self.institution_id, InstitutionInstitutionId):
+            self.institution_id = InstitutionInstitutionId(self.institution_id)
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
@@ -325,7 +329,10 @@ slots.email = Slot(uri=KFI['practitioner/email'], name="email", curie=KFI.curie(
                    model_uri=KFI_FHIR_SPARKS.email, domain=None, range=Optional[str])
 
 slots.institution_id = Slot(uri=KFI['practitioner/institution_id'], name="institution_id", curie=KFI.curie('practitioner/institution_id'),
-                   model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionId]])
+                   model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
+
+slots.practitioner_role_id = Slot(uri=KFI['practitioner/practitioner_role_id'], name="practitioner_role_id", curie=KFI.curie('practitioner/practitioner_role_id'),
+                   model_uri=KFI_FHIR_SPARKS.practitioner_role_id, domain=None, range=Optional[str])
 
 slots.title = Slot(uri=KFI['practitioner/title'], name="title", curie=KFI.curie('practitioner/title'),
                    model_uri=KFI_FHIR_SPARKS.title, domain=None, range=Optional[str])
@@ -344,3 +351,6 @@ slots.classifier = Slot(uri=KFI['associated_party/classifier'], name="classifier
 
 slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.curie('associated_party/party'),
                    model_uri=KFI_FHIR_SPARKS.party, domain=None, range=Optional[Union[dict, Any]])
+
+slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], name="institution__institution_id", curie=KFI.curie('institution/institution_id'),
+                   model_uri=KFI_FHIR_SPARKS.institution__institution_id, domain=None, range=URIRef)

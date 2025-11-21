@@ -7,8 +7,15 @@ classes:
   Institution:
     title: Research Institution 
     description: Institution related to study or research personnel
-    is_a: Record 
+    # is_a: Record 
     annotations:
       fhir_resource: Organization
+    attributes:
+      institution_id:
+        title: Institution ID
+        description: Global ID for this record
+        identifier: true
+        required: true
+        range: string
     slots:
       - name          # Institution.name

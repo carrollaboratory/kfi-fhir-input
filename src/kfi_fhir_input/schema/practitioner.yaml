@@ -14,7 +14,8 @@ classes:
     slots:
       - name 
       - email 
-      - institution_id
+      - institution_id        # We link Practitioners to institutions through the PractitionerRole resource
+      - practitioner_role_id  # This will be a global ID generated specifically for the practitioner's role at an institution. 
       - description
       - title
 slots:
@@ -33,7 +34,12 @@ slots:
     description: The institution this record is associated with.
     range: Institution 
     annotations: 
-      target_slot: id 
+      target_slot: institution_id 
+    required: false
+  practitioner_role_id:
+    title: Practitioner Role ID 
+    description: The Global ID for the PractitionerRole that links a Practitioner to their Institution. 
+    range: string 
     required: false
   title:
     title: Title 
