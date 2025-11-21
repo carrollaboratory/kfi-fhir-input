@@ -76,7 +76,7 @@ clean: _clean_project
 
 # (Re-)Generate project and documentation locally
 [group('model development')]
-site: gen-project gen-doc _gen_ftddd test
+site: gen-project lint gen-doc _gen_ftddd test
 
 # Deploy documentation site to Github Pages
 [group('deployment')]
