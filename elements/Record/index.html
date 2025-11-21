@@ -266,10 +266,8 @@
 <div class="mermaid"> classDiagram
     class Record
     click Record href "../Record/"
-      Record &lt;|-- Practitioner
-        click Practitioner href "../Practitioner/"
-      Record &lt;|-- AssociatedParty
-        click AssociatedParty href "../AssociatedParty/"
+      HasExternalId &lt;|-- Record
+        click HasExternalId href "../HasExternalId/"
 
       Record : external_id
 
@@ -279,9 +277,8 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><strong>Record</strong><ul>
-<li><a href="../Practitioner/">Practitioner</a></li>
-<li><a href="../AssociatedParty/">AssociatedParty</a></li>
+<li><a href="../HasExternalId/">HasExternalId</a><ul>
+<li><strong>Record</strong></li>
 </ul>
 </li>
 </ul>
@@ -306,7 +303,7 @@
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td>direct</td>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -342,10 +339,10 @@
 description: One row / entity within the database
 title: Record
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+is_a: HasExternalId
 abstract: true
 slots:
 - id
-- external_id
 
 </code></pre>
 </details>
@@ -355,6 +352,7 @@ slots:
 description: One row / entity within the database
 title: Record
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+is_a: HasExternalId
 abstract: true
 attributes:
   id:
@@ -381,7 +379,7 @@ attributes:
     alias: external_id
     owner: Record
     domain_of:
-    - Record
+    - HasExternalId
     range: uriorcurie
     required: false
     multivalued: true

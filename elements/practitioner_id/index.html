@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/period_start/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/practitioner_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Period Start (period_start) - kfi-fhir-input</title>
+        <title>Slot: Practitioner ID (practitioner_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-period-start-period_start" class="md-skip">
+        <a href="#slot-practitioner-id-practitioner_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Period Start (period_start)
+              Slot: Practitioner ID (practitioner_id)
             
           </span>
         </div>
@@ -416,10 +416,10 @@
   
 
 
-<h1 id="slot-period-start-period_start">Slot: Period Start (period_start)</h1>
-<p><em>Start attribute for a FHIR period data type.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputperiod_start">kfi_fhir_sparks:period_start</a>
-Alias: period_start</p>
+<h1 id="slot-practitioner-id-practitioner_id">Slot: Practitioner ID (practitioner_id)</h1>
+<p><em>The Global ID for the PractitionerRole that links a Practitioner to their Institution.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputpractitioner_id">kfi_fhir_sparks:practitioner_id</a>
+Alias: practitioner_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -433,20 +433,15 @@ Alias: period_start</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
+<td><a href="../Practitioner/">Practitioner</a></td>
+<td>For our purposes, this will be an investigator</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../Datetime/">Datetime</a></p>
-</li>
-<li>
-<p>Multivalued: True</p>
-</li>
+<li>Range: <a href="../String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -464,28 +459,28 @@ Alias: period_start</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:period_start</td>
+<td>kfi_fhir_sparks:practitioner_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:period_start</td>
+<td>kfi_fhir_sparks:practitioner_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: period_start
-description: Start attribute for a FHIR period data type.
-title: Period Start
+<pre><code class="language-yaml">name: practitioner_id
+description: The Global ID for the PractitionerRole that links a Practitioner to their
+  Institution.
+title: Practitioner ID
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: period_start
+alias: practitioner_id
 domain_of:
-- AssociatedParty
-range: datetime
+- Practitioner
+range: string
 required: false
-multivalued: true
 
 </code></pre>
 

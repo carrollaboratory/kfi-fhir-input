@@ -179,15 +179,20 @@ Any {
 AssociatedParty {
     string name  
     EnumResearchStudyPartyRole role  
-    datetimeList period_start  
-    datetimeList period_end  
     EnumResearchStudyPartyOrganizationTypeList classifier  
-    string id  
+}
+HasExternalId {
     uriorcurieList external_id  
 }
 Institution {
     string name  
     string institution_id  
+    uriorcurieList external_id  
+}
+Period {
+    string period_id  
+    datetime start  
+    datetime end  
 }
 Practitioner {
     string name  
@@ -195,7 +200,7 @@ Practitioner {
     string practitioner_role_id  
     string description  
     string title  
-    string id  
+    string practitioner_id  
     uriorcurieList external_id  
 }
 Record {
@@ -204,6 +209,7 @@ Record {
 }
 
 AssociatedParty ||--|o Any : "party"
+AssociatedParty ||--}o Period : "period_id"
 Practitioner ||--|o Institution : "institution_id"
 
 </div>
