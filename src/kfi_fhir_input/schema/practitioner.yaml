@@ -25,19 +25,14 @@ classes:
       - institution_id        # We link Practitioners to institutions through the PractitionerRole resource
       - practitioner_role_id  # This will be a global ID generated specifically for the practitioner's role at an institution. 
       - description
-      - title
+      - practitioner_title
 slots:
-  description:
-    title: Description 
-    description: Note relating to who this person is in relation to the study 
-    range: string 
-    required: false
   email:
     title: Email Address
     description: An email address to reach the entity.
     range: string
     required: false
-  title:
+  practitioner_title:
     title: Title 
     description: The title of the Investigator, eg, "Assistant Professor"
     range: string
