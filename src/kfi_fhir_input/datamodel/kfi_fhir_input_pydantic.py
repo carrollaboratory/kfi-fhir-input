@@ -96,6 +96,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                        'prefix_reference': 'http://hl7.org/fhir/research-study-party-organization-type'},
                   'hl7_rsp_role': {'prefix_prefix': 'hl7_rsp_role',
                                    'prefix_reference': 'http://hl7.org/fhir/research-study-party-role'},
+                  'hl7_study_status': {'prefix_prefix': 'hl7_study_status',
+                                       'prefix_reference': 'https://hl7.org/fhir/R4/codesystem-research-study-status'},
                   'kfi': {'prefix_prefix': 'kfi',
                           'prefix_reference': 'https://carrollaboratory.github.io/kfi-fhir-input/'},
                   'kfi_fhir_sparks': {'prefix_prefix': 'kfi_fhir_sparks',
@@ -130,6 +132,29 @@ class EnumResearchStudyPartyRole(str, Enum):
     study_director = "study_director"
     study_chair = "study_chair"
     Institutional_Review_Board = "irb"
+
+
+class EnumStudyStatus(str, Enum):
+    """
+    Codes indicating the study's current status
+    """
+    Active = "active"
+    """
+    Study is opened for accrual.
+    """
+    Administratively_Completed = "administratively-completed"
+    """
+    Study is completed prematurely and will not resume; patients are no longer examined nor treated.
+    """
+    Approved = "approved"
+    Closed_to_Accrual = "closed-to-accrual"
+    Closed_to_Accrual_and_Intervention = "closed-to-accrual-and-intervention"
+    Completed = "completed"
+    Disapproved = "disapproved"
+    In_Review = "in-review"
+    Temporarily_Closed_to_Accrual = "temporarily-closed-to-accrual"
+    Temporarily_Closed_to_Accrual_and_Intervention = "temporarily-closed-to-accrual-and-intervention"
+    Withdrawn = "withdrawn"
 
 
 
@@ -252,6 +277,9 @@ class ResearchStudy(HasExternalId):
     study_title: Optional[str] = Field(default=None, title="Title", description="""Research	Study's formal title.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_focus: Optional[list[str]] = Field(default=[], title="Study Focus", description="""The primary, non-disease focus(es) of the study. This can include terms related to intervention, drug, device, or other focus.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'ResearchStudy']} })
+    study_condition: Optional[list[str]] = Field(default=[], title="Study Condition", description="""The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
+    study_acknowledgement: Optional[list[str]] = Field(default=[], title="Study Acknowledgement", description="""Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
+    study_status: EnumStudyStatus = Field(default=..., title="Study Status", description="""The current state of the study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     research_study_id: str = Field(default=..., title="Research Study ID", description="""The Global ID for the Research Study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 

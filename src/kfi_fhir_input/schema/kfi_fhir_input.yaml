@@ -12,8 +12,10 @@ prefixes:
   kfi_fhir_sparks: https://carrollaboratory.github.io/kif-fhir-input
   hl7_rsp_role: http://hl7.org/fhir/research-study-party-role
   hl7_rsp_org_type: http://hl7.org/fhir/research-study-party-organization-type
+  hl7_study_status: https://hl7.org/fhir/R4/codesystem-research-study-status
   kfi: https://carrollaboratory.github.io/kfi-fhir-input/
   linkml: https://w3id.org/linkml/
+
   # I think the linter is wrong on this one, but we'll use the recommendation
   # to quiet the warnings. 
   # biolink: https://biolink.github.io/biolink-model/

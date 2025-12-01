@@ -23,6 +23,9 @@ classes:
       - study_title       
       - study_focus 
       - description
+      - study_condition
+      - study_acknowledgement
+      - study_status
 slots:
   study_title:
     title: Title 
@@ -35,4 +38,60 @@ slots:
     range: uriorcurie 
     multivalued: true 
     required: false 
-  
+  study_condition:
+    title: Study Condition 
+    description: The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.
+    range: uriorcurie 
+    multivalued: true 
+    required: false
+  study_acknowledgement:
+    title: Study Acknowledgement 
+    description: Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.
+    range: string 
+    multivalued: true 
+    required: false
+  study_status:
+    title: Study Status 
+    description: The current state of the study.
+    range: EnumStudyStatus
+    required: true 
+    multivalued: false 
+enums:
+  EnumStudyStatus:
+    description: Codes indicating the study's current status 
+    permissible_values:
+      active: 
+        title: Active 
+        description: Study is opened for accrual.
+        meaning: hl7_study_status:active
+      administratively_completed:
+        title: Administratively Completed
+        description: Study is completed prematurely and will not resume; patients are no longer examined nor treated.
+        meaning: hl7_study_status:administratively-completed
+      approved:
+        title: Approved 
+        meaning: hl7_study_status:approved 
+      closed_to_accrual: 
+        title: Closed to Accrual 
+        meaning: closed-to-accrual
+      closed_to_accrual_and_intervention:
+        title: Closed to Accrual and Intervention 
+        meaning: hl7_study_status:closed-to-accrual-and-intervention
+      completed: 
+        title: Completed 
+        meaning: hl7_study_status:completed
+      disapproved: 
+        title: Disapproved 
+        meaning: hl7_study_status:disapproved
+      in_review: 
+        title: In Review 
+        meaning: hl7_study_status:in-review
+      temporarily_closed_to_accrual: 
+        title: Temporarily Closed to Accrual 
+        meaning: hl7_study_status:temporarily-closed-to-accrual
+      temporarily_closed_to_accrual_and_intervention: 
+        title: Temporarily Closed to Accrual and Intervention 
+        meaning: hl7_study_status:temporarily-closed-to-accrual-and-intervention
+      withdrawn: 
+        title: Withdrawn
+        meaning: hl7_study_status:withdrawn

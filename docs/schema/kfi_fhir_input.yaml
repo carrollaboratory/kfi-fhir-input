@@ -25,6 +25,9 @@ prefixes:
   hl7_rsp_org_type:
     prefix_prefix: hl7_rsp_org_type
     prefix_reference: http://hl7.org/fhir/research-study-party-organization-type
+  hl7_study_status:
+    prefix_prefix: hl7_study_status
+    prefix_reference: https://hl7.org/fhir/R4/codesystem-research-study-status
   kfi:
     prefix_prefix: kfi
     prefix_reference: https://carrollaboratory.github.io/kfi-fhir-input/
@@ -362,6 +365,59 @@ enums:
         text: irb
         meaning: hl7_rsp_role:irb
         title: Institutional Review Board
+  EnumStudyStatus:
+    name: EnumStudyStatus
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
+    description: Codes indicating the study's current status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    permissible_values:
+      active:
+        text: active
+        description: Study is opened for accrual.
+        meaning: hl7_study_status:active
+        title: Active
+      administratively_completed:
+        text: administratively_completed
+        description: Study is completed prematurely and will not resume; patients
+          are no longer examined nor treated.
+        meaning: hl7_study_status:administratively-completed
+        title: Administratively Completed
+      approved:
+        text: approved
+        meaning: hl7_study_status:approved
+        title: Approved
+      closed_to_accrual:
+        text: closed_to_accrual
+        meaning: closed-to-accrual
+        title: Closed to Accrual
+      closed_to_accrual_and_intervention:
+        text: closed_to_accrual_and_intervention
+        meaning: hl7_study_status:closed-to-accrual-and-intervention
+        title: Closed to Accrual and Intervention
+      completed:
+        text: completed
+        meaning: hl7_study_status:completed
+        title: Completed
+      disapproved:
+        text: disapproved
+        meaning: hl7_study_status:disapproved
+        title: Disapproved
+      in_review:
+        text: in_review
+        meaning: hl7_study_status:in-review
+        title: In Review
+      temporarily_closed_to_accrual:
+        text: temporarily_closed_to_accrual
+        meaning: hl7_study_status:temporarily-closed-to-accrual
+        title: Temporarily Closed to Accrual
+      temporarily_closed_to_accrual_and_intervention:
+        text: temporarily_closed_to_accrual_and_intervention
+        meaning: hl7_study_status:temporarily-closed-to-accrual-and-intervention
+        title: Temporarily Closed to Accrual and Intervention
+      withdrawn:
+        text: withdrawn
+        meaning: hl7_study_status:withdrawn
+        title: Withdrawn
 slots:
   id:
     name: id
@@ -584,6 +640,48 @@ slots:
     range: uriorcurie
     required: false
     multivalued: true
+  study_condition:
+    name: study_condition
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_condition
+    description: The primary focus(es) of the study. This is specific to the disease.
+      MeSH terms are preferred.
+    title: Study Condition
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_condition
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: uriorcurie
+    required: false
+    multivalued: true
+  study_acknowledgement:
+    name: study_acknowledgement
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_acknowledgement
+    description: Any attribution or acknowledgements relevant to the study. This can
+      include but is not limited to funding sources, organizational affiliations or
+      sponsors.
+    title: Study Acknowledgement
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_acknowledgement
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: string
+    required: false
+    multivalued: true
+  study_status:
+    name: study_status
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_status
+    description: The current state of the study.
+    title: Study Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_status
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: EnumStudyStatus
+    required: true
+    multivalued: false
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -876,6 +974,9 @@ classes:
     - study_title
     - study_focus
     - description
+    - study_condition
+    - study_acknowledgement
+    - study_status
     - researchStudy__research_study_id
     attributes:
       research_study_id:
@@ -888,7 +989,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-01T10:39:16'
-source_file_size: 2561
-generation_date: '2025-12-01T11:00:19'
+source_file_date: '2025-12-01T12:09:19'
+source_file_size: 2639
+generation_date: '2025-12-01T12:17:02'
 

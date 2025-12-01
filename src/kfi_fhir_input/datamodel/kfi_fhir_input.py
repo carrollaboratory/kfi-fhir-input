@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-01T11:00:26
+# Generation date: 2025-12-01T12:11:11
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -65,6 +65,7 @@ version = None
 # Namespaces
 HL7_RSP_ORG_TYPE = CurieNamespace('hl7_rsp_org_type', 'http://hl7.org/fhir/research-study-party-organization-type')
 HL7_RSP_ROLE = CurieNamespace('hl7_rsp_role', 'http://hl7.org/fhir/research-study-party-role')
+HL7_STUDY_STATUS = CurieNamespace('hl7_study_status', 'https://hl7.org/fhir/R4/codesystem-research-study-status')
 KFI = CurieNamespace('kfi', 'https://carrollaboratory.github.io/kfi-fhir-input/')
 KFI_FHIR_SPARKS = CurieNamespace('kfi_fhir_sparks', 'https://carrollaboratory.github.io/kif-fhir-input')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
@@ -336,15 +337,23 @@ class ResearchStudy(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchStudy
 
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
+    study_status: Union[str, "EnumStudyStatus"] = None
     study_title: Optional[str] = None
     study_focus: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
     description: Optional[str] = None
+    study_condition: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    study_acknowledgement: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.research_study_id):
             self.MissingRequiredField("research_study_id")
         if not isinstance(self.research_study_id, ResearchStudyResearchStudyId):
             self.research_study_id = ResearchStudyResearchStudyId(self.research_study_id)
+
+        if self._is_empty(self.study_status):
+            self.MissingRequiredField("study_status")
+        if not isinstance(self.study_status, EnumStudyStatus):
+            self.study_status = EnumStudyStatus(self.study_status)
 
         if self.study_title is not None and not isinstance(self.study_title, str):
             self.study_title = str(self.study_title)
@@ -355,6 +364,14 @@ class ResearchStudy(HasExternalId):
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
+
+        if not isinstance(self.study_condition, list):
+            self.study_condition = [self.study_condition] if self.study_condition is not None else []
+        self.study_condition = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.study_condition]
+
+        if not isinstance(self.study_acknowledgement, list):
+            self.study_acknowledgement = [self.study_acknowledgement] if self.study_acknowledgement is not None else []
+        self.study_acknowledgement = [v if isinstance(v, str) else str(v) for v in self.study_acknowledgement]
 
         super().__post_init__(**kwargs)
 
@@ -427,6 +444,62 @@ class EnumResearchStudyPartyRole(EnumDefinitionImpl):
         description="This is a ResearchStudy's party role.",
     )
 
+class EnumStudyStatus(EnumDefinitionImpl):
+    """
+    Codes indicating the study's current status
+    """
+    active = PermissibleValue(
+        text="active",
+        title="Active",
+        description="Study is opened for accrual.",
+        meaning=HL7_STUDY_STATUS["active"])
+    approved = PermissibleValue(
+        text="approved",
+        title="Approved")
+    completed = PermissibleValue(
+        text="completed",
+        title="Completed",
+        meaning=HL7_STUDY_STATUS["completed"])
+    disapproved = PermissibleValue(
+        text="disapproved",
+        title="Disapproved")
+    withdrawn = PermissibleValue(
+        text="withdrawn",
+        title="Withdrawn")
+
+    _defn = EnumDefinition(
+        name="EnumStudyStatus",
+        description="Codes indicating the study's current status",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "administratively-completed",
+            PermissibleValue(
+                text="administratively-completed",
+                title="Administratively Completed",
+                description="""Study is completed prematurely and will not resume; patients are no longer examined nor treated."""))
+        setattr(cls, "closed-to-accrual",
+            PermissibleValue(
+                text="closed-to-accrual",
+                title="Closed to Accrual"))
+        setattr(cls, "closed-to-accrual-and-intervention",
+            PermissibleValue(
+                text="closed-to-accrual-and-intervention",
+                title="Closed to Accrual and Intervention"))
+        setattr(cls, "in-review",
+            PermissibleValue(
+                text="in-review",
+                title="In Review"))
+        setattr(cls, "temporarily-closed-to-accrual",
+            PermissibleValue(
+                text="temporarily-closed-to-accrual",
+                title="Temporarily Closed to Accrual"))
+        setattr(cls, "temporarily-closed-to-accrual-and-intervention",
+            PermissibleValue(
+                text="temporarily-closed-to-accrual-and-intervention",
+                title="Temporarily Closed to Accrual and Intervention"))
+
 # Slots
 class slots:
     pass
@@ -478,6 +551,15 @@ slots.study_title = Slot(uri=KFI['research_study/study_title'], name="study_titl
 
 slots.study_focus = Slot(uri=KFI['research_study/study_focus'], name="study_focus", curie=KFI.curie('research_study/study_focus'),
                    model_uri=KFI_FHIR_SPARKS.study_focus, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
+slots.study_condition = Slot(uri=KFI['research_study/study_condition'], name="study_condition", curie=KFI.curie('research_study/study_condition'),
+                   model_uri=KFI_FHIR_SPARKS.study_condition, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
+slots.study_acknowledgement = Slot(uri=KFI['research_study/study_acknowledgement'], name="study_acknowledgement", curie=KFI.curie('research_study/study_acknowledgement'),
+                   model_uri=KFI_FHIR_SPARKS.study_acknowledgement, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.study_status = Slot(uri=KFI['research_study/study_status'], name="study_status", curie=KFI.curie('research_study/study_status'),
+                   model_uri=KFI_FHIR_SPARKS.study_status, domain=None, range=Union[str, "EnumStudyStatus"])
 
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)

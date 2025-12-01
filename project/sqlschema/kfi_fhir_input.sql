@@ -32,6 +32,7 @@
 -- # Class: ResearchStudy Description: The NCPI Research Study FHIR resource represents an individual research effort and acts as a grouper or “container” for that effort’s study participants and their related data files.
 --     * Slot: study_title Description: Research	Study's formal title.
 --     * Slot: description Description: More details associated with the given resource
+--     * Slot: study_status Description: The current state of the study.
 --     * Slot: research_study_id Description: The Global ID for the Research Study.
 -- # Class: HasExternalId_external_id
 --     * Slot: HasExternalId_id Description: Autocreated FK slot
@@ -54,6 +55,12 @@
 -- # Class: ResearchStudy_study_focus
 --     * Slot: ResearchStudy_research_study_id Description: Autocreated FK slot
 --     * Slot: study_focus Description: The primary, non-disease focus(es) of the study. This can include terms related to intervention, drug, device, or other focus.
+-- # Class: ResearchStudy_study_condition
+--     * Slot: ResearchStudy_research_study_id Description: Autocreated FK slot
+--     * Slot: study_condition Description: The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.
+-- # Class: ResearchStudy_study_acknowledgement
+--     * Slot: ResearchStudy_research_study_id Description: Autocreated FK slot
+--     * Slot: study_acknowledgement Description: Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.
 -- # Class: ResearchStudy_external_id
 --     * Slot: ResearchStudy_research_study_id Description: Autocreated FK slot
 --     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
@@ -84,6 +91,7 @@ CREATE TABLE "Period" (
 CREATE TABLE "ResearchStudy" (
 	study_title TEXT,
 	description TEXT,
+	study_status VARCHAR(46) NOT NULL,
 	research_study_id TEXT NOT NULL,
 	PRIMARY KEY (research_study_id)
 );CREATE INDEX "ix_ResearchStudy_research_study_id" ON "ResearchStudy" (research_study_id);
@@ -121,13 +129,25 @@ CREATE TABLE "Institution_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("Institution_institution_id", external_id),
 	FOREIGN KEY("Institution_institution_id") REFERENCES "Institution" (institution_id)
-);CREATE INDEX "ix_Institution_external_id_external_id" ON "Institution_external_id" (external_id);CREATE INDEX "ix_Institution_external_id_Institution_institution_id" ON "Institution_external_id" ("Institution_institution_id");
+);CREATE INDEX "ix_Institution_external_id_Institution_institution_id" ON "Institution_external_id" ("Institution_institution_id");CREATE INDEX "ix_Institution_external_id_external_id" ON "Institution_external_id" (external_id);
 CREATE TABLE "ResearchStudy_study_focus" (
 	"ResearchStudy_research_study_id" TEXT,
 	study_focus TEXT,
 	PRIMARY KEY ("ResearchStudy_research_study_id", study_focus),
 	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
-);CREATE INDEX "ix_ResearchStudy_study_focus_study_focus" ON "ResearchStudy_study_focus" (study_focus);CREATE INDEX "ix_ResearchStudy_study_focus_ResearchStudy_research_study_id" ON "ResearchStudy_study_focus" ("ResearchStudy_research_study_id");
+);CREATE INDEX "ix_ResearchStudy_study_focus_ResearchStudy_research_study_id" ON "ResearchStudy_study_focus" ("ResearchStudy_research_study_id");CREATE INDEX "ix_ResearchStudy_study_focus_study_focus" ON "ResearchStudy_study_focus" (study_focus);
+CREATE TABLE "ResearchStudy_study_condition" (
+	"ResearchStudy_research_study_id" TEXT,
+	study_condition TEXT,
+	PRIMARY KEY ("ResearchStudy_research_study_id", study_condition),
+	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
+);CREATE INDEX "ix_ResearchStudy_study_condition_ResearchStudy_research_study_id" ON "ResearchStudy_study_condition" ("ResearchStudy_research_study_id");CREATE INDEX "ix_ResearchStudy_study_condition_study_condition" ON "ResearchStudy_study_condition" (study_condition);
+CREATE TABLE "ResearchStudy_study_acknowledgement" (
+	"ResearchStudy_research_study_id" TEXT,
+	study_acknowledgement TEXT,
+	PRIMARY KEY ("ResearchStudy_research_study_id", study_acknowledgement),
+	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
+);CREATE INDEX "ix_ResearchStudy_study_acknowledgement_ResearchStudy_research_study_id" ON "ResearchStudy_study_acknowledgement" ("ResearchStudy_research_study_id");CREATE INDEX "ix_ResearchStudy_study_acknowledgement_study_acknowledgement" ON "ResearchStudy_study_acknowledgement" (study_acknowledgement);
 CREATE TABLE "ResearchStudy_external_id" (
 	"ResearchStudy_research_study_id" TEXT,
 	external_id TEXT,
