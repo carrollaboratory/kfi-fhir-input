@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/title/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/research_study_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Title (title) - kfi-fhir-input</title>
+        <title>Slot: Research Study ID (research_study_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-title-title" class="md-skip">
+        <a href="#slot-research-study-id-research_study_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Title (title)
+              Slot: Research Study ID (research_study_id)
             
           </span>
         </div>
@@ -359,6 +359,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -416,10 +427,10 @@
   
 
 
-<h1 id="slot-title-title">Slot: Title (title)</h1>
-<p><em>The title of the Investigator, eg, "Assistant Professor"</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputtitle">kfi_fhir_sparks:title</a>
-Alias: title</p>
+<h1 id="slot-research-study-id-research_study_id">Slot: Research Study ID (research_study_id)</h1>
+<p><em>The Global ID for the Research Study.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputresearch_study_id">kfi_fhir_sparks:research_study_id</a>
+Alias: research_study_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -433,17 +444,37 @@ Alias: title</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
+<td><a href="../ResearchStudy/">ResearchStudy</a></td>
+<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>
+<p>Range: <a href="../ResearchStudy/">ResearchStudy</a></p>
+</li>
+<li>
+<p>Required: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target_slot</td>
+<td>research_study_id</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -459,27 +490,32 @@ Alias: title</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:title</td>
+<td>kfi_fhir_sparks:research_study_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:title</td>
+<td>kfi_fhir_sparks:research_study_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: title
-description: The title of the Investigator, eg, &quot;Assistant Professor&quot;
-title: Title
+<pre><code class="language-yaml">name: research_study_id
+annotations:
+  target_slot:
+    tag: target_slot
+    value: research_study_id
+description: The Global ID for the Research Study.
+title: Research Study ID
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: title
+identifier: true
+alias: research_study_id
 domain_of:
-- Practitioner
-range: string
-required: false
+- ResearchStudy
+range: ResearchStudy
+required: true
 
 </code></pre>
 

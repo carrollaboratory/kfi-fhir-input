@@ -316,7 +316,7 @@
 
 
 
-      Practitioner : title
+      Practitioner : practitioner_title
 
 
 </div>
@@ -365,11 +365,11 @@
 <tr>
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Note relating to who this person is in relation to the study</td>
+<td>More details associated with the given resource</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../title/">title</a></td>
+<td><a href="../practitioner_title/">practitioner_title</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>The title of the Investigator, eg, "Assistant Professor"</td>
 <td>direct</td>
@@ -465,7 +465,7 @@ slots:
 - institution_id
 - practitioner_role_id
 - description
-- title
+- practitioner_title
 attributes:
   practitioner_id:
     name: practitioner_id
@@ -569,7 +569,7 @@ attributes:
     required: false
   description:
     name: description
-    description: Note relating to who this person is in relation to the study
+    description: More details associated with the given resource
     title: Description
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
@@ -577,15 +577,16 @@ attributes:
     owner: Practitioner
     domain_of:
     - Practitioner
+    - ResearchStudy
     range: string
     required: false
-  title:
-    name: title
+  practitioner_title:
+    name: practitioner_title
     description: The title of the Investigator, eg, "Assistant Professor"
     title: Title
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: title
+    alias: practitioner_title
     owner: Practitioner
     domain_of:
     - Practitioner

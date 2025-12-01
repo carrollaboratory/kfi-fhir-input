@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/description/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/practitioner_title/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Description (description) - kfi-fhir-input</title>
+        <title>Slot: Title (practitioner_title) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-description-description" class="md-skip">
+        <a href="#slot-title-practitioner_title" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Description (description)
+              Slot: Title (practitioner_title)
             
           </span>
         </div>
@@ -416,10 +416,10 @@
   
 
 
-<h1 id="slot-description-description">Slot: Description (description)</h1>
-<p><em>More details associated with the given resource</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputdescription">kfi_fhir_sparks:description</a>
-Alias: description</p>
+<h1 id="slot-title-practitioner_title">Slot: Title (practitioner_title)</h1>
+<p><em>The title of the Investigator, eg, "Assistant Professor"</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputpractitioner_title">kfi_fhir_sparks:practitioner_title</a>
+Alias: practitioner_title</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -435,11 +435,6 @@ Alias: description</p>
 <tr>
 <td><a href="../Practitioner/">Practitioner</a></td>
 <td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ResearchStudy/">ResearchStudy</a></td>
-<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -464,26 +459,25 @@ Alias: description</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:description</td>
+<td>kfi_fhir_sparks:practitioner_title</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:description</td>
+<td>kfi_fhir_sparks:practitioner_title</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: description
-description: More details associated with the given resource
-title: Description
+<pre><code class="language-yaml">name: practitioner_title
+description: The title of the Investigator, eg, &quot;Assistant Professor&quot;
+title: Title
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: description
+alias: practitioner_title
 domain_of:
 - Practitioner
-- ResearchStudy
 range: string
 required: false
 

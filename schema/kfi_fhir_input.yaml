@@ -12,6 +12,7 @@ imports:
 - period
 - practitioner_role
 - practitioner
+- research_study
 - kfi_fhir_input
 license: MIT
 prefixes:
@@ -404,6 +405,19 @@ slots:
     - Institution
     range: string
     required: false
+  description:
+    name: description
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputdescription
+    description: More details associated with the given resource
+    title: Description
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:description
+    owner: ResearchStudy
+    domain_of:
+    - Practitioner
+    - ResearchStudy
+    range: string
+    required: false
   practitioner_role_id:
     name: practitioner_role_id
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputpractitioner_role_id
@@ -420,18 +434,20 @@ slots:
     - Practitioner
     range: PractitionerRole
     required: false
-  description:
-    name: description
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/description
-    description: Note relating to who this person is in relation to the study
-    title: Description
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/description
-    owner: Practitioner
-    domain_of:
-    - Practitioner
-    range: string
-    required: false
+  research_study_id:
+    name: research_study_id
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputresearch_study_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: research_study_id
+    description: The Global ID for the Research Study.
+    title: Research Study ID
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:research_study_id
+    identifier: true
+    range: ResearchStudy
+    required: true
   email:
     name: email
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/email
@@ -444,13 +460,13 @@ slots:
     - Practitioner
     range: string
     required: false
-  title:
-    name: title
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/title
+  practitioner_title:
+    name: practitioner_title
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_title
     description: The title of the Investigator, eg, "Assistant Professor"
     title: Title
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/title
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_title
     owner: Practitioner
     domain_of:
     - Practitioner
@@ -542,6 +558,32 @@ slots:
     - PractitionerRole
     range: Period
     required: false
+  study_title:
+    name: study_title
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_title
+    description: "Research\tStudy's formal title."
+    title: Title
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_title
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: string
+    required: false
+  study_focus:
+    name: study_focus
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_focus
+    description: The primary, non-disease focus(es) of the study. This can include
+      terms related to intervention, drug, device, or other focus.
+    title: Study Focus
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_focus
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: uriorcurie
+    required: false
+    multivalued: true
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -619,6 +661,19 @@ slots:
     - PractitionerRole
     range: string
     required: true
+  researchStudy__research_study_id:
+    name: researchStudy__research_study_id
+    description: The Global ID for the Research Study.
+    title: Research Study ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/research_study_id
+    identifier: true
+    alias: research_study_id
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: string
+    required: true
   AssociatedParty_period_id:
     name: AssociatedParty_period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -689,7 +744,7 @@ classes:
     - institution_id
     - practitioner_role_id
     - description
-    - title
+    - practitioner_title
     - practitioner__practitioner_id
     attributes:
       practitioner_id:
@@ -803,9 +858,37 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/PractitionerRole
+  ResearchStudy:
+    name: ResearchStudy
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: ResearchStudy
+    description: "The NCPI Research Study FHIR resource represents an individual research\
+      \ effort and acts as a grouper or \u201Ccontainer\u201D for that effort\u2019\
+      s study participants and their related data files."
+    title: Research Study
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    is_a: HasExternalId
+    slots:
+    - external_id
+    - study_title
+    - study_focus
+    - description
+    - researchStudy__research_study_id
+    attributes:
+      research_study_id:
+        name: research_study_id
+        description: The Global ID for the Research Study.
+        title: Research Study ID
+        identifier: true
+        range: string
+        required: true
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-11-21T20:19:39'
-source_file_size: 2164
-generation_date: '2025-11-21T20:19:49'
+source_file_date: '2025-12-01T17:02:24'
+source_file_size: 2561
+generation_date: '2025-12-01T17:02:34'
 
