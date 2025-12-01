@@ -281,7 +281,22 @@
 
       ResearchStudy : research_study_id
 
+      ResearchStudy : study_acknowledgement
+
+      ResearchStudy : study_condition
+
       ResearchStudy : study_focus
+
+      ResearchStudy : study_status
+
+
+
+
+
+        ResearchStudy --&gt; "1" EnumStudyStatus : study_status
+        click EnumStudyStatus href "../EnumStudyStatus/"
+
+
 
       ResearchStudy : study_title
 
@@ -321,6 +336,24 @@
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>More details associated with the given resource</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../study_condition/">study_condition</a></td>
+<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The primary focus(es) of the study</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../study_acknowledgement/">study_acknowledgement</a></td>
+<td>* <br/> <a href="../String/">String</a></td>
+<td>Any attribution or acknowledgements relevant to the study</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../study_status/">study_status</a></td>
+<td>1 <br/> <a href="../EnumStudyStatus/">EnumStudyStatus</a></td>
+<td>The current state of the study</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -395,6 +428,9 @@ slots:
 - study_title
 - study_focus
 - description
+- study_condition
+- study_acknowledgement
+- study_status
 attributes:
   research_study_id:
     name: research_study_id
@@ -474,6 +510,48 @@ attributes:
     - ResearchStudy
     range: string
     required: false
+  study_condition:
+    name: study_condition
+    description: The primary focus(es) of the study. This is specific to the disease.
+      MeSH terms are preferred.
+    title: Study Condition
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: study_condition
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: uriorcurie
+    required: false
+    multivalued: true
+  study_acknowledgement:
+    name: study_acknowledgement
+    description: Any attribution or acknowledgements relevant to the study. This can
+      include but is not limited to funding sources, organizational affiliations or
+      sponsors.
+    title: Study Acknowledgement
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: study_acknowledgement
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: string
+    required: false
+    multivalued: true
+  study_status:
+    name: study_status
+    description: The current state of the study.
+    title: Study Status
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: study_status
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: EnumStudyStatus
+    required: true
+    multivalued: false
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study

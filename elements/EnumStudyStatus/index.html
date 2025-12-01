@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/name/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumStudyStatus/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Name (name) - kfi-fhir-input</title>
+        <title>Enum: EnumStudyStatus - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name-name" class="md-skip">
+        <a href="#enum-enumstudystatus" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Name (name)
+              Enum: EnumStudyStatus
             
           </span>
         </div>
@@ -325,10 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
+        Permissible Values
       
     </span>
   </a>
@@ -336,10 +336,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Properties
+        Slots
       
     </span>
   </a>
@@ -375,17 +375,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#linkml-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -416,82 +405,151 @@
   
 
 
-<h1 id="slot-name-name">Slot: Name (name)</h1>
-<p><em>Name of the entity.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputname">kfi_fhir_sparks:name</a>
-Alias: name</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumstudystatus">Enum: EnumStudyStatus</h1>
+<p><em>Codes indicating the study's current status</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumStudyStatus">kfi_fhir_sparks:EnumStudyStatus</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>active</td>
+<td>hl7_study_status:active</td>
+<td>Study is opened for accrual</td>
+</tr>
+<tr>
+<td>administratively_completed</td>
+<td>hl7_study_status:administratively-completed</td>
+<td>Study is completed prematurely and will not resume; patients are no longer ex...</td>
+</tr>
+<tr>
+<td>approved</td>
+<td>hl7_study_status:approved</td>
+<td></td>
+</tr>
+<tr>
+<td>closed_to_accrual</td>
+<td>closed-to-accrual</td>
+<td></td>
+</tr>
+<tr>
+<td>closed_to_accrual_and_intervention</td>
+<td>hl7_study_status:closed-to-accrual-and-intervention</td>
+<td></td>
+</tr>
+<tr>
+<td>completed</td>
+<td>hl7_study_status:completed</td>
+<td></td>
+</tr>
+<tr>
+<td>disapproved</td>
+<td>hl7_study_status:disapproved</td>
+<td></td>
+</tr>
+<tr>
+<td>in_review</td>
+<td>hl7_study_status:in-review</td>
+<td></td>
+</tr>
+<tr>
+<td>temporarily_closed_to_accrual</td>
+<td>hl7_study_status:temporarily-closed-to-accrual</td>
+<td></td>
+</tr>
+<tr>
+<td>temporarily_closed_to_accrual_and_intervention</td>
+<td>hl7_study_status:temporarily-closed-to-accrual-and-intervention</td>
+<td></td>
+</tr>
+<tr>
+<td>withdrawn</td>
+<td>hl7_study_status:withdrawn</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
+<td><a href="../study_status/">study_status</a></td>
+<td>The current state of the study</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../String/">String</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:name</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:name</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: Name of the entity.
-title: Name
+<pre><code class="language-yaml">name: EnumStudyStatus
+description: Codes indicating the study's current status
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: name
-domain_of:
-- Practitioner
-- AssociatedParty
-- Institution
-range: string
-required: false
+permissible_values:
+  active:
+    text: active
+    description: Study is opened for accrual.
+    meaning: hl7_study_status:active
+    title: Active
+  administratively_completed:
+    text: administratively_completed
+    description: Study is completed prematurely and will not resume; patients are
+      no longer examined nor treated.
+    meaning: hl7_study_status:administratively-completed
+    title: Administratively Completed
+  approved:
+    text: approved
+    meaning: hl7_study_status:approved
+    title: Approved
+  closed_to_accrual:
+    text: closed_to_accrual
+    meaning: closed-to-accrual
+    title: Closed to Accrual
+  closed_to_accrual_and_intervention:
+    text: closed_to_accrual_and_intervention
+    meaning: hl7_study_status:closed-to-accrual-and-intervention
+    title: Closed to Accrual and Intervention
+  completed:
+    text: completed
+    meaning: hl7_study_status:completed
+    title: Completed
+  disapproved:
+    text: disapproved
+    meaning: hl7_study_status:disapproved
+    title: Disapproved
+  in_review:
+    text: in_review
+    meaning: hl7_study_status:in-review
+    title: In Review
+  temporarily_closed_to_accrual:
+    text: temporarily_closed_to_accrual
+    meaning: hl7_study_status:temporarily-closed-to-accrual
+    title: Temporarily Closed to Accrual
+  temporarily_closed_to_accrual_and_intervention:
+    text: temporarily_closed_to_accrual_and_intervention
+    meaning: hl7_study_status:temporarily-closed-to-accrual-and-intervention
+    title: Temporarily Closed to Accrual and Intervention
+  withdrawn:
+    text: withdrawn
+    meaning: hl7_study_status:withdrawn
+    title: Withdrawn
 
 </code></pre>
 
