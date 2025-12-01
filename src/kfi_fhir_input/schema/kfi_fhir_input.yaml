@@ -33,6 +33,7 @@ imports:
   - period 
   - practitioner_role 
   - practitioner
+  - research_study
 classes:
   Any:
     class_uri: linkml:Any
@@ -70,6 +71,11 @@ slots:
     description: Name of the entity.
     range: string
     required: false
+  description:
+    title: Description 
+    description: More details associated with the given resource
+    range: string 
+    required: false
   practitioner_role_id:
     title: Practitioner Role ID
     description: Global ID for this record
@@ -77,3 +83,11 @@ slots:
     annotations: 
       target_slot: practitioner_role_id 
     required: false
+  research_study_id:
+    title: Research Study ID 
+    description: The Global ID for the Research Study.
+    range: ResearchStudy     
+    annotations:
+      target_slot: research_study_id     
+    identifier: true
+    required: true

@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-11-21T14:15:35
+# Generation date: 2025-12-01T11:00:26
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -94,6 +94,10 @@ class PractitionerRolePractitionerRoleId(extended_str):
     pass
 
 
+class ResearchStudyResearchStudyId(extended_str):
+    pass
+
+
 Any = Any
 
 @dataclass(repr=False)
@@ -159,7 +163,7 @@ class Practitioner(HasExternalId):
     institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
     practitioner_role_id: Optional[Union[str, PractitionerRolePractitionerRoleId]] = None
     description: Optional[str] = None
-    title: Optional[str] = None
+    practitioner_title: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.practitioner_id):
@@ -182,8 +186,8 @@ class Practitioner(HasExternalId):
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
-        if self.title is not None and not isinstance(self.title, str):
-            self.title = str(self.title)
+        if self.practitioner_title is not None and not isinstance(self.practitioner_title, str):
+            self.practitioner_title = str(self.practitioner_title)
 
         super().__post_init__(**kwargs)
 
@@ -318,6 +322,43 @@ class PractitionerRole(YAMLRoot):
         super().__post_init__(**kwargs)
 
 
+@dataclass(repr=False)
+class ResearchStudy(HasExternalId):
+    """
+    The NCPI Research Study FHIR resource represents an individual research effort and acts as a grouper or
+    “container” for that effort’s study participants and their related data files.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["research_study/ResearchStudy"]
+    class_class_curie: ClassVar[str] = "kfi:research_study/ResearchStudy"
+    class_name: ClassVar[str] = "ResearchStudy"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchStudy
+
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
+    study_title: Optional[str] = None
+    study_focus: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    description: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.research_study_id):
+            self.MissingRequiredField("research_study_id")
+        if not isinstance(self.research_study_id, ResearchStudyResearchStudyId):
+            self.research_study_id = ResearchStudyResearchStudyId(self.research_study_id)
+
+        if self.study_title is not None and not isinstance(self.study_title, str):
+            self.study_title = str(self.study_title)
+
+        if not isinstance(self.study_focus, list):
+            self.study_focus = [self.study_focus] if self.study_focus is not None else []
+        self.study_focus = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.study_focus]
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        super().__post_init__(**kwargs)
+
+
 # Enumerations
 class EnumResearchStudyPartyOrganizationType(EnumDefinitionImpl):
     """
@@ -399,17 +440,20 @@ slots.external_id = Slot(uri=KFI_FHIR_SPARKS.external_id, name="external_id", cu
 slots.name = Slot(uri=KFI_FHIR_SPARKS.name, name="name", curie=KFI_FHIR_SPARKS.curie('name'),
                    model_uri=KFI_FHIR_SPARKS.name, domain=None, range=Optional[str])
 
+slots.description = Slot(uri=KFI_FHIR_SPARKS.description, name="description", curie=KFI_FHIR_SPARKS.curie('description'),
+                   model_uri=KFI_FHIR_SPARKS.description, domain=None, range=Optional[str])
+
 slots.practitioner_role_id = Slot(uri=KFI_FHIR_SPARKS.practitioner_role_id, name="practitioner_role_id", curie=KFI_FHIR_SPARKS.curie('practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner_role_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])
 
-slots.description = Slot(uri=KFI['practitioner/description'], name="description", curie=KFI.curie('practitioner/description'),
-                   model_uri=KFI_FHIR_SPARKS.description, domain=None, range=Optional[str])
+slots.research_study_id = Slot(uri=KFI_FHIR_SPARKS.research_study_id, name="research_study_id", curie=KFI_FHIR_SPARKS.curie('research_study_id'),
+                   model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=URIRef)
 
 slots.email = Slot(uri=KFI['practitioner/email'], name="email", curie=KFI.curie('practitioner/email'),
                    model_uri=KFI_FHIR_SPARKS.email, domain=None, range=Optional[str])
 
-slots.title = Slot(uri=KFI['practitioner/title'], name="title", curie=KFI.curie('practitioner/title'),
-                   model_uri=KFI_FHIR_SPARKS.title, domain=None, range=Optional[str])
+slots.practitioner_title = Slot(uri=KFI['practitioner/practitioner_title'], name="practitioner_title", curie=KFI.curie('practitioner/practitioner_title'),
+                   model_uri=KFI_FHIR_SPARKS.practitioner_title, domain=None, range=Optional[str])
 
 slots.practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner_id, domain=None, range=Optional[str])
@@ -429,6 +473,12 @@ slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institu
 slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
 
+slots.study_title = Slot(uri=KFI['research_study/study_title'], name="study_title", curie=KFI.curie('research_study/study_title'),
+                   model_uri=KFI_FHIR_SPARKS.study_title, domain=None, range=Optional[str])
+
+slots.study_focus = Slot(uri=KFI['research_study/study_focus'], name="study_focus", curie=KFI.curie('research_study/study_focus'),
+                   model_uri=KFI_FHIR_SPARKS.study_focus, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)
 
@@ -446,6 +496,9 @@ slots.period__end = Slot(uri=KFI['period/end'], name="period__end", curie=KFI.cu
 
 slots.practitionerRole__practitioner_role_id = Slot(uri=KFI['practitioner_role/practitioner_role_id'], name="practitionerRole__practitioner_role_id", curie=KFI.curie('practitioner_role/practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.practitionerRole__practitioner_role_id, domain=None, range=URIRef)
+
+slots.researchStudy__research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="researchStudy__research_study_id", curie=KFI.curie('research_study/research_study_id'),
+                   model_uri=KFI_FHIR_SPARKS.researchStudy__research_study_id, domain=None, range=URIRef)
 
 slots.AssociatedParty_period_id = Slot(uri=KFI['period/period_id'], name="AssociatedParty_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.AssociatedParty_period_id, domain=AssociatedParty, range=Optional[Union[Union[str, PeriodPeriodId], list[Union[str, PeriodPeriodId]]]])

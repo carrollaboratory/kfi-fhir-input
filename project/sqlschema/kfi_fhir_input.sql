@@ -9,8 +9,8 @@
 --     * Slot: email Description: An email address to reach the entity.
 --     * Slot: institution_id Description: The institution this record is associated with.
 --     * Slot: practitioner_role_id Description: Global ID for this record
---     * Slot: description Description: Note relating to who this person is in relation to the study
---     * Slot: title Description: The title of the Investigator, eg, "Assistant Professor"
+--     * Slot: description Description: More details associated with the given resource
+--     * Slot: practitioner_title Description: The title of the Investigator, eg, "Assistant Professor"
 --     * Slot: practitioner_id Description: The Global ID for the Practitioner.
 -- # Class: AssociatedParty Description: Sponsors, collaborators, and other parties affiliated with a research study.
 --     * Slot: id
@@ -29,6 +29,10 @@
 --     * Slot: practitioner_id Description: The Global ID for the PractitionerRole that links a Practitioner to their Institution.
 --     * Slot: period_id Description: Reference to a time period which defines a Start and End datatime period.
 --     * Slot: practitioner_role_id Description: Global ID for this record
+-- # Class: ResearchStudy Description: The NCPI Research Study FHIR resource represents an individual research effort and acts as a grouper or “container” for that effort’s study participants and their related data files.
+--     * Slot: study_title Description: Research	Study's formal title.
+--     * Slot: description Description: More details associated with the given resource
+--     * Slot: research_study_id Description: The Global ID for the Research Study.
 -- # Class: HasExternalId_external_id
 --     * Slot: HasExternalId_id Description: Autocreated FK slot
 --     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
@@ -46,6 +50,12 @@
 --     * Slot: classifier Description: Research Study Party Organization Type (what type of institution is party)
 -- # Class: Institution_external_id
 --     * Slot: Institution_institution_id Description: Autocreated FK slot
+--     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
+-- # Class: ResearchStudy_study_focus
+--     * Slot: ResearchStudy_research_study_id Description: Autocreated FK slot
+--     * Slot: study_focus Description: The primary, non-disease focus(es) of the study. This can include terms related to intervention, drug, device, or other focus.
+-- # Class: ResearchStudy_external_id
+--     * Slot: ResearchStudy_research_study_id Description: Autocreated FK slot
 --     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
 
 CREATE TABLE "Any" (
@@ -71,6 +81,12 @@ CREATE TABLE "Period" (
 	"end" DATETIME,
 	PRIMARY KEY (period_id)
 );CREATE INDEX "ix_Period_period_id" ON "Period" (period_id);
+CREATE TABLE "ResearchStudy" (
+	study_title TEXT,
+	description TEXT,
+	research_study_id TEXT NOT NULL,
+	PRIMARY KEY (research_study_id)
+);CREATE INDEX "ix_ResearchStudy_research_study_id" ON "ResearchStudy" (research_study_id);
 CREATE TABLE "AssociatedParty" (
 	id INTEGER NOT NULL,
 	name TEXT,
@@ -93,7 +109,7 @@ CREATE TABLE "HasExternalId_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("HasExternalId_id", external_id),
 	FOREIGN KEY("HasExternalId_id") REFERENCES "HasExternalId" (id)
-);CREATE INDEX "ix_HasExternalId_external_id_HasExternalId_id" ON "HasExternalId_external_id" ("HasExternalId_id");CREATE INDEX "ix_HasExternalId_external_id_external_id" ON "HasExternalId_external_id" (external_id);
+);CREATE INDEX "ix_HasExternalId_external_id_external_id" ON "HasExternalId_external_id" (external_id);CREATE INDEX "ix_HasExternalId_external_id_HasExternalId_id" ON "HasExternalId_external_id" ("HasExternalId_id");
 CREATE TABLE "Record_external_id" (
 	"Record_id" TEXT,
 	external_id TEXT,
@@ -105,14 +121,26 @@ CREATE TABLE "Institution_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("Institution_institution_id", external_id),
 	FOREIGN KEY("Institution_institution_id") REFERENCES "Institution" (institution_id)
-);CREATE INDEX "ix_Institution_external_id_Institution_institution_id" ON "Institution_external_id" ("Institution_institution_id");CREATE INDEX "ix_Institution_external_id_external_id" ON "Institution_external_id" (external_id);
+);CREATE INDEX "ix_Institution_external_id_external_id" ON "Institution_external_id" (external_id);CREATE INDEX "ix_Institution_external_id_Institution_institution_id" ON "Institution_external_id" ("Institution_institution_id");
+CREATE TABLE "ResearchStudy_study_focus" (
+	"ResearchStudy_research_study_id" TEXT,
+	study_focus TEXT,
+	PRIMARY KEY ("ResearchStudy_research_study_id", study_focus),
+	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
+);CREATE INDEX "ix_ResearchStudy_study_focus_study_focus" ON "ResearchStudy_study_focus" (study_focus);CREATE INDEX "ix_ResearchStudy_study_focus_ResearchStudy_research_study_id" ON "ResearchStudy_study_focus" ("ResearchStudy_research_study_id");
+CREATE TABLE "ResearchStudy_external_id" (
+	"ResearchStudy_research_study_id" TEXT,
+	external_id TEXT,
+	PRIMARY KEY ("ResearchStudy_research_study_id", external_id),
+	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
+);CREATE INDEX "ix_ResearchStudy_external_id_external_id" ON "ResearchStudy_external_id" (external_id);CREATE INDEX "ix_ResearchStudy_external_id_ResearchStudy_research_study_id" ON "ResearchStudy_external_id" ("ResearchStudy_research_study_id");
 CREATE TABLE "Practitioner" (
 	name TEXT,
 	email TEXT,
 	institution_id TEXT,
 	practitioner_role_id TEXT,
 	description TEXT,
-	title TEXT,
+	practitioner_title TEXT,
 	practitioner_id TEXT NOT NULL,
 	PRIMARY KEY (practitioner_id),
 	FOREIGN KEY(institution_id) REFERENCES "Institution" (institution_id),
