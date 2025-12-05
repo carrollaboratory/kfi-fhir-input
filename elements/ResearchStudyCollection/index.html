@@ -275,6 +275,17 @@
       HasExternalId &lt;|-- ResearchStudyCollection
         click HasExternalId href "../HasExternalId/"
 
+      ResearchStudyCollection : collection_status
+
+
+
+
+
+        ResearchStudyCollection --&gt; "1" EnumCollectionStatus : collection_status
+        click EnumCollectionStatus href "../EnumCollectionStatus/"
+
+
+
       ResearchStudyCollection : collection_title
 
       ResearchStudyCollection : description
@@ -351,6 +362,12 @@
 <td><a href="../website/">website</a></td>
 <td>0..1 <br/> <a href="../Uri/">Uri</a></td>
 <td>URL describing the entity this represents</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../collection_status/">collection_status</a></td>
+<td>1 <br/> <a href="../EnumCollectionStatus/">EnumCollectionStatus</a></td>
+<td>The current state of the collection</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -437,6 +454,7 @@ slots:
 - research_study_collection_type
 - label
 - website
+- collection_status
 - research_study_collection_member_id
 attributes:
   research_study_collection_id:
@@ -555,6 +573,19 @@ attributes:
     - ResearchStudyCollection
     range: uri
     required: false
+    multivalued: false
+  collection_status:
+    name: collection_status
+    description: The current state of the collection
+    title: Collection Status
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: collection_status
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: EnumCollectionStatus
+    required: true
     multivalued: false
   research_study_collection_member_id:
     name: research_study_collection_member_id

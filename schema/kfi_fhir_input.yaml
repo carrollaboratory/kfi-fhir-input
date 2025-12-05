@@ -32,6 +32,9 @@ prefixes:
   hl7_study_design:
     prefix_prefix: hl7_study_design
     prefix_reference: https://hl7.org/fhir/codesystem-study-design
+  hl7_list_status:
+    prefix_prefix: hl7_list_status
+    prefix_reference: https://hl7.org/fhir/R4/codesystem-list-status
   kfi:
     prefix_prefix: kfi
     prefix_reference: https://carrollaboratory.github.io/kfi-fhir-input/
@@ -459,6 +462,20 @@ enums:
         text: user_defined
         meaning: ncpi_collection_type:user-defined
         title: User Defined
+  EnumCollectionStatus:
+    name: EnumCollectionStatus
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/EnumCollectionStatus
+    description: The current state of the collection
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    permissible_values:
+      current:
+        text: current
+        meaning: hl7_list_status:current
+        title: Current
+      retired:
+        text: retired
+        meaning: hl7_list_status:retired
+        title: Retired
 slots:
   id:
     name: id
@@ -866,6 +883,19 @@ slots:
     range: ResearchStudy
     required: true
     multivalued: true
+  collection_status:
+    name: collection_status
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_status
+    description: The current state of the collection
+    title: Collection Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_status
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: EnumCollectionStatus
+    required: true
+    multivalued: false
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -1178,6 +1208,7 @@ classes:
     - research_study_collection_type
     - label
     - website
+    - collection_status
     - research_study_collection_member_id
     - researchStudyCollection__research_study_collection_id
     - researchStudyCollection__description
@@ -1199,7 +1230,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-05T18:34:51'
-source_file_size: 3564
-generation_date: '2025-12-05T18:35:01'
+source_file_date: '2025-12-05T19:04:49'
+source_file_size: 3630
+generation_date: '2025-12-05T19:05:00'
 
