@@ -13,8 +13,11 @@ prefixes:
   hl7_rsp_role: http://hl7.org/fhir/research-study-party-role
   hl7_rsp_org_type: http://hl7.org/fhir/research-study-party-organization-type
   hl7_study_status: https://hl7.org/fhir/R4/codesystem-research-study-status
+  hl7_study_design: https://hl7.org/fhir/codesystem-study-design
   kfi: https://carrollaboratory.github.io/kfi-fhir-input/
+  ncpi_collection_type: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type
   linkml: https://w3id.org/linkml/
+
 
   # I think the linter is wrong on this one, but we'll use the recommendation
   # to quiet the warnings. 
@@ -36,6 +39,7 @@ imports:
   - practitioner_role 
   - practitioner
   - research_study
+  - research_study_collection
 classes:
   Any:
     class_uri: linkml:Any
@@ -57,7 +61,7 @@ classes:
 slots:
   id:
     title: ID
-    description: Global ID for this record
+    description: Unique Identifier for a table entry. This is probably not the Global ID
     identifier: true
     required: true
     range: string
@@ -93,3 +97,25 @@ slots:
       target_slot: research_study_id     
     identifier: true
     required: true
+  period_id:
+    title: Period ID
+    description: Reference to a time period which defines a Start and End datatime period. 
+    range: Period 
+    required: false
+    inlined: false
+    multivalued: false
+    annotations:
+      db_column: period_id
+      target_slot: id 
+  website: 
+    title: Website 
+    description: URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.
+    required: false 
+    multivalued: false 
+    range: uri 
+  label:
+    title: Label 
+    description: Alias such as acronym and alternate names.
+    required: false 
+    multivalued: true 
+    range: string

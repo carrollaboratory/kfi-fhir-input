@@ -1,0 +1,10 @@
+# Example Associated Party
+---
+id: asp0001
+role: primary_investigator
+name: Cat McStevens
+classifier: 
+  - academic
+#party: prol-0001
+#period: 
+#  - prd-00001

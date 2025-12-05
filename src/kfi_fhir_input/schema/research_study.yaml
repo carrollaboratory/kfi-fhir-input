@@ -5,6 +5,7 @@ imports:
   - kfi_fhir_input
   - institution
   - practitioner_role
+  - associated_party
 classes:
   ResearchStudy:
     title: Research Study 
@@ -21,15 +22,26 @@ classes:
         required: true
     slots:
       - study_title       
+      - parent_study_id
       - study_focus 
       - description
       - study_condition
       - study_acknowledgement
       - study_status
+      - study_design
+      - study_personnel
 slots:
+  parent_study_id: 
+    title: Parent Study 
+    description: ID For Parent Study if this is a substudy
+    range: ResearchStudy 
+    required: false 
+    annotations:
+      db_column: parent_study_id 
+      target_slot: research_study_id 
   study_title:
     title: Title 
-    description: Research	Study's formal title.
+    description: Research Study's formal title.
     range: string 
     required: false
   study_focus:
@@ -56,7 +68,19 @@ slots:
     range: EnumStudyStatus
     required: true 
     multivalued: false 
-enums:
+  study_design: 
+    title: Study Design 
+    description: Study Design and Study Type ([example ValueSet can be found here](https://hl7.org/fhir/valueset-study-design.html))
+    range: uriorcurie  
+    required: false 
+    multivalued: true 
+  study_personnel:
+    title: Study Personnel 
+    description: Every study must have at least one Primary Contact defined. Additional personnel such as Primary Investigator(s), Administrator(s), Collaborator(s) or other roles may also be included. If there are no appropriate individuals who can serve as primary contact for a study, an organization may be provided.
+    range: AssociatedParty 
+    required: true 
+    multivalued: true
+enums:  
   EnumStudyStatus:
     description: Codes indicating the study's current status 
     permissible_values:

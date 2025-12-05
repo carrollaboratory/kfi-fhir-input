@@ -1,0 +1,76 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+name: kfi-fhir-input-research-study-collection
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  ResearchStudyCollection:
+    title: Research Study Collection  
+    description: Collections of research data including, but not limited, to 
+        Consortia, Programs, adhoc collections of Studies and datasets among 
+        other types of collections.
+    is_a: HasExternalId 
+    annotations:
+      fhir_resource: List
+    attributes:
+      research_study_collection_id:
+        title: Research Study Collection ID
+        description: Global ID for this record
+        identifier: true
+        required: true
+        range: string
+      description:
+        title: Description 
+        description: The description of the collection.
+        required: false 
+        range: string 
+        multivalued: false        # technically, the IG says this is multivalued, but it doesn't really make sense
+    slots:
+      - collection_title          # Collection's title
+      - research_study_collection_type
+      - label 
+      - website 
+      - research_study_collection_member_id
+slots: 
+  collection_title:
+    title: Collection Title 
+    description: The collection's title.
+    required: true 
+    range: string 
+  research_study_collection_type:
+    title: Research Study Collection Type 
+    description: The type of collection being described.
+    multivalued: false 
+    required: true  
+    range: EnumResearchCollectionType
+  research_study_collection_id:
+    title: Research Study Collection ID
+    description: Global ID for this record
+    identifier: false
+    required: false
+    range: string
+    annotations: 
+      target_slot: research_study_collection_id 
+  research_study_collection_member_id:
+    title: Research Study Collection Member ID 
+    description: ID associated with a member of the collection (Research Study, Dataset, etc)
+    identifier: false 
+    required: true 
+    multivalued: true
+    range: ResearchStudy # Ultimately, we may support other types
+    annotations:
+      target_slot: research_study_id
+enums:
+  EnumResearchCollectionType:
+    description: Research Study Collection Type 
+    permissible_values:
+      consortium: 
+        title: Consortium 
+        meaning: ncpi_collection_type:consortium 
+      program: 
+        title: Program 
+        meaning: ncpi_collection_type:program 
+      user_defined:
+        title: User Defined 
+        meaning: ncpi_collection_type:user-defined
+        

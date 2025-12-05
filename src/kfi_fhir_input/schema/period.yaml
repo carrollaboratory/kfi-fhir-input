@@ -6,27 +6,16 @@ imports:
 classes:  
   Period:
     title: Period 
-    description: Time period associated with some FHIR resource 
+    description: Time period associated with some FHIR resource     
+    is_a: Record
     attributes:
-      period_id: 
-        title: Period ID
-        description: Database ID for this record. This is not a global ID, is a global identifier
-        identifier: true
-        required: true
-        range: string
       start:
         title: Start 
         description: Start attribute for a FHIR period data type. 
-        range: datetime
+        range: date
         required: false
       end: 
         title: End 
         description: End attribute for a FHIR period data type. 
-        range: datetime
+        range: date
         required: false
-slots:
-  period_id:
-    title: Period 
-    description: Reference to a time period which defines a Start and End datatime period. 
-    range: Period 
-    required: false

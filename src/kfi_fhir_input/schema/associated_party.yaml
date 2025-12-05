@@ -10,7 +10,7 @@ classes:
   AssociatedParty:
     title: Associated Party 
     description: Sponsors, collaborators, and other parties affiliated with a research study.
-    # is_a: HasExternalId 
+    is_a: Record
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
     slots:
@@ -20,8 +20,8 @@ classes:
       - classifier
       - party 
     slot_usage:
-      period_id:
-        multivalued: true
+      #period_id:
+      #  multivalued: true
 slots: 
   role: 
     title: Role 
@@ -39,8 +39,9 @@ slots:
     description: Individual or organization associated with study 
     range: Any
     any_of: 
-      - range: Practitioner 
-      - range: Institution
+      #- range: Practitioner 
+      #- range: Institution
+      - range: PractitionerRole 
 enums:
   EnumResearchStudyPartyOrganizationType:
     description: Research Study Party Organization Type 
@@ -49,8 +50,20 @@ enums:
         title: NIH 
         meaning: hl7_rsp_org_type:nih 
       fda: 
-        title: fda
+        title: FDA
         meaning: hl7_rsp_org_type:fda 
+      academic: 
+        title: Academic
+        meaning: hl7_rsp_org_type:academic 
+      government: 
+        title: Government 
+        meaning: hl7_rsp_org_type:government 
+      nonprofit:
+        title: Nonprofit 
+        meaning: hl7_rsp_org_type:nonprofit 
+      industry:
+        title: Industry 
+        meaning: hl7_rsp_org_type:industry 
   EnumResearchStudyPartyRole:
     description: This is a ResearchStudy's party role.
     permissible_values:
