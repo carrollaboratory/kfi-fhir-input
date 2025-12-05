@@ -433,13 +433,18 @@ Alias: description</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ResearchStudy/">ResearchStudy</a></td>
-<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
+<td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
+<td>Collections of research data including, but not limited, to Consortia, Progra...</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Practitioner/">Practitioner</a></td>
 <td>For our purposes, this will be an investigator</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ResearchStudy/">ResearchStudy</a></td>
+<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -484,6 +489,7 @@ alias: description
 domain_of:
 - Practitioner
 - ResearchStudy
+- ResearchStudyCollection
 range: string
 required: false
 

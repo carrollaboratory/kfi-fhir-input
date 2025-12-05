@@ -521,10 +521,6 @@
 <td>This is a placeholder for the experimental linkml:any behavior for unions</td>
 </tr>
 <tr>
-<td><a href="AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-</tr>
-<tr>
 <td><a href="HasExternalId/">HasExternalId</a></td>
 <td>Has an external ID</td>
 </tr>
@@ -541,12 +537,20 @@
 <td>One row / entity within the database</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="AssociatedParty/">AssociatedParty</a></td>
+<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Period/">Period</a></td>
+<td>Time period associated with some FHIR resource</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ResearchStudy/">ResearchStudy</a></td>
 <td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
 </tr>
 <tr>
-<td><a href="Period/">Period</a></td>
-<td>Time period associated with some FHIR resource</td>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ResearchStudyCollection/">ResearchStudyCollection</a></td>
+<td>Collections of research data including, but not limited, to Consortia, Progra...</td>
 </tr>
 <tr>
 <td><a href="PractitionerRole/">PractitionerRole</a></td>
@@ -568,6 +572,10 @@
 <td>Research Study Party Organization Type (what type of institution is party)</td>
 </tr>
 <tr>
+<td><a href="collection_title/">collection_title</a></td>
+<td>The collection's title</td>
+</tr>
+<tr>
 <td><a href="description/">description</a></td>
 <td>More details associated with the given resource</td>
 </tr>
@@ -585,15 +593,23 @@
 </tr>
 <tr>
 <td><a href="id/">id</a></td>
-<td>Global ID for this record</td>
+<td>Unique Identifier for a table entry</td>
 </tr>
 <tr>
 <td><a href="institution_id/">institution_id</a></td>
 <td>The institution this record is associated with</td>
 </tr>
 <tr>
+<td><a href="label/">label</a></td>
+<td>Alias such as acronym and alternate names</td>
+</tr>
+<tr>
 <td><a href="name/">name</a></td>
 <td>Name of the entity</td>
+</tr>
+<tr>
+<td><a href="parent_study_id/">parent_study_id</a></td>
+<td>ID For Parent Study if this is a substudy</td>
 </tr>
 <tr>
 <td><a href="party/">party</a></td>
@@ -616,6 +632,18 @@
 <td>The title of the Investigator, eg, "Assistant Professor"</td>
 </tr>
 <tr>
+<td><a href="research_study_collection_id/">research_study_collection_id</a></td>
+<td>Global ID for this record</td>
+</tr>
+<tr>
+<td><a href="research_study_collection_member_id/">research_study_collection_member_id</a></td>
+<td>ID associated with a member of the collection (Research Study, Dataset, etc)</td>
+</tr>
+<tr>
+<td><a href="research_study_collection_type/">research_study_collection_type</a></td>
+<td>The type of collection being described</td>
+</tr>
+<tr>
 <td><a href="research_study_id/">research_study_id</a></td>
 <td>The Global ID for the Research Study</td>
 </tr>
@@ -636,8 +664,16 @@
 <td>The primary focus(es) of the study</td>
 </tr>
 <tr>
+<td><a href="study_design/">study_design</a></td>
+<td>Study Design and Study Type ([example ValueSet can be found here](https://hl7</td>
+</tr>
+<tr>
 <td><a href="study_focus/">study_focus</a></td>
 <td>The primary, non-disease focus(es) of the study</td>
+</tr>
+<tr>
+<td><a href="study_personnel/">study_personnel</a></td>
+<td>Every study must have at least one Primary Contact defined</td>
 </tr>
 <tr>
 <td><a href="study_status/">study_status</a></td>
@@ -645,7 +681,11 @@
 </tr>
 <tr>
 <td><a href="study_title/">study_title</a></td>
-<td>Research  Study's formal title</td>
+<td>Research Study's formal title</td>
+</tr>
+<tr>
+<td><a href="website/">website</a></td>
+<td>URL describing the entity this represents</td>
 </tr>
 </tbody>
 </table>
@@ -658,6 +698,10 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="EnumResearchCollectionType/">EnumResearchCollectionType</a></td>
+<td>Research Study Collection Type</td>
+</tr>
 <tr>
 <td><a href="EnumResearchStudyPartyOrganizationType/">EnumResearchStudyPartyOrganizationType</a></td>
 <td>Research Study Party Organization Type</td>

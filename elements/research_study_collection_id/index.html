@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/name/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/research_study_collection_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Name (name) - kfi-fhir-input</title>
+        <title>Slot: Research Study Collection ID (research_study_collection_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name-name" class="md-skip">
+        <a href="#slot-research-study-collection-id-research_study_collection_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Name (name)
+              Slot: Research Study Collection ID (research_study_collection_id)
             
           </span>
         </div>
@@ -359,6 +359,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -416,10 +427,10 @@
   
 
 
-<h1 id="slot-name-name">Slot: Name (name)</h1>
-<p><em>Name of the entity.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputname">kfi_fhir_sparks:name</a>
-Alias: name</p>
+<h1 id="slot-research-study-collection-id-research_study_collection_id">Slot: Research Study Collection ID (research_study_collection_id)</h1>
+<p><em>Global ID for this record</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputresearch_study_collection_id">kfi_fhir_sparks:research_study_collection_id</a>
+Alias: research_study_collection_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -433,18 +444,8 @@ Alias: name</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
+<td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
+<td>Collections of research data including, but not limited, to Consortia, Progra...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -454,6 +455,21 @@ Alias: name</p>
 <li>Range: <a href="../String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>target_slot</td>
+<td>research_study_collection_id</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -469,27 +485,30 @@ Alias: name</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:name</td>
+<td>kfi_fhir_sparks:research_study_collection_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:name</td>
+<td>kfi_fhir_sparks:research_study_collection_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: Name of the entity.
-title: Name
+<pre><code class="language-yaml">name: research_study_collection_id
+annotations:
+  target_slot:
+    tag: target_slot
+    value: research_study_collection_id
+description: Global ID for this record
+title: Research Study Collection ID
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: name
+identifier: false
+alias: research_study_collection_id
 domain_of:
-- Practitioner
-- AssociatedParty
-- Institution
+- ResearchStudyCollection
 range: string
 required: false
 

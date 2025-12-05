@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/name/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumResearchCollectionType/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Name (name) - kfi-fhir-input</title>
+        <title>Enum: EnumResearchCollectionType - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-name-name" class="md-skip">
+        <a href="#enum-enumresearchcollectiontype" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Name (name)
+              Enum: EnumResearchCollectionType
             
           </span>
         </div>
@@ -325,10 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
+        Permissible Values
       
     </span>
   </a>
@@ -336,10 +336,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Properties
+        Slots
       
     </span>
   </a>
@@ -375,17 +375,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#linkml-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -416,82 +405,76 @@
   
 
 
-<h1 id="slot-name-name">Slot: Name (name)</h1>
-<p><em>Name of the entity.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputname">kfi_fhir_sparks:name</a>
-Alias: name</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumresearchcollectiontype">Enum: EnumResearchCollectionType</h1>
+<p><em>Research Study Collection Type</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumResearchCollectionType">kfi_fhir_sparks:EnumResearchCollectionType</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>consortium</td>
+<td>ncpi_collection_type:consortium</td>
+<td></td>
+</tr>
+<tr>
+<td>program</td>
+<td>ncpi_collection_type:program</td>
+<td></td>
+</tr>
+<tr>
+<td>user_defined</td>
+<td>ncpi_collection_type:user-defined</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-<td>no</td>
+<td><a href="../research_study_collection_type/">research_study_collection_type</a></td>
+<td>The type of collection being described</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../String/">String</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:name</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:name</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: name
-description: Name of the entity.
-title: Name
+<pre><code class="language-yaml">name: EnumResearchCollectionType
+description: Research Study Collection Type
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: name
-domain_of:
-- Practitioner
-- AssociatedParty
-- Institution
-range: string
-required: false
+permissible_values:
+  consortium:
+    text: consortium
+    meaning: ncpi_collection_type:consortium
+    title: Consortium
+  program:
+    text: program
+    meaning: ncpi_collection_type:program
+    title: Program
+  user_defined:
+    text: user_defined
+    meaning: ncpi_collection_type:user-defined
+    title: User Defined
 
 </code></pre>
 

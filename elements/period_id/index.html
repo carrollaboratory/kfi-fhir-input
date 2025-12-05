@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Period (period_id) - kfi-fhir-input</title>
+        <title>Slot: Period ID (period_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-period-period_id" class="md-skip">
+        <a href="#slot-period-id-period_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Period (period_id)
+              Slot: Period ID (period_id)
             
           </span>
         </div>
@@ -359,6 +359,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -416,7 +427,7 @@
   
 
 
-<h1 id="slot-period-period_id">Slot: Period (period_id)</h1>
+<h1 id="slot-period-id-period_id">Slot: Period ID (period_id)</h1>
 <p><em>Reference to a time period which defines a Start and End datatime period.</em></p>
 <p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputperiod_id">kfi_fhir_sparks:period_id</a>
 Alias: period_id</p>
@@ -433,11 +444,6 @@ Alias: period_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Period/">Period</a></td>
-<td>Time period associated with some FHIR resource</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../PractitionerRole/">PractitionerRole</a></td>
 <td>PractitionerRole covers the recording of the location and types of services t...</td>
 <td>no</td>
@@ -445,7 +451,7 @@ Alias: period_id</p>
 <tr>
 <td><a href="../AssociatedParty/">AssociatedParty</a></td>
 <td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-<td>yes</td>
+<td>no</td>
 </tr>
 </tbody>
 </table>
@@ -454,6 +460,25 @@ Alias: period_id</p>
 <li>Range: <a href="../Period/">Period</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db_column</td>
+<td>period_id</td>
+</tr>
+<tr>
+<td>target_slot</td>
+<td>id</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -481,17 +506,25 @@ Alias: period_id</p>
 <details>
 
 <pre><code class="language-yaml">name: period_id
+annotations:
+  db_column:
+    tag: db_column
+    value: period_id
+  target_slot:
+    tag: target_slot
+    value: id
 description: Reference to a time period which defines a Start and End datatime period.
-title: Period
+title: Period ID
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
 alias: period_id
 domain_of:
 - AssociatedParty
-- Period
 - PractitionerRole
 range: Period
 required: false
+multivalued: false
+inlined: false
 
 </code></pre>
 

@@ -180,6 +180,8 @@ AssociatedParty {
     string name  
     EnumResearchStudyPartyRole role  
     EnumResearchStudyPartyOrganizationTypeList classifier  
+    string id  
+    uriorcurieList external_id  
 }
 HasExternalId {
     uriorcurieList external_id  
@@ -190,9 +192,10 @@ Institution {
     uriorcurieList external_id  
 }
 Period {
-    string period_id  
-    datetime start  
-    datetime end  
+    date start  
+    date end  
+    string id  
+    uriorcurieList external_id  
 }
 Practitioner {
     string name  
@@ -217,16 +220,29 @@ ResearchStudy {
     uriorcurieList study_condition  
     stringList study_acknowledgement  
     EnumStudyStatus study_status  
+    uriorcurieList study_design  
     string research_study_id  
+    uriorcurieList external_id  
+}
+ResearchStudyCollection {
+    string collection_title  
+    EnumResearchCollectionType research_study_collection_type  
+    stringList label  
+    uri website  
+    string research_study_collection_id  
+    string description  
     uriorcurieList external_id  
 }
 
 AssociatedParty ||--|o Any : "party"
-AssociatedParty ||--}o Period : "period_id"
+AssociatedParty ||--|o Period : "period_id"
 Practitioner ||--|o Institution : "institution_id"
 Practitioner ||--|o PractitionerRole : "practitioner_role_id"
 PractitionerRole ||--|o Institution : "institution_id"
 PractitionerRole ||--|o Period : "period_id"
+ResearchStudy ||--|o ResearchStudy : "parent_study_id"
+ResearchStudy ||--}| AssociatedParty : "study_personnel"
+ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
 
 </div>
 </article>

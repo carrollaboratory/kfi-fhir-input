@@ -269,6 +269,13 @@
       HasExternalId &lt;|-- Record
         click HasExternalId href "../HasExternalId/"
 
+
+      Record &lt;|-- AssociatedParty
+        click AssociatedParty href "../AssociatedParty/"
+      Record &lt;|-- Period
+        click Period href "../Period/"
+
+
       Record : external_id
 
       Record : id
@@ -278,7 +285,11 @@
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../HasExternalId/">HasExternalId</a><ul>
-<li><strong>Record</strong></li>
+<li><strong>Record</strong><ul>
+<li><a href="../AssociatedParty/">AssociatedParty</a></li>
+<li><a href="../Period/">Period</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -296,7 +307,7 @@
 <tr>
 <td><a href="../id/">id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
-<td>Global ID for this record</td>
+<td>Unique Identifier for a table entry</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -357,7 +368,8 @@ abstract: true
 attributes:
   id:
     name: id
-    description: Global ID for this record
+    description: Unique Identifier for a table entry. This is probably not the Global
+      ID
     title: ID
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000

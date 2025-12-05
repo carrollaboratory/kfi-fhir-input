@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -263,15 +272,29 @@
 <div class="mermaid"> classDiagram
     class Period
     click Period href "../Period/"
+      Record &lt;|-- Period
+        click Record href "../Record/"
+
       Period : end
 
-      Period : period_id
+      Period : external_id
+
+      Period : id
 
       Period : start
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasExternalId/">HasExternalId</a><ul>
+<li><a href="../Record/">Record</a><ul>
+<li><strong>Period</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -284,22 +307,28 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../period_id/">period_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Database ID for this record</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../start/">start</a></td>
-<td>0..1 <br/> <a href="../Datetime/">Datetime</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
 <td>Start attribute for a FHIR period data type</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../end/">end</a></td>
-<td>0..1 <br/> <a href="../Datetime/">Datetime</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
 <td>End attribute for a FHIR period data type</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Unique Identifier for a table entry</td>
+<td><a href="../Record/">Record</a></td>
+</tr>
+<tr>
+<td><a href="../external_id/">external_id</a></td>
+<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -360,20 +389,8 @@
 description: Time period associated with some FHIR resource
 title: Period
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+is_a: Record
 attributes:
-  period_id:
-    name: period_id
-    description: Database ID for this record. This is not a global ID, is a global
-      identifier
-    title: Period ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    identifier: true
-    domain_of:
-    - AssociatedParty
-    - Period
-    - PractitionerRole
-    range: string
-    required: true
   start:
     name: start
     description: Start attribute for a FHIR period data type.
@@ -382,7 +399,7 @@ attributes:
     rank: 1000
     domain_of:
     - Period
-    range: datetime
+    range: date
     required: false
   end:
     name: end
@@ -392,7 +409,7 @@ attributes:
     rank: 1000
     domain_of:
     - Period
-    range: datetime
+    range: date
     required: false
 
 </code></pre>
@@ -403,22 +420,8 @@ attributes:
 description: Time period associated with some FHIR resource
 title: Period
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+is_a: Record
 attributes:
-  period_id:
-    name: period_id
-    description: Database ID for this record. This is not a global ID, is a global
-      identifier
-    title: Period ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    identifier: true
-    alias: period_id
-    owner: Period
-    domain_of:
-    - AssociatedParty
-    - Period
-    - PractitionerRole
-    range: string
-    required: true
   start:
     name: start
     description: Start attribute for a FHIR period data type.
@@ -429,7 +432,7 @@ attributes:
     owner: Period
     domain_of:
     - Period
-    range: datetime
+    range: date
     required: false
   end:
     name: end
@@ -441,8 +444,37 @@ attributes:
     owner: Period
     domain_of:
     - Period
-    range: datetime
+    range: date
     required: false
+  id:
+    name: id
+    description: Unique Identifier for a table entry. This is probably not the Global
+      ID
+    title: ID
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: Period
+    domain_of:
+    - Record
+    range: string
+    required: true
+    multivalued: false
+  external_id:
+    name: external_id
+    description: Other identifiers for this entity, eg, from the submitting study
+      or in systems link dbGaP
+    title: External Identifiers
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: external_id
+    owner: Period
+    domain_of:
+    - HasExternalId
+    range: uriorcurie
+    required: false
+    multivalued: true
 
 </code></pre>
 </details>
