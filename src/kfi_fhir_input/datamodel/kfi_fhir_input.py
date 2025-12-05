@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-05T12:31:54
+# Generation date: 2025-12-05T13:03:27
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -63,6 +63,7 @@ metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
+HL7_LIST_STATUS = CurieNamespace('hl7_list_status', 'https://hl7.org/fhir/R4/codesystem-list-status')
 HL7_RSP_ORG_TYPE = CurieNamespace('hl7_rsp_org_type', 'http://hl7.org/fhir/research-study-party-organization-type')
 HL7_RSP_ROLE = CurieNamespace('hl7_rsp_role', 'http://hl7.org/fhir/research-study-party-role')
 HL7_STUDY_DESIGN = CurieNamespace('hl7_study_design', 'https://hl7.org/fhir/codesystem-study-design')
@@ -423,6 +424,7 @@ class ResearchStudyCollection(HasExternalId):
     research_study_collection_id: Union[str, ResearchStudyCollectionResearchStudyCollectionId] = None
     collection_title: str = None
     research_study_collection_type: Union[str, "EnumResearchCollectionType"] = None
+    collection_status: Union[str, "EnumCollectionStatus"] = None
     research_study_collection_member_id: Union[Union[str, ResearchStudyResearchStudyId], list[Union[str, ResearchStudyResearchStudyId]]] = None
     label: Optional[Union[str, list[str]]] = empty_list()
     website: Optional[Union[str, URI]] = None
@@ -443,6 +445,11 @@ class ResearchStudyCollection(HasExternalId):
             self.MissingRequiredField("research_study_collection_type")
         if not isinstance(self.research_study_collection_type, EnumResearchCollectionType):
             self.research_study_collection_type = EnumResearchCollectionType(self.research_study_collection_type)
+
+        if self._is_empty(self.collection_status):
+            self.MissingRequiredField("collection_status")
+        if not isinstance(self.collection_status, EnumCollectionStatus):
+            self.collection_status = EnumCollectionStatus(self.collection_status)
 
         if self._is_empty(self.research_study_collection_member_id):
             self.MissingRequiredField("research_study_collection_member_id")
@@ -625,6 +632,24 @@ class EnumResearchCollectionType(EnumDefinitionImpl):
         description="Research Study Collection Type",
     )
 
+class EnumCollectionStatus(EnumDefinitionImpl):
+    """
+    The current state of the collection
+    """
+    current = PermissibleValue(
+        text="current",
+        title="Current",
+        meaning=HL7_LIST_STATUS["current"])
+    retired = PermissibleValue(
+        text="retired",
+        title="Retired",
+        meaning=HL7_LIST_STATUS["retired"])
+
+    _defn = EnumDefinition(
+        name="EnumCollectionStatus",
+        description="The current state of the collection",
+    )
+
 # Slots
 class slots:
     pass
@@ -712,6 +737,9 @@ slots.research_study_collection_id = Slot(uri=KFI['research-study-collection/res
 
 slots.research_study_collection_member_id = Slot(uri=KFI['research-study-collection/research_study_collection_member_id'], name="research_study_collection_member_id", curie=KFI.curie('research-study-collection/research_study_collection_member_id'),
                    model_uri=KFI_FHIR_SPARKS.research_study_collection_member_id, domain=None, range=Union[Union[str, ResearchStudyResearchStudyId], list[Union[str, ResearchStudyResearchStudyId]]])
+
+slots.collection_status = Slot(uri=KFI['research-study-collection/collection_status'], name="collection_status", curie=KFI.curie('research-study-collection/collection_status'),
+                   model_uri=KFI_FHIR_SPARKS.collection_status, domain=None, range=Union[str, "EnumCollectionStatus"])
 
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)

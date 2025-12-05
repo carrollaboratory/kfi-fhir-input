@@ -2,5 +2,6 @@ variable_name,description,data_type,min,max,units,enumerations,comment
 collection_title,The collection's title.,string,,,,,
 research_study_collection_type,The type of collection being described.,enumeration,,,,consortium=Consortium;program=Program;user_defined=User Defined,
 website,"URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.",string,,,,,
+collection_status,The current state of the collection,enumeration,,,,current=Current;retired=Retired,
 research_study_collection_id,Global ID for this record,string,,,,,
 description,The description of the collection.,string,,,,,

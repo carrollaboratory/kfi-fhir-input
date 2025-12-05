@@ -30,6 +30,7 @@ classes:
       - research_study_collection_type
       - label 
       - website 
+      - collection_status
       - research_study_collection_member_id
 slots: 
   collection_title:
@@ -60,6 +61,12 @@ slots:
     range: ResearchStudy # Ultimately, we may support other types
     annotations:
       target_slot: research_study_id
+  collection_status:
+    title: Collection Status 
+    description: The current state of the collection 
+    required: true 
+    multivalued: false 
+    range: EnumCollectionStatus 
 enums:
   EnumResearchCollectionType:
     description: Research Study Collection Type 
@@ -73,4 +80,13 @@ enums:
       user_defined:
         title: User Defined 
         meaning: ncpi_collection_type:user-defined
+  EnumCollectionStatus:
+    description: The current state of the collection
+    permissible_values:
+      current: 
+        title: Current 
+        meaning: hl7_list_status:current 
+      retired: 
+        title: Retired 
+        meaning: hl7_list_status:retired
         

@@ -93,7 +93,9 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'research_study_collection'],
      'license': 'MIT',
      'name': 'kfi-fhir-input',
-     'prefixes': {'hl7_rsp_org_type': {'prefix_prefix': 'hl7_rsp_org_type',
+     'prefixes': {'hl7_list_status': {'prefix_prefix': 'hl7_list_status',
+                                      'prefix_reference': 'https://hl7.org/fhir/R4/codesystem-list-status'},
+                  'hl7_rsp_org_type': {'prefix_prefix': 'hl7_rsp_org_type',
                                        'prefix_reference': 'http://hl7.org/fhir/research-study-party-organization-type'},
                   'hl7_rsp_role': {'prefix_prefix': 'hl7_rsp_role',
                                    'prefix_reference': 'http://hl7.org/fhir/research-study-party-role'},
@@ -173,6 +175,14 @@ class EnumResearchCollectionType(str, Enum):
     Consortium = "consortium"
     Program = "program"
     User_Defined = "user_defined"
+
+
+class EnumCollectionStatus(str, Enum):
+    """
+    The current state of the collection
+    """
+    Current = "current"
+    Retired = "retired"
 
 
 
@@ -325,6 +335,7 @@ class ResearchStudyCollection(HasExternalId):
     research_study_collection_type: EnumResearchCollectionType = Field(default=..., title="Research Study Collection Type", description="""The type of collection being described.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
     label: Optional[list[str]] = Field(default=[], title="Label", description="""Alias such as acronym and alternate names.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
     website: Optional[str] = Field(default=None, title="Website", description="""URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
+    collection_status: EnumCollectionStatus = Field(default=..., title="Collection Status", description="""The current state of the collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
     research_study_collection_member_id: list[str] = Field(default=..., title="Research Study Collection Member ID", description="""ID associated with a member of the collection (Research Study, Dataset, etc)""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'research_study_id'}},
          'domain_of': ['ResearchStudyCollection']} })
