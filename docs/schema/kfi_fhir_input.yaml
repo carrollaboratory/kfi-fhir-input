@@ -13,6 +13,7 @@ imports:
 - practitioner_role
 - practitioner
 - research_study
+- research_study_collection
 - kfi_fhir_input
 license: MIT
 prefixes:
@@ -28,9 +29,15 @@ prefixes:
   hl7_study_status:
     prefix_prefix: hl7_study_status
     prefix_reference: https://hl7.org/fhir/R4/codesystem-research-study-status
+  hl7_study_design:
+    prefix_prefix: hl7_study_design
+    prefix_reference: https://hl7.org/fhir/codesystem-study-design
   kfi:
     prefix_prefix: kfi
     prefix_reference: https://carrollaboratory.github.io/kfi-fhir-input/
+  ncpi_collection_type:
+    prefix_prefix: ncpi_collection_type
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
@@ -319,7 +326,23 @@ enums:
       fda:
         text: fda
         meaning: hl7_rsp_org_type:fda
-        title: fda
+        title: FDA
+      academic:
+        text: academic
+        meaning: hl7_rsp_org_type:academic
+        title: Academic
+      government:
+        text: government
+        meaning: hl7_rsp_org_type:government
+        title: Government
+      nonprofit:
+        text: nonprofit
+        meaning: hl7_rsp_org_type:nonprofit
+        title: Nonprofit
+      industry:
+        text: industry
+        meaning: hl7_rsp_org_type:industry
+        title: Industry
   EnumResearchStudyPartyRole:
     name: EnumResearchStudyPartyRole
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyRole
@@ -418,11 +441,30 @@ enums:
         text: withdrawn
         meaning: hl7_study_status:withdrawn
         title: Withdrawn
+  EnumResearchCollectionType:
+    name: EnumResearchCollectionType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/EnumResearchCollectionType
+    description: Research Study Collection Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    permissible_values:
+      consortium:
+        text: consortium
+        meaning: ncpi_collection_type:consortium
+        title: Consortium
+      program:
+        text: program
+        meaning: ncpi_collection_type:program
+        title: Program
+      user_defined:
+        text: user_defined
+        meaning: ncpi_collection_type:user-defined
+        title: User Defined
 slots:
   id:
     name: id
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputid
-    description: Global ID for this record
+    description: Unique Identifier for a table entry. This is probably not the Global
+      ID
     title: ID
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     slot_uri: kfi_fhir_sparks:id
@@ -504,6 +546,57 @@ slots:
     identifier: true
     range: ResearchStudy
     required: true
+  period_id:
+    name: period_id
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputperiod_id
+    annotations:
+      db_column:
+        tag: db_column
+        value: period_id
+      target_slot:
+        tag: target_slot
+        value: id
+    description: Reference to a time period which defines a Start and End datatime
+      period.
+    title: Period ID
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:period_id
+    owner: PractitionerRole
+    domain_of:
+    - AssociatedParty
+    - PractitionerRole
+    range: Period
+    required: false
+    multivalued: false
+    inlined: false
+  website:
+    name: website
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputwebsite
+    description: URL describing the entity this represents. This can include a formal
+      website, such as the Entity's website, or to an online document describing the
+      entity.
+    title: Website
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:website
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: uri
+    required: false
+    multivalued: false
+  label:
+    name: label
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputlabel
+    description: Alias such as acronym and alternate names.
+    title: Label
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:label
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: string
+    required: false
+    multivalued: true
   email:
     name: email
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/email
@@ -581,8 +674,7 @@ slots:
     inlined: true
     inlined_as_list: true
     any_of:
-    - range: Practitioner
-    - range: Institution
+    - range: PractitionerRole
   institution_id:
     name: institution_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
@@ -600,24 +692,29 @@ slots:
     - PractitionerRole
     range: Institution
     required: false
-  period_id:
-    name: period_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    description: Reference to a time period which defines a Start and End datatime
-      period.
-    title: Period
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    owner: PractitionerRole
+  parent_study_id:
+    name: parent_study_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
+    annotations:
+      db_column:
+        tag: db_column
+        value: parent_study_id
+      target_slot:
+        tag: target_slot
+        value: research_study_id
+    description: ID For Parent Study if this is a substudy
+    title: Parent Study
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
+    owner: ResearchStudy
     domain_of:
-    - AssociatedParty
-    - PractitionerRole
-    range: Period
+    - ResearchStudy
+    range: ResearchStudy
     required: false
   study_title:
     name: study_title
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_title
-    description: "Research\tStudy's formal title."
+    description: Research Study's formal title.
     title: Title
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_title
@@ -682,6 +779,93 @@ slots:
     range: EnumStudyStatus
     required: true
     multivalued: false
+  study_design:
+    name: study_design
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_design
+    description: Study Design and Study Type ([example ValueSet can be found here](https://hl7.org/fhir/valueset-study-design.html))
+    title: Study Design
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_design
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: uriorcurie
+    required: false
+    multivalued: true
+  study_personnel:
+    name: study_personnel
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_personnel
+    description: Every study must have at least one Primary Contact defined. Additional
+      personnel such as Primary Investigator(s), Administrator(s), Collaborator(s)
+      or other roles may also be included. If there are no appropriate individuals
+      who can serve as primary contact for a study, an organization may be provided.
+    title: Study Personnel
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_personnel
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: AssociatedParty
+    required: true
+    multivalued: true
+  collection_title:
+    name: collection_title
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_title
+    description: The collection's title.
+    title: Collection Title
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_title
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: string
+    required: true
+  research_study_collection_type:
+    name: research_study_collection_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_type
+    description: The type of collection being described.
+    title: Research Study Collection Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_type
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: EnumResearchCollectionType
+    required: true
+    multivalued: false
+  research_study_collection_id:
+    name: research_study_collection_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: research_study_collection_id
+    description: Global ID for this record
+    title: Research Study Collection ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
+    identifier: false
+    range: string
+    required: false
+  research_study_collection_member_id:
+    name: research_study_collection_member_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_member_id
+    description: ID associated with a member of the collection (Research Study, Dataset,
+      etc)
+    title: Research Study Collection Member ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_member_id
+    identifier: false
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: Any
+    required: true
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: ResearchStudy
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -708,20 +892,6 @@ slots:
     - Institution
     range: string
     required: true
-  period__period_id:
-    name: period__period_id
-    description: Database ID for this record. This is not a global ID, is a global
-      identifier
-    title: Period ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    identifier: true
-    alias: period_id
-    owner: Period
-    domain_of:
-    - Period
-    range: string
-    required: true
   period__start:
     name: period__start
     description: Start attribute for a FHIR period data type.
@@ -732,7 +902,7 @@ slots:
     owner: Period
     domain_of:
     - Period
-    range: datetime
+    range: date
     required: false
   period__end:
     name: period__end
@@ -744,7 +914,7 @@ slots:
     owner: Period
     domain_of:
     - Period
-    range: datetime
+    range: date
     required: false
   practitionerRole__practitioner_role_id:
     name: practitionerRole__practitioner_role_id
@@ -772,25 +942,32 @@ slots:
     - ResearchStudy
     range: string
     required: true
-  AssociatedParty_period_id:
-    name: AssociatedParty_period_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    description: Reference to a time period which defines a Start and End datatime
-      period.
-    title: Period
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    is_a: period_id
-    domain: AssociatedParty
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    alias: period_id
-    owner: AssociatedParty
+  researchStudyCollection__research_study_collection_id:
+    name: researchStudyCollection__research_study_collection_id
+    description: Global ID for this record
+    title: Research Study Collection ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
+    identifier: true
+    alias: research_study_collection_id
+    owner: ResearchStudyCollection
     domain_of:
-    - AssociatedParty
-    is_usage_slot: true
-    usage_slot_name: period_id
-    range: Period
+    - ResearchStudyCollection
+    range: string
+    required: true
+  researchStudyCollection__description:
+    name: researchStudyCollection__description
+    description: The description of the collection.
+    title: Description
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/description
+    alias: description
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: string
     required: false
-    multivalued: true
+    multivalued: false
 classes:
   Any:
     name: Any
@@ -864,16 +1041,15 @@ classes:
       study.
     title: Associated Party
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    is_a: Record
     slots:
+    - external_id
+    - id
     - name
     - role
-    - AssociatedParty_period_id
+    - period_id
     - classifier
     - party
-    slot_usage:
-      period_id:
-        name: period_id
-        multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/AssociatedParty
   Institution:
     name: Institution
@@ -905,30 +1081,24 @@ classes:
     description: Time period associated with some FHIR resource
     title: Period
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    is_a: Record
     slots:
-    - period__period_id
+    - external_id
+    - id
     - period__start
     - period__end
     attributes:
-      period_id:
-        name: period_id
-        description: Database ID for this record. This is not a global ID, is a global
-          identifier
-        title: Period ID
-        identifier: true
-        range: string
-        required: true
       start:
         name: start
         description: Start attribute for a FHIR period data type.
         title: Start
-        range: datetime
+        range: date
         required: false
       end:
         name: end
         description: End attribute for a FHIR period data type.
         title: End
-        range: datetime
+        range: date
         required: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/Period
   PractitionerRole:
@@ -972,11 +1142,14 @@ classes:
     slots:
     - external_id
     - study_title
+    - parent_study_id
     - study_focus
     - description
     - study_condition
     - study_acknowledgement
     - study_status
+    - study_design
+    - study_personnel
     - researchStudy__research_study_id
     attributes:
       research_study_id:
@@ -987,9 +1160,46 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
+  ResearchStudyCollection:
+    name: ResearchStudyCollection
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: List
+    description: Collections of research data including, but not limited, to Consortia,
+      Programs, adhoc collections of Studies and datasets among other types of collections.
+    title: Research Study Collection
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    is_a: HasExternalId
+    slots:
+    - external_id
+    - collection_title
+    - research_study_collection_type
+    - label
+    - website
+    - research_study_collection_member_id
+    - researchStudyCollection__research_study_collection_id
+    - researchStudyCollection__description
+    attributes:
+      research_study_collection_id:
+        name: research_study_collection_id
+        description: Global ID for this record
+        title: Research Study Collection ID
+        identifier: true
+        range: string
+        required: true
+      description:
+        name: description
+        description: The description of the collection.
+        title: Description
+        range: string
+        required: false
+        multivalued: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-01T12:09:19'
-source_file_size: 2639
-generation_date: '2025-12-01T12:17:02'
+source_file_date: '2025-12-05T12:13:28'
+source_file_size: 3564
+generation_date: '2025-12-05T12:25:45'
 
