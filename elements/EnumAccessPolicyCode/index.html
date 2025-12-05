@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumAccessPolicyCode/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: ID (id) - kfi-fhir-input</title>
+        <title>Enum: EnumAccessPolicyCode - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-id-id" class="md-skip">
+        <a href="#enum-enumaccesspolicycode" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: ID (id)
+              Enum: EnumAccessPolicyCode
             
           </span>
         </div>
@@ -325,10 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
+        Permissible Values
       
     </span>
   </a>
@@ -336,10 +336,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Properties
+        Slots
       
     </span>
   </a>
@@ -375,17 +375,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#linkml-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -416,88 +405,412 @@
   
 
 
-<h1 id="slot-id-id">Slot: ID (id)</h1>
-<p><em>Unique Identifier for a table entry. This is probably not the Global ID</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputid">kfi_fhir_sparks:id</a>
-Alias: id</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumaccesspolicycode">Enum: EnumAccessPolicyCode</h1>
+<p><em>Type of research use case allowed</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumAccessPolicyCode">kfi_fhir_sparks:EnumAccessPolicyCode</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gru</td>
+<td>ncpi_data_access_code:GRU</td>
+<td>General Research Use</td>
+</tr>
+<tr>
+<td>hmb</td>
+<td>ncpi_data_access_code:HMB</td>
+<td>Health/Medical/Biomedical</td>
+</tr>
+<tr>
+<td>ds</td>
+<td>ncpi_data_access_code:DS</td>
+<td>Disease-Specific (Disease/Trait/Exposure)</td>
+</tr>
+<tr>
+<td>irb</td>
+<td>ncpi_data_access_code:IRB</td>
+<td>IRB Approval Required</td>
+</tr>
+<tr>
+<td>pub</td>
+<td>ncpi_data_access_code:PUB</td>
+<td>Publication Required</td>
+</tr>
+<tr>
+<td>col</td>
+<td>ncpi_data_access_code:COL</td>
+<td>Collaboration Required</td>
+</tr>
+<tr>
+<td>npu</td>
+<td>ncpi_data_access_code:NPU</td>
+<td>Not-for-profit use only</td>
+</tr>
+<tr>
+<td>mds</td>
+<td>ncpi_data_access_code:MDS</td>
+<td>Methods</td>
+</tr>
+<tr>
+<td>gso</td>
+<td>ncpi_data_access_code:GSO</td>
+<td>Genetic Studies only</td>
+</tr>
+<tr>
+<td>gsr</td>
+<td>ncpi_data_access_code:GSR</td>
+<td>Genomic Summary Results</td>
+</tr>
+<tr>
+<td>rd</td>
+<td>ncpi_data_access_code:RD</td>
+<td>Related Diseases</td>
+</tr>
+<tr>
+<td>duo_0000004</td>
+<td>duo:0000004</td>
+<td>This data use permission indicates there is no restriction on use</td>
+</tr>
+<tr>
+<td>duo_0000042</td>
+<td>duo:0000042</td>
+<td>This data use permission indicates that use is allowed for general research u...</td>
+</tr>
+<tr>
+<td>duo_0000006</td>
+<td>duo:0000006</td>
+<td>This data use permission indicates that use is allowed for health/medical/bio...</td>
+</tr>
+<tr>
+<td>duo_0000007</td>
+<td>duo:0000007</td>
+<td>This data use permission indicates that use is allowed provided it is related...</td>
+</tr>
+<tr>
+<td>duo_0000011</td>
+<td>duo:0000011</td>
+<td>This data use permission indicates that use of the data is limited to the stu...</td>
+</tr>
+<tr>
+<td>duo_0000012</td>
+<td>duo:0000012</td>
+<td>This data use modifier indicates that use is limited to studies of a certain ...</td>
+</tr>
+<tr>
+<td>duo_0000015</td>
+<td>duo:0000015</td>
+<td>This data use modifier indicates that use does not allow methods development ...</td>
+</tr>
+<tr>
+<td>duo_0000016</td>
+<td>duo:0000016</td>
+<td>This data use modifier indicates that use is limited to genetic studies only ...</td>
+</tr>
+<tr>
+<td>duo_0000018</td>
+<td>duo:0000018</td>
+<td>This data use modifier indicates that use of the data is limited to not-for-p...</td>
+</tr>
+<tr>
+<td>duo_0000019</td>
+<td>duo:0000019</td>
+<td>This data use modifier indicates that requestor agrees to make results of stu...</td>
+</tr>
+<tr>
+<td>duo_0000020</td>
+<td>duo:0000020</td>
+<td>This data use modifier indicates that the requestor must agree to collaborati...</td>
+</tr>
+<tr>
+<td>duo_0000021</td>
+<td>duo:0000021</td>
+<td>This data use modifier indicates that the requestor must provide documentatio...</td>
+</tr>
+<tr>
+<td>duo_0000022</td>
+<td>duo:0000022</td>
+<td>This data use modifier indicates that use is limited to within a specific geo...</td>
+</tr>
+<tr>
+<td>duo_0000024</td>
+<td>duo:0000024</td>
+<td>This data use modifier indicates that requestor agrees not to publish results...</td>
+</tr>
+<tr>
+<td>duo_0000025</td>
+<td>duo:0000025</td>
+<td>This data use modifier indicates that use is approved for a specific number o...</td>
+</tr>
+<tr>
+<td>duo_0000026</td>
+<td>duo:0000026</td>
+<td>This data use modifier indicates that use is limited to use by approved users</td>
+</tr>
+<tr>
+<td>duo_0000027</td>
+<td>duo:0000027</td>
+<td>This data use modifier indicates that use is limited to use within an approve...</td>
+</tr>
+<tr>
+<td>duo_0000028</td>
+<td>duo:0000028</td>
+<td>This data use modifier indicates that use is limited to use within an approve...</td>
+</tr>
+<tr>
+<td>duo_0000029</td>
+<td>duo:0000029</td>
+<td>This data use modifier indicates that the requestor must return derived/enric...</td>
+</tr>
+<tr>
+<td>duo_0000043</td>
+<td>duo:0000043</td>
+<td>This data use modifier indicates that use is allowed for clinical use and car...</td>
+</tr>
+<tr>
+<td>duo_0000044</td>
+<td>duo:0000044</td>
+<td>This data use modifier indicates use for purposes of population, origin, or a...</td>
+</tr>
+<tr>
+<td>duo_0000045</td>
+<td>duo:0000045</td>
+<td>This data use modifier indicates that use of the data is limited to not-for-p...</td>
+</tr>
+<tr>
+<td>duo_0000046</td>
+<td>duo:0000046</td>
+<td>This data use modifier indicates that use of the data is limited to not-for-p...</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Record/">Record</a></td>
-<td>One row / entity within the database</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Period/">Period</a></td>
-<td>Time period associated with some FHIR resource</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-<td>no</td>
+<td><a href="../access_policy_code/">access_policy_code</a></td>
+<td>A classification of the type of consents found in a consent statement</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>
-<p>Range: <a href="../String/">String</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:id</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:id</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: id
-description: Unique Identifier for a table entry. This is probably not the Global
-  ID
-title: ID
+<pre><code class="language-yaml">name: EnumAccessPolicyCode
+description: Type of research use case allowed
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-identifier: true
-alias: id
-domain_of:
-- Record
-range: string
-required: true
-multivalued: false
+permissible_values:
+  gru:
+    text: gru
+    description: General Research Use
+    meaning: ncpi_data_access_code:GRU
+    title: GRU
+  hmb:
+    text: hmb
+    description: Health/Medical/Biomedical
+    meaning: ncpi_data_access_code:HMB
+    title: HMB
+  ds:
+    text: ds
+    description: Disease-Specific (Disease/Trait/Exposure)
+    meaning: ncpi_data_access_code:DS
+    title: DS
+  irb:
+    text: irb
+    description: IRB Approval Required
+    meaning: ncpi_data_access_code:IRB
+    title: IRB
+  pub:
+    text: pub
+    description: Publication Required
+    meaning: ncpi_data_access_code:PUB
+    title: PUB
+  col:
+    text: col
+    description: Collaboration Required
+    meaning: ncpi_data_access_code:COL
+    title: COL
+  npu:
+    text: npu
+    description: Not-for-profit use only
+    meaning: ncpi_data_access_code:NPU
+    title: NPU
+  mds:
+    text: mds
+    description: Methods
+    meaning: ncpi_data_access_code:MDS
+    title: MDS
+  gso:
+    text: gso
+    description: Genetic Studies only
+    meaning: ncpi_data_access_code:GSO
+    title: GSO
+  gsr:
+    text: gsr
+    description: Genomic Summary Results
+    meaning: ncpi_data_access_code:GSR
+    title: GSR
+  rd:
+    text: rd
+    description: Related Diseases
+    meaning: ncpi_data_access_code:RD
+    title: RD
+  duo_0000004:
+    text: duo_0000004
+    description: This data use permission indicates there is no restriction on use.
+    meaning: duo:0000004
+    title: no restriction
+  duo_0000042:
+    text: duo_0000042
+    description: This data use permission indicates that use is allowed for general
+      research use for any research purpose.
+    meaning: duo:0000042
+    title: general research use
+  duo_0000006:
+    text: duo_0000006
+    description: This data use permission indicates that use is allowed for health/medical/biomedical
+      purposes; does not include the study of population origins or ancestry.
+    meaning: duo:0000006
+    title: health or medical or biomedical research
+  duo_0000007:
+    text: duo_0000007
+    description: This data use permission indicates that use is allowed provided it
+      is related to the specified disease.
+    meaning: duo:0000007
+    title: disease specific research
+  duo_0000011:
+    text: duo_0000011
+    description: This data use permission indicates that use of the data is limited
+      to the study of population origins or ancestry.
+    meaning: duo:0000011
+    title: population origins or ancestry research only
+  duo_0000012:
+    text: duo_0000012
+    description: This data use modifier indicates that use is limited to studies of
+      a certain research type.
+    meaning: duo:0000012
+    title: research specific restrictions
+  duo_0000015:
+    text: duo_0000015
+    description: This data use modifier indicates that use does not allow methods
+      development research (e.g., development of software or algorithms).
+    meaning: duo:0000015
+    title: no general methods research
+  duo_0000016:
+    text: duo_0000016
+    description: This data use modifier indicates that use is limited to genetic studies
+      only (i.e., studies that include genotype research alone or both genotype and
+      phenotype research, but not phenotype research exclusively)
+    meaning: duo:0000016
+    title: genetic studies only
+  duo_0000018:
+    text: duo_0000018
+    description: This data use modifier indicates that use of the data is limited
+      to not-for-profit organizations and not-for-profit use, non-commercial use.
+    meaning: duo:0000018
+    title: not for profit, non commercial use only
+  duo_0000019:
+    text: duo_0000019
+    description: This data use modifier indicates that requestor agrees to make results
+      of studies using the data available to the larger scientific community.
+    meaning: duo:0000019
+    title: publication required
+  duo_0000020:
+    text: duo_0000020
+    description: This data use modifier indicates that the requestor must agree to
+      collaboration with the primary study investigator(s).
+    meaning: duo:0000020
+    title: collaboration required
+  duo_0000021:
+    text: duo_0000021
+    description: This data use modifier indicates that the requestor must provide
+      documentation of local IRB/ERB approval.
+    meaning: duo:0000021
+    title: ethics approval required
+  duo_0000022:
+    text: duo_0000022
+    description: This data use modifier indicates that use is limited to within a
+      specific geographic region.
+    meaning: duo:0000022
+    title: geographical restriction
+  duo_0000024:
+    text: duo_0000024
+    description: This data use modifier indicates that requestor agrees not to publish
+      results of studies until a specific date.
+    meaning: duo:0000024
+    title: publication moratorium
+  duo_0000025:
+    text: duo_0000025
+    description: This data use modifier indicates that use is approved for a specific
+      number of months.
+    meaning: duo:0000025
+    title: time limit on use
+  duo_0000026:
+    text: duo_0000026
+    description: This data use modifier indicates that use is limited to use by approved
+      users.
+    meaning: duo:0000026
+    title: user specific restriction
+  duo_0000027:
+    text: duo_0000027
+    description: This data use modifier indicates that use is limited to use within
+      an approved project.
+    meaning: duo:0000027
+    title: project specific restriction
+  duo_0000028:
+    text: duo_0000028
+    description: This data use modifier indicates that use is limited to use within
+      an approved institution.
+    meaning: duo:0000028
+    title: institution specific restriction
+  duo_0000029:
+    text: duo_0000029
+    description: This data use modifier indicates that the requestor must return derived/enriched
+      data to the database/resource.
+    meaning: duo:0000029
+    title: return to database or resource
+  duo_0000043:
+    text: duo_0000043
+    description: This data use modifier indicates that use is allowed for clinical
+      use and care.
+    meaning: duo:0000043
+    title: clinical care use
+  duo_0000044:
+    text: duo_0000044
+    description: This data use modifier indicates use for purposes of population,
+      origin, or ancestry research is prohibited.
+    meaning: duo:0000044
+    title: population origins or ancestry research prohibited
+  duo_0000045:
+    text: duo_0000045
+    description: This data use modifier indicates that use of the data is limited
+      to not-for-profit organisations.
+    meaning: duo:0000045
+    title: not for profit organisation use only
+  duo_0000046:
+    text: duo_0000046
+    description: This data use modifier indicates that use of the data is limited
+      to not-for-profit use.
+    meaning: duo:0000046
+    title: non-commercial use only
 
 </code></pre>
 

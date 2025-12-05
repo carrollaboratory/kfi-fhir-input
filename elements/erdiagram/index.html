@@ -173,6 +173,16 @@
 <article class="md-content__inner md-typeset">
 <h1>ER Diagram</h1>
 <div class="mermaid">erDiagram
+AccessPolicy {
+    string description  
+    EnumDataAccessType data_access_type  
+    uri website  
+    EnumConsentScope consent_scope  
+    EnumAccessPolicyCodeList access_policy_code  
+    string disease_limitation  
+    string access_policy_id  
+    EnumConsentStateCodes status  
+}
 Any {
 
 }

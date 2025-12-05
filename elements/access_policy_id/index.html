@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/access_policy_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: ID (id) - kfi-fhir-input</title>
+        <title>Slot: Access Policy ID (access_policy_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-id-id" class="md-skip">
+        <a href="#slot-access-policy-id-access_policy_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: ID (id)
+              Slot: Access Policy ID (access_policy_id)
             
           </span>
         </div>
@@ -416,10 +416,10 @@
   
 
 
-<h1 id="slot-id-id">Slot: ID (id)</h1>
-<p><em>Unique Identifier for a table entry. This is probably not the Global ID</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputid">kfi_fhir_sparks:id</a>
-Alias: id</p>
+<h1 id="slot-access-policy-id-access_policy_id">Slot: Access Policy ID (access_policy_id)</h1>
+<p><em>Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputaccess_policy_id">kfi_fhir_sparks:access_policy_id</a>
+Alias: access_policy_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -433,18 +433,8 @@ Alias: id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Record/">Record</a></td>
-<td>One row / entity within the database</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Period/">Period</a></td>
-<td>Time period associated with some FHIR resource</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
+<td><a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Limitations and/or requirements that define how a user may gain access to a p...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -474,30 +464,30 @@ Alias: id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:id</td>
+<td>kfi_fhir_sparks:access_policy_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:id</td>
+<td>kfi_fhir_sparks:access_policy_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: id
-description: Unique Identifier for a table entry. This is probably not the Global
-  ID
-title: ID
+<pre><code class="language-yaml">name: access_policy_id
+description: Access policy communicates the limitations and/or requirements that define
+  how a user may gain access to a particular set of data.
+title: Access Policy ID
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
 identifier: true
-alias: id
+alias: access_policy_id
+owner: AccessPolicy
 domain_of:
-- Record
+- AccessPolicy
 range: string
 required: true
-multivalued: false
 
 </code></pre>
 

@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/ResearchStudyCollection/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/AccessPolicy/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>Class: Research Study Collection (ResearchStudyCollection) - kfi-fhir-input</title>
+<title>Class: Access Policy (AccessPolicy) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-research-study-collection-researchstudycollection">
+<a class="md-skip" href="#class-access-policy-accesspolicy">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Research Study Collection (ResearchStudyCollection)
+              Class: Access Policy (AccessPolicy)
             
           </span>
 </div>
@@ -171,15 +171,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -266,69 +257,67 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-research-study-collection-researchstudycollection">Class: Research Study Collection (ResearchStudyCollection)</h1>
-<p><em>Collections of research data including, but not limited, to Consortia, Programs, adhoc collections of Studies and datasets among other types of collections.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputResearchStudyCollection">kfi_fhir_sparks:ResearchStudyCollection</a></p>
+<h1 id="class-access-policy-accesspolicy">Class: Access Policy (AccessPolicy)</h1>
+<p><em>Limitations and/or requirements that define how a user may gain access to a particular set of data.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputAccessPolicy">kfi_fhir_sparks:AccessPolicy</a></p>
 <div class="mermaid"> classDiagram
-    class ResearchStudyCollection
-    click ResearchStudyCollection href "../ResearchStudyCollection/"
-      HasExternalId &lt;|-- ResearchStudyCollection
-        click HasExternalId href "../HasExternalId/"
-
-      ResearchStudyCollection : collection_status
+    class AccessPolicy
+    click AccessPolicy href "../AccessPolicy/"
+      AccessPolicy : access_policy_code
 
 
 
 
 
-        ResearchStudyCollection --&gt; "1" EnumCollectionStatus : collection_status
-        click EnumCollectionStatus href "../EnumCollectionStatus/"
+        AccessPolicy --&gt; "1..*" EnumAccessPolicyCode : access_policy_code
+        click EnumAccessPolicyCode href "../EnumAccessPolicyCode/"
 
 
 
-      ResearchStudyCollection : collection_title
+      AccessPolicy : access_policy_id
 
-      ResearchStudyCollection : description
-
-      ResearchStudyCollection : external_id
-
-      ResearchStudyCollection : label
-
-      ResearchStudyCollection : research_study_collection_id
-
-      ResearchStudyCollection : research_study_collection_member_id
+      AccessPolicy : consent_scope
 
 
 
 
 
-        ResearchStudyCollection --&gt; "1..*" ResearchStudy : research_study_collection_member_id
-        click ResearchStudy href "../ResearchStudy/"
+        AccessPolicy --&gt; "1" EnumConsentScope : consent_scope
+        click EnumConsentScope href "../EnumConsentScope/"
 
 
 
-      ResearchStudyCollection : research_study_collection_type
+      AccessPolicy : data_access_type
 
 
 
 
 
-        ResearchStudyCollection --&gt; "1" EnumResearchCollectionType : research_study_collection_type
-        click EnumResearchCollectionType href "../EnumResearchCollectionType/"
+        AccessPolicy --&gt; "1" EnumDataAccessType : data_access_type
+        click EnumDataAccessType href "../EnumDataAccessType/"
 
 
 
-      ResearchStudyCollection : website
+      AccessPolicy : description
+
+      AccessPolicy : disease_limitation
+
+      AccessPolicy : status
+
+
+
+
+
+        AccessPolicy --&gt; "1" EnumConsentStateCodes : status
+        click EnumConsentStateCodes href "../EnumConsentStateCodes/"
+
+
+
+      AccessPolicy : website
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../HasExternalId/">HasExternalId</a><ul>
-<li><strong>ResearchStudyCollection</strong></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -341,22 +330,16 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../collection_title/">collection_title</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>The collection's title</td>
+<td><a href="../description/">description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>More details associated with the given resource</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../research_study_collection_type/">research_study_collection_type</a></td>
-<td>1 <br/> <a href="../EnumResearchCollectionType/">EnumResearchCollectionType</a></td>
-<td>The type of collection being described</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../label/">label</a></td>
-<td>* <br/> <a href="../String/">String</a></td>
-<td>Alias such as acronym and alternate names</td>
-<td>direct</td>
+<td><a href="../data_access_type/">data_access_type</a></td>
+<td>1 <br/> <a href="../EnumDataAccessType/">EnumDataAccessType</a></td>
+<td>Type of access restrictions on file downloads ( open</td>
+<td>registered</td>
 </tr>
 <tr>
 <td><a href="../website/">website</a></td>
@@ -365,34 +348,34 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../collection_status/">collection_status</a></td>
-<td>1 <br/> <a href="../EnumCollectionStatus/">EnumCollectionStatus</a></td>
-<td>The current state of the collection</td>
+<td><a href="../consent_scope/">consent_scope</a></td>
+<td>1 <br/> <a href="../EnumConsentScope/">EnumConsentScope</a></td>
+<td>Which of the four areas this resource covers (extensible)</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../research_study_collection_member_id/">research_study_collection_member_id</a></td>
-<td>1..* <br/> <a href="../ResearchStudy/">ResearchStudy</a></td>
-<td>ID associated with a member of the collection (Research Study, Dataset, etc)</td>
+<td><a href="../access_policy_code/">access_policy_code</a></td>
+<td>1..* <br/> <a href="../EnumAccessPolicyCode/">EnumAccessPolicyCode</a></td>
+<td>A classification of the type of consents found in a consent statement</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../research_study_collection_id/">research_study_collection_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Global ID for this record</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
+<td><a href="../disease_limitation/">disease_limitation</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The description of the collection</td>
+<td>Disease Use Limitations</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../HasExternalId/">HasExternalId</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Access policy communicates the limitations and/or requirements that define ho...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../status/">status</a></td>
+<td>1 <br/> <a href="../EnumConsentStateCodes/">EnumConsentStateCodes</a></td>
+<td>Indicates the state of the consent</td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -408,7 +391,7 @@
 <tbody>
 <tr>
 <td>fhir_resource</td>
-<td>List</td>
+<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy</td>
 </tr>
 </tbody>
 </table>
@@ -427,11 +410,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:ResearchStudyCollection</td>
+<td>kfi_fhir_sparks:AccessPolicy</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:ResearchStudyCollection</td>
+<td>kfi_fhir_sparks:AccessPolicy</td>
 </tr>
 </tbody>
 </table>
@@ -439,82 +422,96 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: ResearchStudyCollection
+<pre><code class="language-yaml">name: AccessPolicy
 annotations:
   fhir_resource:
     tag: fhir_resource
-    value: List
-description: Collections of research data including, but not limited, to Consortia,
-  Programs, adhoc collections of Studies and datasets among other types of collections.
-title: Research Study Collection
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+description: Limitations and/or requirements that define how a user may gain access
+  to a particular set of data.
+title: Access Policy
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
-is_a: HasExternalId
 slots:
-- collection_title
-- research_study_collection_type
-- label
+- description
+- data_access_type
 - website
-- collection_status
-- research_study_collection_member_id
+- consent_scope
+- access_policy_code
+- disease_limitation
 attributes:
-  research_study_collection_id:
-    name: research_study_collection_id
-    description: Global ID for this record
-    title: Research Study Collection ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+  access_policy_id:
+    name: access_policy_id
+    description: Access policy communicates the limitations and/or requirements that
+      define how a user may gain access to a particular set of data.
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    rank: 1000
     identifier: true
     domain_of:
-    - ResearchStudyCollection
+    - AccessPolicy
     range: string
     required: true
-  description:
-    name: description
-    description: The description of the collection.
-    title: Description
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+  status:
+    name: status
+    description: Indicates the state of the consent.
+    title: Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    rank: 1000
     domain_of:
-    - Practitioner
-    - ResearchStudy
     - AccessPolicy
-    - ResearchStudyCollection
-    range: string
-    required: false
+    range: EnumConsentStateCodes
+    required: true
     multivalued: false
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: ResearchStudyCollection
+<pre><code class="language-yaml">name: AccessPolicy
 annotations:
   fhir_resource:
     tag: fhir_resource
-    value: List
-description: Collections of research data including, but not limited, to Consortia,
-  Programs, adhoc collections of Studies and datasets among other types of collections.
-title: Research Study Collection
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+description: Limitations and/or requirements that define how a user may gain access
+  to a particular set of data.
+title: Access Policy
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
-is_a: HasExternalId
 attributes:
-  research_study_collection_id:
-    name: research_study_collection_id
-    description: Global ID for this record
-    title: Research Study Collection ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+  access_policy_id:
+    name: access_policy_id
+    description: Access policy communicates the limitations and/or requirements that
+      define how a user may gain access to a particular set of data.
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    rank: 1000
     identifier: true
-    alias: research_study_collection_id
-    owner: ResearchStudyCollection
+    alias: access_policy_id
+    owner: AccessPolicy
     domain_of:
-    - ResearchStudyCollection
+    - AccessPolicy
     range: string
     required: true
+  status:
+    name: status
+    description: Indicates the state of the consent.
+    title: Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    rank: 1000
+    alias: status
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumConsentStateCodes
+    required: true
+    multivalued: false
   description:
     name: description
-    description: The description of the collection.
+    description: More details associated with the given resource
     title: Description
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
     alias: description
-    owner: ResearchStudyCollection
+    owner: AccessPolicy
     domain_of:
     - Practitioner
     - ResearchStudy
@@ -522,45 +519,20 @@ attributes:
     - ResearchStudyCollection
     range: string
     required: false
-    multivalued: false
-  collection_title:
-    name: collection_title
-    description: The collection's title.
-    title: Collection Title
+  data_access_type:
+    name: data_access_type
+    description: Type of access restrictions on file downloads ( open | registered
+      | controlled )
+    title: Access Type
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: collection_title
-    owner: ResearchStudyCollection
+    alias: data_access_type
+    owner: AccessPolicy
     domain_of:
-    - ResearchStudyCollection
-    range: string
-    required: true
-  research_study_collection_type:
-    name: research_study_collection_type
-    description: The type of collection being described.
-    title: Research Study Collection Type
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: research_study_collection_type
-    owner: ResearchStudyCollection
-    domain_of:
-    - ResearchStudyCollection
-    range: EnumResearchCollectionType
+    - AccessPolicy
+    range: EnumDataAccessType
     required: true
     multivalued: false
-  label:
-    name: label
-    description: Alias such as acronym and alternate names.
-    title: Label
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: label
-    owner: ResearchStudyCollection
-    domain_of:
-    - ResearchStudyCollection
-    range: string
-    required: false
-    multivalued: true
   website:
     name: website
     description: URL describing the entity this represents. This can include a formal
@@ -570,59 +542,51 @@ attributes:
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
     alias: website
-    owner: ResearchStudyCollection
+    owner: AccessPolicy
     domain_of:
     - AccessPolicy
     - ResearchStudyCollection
     range: uri
     required: false
     multivalued: false
-  collection_status:
-    name: collection_status
-    description: The current state of the collection
-    title: Collection Status
+  consent_scope:
+    name: consent_scope
+    description: Which of the four areas this resource covers (extensible)
+    title: Consent Scope
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: collection_status
-    owner: ResearchStudyCollection
+    alias: consent_scope
+    owner: AccessPolicy
     domain_of:
-    - ResearchStudyCollection
-    range: EnumCollectionStatus
+    - AccessPolicy
+    range: EnumConsentScope
     required: true
     multivalued: false
-  research_study_collection_member_id:
-    name: research_study_collection_member_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: research_study_id
-    description: ID associated with a member of the collection (Research Study, Dataset,
-      etc)
-    title: Research Study Collection Member ID
+  access_policy_code:
+    name: access_policy_code
+    description: A classification of the type of consents found in a consent statement.
+    title: Access Policy Code
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    identifier: false
-    alias: research_study_collection_member_id
-    owner: ResearchStudyCollection
+    alias: access_policy_code
+    owner: AccessPolicy
     domain_of:
-    - ResearchStudyCollection
-    range: ResearchStudy
+    - AccessPolicy
+    range: EnumAccessPolicyCode
     required: true
     multivalued: true
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
+  disease_limitation:
+    name: disease_limitation
+    description: Disease Use Limitations
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: external_id
-    owner: ResearchStudyCollection
+    alias: disease_limitation
+    owner: AccessPolicy
     domain_of:
-    - HasExternalId
-    range: uriorcurie
+    - AccessPolicy
+    range: string
     required: false
-    multivalued: true
+    multivalued: false
 
 </code></pre>
 </details>
