@@ -13,6 +13,7 @@ imports:
 - practitioner_role
 - practitioner
 - research_study
+- access_policy
 - research_study_collection
 - kfi_fhir_input
 license: MIT
@@ -35,15 +36,30 @@ prefixes:
   hl7_list_status:
     prefix_prefix: hl7_list_status
     prefix_reference: https://hl7.org/fhir/R4/codesystem-list-status
+  hl7_consent_state_codes:
+    prefix_prefix: hl7_consent_state_codes
+    prefix_reference: http://hl7.org/fhir/consent-state-codes
+  hl7_consent_scope:
+    prefix_prefix: hl7_consent_scope
+    prefix_reference: http://terminology.hl7.org/CodeSystem/consentscope
   kfi:
     prefix_prefix: kfi
     prefix_reference: https://carrollaboratory.github.io/kfi-fhir-input/
   ncpi_collection_type:
     prefix_prefix: ncpi_collection_type
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type
+  ncpi_data_access_type:
+    prefix_prefix: ncpi_data_access_type
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type
+  ncpi_data_access_code:
+    prefix_prefix: ncpi_data_access_code
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
+  duo:
+    prefix_prefix: duo
+    prefix_reference: http://purl.obolibrary.org/obo/duo.owl
 default_prefix: kfi_fhir_sparks
 default_range: string
 types:
@@ -444,6 +460,285 @@ enums:
         text: withdrawn
         meaning: hl7_study_status:withdrawn
         title: Withdrawn
+  EnumAccessPolicyCode:
+    name: EnumAccessPolicyCode
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/EnumAccessPolicyCode
+    description: Type of research use case allowed
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    permissible_values:
+      gru:
+        text: gru
+        description: General Research Use
+        meaning: ncpi_data_access_code:GRU
+        title: GRU
+      hmb:
+        text: hmb
+        description: Health/Medical/Biomedical
+        meaning: ncpi_data_access_code:HMB
+        title: HMB
+      ds:
+        text: ds
+        description: Disease-Specific (Disease/Trait/Exposure)
+        meaning: ncpi_data_access_code:DS
+        title: DS
+      irb:
+        text: irb
+        description: IRB Approval Required
+        meaning: ncpi_data_access_code:IRB
+        title: IRB
+      pub:
+        text: pub
+        description: Publication Required
+        meaning: ncpi_data_access_code:PUB
+        title: PUB
+      col:
+        text: col
+        description: Collaboration Required
+        meaning: ncpi_data_access_code:COL
+        title: COL
+      npu:
+        text: npu
+        description: Not-for-profit use only
+        meaning: ncpi_data_access_code:NPU
+        title: NPU
+      mds:
+        text: mds
+        description: Methods
+        meaning: ncpi_data_access_code:MDS
+        title: MDS
+      gso:
+        text: gso
+        description: Genetic Studies only
+        meaning: ncpi_data_access_code:GSO
+        title: GSO
+      gsr:
+        text: gsr
+        description: Genomic Summary Results
+        meaning: ncpi_data_access_code:GSR
+        title: GSR
+      rd:
+        text: rd
+        description: Related Diseases
+        meaning: ncpi_data_access_code:RD
+        title: RD
+      duo_0000004:
+        text: duo_0000004
+        description: This data use permission indicates there is no restriction on
+          use.
+        meaning: duo:0000004
+        title: no restriction
+      duo_0000042:
+        text: duo_0000042
+        description: This data use permission indicates that use is allowed for general
+          research use for any research purpose.
+        meaning: duo:0000042
+        title: general research use
+      duo_0000006:
+        text: duo_0000006
+        description: This data use permission indicates that use is allowed for health/medical/biomedical
+          purposes; does not include the study of population origins or ancestry.
+        meaning: duo:0000006
+        title: health or medical or biomedical research
+      duo_0000007:
+        text: duo_0000007
+        description: This data use permission indicates that use is allowed provided
+          it is related to the specified disease.
+        meaning: duo:0000007
+        title: disease specific research
+      duo_0000011:
+        text: duo_0000011
+        description: This data use permission indicates that use of the data is limited
+          to the study of population origins or ancestry.
+        meaning: duo:0000011
+        title: population origins or ancestry research only
+      duo_0000012:
+        text: duo_0000012
+        description: This data use modifier indicates that use is limited to studies
+          of a certain research type.
+        meaning: duo:0000012
+        title: research specific restrictions
+      duo_0000015:
+        text: duo_0000015
+        description: This data use modifier indicates that use does not allow methods
+          development research (e.g., development of software or algorithms).
+        meaning: duo:0000015
+        title: no general methods research
+      duo_0000016:
+        text: duo_0000016
+        description: This data use modifier indicates that use is limited to genetic
+          studies only (i.e., studies that include genotype research alone or both
+          genotype and phenotype research, but not phenotype research exclusively)
+        meaning: duo:0000016
+        title: genetic studies only
+      duo_0000018:
+        text: duo_0000018
+        description: This data use modifier indicates that use of the data is limited
+          to not-for-profit organizations and not-for-profit use, non-commercial use.
+        meaning: duo:0000018
+        title: not for profit, non commercial use only
+      duo_0000019:
+        text: duo_0000019
+        description: This data use modifier indicates that requestor agrees to make
+          results of studies using the data available to the larger scientific community.
+        meaning: duo:0000019
+        title: publication required
+      duo_0000020:
+        text: duo_0000020
+        description: This data use modifier indicates that the requestor must agree
+          to collaboration with the primary study investigator(s).
+        meaning: duo:0000020
+        title: collaboration required
+      duo_0000021:
+        text: duo_0000021
+        description: This data use modifier indicates that the requestor must provide
+          documentation of local IRB/ERB approval.
+        meaning: duo:0000021
+        title: ethics approval required
+      duo_0000022:
+        text: duo_0000022
+        description: This data use modifier indicates that use is limited to within
+          a specific geographic region.
+        meaning: duo:0000022
+        title: geographical restriction
+      duo_0000024:
+        text: duo_0000024
+        description: This data use modifier indicates that requestor agrees not to
+          publish results of studies until a specific date.
+        meaning: duo:0000024
+        title: publication moratorium
+      duo_0000025:
+        text: duo_0000025
+        description: This data use modifier indicates that use is approved for a specific
+          number of months.
+        meaning: duo:0000025
+        title: time limit on use
+      duo_0000026:
+        text: duo_0000026
+        description: This data use modifier indicates that use is limited to use by
+          approved users.
+        meaning: duo:0000026
+        title: user specific restriction
+      duo_0000027:
+        text: duo_0000027
+        description: This data use modifier indicates that use is limited to use within
+          an approved project.
+        meaning: duo:0000027
+        title: project specific restriction
+      duo_0000028:
+        text: duo_0000028
+        description: This data use modifier indicates that use is limited to use within
+          an approved institution.
+        meaning: duo:0000028
+        title: institution specific restriction
+      duo_0000029:
+        text: duo_0000029
+        description: This data use modifier indicates that the requestor must return
+          derived/enriched data to the database/resource.
+        meaning: duo:0000029
+        title: return to database or resource
+      duo_0000043:
+        text: duo_0000043
+        description: This data use modifier indicates that use is allowed for clinical
+          use and care.
+        meaning: duo:0000043
+        title: clinical care use
+      duo_0000044:
+        text: duo_0000044
+        description: This data use modifier indicates use for purposes of population,
+          origin, or ancestry research is prohibited.
+        meaning: duo:0000044
+        title: population origins or ancestry research prohibited
+      duo_0000045:
+        text: duo_0000045
+        description: This data use modifier indicates that use of the data is limited
+          to not-for-profit organisations.
+        meaning: duo:0000045
+        title: not for profit organisation use only
+      duo_0000046:
+        text: duo_0000046
+        description: This data use modifier indicates that use of the data is limited
+          to not-for-profit use.
+        meaning: duo:0000046
+        title: non-commercial use only
+  EnumConsentScope:
+    name: EnumConsentScope
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/EnumConsentScope
+    description: The four anticipated uses for the Consent Resource.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    permissible_values:
+      adr:
+        text: adr
+        meaning: hl7_consent_scope:adr
+        title: Advanced Care Directive
+      research:
+        text: research
+        meaning: hl7_consent_scope:research
+        title: Research
+      patient_privacy:
+        text: patient_privacy
+        meaning: hl7_consent_scope:patient-privacy
+        title: Patient Privacy
+      treatment:
+        text: treatment
+        meaning: hl7_consent_scope:treatment
+        title: Treatment
+  EnumConsentStateCodes:
+    name: EnumConsentStateCodes
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/EnumConsentStateCodes
+    description: Indicates the state of the consent.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    permissible_values:
+      draft:
+        text: draft
+        meaning: hl7_consent_state_codes:draft
+        title: Draft
+      proposed:
+        text: proposed
+        meaning: hl7_consent_state_codes:proposed
+        title: Proposed
+      active:
+        text: active
+        meaning: hl7_consent_state_codes:active
+        title: Active
+      rejected:
+        text: rejected
+        meaning: hl7_consent_state_codes:rejected
+        title: Rejected
+      inactive:
+        text: inactive
+        meaning: hl7_consent_state_codes:inactive
+        title: Inactive
+      entered_in_error:
+        text: entered_in_error
+        meaning: hl7_consent_state_codes:entered-in-error
+        title: Entered in Error
+  EnumDataAccessType:
+    name: EnumDataAccessType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/EnumDataAccessType
+    description: Enumerated list of access type codes such as 'Open Access', 'Registered
+      Access' and 'Controlled Access'
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    permissible_values:
+      open:
+        text: open
+        meaning: ncpi_data_access_type:open
+        title: Open Access
+      registered:
+        text: registered
+        meaning: ncpi_data_access_type:registered
+        title: Registered
+      controlled:
+        text: controlled
+        meaning: ncpi_data_access_type:controlled
+        title: Controlled
+      gsr_restricted:
+        text: gsr_restricted
+        meaning: ncpi_data_access_type:gsr-restricted
+        title: GSR Restricted
+      gsr_allowed:
+        text: gsr_allowed
+        meaning: ncpi_data_access_type:gsr-allowed
+        title: GSR Allowed
   EnumResearchCollectionType:
     name: EnumResearchCollectionType
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/EnumResearchCollectionType
@@ -527,10 +822,11 @@ slots:
     title: Description
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     slot_uri: kfi_fhir_sparks:description
-    owner: ResearchStudy
+    owner: AccessPolicy
     domain_of:
     - Practitioner
     - ResearchStudy
+    - AccessPolicy
     range: string
     required: false
   practitioner_role_id:
@@ -597,6 +893,7 @@ slots:
     slot_uri: kfi_fhir_sparks:website
     owner: ResearchStudyCollection
     domain_of:
+    - AccessPolicy
     - ResearchStudyCollection
     range: uri
     required: false
@@ -825,6 +1122,58 @@ slots:
     range: AssociatedParty
     required: true
     multivalued: true
+  disease_limitation:
+    name: disease_limitation
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
+    description: Disease Use Limitations
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+    required: false
+    multivalued: false
+  access_policy_code:
+    name: access_policy_code
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
+    description: A classification of the type of consents found in a consent statement.
+    title: Access Policy Code
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumAccessPolicyCode
+    required: true
+    multivalued: true
+  data_access_type:
+    name: data_access_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
+    description: Type of access restrictions on file downloads ( open | registered
+      | controlled )
+    title: Access Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumDataAccessType
+    required: true
+    multivalued: false
+  consent_scope:
+    name: consent_scope
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
+    description: Which of the four areas this resource covers (extensible)
+    title: Consent Scope
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumConsentScope
+    required: true
+    multivalued: false
   collection_title:
     name: collection_title
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_title
@@ -972,6 +1321,33 @@ slots:
     - ResearchStudy
     range: string
     required: true
+  accessPolicy__access_policy_id:
+    name: accessPolicy__access_policy_id
+    description: Access policy communicates the limitations and/or requirements that
+      define how a user may gain access to a particular set of data.
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
+    identifier: true
+    alias: access_policy_id
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+    required: true
+  accessPolicy__status:
+    name: accessPolicy__status
+    description: Indicates the state of the consent.
+    title: Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/status
+    alias: status
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumConsentStateCodes
+    required: true
+    multivalued: false
   researchStudyCollection__research_study_collection_id:
     name: researchStudyCollection__research_study_collection_id
     description: Global ID for this record
@@ -1190,6 +1566,43 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
+  AccessPolicy:
+    name: AccessPolicy
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+    description: Limitations and/or requirements that define how a user may gain access
+      to a particular set of data.
+    title: Access Policy
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slots:
+    - description
+    - data_access_type
+    - website
+    - consent_scope
+    - access_policy_code
+    - disease_limitation
+    - accessPolicy__access_policy_id
+    - accessPolicy__status
+    attributes:
+      access_policy_id:
+        name: access_policy_id
+        description: Access policy communicates the limitations and/or requirements
+          that define how a user may gain access to a particular set of data.
+        title: Access Policy ID
+        identifier: true
+        range: string
+        required: true
+      status:
+        name: status
+        description: Indicates the state of the consent.
+        title: Status
+        range: EnumConsentStateCodes
+        required: true
+        multivalued: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
   ResearchStudyCollection:
     name: ResearchStudyCollection
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
@@ -1230,7 +1643,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-05T12:57:12'
-source_file_size: 3630
-generation_date: '2025-12-05T13:03:39'
+source_file_date: '2025-12-05T16:55:02'
+source_file_size: 4042
+generation_date: '2025-12-05T16:58:08'
 

@@ -1,0 +1,250 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+name: kfi-fhir-input-access-policy
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  AccessPolicy:
+    title: Access Policy  
+    description: Limitations and/or requirements that define how a user may gain access to a particular set of data.
+    # is_a: HasExternalId 
+    annotations:
+      fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+    attributes:
+      access_policy_id:
+        title: Access Policy ID
+        description: Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.
+        range: string         
+        identifier: true
+        required: true
+      status: 
+        title: Status 
+        description: Indicates the state of the consent.
+        range: EnumConsentStateCodes 
+        required: true 
+        multivalued: false
+    slots:
+      - description 
+      - data_access_type 
+      - website
+      - consent_scope 
+      - access_policy_code
+      - disease_limitation
+slots:
+  disease_limitation: 
+    description: Disease Use Limitations  
+    required: false 
+    range: string 
+    multivalued: false 
+  access_policy_code:
+    title: Access Policy Code 
+    description: A classification of the type of consents found in a consent statement.
+    required: true 
+    multivalued: true 
+    range: EnumAccessPolicyCode
+  data_access_type: 
+    title: Access Type 
+    description: Type of access restrictions on file downloads ( open | registered | controlled )
+    multivalued: false 
+    required: true 
+    range: EnumDataAccessType 
+  consent_scope:
+    title: Consent Scope 
+    description: Which of the four areas this resource covers (extensible)
+    required: true 
+    multivalued: false 
+    range: EnumConsentScope
+enums:
+  EnumAccessPolicyCode:
+    description: Type of research use case allowed
+    permissible_values:
+      gru: 
+        title: GRU 
+        meaning: ncpi_data_access_code:GRU
+        description: General Research Use 
+      hmb: 
+        title: HMB 
+        meaning: ncpi_data_access_code:HMB 
+        description: Health/Medical/Biomedical 
+      ds: 
+        title: DS 
+        meaning: ncpi_data_access_code:DS 
+        description: Disease-Specific (Disease/Trait/Exposure)
+      irb: 
+        title: IRB 
+        meaning: ncpi_data_access_code:IRB 
+        description: IRB Approval Required 
+      pub: 
+        title: PUB 
+        meaning: ncpi_data_access_code:PUB 
+        description: Publication Required 
+      col: 
+        title: COL 
+        meaning: ncpi_data_access_code:COL 
+        description: Collaboration Required 
+      npu: 
+        title: NPU 
+        meaning: ncpi_data_access_code:NPU 
+        description: Not-for-profit use only 
+      mds: 
+        title: MDS 
+        meaning: ncpi_data_access_code:MDS 
+        description: Methods 
+      gso: 
+        title: GSO 
+        meaning: ncpi_data_access_code:GSO 
+        description: Genetic Studies only 
+      gsr: 
+        title: GSR 
+        meaning: ncpi_data_access_code:GSR 
+        description: Genomic Summary Results
+      rd:
+        title: RD
+        meaning: ncpi_data_access_code:RD 
+        description: Related Diseases
+      duo_0000004:
+        title: no restriction
+        description: This data use permission indicates there is no restriction on use.
+        meaning: duo:0000004
+      duo_0000042:
+        title: general research use
+        description: This data use permission indicates that use is allowed for general research use for any research purpose.
+        meaning: duo:0000042
+      duo_0000006:
+        title: health or medical or biomedical research
+        description: This data use permission indicates that use is allowed for health/medical/biomedical purposes; does not include the study of population origins or ancestry.
+        meaning: duo:0000006
+      duo_0000007:
+        title: disease specific research
+        description: This data use permission indicates that use is allowed provided it is related to the specified disease.
+        meaning: duo:0000007
+      duo_0000011:
+        title: population origins or ancestry research only
+        description: This data use permission indicates that use of the data is limited to the study of population origins or ancestry.
+        meaning: duo:0000011
+      duo_0000012:
+        title: research specific restrictions
+        description: This data use modifier indicates that use is limited to studies of a certain research type.
+        meaning: duo:0000012
+      duo_0000015:
+        title: no general methods research
+        description: This data use modifier indicates that use does not allow methods development research (e.g., development of software or algorithms).
+        meaning: duo:0000015
+      duo_0000016:
+        title: genetic studies only
+        description: This data use modifier indicates that use is limited to genetic studies only (i.e., studies that include genotype research alone or both genotype and phenotype research, but not phenotype research exclusively)
+        meaning: duo:0000016
+      duo_0000018:
+        title: not for profit, non commercial use only
+        description: This data use modifier indicates that use of the data is limited to not-for-profit organizations and not-for-profit use, non-commercial use.
+        meaning: duo:0000018
+      duo_0000019:
+        title: publication required
+        description: This data use modifier indicates that requestor agrees to make results of studies using the data available to the larger scientific community.
+        meaning: duo:0000019
+      duo_0000020:
+        title: collaboration required
+        description: This data use modifier indicates that the requestor must agree to collaboration with the primary study investigator(s).
+        meaning: duo:0000020
+      duo_0000021:
+        title: ethics approval required
+        description: This data use modifier indicates that the requestor must provide documentation of local IRB/ERB approval.
+        meaning: duo:0000021
+      duo_0000022:
+        title: geographical restriction
+        description: This data use modifier indicates that use is limited to within a specific geographic region.
+        meaning: duo:0000022
+      duo_0000024:
+        title: publication moratorium
+        description: This data use modifier indicates that requestor agrees not to publish results of studies until a specific date.
+        meaning: duo:0000024
+      duo_0000025:
+        title: time limit on use
+        description: This data use modifier indicates that use is approved for a specific number of months.
+        meaning: duo:0000025
+      duo_0000026:
+        title: user specific restriction
+        description: This data use modifier indicates that use is limited to use by approved users.
+        meaning: duo:0000026
+      duo_0000027:
+        title: project specific restriction
+        description: This data use modifier indicates that use is limited to use within an approved project.
+        meaning: duo:0000027
+      duo_0000028:
+        title: institution specific restriction
+        description: This data use modifier indicates that use is limited to use within an approved institution.
+        meaning: duo:0000028
+      duo_0000029:
+        title: return to database or resource
+        description: This data use modifier indicates that the requestor must return derived/enriched data to the database/resource.
+        meaning: duo:0000029
+      duo_0000043:
+        title: clinical care use
+        description: This data use modifier indicates that use is allowed for clinical use and care.
+        meaning: duo:0000043
+      duo_0000044:
+        title: population origins or ancestry research prohibited
+        description: This data use modifier indicates use for purposes of population, origin, or ancestry research is prohibited.
+        meaning: duo:0000044
+      duo_0000045:
+        title: not for profit organisation use only
+        description: This data use modifier indicates that use of the data is limited to not-for-profit organisations.
+        meaning: duo:0000045
+      duo_0000046:
+        title: non-commercial use only
+        description: This data use modifier indicates that use of the data is limited to not-for-profit use.
+        meaning: duo:0000046
+  EnumConsentScope:
+    description: The four anticipated uses for the Consent Resource.
+    permissible_values:
+      adr:
+        title: Advanced Care Directive 
+        meaning: hl7_consent_scope:adr
+      research:
+        title: Research
+        meaning: hl7_consent_scope:research
+      patient_privacy:
+        title: Patient Privacy
+        meaning: hl7_consent_scope:patient-privacy
+      treatment:
+        title: Treatment 
+        meaning: hl7_consent_scope:treatment
+  EnumConsentStateCodes: 
+    description: Indicates the state of the consent.
+    permissible_values: 
+      draft:
+        title: Draft
+        meaning: hl7_consent_state_codes:draft
+      proposed:
+        title: Proposed 
+        meaning: hl7_consent_state_codes:proposed
+      active:
+        title: Active 
+        meaning: hl7_consent_state_codes:active
+      rejected:
+        title: Rejected 
+        meaning: hl7_consent_state_codes:rejected
+      inactive:
+        title: Inactive 
+        meaning: hl7_consent_state_codes:inactive
+      entered_in_error:
+        title: Entered in Error
+        meaning: hl7_consent_state_codes:entered-in-error
+  EnumDataAccessType:
+    description: Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'
+    permissible_values:
+      open:
+        title: Open Access 
+        meaning: ncpi_data_access_type:open 
+      registered:
+        title: Registered 
+        meaning: ncpi_data_access_type:registered 
+      controlled: 
+        title: Controlled 
+        meaning: ncpi_data_access_type:controlled 
+      gsr_restricted:
+        title: GSR Restricted 
+        meaning: ncpi_data_access_type:gsr-restricted 
+      gsr_allowed:
+        title: GSR Allowed 
+        meaning: ncpi_data_access_type:gsr-allowed

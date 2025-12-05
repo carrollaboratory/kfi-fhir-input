@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-05T13:03:27
+# Generation date: 2025-12-05T16:57:52
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -63,6 +63,9 @@ metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
+DUO = CurieNamespace('duo', 'http://purl.obolibrary.org/obo/duo.owl')
+HL7_CONSENT_SCOPE = CurieNamespace('hl7_consent_scope', 'http://terminology.hl7.org/CodeSystem/consentscope')
+HL7_CONSENT_STATE_CODES = CurieNamespace('hl7_consent_state_codes', 'http://hl7.org/fhir/consent-state-codes')
 HL7_LIST_STATUS = CurieNamespace('hl7_list_status', 'https://hl7.org/fhir/R4/codesystem-list-status')
 HL7_RSP_ORG_TYPE = CurieNamespace('hl7_rsp_org_type', 'http://hl7.org/fhir/research-study-party-organization-type')
 HL7_RSP_ROLE = CurieNamespace('hl7_rsp_role', 'http://hl7.org/fhir/research-study-party-role')
@@ -72,6 +75,8 @@ KFI = CurieNamespace('kfi', 'https://carrollaboratory.github.io/kfi-fhir-input/'
 KFI_FHIR_SPARKS = CurieNamespace('kfi_fhir_sparks', 'https://carrollaboratory.github.io/kif-fhir-input')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type')
+NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
+NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
 DEFAULT_ = KFI_FHIR_SPARKS
 
 
@@ -103,6 +108,10 @@ class PractitionerRolePractitionerRoleId(extended_str):
 
 
 class ResearchStudyResearchStudyId(extended_str):
+    pass
+
+
+class AccessPolicyAccessPolicyId(extended_str):
     pass
 
 
@@ -409,6 +418,66 @@ class ResearchStudy(HasExternalId):
 
 
 @dataclass(repr=False)
+class AccessPolicy(YAMLRoot):
+    """
+    Limitations and/or requirements that define how a user may gain access to a particular set of data.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["access-policy/AccessPolicy"]
+    class_class_curie: ClassVar[str] = "kfi:access-policy/AccessPolicy"
+    class_name: ClassVar[str] = "AccessPolicy"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AccessPolicy
+
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    data_access_type: Union[str, "EnumDataAccessType"] = None
+    consent_scope: Union[str, "EnumConsentScope"] = None
+    access_policy_code: Union[Union[str, "EnumAccessPolicyCode"], list[Union[str, "EnumAccessPolicyCode"]]] = None
+    status: Union[str, "EnumConsentStateCodes"] = None
+    description: Optional[str] = None
+    website: Optional[Union[str, URI]] = None
+    disease_limitation: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        if self._is_empty(self.data_access_type):
+            self.MissingRequiredField("data_access_type")
+        if not isinstance(self.data_access_type, EnumDataAccessType):
+            self.data_access_type = EnumDataAccessType(self.data_access_type)
+
+        if self._is_empty(self.consent_scope):
+            self.MissingRequiredField("consent_scope")
+        if not isinstance(self.consent_scope, EnumConsentScope):
+            self.consent_scope = EnumConsentScope(self.consent_scope)
+
+        if self._is_empty(self.access_policy_code):
+            self.MissingRequiredField("access_policy_code")
+        if not isinstance(self.access_policy_code, list):
+            self.access_policy_code = [self.access_policy_code] if self.access_policy_code is not None else []
+        self.access_policy_code = [v if isinstance(v, EnumAccessPolicyCode) else EnumAccessPolicyCode(v) for v in self.access_policy_code]
+
+        if self._is_empty(self.status):
+            self.MissingRequiredField("status")
+        if not isinstance(self.status, EnumConsentStateCodes):
+            self.status = EnumConsentStateCodes(self.status)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        if self.website is not None and not isinstance(self.website, URI):
+            self.website = URI(self.website)
+
+        if self.disease_limitation is not None and not isinstance(self.disease_limitation, str):
+            self.disease_limitation = str(self.disease_limitation)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class ResearchStudyCollection(HasExternalId):
     """
     Collections of research data including, but not limited, to Consortia, Programs, adhoc collections of Studies and
@@ -610,6 +679,276 @@ class EnumStudyStatus(EnumDefinitionImpl):
         description="Codes indicating the study's current status",
     )
 
+class EnumAccessPolicyCode(EnumDefinitionImpl):
+    """
+    Type of research use case allowed
+    """
+    gru = PermissibleValue(
+        text="gru",
+        title="GRU",
+        description="General Research Use",
+        meaning=NCPI_DATA_ACCESS_CODE["GRU"])
+    hmb = PermissibleValue(
+        text="hmb",
+        title="HMB",
+        description="Health/Medical/Biomedical",
+        meaning=NCPI_DATA_ACCESS_CODE["HMB"])
+    ds = PermissibleValue(
+        text="ds",
+        title="DS",
+        description="Disease-Specific (Disease/Trait/Exposure)",
+        meaning=NCPI_DATA_ACCESS_CODE["DS"])
+    irb = PermissibleValue(
+        text="irb",
+        title="IRB",
+        description="IRB Approval Required",
+        meaning=NCPI_DATA_ACCESS_CODE["IRB"])
+    pub = PermissibleValue(
+        text="pub",
+        title="PUB",
+        description="Publication Required",
+        meaning=NCPI_DATA_ACCESS_CODE["PUB"])
+    col = PermissibleValue(
+        text="col",
+        title="COL",
+        description="Collaboration Required",
+        meaning=NCPI_DATA_ACCESS_CODE["COL"])
+    npu = PermissibleValue(
+        text="npu",
+        title="NPU",
+        description="Not-for-profit use only",
+        meaning=NCPI_DATA_ACCESS_CODE["NPU"])
+    mds = PermissibleValue(
+        text="mds",
+        title="MDS",
+        description="Methods",
+        meaning=NCPI_DATA_ACCESS_CODE["MDS"])
+    gso = PermissibleValue(
+        text="gso",
+        title="GSO",
+        description="Genetic Studies only",
+        meaning=NCPI_DATA_ACCESS_CODE["GSO"])
+    gsr = PermissibleValue(
+        text="gsr",
+        title="GSR",
+        description="Genomic Summary Results",
+        meaning=NCPI_DATA_ACCESS_CODE["GSR"])
+    rd = PermissibleValue(
+        text="rd",
+        title="RD",
+        description="Related Diseases",
+        meaning=NCPI_DATA_ACCESS_CODE["RD"])
+    duo_0000004 = PermissibleValue(
+        text="duo_0000004",
+        title="no restriction",
+        description="This data use permission indicates there is no restriction on use.",
+        meaning=DUO["0000004"])
+    duo_0000042 = PermissibleValue(
+        text="duo_0000042",
+        title="general research use",
+        description="""This data use permission indicates that use is allowed for general research use for any research purpose.""",
+        meaning=DUO["0000042"])
+    duo_0000006 = PermissibleValue(
+        text="duo_0000006",
+        title="health or medical or biomedical research",
+        description="""This data use permission indicates that use is allowed for health/medical/biomedical purposes; does not include the study of population origins or ancestry.""",
+        meaning=DUO["0000006"])
+    duo_0000007 = PermissibleValue(
+        text="duo_0000007",
+        title="disease specific research",
+        description="""This data use permission indicates that use is allowed provided it is related to the specified disease.""",
+        meaning=DUO["0000007"])
+    duo_0000011 = PermissibleValue(
+        text="duo_0000011",
+        title="population origins or ancestry research only",
+        description="""This data use permission indicates that use of the data is limited to the study of population origins or ancestry.""",
+        meaning=DUO["0000011"])
+    duo_0000012 = PermissibleValue(
+        text="duo_0000012",
+        title="research specific restrictions",
+        description="This data use modifier indicates that use is limited to studies of a certain research type.",
+        meaning=DUO["0000012"])
+    duo_0000015 = PermissibleValue(
+        text="duo_0000015",
+        title="no general methods research",
+        description="""This data use modifier indicates that use does not allow methods development research (e.g., development of software or algorithms).""",
+        meaning=DUO["0000015"])
+    duo_0000016 = PermissibleValue(
+        text="duo_0000016",
+        title="genetic studies only",
+        description="""This data use modifier indicates that use is limited to genetic studies only (i.e., studies that include genotype research alone or both genotype and phenotype research, but not phenotype research exclusively)""",
+        meaning=DUO["0000016"])
+    duo_0000018 = PermissibleValue(
+        text="duo_0000018",
+        title="not for profit, non commercial use only",
+        description="""This data use modifier indicates that use of the data is limited to not-for-profit organizations and not-for-profit use, non-commercial use.""",
+        meaning=DUO["0000018"])
+    duo_0000019 = PermissibleValue(
+        text="duo_0000019",
+        title="publication required",
+        description="""This data use modifier indicates that requestor agrees to make results of studies using the data available to the larger scientific community.""",
+        meaning=DUO["0000019"])
+    duo_0000020 = PermissibleValue(
+        text="duo_0000020",
+        title="collaboration required",
+        description="""This data use modifier indicates that the requestor must agree to collaboration with the primary study investigator(s).""",
+        meaning=DUO["0000020"])
+    duo_0000021 = PermissibleValue(
+        text="duo_0000021",
+        title="ethics approval required",
+        description="""This data use modifier indicates that the requestor must provide documentation of local IRB/ERB approval.""",
+        meaning=DUO["0000021"])
+    duo_0000022 = PermissibleValue(
+        text="duo_0000022",
+        title="geographical restriction",
+        description="This data use modifier indicates that use is limited to within a specific geographic region.",
+        meaning=DUO["0000022"])
+    duo_0000024 = PermissibleValue(
+        text="duo_0000024",
+        title="publication moratorium",
+        description="""This data use modifier indicates that requestor agrees not to publish results of studies until a specific date.""",
+        meaning=DUO["0000024"])
+    duo_0000025 = PermissibleValue(
+        text="duo_0000025",
+        title="time limit on use",
+        description="This data use modifier indicates that use is approved for a specific number of months.",
+        meaning=DUO["0000025"])
+    duo_0000026 = PermissibleValue(
+        text="duo_0000026",
+        title="user specific restriction",
+        description="This data use modifier indicates that use is limited to use by approved users.",
+        meaning=DUO["0000026"])
+    duo_0000027 = PermissibleValue(
+        text="duo_0000027",
+        title="project specific restriction",
+        description="This data use modifier indicates that use is limited to use within an approved project.",
+        meaning=DUO["0000027"])
+    duo_0000028 = PermissibleValue(
+        text="duo_0000028",
+        title="institution specific restriction",
+        description="This data use modifier indicates that use is limited to use within an approved institution.",
+        meaning=DUO["0000028"])
+    duo_0000029 = PermissibleValue(
+        text="duo_0000029",
+        title="return to database or resource",
+        description="""This data use modifier indicates that the requestor must return derived/enriched data to the database/resource.""",
+        meaning=DUO["0000029"])
+    duo_0000043 = PermissibleValue(
+        text="duo_0000043",
+        title="clinical care use",
+        description="This data use modifier indicates that use is allowed for clinical use and care.",
+        meaning=DUO["0000043"])
+    duo_0000044 = PermissibleValue(
+        text="duo_0000044",
+        title="population origins or ancestry research prohibited",
+        description="""This data use modifier indicates use for purposes of population, origin, or ancestry research is prohibited.""",
+        meaning=DUO["0000044"])
+    duo_0000045 = PermissibleValue(
+        text="duo_0000045",
+        title="not for profit organisation use only",
+        description="""This data use modifier indicates that use of the data is limited to not-for-profit organisations.""",
+        meaning=DUO["0000045"])
+    duo_0000046 = PermissibleValue(
+        text="duo_0000046",
+        title="non-commercial use only",
+        description="This data use modifier indicates that use of the data is limited to not-for-profit use.",
+        meaning=DUO["0000046"])
+
+    _defn = EnumDefinition(
+        name="EnumAccessPolicyCode",
+        description="Type of research use case allowed",
+    )
+
+class EnumConsentScope(EnumDefinitionImpl):
+    """
+    The four anticipated uses for the Consent Resource.
+    """
+    adr = PermissibleValue(
+        text="adr",
+        title="Advanced Care Directive",
+        meaning=HL7_CONSENT_SCOPE["adr"])
+    research = PermissibleValue(
+        text="research",
+        title="Research",
+        meaning=HL7_CONSENT_SCOPE["research"])
+    patient_privacy = PermissibleValue(
+        text="patient_privacy",
+        title="Patient Privacy",
+        meaning=HL7_CONSENT_SCOPE["patient-privacy"])
+    treatment = PermissibleValue(
+        text="treatment",
+        title="Treatment",
+        meaning=HL7_CONSENT_SCOPE["treatment"])
+
+    _defn = EnumDefinition(
+        name="EnumConsentScope",
+        description="The four anticipated uses for the Consent Resource.",
+    )
+
+class EnumConsentStateCodes(EnumDefinitionImpl):
+    """
+    Indicates the state of the consent.
+    """
+    draft = PermissibleValue(
+        text="draft",
+        title="Draft",
+        meaning=HL7_CONSENT_STATE_CODES["draft"])
+    proposed = PermissibleValue(
+        text="proposed",
+        title="Proposed",
+        meaning=HL7_CONSENT_STATE_CODES["proposed"])
+    active = PermissibleValue(
+        text="active",
+        title="Active",
+        meaning=HL7_CONSENT_STATE_CODES["active"])
+    rejected = PermissibleValue(
+        text="rejected",
+        title="Rejected",
+        meaning=HL7_CONSENT_STATE_CODES["rejected"])
+    inactive = PermissibleValue(
+        text="inactive",
+        title="Inactive",
+        meaning=HL7_CONSENT_STATE_CODES["inactive"])
+    entered_in_error = PermissibleValue(
+        text="entered_in_error",
+        title="Entered in Error",
+        meaning=HL7_CONSENT_STATE_CODES["entered-in-error"])
+
+    _defn = EnumDefinition(
+        name="EnumConsentStateCodes",
+        description="Indicates the state of the consent.",
+    )
+
+class EnumDataAccessType(EnumDefinitionImpl):
+    """
+    Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'
+    """
+    open = PermissibleValue(
+        text="open",
+        title="Open Access",
+        meaning=NCPI_DATA_ACCESS_TYPE["open"])
+    registered = PermissibleValue(
+        text="registered",
+        title="Registered",
+        meaning=NCPI_DATA_ACCESS_TYPE["registered"])
+    controlled = PermissibleValue(
+        text="controlled",
+        title="Controlled",
+        meaning=NCPI_DATA_ACCESS_TYPE["controlled"])
+    gsr_restricted = PermissibleValue(
+        text="gsr_restricted",
+        title="GSR Restricted",
+        meaning=NCPI_DATA_ACCESS_TYPE["gsr-restricted"])
+    gsr_allowed = PermissibleValue(
+        text="gsr_allowed",
+        title="GSR Allowed",
+        meaning=NCPI_DATA_ACCESS_TYPE["gsr-allowed"])
+
+    _defn = EnumDefinition(
+        name="EnumDataAccessType",
+        description="""Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'""",
+    )
+
 class EnumResearchCollectionType(EnumDefinitionImpl):
     """
     Research Study Collection Type
@@ -726,6 +1065,18 @@ slots.study_design = Slot(uri=KFI['research_study/study_design'], name="study_de
 slots.study_personnel = Slot(uri=KFI['research_study/study_personnel'], name="study_personnel", curie=KFI.curie('research_study/study_personnel'),
                    model_uri=KFI_FHIR_SPARKS.study_personnel, domain=None, range=Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]])
 
+slots.disease_limitation = Slot(uri=KFI['access-policy/disease_limitation'], name="disease_limitation", curie=KFI.curie('access-policy/disease_limitation'),
+                   model_uri=KFI_FHIR_SPARKS.disease_limitation, domain=None, range=Optional[str])
+
+slots.access_policy_code = Slot(uri=KFI['access-policy/access_policy_code'], name="access_policy_code", curie=KFI.curie('access-policy/access_policy_code'),
+                   model_uri=KFI_FHIR_SPARKS.access_policy_code, domain=None, range=Union[Union[str, "EnumAccessPolicyCode"], list[Union[str, "EnumAccessPolicyCode"]]])
+
+slots.data_access_type = Slot(uri=KFI['access-policy/data_access_type'], name="data_access_type", curie=KFI.curie('access-policy/data_access_type'),
+                   model_uri=KFI_FHIR_SPARKS.data_access_type, domain=None, range=Union[str, "EnumDataAccessType"])
+
+slots.consent_scope = Slot(uri=KFI['access-policy/consent_scope'], name="consent_scope", curie=KFI.curie('access-policy/consent_scope'),
+                   model_uri=KFI_FHIR_SPARKS.consent_scope, domain=None, range=Union[str, "EnumConsentScope"])
+
 slots.collection_title = Slot(uri=KFI['research-study-collection/collection_title'], name="collection_title", curie=KFI.curie('research-study-collection/collection_title'),
                    model_uri=KFI_FHIR_SPARKS.collection_title, domain=None, range=str)
 
@@ -758,6 +1109,12 @@ slots.practitionerRole__practitioner_role_id = Slot(uri=KFI['practitioner_role/p
 
 slots.researchStudy__research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="researchStudy__research_study_id", curie=KFI.curie('research_study/research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.researchStudy__research_study_id, domain=None, range=URIRef)
+
+slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
+                   model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)
+
+slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
+                   model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])
 
 slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['research-study-collection/research_study_collection_id'], name="researchStudyCollection__research_study_collection_id", curie=KFI.curie('research-study-collection/research_study_collection_id'),
                    model_uri=KFI_FHIR_SPARKS.researchStudyCollection__research_study_collection_id, domain=None, range=URIRef)

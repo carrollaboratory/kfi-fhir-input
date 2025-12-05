@@ -1,0 +1,11 @@
+---
+access_policy_id: acp-0002
+status: active 
+description: Research data is open for use with research into cat-scratch disease  
+website: https://hisssss.com/feline/consent/001
+consent_scope: research 
+disease_limitation: MONDO:0005692 # cat-scratch disease
+data_access_type: controlled
+access_policy_code:
+  - ds
+  - duo_0000007

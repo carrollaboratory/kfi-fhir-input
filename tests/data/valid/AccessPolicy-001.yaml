@@ -1,0 +1,11 @@
+---
+access_policy_id: acp-0001
+status: active 
+description: Research data is open for general research purposes 
+website: https://hisssss.com/feline/consent/001
+consent_scope: research 
+data_access_type: open
+access_policy_code:
+  - gru
+  - duo_0000042
+
