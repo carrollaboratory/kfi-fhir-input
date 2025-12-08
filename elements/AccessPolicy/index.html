@@ -453,6 +453,16 @@ attributes:
     required: true
   status:
     name: status
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: status
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Indicates the state of the consent.
     title: Status
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
@@ -493,6 +503,16 @@ attributes:
     required: true
   status:
     name: status
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: status
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Indicates the state of the consent.
     title: Status
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
@@ -521,6 +541,16 @@ attributes:
     required: false
   data_access_type:
     name: data_access_type
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_extension:
+        tag: fhir_extension
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Type of access restrictions on file downloads ( open | registered
       | controlled )
     title: Access Type
@@ -551,6 +581,16 @@ attributes:
     multivalued: false
   consent_scope:
     name: consent_scope
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+      fhir_element:
+        tag: fhir_element
+        value: scope
     description: Which of the four areas this resource covers (extensible)
     title: Consent Scope
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -564,6 +604,16 @@ attributes:
     multivalued: false
   access_policy_code:
     name: access_policy_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: A classification of the type of consents found in a consent statement.
     title: Access Policy Code
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -577,6 +627,16 @@ attributes:
     multivalued: true
   disease_limitation:
     name: disease_limitation
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: provision.purpose
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Disease Use Limitations
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
