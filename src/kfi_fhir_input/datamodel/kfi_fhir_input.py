@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-05T16:57:52
+# Generation date: 2025-12-08T11:55:53
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input

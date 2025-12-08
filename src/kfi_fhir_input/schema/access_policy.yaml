@@ -23,6 +23,10 @@ classes:
         range: EnumConsentStateCodes 
         required: true 
         multivalued: false
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+          fhir_element: status
+          fhir_resource: Consent
     slots:
       - description 
       - data_access_type 
@@ -36,24 +40,40 @@ slots:
     required: false 
     range: string 
     multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element: provision.purpose
+      fhir_resource: Consent
   access_policy_code:
     title: Access Policy Code 
     description: A classification of the type of consents found in a consent statement.
     required: true 
     multivalued: true 
     range: EnumAccessPolicyCode
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element: category
+      fhir_resource: Consent
   data_access_type: 
     title: Access Type 
     description: Type of access restrictions on file downloads ( open | registered | controlled )
     multivalued: false 
     required: true 
     range: EnumDataAccessType 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_extension: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
+      fhir_resource: Consent
   consent_scope:
     title: Consent Scope 
     description: Which of the four areas this resource covers (extensible)
     required: true 
     multivalued: false 
     range: EnumConsentScope
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_resource: Consent 
+      fhir_element: scope 
 enums:
   EnumAccessPolicyCode:
     description: Type of research use case allowed

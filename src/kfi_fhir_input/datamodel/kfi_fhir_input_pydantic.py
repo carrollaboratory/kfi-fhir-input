@@ -404,13 +404,35 @@ class AccessPolicy(ConfiguredBaseModel):
                        'ResearchStudy',
                        'AccessPolicy',
                        'ResearchStudyCollection']} })
-    data_access_type: EnumDataAccessType = Field(default=..., title="Access Type", description="""Type of access restrictions on file downloads ( open | registered | controlled )""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    data_access_type: EnumDataAccessType = Field(default=..., title="Access Type", description="""Type of access restrictions on file downloads ( open | registered | controlled )""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
+                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['AccessPolicy']} })
     website: Optional[str] = Field(default=None, title="Website", description="""URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'ResearchStudyCollection']} })
-    consent_scope: EnumConsentScope = Field(default=..., title="Consent Scope", description="""Which of the four areas this resource covers (extensible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
-    access_policy_code: list[EnumAccessPolicyCode] = Field(default=..., title="Access Policy Code", description="""A classification of the type of consents found in a consent statement.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
-    disease_limitation: Optional[str] = Field(default=None, description="""Disease Use Limitations""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    consent_scope: EnumConsentScope = Field(default=..., title="Consent Scope", description="""Which of the four areas this resource covers (extensible)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'scope'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['AccessPolicy']} })
+    access_policy_code: list[EnumAccessPolicyCode] = Field(default=..., title="Access Policy Code", description="""A classification of the type of consents found in a consent statement.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'category'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['AccessPolicy']} })
+    disease_limitation: Optional[str] = Field(default=None, description="""Disease Use Limitations""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'provision.purpose'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['AccessPolicy']} })
     access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
-    status: EnumConsentStateCodes = Field(default=..., title="Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy']} })
+    status: EnumConsentStateCodes = Field(default=..., title="Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['AccessPolicy']} })
 
 
 class HasExternalId(ConfiguredBaseModel):

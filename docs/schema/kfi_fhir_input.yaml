@@ -1125,6 +1125,16 @@ slots:
   disease_limitation:
     name: disease_limitation
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: provision.purpose
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Disease Use Limitations
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
@@ -1137,6 +1147,16 @@ slots:
   access_policy_code:
     name: access_policy_code
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: A classification of the type of consents found in a consent statement.
     title: Access Policy Code
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
@@ -1150,6 +1170,16 @@ slots:
   data_access_type:
     name: data_access_type
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_extension:
+        tag: fhir_extension
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Type of access restrictions on file downloads ( open | registered
       | controlled )
     title: Access Type
@@ -1164,6 +1194,16 @@ slots:
   consent_scope:
     name: consent_scope
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+      fhir_element:
+        tag: fhir_element
+        value: scope
     description: Which of the four areas this resource covers (extensible)
     title: Consent Scope
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
@@ -1337,6 +1377,16 @@ slots:
     required: true
   accessPolicy__status:
     name: accessPolicy__status
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: status
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
     description: Indicates the state of the consent.
     title: Status
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
@@ -1597,6 +1647,16 @@ classes:
         required: true
       status:
         name: status
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+          fhir_element:
+            tag: fhir_element
+            value: status
+          fhir_resource:
+            tag: fhir_resource
+            value: Consent
         description: Indicates the state of the consent.
         title: Status
         range: EnumConsentStateCodes
@@ -1645,5 +1705,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2025-12-05T16:55:02'
 source_file_size: 4042
-generation_date: '2025-12-05T16:58:08'
+generation_date: '2025-12-08T11:55:43'
 
