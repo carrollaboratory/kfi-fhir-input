@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/race/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Institution (institution_id) - kfi-fhir-input</title>
+        <title>Slot: Race (race) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-institution-institution_id" class="md-skip">
+        <a href="#slot-race-race" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Institution (institution_id)
+              Slot: Race (race)
             
           </span>
         </div>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -427,10 +416,10 @@
   
 
 
-<h1 id="slot-institution-institution_id">Slot: Institution (institution_id)</h1>
-<p><em>The institution this record is associated with.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution_id">kfi_fhir_sparks:institution_id</a>
-Alias: institution_id</p>
+<h1 id="slot-race-race">Slot: Race (race)</h1>
+<p><em>Reported race as defined by the 1997 OMB directives.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputrace">kfi_fhir_sparks:race</a>
+Alias: race</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -444,42 +433,25 @@ Alias: institution_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>PractitionerRole covers the recording of the location and types of services t...</td>
+<td><a href="../Participant/">Participant</a></td>
+<td>Research oriented patient</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../Institution/">Institution</a></li>
+<li>
+<p>Range: <a href="../EnumRace/">EnumRace</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
+</li>
+<li>
+<p>Required: True</p>
+</li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>institution_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -495,33 +467,28 @@ Alias: institution_id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:institution_id</td>
+<td>kfi_fhir_sparks:race</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:institution_id</td>
+<td>kfi_fhir_sparks:race</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: institution_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: institution_id
-description: The institution this record is associated with.
-title: Institution
+<pre><code class="language-yaml">name: race
+description: Reported race as defined by the 1997 OMB directives.
+title: Race
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: institution_id
+alias: race
 domain_of:
-- Practitioner
-- Institution
-- PractitionerRole
-range: Institution
-required: false
+- Participant
+range: EnumRace
+required: true
+multivalued: true
 
 </code></pre>
 

@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/AccessPolicy/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/Participant/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>Class: Access Policy (AccessPolicy) - kfi-fhir-input</title>
+<title>Class: Participant (Participant) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-access-policy-accesspolicy">
+<a class="md-skip" href="#class-participant-participant">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Access Policy (AccessPolicy)
+              Class: Participant (Participant)
             
           </span>
 </div>
@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -257,67 +266,83 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-access-policy-accesspolicy">Class: Access Policy (AccessPolicy)</h1>
-<p><em>Limitations and/or requirements that define how a user may gain access to a particular set of data.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputAccessPolicy">kfi_fhir_sparks:AccessPolicy</a></p>
+<h1 id="class-participant-participant">Class: Participant (Participant)</h1>
+<p><em>Research oriented patient</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputParticipant">kfi_fhir_sparks:Participant</a></p>
 <div class="mermaid"> classDiagram
-    class AccessPolicy
-    click AccessPolicy href "../AccessPolicy/"
-      AccessPolicy : access_policy_code
+    class Participant
+    click Participant href "../Participant/"
+      HasExternalId &lt;|-- Participant
+        click HasExternalId href "../HasExternalId/"
+
+      Participant : birthsex
 
 
 
 
 
-        AccessPolicy --&gt; "1..*" EnumAccessPolicyCode : access_policy_code
-        click EnumAccessPolicyCode href "../EnumAccessPolicyCode/"
+        Participant --&gt; "0..1" EnumBirthSex : birthsex
+        click EnumBirthSex href "../EnumBirthSex/"
 
 
 
-      AccessPolicy : access_policy_id
-
-      AccessPolicy : consent_scope
-
-
-
-
-
-        AccessPolicy --&gt; "1" EnumConsentScope : consent_scope
-        click EnumConsentScope href "../EnumConsentScope/"
-
-
-
-      AccessPolicy : data_access_type
+      Participant : consent_status
 
 
 
 
 
-        AccessPolicy --&gt; "1" EnumDataAccessType : data_access_type
-        click EnumDataAccessType href "../EnumDataAccessType/"
-
-
-
-      AccessPolicy : description
-
-      AccessPolicy : disease_limitation
-
-      AccessPolicy : status
-
-
-
-
-
-        AccessPolicy --&gt; "1" EnumConsentStateCodes : status
+        Participant --&gt; "1" EnumConsentStateCodes : consent_status
         click EnumConsentStateCodes href "../EnumConsentStateCodes/"
 
 
 
-      AccessPolicy : website
+      Participant : ethnicity
+
+
+
+
+
+        Participant --&gt; "1" EnumEthnicity : ethnicity
+        click EnumEthnicity href "../EnumEthnicity/"
+
+
+
+      Participant : external_id
+
+      Participant : participant_id
+
+      Participant : population
+
+
+
+
+
+        Participant --&gt; "0..1" EnumPopulation : population
+        click EnumPopulation href "../EnumPopulation/"
+
+
+
+      Participant : race
+
+
+
+
+
+        Participant --&gt; "1..*" EnumRace : race
+        click EnumRace href "../EnumRace/"
+
+
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasExternalId/">HasExternalId</a><ul>
+<li><strong>Participant</strong></li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -330,52 +355,46 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>More details associated with the given resource</td>
+<td><a href="../birthsex/">birthsex</a></td>
+<td>0..1 <br/> <a href="../EnumBirthSex/">EnumBirthSex</a></td>
+<td>Sex assigned at birth (or pre-natal observed sex)</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../data_access_type/">data_access_type</a></td>
-<td>1 <br/> <a href="../EnumDataAccessType/">EnumDataAccessType</a></td>
-<td>Type of access restrictions on file downloads ( open</td>
-<td>registered</td>
-</tr>
-<tr>
-<td><a href="../website/">website</a></td>
-<td>0..1 <br/> <a href="../Uri/">Uri</a></td>
-<td>URL describing the entity this represents</td>
+<td><a href="../race/">race</a></td>
+<td>1..* <br/> <a href="../EnumRace/">EnumRace</a></td>
+<td>Reported race as defined by the 1997 OMB directives</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../consent_scope/">consent_scope</a></td>
-<td>1 <br/> <a href="../EnumConsentScope/">EnumConsentScope</a></td>
-<td>Which of the four areas this resource covers (extensible)</td>
+<td><a href="../ethnicity/">ethnicity</a></td>
+<td>1 <br/> <a href="../EnumEthnicity/">EnumEthnicity</a></td>
+<td>Reported ethnicity as defined by the 1997 OMB directives</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../access_policy_code/">access_policy_code</a></td>
-<td>1..* <br/> <a href="../EnumAccessPolicyCode/">EnumAccessPolicyCode</a></td>
-<td>A classification of the type of consents found in a consent statement</td>
+<td><a href="../population/">population</a></td>
+<td>0..1 <br/> <a href="../EnumPopulation/">EnumPopulation</a></td>
+<td>opulation, Race, and/or Ethnicity information</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../disease_limitation/">disease_limitation</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Disease Use Limitations</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td><a href="../participant_id/">participant_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
-<td>Access policy communicates the limitations and/or requirements that define ho...</td>
+<td>Participant Global ID</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../status/">status</a></td>
+<td><a href="../consent_status/">consent_status</a></td>
 <td>1 <br/> <a href="../EnumConsentStateCodes/">EnumConsentStateCodes</a></td>
 <td>Indicates the state of the consent</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../external_id/">external_id</a></td>
+<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -391,7 +410,7 @@
 <tbody>
 <tr>
 <td>fhir_resource</td>
-<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy</td>
+<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant</td>
 </tr>
 </tbody>
 </table>
@@ -410,11 +429,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:AccessPolicy</td>
+<td>kfi_fhir_sparks:Participant</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:AccessPolicy</td>
+<td>kfi_fhir_sparks:Participant</td>
 </tr>
 </tbody>
 </table>
@@ -422,37 +441,34 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: AccessPolicy
+<pre><code class="language-yaml">name: Participant
 annotations:
   fhir_resource:
     tag: fhir_resource
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-description: Limitations and/or requirements that define how a user may gain access
-  to a particular set of data.
-title: Access Policy
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+description: Research oriented patient
+title: Participant
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+is_a: HasExternalId
 slots:
-- description
-- data_access_type
-- website
-- consent_scope
-- access_policy_code
-- disease_limitation
+- birthsex
+- race
+- ethnicity
+- population
 attributes:
-  access_policy_id:
-    name: access_policy_id
-    description: Access policy communicates the limitations and/or requirements that
-      define how a user may gain access to a particular set of data.
-    title: Access Policy ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+  participant_id:
+    name: participant_id
+    description: Participant Global ID
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     rank: 1000
     identifier: true
     domain_of:
-    - AccessPolicy
+    - Participant
     range: string
     required: true
-  status:
-    name: status
+  consent_status:
+    name: consent_status
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -464,11 +480,11 @@ attributes:
         tag: fhir_resource
         value: Consent
     description: Indicates the state of the consent.
-    title: Status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    title: Consent Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     rank: 1000
     domain_of:
-    - AccessPolicy
+    - Participant
     range: EnumConsentStateCodes
     required: true
     multivalued: false
@@ -477,32 +493,31 @@ attributes:
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: AccessPolicy
+<pre><code class="language-yaml">name: Participant
 annotations:
   fhir_resource:
     tag: fhir_resource
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-description: Limitations and/or requirements that define how a user may gain access
-  to a particular set of data.
-title: Access Policy
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+description: Research oriented patient
+title: Participant
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+is_a: HasExternalId
 attributes:
-  access_policy_id:
-    name: access_policy_id
-    description: Access policy communicates the limitations and/or requirements that
-      define how a user may gain access to a particular set of data.
-    title: Access Policy ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+  participant_id:
+    name: participant_id
+    description: Participant Global ID
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     rank: 1000
     identifier: true
-    alias: access_policy_id
-    owner: AccessPolicy
+    alias: participant_id
+    owner: Participant
     domain_of:
-    - AccessPolicy
+    - Participant
     range: string
     required: true
-  status:
-    name: status
+  consent_status:
+    name: consent_status
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -514,139 +529,91 @@ attributes:
         tag: fhir_resource
         value: Consent
     description: Indicates the state of the consent.
-    title: Status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    title: Consent Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     rank: 1000
-    alias: status
-    owner: AccessPolicy
+    alias: consent_status
+    owner: Participant
     domain_of:
-    - AccessPolicy
+    - Participant
     range: EnumConsentStateCodes
     required: true
     multivalued: false
-  description:
-    name: description
-    description: More details associated with the given resource
-    title: Description
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: description
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    - Practitioner
-    - ResearchStudy
-    - ResearchStudyCollection
-    range: string
-    required: false
-  data_access_type:
-    name: data_access_type
+  birthsex:
+    name: birthsex
     annotations:
       fhir_profile:
         tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
       fhir_extension:
         tag: fhir_extension
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
+        value: http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
       fhir_resource:
         tag: fhir_resource
         value: Consent
-    description: Type of access restrictions on file downloads ( open | registered
-      | controlled )
-    title: Access Type
+    description: Sex assigned at birth (or pre-natal observed sex)
+    title: Birth Sex
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: data_access_type
-    owner: AccessPolicy
+    alias: birthsex
+    owner: Participant
     domain_of:
-    - AccessPolicy
-    range: EnumDataAccessType
-    required: true
-    multivalued: false
-  website:
-    name: website
-    description: URL describing the entity this represents. This can include a formal
-      website, such as the Entity's website, or to an online document describing the
-      entity.
-    title: Website
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: website
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    - ResearchStudyCollection
-    range: uri
+    - Participant
+    range: EnumBirthSex
     required: false
     multivalued: false
-  consent_scope:
-    name: consent_scope
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-      fhir_element:
-        tag: fhir_element
-        value: scope
-    description: Which of the four areas this resource covers (extensible)
-    title: Consent Scope
+  race:
+    name: race
+    description: Reported race as defined by the 1997 OMB directives.
+    title: Race
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: consent_scope
-    owner: AccessPolicy
+    alias: race
+    owner: Participant
     domain_of:
-    - AccessPolicy
-    range: EnumConsentScope
-    required: true
-    multivalued: false
-  access_policy_code:
-    name: access_policy_code
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: category
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: A classification of the type of consents found in a consent statement.
-    title: Access Policy Code
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: access_policy_code
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: EnumAccessPolicyCode
+    - Participant
+    range: EnumRace
     required: true
     multivalued: true
-  disease_limitation:
-    name: disease_limitation
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: provision.purpose
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Disease Use Limitations
+  ethnicity:
+    name: ethnicity
+    description: Reported ethnicity as defined by the 1997 OMB directives.
+    title: Ethnicity
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: disease_limitation
-    owner: AccessPolicy
+    alias: ethnicity
+    owner: Participant
     domain_of:
-    - AccessPolicy
-    range: string
+    - Participant
+    range: EnumEthnicity
+    required: true
+  population:
+    name: population
+    description: opulation, Race, and/or Ethnicity information.
+    title: Population
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: population
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumPopulation
     required: false
     multivalued: false
+  external_id:
+    name: external_id
+    description: Other identifiers for this entity, eg, from the submitting study
+      or in systems link dbGaP
+    title: External Identifiers
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: external_id
+    owner: Participant
+    domain_of:
+    - HasExternalId
+    range: uriorcurie
+    required: false
+    multivalued: true
 
 </code></pre>
 </details>

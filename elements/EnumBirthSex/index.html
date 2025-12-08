@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumBirthSex/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Institution (institution_id) - kfi-fhir-input</title>
+        <title>Enum: EnumBirthSex - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-institution-institution_id" class="md-skip">
+        <a href="#enum-enumbirthsex" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Institution (institution_id)
+              Enum: EnumBirthSex
             
           </span>
         </div>
@@ -325,10 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
+        Permissible Values
       
     </span>
   </a>
@@ -336,10 +336,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Properties
+        Slots
       
     </span>
   </a>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -382,17 +371,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
   
 </li>
       
@@ -427,101 +405,124 @@
   
 
 
-<h1 id="slot-institution-institution_id">Slot: Institution (institution_id)</h1>
-<p><em>The institution this record is associated with.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution_id">kfi_fhir_sparks:institution_id</a>
-Alias: institution_id</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumbirthsex">Enum: EnumBirthSex</h1>
+<p><em>Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumBirthSex">kfi_fhir_sparks:EnumBirthSex</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>female</td>
+<td>usc_birthsex:F</td>
+<td>Female</td>
+</tr>
+<tr>
+<td>male</td>
+<td>usc_birthsex:M</td>
+<td>Male</td>
+</tr>
+<tr>
+<td>asku</td>
+<td>hl7_null:ASKU</td>
+<td>Information was sought but not found (e</td>
+</tr>
+<tr>
+<td>oth</td>
+<td>hl7_null:OTH</td>
+<td><strong>Description:</strong>The actual value is not a member of the set of permitted data...</td>
+</tr>
+<tr>
+<td>unk</td>
+<td>hl7_null:UNK</td>
+<td><em>Description:</em>*A proper value is applicable, but not known</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>PractitionerRole covers the recording of the location and types of services t...</td>
-<td>no</td>
+<td><a href="../birthsex/">birthsex</a></td>
+<td>Sex assigned at birth (or pre-natal observed sex)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../Institution/">Institution</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>institution_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:institution_id</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:institution_id</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: institution_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: institution_id
-description: The institution this record is associated with.
-title: Institution
+<pre><code class="language-yaml">name: EnumBirthSex
+description: Codes for assigning sex at birth as specified by the Office of the National
+  Coordinator for Health IT (ONC)
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: institution_id
-domain_of:
-- Practitioner
-- Institution
-- PractitionerRole
-range: Institution
-required: false
+permissible_values:
+  female:
+    text: female
+    description: Female
+    meaning: usc_birthsex:F
+    title: Female
+  male:
+    text: male
+    description: Male
+    meaning: usc_birthsex:M
+    title: Male
+  asku:
+    text: asku
+    description: Information was sought but not found (e.g., patient was asked but
+      didn't know)
+    meaning: hl7_null:ASKU
+    title: asked but unknown
+  oth:
+    text: oth
+    description: '**Description:**The actual value is not a member of the set of permitted
+      data values in the constrained value domain of a variable. (e.g., concept not
+      provided by required code system).
+
+      Usage Notes: This flavor and its specializations are most commonly used with
+      the CD datatype and its flavors. However, it may apply to *any* datatype where
+      the constraints of the type are tighter than can be conveyed. For example, a
+      PQ that is for a true measured amount whose units are not supported in UCUM,
+      a need to convey a REAL when the type has been constrained to INT, etc.
+
+      With coded datatypes, this null flavor may only be used if the vocabulary binding
+      has a coding strength of CNE. By definition, all local codes and original text
+      are part of the value set if the coding strength is CWE.'
+    meaning: hl7_null:OTH
+    title: other
+  unk:
+    text: unk
+    description: '*Description:**A proper value is applicable, but not known.
+
+      Usage Notes: This means the actual value is not known. If the only thing that
+      is unknown is how to properly express the value in the necessary constraints
+      (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties
+      should be included for a datatype with this property unless:
+
+      Those properties themselves directly translate to a semantic of ''unknown''.
+      (E.g. a local code sent as a translation that conveys ''unknown'') Those properties
+      further qualify the nature of what is unknown. (E.g. specifying a use code of
+      ''H'' and a URL prefix of ''tel:'' to convey that it is the home phone number
+      that is unknown.)'
+    meaning: hl7_null:UNK
+    title: Unknown
 
 </code></pre>
 

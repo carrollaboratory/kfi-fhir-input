@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumPopulation/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Institution (institution_id) - kfi-fhir-input</title>
+        <title>Enum: EnumPopulation - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-institution-institution_id" class="md-skip">
+        <a href="#enum-enumpopulation" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Institution (institution_id)
+              Enum: EnumPopulation
             
           </span>
         </div>
@@ -325,21 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Properties
+        Slots
       
     </span>
   </a>
@@ -359,17 +348,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -382,17 +360,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
   
 </li>
       
@@ -427,101 +394,40 @@
   
 
 
-<h1 id="slot-institution-institution_id">Slot: Institution (institution_id)</h1>
-<p><em>The institution this record is associated with.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution_id">kfi_fhir_sparks:institution_id</a>
-Alias: institution_id</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumpopulation">Enum: EnumPopulation</h1>
+<p><em>Code describing the population (CDC). This should be one of the codes from the <a href="https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html">CDC Race codes</a>.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumPopulation">kfi_fhir_sparks:EnumPopulation</a></p>
+<p><em>This is a dynamic enum</em></p>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>PractitionerRole covers the recording of the location and types of services t...</td>
-<td>no</td>
+<td><a href="../population/">population</a></td>
+<td>opulation, Race, and/or Ethnicity information</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../Institution/">Institution</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>institution_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:institution_id</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:institution_id</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: institution_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: institution_id
-description: The institution this record is associated with.
-title: Institution
+<pre><code class="language-yaml">name: EnumPopulation
+description: Code describing the population (CDC). This should be one of the codes
+  from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: institution_id
-domain_of:
-- Practitioner
-- Institution
-- PractitionerRole
-range: Institution
-required: false
+reachable_from:
+  source_ontology: cdc_rec
 
 </code></pre>
 

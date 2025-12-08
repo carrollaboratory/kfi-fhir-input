@@ -57,6 +57,10 @@
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumBirthSex/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumCollectionStatus/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
@@ -70,6 +74,18 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumDataAccessType/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumEthnicity/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumPopulation/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumRace/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
@@ -125,6 +141,10 @@
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Participant/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Period/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
@@ -177,6 +197,10 @@
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/birthsex/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/classifier/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
@@ -190,6 +214,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/consent_scope/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/consent_status/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
@@ -214,6 +242,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/erdiagram/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/ethnicity/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
@@ -245,11 +277,19 @@
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/participant_id/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/party/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/period_id/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/population/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>
@@ -262,6 +302,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/practitioner_title/</loc>
+         <lastmod>2025-12-08</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/race/</loc>
          <lastmod>2025-12-08</lastmod>
     </url>
     <url>

@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/birthsex/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Institution (institution_id) - kfi-fhir-input</title>
+        <title>Slot: Birth Sex (birthsex) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-institution-institution_id" class="md-skip">
+        <a href="#slot-birth-sex-birthsex" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Institution (institution_id)
+              Slot: Birth Sex (birthsex)
             
           </span>
         </div>
@@ -427,10 +427,10 @@
   
 
 
-<h1 id="slot-institution-institution_id">Slot: Institution (institution_id)</h1>
-<p><em>The institution this record is associated with.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution_id">kfi_fhir_sparks:institution_id</a>
-Alias: institution_id</p>
+<h1 id="slot-birth-sex-birthsex">Slot: Birth Sex (birthsex)</h1>
+<p><em>Sex assigned at birth (or pre-natal observed sex)</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputbirthsex">kfi_fhir_sparks:birthsex</a>
+Alias: birthsex</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -444,25 +444,15 @@ Alias: institution_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>PractitionerRole covers the recording of the location and types of services t...</td>
+<td><a href="../Participant/">Participant</a></td>
+<td>Research oriented patient</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../Institution/">Institution</a></li>
+<li>Range: <a href="../EnumBirthSex/">EnumBirthSex</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="annotations">Annotations</h3>
@@ -475,8 +465,16 @@ Alias: institution_id</p>
 </thead>
 <tbody>
 <tr>
-<td>target_slot</td>
-<td>institution_id</td>
+<td>fhir_profile</td>
+<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant</td>
+</tr>
+<tr>
+<td>fhir_extension</td>
+<td>http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex</td>
+</tr>
+<tr>
+<td>fhir_resource</td>
+<td>Consent</td>
 </tr>
 </tbody>
 </table>
@@ -495,33 +493,38 @@ Alias: institution_id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:institution_id</td>
+<td>kfi_fhir_sparks:birthsex</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:institution_id</td>
+<td>kfi_fhir_sparks:birthsex</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: institution_id
+<pre><code class="language-yaml">name: birthsex
 annotations:
-  target_slot:
-    tag: target_slot
-    value: institution_id
-description: The institution this record is associated with.
-title: Institution
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+  fhir_extension:
+    tag: fhir_extension
+    value: http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
+  fhir_resource:
+    tag: fhir_resource
+    value: Consent
+description: Sex assigned at birth (or pre-natal observed sex)
+title: Birth Sex
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: institution_id
+alias: birthsex
 domain_of:
-- Practitioner
-- Institution
-- PractitionerRole
-range: Institution
+- Participant
+range: EnumBirthSex
 required: false
+multivalued: false
 
 </code></pre>
 

@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumEthnicity/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Institution (institution_id) - kfi-fhir-input</title>
+        <title>Enum: EnumEthnicity - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-institution-institution_id" class="md-skip">
+        <a href="#enum-enumethnicity" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Institution (institution_id)
+              Enum: EnumEthnicity
             
           </span>
         </div>
@@ -325,10 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
+        Permissible Values
       
     </span>
   </a>
@@ -336,10 +336,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Properties
+        Slots
       
     </span>
   </a>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -382,17 +371,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
   
 </li>
       
@@ -427,101 +405,85 @@
   
 
 
-<h1 id="slot-institution-institution_id">Slot: Institution (institution_id)</h1>
-<p><em>The institution this record is associated with.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputinstitution_id">kfi_fhir_sparks:institution_id</a>
-Alias: institution_id</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumethnicity">Enum: EnumEthnicity</h1>
+<p><em>OMB Codes describing Hispanic or Latino ethnicity.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumEthnicity">kfi_fhir_sparks:EnumEthnicity</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hispanic_or_latino</td>
+<td>cdc_rec:2135-2</td>
+<td>Hispanic or Latino</td>
+</tr>
+<tr>
+<td>not_hispanic_or_latino</td>
+<td>cdc_rec:2186-5</td>
+<td>Not Hispanic or Latino</td>
+</tr>
+<tr>
+<td>unknown</td>
+<td>hl7_null:UNK</td>
+<td>unknown</td>
+</tr>
+<tr>
+<td>asked_but_unknown</td>
+<td>hl7_null:ASKU</td>
+<td>asked but unknown</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Institution/">Institution</a></td>
-<td>Institution related to study or research personnel</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>PractitionerRole covers the recording of the location and types of services t...</td>
-<td>no</td>
+<td><a href="../ethnicity/">ethnicity</a></td>
+<td>Reported ethnicity as defined by the 1997 OMB directives</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>Range: <a href="../Institution/">Institution</a></li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>institution_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:institution_id</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:institution_id</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: institution_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: institution_id
-description: The institution this record is associated with.
-title: Institution
+<pre><code class="language-yaml">name: EnumEthnicity
+description: OMB Codes describing Hispanic or Latino ethnicity.
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: institution_id
-domain_of:
-- Practitioner
-- Institution
-- PractitionerRole
-range: Institution
-required: false
+permissible_values:
+  hispanic_or_latino:
+    text: hispanic_or_latino
+    description: Hispanic or Latino
+    meaning: cdc_rec:2135-2
+  not_hispanic_or_latino:
+    text: not_hispanic_or_latino
+    description: Not Hispanic or Latino
+    meaning: cdc_rec:2186-5
+  unknown:
+    text: unknown
+    description: unknown
+    meaning: hl7_null:UNK
+  asked_but_unknown:
+    text: asked_but_unknown
+    description: asked but unknown
+    meaning: hl7_null:ASKU
 
 </code></pre>
 
