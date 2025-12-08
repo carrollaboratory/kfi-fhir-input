@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-08T11:55:53
+# Generation date: 2025-12-08T15:35:21
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -63,10 +63,13 @@ metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
+CDC_REC = CurieNamespace('cdc_rec', 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC')
+CDC_UNK = CurieNamespace('cdc_unk', 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion')
 DUO = CurieNamespace('duo', 'http://purl.obolibrary.org/obo/duo.owl')
 HL7_CONSENT_SCOPE = CurieNamespace('hl7_consent_scope', 'http://terminology.hl7.org/CodeSystem/consentscope')
 HL7_CONSENT_STATE_CODES = CurieNamespace('hl7_consent_state_codes', 'http://hl7.org/fhir/consent-state-codes')
 HL7_LIST_STATUS = CurieNamespace('hl7_list_status', 'https://hl7.org/fhir/R4/codesystem-list-status')
+HL7_NULL = CurieNamespace('hl7_null', 'http://terminology.hl7.org/CodeSystem/v3-NullFlavor')
 HL7_RSP_ORG_TYPE = CurieNamespace('hl7_rsp_org_type', 'http://hl7.org/fhir/research-study-party-organization-type')
 HL7_RSP_ROLE = CurieNamespace('hl7_rsp_role', 'http://hl7.org/fhir/research-study-party-role')
 HL7_STUDY_DESIGN = CurieNamespace('hl7_study_design', 'https://hl7.org/fhir/codesystem-study-design')
@@ -77,6 +80,7 @@ LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type')
 NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
+USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
 DEFAULT_ = KFI_FHIR_SPARKS
 
 
@@ -84,6 +88,10 @@ DEFAULT_ = KFI_FHIR_SPARKS
 
 # Class references
 class RecordId(extended_str):
+    pass
+
+
+class AccessPolicyAccessPolicyId(extended_str):
     pass
 
 
@@ -99,6 +107,10 @@ class InstitutionInstitutionId(extended_str):
     pass
 
 
+class ParticipantParticipantId(extended_str):
+    pass
+
+
 class PeriodId(RecordId):
     pass
 
@@ -108,10 +120,6 @@ class PractitionerRolePractitionerRoleId(extended_str):
 
 
 class ResearchStudyResearchStudyId(extended_str):
-    pass
-
-
-class AccessPolicyAccessPolicyId(extended_str):
     pass
 
 
@@ -162,6 +170,66 @@ class Record(HasExternalId):
             self.MissingRequiredField("id")
         if not isinstance(self.id, RecordId):
             self.id = RecordId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class AccessPolicy(YAMLRoot):
+    """
+    Limitations and/or requirements that define how a user may gain access to a particular set of data.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["access-policy/AccessPolicy"]
+    class_class_curie: ClassVar[str] = "kfi:access-policy/AccessPolicy"
+    class_name: ClassVar[str] = "AccessPolicy"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AccessPolicy
+
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    data_access_type: Union[str, "EnumDataAccessType"] = None
+    consent_scope: Union[str, "EnumConsentScope"] = None
+    access_policy_code: Union[Union[str, "EnumAccessPolicyCode"], list[Union[str, "EnumAccessPolicyCode"]]] = None
+    status: Union[str, "EnumConsentStateCodes"] = None
+    description: Optional[str] = None
+    website: Optional[Union[str, URI]] = None
+    disease_limitation: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        if self._is_empty(self.data_access_type):
+            self.MissingRequiredField("data_access_type")
+        if not isinstance(self.data_access_type, EnumDataAccessType):
+            self.data_access_type = EnumDataAccessType(self.data_access_type)
+
+        if self._is_empty(self.consent_scope):
+            self.MissingRequiredField("consent_scope")
+        if not isinstance(self.consent_scope, EnumConsentScope):
+            self.consent_scope = EnumConsentScope(self.consent_scope)
+
+        if self._is_empty(self.access_policy_code):
+            self.MissingRequiredField("access_policy_code")
+        if not isinstance(self.access_policy_code, list):
+            self.access_policy_code = [self.access_policy_code] if self.access_policy_code is not None else []
+        self.access_policy_code = [v if isinstance(v, EnumAccessPolicyCode) else EnumAccessPolicyCode(v) for v in self.access_policy_code]
+
+        if self._is_empty(self.status):
+            self.MissingRequiredField("status")
+        if not isinstance(self.status, EnumConsentStateCodes):
+            self.status = EnumConsentStateCodes(self.status)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        if self.website is not None and not isinstance(self.website, URI):
+            self.website = URI(self.website)
+
+        if self.disease_limitation is not None and not isinstance(self.disease_limitation, str):
+            self.disease_limitation = str(self.disease_limitation)
 
         super().__post_init__(**kwargs)
 
@@ -277,6 +345,53 @@ class Institution(HasExternalId):
 
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Participant(YAMLRoot):
+    """
+    Research oriented patient
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["participant/Participant"]
+    class_class_curie: ClassVar[str] = "kfi:participant/Participant"
+    class_name: ClassVar[str] = "Participant"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Participant
+
+    participant_id: Union[str, ParticipantParticipantId] = None
+    race: Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]] = None
+    ethnicity: Union[str, "EnumEthnicity"] = None
+    consent_status: Union[str, "EnumConsentStateCodes"] = None
+    birthsex: Optional[Union[str, "EnumBirthSex"]] = None
+    population: Optional[Union[str, "EnumPopulation"]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, ParticipantParticipantId):
+            self.participant_id = ParticipantParticipantId(self.participant_id)
+
+        if self._is_empty(self.race):
+            self.MissingRequiredField("race")
+        if not isinstance(self.race, list):
+            self.race = [self.race] if self.race is not None else []
+        self.race = [v if isinstance(v, EnumRace) else EnumRace(v) for v in self.race]
+
+        if self._is_empty(self.ethnicity):
+            self.MissingRequiredField("ethnicity")
+        if not isinstance(self.ethnicity, EnumEthnicity):
+            self.ethnicity = EnumEthnicity(self.ethnicity)
+
+        if self._is_empty(self.consent_status):
+            self.MissingRequiredField("consent_status")
+        if not isinstance(self.consent_status, EnumConsentStateCodes):
+            self.consent_status = EnumConsentStateCodes(self.consent_status)
+
+        if self.birthsex is not None and not isinstance(self.birthsex, EnumBirthSex):
+            self.birthsex = EnumBirthSex(self.birthsex)
 
         super().__post_init__(**kwargs)
 
@@ -418,66 +533,6 @@ class ResearchStudy(HasExternalId):
 
 
 @dataclass(repr=False)
-class AccessPolicy(YAMLRoot):
-    """
-    Limitations and/or requirements that define how a user may gain access to a particular set of data.
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = KFI["access-policy/AccessPolicy"]
-    class_class_curie: ClassVar[str] = "kfi:access-policy/AccessPolicy"
-    class_name: ClassVar[str] = "AccessPolicy"
-    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AccessPolicy
-
-    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
-    data_access_type: Union[str, "EnumDataAccessType"] = None
-    consent_scope: Union[str, "EnumConsentScope"] = None
-    access_policy_code: Union[Union[str, "EnumAccessPolicyCode"], list[Union[str, "EnumAccessPolicyCode"]]] = None
-    status: Union[str, "EnumConsentStateCodes"] = None
-    description: Optional[str] = None
-    website: Optional[Union[str, URI]] = None
-    disease_limitation: Optional[str] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.access_policy_id):
-            self.MissingRequiredField("access_policy_id")
-        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
-            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
-
-        if self._is_empty(self.data_access_type):
-            self.MissingRequiredField("data_access_type")
-        if not isinstance(self.data_access_type, EnumDataAccessType):
-            self.data_access_type = EnumDataAccessType(self.data_access_type)
-
-        if self._is_empty(self.consent_scope):
-            self.MissingRequiredField("consent_scope")
-        if not isinstance(self.consent_scope, EnumConsentScope):
-            self.consent_scope = EnumConsentScope(self.consent_scope)
-
-        if self._is_empty(self.access_policy_code):
-            self.MissingRequiredField("access_policy_code")
-        if not isinstance(self.access_policy_code, list):
-            self.access_policy_code = [self.access_policy_code] if self.access_policy_code is not None else []
-        self.access_policy_code = [v if isinstance(v, EnumAccessPolicyCode) else EnumAccessPolicyCode(v) for v in self.access_policy_code]
-
-        if self._is_empty(self.status):
-            self.MissingRequiredField("status")
-        if not isinstance(self.status, EnumConsentStateCodes):
-            self.status = EnumConsentStateCodes(self.status)
-
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
-
-        if self.website is not None and not isinstance(self.website, URI):
-            self.website = URI(self.website)
-
-        if self.disease_limitation is not None and not isinstance(self.disease_limitation, str):
-            self.disease_limitation = str(self.disease_limitation)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
 class ResearchStudyCollection(HasExternalId):
     """
     Collections of research data including, but not limited, to Consortia, Programs, adhoc collections of Studies and
@@ -540,145 +595,6 @@ class ResearchStudyCollection(HasExternalId):
 
 
 # Enumerations
-class EnumResearchStudyPartyOrganizationType(EnumDefinitionImpl):
-    """
-    Research Study Party Organization Type
-    """
-    nih = PermissibleValue(
-        text="nih",
-        title="NIH",
-        meaning=HL7_RSP_ORG_TYPE["nih"])
-    fda = PermissibleValue(
-        text="fda",
-        title="FDA",
-        meaning=HL7_RSP_ORG_TYPE["fda"])
-    academic = PermissibleValue(
-        text="academic",
-        title="Academic",
-        meaning=HL7_RSP_ORG_TYPE["academic"])
-    government = PermissibleValue(
-        text="government",
-        title="Government",
-        meaning=HL7_RSP_ORG_TYPE["government"])
-    nonprofit = PermissibleValue(
-        text="nonprofit",
-        title="Nonprofit",
-        meaning=HL7_RSP_ORG_TYPE["nonprofit"])
-    industry = PermissibleValue(
-        text="industry",
-        title="Industry",
-        meaning=HL7_RSP_ORG_TYPE["industry"])
-
-    _defn = EnumDefinition(
-        name="EnumResearchStudyPartyOrganizationType",
-        description="Research Study Party Organization Type",
-    )
-
-class EnumResearchStudyPartyRole(EnumDefinitionImpl):
-    """
-    This is a ResearchStudy's party role.
-    """
-    sponsor = PermissibleValue(
-        text="sponsor",
-        title="sponsor",
-        meaning=HL7_RSP_ROLE["sponsor"])
-    lead_sponsor = PermissibleValue(
-        text="lead_sponsor",
-        title="lead-sponsor",
-        meaning=HL7_RSP_ROLE["lead-sponsor"])
-    sponsor_investigator = PermissibleValue(
-        text="sponsor_investigator",
-        meaning=HL7_RSP_ROLE["sponsor-investigator"])
-    primary_investigator = PermissibleValue(
-        text="primary_investigator",
-        meaning=HL7_RSP_ROLE["primary-investigator"])
-    collaborator = PermissibleValue(
-        text="collaborator",
-        meaning=HL7_RSP_ROLE["collaborator"])
-    funding_source = PermissibleValue(
-        text="funding_source",
-        meaning=HL7_RSP_ROLE["funding-source"])
-    general_contact = PermissibleValue(
-        text="general_contact",
-        meaning=HL7_RSP_ROLE["general=contact"])
-    recruitment_contact = PermissibleValue(
-        text="recruitment_contact",
-        meaning=HL7_RSP_ROLE["recruitment-contact"])
-    sub_investigator = PermissibleValue(
-        text="sub_investigator",
-        meaning=HL7_RSP_ROLE["sub-investigator"])
-    study_director = PermissibleValue(
-        text="study_director",
-        meaning=HL7_RSP_ROLE["study-director"])
-    study_chair = PermissibleValue(
-        text="study_chair",
-        meaning=HL7_RSP_ROLE["study-chair"])
-    irb = PermissibleValue(
-        text="irb",
-        title="Institutional Review Board",
-        meaning=HL7_RSP_ROLE["irb"])
-
-    _defn = EnumDefinition(
-        name="EnumResearchStudyPartyRole",
-        description="This is a ResearchStudy's party role.",
-    )
-
-class EnumStudyStatus(EnumDefinitionImpl):
-    """
-    Codes indicating the study's current status
-    """
-    active = PermissibleValue(
-        text="active",
-        title="Active",
-        description="Study is opened for accrual.",
-        meaning=HL7_STUDY_STATUS["active"])
-    administratively_completed = PermissibleValue(
-        text="administratively_completed",
-        title="Administratively Completed",
-        description="""Study is completed prematurely and will not resume; patients are no longer examined nor treated.""",
-        meaning=HL7_STUDY_STATUS["administratively-completed"])
-    approved = PermissibleValue(
-        text="approved",
-        title="Approved",
-        meaning=HL7_STUDY_STATUS["approved"])
-    closed_to_accrual = PermissibleValue(
-        text="closed_to_accrual",
-        title="Closed to Accrual",
-        meaning=KFI_FHIR_SPARKS["closed-to-accrual"])
-    closed_to_accrual_and_intervention = PermissibleValue(
-        text="closed_to_accrual_and_intervention",
-        title="Closed to Accrual and Intervention",
-        meaning=HL7_STUDY_STATUS["closed-to-accrual-and-intervention"])
-    completed = PermissibleValue(
-        text="completed",
-        title="Completed",
-        meaning=HL7_STUDY_STATUS["completed"])
-    disapproved = PermissibleValue(
-        text="disapproved",
-        title="Disapproved",
-        meaning=HL7_STUDY_STATUS["disapproved"])
-    in_review = PermissibleValue(
-        text="in_review",
-        title="In Review",
-        meaning=HL7_STUDY_STATUS["in-review"])
-    temporarily_closed_to_accrual = PermissibleValue(
-        text="temporarily_closed_to_accrual",
-        title="Temporarily Closed to Accrual",
-        meaning=HL7_STUDY_STATUS["temporarily-closed-to-accrual"])
-    temporarily_closed_to_accrual_and_intervention = PermissibleValue(
-        text="temporarily_closed_to_accrual_and_intervention",
-        title="Temporarily Closed to Accrual and Intervention",
-        meaning=HL7_STUDY_STATUS["temporarily-closed-to-accrual-and-intervention"])
-    withdrawn = PermissibleValue(
-        text="withdrawn",
-        title="Withdrawn",
-        meaning=HL7_STUDY_STATUS["withdrawn"])
-
-    _defn = EnumDefinition(
-        name="EnumStudyStatus",
-        description="Codes indicating the study's current status",
-    )
-
 class EnumAccessPolicyCode(EnumDefinitionImpl):
     """
     Type of research use case allowed
@@ -949,6 +865,262 @@ class EnumDataAccessType(EnumDefinitionImpl):
         description="""Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'""",
     )
 
+class EnumResearchStudyPartyOrganizationType(EnumDefinitionImpl):
+    """
+    Research Study Party Organization Type
+    """
+    nih = PermissibleValue(
+        text="nih",
+        title="NIH",
+        meaning=HL7_RSP_ORG_TYPE["nih"])
+    fda = PermissibleValue(
+        text="fda",
+        title="FDA",
+        meaning=HL7_RSP_ORG_TYPE["fda"])
+    academic = PermissibleValue(
+        text="academic",
+        title="Academic",
+        meaning=HL7_RSP_ORG_TYPE["academic"])
+    government = PermissibleValue(
+        text="government",
+        title="Government",
+        meaning=HL7_RSP_ORG_TYPE["government"])
+    nonprofit = PermissibleValue(
+        text="nonprofit",
+        title="Nonprofit",
+        meaning=HL7_RSP_ORG_TYPE["nonprofit"])
+    industry = PermissibleValue(
+        text="industry",
+        title="Industry",
+        meaning=HL7_RSP_ORG_TYPE["industry"])
+
+    _defn = EnumDefinition(
+        name="EnumResearchStudyPartyOrganizationType",
+        description="Research Study Party Organization Type",
+    )
+
+class EnumResearchStudyPartyRole(EnumDefinitionImpl):
+    """
+    This is a ResearchStudy's party role.
+    """
+    sponsor = PermissibleValue(
+        text="sponsor",
+        title="sponsor",
+        meaning=HL7_RSP_ROLE["sponsor"])
+    lead_sponsor = PermissibleValue(
+        text="lead_sponsor",
+        title="lead-sponsor",
+        meaning=HL7_RSP_ROLE["lead-sponsor"])
+    sponsor_investigator = PermissibleValue(
+        text="sponsor_investigator",
+        meaning=HL7_RSP_ROLE["sponsor-investigator"])
+    primary_investigator = PermissibleValue(
+        text="primary_investigator",
+        meaning=HL7_RSP_ROLE["primary-investigator"])
+    collaborator = PermissibleValue(
+        text="collaborator",
+        meaning=HL7_RSP_ROLE["collaborator"])
+    funding_source = PermissibleValue(
+        text="funding_source",
+        meaning=HL7_RSP_ROLE["funding-source"])
+    general_contact = PermissibleValue(
+        text="general_contact",
+        meaning=HL7_RSP_ROLE["general=contact"])
+    recruitment_contact = PermissibleValue(
+        text="recruitment_contact",
+        meaning=HL7_RSP_ROLE["recruitment-contact"])
+    sub_investigator = PermissibleValue(
+        text="sub_investigator",
+        meaning=HL7_RSP_ROLE["sub-investigator"])
+    study_director = PermissibleValue(
+        text="study_director",
+        meaning=HL7_RSP_ROLE["study-director"])
+    study_chair = PermissibleValue(
+        text="study_chair",
+        meaning=HL7_RSP_ROLE["study-chair"])
+    irb = PermissibleValue(
+        text="irb",
+        title="Institutional Review Board",
+        meaning=HL7_RSP_ROLE["irb"])
+
+    _defn = EnumDefinition(
+        name="EnumResearchStudyPartyRole",
+        description="This is a ResearchStudy's party role.",
+    )
+
+class EnumBirthSex(EnumDefinitionImpl):
+    """
+    Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)
+    """
+    female = PermissibleValue(
+        text="female",
+        title="Female",
+        description="Female",
+        meaning=USC_BIRTHSEX["F"])
+    male = PermissibleValue(
+        text="male",
+        title="Male",
+        description="Male",
+        meaning=USC_BIRTHSEX["M"])
+    asku = PermissibleValue(
+        text="asku",
+        title="asked but unknown",
+        description="Information was sought but not found (e.g., patient was asked but didn't know)",
+        meaning=HL7_NULL["ASKU"])
+    oth = PermissibleValue(
+        text="oth",
+        title="other",
+        description="""**Description:**The actual value is not a member of the set of permitted data values in the constrained value domain of a variable. (e.g., concept not provided by required code system).
+Usage Notes: This flavor and its specializations are most commonly used with the CD datatype and its flavors. However, it may apply to *any* datatype where the constraints of the type are tighter than can be conveyed. For example, a PQ that is for a true measured amount whose units are not supported in UCUM, a need to convey a REAL when the type has been constrained to INT, etc.
+With coded datatypes, this null flavor may only be used if the vocabulary binding has a coding strength of CNE. By definition, all local codes and original text are part of the value set if the coding strength is CWE.""",
+        meaning=HL7_NULL["OTH"])
+    unk = PermissibleValue(
+        text="unk",
+        title="Unknown",
+        description="""*Description:**A proper value is applicable, but not known.
+Usage Notes: This means the actual value is not known. If the only thing that is unknown is how to properly express the value in the necessary constraints (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties should be included for a datatype with this property unless:
+Those properties themselves directly translate to a semantic of 'unknown'. (E.g. a local code sent as a translation that conveys 'unknown') Those properties further qualify the nature of what is unknown. (E.g. specifying a use code of 'H' and a URL prefix of 'tel:' to convey that it is the home phone number that is unknown.)""",
+        meaning=HL7_NULL["UNK"])
+
+    _defn = EnumDefinition(
+        name="EnumBirthSex",
+        description="""Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)""",
+    )
+
+class EnumRace(EnumDefinitionImpl):
+    """
+    OMB Codes describing race.
+    """
+    american_indian_or_alaskan_native = PermissibleValue(
+        text="american_indian_or_alaskan_native",
+        title="American Indian or Alaskan Native",
+        meaning=CDC_REC["1002-5"])
+    asian = PermissibleValue(
+        text="asian",
+        title="Asian",
+        meaning=CDC_REC["2028-9"])
+    black_or_african_american = PermissibleValue(
+        text="black_or_african_american",
+        title="Black or African American",
+        meaning=CDC_REC["2054-5"])
+    native_hawaiian_or_pacific_islander = PermissibleValue(
+        text="native_hawaiian_or_pacific_islander",
+        title="Native Hawaiian or Other Pacific Islander",
+        meaning=CDC_REC["2076-8"])
+    white = PermissibleValue(
+        text="white",
+        title="White",
+        meaning=CDC_REC["2106-3"])
+    other_race = PermissibleValue(
+        text="other_race",
+        title="Other Race",
+        meaning=CDC_REC["2131-1"])
+    unknown = PermissibleValue(
+        text="unknown",
+        title="unknown",
+        meaning=HL7_NULL["UNK"])
+    asked_but_unknown = PermissibleValue(
+        text="asked_but_unknown",
+        title="asked but unknown",
+        meaning=HL7_NULL["ASKU"])
+
+    _defn = EnumDefinition(
+        name="EnumRace",
+        description="OMB Codes describing race.",
+    )
+
+class EnumEthnicity(EnumDefinitionImpl):
+    """
+    OMB Codes describing Hispanic or Latino ethnicity.
+    """
+    hispanic_or_latino = PermissibleValue(
+        text="hispanic_or_latino",
+        description="Hispanic or Latino",
+        meaning=CDC_REC["2135-2"])
+    not_hispanic_or_latino = PermissibleValue(
+        text="not_hispanic_or_latino",
+        description="Not Hispanic or Latino",
+        meaning=CDC_REC["2186-5"])
+    unknown = PermissibleValue(
+        text="unknown",
+        description="unknown",
+        meaning=HL7_NULL["UNK"])
+    asked_but_unknown = PermissibleValue(
+        text="asked_but_unknown",
+        description="asked but unknown",
+        meaning=HL7_NULL["ASKU"])
+
+    _defn = EnumDefinition(
+        name="EnumEthnicity",
+        description="OMB Codes describing Hispanic or Latino ethnicity.",
+    )
+
+class EnumPopulation(EnumDefinitionImpl):
+    """
+    Code describing the population (CDC). This should be one of the codes from the [CDC Race
+    codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
+    """
+    _defn = EnumDefinition(
+        name="EnumPopulation",
+        description="""Code describing the population (CDC). This should be one of the codes from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).""",
+    )
+
+class EnumStudyStatus(EnumDefinitionImpl):
+    """
+    Codes indicating the study's current status
+    """
+    active = PermissibleValue(
+        text="active",
+        title="Active",
+        description="Study is opened for accrual.",
+        meaning=HL7_STUDY_STATUS["active"])
+    administratively_completed = PermissibleValue(
+        text="administratively_completed",
+        title="Administratively Completed",
+        description="""Study is completed prematurely and will not resume; patients are no longer examined nor treated.""",
+        meaning=HL7_STUDY_STATUS["administratively-completed"])
+    approved = PermissibleValue(
+        text="approved",
+        title="Approved",
+        meaning=HL7_STUDY_STATUS["approved"])
+    closed_to_accrual = PermissibleValue(
+        text="closed_to_accrual",
+        title="Closed to Accrual",
+        meaning=KFI_FHIR_SPARKS["closed-to-accrual"])
+    closed_to_accrual_and_intervention = PermissibleValue(
+        text="closed_to_accrual_and_intervention",
+        title="Closed to Accrual and Intervention",
+        meaning=HL7_STUDY_STATUS["closed-to-accrual-and-intervention"])
+    completed = PermissibleValue(
+        text="completed",
+        title="Completed",
+        meaning=HL7_STUDY_STATUS["completed"])
+    disapproved = PermissibleValue(
+        text="disapproved",
+        title="Disapproved",
+        meaning=HL7_STUDY_STATUS["disapproved"])
+    in_review = PermissibleValue(
+        text="in_review",
+        title="In Review",
+        meaning=HL7_STUDY_STATUS["in-review"])
+    temporarily_closed_to_accrual = PermissibleValue(
+        text="temporarily_closed_to_accrual",
+        title="Temporarily Closed to Accrual",
+        meaning=HL7_STUDY_STATUS["temporarily-closed-to-accrual"])
+    temporarily_closed_to_accrual_and_intervention = PermissibleValue(
+        text="temporarily_closed_to_accrual_and_intervention",
+        title="Temporarily Closed to Accrual and Intervention",
+        meaning=HL7_STUDY_STATUS["temporarily-closed-to-accrual-and-intervention"])
+    withdrawn = PermissibleValue(
+        text="withdrawn",
+        title="Withdrawn",
+        meaning=HL7_STUDY_STATUS["withdrawn"])
+
+    _defn = EnumDefinition(
+        name="EnumStudyStatus",
+        description="Codes indicating the study's current status",
+    )
+
 class EnumResearchCollectionType(EnumDefinitionImpl):
     """
     Research Study Collection Type
@@ -1020,6 +1192,18 @@ slots.website = Slot(uri=KFI_FHIR_SPARKS.website, name="website", curie=KFI_FHIR
 slots.label = Slot(uri=KFI_FHIR_SPARKS.label, name="label", curie=KFI_FHIR_SPARKS.curie('label'),
                    model_uri=KFI_FHIR_SPARKS.label, domain=None, range=Optional[Union[str, list[str]]])
 
+slots.disease_limitation = Slot(uri=KFI['access-policy/disease_limitation'], name="disease_limitation", curie=KFI.curie('access-policy/disease_limitation'),
+                   model_uri=KFI_FHIR_SPARKS.disease_limitation, domain=None, range=Optional[str])
+
+slots.access_policy_code = Slot(uri=KFI['access-policy/access_policy_code'], name="access_policy_code", curie=KFI.curie('access-policy/access_policy_code'),
+                   model_uri=KFI_FHIR_SPARKS.access_policy_code, domain=None, range=Union[Union[str, "EnumAccessPolicyCode"], list[Union[str, "EnumAccessPolicyCode"]]])
+
+slots.data_access_type = Slot(uri=KFI['access-policy/data_access_type'], name="data_access_type", curie=KFI.curie('access-policy/data_access_type'),
+                   model_uri=KFI_FHIR_SPARKS.data_access_type, domain=None, range=Union[str, "EnumDataAccessType"])
+
+slots.consent_scope = Slot(uri=KFI['access-policy/consent_scope'], name="consent_scope", curie=KFI.curie('access-policy/consent_scope'),
+                   model_uri=KFI_FHIR_SPARKS.consent_scope, domain=None, range=Union[str, "EnumConsentScope"])
+
 slots.email = Slot(uri=KFI['practitioner/email'], name="email", curie=KFI.curie('practitioner/email'),
                    model_uri=KFI_FHIR_SPARKS.email, domain=None, range=Optional[str])
 
@@ -1040,6 +1224,18 @@ slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.cu
 
 slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
+
+slots.birthsex = Slot(uri=KFI['participant/birthsex'], name="birthsex", curie=KFI.curie('participant/birthsex'),
+                   model_uri=KFI_FHIR_SPARKS.birthsex, domain=None, range=Optional[Union[str, "EnumBirthSex"]])
+
+slots.race = Slot(uri=KFI['participant/race'], name="race", curie=KFI.curie('participant/race'),
+                   model_uri=KFI_FHIR_SPARKS.race, domain=None, range=Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]])
+
+slots.ethnicity = Slot(uri=KFI['participant/ethnicity'], name="ethnicity", curie=KFI.curie('participant/ethnicity'),
+                   model_uri=KFI_FHIR_SPARKS.ethnicity, domain=None, range=Union[str, "EnumEthnicity"])
+
+slots.population = Slot(uri=KFI['participant/population'], name="population", curie=KFI.curie('participant/population'),
+                   model_uri=KFI_FHIR_SPARKS.population, domain=None, range=Optional[Union[str, "EnumPopulation"]])
 
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
@@ -1065,18 +1261,6 @@ slots.study_design = Slot(uri=KFI['research_study/study_design'], name="study_de
 slots.study_personnel = Slot(uri=KFI['research_study/study_personnel'], name="study_personnel", curie=KFI.curie('research_study/study_personnel'),
                    model_uri=KFI_FHIR_SPARKS.study_personnel, domain=None, range=Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]])
 
-slots.disease_limitation = Slot(uri=KFI['access-policy/disease_limitation'], name="disease_limitation", curie=KFI.curie('access-policy/disease_limitation'),
-                   model_uri=KFI_FHIR_SPARKS.disease_limitation, domain=None, range=Optional[str])
-
-slots.access_policy_code = Slot(uri=KFI['access-policy/access_policy_code'], name="access_policy_code", curie=KFI.curie('access-policy/access_policy_code'),
-                   model_uri=KFI_FHIR_SPARKS.access_policy_code, domain=None, range=Union[Union[str, "EnumAccessPolicyCode"], list[Union[str, "EnumAccessPolicyCode"]]])
-
-slots.data_access_type = Slot(uri=KFI['access-policy/data_access_type'], name="data_access_type", curie=KFI.curie('access-policy/data_access_type'),
-                   model_uri=KFI_FHIR_SPARKS.data_access_type, domain=None, range=Union[str, "EnumDataAccessType"])
-
-slots.consent_scope = Slot(uri=KFI['access-policy/consent_scope'], name="consent_scope", curie=KFI.curie('access-policy/consent_scope'),
-                   model_uri=KFI_FHIR_SPARKS.consent_scope, domain=None, range=Union[str, "EnumConsentScope"])
-
 slots.collection_title = Slot(uri=KFI['research-study-collection/collection_title'], name="collection_title", curie=KFI.curie('research-study-collection/collection_title'),
                    model_uri=KFI_FHIR_SPARKS.collection_title, domain=None, range=str)
 
@@ -1092,11 +1276,23 @@ slots.research_study_collection_member_id = Slot(uri=KFI['research-study-collect
 slots.collection_status = Slot(uri=KFI['research-study-collection/collection_status'], name="collection_status", curie=KFI.curie('research-study-collection/collection_status'),
                    model_uri=KFI_FHIR_SPARKS.collection_status, domain=None, range=Union[str, "EnumCollectionStatus"])
 
+slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
+                   model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)
+
+slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
+                   model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])
+
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)
 
 slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], name="institution__institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution__institution_id, domain=None, range=URIRef)
+
+slots.participant__participant_id = Slot(uri=KFI['participant/participant_id'], name="participant__participant_id", curie=KFI.curie('participant/participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.participant__participant_id, domain=None, range=URIRef)
+
+slots.participant__consent_status = Slot(uri=KFI['participant/consent_status'], name="participant__consent_status", curie=KFI.curie('participant/consent_status'),
+                   model_uri=KFI_FHIR_SPARKS.participant__consent_status, domain=None, range=Union[str, "EnumConsentStateCodes"])
 
 slots.period__start = Slot(uri=KFI['period/start'], name="period__start", curie=KFI.curie('period/start'),
                    model_uri=KFI_FHIR_SPARKS.period__start, domain=None, range=Optional[Union[str, XSDDate]])
@@ -1109,12 +1305,6 @@ slots.practitionerRole__practitioner_role_id = Slot(uri=KFI['practitioner_role/p
 
 slots.researchStudy__research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="researchStudy__research_study_id", curie=KFI.curie('research_study/research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.researchStudy__research_study_id, domain=None, range=URIRef)
-
-slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
-                   model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)
-
-slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
-                   model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])
 
 slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['research-study-collection/research_study_collection_id'], name="researchStudyCollection__research_study_collection_id", curie=KFI.curie('research-study-collection/research_study_collection_id'),
                    model_uri=KFI_FHIR_SPARKS.researchStudyCollection__research_study_collection_id, domain=None, range=URIRef)

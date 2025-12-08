@@ -6,18 +6,25 @@ see_also:
 id: https://carrollaboratory.github.io/kif-fhir-input
 imports:
 - linkml:types
+- access_policy
 - practitioner
 - associated_party
 - institution
+- participant
 - period
 - practitioner_role
 - practitioner
 - research_study
-- access_policy
 - research_study_collection
 - kfi_fhir_input
 license: MIT
 prefixes:
+  cdc_rec:
+    prefix_prefix: cdc_rec
+    prefix_reference: https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC
+  cdc_unk:
+    prefix_prefix: cdc_unk
+    prefix_reference: https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion
   kfi_fhir_sparks:
     prefix_prefix: kfi_fhir_sparks
     prefix_reference: https://carrollaboratory.github.io/kif-fhir-input
@@ -42,6 +49,9 @@ prefixes:
   hl7_consent_scope:
     prefix_prefix: hl7_consent_scope
     prefix_reference: http://terminology.hl7.org/CodeSystem/consentscope
+  hl7_null:
+    prefix_prefix: hl7_null
+    prefix_reference: http://terminology.hl7.org/CodeSystem/v3-NullFlavor
   kfi:
     prefix_prefix: kfi
     prefix_reference: https://carrollaboratory.github.io/kfi-fhir-input/
@@ -60,6 +70,9 @@ prefixes:
   duo:
     prefix_prefix: duo
     prefix_reference: http://purl.obolibrary.org/obo/duo.owl
+  usc_birthsex:
+    prefix_prefix: usc_birthsex
+    prefix_reference: http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender
 default_prefix: kfi_fhir_sparks
 default_range: string
 types:
@@ -332,134 +345,6 @@ types:
     uri: xsd:string
     repr: str
 enums:
-  EnumResearchStudyPartyOrganizationType:
-    name: EnumResearchStudyPartyOrganizationType
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyOrganizationType
-    description: Research Study Party Organization Type
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
-    permissible_values:
-      nih:
-        text: nih
-        meaning: hl7_rsp_org_type:nih
-        title: NIH
-      fda:
-        text: fda
-        meaning: hl7_rsp_org_type:fda
-        title: FDA
-      academic:
-        text: academic
-        meaning: hl7_rsp_org_type:academic
-        title: Academic
-      government:
-        text: government
-        meaning: hl7_rsp_org_type:government
-        title: Government
-      nonprofit:
-        text: nonprofit
-        meaning: hl7_rsp_org_type:nonprofit
-        title: Nonprofit
-      industry:
-        text: industry
-        meaning: hl7_rsp_org_type:industry
-        title: Industry
-  EnumResearchStudyPartyRole:
-    name: EnumResearchStudyPartyRole
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyRole
-    description: This is a ResearchStudy's party role.
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
-    permissible_values:
-      sponsor:
-        text: sponsor
-        meaning: hl7_rsp_role:sponsor
-        title: sponsor
-      lead_sponsor:
-        text: lead_sponsor
-        meaning: hl7_rsp_role:lead-sponsor
-        title: lead-sponsor
-      sponsor_investigator:
-        text: sponsor_investigator
-        meaning: hl7_rsp_role:sponsor-investigator
-      primary_investigator:
-        text: primary_investigator
-        meaning: hl7_rsp_role:primary-investigator
-      collaborator:
-        text: collaborator
-        meaning: hl7_rsp_role:collaborator
-      funding_source:
-        text: funding_source
-        meaning: hl7_rsp_role:funding-source
-      general_contact:
-        text: general_contact
-        meaning: hl7_rsp_role:general=contact
-      recruitment_contact:
-        text: recruitment_contact
-        meaning: hl7_rsp_role:recruitment-contact
-      sub_investigator:
-        text: sub_investigator
-        meaning: hl7_rsp_role:sub-investigator
-      study_director:
-        text: study_director
-        meaning: hl7_rsp_role:study-director
-      study_chair:
-        text: study_chair
-        meaning: hl7_rsp_role:study-chair
-      irb:
-        text: irb
-        meaning: hl7_rsp_role:irb
-        title: Institutional Review Board
-  EnumStudyStatus:
-    name: EnumStudyStatus
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
-    description: Codes indicating the study's current status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
-    permissible_values:
-      active:
-        text: active
-        description: Study is opened for accrual.
-        meaning: hl7_study_status:active
-        title: Active
-      administratively_completed:
-        text: administratively_completed
-        description: Study is completed prematurely and will not resume; patients
-          are no longer examined nor treated.
-        meaning: hl7_study_status:administratively-completed
-        title: Administratively Completed
-      approved:
-        text: approved
-        meaning: hl7_study_status:approved
-        title: Approved
-      closed_to_accrual:
-        text: closed_to_accrual
-        meaning: closed-to-accrual
-        title: Closed to Accrual
-      closed_to_accrual_and_intervention:
-        text: closed_to_accrual_and_intervention
-        meaning: hl7_study_status:closed-to-accrual-and-intervention
-        title: Closed to Accrual and Intervention
-      completed:
-        text: completed
-        meaning: hl7_study_status:completed
-        title: Completed
-      disapproved:
-        text: disapproved
-        meaning: hl7_study_status:disapproved
-        title: Disapproved
-      in_review:
-        text: in_review
-        meaning: hl7_study_status:in-review
-        title: In Review
-      temporarily_closed_to_accrual:
-        text: temporarily_closed_to_accrual
-        meaning: hl7_study_status:temporarily-closed-to-accrual
-        title: Temporarily Closed to Accrual
-      temporarily_closed_to_accrual_and_intervention:
-        text: temporarily_closed_to_accrual_and_intervention
-        meaning: hl7_study_status:temporarily-closed-to-accrual-and-intervention
-        title: Temporarily Closed to Accrual and Intervention
-      withdrawn:
-        text: withdrawn
-        meaning: hl7_study_status:withdrawn
-        title: Withdrawn
   EnumAccessPolicyCode:
     name: EnumAccessPolicyCode
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/EnumAccessPolicyCode
@@ -739,6 +624,259 @@ enums:
         text: gsr_allowed
         meaning: ncpi_data_access_type:gsr-allowed
         title: GSR Allowed
+  EnumResearchStudyPartyOrganizationType:
+    name: EnumResearchStudyPartyOrganizationType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyOrganizationType
+    description: Research Study Party Organization Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    permissible_values:
+      nih:
+        text: nih
+        meaning: hl7_rsp_org_type:nih
+        title: NIH
+      fda:
+        text: fda
+        meaning: hl7_rsp_org_type:fda
+        title: FDA
+      academic:
+        text: academic
+        meaning: hl7_rsp_org_type:academic
+        title: Academic
+      government:
+        text: government
+        meaning: hl7_rsp_org_type:government
+        title: Government
+      nonprofit:
+        text: nonprofit
+        meaning: hl7_rsp_org_type:nonprofit
+        title: Nonprofit
+      industry:
+        text: industry
+        meaning: hl7_rsp_org_type:industry
+        title: Industry
+  EnumResearchStudyPartyRole:
+    name: EnumResearchStudyPartyRole
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyRole
+    description: This is a ResearchStudy's party role.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    permissible_values:
+      sponsor:
+        text: sponsor
+        meaning: hl7_rsp_role:sponsor
+        title: sponsor
+      lead_sponsor:
+        text: lead_sponsor
+        meaning: hl7_rsp_role:lead-sponsor
+        title: lead-sponsor
+      sponsor_investigator:
+        text: sponsor_investigator
+        meaning: hl7_rsp_role:sponsor-investigator
+      primary_investigator:
+        text: primary_investigator
+        meaning: hl7_rsp_role:primary-investigator
+      collaborator:
+        text: collaborator
+        meaning: hl7_rsp_role:collaborator
+      funding_source:
+        text: funding_source
+        meaning: hl7_rsp_role:funding-source
+      general_contact:
+        text: general_contact
+        meaning: hl7_rsp_role:general=contact
+      recruitment_contact:
+        text: recruitment_contact
+        meaning: hl7_rsp_role:recruitment-contact
+      sub_investigator:
+        text: sub_investigator
+        meaning: hl7_rsp_role:sub-investigator
+      study_director:
+        text: study_director
+        meaning: hl7_rsp_role:study-director
+      study_chair:
+        text: study_chair
+        meaning: hl7_rsp_role:study-chair
+      irb:
+        text: irb
+        meaning: hl7_rsp_role:irb
+        title: Institutional Review Board
+  EnumBirthSex:
+    name: EnumBirthSex
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/EnumBirthSex
+    description: Codes for assigning sex at birth as specified by the Office of the
+      National Coordinator for Health IT (ONC)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    permissible_values:
+      female:
+        text: female
+        description: Female
+        meaning: usc_birthsex:F
+        title: Female
+      male:
+        text: male
+        description: Male
+        meaning: usc_birthsex:M
+        title: Male
+      asku:
+        text: asku
+        description: Information was sought but not found (e.g., patient was asked
+          but didn't know)
+        meaning: hl7_null:ASKU
+        title: asked but unknown
+      oth:
+        text: oth
+        description: '**Description:**The actual value is not a member of the set
+          of permitted data values in the constrained value domain of a variable.
+          (e.g., concept not provided by required code system).
+
+          Usage Notes: This flavor and its specializations are most commonly used
+          with the CD datatype and its flavors. However, it may apply to *any* datatype
+          where the constraints of the type are tighter than can be conveyed. For
+          example, a PQ that is for a true measured amount whose units are not supported
+          in UCUM, a need to convey a REAL when the type has been constrained to INT,
+          etc.
+
+          With coded datatypes, this null flavor may only be used if the vocabulary
+          binding has a coding strength of CNE. By definition, all local codes and
+          original text are part of the value set if the coding strength is CWE.'
+        meaning: hl7_null:OTH
+        title: other
+      unk:
+        text: unk
+        description: '*Description:**A proper value is applicable, but not known.
+
+          Usage Notes: This means the actual value is not known. If the only thing
+          that is unknown is how to properly express the value in the necessary constraints
+          (value set, datatype, etc.), then the OTH or UNC flavor should be used.
+          No properties should be included for a datatype with this property unless:
+
+          Those properties themselves directly translate to a semantic of ''unknown''.
+          (E.g. a local code sent as a translation that conveys ''unknown'') Those
+          properties further qualify the nature of what is unknown. (E.g. specifying
+          a use code of ''H'' and a URL prefix of ''tel:'' to convey that it is the
+          home phone number that is unknown.)'
+        meaning: hl7_null:UNK
+        title: Unknown
+  EnumRace:
+    name: EnumRace
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/EnumRace
+    description: OMB Codes describing race.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    permissible_values:
+      american_indian_or_alaskan_native:
+        text: american_indian_or_alaskan_native
+        meaning: cdc_rec:1002-5
+        title: American Indian or Alaskan Native
+      asian:
+        text: asian
+        meaning: cdc_rec:2028-9
+        title: Asian
+      black_or_african_american:
+        text: black_or_african_american
+        meaning: cdc_rec:2054-5
+        title: Black or African American
+      native_hawaiian_or_pacific_islander:
+        text: native_hawaiian_or_pacific_islander
+        meaning: cdc_rec:2076-8
+        title: Native Hawaiian or Other Pacific Islander
+      white:
+        text: white
+        meaning: cdc_rec:2106-3
+        title: White
+      other_race:
+        text: other_race
+        meaning: cdc_rec:2131-1
+        title: Other Race
+      unknown:
+        text: unknown
+        meaning: hl7_null:UNK
+        title: unknown
+      asked_but_unknown:
+        text: asked_but_unknown
+        meaning: hl7_null:ASKU
+        title: asked but unknown
+  EnumEthnicity:
+    name: EnumEthnicity
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/EnumEthnicity
+    description: OMB Codes describing Hispanic or Latino ethnicity.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    permissible_values:
+      hispanic_or_latino:
+        text: hispanic_or_latino
+        description: Hispanic or Latino
+        meaning: cdc_rec:2135-2
+      not_hispanic_or_latino:
+        text: not_hispanic_or_latino
+        description: Not Hispanic or Latino
+        meaning: cdc_rec:2186-5
+      unknown:
+        text: unknown
+        description: unknown
+        meaning: hl7_null:UNK
+      asked_but_unknown:
+        text: asked_but_unknown
+        description: asked but unknown
+        meaning: hl7_null:ASKU
+  EnumPopulation:
+    name: EnumPopulation
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/EnumPopulation
+    description: Code describing the population (CDC). This should be one of the codes
+      from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    reachable_from:
+      source_ontology: cdc_rec
+  EnumStudyStatus:
+    name: EnumStudyStatus
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
+    description: Codes indicating the study's current status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    permissible_values:
+      active:
+        text: active
+        description: Study is opened for accrual.
+        meaning: hl7_study_status:active
+        title: Active
+      administratively_completed:
+        text: administratively_completed
+        description: Study is completed prematurely and will not resume; patients
+          are no longer examined nor treated.
+        meaning: hl7_study_status:administratively-completed
+        title: Administratively Completed
+      approved:
+        text: approved
+        meaning: hl7_study_status:approved
+        title: Approved
+      closed_to_accrual:
+        text: closed_to_accrual
+        meaning: closed-to-accrual
+        title: Closed to Accrual
+      closed_to_accrual_and_intervention:
+        text: closed_to_accrual_and_intervention
+        meaning: hl7_study_status:closed-to-accrual-and-intervention
+        title: Closed to Accrual and Intervention
+      completed:
+        text: completed
+        meaning: hl7_study_status:completed
+        title: Completed
+      disapproved:
+        text: disapproved
+        meaning: hl7_study_status:disapproved
+        title: Disapproved
+      in_review:
+        text: in_review
+        meaning: hl7_study_status:in-review
+        title: In Review
+      temporarily_closed_to_accrual:
+        text: temporarily_closed_to_accrual
+        meaning: hl7_study_status:temporarily-closed-to-accrual
+        title: Temporarily Closed to Accrual
+      temporarily_closed_to_accrual_and_intervention:
+        text: temporarily_closed_to_accrual_and_intervention
+        meaning: hl7_study_status:temporarily-closed-to-accrual-and-intervention
+        title: Temporarily Closed to Accrual and Intervention
+      withdrawn:
+        text: withdrawn
+        meaning: hl7_study_status:withdrawn
+        title: Withdrawn
   EnumResearchCollectionType:
     name: EnumResearchCollectionType
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/EnumResearchCollectionType
@@ -822,11 +960,11 @@ slots:
     title: Description
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     slot_uri: kfi_fhir_sparks:description
-    owner: AccessPolicy
+    owner: ResearchStudy
     domain_of:
+    - AccessPolicy
     - Practitioner
     - ResearchStudy
-    - AccessPolicy
     range: string
     required: false
   practitioner_role_id:
@@ -911,6 +1049,98 @@ slots:
     range: string
     required: false
     multivalued: true
+  disease_limitation:
+    name: disease_limitation
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: provision.purpose
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+    description: Disease Use Limitations
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+    required: false
+    multivalued: false
+  access_policy_code:
+    name: access_policy_code
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+    description: A classification of the type of consents found in a consent statement.
+    title: Access Policy Code
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumAccessPolicyCode
+    required: true
+    multivalued: true
+  data_access_type:
+    name: data_access_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_extension:
+        tag: fhir_extension
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+    description: Type of access restrictions on file downloads ( open | registered
+      | controlled )
+    title: Access Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumDataAccessType
+    required: true
+    multivalued: false
+  consent_scope:
+    name: consent_scope
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+      fhir_element:
+        tag: fhir_element
+        value: scope
+    description: Which of the four areas this resource covers (extensible)
+    title: Consent Scope
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumConsentScope
+    required: true
+    multivalued: false
   email:
     name: email
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/email
@@ -1006,6 +1236,67 @@ slots:
     - PractitionerRole
     range: Institution
     required: false
+  birthsex:
+    name: birthsex
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/birthsex
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+      fhir_extension:
+        tag: fhir_extension
+        value: http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+    description: Sex assigned at birth (or pre-natal observed sex)
+    title: Birth Sex
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/birthsex
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumBirthSex
+    required: false
+    multivalued: false
+  race:
+    name: race
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/race
+    description: Reported race as defined by the 1997 OMB directives.
+    title: Race
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/race
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumRace
+    required: true
+    multivalued: true
+  ethnicity:
+    name: ethnicity
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/ethnicity
+    description: Reported ethnicity as defined by the 1997 OMB directives.
+    title: Ethnicity
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/ethnicity
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumEthnicity
+    required: true
+  population:
+    name: population
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/population
+    description: opulation, Race, and/or Ethnicity information.
+    title: Population
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/population
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumPopulation
+    required: false
+    multivalued: false
   parent_study_id:
     name: parent_study_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
@@ -1122,98 +1413,6 @@ slots:
     range: AssociatedParty
     required: true
     multivalued: true
-  disease_limitation:
-    name: disease_limitation
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: provision.purpose
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Disease Use Limitations
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: string
-    required: false
-    multivalued: false
-  access_policy_code:
-    name: access_policy_code
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: category
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: A classification of the type of consents found in a consent statement.
-    title: Access Policy Code
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_code
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: EnumAccessPolicyCode
-    required: true
-    multivalued: true
-  data_access_type:
-    name: data_access_type
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_extension:
-        tag: fhir_extension
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Type of access restrictions on file downloads ( open | registered
-      | controlled )
-    title: Access Type
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/data_access_type
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: EnumDataAccessType
-    required: true
-    multivalued: false
-  consent_scope:
-    name: consent_scope
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-      fhir_element:
-        tag: fhir_element
-        value: scope
-    description: Which of the four areas this resource covers (extensible)
-    title: Consent Scope
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/consent_scope
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: EnumConsentScope
-    required: true
-    multivalued: false
   collection_title:
     name: collection_title
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_title
@@ -1285,6 +1484,43 @@ slots:
     range: EnumCollectionStatus
     required: true
     multivalued: false
+  accessPolicy__access_policy_id:
+    name: accessPolicy__access_policy_id
+    description: Access policy communicates the limitations and/or requirements that
+      define how a user may gain access to a particular set of data.
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
+    identifier: true
+    alias: access_policy_id
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: string
+    required: true
+  accessPolicy__status:
+    name: accessPolicy__status
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: status
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+    description: Indicates the state of the consent.
+    title: Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/status
+    alias: status
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    range: EnumConsentStateCodes
+    required: true
+    multivalued: false
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -1311,6 +1547,42 @@ slots:
     - Institution
     range: string
     required: true
+  participant__participant_id:
+    name: participant__participant_id
+    description: Participant Global ID
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    identifier: true
+    alias: participant_id
+    owner: Participant
+    domain_of:
+    - Participant
+    range: string
+    required: true
+  participant__consent_status:
+    name: participant__consent_status
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+      fhir_element:
+        tag: fhir_element
+        value: status
+      fhir_resource:
+        tag: fhir_resource
+        value: Consent
+    description: Indicates the state of the consent.
+    title: Consent Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/consent_status
+    alias: consent_status
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumConsentStateCodes
+    required: true
+    multivalued: false
   period__start:
     name: period__start
     description: Start attribute for a FHIR period data type.
@@ -1361,43 +1633,6 @@ slots:
     - ResearchStudy
     range: string
     required: true
-  accessPolicy__access_policy_id:
-    name: accessPolicy__access_policy_id
-    description: Access policy communicates the limitations and/or requirements that
-      define how a user may gain access to a particular set of data.
-    title: Access Policy ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
-    identifier: true
-    alias: access_policy_id
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: string
-    required: true
-  accessPolicy__status:
-    name: accessPolicy__status
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: status
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Indicates the state of the consent.
-    title: Status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/status
-    alias: status
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: EnumConsentStateCodes
-    required: true
-    multivalued: false
   researchStudyCollection__research_study_collection_id:
     name: researchStudyCollection__research_study_collection_id
     description: Global ID for this record
@@ -1457,6 +1692,53 @@ classes:
     - external_id
     - id
     class_uri: kfi_fhir_sparks:Record
+  AccessPolicy:
+    name: AccessPolicy
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+    description: Limitations and/or requirements that define how a user may gain access
+      to a particular set of data.
+    title: Access Policy
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slots:
+    - description
+    - data_access_type
+    - website
+    - consent_scope
+    - access_policy_code
+    - disease_limitation
+    - accessPolicy__access_policy_id
+    - accessPolicy__status
+    attributes:
+      access_policy_id:
+        name: access_policy_id
+        description: Access policy communicates the limitations and/or requirements
+          that define how a user may gain access to a particular set of data.
+        title: Access Policy ID
+        identifier: true
+        range: string
+        required: true
+      status:
+        name: status
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+          fhir_element:
+            tag: fhir_element
+            value: status
+          fhir_resource:
+            tag: fhir_resource
+            value: Consent
+        description: Indicates the state of the consent.
+        title: Status
+        range: EnumConsentStateCodes
+        required: true
+        multivalued: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
   Practitioner:
     name: Practitioner
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/Practitioner
@@ -1531,6 +1813,49 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/Institution
+  Participant:
+    name: Participant
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+    description: Research oriented patient
+    title: Participant
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slots:
+    - birthsex
+    - race
+    - ethnicity
+    - population
+    - participant__participant_id
+    - participant__consent_status
+    attributes:
+      participant_id:
+        name: participant_id
+        description: Participant Global ID
+        title: Participant ID
+        identifier: true
+        range: string
+        required: true
+      consent_status:
+        name: consent_status
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+          fhir_element:
+            tag: fhir_element
+            value: status
+          fhir_resource:
+            tag: fhir_resource
+            value: Consent
+        description: Indicates the state of the consent.
+        title: Consent Status
+        range: EnumConsentStateCodes
+        required: true
+        multivalued: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
   Period:
     name: Period
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/Period
@@ -1616,53 +1941,6 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
-  AccessPolicy:
-    name: AccessPolicy
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
-    annotations:
-      fhir_resource:
-        tag: fhir_resource
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-    description: Limitations and/or requirements that define how a user may gain access
-      to a particular set of data.
-    title: Access Policy
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slots:
-    - description
-    - data_access_type
-    - website
-    - consent_scope
-    - access_policy_code
-    - disease_limitation
-    - accessPolicy__access_policy_id
-    - accessPolicy__status
-    attributes:
-      access_policy_id:
-        name: access_policy_id
-        description: Access policy communicates the limitations and/or requirements
-          that define how a user may gain access to a particular set of data.
-        title: Access Policy ID
-        identifier: true
-        range: string
-        required: true
-      status:
-        name: status
-        annotations:
-          fhir_profile:
-            tag: fhir_profile
-            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-          fhir_element:
-            tag: fhir_element
-            value: status
-          fhir_resource:
-            tag: fhir_resource
-            value: Consent
-        description: Indicates the state of the consent.
-        title: Status
-        range: EnumConsentStateCodes
-        required: true
-        multivalued: false
-    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
   ResearchStudyCollection:
     name: ResearchStudyCollection
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
@@ -1703,7 +1981,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-05T16:55:02'
-source_file_size: 4042
-generation_date: '2025-12-08T11:55:43'
+source_file_date: '2025-12-08T15:21:18'
+source_file_size: 4460
+generation_date: '2025-12-08T15:35:10'
 

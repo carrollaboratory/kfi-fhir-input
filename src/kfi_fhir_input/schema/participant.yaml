@@ -1,0 +1,141 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/participant
+name: kfi-fhir-input-participant
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  Participant:
+    title: Participant  
+    description: Research oriented patient
+    is_a: HasExternalId 
+    annotations:
+      fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+    attributes:
+      participant_id:
+        title: Participant ID
+        description: Participant Global ID
+        range: string         
+        identifier: true
+        required: true
+      consent_status: 
+        title: Consent Status 
+        description: Indicates the state of the consent.
+        range: EnumConsentStateCodes 
+        required: true 
+        multivalued: false
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
+          fhir_element: status
+          fhir_resource: Consent
+    slots:
+      - birthsex 
+      - race 
+      - ethnicity 
+      - population 
+slots:
+  birthsex:
+    title: Birth Sex 
+    description: Sex assigned at birth (or pre-natal observed sex)
+    range: EnumBirthSex 
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+      fhir_extension: http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex
+      fhir_resource: Consent
+  race: 
+    description: Reported race as defined by the 1997 OMB directives.
+    title: Race 
+    range: EnumRace
+    required: true 
+    multivalued: true
+  ethnicity: 
+    title: Ethnicity 
+    description: Reported ethnicity as defined by the 1997 OMB directives.
+    range: EnumEthnicity
+    required: true 
+  population:
+    title: Population
+    description: opulation, Race, and/or Ethnicity information.
+    range: EnumPopulation
+    required: false 
+    multivalued: false 
+enums:
+  EnumBirthSex:
+    description: Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)
+    permissible_values:
+      female: 
+        title: Female
+        description: Female 
+        meaning: usc_birthsex:F
+      male:
+        title: Male
+        description: Male 
+        meaning: usc_birthsex:M
+      asku:
+        title: asked but unknown
+        description: Information was sought but not found (e.g., patient was asked but didn't know)
+        meaning: hl7_null:ASKU 
+      oth:
+        title: other 
+        description: "**Description:**The actual value is not a member of the set of permitted data values in the constrained value domain of a variable. (e.g., concept not provided by required code system).
+
+                     Usage Notes: This flavor and its specializations are most commonly used with the CD datatype and its flavors. However, it may apply to *any* datatype where the constraints of the type are tighter than can be conveyed. For example, a PQ that is for a true measured amount whose units are not supported in UCUM, a need to convey a REAL when the type has been constrained to INT, etc.
+
+                     With coded datatypes, this null flavor may only be used if the vocabulary binding has a coding strength of CNE. By definition, all local codes and original text are part of the value set if the coding strength is CWE."
+        meaning: hl7_null:OTH
+      unk:
+        title: Unknown
+        description: "*Description:**A proper value is applicable, but not known.
+
+                     Usage Notes: This means the actual value is not known. If the only thing that is unknown is how to properly express the value in the necessary constraints (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties should be included for a datatype with this property unless:
+
+                     Those properties themselves directly translate to a semantic of 'unknown'. (E.g. a local code sent as a translation that conveys 'unknown')
+                     Those properties further qualify the nature of what is unknown. (E.g. specifying a use code of 'H' and a URL prefix of 'tel:' to convey that it is the home phone number that is unknown.)"
+        meaning: hl7_null:UNK
+  EnumRace: 
+    description: OMB Codes describing race.
+    permissible_values:
+      american_indian_or_alaskan_native:
+        title: American Indian or Alaskan Native
+        meaning: cdc_rec:1002-5
+      asian: 
+        title: Asian
+        meaning: cdc_rec:2028-9
+      black_or_african_american:
+        title: Black or African American
+        meaning: cdc_rec:2054-5
+      native_hawaiian_or_pacific_islander:
+        title: Native Hawaiian or Other Pacific Islander
+        meaning: cdc_rec:2076-8
+      white: 
+        title: White
+        meaning: cdc_rec:2106-3
+      other_race:
+        title: Other Race 
+        meaning: cdc_rec:2131-1
+      unknown:
+        title: unknown 
+        meaning: hl7_null:UNK
+      asked_but_unknown:
+        title: asked but unknown
+        meaning: hl7_null:ASKU
+  EnumEthnicity: 
+    description: OMB Codes describing Hispanic or Latino ethnicity.
+    permissible_values:
+      hispanic_or_latino:
+        description: Hispanic or Latino
+        meaning: cdc_rec:2135-2
+      not_hispanic_or_latino:
+        description: Not Hispanic or Latino
+        meaning: cdc_rec:2186-5
+      unknown:
+        description: unknown 
+        meaning: hl7_null:UNK
+      asked_but_unknown:
+        description: asked but unknown
+        meaning: hl7_null:ASKU
+  EnumPopulation:
+    description: Code describing the population (CDC). This should be one of the codes from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
+    reachable_from:
+      source_ontology: cdc_rec # https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238#

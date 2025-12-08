@@ -83,18 +83,23 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
      'description': 'DBT Output Schema for FHIR Ingest',
      'id': 'https://carrollaboratory.github.io/kif-fhir-input',
      'imports': ['linkml:types',
+                 'access_policy',
                  'practitioner',
                  'associated_party',
                  'institution',
+                 'participant',
                  'period',
                  'practitioner_role',
                  'practitioner',
                  'research_study',
-                 'access_policy',
                  'research_study_collection'],
      'license': 'MIT',
      'name': 'kfi-fhir-input',
-     'prefixes': {'duo': {'prefix_prefix': 'duo',
+     'prefixes': {'cdc_rec': {'prefix_prefix': 'cdc_rec',
+                              'prefix_reference': 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC'},
+                  'cdc_unk': {'prefix_prefix': 'cdc_unk',
+                              'prefix_reference': 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion'},
+                  'duo': {'prefix_prefix': 'duo',
                           'prefix_reference': 'http://purl.obolibrary.org/obo/duo.owl'},
                   'hl7_consent_scope': {'prefix_prefix': 'hl7_consent_scope',
                                         'prefix_reference': 'http://terminology.hl7.org/CodeSystem/consentscope'},
@@ -102,6 +107,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                               'prefix_reference': 'http://hl7.org/fhir/consent-state-codes'},
                   'hl7_list_status': {'prefix_prefix': 'hl7_list_status',
                                       'prefix_reference': 'https://hl7.org/fhir/R4/codesystem-list-status'},
+                  'hl7_null': {'prefix_prefix': 'hl7_null',
+                               'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-NullFlavor'},
                   'hl7_rsp_org_type': {'prefix_prefix': 'hl7_rsp_org_type',
                                        'prefix_reference': 'http://hl7.org/fhir/research-study-party-organization-type'},
                   'hl7_rsp_role': {'prefix_prefix': 'hl7_rsp_role',
@@ -121,63 +128,12 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                   'ncpi_data_access_code': {'prefix_prefix': 'ncpi_data_access_code',
                                             'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/'},
                   'ncpi_data_access_type': {'prefix_prefix': 'ncpi_data_access_type',
-                                            'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type'}},
+                                            'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type'},
+                  'usc_birthsex': {'prefix_prefix': 'usc_birthsex',
+                                   'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender'}},
      'see_also': ['https://carrollaboratory.github.io/kif-fhir-input'],
      'source_file': 'src/kfi_fhir_input/schema/kfi_fhir_input.yaml',
      'title': 'KF/Include FHIR Input Model'} )
-
-class EnumResearchStudyPartyOrganizationType(str, Enum):
-    """
-    Research Study Party Organization Type
-    """
-    NIH = "nih"
-    FDA = "fda"
-    Academic = "academic"
-    Government = "government"
-    Nonprofit = "nonprofit"
-    Industry = "industry"
-
-
-class EnumResearchStudyPartyRole(str, Enum):
-    """
-    This is a ResearchStudy's party role.
-    """
-    sponsor = "sponsor"
-    lead_sponsor = "lead_sponsor"
-    sponsor_investigator = "sponsor_investigator"
-    primary_investigator = "primary_investigator"
-    collaborator = "collaborator"
-    funding_source = "funding_source"
-    general_contact = "general_contact"
-    recruitment_contact = "recruitment_contact"
-    sub_investigator = "sub_investigator"
-    study_director = "study_director"
-    study_chair = "study_chair"
-    Institutional_Review_Board = "irb"
-
-
-class EnumStudyStatus(str, Enum):
-    """
-    Codes indicating the study's current status
-    """
-    Active = "active"
-    """
-    Study is opened for accrual.
-    """
-    Administratively_Completed = "administratively_completed"
-    """
-    Study is completed prematurely and will not resume; patients are no longer examined nor treated.
-    """
-    Approved = "approved"
-    Closed_to_Accrual = "closed_to_accrual"
-    Closed_to_Accrual_and_Intervention = "closed_to_accrual_and_intervention"
-    Completed = "completed"
-    Disapproved = "disapproved"
-    In_Review = "in_review"
-    Temporarily_Closed_to_Accrual = "temporarily_closed_to_accrual"
-    Temporarily_Closed_to_Accrual_and_Intervention = "temporarily_closed_to_accrual_and_intervention"
-    Withdrawn = "withdrawn"
-
 
 class EnumAccessPolicyCode(str, Enum):
     """
@@ -354,6 +310,132 @@ class EnumDataAccessType(str, Enum):
     GSR_Allowed = "gsr_allowed"
 
 
+class EnumResearchStudyPartyOrganizationType(str, Enum):
+    """
+    Research Study Party Organization Type
+    """
+    NIH = "nih"
+    FDA = "fda"
+    Academic = "academic"
+    Government = "government"
+    Nonprofit = "nonprofit"
+    Industry = "industry"
+
+
+class EnumResearchStudyPartyRole(str, Enum):
+    """
+    This is a ResearchStudy's party role.
+    """
+    sponsor = "sponsor"
+    lead_sponsor = "lead_sponsor"
+    sponsor_investigator = "sponsor_investigator"
+    primary_investigator = "primary_investigator"
+    collaborator = "collaborator"
+    funding_source = "funding_source"
+    general_contact = "general_contact"
+    recruitment_contact = "recruitment_contact"
+    sub_investigator = "sub_investigator"
+    study_director = "study_director"
+    study_chair = "study_chair"
+    Institutional_Review_Board = "irb"
+
+
+class EnumBirthSex(str, Enum):
+    """
+    Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)
+    """
+    Female = "female"
+    """
+    Female
+    """
+    Male = "male"
+    """
+    Male
+    """
+    asked_but_unknown = "asku"
+    """
+    Information was sought but not found (e.g., patient was asked but didn't know)
+    """
+    other = "oth"
+    """
+    **Description:**The actual value is not a member of the set of permitted data values in the constrained value domain of a variable. (e.g., concept not provided by required code system).
+    Usage Notes: This flavor and its specializations are most commonly used with the CD datatype and its flavors. However, it may apply to *any* datatype where the constraints of the type are tighter than can be conveyed. For example, a PQ that is for a true measured amount whose units are not supported in UCUM, a need to convey a REAL when the type has been constrained to INT, etc.
+    With coded datatypes, this null flavor may only be used if the vocabulary binding has a coding strength of CNE. By definition, all local codes and original text are part of the value set if the coding strength is CWE.
+    """
+    Unknown = "unk"
+    """
+    *Description:**A proper value is applicable, but not known.
+    Usage Notes: This means the actual value is not known. If the only thing that is unknown is how to properly express the value in the necessary constraints (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties should be included for a datatype with this property unless:
+    Those properties themselves directly translate to a semantic of 'unknown'. (E.g. a local code sent as a translation that conveys 'unknown') Those properties further qualify the nature of what is unknown. (E.g. specifying a use code of 'H' and a URL prefix of 'tel:' to convey that it is the home phone number that is unknown.)
+    """
+
+
+class EnumRace(str, Enum):
+    """
+    OMB Codes describing race.
+    """
+    American_Indian_or_Alaskan_Native = "american_indian_or_alaskan_native"
+    Asian = "asian"
+    Black_or_African_American = "black_or_african_american"
+    Native_Hawaiian_or_Other_Pacific_Islander = "native_hawaiian_or_pacific_islander"
+    White = "white"
+    Other_Race = "other_race"
+    unknown = "unknown"
+    asked_but_unknown = "asked_but_unknown"
+
+
+class EnumEthnicity(str, Enum):
+    """
+    OMB Codes describing Hispanic or Latino ethnicity.
+    """
+    hispanic_or_latino = "hispanic_or_latino"
+    """
+    Hispanic or Latino
+    """
+    not_hispanic_or_latino = "not_hispanic_or_latino"
+    """
+    Not Hispanic or Latino
+    """
+    unknown = "unknown"
+    """
+    unknown
+    """
+    asked_but_unknown = "asked_but_unknown"
+    """
+    asked but unknown
+    """
+
+
+class EnumPopulation(str):
+    """
+    Code describing the population (CDC). This should be one of the codes from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
+    """
+    pass
+
+
+class EnumStudyStatus(str, Enum):
+    """
+    Codes indicating the study's current status
+    """
+    Active = "active"
+    """
+    Study is opened for accrual.
+    """
+    Administratively_Completed = "administratively_completed"
+    """
+    Study is completed prematurely and will not resume; patients are no longer examined nor treated.
+    """
+    Approved = "approved"
+    Closed_to_Accrual = "closed_to_accrual"
+    Closed_to_Accrual_and_Intervention = "closed_to_accrual_and_intervention"
+    Completed = "completed"
+    Disapproved = "disapproved"
+    In_Review = "in_review"
+    Temporarily_Closed_to_Accrual = "temporarily_closed_to_accrual"
+    Temporarily_Closed_to_Accrual_and_Intervention = "temporarily_closed_to_accrual_and_intervention"
+    Withdrawn = "withdrawn"
+
+
 class EnumResearchCollectionType(str, Enum):
     """
     Research Study Collection Type
@@ -372,25 +454,6 @@ class EnumCollectionStatus(str, Enum):
 
 
 
-class PractitionerRole(ConfiguredBaseModel):
-    """
-    PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'PractitionerRole'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role',
-         'title': 'Practitioner Role'})
-
-    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'institution_id'}},
-         'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
-    practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
-    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'period_id'},
-                         'target_slot': {'tag': 'target_slot', 'value': 'id'}},
-         'domain_of': ['AssociatedParty', 'PractitionerRole']} })
-    practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
-
-
 class AccessPolicy(ConfiguredBaseModel):
     """
     Limitations and/or requirements that define how a user may gain access to a particular set of data.
@@ -400,9 +463,9 @@ class AccessPolicy(ConfiguredBaseModel):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/access-policy',
          'title': 'Access Policy'})
 
-    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner',
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
                        'ResearchStudy',
-                       'AccessPolicy',
                        'ResearchStudyCollection']} })
     data_access_type: EnumDataAccessType = Field(default=..., title="Access Type", description="""Type of access restrictions on file downloads ( open | registered | controlled )""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
                                             'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type'},
@@ -435,6 +498,51 @@ class AccessPolicy(ConfiguredBaseModel):
          'domain_of': ['AccessPolicy']} })
 
 
+class Participant(ConfiguredBaseModel):
+    """
+    Research oriented patient
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant',
+         'title': 'Participant'})
+
+    birthsex: Optional[EnumBirthSex] = Field(default=None, title="Birth Sex", description="""Sex assigned at birth (or pre-natal observed sex)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
+                                            'value': 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['Participant']} })
+    race: list[EnumRace] = Field(default=..., title="Race", description="""Reported race as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Reported ethnicity as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    population: Optional[EnumPopulation] = Field(default=None, title="Population", description="""opulation, Race, and/or Ethnicity information.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    consent_status: EnumConsentStateCodes = Field(default=..., title="Consent Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['Participant']} })
+
+
+class PractitionerRole(ConfiguredBaseModel):
+    """
+    PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'PractitionerRole'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role',
+         'title': 'Practitioner Role'})
+
+    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'institution_id'}},
+         'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
+    practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
+    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'period_id'},
+                         'target_slot': {'tag': 'target_slot', 'value': 'id'}},
+         'domain_of': ['AssociatedParty', 'PractitionerRole']} })
+    practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
+
+
 class HasExternalId(ConfiguredBaseModel):
     """
     Has an external ID
@@ -463,9 +571,9 @@ class Practitioner(HasExternalId):
     practitioner_role_id: Optional[str] = Field(default=None, title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'practitioner_role_id'}},
          'domain_of': ['Practitioner', 'PractitionerRole']} })
-    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner',
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
                        'ResearchStudy',
-                       'AccessPolicy',
                        'ResearchStudyCollection']} })
     practitioner_title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     practitioner_id: str = Field(default=..., title="Practitioner ID", description="""The Global ID for the Practitioner.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
@@ -501,9 +609,9 @@ class ResearchStudy(HasExternalId):
                                          'value': 'research_study_id'}},
          'domain_of': ['ResearchStudy']} })
     study_focus: Optional[list[str]] = Field(default=[], title="Study Focus", description="""The primary, non-disease focus(es) of the study. This can include terms related to intervention, drug, device, or other focus.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
-    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner',
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
                        'ResearchStudy',
-                       'AccessPolicy',
                        'ResearchStudyCollection']} })
     study_condition: Optional[list[str]] = Field(default=[], title="Study Condition", description="""The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_acknowledgement: Optional[list[str]] = Field(default=[], title="Study Acknowledgement", description="""Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
@@ -576,17 +684,18 @@ class ResearchStudyCollection(HasExternalId):
                                          'value': 'research_study_id'}},
          'domain_of': ['ResearchStudyCollection']} })
     research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    description: Optional[str] = Field(default=None, title="Description", description="""The description of the collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner',
+    description: Optional[str] = Field(default=None, title="Description", description="""The description of the collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
                        'ResearchStudy',
-                       'AccessPolicy',
                        'ResearchStudyCollection']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
-PractitionerRole.model_rebuild()
 AccessPolicy.model_rebuild()
+Participant.model_rebuild()
+PractitionerRole.model_rebuild()
 HasExternalId.model_rebuild()
 Practitioner.model_rebuild()
 Institution.model_rebuild()
