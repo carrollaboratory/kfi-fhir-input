@@ -3,6 +3,7 @@ name: kfi-fhir-input-participant
 imports:
   - linkml:types 
   - kfi_fhir_input
+  - relative_date_time
 classes:
   Participant:
     title: Participant  
@@ -34,19 +35,10 @@ classes:
       - population 
       - dob 
       - dob_method
+      - age_at_last_vital
+      - deceased
+      - patient_knowledge_source
 slots:
-  dob: 
-    title: Date of Birth 
-    description: 	Date of Birth of the participant. Details of privacy method should be included in DOBMethod 
-    range: date 
-    required: false 
-    multivalued: false 
-  dob_method: 
-    title: Date of Birth Method 
-    description: Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.
-    required: false 
-    multivalued: false 
-    range: EnumDobMethod
   birthsex:
     title: Birth Sex 
     description: Sex assigned at birth (or pre-natal observed sex)
@@ -74,6 +66,42 @@ slots:
     range: EnumPopulation
     required: false 
     multivalued: false 
+  dob: 
+    title: Date of Birth 
+    description: 	Date of Birth of the participant. Details of privacy method should be included in DOBMethod 
+    range: date 
+    required: false 
+    multivalued: false 
+  dob_method: 
+    title: Date of Birth Method 
+    description: Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.
+    required: false 
+    multivalued: false 
+    range: EnumDobMethod
+  age_at_last_vital:
+    title: Age At Last Vital Status 
+    description: Age or date of last vital status 
+    required: false 
+    multivalued: false 
+    range: Any 
+    any_of:
+      - range: date 
+      - range: string 
+  deceased:
+    title: Deceased 
+    description: Implementers can provide relativeDateTime or actual date or T/F, depending on data available.
+    required: false 
+    multivalued: false 
+    range: Any 
+    any_of:
+      - range: boolean
+      - range: RelativeDateTime 
+  patient_knowledge_source:
+    title: Patient Knowledge Source 
+    description: The source of the knowledge represented by this Patient resource.
+    required: false 
+    multivalued: false
+    range: EnumPatientKnowledgeSource
 enums:
   EnumBirthSex:
     description: Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)
@@ -171,3 +199,14 @@ enums:
       other:
         description: Other 
         meaning: ncpi_dob_method:other 
+  EnumPatientKnowledgeSource:
+    description: The source of the knowledge represented in a Patient resource.
+    permissible_values:
+      traditional: 
+        title: Traditional
+        description: The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.
+        meaning: ncpi_patient_knowledge_source:traditional 
+      inferred:
+        title: Inferred 
+        description: The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.
+        meaning: ncpi_patient_knowledge_source:traditional

@@ -91,6 +91,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'period',
                  'practitioner_role',
                  'practitioner',
+                 'relative_date_time',
                  'research_study',
                  'research_study_collection'],
      'license': 'MIT',
@@ -131,6 +132,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                             'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type'},
                   'ncpi_dob_method': {'prefix_prefix': 'ncpi_dob_method',
                                       'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method'},
+                  'ncpi_patient_knowledge_source': {'prefix_prefix': 'ncpi_patient_knowledge_source',
+                                                    'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source'},
                   'usc_birthsex': {'prefix_prefix': 'usc_birthsex',
                                    'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender'}},
      'see_also': ['https://carrollaboratory.github.io/kif-fhir-input'],
@@ -441,6 +444,20 @@ class EnumDobMethod(str, Enum):
     """
 
 
+class EnumPatientKnowledgeSource(str, Enum):
+    """
+    The source of the knowledge represented in a Patient resource.
+    """
+    Traditional = "traditional"
+    """
+    The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.
+    """
+    Inferred = "inferred"
+    """
+    The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.
+    """
+
+
 class EnumStudyStatus(str, Enum):
     """
     Codes indicating the study's current status
@@ -545,6 +562,20 @@ class PractitionerRole(ConfiguredBaseModel):
     practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
 
 
+class RelativeDateTime(ConfiguredBaseModel):
+    """
+    In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time',
+         'title': 'Relative Date Time'})
+
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
+    target_resource: str = Field(default=..., title="Target Resource", description="""FHIR Resource Type for target (i.e. Patient)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    target_path: str = Field(default=..., title="Target Path", description="""resource property about which this is related""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset: date = Field(default=..., title="Offset", description="""The point after the target being described. For ranges, this can be used for the starting point""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset_end: Optional[date] = Field(default=None, title="Offset End", description="""The end of a relative date/time range""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+
+
 class HasExternalId(ConfiguredBaseModel):
     """
     Has an external ID
@@ -616,6 +647,11 @@ class Participant(HasExternalId):
     population: Optional[EnumPopulation] = Field(default=None, title="Population", description="""opulation, Race, and/or Ethnicity information.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     dob: Optional[date] = Field(default=None, title="Date of Birth", description="""Date of Birth of the participant. Details of privacy method should be included in DOBMethod""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     dob_method: Optional[EnumDobMethod] = Field(default=None, title="Date of Birth Method", description="""Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    age_at_last_vital: Optional[Union[date, str]] = Field(default=None, title="Age At Last Vital Status", description="""Age or date of last vital status""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'date'}, {'range': 'string'}],
+         'domain_of': ['Participant']} })
+    deceased: Optional[Union[bool, str]] = Field(default=None, title="Deceased", description="""Implementers can provide relativeDateTime or actual date or T/F, depending on data available.""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'boolean'}, {'range': 'RelativeDateTime'}],
+         'domain_of': ['Participant']} })
+    patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     consent_status: EnumConsentStateCodes = Field(default=..., title="Consent Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
                          'fhir_profile': {'tag': 'fhir_profile',
@@ -661,7 +697,7 @@ class Record(HasExternalId):
          'from_schema': 'https://carrollaboratory.github.io/kif-fhir-input',
          'title': 'Record'})
 
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -681,7 +717,7 @@ class AssociatedParty(Record):
          'domain_of': ['AssociatedParty', 'PractitionerRole']} })
     classifier: Optional[list[EnumResearchStudyPartyOrganizationType]] = Field(default=[], title="Classifier", description="""Research Study Party Organization Type (what type of institution is party)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     party: Optional[str] = Field(default=None, title="Associated Party", description="""Individual or organization associated with study""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'PractitionerRole'}], 'domain_of': ['AssociatedParty']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -694,7 +730,7 @@ class Period(Record):
 
     start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
     end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -726,6 +762,7 @@ class ResearchStudyCollection(HasExternalId):
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
 PractitionerRole.model_rebuild()
+RelativeDateTime.model_rebuild()
 HasExternalId.model_rebuild()
 Practitioner.model_rebuild()
 Institution.model_rebuild()

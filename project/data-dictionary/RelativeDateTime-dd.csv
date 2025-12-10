@@ -1,0 +1,6 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+id,Unique Identifier for a table entry. This is probably not the Global ID,string,,,,,
+target_resource,FHIR Resource Type for target (i.e. Patient),string,,,,,
+target_path,resource property about which this is related,string,,,,,
+offset,"The point after the target being described. For ranges, this can be used for the starting point",string,,,,,
+offset_end,The end of a relative date/time range,string,,,,,

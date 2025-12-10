@@ -1,0 +1,42 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+name: kfi-fhir-input-relative-date-time
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  RelativeDateTime: 
+    title: Relative Date Time
+    description: In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
+    slots:
+      - id 
+      - target_resource 
+      - target_path 
+      - offset
+      - offset_end 
+slots:
+  target_resource:
+    title: Target Resource 
+    description: FHIR Resource Type for target (i.e. Patient)
+    range: string     # Should be switch to using an enum here? 
+    required: true 
+    multivalued: false 
+  target_path: 
+    title: Target Path 
+    description: resource property about which this is related 
+    range: string     # fhir attribute, such as 'dob'
+    required: true 
+    multivalued: false 
+  offset: 
+    title: Offset
+    description: The point after the target being described. For ranges, this can be used for the starting point 
+    range: date 
+    required: true 
+    multivalued: false 
+  offset_end:
+    title: Offset End 
+    description: The end of a relative date/time range 
+    range: date 
+    required: false 
+    multivalued: false 
+
+

@@ -26,6 +26,7 @@ prefixes:
   ncpi_data_access_type: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type
   ncpi_data_access_code: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
   ncpi_dob_method: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method
+  ncpi_patient_knowledge_source: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
   linkml: https://w3id.org/linkml/
   duo: http://purl.obolibrary.org/obo/duo.owl
   usc_birthsex: http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender
@@ -52,6 +53,7 @@ imports:
   - period 
   - practitioner_role 
   - practitioner
+  - relative_date_time
   - research_study
   - research_study_collection
 classes:

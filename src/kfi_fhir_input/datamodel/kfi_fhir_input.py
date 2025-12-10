@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-10T12:29:08
+# Generation date: 2025-12-10T13:29:55
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -81,6 +81,7 @@ NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.
 NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
+NCPI_PATIENT_KNOWLEDGE_SOURCE = CurieNamespace('ncpi_patient_knowledge_source', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
 DEFAULT_ = KFI_FHIR_SPARKS
 
@@ -117,6 +118,10 @@ class PeriodId(RecordId):
 
 
 class PractitionerRolePractitionerRoleId(extended_str):
+    pass
+
+
+class RelativeDateTimeId(extended_str):
     pass
 
 
@@ -370,6 +375,9 @@ class Participant(HasExternalId):
     population: Optional[Union[str, "EnumPopulation"]] = None
     dob: Optional[Union[str, XSDDate]] = None
     dob_method: Optional[Union[str, "EnumDobMethod"]] = None
+    age_at_last_vital: Optional[Union[dict, Any]] = None
+    deceased: Optional[Union[dict, Any]] = None
+    patient_knowledge_source: Optional[Union[str, "EnumPatientKnowledgeSource"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.participant_id):
@@ -401,6 +409,9 @@ class Participant(HasExternalId):
 
         if self.dob_method is not None and not isinstance(self.dob_method, EnumDobMethod):
             self.dob_method = EnumDobMethod(self.dob_method)
+
+        if self.patient_knowledge_source is not None and not isinstance(self.patient_knowledge_source, EnumPatientKnowledgeSource):
+            self.patient_knowledge_source = EnumPatientKnowledgeSource(self.patient_knowledge_source)
 
         super().__post_init__(**kwargs)
 
@@ -468,6 +479,52 @@ class PractitionerRole(YAMLRoot):
 
         if self.period_id is not None and not isinstance(self.period_id, PeriodId):
             self.period_id = PeriodId(self.period_id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class RelativeDateTime(YAMLRoot):
+    """
+    In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive
+    information
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["relative-date-time/RelativeDateTime"]
+    class_class_curie: ClassVar[str] = "kfi:relative-date-time/RelativeDateTime"
+    class_name: ClassVar[str] = "RelativeDateTime"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.RelativeDateTime
+
+    id: Union[str, RelativeDateTimeId] = None
+    target_resource: str = None
+    target_path: str = None
+    offset: Union[str, XSDDate] = None
+    offset_end: Optional[Union[str, XSDDate]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RelativeDateTimeId):
+            self.id = RelativeDateTimeId(self.id)
+
+        if self._is_empty(self.target_resource):
+            self.MissingRequiredField("target_resource")
+        if not isinstance(self.target_resource, str):
+            self.target_resource = str(self.target_resource)
+
+        if self._is_empty(self.target_path):
+            self.MissingRequiredField("target_path")
+        if not isinstance(self.target_path, str):
+            self.target_path = str(self.target_path)
+
+        if self._is_empty(self.offset):
+            self.MissingRequiredField("offset")
+        if not isinstance(self.offset, XSDDate):
+            self.offset = XSDDate(self.offset)
+
+        if self.offset_end is not None and not isinstance(self.offset_end, XSDDate):
+            self.offset_end = XSDDate(self.offset_end)
 
         super().__post_init__(**kwargs)
 
@@ -1104,6 +1161,26 @@ class EnumDobMethod(EnumDefinitionImpl):
         description="Enumerations for how DOB was constructed",
     )
 
+class EnumPatientKnowledgeSource(EnumDefinitionImpl):
+    """
+    The source of the knowledge represented in a Patient resource.
+    """
+    traditional = PermissibleValue(
+        text="traditional",
+        title="Traditional",
+        description="""The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.""",
+        meaning=NCPI_PATIENT_KNOWLEDGE_SOURCE["traditional"])
+    inferred = PermissibleValue(
+        text="inferred",
+        title="Inferred",
+        description="""The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.""",
+        meaning=NCPI_PATIENT_KNOWLEDGE_SOURCE["traditional"])
+
+    _defn = EnumDefinition(
+        name="EnumPatientKnowledgeSource",
+        description="The source of the knowledge represented in a Patient resource.",
+    )
+
 class EnumStudyStatus(EnumDefinitionImpl):
     """
     Codes indicating the study's current status
@@ -1264,12 +1341,6 @@ slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.cu
 slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
 
-slots.dob = Slot(uri=KFI['participant/dob'], name="dob", curie=KFI.curie('participant/dob'),
-                   model_uri=KFI_FHIR_SPARKS.dob, domain=None, range=Optional[Union[str, XSDDate]])
-
-slots.dob_method = Slot(uri=KFI['participant/dob_method'], name="dob_method", curie=KFI.curie('participant/dob_method'),
-                   model_uri=KFI_FHIR_SPARKS.dob_method, domain=None, range=Optional[Union[str, "EnumDobMethod"]])
-
 slots.birthsex = Slot(uri=KFI['participant/birthsex'], name="birthsex", curie=KFI.curie('participant/birthsex'),
                    model_uri=KFI_FHIR_SPARKS.birthsex, domain=None, range=Optional[Union[str, "EnumBirthSex"]])
 
@@ -1281,6 +1352,33 @@ slots.ethnicity = Slot(uri=KFI['participant/ethnicity'], name="ethnicity", curie
 
 slots.population = Slot(uri=KFI['participant/population'], name="population", curie=KFI.curie('participant/population'),
                    model_uri=KFI_FHIR_SPARKS.population, domain=None, range=Optional[Union[str, "EnumPopulation"]])
+
+slots.dob = Slot(uri=KFI['participant/dob'], name="dob", curie=KFI.curie('participant/dob'),
+                   model_uri=KFI_FHIR_SPARKS.dob, domain=None, range=Optional[Union[str, XSDDate]])
+
+slots.dob_method = Slot(uri=KFI['participant/dob_method'], name="dob_method", curie=KFI.curie('participant/dob_method'),
+                   model_uri=KFI_FHIR_SPARKS.dob_method, domain=None, range=Optional[Union[str, "EnumDobMethod"]])
+
+slots.age_at_last_vital = Slot(uri=KFI['participant/age_at_last_vital'], name="age_at_last_vital", curie=KFI.curie('participant/age_at_last_vital'),
+                   model_uri=KFI_FHIR_SPARKS.age_at_last_vital, domain=None, range=Optional[Union[dict, Any]])
+
+slots.deceased = Slot(uri=KFI['participant/deceased'], name="deceased", curie=KFI.curie('participant/deceased'),
+                   model_uri=KFI_FHIR_SPARKS.deceased, domain=None, range=Optional[Union[dict, Any]])
+
+slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_source'], name="patient_knowledge_source", curie=KFI.curie('participant/patient_knowledge_source'),
+                   model_uri=KFI_FHIR_SPARKS.patient_knowledge_source, domain=None, range=Optional[Union[str, "EnumPatientKnowledgeSource"]])
+
+slots.target_resource = Slot(uri=KFI['relative-date-time/target_resource'], name="target_resource", curie=KFI.curie('relative-date-time/target_resource'),
+                   model_uri=KFI_FHIR_SPARKS.target_resource, domain=None, range=str)
+
+slots.target_path = Slot(uri=KFI['relative-date-time/target_path'], name="target_path", curie=KFI.curie('relative-date-time/target_path'),
+                   model_uri=KFI_FHIR_SPARKS.target_path, domain=None, range=str)
+
+slots.offset = Slot(uri=KFI['relative-date-time/offset'], name="offset", curie=KFI.curie('relative-date-time/offset'),
+                   model_uri=KFI_FHIR_SPARKS.offset, domain=None, range=Union[str, XSDDate])
+
+slots.offset_end = Slot(uri=KFI['relative-date-time/offset_end'], name="offset_end", curie=KFI.curie('relative-date-time/offset_end'),
+                   model_uri=KFI_FHIR_SPARKS.offset_end, domain=None, range=Optional[Union[str, XSDDate]])
 
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
