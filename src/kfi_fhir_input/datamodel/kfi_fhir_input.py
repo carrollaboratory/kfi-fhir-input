@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-08T15:35:21
+# Generation date: 2025-12-10T12:29:08
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -80,6 +80,7 @@ LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type')
 NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
+NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
 DEFAULT_ = KFI_FHIR_SPARKS
 
@@ -350,7 +351,7 @@ class Institution(HasExternalId):
 
 
 @dataclass(repr=False)
-class Participant(YAMLRoot):
+class Participant(HasExternalId):
     """
     Research oriented patient
     """
@@ -367,6 +368,8 @@ class Participant(YAMLRoot):
     consent_status: Union[str, "EnumConsentStateCodes"] = None
     birthsex: Optional[Union[str, "EnumBirthSex"]] = None
     population: Optional[Union[str, "EnumPopulation"]] = None
+    dob: Optional[Union[str, XSDDate]] = None
+    dob_method: Optional[Union[str, "EnumDobMethod"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.participant_id):
@@ -392,6 +395,12 @@ class Participant(YAMLRoot):
 
         if self.birthsex is not None and not isinstance(self.birthsex, EnumBirthSex):
             self.birthsex = EnumBirthSex(self.birthsex)
+
+        if self.dob is not None and not isinstance(self.dob, XSDDate):
+            self.dob = XSDDate(self.dob)
+
+        if self.dob_method is not None and not isinstance(self.dob_method, EnumDobMethod):
+            self.dob_method = EnumDobMethod(self.dob_method)
 
         super().__post_init__(**kwargs)
 
@@ -1065,6 +1074,36 @@ class EnumPopulation(EnumDefinitionImpl):
         description="""Code describing the population (CDC). This should be one of the codes from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).""",
     )
 
+class EnumDobMethod(EnumDefinitionImpl):
+    """
+    Enumerations for how DOB was constructed
+    """
+    exact = PermissibleValue(
+        text="exact",
+        description="Exact",
+        meaning=NCPI_DOB_METHOD["exact"])
+    year_only = PermissibleValue(
+        text="year_only",
+        description="Year Only",
+        meaning=NCPI_DOB_METHOD["year-only"])
+    shifted = PermissibleValue(
+        text="shifted",
+        description="Shifted",
+        meaning=NCPI_DOB_METHOD["shifted"])
+    decade_only = PermissibleValue(
+        text="decade_only",
+        description="Decade Only",
+        meaning=NCPI_DOB_METHOD["decade-only"])
+    other = PermissibleValue(
+        text="other",
+        description="Other",
+        meaning=NCPI_DOB_METHOD["other"])
+
+    _defn = EnumDefinition(
+        name="EnumDobMethod",
+        description="Enumerations for how DOB was constructed",
+    )
+
 class EnumStudyStatus(EnumDefinitionImpl):
     """
     Codes indicating the study's current status
@@ -1224,6 +1263,12 @@ slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.cu
 
 slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
+
+slots.dob = Slot(uri=KFI['participant/dob'], name="dob", curie=KFI.curie('participant/dob'),
+                   model_uri=KFI_FHIR_SPARKS.dob, domain=None, range=Optional[Union[str, XSDDate]])
+
+slots.dob_method = Slot(uri=KFI['participant/dob_method'], name="dob_method", curie=KFI.curie('participant/dob_method'),
+                   model_uri=KFI_FHIR_SPARKS.dob_method, domain=None, range=Optional[Union[str, "EnumDobMethod"]])
 
 slots.birthsex = Slot(uri=KFI['participant/birthsex'], name="birthsex", curie=KFI.curie('participant/birthsex'),
                    model_uri=KFI_FHIR_SPARKS.birthsex, domain=None, range=Optional[Union[str, "EnumBirthSex"]])

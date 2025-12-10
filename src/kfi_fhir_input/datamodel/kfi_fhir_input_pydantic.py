@@ -129,6 +129,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                             'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/'},
                   'ncpi_data_access_type': {'prefix_prefix': 'ncpi_data_access_type',
                                             'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type'},
+                  'ncpi_dob_method': {'prefix_prefix': 'ncpi_dob_method',
+                                      'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method'},
                   'usc_birthsex': {'prefix_prefix': 'usc_birthsex',
                                    'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender'}},
      'see_also': ['https://carrollaboratory.github.io/kif-fhir-input'],
@@ -413,6 +415,32 @@ class EnumPopulation(str):
     pass
 
 
+class EnumDobMethod(str, Enum):
+    """
+    Enumerations for how DOB was constructed
+    """
+    exact = "exact"
+    """
+    Exact
+    """
+    year_only = "year_only"
+    """
+    Year Only
+    """
+    shifted = "shifted"
+    """
+    Shifted
+    """
+    decade_only = "decade_only"
+    """
+    Decade Only
+    """
+    other = "other"
+    """
+    Other
+    """
+
+
 class EnumStudyStatus(str, Enum):
     """
     Codes indicating the study's current status
@@ -498,32 +526,6 @@ class AccessPolicy(ConfiguredBaseModel):
          'domain_of': ['AccessPolicy']} })
 
 
-class Participant(ConfiguredBaseModel):
-    """
-    Research oriented patient
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant',
-         'title': 'Participant'})
-
-    birthsex: Optional[EnumBirthSex] = Field(default=None, title="Birth Sex", description="""Sex assigned at birth (or pre-natal observed sex)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
-                                            'value': 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'},
-                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
-         'domain_of': ['Participant']} })
-    race: list[EnumRace] = Field(default=..., title="Race", description="""Reported race as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Reported ethnicity as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    population: Optional[EnumPopulation] = Field(default=None, title="Population", description="""opulation, Race, and/or Ethnicity information.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    consent_status: EnumConsentStateCodes = Field(default=..., title="Consent Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
-                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
-         'domain_of': ['Participant']} })
-
-
 class PractitionerRole(ConfiguredBaseModel):
     """
     PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
@@ -591,6 +593,35 @@ class Institution(HasExternalId):
 
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'AssociatedParty', 'Institution']} })
     institution_id: str = Field(default=..., title="Institution ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
+class Participant(HasExternalId):
+    """
+    Research oriented patient
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant',
+         'title': 'Participant'})
+
+    birthsex: Optional[EnumBirthSex] = Field(default=None, title="Birth Sex", description="""Sex assigned at birth (or pre-natal observed sex)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
+                                            'value': 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['Participant']} })
+    race: list[EnumRace] = Field(default=..., title="Race", description="""Reported race as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Reported ethnicity as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    population: Optional[EnumPopulation] = Field(default=None, title="Population", description="""opulation, Race, and/or Ethnicity information.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    dob: Optional[date] = Field(default=None, title="Date of Birth", description="""Date of Birth of the participant. Details of privacy method should be included in DOBMethod""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    dob_method: Optional[EnumDobMethod] = Field(default=None, title="Date of Birth Method", description="""Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    consent_status: EnumConsentStateCodes = Field(default=..., title="Consent Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
+         'domain_of': ['Participant']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -694,11 +725,11 @@ class ResearchStudyCollection(HasExternalId):
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
-Participant.model_rebuild()
 PractitionerRole.model_rebuild()
 HasExternalId.model_rebuild()
 Practitioner.model_rebuild()
 Institution.model_rebuild()
+Participant.model_rebuild()
 ResearchStudy.model_rebuild()
 Record.model_rebuild()
 AssociatedParty.model_rebuild()

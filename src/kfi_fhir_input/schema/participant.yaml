@@ -32,7 +32,21 @@ classes:
       - race 
       - ethnicity 
       - population 
+      - dob 
+      - dob_method
 slots:
+  dob: 
+    title: Date of Birth 
+    description: 	Date of Birth of the participant. Details of privacy method should be included in DOBMethod 
+    range: date 
+    required: false 
+    multivalued: false 
+  dob_method: 
+    title: Date of Birth Method 
+    description: Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.
+    required: false 
+    multivalued: false 
+    range: EnumDobMethod
   birthsex:
     title: Birth Sex 
     description: Sex assigned at birth (or pre-natal observed sex)
@@ -139,3 +153,21 @@ enums:
     description: Code describing the population (CDC). This should be one of the codes from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
     reachable_from:
       source_ontology: cdc_rec # https://phinvads.cdc.gov/vads/ViewCodeSystem.action?id=2.16.840.1.113883.6.238#
+  EnumDobMethod: 
+    description: Enumerations for how DOB was constructed
+    permissible_values:
+      exact:
+        description: Exact 
+        meaning: ncpi_dob_method:exact 
+      year_only:
+        description: Year Only 
+        meaning: ncpi_dob_method:year-only 
+      shifted:
+        description: Shifted  
+        meaning: ncpi_dob_method:shifted 
+      decade_only:
+        description: Decade Only 
+        meaning: ncpi_dob_method:decade-only 
+      other:
+        description: Other 
+        meaning: ncpi_dob_method:other 
