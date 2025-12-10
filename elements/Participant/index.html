@@ -297,6 +297,19 @@
 
 
 
+      Participant : dob
+
+      Participant : dob_method
+
+
+
+
+
+        Participant --&gt; "0..1" EnumDobMethod : dob_method
+        click EnumDobMethod href "../EnumDobMethod/"
+
+
+
       Participant : ethnicity
 
 
@@ -379,6 +392,18 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../dob/">dob</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>Date of Birth of the participant</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../dob_method/">dob_method</a></td>
+<td>0..1 <br/> <a href="../EnumDobMethod/">EnumDobMethod</a></td>
+<td>Specifies method used to alter DOB for research sharing</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../participant_id/">participant_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Participant Global ID</td>
@@ -455,6 +480,8 @@ slots:
 - race
 - ethnicity
 - population
+- dob
+- dob_method
 attributes:
   participant_id:
     name: participant_id
@@ -598,6 +625,34 @@ attributes:
     domain_of:
     - Participant
     range: EnumPopulation
+    required: false
+    multivalued: false
+  dob:
+    name: dob
+    description: Date of Birth of the participant. Details of privacy method should
+      be included in DOBMethod
+    title: Date of Birth
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: dob
+    owner: Participant
+    domain_of:
+    - Participant
+    range: date
+    required: false
+    multivalued: false
+  dob_method:
+    name: dob_method
+    description: Specifies method used to alter DOB for research sharing. Details
+      should be available in the study protocols.
+    title: Date of Birth Method
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: dob_method
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumDobMethod
     required: false
     multivalued: false
   external_id:

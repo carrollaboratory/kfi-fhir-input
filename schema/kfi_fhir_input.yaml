@@ -64,6 +64,9 @@ prefixes:
   ncpi_data_access_code:
     prefix_prefix: ncpi_data_access_code
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
+  ncpi_dob_method:
+    prefix_prefix: ncpi_dob_method
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
@@ -824,6 +827,32 @@ enums:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     reachable_from:
       source_ontology: cdc_rec
+  EnumDobMethod:
+    name: EnumDobMethod
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/EnumDobMethod
+    description: Enumerations for how DOB was constructed
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    permissible_values:
+      exact:
+        text: exact
+        description: Exact
+        meaning: ncpi_dob_method:exact
+      year_only:
+        text: year_only
+        description: Year Only
+        meaning: ncpi_dob_method:year-only
+      shifted:
+        text: shifted
+        description: Shifted
+        meaning: ncpi_dob_method:shifted
+      decade_only:
+        text: decade_only
+        description: Decade Only
+        meaning: ncpi_dob_method:decade-only
+      other:
+        text: other
+        description: Other
+        meaning: ncpi_dob_method:other
   EnumStudyStatus:
     name: EnumStudyStatus
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
@@ -1236,6 +1265,34 @@ slots:
     - PractitionerRole
     range: Institution
     required: false
+  dob:
+    name: dob
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob
+    description: Date of Birth of the participant. Details of privacy method should
+      be included in DOBMethod
+    title: Date of Birth
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob
+    owner: Participant
+    domain_of:
+    - Participant
+    range: date
+    required: false
+    multivalued: false
+  dob_method:
+    name: dob_method
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob_method
+    description: Specifies method used to alter DOB for research sharing. Details
+      should be available in the study protocols.
+    title: Date of Birth Method
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob_method
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumDobMethod
+    required: false
+    multivalued: false
   birthsex:
     name: birthsex
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/birthsex
@@ -1830,6 +1887,8 @@ classes:
     - race
     - ethnicity
     - population
+    - dob
+    - dob_method
     - participant__participant_id
     - participant__consent_status
     attributes:
@@ -1983,7 +2042,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-08T22:02:28'
-source_file_size: 4460
-generation_date: '2025-12-08T22:02:39'
+source_file_date: '2025-12-10T18:33:41'
+source_file_size: 4567
+generation_date: '2025-12-10T18:33:50'
 
