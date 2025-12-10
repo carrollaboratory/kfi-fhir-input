@@ -208,6 +208,7 @@ Participant {
     EnumPopulation population  
     date dob  
     EnumDobMethod dob_method  
+    EnumPatientKnowledgeSource patient_knowledge_source  
     string participant_id  
     EnumConsentStateCodes consent_status  
     uriorcurieList external_id  
@@ -234,6 +235,13 @@ Record {
     string id  
     uriorcurieList external_id  
 }
+RelativeDateTime {
+    string id  
+    string target_resource  
+    string target_path  
+    date offset  
+    date offset_end  
+}
 ResearchStudy {
     string study_title  
     uriorcurieList study_focus  
@@ -258,6 +266,8 @@ ResearchStudyCollection {
 
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
+Participant ||--|o Any : "age_at_last_vital"
+Participant ||--|o Any : "deceased"
 Practitioner ||--|o Institution : "institution_id"
 Practitioner ||--|o PractitionerRole : "practitioner_role_id"
 PractitionerRole ||--|o Institution : "institution_id"

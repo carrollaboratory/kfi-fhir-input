@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/AssociatedParty/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/RelativeDateTime/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>Class: Associated Party (AssociatedParty) - kfi-fhir-input</title>
+<title>Class: Relative Date Time (RelativeDateTime) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-associated-party-associatedparty">
+<a class="md-skip" href="#class-relative-date-time-relativedatetime">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Associated Party (AssociatedParty)
+              Class: Relative Date Time (RelativeDateTime)
             
           </span>
 </div>
@@ -171,15 +171,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -207,15 +198,6 @@
 </a>
 <nav aria-label="Identifier and Mapping Information" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#annotations">
-<span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-</a>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#schema-source">
 <span class="md-ellipsis">
@@ -275,77 +257,25 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-associated-party-associatedparty">Class: Associated Party (AssociatedParty)</h1>
-<p><em>Sponsors, collaborators, and other parties affiliated with a research study.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputAssociatedParty">kfi_fhir_sparks:AssociatedParty</a></p>
+<h1 id="class-relative-date-time-relativedatetime">Class: Relative Date Time (RelativeDateTime)</h1>
+<p><em>In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputRelativeDateTime">kfi_fhir_sparks:RelativeDateTime</a></p>
 <div class="mermaid"> classDiagram
-    class AssociatedParty
-    click AssociatedParty href "../AssociatedParty/"
-      Record &lt;|-- AssociatedParty
-        click Record href "../Record/"
+    class RelativeDateTime
+    click RelativeDateTime href "../RelativeDateTime/"
+      RelativeDateTime : id
 
-      AssociatedParty : classifier
+      RelativeDateTime : offset
 
+      RelativeDateTime : offset_end
 
+      RelativeDateTime : target_path
 
-
-
-        AssociatedParty --&gt; "*" EnumResearchStudyPartyOrganizationType : classifier
-        click EnumResearchStudyPartyOrganizationType href "../EnumResearchStudyPartyOrganizationType/"
-
-
-
-      AssociatedParty : external_id
-
-      AssociatedParty : id
-
-      AssociatedParty : name
-
-      AssociatedParty : party
-
-
-
-
-
-        AssociatedParty --&gt; "0..1" Any : party
-        click Any href "../Any/"
-
-
-
-      AssociatedParty : period_id
-
-
-
-
-
-        AssociatedParty --&gt; "0..1" Period : period_id
-        click Period href "../Period/"
-
-
-
-      AssociatedParty : role
-
-
-
-
-
-        AssociatedParty --&gt; "0..1" EnumResearchStudyPartyRole : role
-        click EnumResearchStudyPartyRole href "../EnumResearchStudyPartyRole/"
-
-
+      RelativeDateTime : target_resource
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../HasExternalId/">HasExternalId</a><ul>
-<li><a href="../Record/">Record</a><ul>
-<li><strong>AssociatedParty</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -358,46 +288,34 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Name of the entity</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../role/">role</a></td>
-<td>0..1 <br/> <a href="../EnumResearchStudyPartyRole/">EnumResearchStudyPartyRole</a></td>
-<td>Research Study Party Role</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../period_id/">period_id</a></td>
-<td>0..1 <br/> <a href="../Period/">Period</a></td>
-<td>Reference to a time period which defines a Start and End datatime period</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../classifier/">classifier</a></td>
-<td>* <br/> <a href="../EnumResearchStudyPartyOrganizationType/">EnumResearchStudyPartyOrganizationType</a></td>
-<td>Research Study Party Organization Type (what type of institution is party)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../party/">party</a></td>
-<td>0..1 <br/> <a href="../Any/">Any</a> or <br/><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>Individual or organization associated with study</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../id/">id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Unique Identifier for a table entry</td>
-<td><a href="../Record/">Record</a></td>
+<td>direct</td>
 </tr>
 <tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../HasExternalId/">HasExternalId</a></td>
+<td><a href="../target_resource/">target_resource</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>FHIR Resource Type for target (i</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../target_path/">target_path</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>resource property about which this is related</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../offset/">offset</a></td>
+<td>1 <br/> <a href="../Date/">Date</a></td>
+<td>The point after the target being described</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../offset_end/">offset_end</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>The end of a relative date/time range</td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -413,29 +331,14 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../ResearchStudy/">ResearchStudy</a></td>
-<td><a href="../study_personnel/">study_personnel</a></td>
-<td>range</td>
-<td><a href="./">AssociatedParty</a></td>
+<td><a href="../Participant/">Participant</a></td>
+<td><a href="../deceased/">deceased</a></td>
+<td>any_of[range]</td>
+<td><a href="./">RelativeDateTime</a></td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fhir_resource</td>
-<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -451,11 +354,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:AssociatedParty</td>
+<td>kfi_fhir_sparks:RelativeDateTime</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:AssociatedParty</td>
+<td>kfi_fhir_sparks:RelativeDateTime</td>
 </tr>
 </tbody>
 </table>
@@ -463,114 +366,28 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: AssociatedParty
-annotations:
-  fhir_resource:
-    tag: fhir_resource
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
-description: Sponsors, collaborators, and other parties affiliated with a research
-  study.
-title: Associated Party
+<pre><code class="language-yaml">name: RelativeDateTime
+description: In FHIR, we can express events using relative date/times from the participant's
+  DOB to avoid exposing sensitive information
+title: Relative Date Time
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
-is_a: Record
 slots:
-- name
-- role
-- period_id
-- classifier
-- party
+- id
+- target_resource
+- target_path
+- offset
+- offset_end
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: AssociatedParty
-annotations:
-  fhir_resource:
-    tag: fhir_resource
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
-description: Sponsors, collaborators, and other parties affiliated with a research
-  study.
-title: Associated Party
+<pre><code class="language-yaml">name: RelativeDateTime
+description: In FHIR, we can express events using relative date/times from the participant's
+  DOB to avoid exposing sensitive information
+title: Relative Date Time
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
-is_a: Record
 attributes:
-  name:
-    name: name
-    description: Name of the entity.
-    title: Name
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: name
-    owner: AssociatedParty
-    domain_of:
-    - Practitioner
-    - AssociatedParty
-    - Institution
-    range: string
-    required: false
-  role:
-    name: role
-    description: Research Study Party Role
-    title: Role
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: role
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
-    range: EnumResearchStudyPartyRole
-    required: false
-  period_id:
-    name: period_id
-    annotations:
-      db_column:
-        tag: db_column
-        value: period_id
-      target_slot:
-        tag: target_slot
-        value: id
-    description: Reference to a time period which defines a Start and End datatime
-      period.
-    title: Period ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: period_id
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
-    - PractitionerRole
-    range: Period
-    required: false
-    multivalued: false
-    inlined: false
-  classifier:
-    name: classifier
-    description: Research Study Party Organization Type (what type of institution
-      is party)
-    title: Classifier
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: classifier
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
-    range: EnumResearchStudyPartyOrganizationType
-    required: false
-    multivalued: true
-  party:
-    name: party
-    description: Individual or organization associated with study
-    title: Associated Party
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: party
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
-    range: Any
-    any_of:
-    - range: PractitionerRole
   id:
     name: id
     description: Unique Identifier for a table entry. This is probably not the Global
@@ -580,27 +397,66 @@ attributes:
     rank: 1000
     identifier: true
     alias: id
-    owner: AssociatedParty
+    owner: RelativeDateTime
     domain_of:
     - Record
     - RelativeDateTime
     range: string
     required: true
     multivalued: false
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
+  target_resource:
+    name: target_resource
+    description: FHIR Resource Type for target (i.e. Patient)
+    title: Target Resource
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: external_id
-    owner: AssociatedParty
+    alias: target_resource
+    owner: RelativeDateTime
     domain_of:
-    - HasExternalId
-    range: uriorcurie
+    - RelativeDateTime
+    range: string
+    required: true
+    multivalued: false
+  target_path:
+    name: target_path
+    description: resource property about which this is related
+    title: Target Path
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: target_path
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: string
+    required: true
+    multivalued: false
+  offset:
+    name: offset
+    description: The point after the target being described. For ranges, this can
+      be used for the starting point
+    title: Offset
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: offset
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: date
+    required: true
+    multivalued: false
+  offset_end:
+    name: offset_end
+    description: The end of a relative date/time range
+    title: Offset End
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: offset_end
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: date
     required: false
-    multivalued: true
+    multivalued: false
 
 </code></pre>
 </details>

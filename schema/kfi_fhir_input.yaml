@@ -14,6 +14,7 @@ imports:
 - period
 - practitioner_role
 - practitioner
+- relative_date_time
 - research_study
 - research_study_collection
 - kfi_fhir_input
@@ -67,6 +68,9 @@ prefixes:
   ncpi_dob_method:
     prefix_prefix: ncpi_dob_method
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method
+  ncpi_patient_knowledge_source:
+    prefix_prefix: ncpi_patient_knowledge_source
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
@@ -853,6 +857,26 @@ enums:
         text: other
         description: Other
         meaning: ncpi_dob_method:other
+  EnumPatientKnowledgeSource:
+    name: EnumPatientKnowledgeSource
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/EnumPatientKnowledgeSource
+    description: The source of the knowledge represented in a Patient resource.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    permissible_values:
+      traditional:
+        text: traditional
+        description: The knowledge comes from traditional sources like a form filled
+          out by a patient or information copied from an external traditional source
+          like government records.
+        meaning: ncpi_patient_knowledge_source:traditional
+        title: Traditional
+      inferred:
+        text: inferred
+        description: The knowledge is inferred from indirect evidence. For example,
+          the existence of one patient's mother can be inferred from the existence
+          of the patient.
+        meaning: ncpi_patient_knowledge_source:traditional
+        title: Inferred
   EnumStudyStatus:
     name: EnumStudyStatus
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
@@ -948,9 +972,10 @@ slots:
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     slot_uri: kfi_fhir_sparks:id
     identifier: true
-    owner: Record
+    owner: RelativeDateTime
     domain_of:
     - Record
+    - RelativeDateTime
     range: string
     required: true
     multivalued: false
@@ -1265,34 +1290,6 @@ slots:
     - PractitionerRole
     range: Institution
     required: false
-  dob:
-    name: dob
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob
-    description: Date of Birth of the participant. Details of privacy method should
-      be included in DOBMethod
-    title: Date of Birth
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob
-    owner: Participant
-    domain_of:
-    - Participant
-    range: date
-    required: false
-    multivalued: false
-  dob_method:
-    name: dob_method
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob_method
-    description: Specifies method used to alter DOB for research sharing. Details
-      should be available in the study protocols.
-    title: Date of Birth Method
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob_method
-    owner: Participant
-    domain_of:
-    - Participant
-    range: EnumDobMethod
-    required: false
-    multivalued: false
   birthsex:
     name: birthsex
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/birthsex
@@ -1352,6 +1349,137 @@ slots:
     domain_of:
     - Participant
     range: EnumPopulation
+    required: false
+    multivalued: false
+  dob:
+    name: dob
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob
+    description: Date of Birth of the participant. Details of privacy method should
+      be included in DOBMethod
+    title: Date of Birth
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob
+    owner: Participant
+    domain_of:
+    - Participant
+    range: date
+    required: false
+    multivalued: false
+  dob_method:
+    name: dob_method
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob_method
+    description: Specifies method used to alter DOB for research sharing. Details
+      should be available in the study protocols.
+    title: Date of Birth Method
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/dob_method
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumDobMethod
+    required: false
+    multivalued: false
+  age_at_last_vital:
+    name: age_at_last_vital
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/age_at_last_vital
+    description: Age or date of last vital status
+    title: Age At Last Vital Status
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/age_at_last_vital
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Any
+    required: false
+    multivalued: false
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: date
+    - range: string
+  deceased:
+    name: deceased
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/deceased
+    description: Implementers can provide relativeDateTime or actual date or T/F,
+      depending on data available.
+    title: Deceased
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/deceased
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Any
+    required: false
+    multivalued: false
+    inlined: true
+    inlined_as_list: true
+    any_of:
+    - range: boolean
+    - range: RelativeDateTime
+  patient_knowledge_source:
+    name: patient_knowledge_source
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/patient_knowledge_source
+    description: The source of the knowledge represented by this Patient resource.
+    title: Patient Knowledge Source
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/patient_knowledge_source
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumPatientKnowledgeSource
+    required: false
+    multivalued: false
+  target_resource:
+    name: target_resource
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_resource
+    description: FHIR Resource Type for target (i.e. Patient)
+    title: Target Resource
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_resource
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: string
+    required: true
+    multivalued: false
+  target_path:
+    name: target_path
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_path
+    description: resource property about which this is related
+    title: Target Path
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_path
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: string
+    required: true
+    multivalued: false
+  offset:
+    name: offset
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
+    description: The point after the target being described. For ranges, this can
+      be used for the starting point
+    title: Offset
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: date
+    required: true
+    multivalued: false
+  offset_end:
+    name: offset_end
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_end
+    description: The end of a relative date/time range
+    title: Offset End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_end
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: date
     required: false
     multivalued: false
   parent_study_id:
@@ -1889,6 +2017,9 @@ classes:
     - population
     - dob
     - dob_method
+    - age_at_last_vital
+    - deceased
+    - patient_knowledge_source
     - participant__participant_id
     - participant__consent_status
     attributes:
@@ -1968,6 +2099,20 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/PractitionerRole
+  RelativeDateTime:
+    name: RelativeDateTime
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
+    description: In FHIR, we can express events using relative date/times from the
+      participant's DOB to avoid exposing sensitive information
+    title: Relative Date Time
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slots:
+    - id
+    - target_resource
+    - target_path
+    - offset
+    - offset_end
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
   ResearchStudy:
     name: ResearchStudy
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
@@ -2042,7 +2187,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-10T18:33:41'
-source_file_size: 4567
-generation_date: '2025-12-10T18:33:50'
+source_file_date: '2025-12-10T19:32:31'
+source_file_size: 4701
+generation_date: '2025-12-10T19:32:40'
 

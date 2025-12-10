@@ -275,6 +275,17 @@
       HasExternalId &lt;|-- Participant
         click HasExternalId href "../HasExternalId/"
 
+      Participant : age_at_last_vital
+
+
+
+
+
+        Participant --&gt; "0..1" Any : age_at_last_vital
+        click Any href "../Any/"
+
+
+
       Participant : birthsex
 
 
@@ -294,6 +305,17 @@
 
         Participant --&gt; "1" EnumConsentStateCodes : consent_status
         click EnumConsentStateCodes href "../EnumConsentStateCodes/"
+
+
+
+      Participant : deceased
+
+
+
+
+
+        Participant --&gt; "0..1" Any : deceased
+        click Any href "../Any/"
 
 
 
@@ -324,6 +346,17 @@
       Participant : external_id
 
       Participant : participant_id
+
+      Participant : patient_knowledge_source
+
+
+
+
+
+        Participant --&gt; "0..1" EnumPatientKnowledgeSource : patient_knowledge_source
+        click EnumPatientKnowledgeSource href "../EnumPatientKnowledgeSource/"
+
+
 
       Participant : population
 
@@ -401,6 +434,24 @@
 <td><a href="../dob_method/">dob_method</a></td>
 <td>0..1 <br/> <a href="../EnumDobMethod/">EnumDobMethod</a></td>
 <td>Specifies method used to alter DOB for research sharing</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../age_at_last_vital/">age_at_last_vital</a></td>
+<td>0..1 <br/> <a href="../Any/">Any</a> or <br/><a href="../Date/">Date</a> or <br/><a href="../String/">String</a></td>
+<td>Age or date of last vital status</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../deceased/">deceased</a></td>
+<td>0..1 <br/> <a href="../Any/">Any</a> or <br/><a href="../Boolean/">Boolean</a> or <br/><a href="../RelativeDateTime/">RelativeDateTime</a></td>
+<td>Implementers can provide relativeDateTime or actual date or T/F, depending on...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../patient_knowledge_source/">patient_knowledge_source</a></td>
+<td>0..1 <br/> <a href="../EnumPatientKnowledgeSource/">EnumPatientKnowledgeSource</a></td>
+<td>The source of the knowledge represented by this Patient resource</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -482,6 +533,9 @@ slots:
 - population
 - dob
 - dob_method
+- age_at_last_vital
+- deceased
+- patient_knowledge_source
 attributes:
   participant_id:
     name: participant_id
@@ -653,6 +707,52 @@ attributes:
     domain_of:
     - Participant
     range: EnumDobMethod
+    required: false
+    multivalued: false
+  age_at_last_vital:
+    name: age_at_last_vital
+    description: Age or date of last vital status
+    title: Age At Last Vital Status
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: age_at_last_vital
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Any
+    required: false
+    multivalued: false
+    any_of:
+    - range: date
+    - range: string
+  deceased:
+    name: deceased
+    description: Implementers can provide relativeDateTime or actual date or T/F,
+      depending on data available.
+    title: Deceased
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: deceased
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Any
+    required: false
+    multivalued: false
+    any_of:
+    - range: boolean
+    - range: RelativeDateTime
+  patient_knowledge_source:
+    name: patient_knowledge_source
+    description: The source of the knowledge represented by this Patient resource.
+    title: Patient Knowledge Source
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: patient_knowledge_source
+    owner: Participant
+    domain_of:
+    - Participant
+    range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
   external_id:
