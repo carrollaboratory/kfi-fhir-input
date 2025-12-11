@@ -277,15 +277,6 @@
 
       Participant : age_at_last_vital
 
-
-
-
-
-        Participant --&gt; "0..1" Any : age_at_last_vital
-        click Any href "../Any/"
-
-
-
       Participant : birthsex
 
 
@@ -297,25 +288,14 @@
 
 
 
-      Participant : consent_status
+      Participant : deceased_rel
 
 
 
 
 
-        Participant --&gt; "1" EnumConsentStateCodes : consent_status
-        click EnumConsentStateCodes href "../EnumConsentStateCodes/"
-
-
-
-      Participant : deceased
-
-
-
-
-
-        Participant --&gt; "0..1" Any : deceased
-        click Any href "../Any/"
+        Participant --&gt; "0..1" RelativeDateTime : deceased_rel
+        click RelativeDateTime href "../RelativeDateTime/"
 
 
 
@@ -344,6 +324,8 @@
 
 
       Participant : external_id
+
+      Participant : is_deceased
 
       Participant : participant_id
 
@@ -426,7 +408,7 @@
 </tr>
 <tr>
 <td><a href="../dob/">dob</a></td>
-<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Date of Birth of the participant</td>
 <td>direct</td>
 </tr>
@@ -438,14 +420,20 @@
 </tr>
 <tr>
 <td><a href="../age_at_last_vital/">age_at_last_vital</a></td>
-<td>0..1 <br/> <a href="../Any/">Any</a> or <br/><a href="../Date/">Date</a> or <br/><a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Age or date of last vital status</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../deceased/">deceased</a></td>
-<td>0..1 <br/> <a href="../Any/">Any</a> or <br/><a href="../Boolean/">Boolean</a> or <br/><a href="../RelativeDateTime/">RelativeDateTime</a></td>
-<td>Implementers can provide relativeDateTime or actual date or T/F, depending on...</td>
+<td><a href="../is_deceased/">is_deceased</a></td>
+<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
+<td>Is the participant known to be Deceased, T, or Alive, F</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../deceased_rel/">deceased_rel</a></td>
+<td>0..1 <br/> <a href="../RelativeDateTime/">RelativeDateTime</a></td>
+<td>Implementers can provide relativeDateTime if information is available</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -458,12 +446,6 @@
 <td><a href="../participant_id/">participant_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Participant Global ID</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../consent_status/">consent_status</a></td>
-<td>1 <br/> <a href="../EnumConsentStateCodes/">EnumConsentStateCodes</a></td>
-<td>Indicates the state of the consent</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -534,7 +516,8 @@ slots:
 - dob
 - dob_method
 - age_at_last_vital
-- deceased
+- is_deceased
+- deceased_rel
 - patient_knowledge_source
 attributes:
   participant_id:
@@ -548,27 +531,6 @@ attributes:
     - Participant
     range: string
     required: true
-  consent_status:
-    name: consent_status
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: status
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Indicates the state of the consent.
-    title: Consent Status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    rank: 1000
-    domain_of:
-    - Participant
-    range: EnumConsentStateCodes
-    required: true
-    multivalued: false
 
 </code></pre>
 </details>
@@ -597,29 +559,6 @@ attributes:
     - Participant
     range: string
     required: true
-  consent_status:
-    name: consent_status
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: status
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Indicates the state of the consent.
-    title: Consent Status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    rank: 1000
-    alias: consent_status
-    owner: Participant
-    domain_of:
-    - Participant
-    range: EnumConsentStateCodes
-    required: true
-    multivalued: false
   birthsex:
     name: birthsex
     annotations:
@@ -692,7 +631,7 @@ attributes:
     owner: Participant
     domain_of:
     - Participant
-    range: date
+    range: string
     required: false
     multivalued: false
   dob_method:
@@ -719,29 +658,35 @@ attributes:
     owner: Participant
     domain_of:
     - Participant
-    range: Any
+    range: string
     required: false
     multivalued: false
-    any_of:
-    - range: date
-    - range: string
-  deceased:
-    name: deceased
-    description: Implementers can provide relativeDateTime or actual date or T/F,
-      depending on data available.
-    title: Deceased
+  is_deceased:
+    name: is_deceased
+    description: Is the participant known to be Deceased, T, or Alive, F
+    title: Is Deceased
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
-    alias: deceased
+    alias: is_deceased
     owner: Participant
     domain_of:
     - Participant
-    range: Any
+    range: boolean
     required: false
     multivalued: false
-    any_of:
-    - range: boolean
-    - range: RelativeDateTime
+  deceased_rel:
+    name: deceased_rel
+    description: Implementers can provide relativeDateTime if information is available.
+    title: Deceased Relative Date
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: deceased_rel
+    owner: Participant
+    domain_of:
+    - Participant
+    range: RelativeDateTime
+    required: false
+    multivalued: false
   patient_knowledge_source:
     name: patient_knowledge_source
     description: The source of the knowledge represented by this Patient resource.

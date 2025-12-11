@@ -441,7 +441,7 @@ Alias: age_at_last_vital</p>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../Any/">Any</a>&nbsp;or&nbsp;<br /><a href="../Date/">Date</a>&nbsp;or&nbsp;<br /><a href="../String/">String</a></li>
+<li>Range: <a href="../String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -478,12 +478,9 @@ rank: 1000
 alias: age_at_last_vital
 domain_of:
 - Participant
-range: Any
+range: string
 required: false
 multivalued: false
-any_of:
-- range: date
-- range: string
 
 </code></pre>
 

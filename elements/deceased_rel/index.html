@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/consent_status/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/deceased_rel/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Consent Status (consent_status) - kfi-fhir-input</title>
+        <title>Slot: Deceased Relative Date (deceased_rel) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-consent-status-consent_status" class="md-skip">
+        <a href="#slot-deceased-relative-date-deceased_rel" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Consent Status (consent_status)
+              Slot: Deceased Relative Date (deceased_rel)
             
           </span>
         </div>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -427,10 +416,10 @@
   
 
 
-<h1 id="slot-consent-status-consent_status">Slot: Consent Status (consent_status)</h1>
-<p><em>Indicates the state of the consent.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputconsent_status">kfi_fhir_sparks:consent_status</a>
-Alias: consent_status</p>
+<h1 id="slot-deceased-relative-date-deceased_rel">Slot: Deceased Relative Date (deceased_rel)</h1>
+<p><em>Implementers can provide relativeDateTime if information is available.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputdeceased_rel">kfi_fhir_sparks:deceased_rel</a>
+Alias: deceased_rel</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -452,37 +441,9 @@ Alias: consent_status</p>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../EnumConsentStateCodes/">EnumConsentStateCodes</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../RelativeDateTime/">RelativeDateTime</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fhir_profile</td>
-<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy</td>
-</tr>
-<tr>
-<td>fhir_element</td>
-<td>status</td>
-</tr>
-<tr>
-<td>fhir_resource</td>
-<td>Consent</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
@@ -498,38 +459,27 @@ Alias: consent_status</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:consent_status</td>
+<td>kfi_fhir_sparks:deceased_rel</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:consent_status</td>
+<td>kfi_fhir_sparks:deceased_rel</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: consent_status
-annotations:
-  fhir_profile:
-    tag: fhir_profile
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-  fhir_element:
-    tag: fhir_element
-    value: status
-  fhir_resource:
-    tag: fhir_resource
-    value: Consent
-description: Indicates the state of the consent.
-title: Consent Status
+<pre><code class="language-yaml">name: deceased_rel
+description: Implementers can provide relativeDateTime if information is available.
+title: Deceased Relative Date
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: consent_status
-owner: Participant
+alias: deceased_rel
 domain_of:
 - Participant
-range: EnumConsentStateCodes
-required: true
+range: RelativeDateTime
+required: false
 multivalued: false
 
 </code></pre>

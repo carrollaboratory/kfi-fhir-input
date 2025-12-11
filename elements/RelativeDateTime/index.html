@@ -269,6 +269,17 @@
 
       RelativeDateTime : offset_end
 
+      RelativeDateTime : offset_type
+
+
+
+
+
+        RelativeDateTime --&gt; "1" EnumOffsetType : offset_type
+        click EnumOffsetType href "../EnumOffsetType/"
+
+
+
       RelativeDateTime : target_path
 
       RelativeDateTime : target_resource
@@ -307,14 +318,20 @@
 </tr>
 <tr>
 <td><a href="../offset/">offset</a></td>
-<td>1 <br/> <a href="../Date/">Date</a></td>
+<td>1 <br/> <a href="../Integer/">Integer</a></td>
 <td>The point after the target being described</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../offset_end/">offset_end</a></td>
-<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>0..1 <br/> <a href="../Integer/">Integer</a></td>
 <td>The end of a relative date/time range</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../offset_type/">offset_type</a></td>
+<td>1 <br/> <a href="../EnumOffsetType/">EnumOffsetType</a></td>
+<td>What is the datatype associated with the offset (days, years, etc)</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -332,8 +349,8 @@
 <tbody>
 <tr>
 <td><a href="../Participant/">Participant</a></td>
-<td><a href="../deceased/">deceased</a></td>
-<td>any_of[range]</td>
+<td><a href="../deceased_rel/">deceased_rel</a></td>
+<td>range</td>
 <td><a href="./">RelativeDateTime</a></td>
 </tr>
 </tbody>
@@ -377,6 +394,7 @@ slots:
 - target_path
 - offset
 - offset_end
+- offset_type
 
 </code></pre>
 </details>
@@ -441,7 +459,7 @@ attributes:
     owner: RelativeDateTime
     domain_of:
     - RelativeDateTime
-    range: date
+    range: integer
     required: true
     multivalued: false
   offset_end:
@@ -454,8 +472,21 @@ attributes:
     owner: RelativeDateTime
     domain_of:
     - RelativeDateTime
-    range: date
+    range: integer
     required: false
+    multivalued: false
+  offset_type:
+    name: offset_type
+    description: What is the datatype associated with the offset (days, years, etc)
+    title: Offset Type
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: offset_type
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: EnumOffsetType
+    required: true
     multivalued: false
 
 </code></pre>

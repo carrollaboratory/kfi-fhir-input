@@ -206,11 +206,12 @@ Participant {
     EnumRaceList race  
     EnumEthnicity ethnicity  
     EnumPopulation population  
-    date dob  
+    string dob  
     EnumDobMethod dob_method  
+    string age_at_last_vital  
+    boolean is_deceased  
     EnumPatientKnowledgeSource patient_knowledge_source  
     string participant_id  
-    EnumConsentStateCodes consent_status  
     uriorcurieList external_id  
 }
 Period {
@@ -239,8 +240,9 @@ RelativeDateTime {
     string id  
     string target_resource  
     string target_path  
-    date offset  
-    date offset_end  
+    integer offset  
+    integer offset_end  
+    EnumOffsetType offset_type  
 }
 ResearchStudy {
     string study_title  
@@ -266,8 +268,7 @@ ResearchStudyCollection {
 
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
-Participant ||--|o Any : "age_at_last_vital"
-Participant ||--|o Any : "deceased"
+Participant ||--|o RelativeDateTime : "deceased_rel"
 Practitioner ||--|o Institution : "institution_id"
 Practitioner ||--|o PractitionerRole : "practitioner_role_id"
 PractitionerRole ||--|o Institution : "institution_id"
