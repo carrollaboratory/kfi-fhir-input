@@ -1,3 +1,0 @@
-variable_name,description,data_type,min,max,units,enumerations,comment
-PractitionerRole_practitioner_role_id,Autocreated FK slot,string,,,,,Foreign Key: PractitionerRole.practitioner_role_id
-period_id_id,Reference to a time period which defines a Start and End datatime period.,string,,,,,Foreign Key: Period.id

@@ -13,6 +13,7 @@ classes:
       - target_path 
       - offset
       - offset_end 
+      - offset_type
 slots:
   target_resource:
     title: Target Resource 
@@ -29,14 +30,31 @@ slots:
   offset: 
     title: Offset
     description: The point after the target being described. For ranges, this can be used for the starting point 
-    range: date 
+    range: integer
     required: true 
     multivalued: false 
   offset_end:
     title: Offset End 
     description: The end of a relative date/time range 
-    range: date 
+    range: integer
     required: false 
     multivalued: false 
+  offset_type:
+    title: Offset Type 
+    description: What is the datatype associated with the offset (days, years, etc)
+    range: EnumOffsetType 
+    required: true
+    multivalued: false
+enums:
+  EnumOffsetType:
+    description: Offset Type 
+    permissible_values:
+      days: 
+        title: Days 
+        description: The offset is represented in days
+      years:
+        title: Years 
+        description: The offset is represented in Years
+
 
 

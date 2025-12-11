@@ -1,0 +1,11 @@
+---
+participant_id: par-431
+birthsex: female 
+race: 
+  - white 
+ethnicity: hispanic_or_latino
+dob: '2012-03-22'   # There are a bunch of ways this can be assigned, so it's string only
+dob_method: exact
+age_at_last_vital: rt-0003
+is_deceased: True 
+deceased_rel: rt-0003

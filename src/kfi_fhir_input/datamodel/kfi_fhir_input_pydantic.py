@@ -458,6 +458,20 @@ class EnumPatientKnowledgeSource(str, Enum):
     """
 
 
+class EnumOffsetType(str, Enum):
+    """
+    Offset Type
+    """
+    Days = "days"
+    """
+    The offset is represented in days
+    """
+    Years = "years"
+    """
+    The offset is represented in Years
+    """
+
+
 class EnumStudyStatus(str, Enum):
     """
     Codes indicating the study's current status
@@ -572,8 +586,9 @@ class RelativeDateTime(ConfiguredBaseModel):
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
     target_resource: str = Field(default=..., title="Target Resource", description="""FHIR Resource Type for target (i.e. Patient)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
     target_path: str = Field(default=..., title="Target Path", description="""resource property about which this is related""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
-    offset: date = Field(default=..., title="Offset", description="""The point after the target being described. For ranges, this can be used for the starting point""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
-    offset_end: Optional[date] = Field(default=None, title="Offset End", description="""The end of a relative date/time range""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset: int = Field(default=..., title="Offset", description="""The point after the target being described. For ranges, this can be used for the starting point""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset_end: Optional[int] = Field(default=None, title="Offset End", description="""The end of a relative date/time range""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset_type: EnumOffsetType = Field(default=..., title="Offset Type", description="""What is the datatype associated with the offset (days, years, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
 
 
 class HasExternalId(ConfiguredBaseModel):
@@ -645,19 +660,13 @@ class Participant(HasExternalId):
     race: list[EnumRace] = Field(default=..., title="Race", description="""Reported race as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     ethnicity: EnumEthnicity = Field(default=..., title="Ethnicity", description="""Reported ethnicity as defined by the 1997 OMB directives.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     population: Optional[EnumPopulation] = Field(default=None, title="Population", description="""opulation, Race, and/or Ethnicity information.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    dob: Optional[date] = Field(default=None, title="Date of Birth", description="""Date of Birth of the participant. Details of privacy method should be included in DOBMethod""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    dob: Optional[str] = Field(default=None, title="Date of Birth", description="""Date of Birth of the participant. Details of privacy method should be included in DOBMethod""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     dob_method: Optional[EnumDobMethod] = Field(default=None, title="Date of Birth Method", description="""Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    age_at_last_vital: Optional[Union[date, str]] = Field(default=None, title="Age At Last Vital Status", description="""Age or date of last vital status""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'date'}, {'range': 'string'}],
-         'domain_of': ['Participant']} })
-    deceased: Optional[Union[bool, str]] = Field(default=None, title="Deceased", description="""Implementers can provide relativeDateTime or actual date or T/F, depending on data available.""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'boolean'}, {'range': 'RelativeDateTime'}],
-         'domain_of': ['Participant']} })
+    age_at_last_vital: Optional[str] = Field(default=None, title="Age At Last Vital Status", description="""Age or date of last vital status""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    is_deceased: Optional[bool] = Field(default=None, title="Is Deceased", description="""Is the participant known to be Deceased, T, or Alive, F""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+    deceased_rel: Optional[str] = Field(default=None, title="Deceased Relative Date", description="""Implementers can provide relativeDateTime if information is available.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    consent_status: EnumConsentStateCodes = Field(default=..., title="Consent Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
-                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
-         'domain_of': ['Participant']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 

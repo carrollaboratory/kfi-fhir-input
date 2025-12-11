@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-10T13:29:55
+# Generation date: 2025-12-11T13:12:37
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -56,8 +56,8 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Date, String, Uri, Uriorcurie
-from linkml_runtime.utils.metamodelcore import URI, URIorCURIE, XSDDate
+from linkml_runtime.linkml_model.types import Boolean, Date, Integer, String, Uri, Uriorcurie
+from linkml_runtime.utils.metamodelcore import Bool, URI, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"
 version = None
@@ -370,13 +370,13 @@ class Participant(HasExternalId):
     participant_id: Union[str, ParticipantParticipantId] = None
     race: Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]] = None
     ethnicity: Union[str, "EnumEthnicity"] = None
-    consent_status: Union[str, "EnumConsentStateCodes"] = None
     birthsex: Optional[Union[str, "EnumBirthSex"]] = None
     population: Optional[Union[str, "EnumPopulation"]] = None
-    dob: Optional[Union[str, XSDDate]] = None
+    dob: Optional[str] = None
     dob_method: Optional[Union[str, "EnumDobMethod"]] = None
-    age_at_last_vital: Optional[Union[dict, Any]] = None
-    deceased: Optional[Union[dict, Any]] = None
+    age_at_last_vital: Optional[str] = None
+    is_deceased: Optional[Union[bool, Bool]] = None
+    deceased_rel: Optional[Union[str, RelativeDateTimeId]] = None
     patient_knowledge_source: Optional[Union[str, "EnumPatientKnowledgeSource"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -396,19 +396,23 @@ class Participant(HasExternalId):
         if not isinstance(self.ethnicity, EnumEthnicity):
             self.ethnicity = EnumEthnicity(self.ethnicity)
 
-        if self._is_empty(self.consent_status):
-            self.MissingRequiredField("consent_status")
-        if not isinstance(self.consent_status, EnumConsentStateCodes):
-            self.consent_status = EnumConsentStateCodes(self.consent_status)
-
         if self.birthsex is not None and not isinstance(self.birthsex, EnumBirthSex):
             self.birthsex = EnumBirthSex(self.birthsex)
 
-        if self.dob is not None and not isinstance(self.dob, XSDDate):
-            self.dob = XSDDate(self.dob)
+        if self.dob is not None and not isinstance(self.dob, str):
+            self.dob = str(self.dob)
 
         if self.dob_method is not None and not isinstance(self.dob_method, EnumDobMethod):
             self.dob_method = EnumDobMethod(self.dob_method)
+
+        if self.age_at_last_vital is not None and not isinstance(self.age_at_last_vital, str):
+            self.age_at_last_vital = str(self.age_at_last_vital)
+
+        if self.is_deceased is not None and not isinstance(self.is_deceased, Bool):
+            self.is_deceased = Bool(self.is_deceased)
+
+        if self.deceased_rel is not None and not isinstance(self.deceased_rel, RelativeDateTimeId):
+            self.deceased_rel = RelativeDateTimeId(self.deceased_rel)
 
         if self.patient_knowledge_source is not None and not isinstance(self.patient_knowledge_source, EnumPatientKnowledgeSource):
             self.patient_knowledge_source = EnumPatientKnowledgeSource(self.patient_knowledge_source)
@@ -499,8 +503,9 @@ class RelativeDateTime(YAMLRoot):
     id: Union[str, RelativeDateTimeId] = None
     target_resource: str = None
     target_path: str = None
-    offset: Union[str, XSDDate] = None
-    offset_end: Optional[Union[str, XSDDate]] = None
+    offset: int = None
+    offset_type: Union[str, "EnumOffsetType"] = None
+    offset_end: Optional[int] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -520,11 +525,16 @@ class RelativeDateTime(YAMLRoot):
 
         if self._is_empty(self.offset):
             self.MissingRequiredField("offset")
-        if not isinstance(self.offset, XSDDate):
-            self.offset = XSDDate(self.offset)
+        if not isinstance(self.offset, int):
+            self.offset = int(self.offset)
 
-        if self.offset_end is not None and not isinstance(self.offset_end, XSDDate):
-            self.offset_end = XSDDate(self.offset_end)
+        if self._is_empty(self.offset_type):
+            self.MissingRequiredField("offset_type")
+        if not isinstance(self.offset_type, EnumOffsetType):
+            self.offset_type = EnumOffsetType(self.offset_type)
+
+        if self.offset_end is not None and not isinstance(self.offset_end, int):
+            self.offset_end = int(self.offset_end)
 
         super().__post_init__(**kwargs)
 
@@ -1181,6 +1191,24 @@ class EnumPatientKnowledgeSource(EnumDefinitionImpl):
         description="The source of the knowledge represented in a Patient resource.",
     )
 
+class EnumOffsetType(EnumDefinitionImpl):
+    """
+    Offset Type
+    """
+    days = PermissibleValue(
+        text="days",
+        title="Days",
+        description="The offset is represented in days")
+    years = PermissibleValue(
+        text="years",
+        title="Years",
+        description="The offset is represented in Years")
+
+    _defn = EnumDefinition(
+        name="EnumOffsetType",
+        description="Offset Type",
+    )
+
 class EnumStudyStatus(EnumDefinitionImpl):
     """
     Codes indicating the study's current status
@@ -1354,16 +1382,19 @@ slots.population = Slot(uri=KFI['participant/population'], name="population", cu
                    model_uri=KFI_FHIR_SPARKS.population, domain=None, range=Optional[Union[str, "EnumPopulation"]])
 
 slots.dob = Slot(uri=KFI['participant/dob'], name="dob", curie=KFI.curie('participant/dob'),
-                   model_uri=KFI_FHIR_SPARKS.dob, domain=None, range=Optional[Union[str, XSDDate]])
+                   model_uri=KFI_FHIR_SPARKS.dob, domain=None, range=Optional[str])
 
 slots.dob_method = Slot(uri=KFI['participant/dob_method'], name="dob_method", curie=KFI.curie('participant/dob_method'),
                    model_uri=KFI_FHIR_SPARKS.dob_method, domain=None, range=Optional[Union[str, "EnumDobMethod"]])
 
 slots.age_at_last_vital = Slot(uri=KFI['participant/age_at_last_vital'], name="age_at_last_vital", curie=KFI.curie('participant/age_at_last_vital'),
-                   model_uri=KFI_FHIR_SPARKS.age_at_last_vital, domain=None, range=Optional[Union[dict, Any]])
+                   model_uri=KFI_FHIR_SPARKS.age_at_last_vital, domain=None, range=Optional[str])
 
-slots.deceased = Slot(uri=KFI['participant/deceased'], name="deceased", curie=KFI.curie('participant/deceased'),
-                   model_uri=KFI_FHIR_SPARKS.deceased, domain=None, range=Optional[Union[dict, Any]])
+slots.is_deceased = Slot(uri=KFI['participant/is_deceased'], name="is_deceased", curie=KFI.curie('participant/is_deceased'),
+                   model_uri=KFI_FHIR_SPARKS.is_deceased, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.deceased_rel = Slot(uri=KFI['participant/deceased_rel'], name="deceased_rel", curie=KFI.curie('participant/deceased_rel'),
+                   model_uri=KFI_FHIR_SPARKS.deceased_rel, domain=None, range=Optional[Union[str, RelativeDateTimeId]])
 
 slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_source'], name="patient_knowledge_source", curie=KFI.curie('participant/patient_knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.patient_knowledge_source, domain=None, range=Optional[Union[str, "EnumPatientKnowledgeSource"]])
@@ -1375,10 +1406,13 @@ slots.target_path = Slot(uri=KFI['relative-date-time/target_path'], name="target
                    model_uri=KFI_FHIR_SPARKS.target_path, domain=None, range=str)
 
 slots.offset = Slot(uri=KFI['relative-date-time/offset'], name="offset", curie=KFI.curie('relative-date-time/offset'),
-                   model_uri=KFI_FHIR_SPARKS.offset, domain=None, range=Union[str, XSDDate])
+                   model_uri=KFI_FHIR_SPARKS.offset, domain=None, range=int)
 
 slots.offset_end = Slot(uri=KFI['relative-date-time/offset_end'], name="offset_end", curie=KFI.curie('relative-date-time/offset_end'),
-                   model_uri=KFI_FHIR_SPARKS.offset_end, domain=None, range=Optional[Union[str, XSDDate]])
+                   model_uri=KFI_FHIR_SPARKS.offset_end, domain=None, range=Optional[int])
+
+slots.offset_type = Slot(uri=KFI['relative-date-time/offset_type'], name="offset_type", curie=KFI.curie('relative-date-time/offset_type'),
+                   model_uri=KFI_FHIR_SPARKS.offset_type, domain=None, range=Union[str, "EnumOffsetType"])
 
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
@@ -1433,9 +1467,6 @@ slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], 
 
 slots.participant__participant_id = Slot(uri=KFI['participant/participant_id'], name="participant__participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.participant__participant_id, domain=None, range=URIRef)
-
-slots.participant__consent_status = Slot(uri=KFI['participant/consent_status'], name="participant__consent_status", curie=KFI.curie('participant/consent_status'),
-                   model_uri=KFI_FHIR_SPARKS.participant__consent_status, domain=None, range=Union[str, "EnumConsentStateCodes"])
 
 slots.period__start = Slot(uri=KFI['period/start'], name="period__start", curie=KFI.curie('period/start'),
                    model_uri=KFI_FHIR_SPARKS.period__start, domain=None, range=Optional[Union[str, XSDDate]])

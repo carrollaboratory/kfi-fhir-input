@@ -1,7 +1,11 @@
 ---
 participant_id: par-01234
-consent_status: active 
 birthsex: male 
 race: 
   - asian 
 ethnicity: not_hispanic_or_latino
+population: cdc_rec:2034-7  # Chinese
+dob: '2017'
+dob_method: year_only
+age_at_last_vital: rt-0001
+is_deceased: False

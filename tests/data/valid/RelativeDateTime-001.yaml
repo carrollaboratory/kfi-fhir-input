@@ -1,0 +1,6 @@
+---
+id: rt-0001
+target_resource: Patient 
+target_path: dob 
+offset: 92
+offset_type: days

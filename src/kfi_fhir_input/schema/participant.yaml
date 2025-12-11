@@ -18,16 +18,6 @@ classes:
         range: string         
         identifier: true
         required: true
-      consent_status: 
-        title: Consent Status 
-        description: Indicates the state of the consent.
-        range: EnumConsentStateCodes 
-        required: true 
-        multivalued: false
-        annotations:
-          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-          fhir_element: status
-          fhir_resource: Consent
     slots:
       - birthsex 
       - race 
@@ -36,7 +26,8 @@ classes:
       - dob 
       - dob_method
       - age_at_last_vital
-      - deceased
+      - is_deceased
+      - deceased_rel
       - patient_knowledge_source
 slots:
   birthsex:
@@ -69,7 +60,7 @@ slots:
   dob: 
     title: Date of Birth 
     description: 	Date of Birth of the participant. Details of privacy method should be included in DOBMethod 
-    range: date 
+    range: string # date or string
     required: false 
     multivalued: false 
   dob_method: 
@@ -83,19 +74,21 @@ slots:
     description: Age or date of last vital status 
     required: false 
     multivalued: false 
-    range: Any 
-    any_of:
-      - range: date 
-      - range: string 
-  deceased:
-    title: Deceased 
-    description: Implementers can provide relativeDateTime or actual date or T/F, depending on data available.
+    range: string # date or string  
+  is_deceased: 
+    title: Is Deceased 
+    description: Is the participant known to be Deceased, T, or Alive, F 
     required: false 
     multivalued: false 
-    range: Any 
-    any_of:
-      - range: boolean
-      - range: RelativeDateTime 
+    range: boolean
+  deceased_rel:
+    title: Deceased Relative Date
+    description: Implementers can provide relativeDateTime if information is available.
+    required: false 
+    multivalued: false 
+    range: RelativeDateTime 
+  # deceased_date:  # If we decide we want to support actual dates, we will want to add this here
+  #   description: Implementers can provide relativeDateTime or actual date, depending on data available.
   patient_knowledge_source:
     title: Patient Knowledge Source 
     description: The source of the knowledge represented by this Patient resource.

@@ -8,8 +8,8 @@ ethnicity,Reported ethnicity as defined by the 1997 OMB directives.,enumeration,
 population,"opulation, Race, and/or Ethnicity information.",enumeration,,,,,Code describing the population (CDC). This should be one of the codes from the [CDC Race codes](https://hl7.org/fhir/us/core/STU6.1/ValueSet-detailed-race.html).
 dob,Date of Birth of the participant. Details of privacy method should be included in DOBMethod,string,,,,,
 dob_method,Specifies method used to alter DOB for research sharing. Details should be available in the study protocols.,enumeration,,,,exact=Exact;year_only=Year Only;shifted=Shifted;decade_only=Decade Only;other=Other,
+age_at_last_vital,Age or date of last vital status,string,,,,,
+is_deceased,"Is the participant known to be Deceased, T, or Alive, F",string,,,,,
+deceased_rel,Implementers can provide relativeDateTime if information is available.,string,,,,,Foreign Key: RelativeDateTime.id
 patient_knowledge_source,The source of the knowledge represented by this Patient resource.,enumeration,,,,"traditional=The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.;inferred=The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.",
 participant_id,Participant Global ID,string,,,,,
-consent_status,Indicates the state of the consent.,enumeration,,,,draft=Draft;proposed=Proposed;active=Active;rejected=Rejected;inactive=Inactive;entered_in_error=Entered in Error,
-age_at_last_vital_id,Age or date of last vital status,integer,,,,,Foreign Key: Any.id
-deceased_id,"Implementers can provide relativeDateTime or actual date or T/F, depending on data available.",integer,,,,,Foreign Key: Any.id

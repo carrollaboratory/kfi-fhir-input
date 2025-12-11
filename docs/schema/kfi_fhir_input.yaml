@@ -877,6 +877,20 @@ enums:
           of the patient.
         meaning: ncpi_patient_knowledge_source:traditional
         title: Inferred
+  EnumOffsetType:
+    name: EnumOffsetType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/EnumOffsetType
+    description: Offset Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    permissible_values:
+      days:
+        text: days
+        description: The offset is represented in days
+        title: Days
+      years:
+        text: years
+        description: The offset is represented in Years
+        title: Years
   EnumStudyStatus:
     name: EnumStudyStatus
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
@@ -1362,7 +1376,7 @@ slots:
     owner: Participant
     domain_of:
     - Participant
-    range: date
+    range: string
     required: false
     multivalued: false
   dob_method:
@@ -1389,33 +1403,35 @@ slots:
     owner: Participant
     domain_of:
     - Participant
-    range: Any
+    range: string
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
-    any_of:
-    - range: date
-    - range: string
-  deceased:
-    name: deceased
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/deceased
-    description: Implementers can provide relativeDateTime or actual date or T/F,
-      depending on data available.
-    title: Deceased
+  is_deceased:
+    name: is_deceased
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/is_deceased
+    description: Is the participant known to be Deceased, T, or Alive, F
+    title: Is Deceased
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/deceased
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/is_deceased
     owner: Participant
     domain_of:
     - Participant
-    range: Any
+    range: boolean
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
-    any_of:
-    - range: boolean
-    - range: RelativeDateTime
+  deceased_rel:
+    name: deceased_rel
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/deceased_rel
+    description: Implementers can provide relativeDateTime if information is available.
+    title: Deceased Relative Date
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/deceased_rel
+    owner: Participant
+    domain_of:
+    - Participant
+    range: RelativeDateTime
+    required: false
+    multivalued: false
   patient_knowledge_source:
     name: patient_knowledge_source
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/patient_knowledge_source
@@ -1466,7 +1482,7 @@ slots:
     owner: RelativeDateTime
     domain_of:
     - RelativeDateTime
-    range: date
+    range: integer
     required: true
     multivalued: false
   offset_end:
@@ -1479,8 +1495,21 @@ slots:
     owner: RelativeDateTime
     domain_of:
     - RelativeDateTime
-    range: date
+    range: integer
     required: false
+    multivalued: false
+  offset_type:
+    name: offset_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_type
+    description: What is the datatype associated with the offset (days, years, etc)
+    title: Offset Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_type
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: EnumOffsetType
+    required: true
     multivalued: false
   parent_study_id:
     name: parent_study_id
@@ -1745,29 +1774,6 @@ slots:
     - Participant
     range: string
     required: true
-  participant__consent_status:
-    name: participant__consent_status
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_element:
-        tag: fhir_element
-        value: status
-      fhir_resource:
-        tag: fhir_resource
-        value: Consent
-    description: Indicates the state of the consent.
-    title: Consent Status
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/consent_status
-    alias: consent_status
-    owner: Participant
-    domain_of:
-    - Participant
-    range: EnumConsentStateCodes
-    required: true
-    multivalued: false
   period__start:
     name: period__start
     description: Start attribute for a FHIR period data type.
@@ -2018,10 +2024,10 @@ classes:
     - dob
     - dob_method
     - age_at_last_vital
-    - deceased
+    - is_deceased
+    - deceased_rel
     - patient_knowledge_source
     - participant__participant_id
-    - participant__consent_status
     attributes:
       participant_id:
         name: participant_id
@@ -2030,23 +2036,6 @@ classes:
         identifier: true
         range: string
         required: true
-      consent_status:
-        name: consent_status
-        annotations:
-          fhir_profile:
-            tag: fhir_profile
-            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-          fhir_element:
-            tag: fhir_element
-            value: status
-          fhir_resource:
-            tag: fhir_resource
-            value: Consent
-        description: Indicates the state of the consent.
-        title: Consent Status
-        range: EnumConsentStateCodes
-        required: true
-        multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
   Period:
     name: Period
@@ -2112,6 +2101,7 @@ classes:
     - target_path
     - offset
     - offset_end
+    - offset_type
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
   ResearchStudy:
     name: ResearchStudy
@@ -2189,5 +2179,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2025-12-10T13:27:50'
 source_file_size: 4701
-generation_date: '2025-12-10T13:30:47'
+generation_date: '2025-12-11T13:12:30'
 
