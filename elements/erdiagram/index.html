@@ -183,6 +183,12 @@ AccessPolicy {
     string access_policy_id  
     EnumConsentStateCodes status  
 }
+AgeAt {
+    string id  
+    EnumAgeValueType value_type  
+    uriorcurie age_code  
+    date as_date  
+}
 Any {
 
 }
@@ -213,6 +219,10 @@ Participant {
     EnumPatientKnowledgeSource patient_knowledge_source  
     string participant_id  
     uriorcurieList external_id  
+}
+ParticipantAssertion {
+    EnumEntityAsserter entity_asserter  
+    string participant_assertion_id  
 }
 Period {
     date start  
@@ -266,9 +276,15 @@ ResearchStudyCollection {
     uriorcurieList external_id  
 }
 
+AgeAt ||--|o RelativeDateTime : "age"
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
 Participant ||--|o RelativeDateTime : "deceased_rel"
+ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
+ParticipantAssertion ||--|o AgeAt : "age_at_onset"
+ParticipantAssertion ||--|o AgeAt : "age_at_resolution"
+ParticipantAssertion ||--|o PractitionerRole : "practitioner_role_id"
+ParticipantAssertion ||--|| Participant : "participant_id"
 Practitioner ||--|o Institution : "institution_id"
 Practitioner ||--|o PractitionerRole : "practitioner_role_id"
 PractitionerRole ||--|o Institution : "institution_id"

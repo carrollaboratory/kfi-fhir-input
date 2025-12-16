@@ -7,10 +7,12 @@ id: https://carrollaboratory.github.io/kif-fhir-input
 imports:
 - linkml:types
 - access_policy
+- age_at
 - practitioner
 - associated_party
 - institution
 - participant
+- participant_assertion
 - period
 - practitioner_role
 - practitioner
@@ -631,6 +633,28 @@ enums:
         text: gsr_allowed
         meaning: ncpi_data_access_type:gsr-allowed
         title: GSR Allowed
+  EnumAgeValueType:
+    name: EnumAgeValueType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/EnumAgeValueType
+    description: Describes where to look for the data (as value, code, range, etc)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    permissible_values:
+      age:
+        text: age
+        description: Age (must also be annotated with age units)
+        title: Age
+      code:
+        text: code
+        description: Age as Code (ages will be provided as coded values)
+        title: Age as Code
+      age_range:
+        text: age_range
+        description: Age expressed as a range (relative date/time)
+        title: Age Range
+      date:
+        text: date
+        description: Rather than an age, we have an actual date for the event's occurence
+        title: Date
   EnumResearchStudyPartyOrganizationType:
     name: EnumResearchStudyPartyOrganizationType
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyOrganizationType
@@ -989,6 +1013,7 @@ slots:
     owner: RelativeDateTime
     domain_of:
     - Record
+    - AgeAt
     - RelativeDateTime
     range: string
     required: true
@@ -1064,6 +1089,19 @@ slots:
     slot_uri: kfi_fhir_sparks:research_study_id
     identifier: true
     range: ResearchStudy
+    required: true
+  participant_id:
+    name: participant_id
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputparticipant_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    slot_uri: kfi_fhir_sparks:participant_id
+    range: Participant
     required: true
   period_id:
     name: period_id
@@ -1735,6 +1773,55 @@ slots:
     range: EnumConsentStateCodes
     required: true
     multivalued: false
+  ageAt__value_type:
+    name: ageAt__value_type
+    description: Age Value Type
+    title: Value Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_type
+    identifier: false
+    alias: value_type
+    owner: AgeAt
+    domain_of:
+    - AgeAt
+    range: EnumAgeValueType
+    required: true
+  ageAt__age:
+    name: ageAt__age
+    description: Age either numeric value or range
+    title: Age
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age
+    alias: age
+    owner: AgeAt
+    domain_of:
+    - AgeAt
+    range: RelativeDateTime
+    required: false
+  ageAt__age_code:
+    name: ageAt__age_code
+    description: Age expressed as an enumerated value representing an age category
+    title: Age Code
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_code
+    alias: age_code
+    owner: AgeAt
+    domain_of:
+    - AgeAt
+    range: uriorcurie
+    required: false
+  ageAt__as_date:
+    name: ageAt__as_date
+    description: Event Date (rather than age)
+    title: Age As Date
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/as_date
+    alias: as_date
+    owner: AgeAt
+    domain_of:
+    - AgeAt
+    range: date
+    required: false
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -1930,6 +2017,46 @@ classes:
         required: true
         multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
+  AgeAt:
+    name: AgeAt
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/AgeAt
+    description: These represent a flexible age value that could represent one of
+      the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
+    title: Age At ...
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slots:
+    - id
+    - ageAt__value_type
+    - ageAt__age
+    - ageAt__age_code
+    - ageAt__as_date
+    attributes:
+      value_type:
+        name: value_type
+        description: Age Value Type
+        title: Value Type
+        identifier: false
+        range: EnumAgeValueType
+        required: true
+      age:
+        name: age
+        description: Age either numeric value or range
+        title: Age
+        range: RelativeDateTime
+        required: false
+      age_code:
+        name: age_code
+        description: Age expressed as an enumerated value representing an age category
+        title: Age Code
+        range: uriorcurie
+        required: false
+      as_date:
+        name: as_date
+        description: Event Date (rather than age)
+        title: Age As Date
+        range: date
+        required: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/AgeAt
   Practitioner:
     name: Practitioner
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/Practitioner
@@ -2177,7 +2304,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-11T19:13:22'
-source_file_size: 4701
-generation_date: '2025-12-11T19:13:33'
+source_file_date: '2025-12-16T20:10:59'
+source_file_size: 4933
+generation_date: '2025-12-16T20:11:09'
 
