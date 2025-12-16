@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-11T13:12:37
+# Generation date: 2025-12-16T14:09:56
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -94,6 +94,10 @@ class RecordId(extended_str):
 
 
 class AccessPolicyAccessPolicyId(extended_str):
+    pass
+
+
+class AgeAtId(extended_str):
     pass
 
 
@@ -236,6 +240,48 @@ class AccessPolicy(YAMLRoot):
 
         if self.disease_limitation is not None and not isinstance(self.disease_limitation, str):
             self.disease_limitation = str(self.disease_limitation)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class AgeAt(YAMLRoot):
+    """
+    These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as
+    Code, Date Range, DateTime
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["participant-assertion/AgeAt"]
+    class_class_curie: ClassVar[str] = "kfi:participant-assertion/AgeAt"
+    class_name: ClassVar[str] = "AgeAt"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AgeAt
+
+    id: Union[str, AgeAtId] = None
+    value_type: Union[str, "EnumAgeValueType"] = None
+    age: Optional[Union[str, RelativeDateTimeId]] = None
+    age_code: Optional[Union[str, URIorCURIE]] = None
+    as_date: Optional[Union[str, XSDDate]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, AgeAtId):
+            self.id = AgeAtId(self.id)
+
+        if self._is_empty(self.value_type):
+            self.MissingRequiredField("value_type")
+        if not isinstance(self.value_type, EnumAgeValueType):
+            self.value_type = EnumAgeValueType(self.value_type)
+
+        if self.age is not None and not isinstance(self.age, RelativeDateTimeId):
+            self.age = RelativeDateTimeId(self.age)
+
+        if self.age_code is not None and not isinstance(self.age_code, URIorCURIE):
+            self.age_code = URIorCURIE(self.age_code)
+
+        if self.as_date is not None and not isinstance(self.as_date, XSDDate):
+            self.as_date = XSDDate(self.as_date)
 
         super().__post_init__(**kwargs)
 
@@ -941,6 +987,32 @@ class EnumDataAccessType(EnumDefinitionImpl):
         description="""Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'""",
     )
 
+class EnumAgeValueType(EnumDefinitionImpl):
+    """
+    Describes where to look for the data (as value, code, range, etc)
+    """
+    age = PermissibleValue(
+        text="age",
+        title="Age",
+        description="Age (must also be annotated with age units)")
+    code = PermissibleValue(
+        text="code",
+        title="Age as Code",
+        description="Age as Code (ages will be provided as coded values)")
+    age_range = PermissibleValue(
+        text="age_range",
+        title="Age Range",
+        description="Age expressed as a range (relative date/time)")
+    date = PermissibleValue(
+        text="date",
+        title="Date",
+        description="Rather than an age, we have an actual date for the event's occurence")
+
+    _defn = EnumDefinition(
+        name="EnumAgeValueType",
+        description="Describes where to look for the data (as value, code, range, etc)",
+    )
+
 class EnumResearchStudyPartyOrganizationType(EnumDefinitionImpl):
     """
     Research Study Party Organization Type
@@ -1327,6 +1399,9 @@ slots.practitioner_role_id = Slot(uri=KFI_FHIR_SPARKS.practitioner_role_id, name
 slots.research_study_id = Slot(uri=KFI_FHIR_SPARKS.research_study_id, name="research_study_id", curie=KFI_FHIR_SPARKS.curie('research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=URIRef)
 
+slots.participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.participant_id, domain=None, range=Union[str, ParticipantParticipantId])
+
 slots.period_id = Slot(uri=KFI_FHIR_SPARKS.period_id, name="period_id", curie=KFI_FHIR_SPARKS.curie('period_id'),
                    model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodId]])
 
@@ -1458,6 +1533,18 @@ slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy
 
 slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])
+
+slots.ageAt__value_type = Slot(uri=KFI['participant-assertion/value_type'], name="ageAt__value_type", curie=KFI.curie('participant-assertion/value_type'),
+                   model_uri=KFI_FHIR_SPARKS.ageAt__value_type, domain=None, range=Union[str, "EnumAgeValueType"])
+
+slots.ageAt__age = Slot(uri=KFI['participant-assertion/age'], name="ageAt__age", curie=KFI.curie('participant-assertion/age'),
+                   model_uri=KFI_FHIR_SPARKS.ageAt__age, domain=None, range=Optional[Union[str, RelativeDateTimeId]])
+
+slots.ageAt__age_code = Slot(uri=KFI['participant-assertion/age_code'], name="ageAt__age_code", curie=KFI.curie('participant-assertion/age_code'),
+                   model_uri=KFI_FHIR_SPARKS.ageAt__age_code, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.ageAt__as_date = Slot(uri=KFI['participant-assertion/as_date'], name="ageAt__as_date", curie=KFI.curie('participant-assertion/as_date'),
+                   model_uri=KFI_FHIR_SPARKS.ageAt__as_date, domain=None, range=Optional[Union[str, XSDDate]])
 
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)

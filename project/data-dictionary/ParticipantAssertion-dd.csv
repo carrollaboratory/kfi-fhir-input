@@ -1,0 +1,8 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+participant_id,The Global ID for the Participant,string,,,,,Foreign Key: Participant.participant_id
+age_at_assertion,The date or age at which this condition is being asserted.,string,,,,,Foreign Key: AgeAt.id
+age_at_onset,The date or age at which this condition is being asserted.,string,,,,,Foreign Key: AgeAt.id
+age_at_resolution,The date or age at which this condition is being asserted.,string,,,,,Foreign Key: AgeAt.id
+practitioner_role_id,Global ID for this record,string,,,,,Foreign Key: PractitionerRole.practitioner_role_id
+entity_asserter,"Who recorded this assertion about the Participant? This can support understanding the differences between self-report, doctor, trained research staff.",enumeration,,,,self_report=The participant reported the assertion;doctor=Physician;staff=Trained research staff,
+participant_assertion_id,Participant Assertion Global ID,string,,,,,

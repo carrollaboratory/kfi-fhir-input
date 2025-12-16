@@ -1,0 +1,68 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+name: kfi-fhir-input-participant-assertion
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+  - age_at
+classes:
+  ParticipantAssertion:
+    title: Participant Assertion 
+    description: Assertion about a particular Participant. May include Conditions, Measurements, etc.
+    annotations:
+      fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+    attributes:
+      participant_assertion_id:
+        title: Participant Assertion ID
+        description: Participant Assertion Global ID
+        range: string         
+        identifier: true
+        required: true
+    slots:
+      - participant_id 
+      - age_at_assertion
+      - age_at_onset 
+      - age_at_resolution
+      - practitioner_role_id
+      - entity_asserter 
+slots:
+  age_at_assertion:
+    title: Age At Assertion 
+    description: The date or age at which this condition is being asserted.
+    required: false 
+    multivalued: false 
+    range: AgeAt
+  age_at_onset:
+    title: Age At Onset 
+    description: The date or age at which this condition is being asserted.
+    required: false 
+    multivalued: false 
+    range: AgeAt
+  age_at_resolution:
+    title: Age At Resolution 
+    description: The date or age at which this condition is being asserted.
+    required: false 
+    multivalued: false 
+    range: AgeAt
+  entity_asserter: 
+    title: Entity Asserter 
+    description: Who recorded this assertion about the Participant? This can 
+                 support understanding the differences between self-report, 
+                 doctor, trained research staff.
+    required: false 
+    multivalued: false 
+    range: EnumEntityAsserter 
+enums:
+  EnumEntityAsserter:
+    description: Who recorded this assertion about the Participant? This can 
+                  support understanding the differences between self-report, 
+                  doctor, trained research staff.
+    permissible_values:
+      self_report:
+        title: Self Report 
+        description: The participant reported the assertion 
+      doctor: 
+        title: Doctor
+        description: Physician
+      staff:
+        title: Trained Research Staff 
+        description: Trained research staff 

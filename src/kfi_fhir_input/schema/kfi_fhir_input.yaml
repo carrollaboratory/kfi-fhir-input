@@ -46,10 +46,12 @@ default_range: string
 imports:
   - linkml:types
   - access_policy
+  - age_at 
   - practitioner
   - associated_party
   - institution
   - participant
+  - participant_assertion
   - period 
   - practitioner_role 
   - practitioner
@@ -113,6 +115,13 @@ slots:
       target_slot: research_study_id     
     identifier: true
     required: true
+  participant_id:
+    title: Participant ID 
+    description: The Global ID for the Participant 
+    range: Participant 
+    annotations: 
+      target_slot: participant_id 
+    required: true 
   period_id:
     title: Period ID
     description: Reference to a time period which defines a Start and End datatime period. 
