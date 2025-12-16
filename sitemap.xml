@@ -65,6 +65,10 @@
          <lastmod>2025-12-16</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumAssertionType/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumBirthSex/</loc>
          <lastmod>2025-12-16</lastmod>
     </url>
@@ -257,6 +261,14 @@
          <lastmod>2025-12-16</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_code/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_type/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/birthsex/</loc>
          <lastmod>2025-12-16</lastmod>
     </url>
@@ -358,6 +370,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/offset_type/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/other_condition_modifiers/</loc>
          <lastmod>2025-12-16</lastmod>
     </url>
     <url>
@@ -469,7 +485,23 @@
          <lastmod>2025-12-16</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_code/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_number/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_string/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_type/</loc>
+         <lastmod>2025-12-16</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_units/</loc>
          <lastmod>2025-12-16</lastmod>
     </url>
     <url>

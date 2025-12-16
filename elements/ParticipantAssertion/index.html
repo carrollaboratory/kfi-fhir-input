@@ -296,6 +296,19 @@
 
 
 
+      ParticipantAssertion : assertion_code
+
+      ParticipantAssertion : assertion_type
+
+
+
+
+
+        ParticipantAssertion --&gt; "1" EnumAssertionType : assertion_type
+        click EnumAssertionType href "../EnumAssertionType/"
+
+
+
       ParticipantAssertion : entity_asserter
 
 
@@ -306,6 +319,8 @@
         click EnumEntityAsserter href "../EnumEntityAsserter/"
 
 
+
+      ParticipantAssertion : other_condition_modifiers
 
       ParticipantAssertion : participant_assertion_id
 
@@ -330,6 +345,14 @@
         click PractitionerRole href "../PractitionerRole/"
 
 
+
+      ParticipantAssertion : value_code
+
+      ParticipantAssertion : value_number
+
+      ParticipantAssertion : value_string
+
+      ParticipantAssertion : value_units
 
 
 </div>
@@ -360,13 +383,13 @@
 <tr>
 <td><a href="../age_at_onset/">age_at_onset</a></td>
 <td>0..1 <br/> <a href="../AgeAt/">AgeAt</a></td>
-<td>The date or age at which this condition is being asserted</td>
+<td>The age of onset for this condition</td>
 <td>direct</td>
 </tr>
 <tr>
 <td><a href="../age_at_resolution/">age_at_resolution</a></td>
 <td>0..1 <br/> <a href="../AgeAt/">AgeAt</a></td>
-<td>The date or age at which this condition is being asserted</td>
+<td>The age at which this condition was resolved, abated, or cured</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -379,6 +402,48 @@
 <td><a href="../entity_asserter/">entity_asserter</a></td>
 <td>0..1 <br/> <a href="../EnumEntityAsserter/">EnumEntityAsserter</a></td>
 <td>Who recorded this assertion about the Participant? This can support understan...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../other_condition_modifiers/">other_condition_modifiers</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Any additional modifiers for this condition, such as severity</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../assertion_type/">assertion_type</a></td>
+<td>1 <br/> <a href="../EnumAssertionType/">EnumAssertionType</a></td>
+<td>Describe the type of assertion being made</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../assertion_code/">assertion_code</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The structured term defining the meaning of the assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_code/">value_code</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Value as code</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_string/">value_string</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Value as string</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_number/">value_number</a></td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
+<td>Value as numer</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../value_units/">value_units</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The structured term defining the units of the value (ucum)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -448,6 +513,13 @@ slots:
 - age_at_resolution
 - practitioner_role_id
 - entity_asserter
+- other_condition_modifiers
+- assertion_type
+- assertion_code
+- value_code
+- value_string
+- value_number
+- value_units
 attributes:
   participant_assertion_id:
     name: participant_assertion_id
@@ -520,7 +592,8 @@ attributes:
     multivalued: false
   age_at_onset:
     name: age_at_onset
-    description: The date or age at which this condition is being asserted.
+    description: The age of onset for this condition. Could be expressed with a term,
+      an age, or an age range.
     title: Age At Onset
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
@@ -533,7 +606,9 @@ attributes:
     multivalued: false
   age_at_resolution:
     name: age_at_resolution
-    description: The date or age at which this condition is being asserted.
+    description: The age at which this condition was resolved, abated, or cured. Should
+      be left empty in cases of current active status. Could be expressed with a term,
+      an age, or an age range.
     title: Age At Resolution
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
@@ -575,6 +650,97 @@ attributes:
     domain_of:
     - ParticipantAssertion
     range: EnumEntityAsserter
+    required: false
+    multivalued: false
+  other_condition_modifiers:
+    name: other_condition_modifiers
+    description: Any additional modifiers for this condition, such as severity.
+    title: Other Condition Modifiers
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: other_condition_modifiers
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  assertion_type:
+    name: assertion_type
+    description: Describe the type of assertion being made.
+    title: Assertion Type
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: assertion_type
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: EnumAssertionType
+    required: true
+    multivalued: false
+  assertion_code:
+    name: assertion_code
+    description: The structured term defining the meaning of the assertion.
+    title: Assertion Code
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: assertion_code
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: true
+    multivalued: false
+  value_code:
+    name: value_code
+    description: Value as code
+    title: Value Code
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: value_code
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  value_string:
+    name: value_string
+    description: Value as string
+    title: Value String
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: value_string
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: string
+    required: false
+    multivalued: false
+  value_number:
+    name: value_number
+    description: Value as numer
+    title: Value Number
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: value_number
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: float
+    required: false
+    multivalued: false
+  value_units:
+    name: value_units
+    description: The structured term defining the units of the value (ucum).
+    title: Value Units
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: value_units
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
     required: false
     multivalued: false
 

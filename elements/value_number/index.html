@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/description/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/value_number/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Description (description) - kfi-fhir-input</title>
+        <title>Slot: Value Number (value_number) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-description-description" class="md-skip">
+        <a href="#slot-value-number-value_number" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Description (description)
+              Slot: Value Number (value_number)
             
           </span>
         </div>
@@ -416,10 +416,10 @@
   
 
 
-<h1 id="slot-description-description">Slot: Description (description)</h1>
-<p><em>More details associated with the given resource</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputdescription">kfi_fhir_sparks:description</a>
-Alias: description</p>
+<h1 id="slot-value-number-value_number">Slot: Value Number (value_number)</h1>
+<p><em>Value as numer</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputvalue_number">kfi_fhir_sparks:value_number</a>
+Alias: value_number</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -433,30 +433,15 @@ Alias: description</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
-<td>Collections of research data including, but not limited, to Consortia, Progra...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AccessPolicy/">AccessPolicy</a></td>
-<td>Limitations and/or requirements that define how a user may gain access to a p...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ResearchStudy/">ResearchStudy</a></td>
-<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Practitioner/">Practitioner</a></td>
-<td>For our purposes, this will be an investigator</td>
+<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
+<td>Assertion about a particular Participant</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../Float/">Float</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -474,30 +459,28 @@ Alias: description</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:description</td>
+<td>kfi_fhir_sparks:value_number</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:description</td>
+<td>kfi_fhir_sparks:value_number</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: description
-description: More details associated with the given resource
-title: Description
+<pre><code class="language-yaml">name: value_number
+description: Value as numer
+title: Value Number
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: description
+alias: value_number
 domain_of:
-- AccessPolicy
-- Practitioner
-- ResearchStudy
-- ResearchStudyCollection
-range: string
+- ParticipantAssertion
+range: float
 required: false
+multivalued: false
 
 </code></pre>
 

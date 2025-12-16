@@ -2304,7 +2304,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-16T20:10:59'
+source_file_date: '2025-12-16T22:49:02'
 source_file_size: 4933
-generation_date: '2025-12-16T20:11:09'
+generation_date: '2025-12-16T22:49:11'
 

@@ -609,11 +609,11 @@
 </tr>
 <tr>
 <td><a href="age_at_onset/">age_at_onset</a></td>
-<td>The date or age at which this condition is being asserted</td>
+<td>The age of onset for this condition</td>
 </tr>
 <tr>
 <td><a href="age_at_resolution/">age_at_resolution</a></td>
-<td>The date or age at which this condition is being asserted</td>
+<td>The age at which this condition was resolved, abated, or cured</td>
 </tr>
 <tr>
 <td><a href="age_code/">age_code</a></td>
@@ -622,6 +622,14 @@
 <tr>
 <td><a href="as_date/">as_date</a></td>
 <td>Event Date (rather than age)</td>
+</tr>
+<tr>
+<td><a href="assertion_code/">assertion_code</a></td>
+<td>The structured term defining the meaning of the assertion</td>
+</tr>
+<tr>
+<td><a href="assertion_type/">assertion_type</a></td>
+<td>Describe the type of assertion being made</td>
 </tr>
 <tr>
 <td><a href="birthsex/">birthsex</a></td>
@@ -718,6 +726,10 @@
 <tr>
 <td><a href="offset_type/">offset_type</a></td>
 <td>What is the datatype associated with the offset (days, years, etc)</td>
+</tr>
+<tr>
+<td><a href="other_condition_modifiers/">other_condition_modifiers</a></td>
+<td>Any additional modifiers for this condition, such as severity</td>
 </tr>
 <tr>
 <td><a href="parent_study_id/">parent_study_id</a></td>
@@ -828,8 +840,24 @@
 <td>FHIR Resource Type for target (i</td>
 </tr>
 <tr>
+<td><a href="value_code/">value_code</a></td>
+<td>Value as code</td>
+</tr>
+<tr>
+<td><a href="value_number/">value_number</a></td>
+<td>Value as numer</td>
+</tr>
+<tr>
+<td><a href="value_string/">value_string</a></td>
+<td>Value as string</td>
+</tr>
+<tr>
 <td><a href="value_type/">value_type</a></td>
 <td>Age Value Type</td>
+</tr>
+<tr>
+<td><a href="value_units/">value_units</a></td>
+<td>The structured term defining the units of the value (ucum)</td>
 </tr>
 <tr>
 <td><a href="website/">website</a></td>
@@ -853,6 +881,10 @@
 <tr>
 <td><a href="EnumAgeValueType/">EnumAgeValueType</a></td>
 <td>Describes where to look for the data (as value, code, range, etc)</td>
+</tr>
+<tr>
+<td><a href="EnumAssertionType/">EnumAssertionType</a></td>
+<td>Provides options to describe the expressed semantics of a condition</td>
 </tr>
 <tr>
 <td><a href="EnumBirthSex/">EnumBirthSex</a></td>
