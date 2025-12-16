@@ -24,6 +24,13 @@ classes:
       - age_at_resolution
       - practitioner_role_id
       - entity_asserter 
+      - other_condition_modifiers
+      - assertion_type 
+      - assertion_code
+      - value_code 
+      - value_string 
+      - value_number
+      - value_units
 slots:
   age_at_assertion:
     title: Age At Assertion 
@@ -33,13 +40,16 @@ slots:
     range: AgeAt
   age_at_onset:
     title: Age At Onset 
-    description: The date or age at which this condition is being asserted.
+    description: The age of onset for this condition. Could be expressed with a
+                 term, an age, or an age range.
     required: false 
     multivalued: false 
     range: AgeAt
   age_at_resolution:
     title: Age At Resolution 
-    description: The date or age at which this condition is being asserted.
+    description: The age at which this condition was resolved, abated, or cured. 
+                 Should be left empty in cases of current active status. Could 
+                 be expressed with a term, an age, or an age range.
     required: false 
     multivalued: false 
     range: AgeAt
@@ -51,6 +61,48 @@ slots:
     required: false 
     multivalued: false 
     range: EnumEntityAsserter 
+  other_condition_modifiers:
+    title: Other Condition Modifiers 
+    description: Any additional modifiers for this condition, such as severity.
+    required: false 
+    multivalued: false 
+    range: uriorcurie
+  assertion_type:
+    title: Assertion Type 
+    description: Describe the type of assertion being made.
+    required: true 
+    multivalued: false 
+    range: EnumAssertionType
+  assertion_code:
+    title: Assertion Code 
+    description: The structured term defining the meaning of the assertion.
+    required: true 
+    multivalued: false 
+    range: uriorcurie 
+  value_code:
+    title: Value Code 
+    description: Value as code 
+    required: false 
+    multivalued: false 
+    range: uriorcurie 
+  value_string:
+    title: Value String 
+    description: Value as string 
+    required: false 
+    multivalued: false
+    range: string
+  value_number:
+    title: Value Number 
+    description: Value as numer
+    required: false 
+    multivalued: false
+    range: float
+  value_units:
+    title: Value Units
+    description: The structured term defining the units of the value (ucum). 
+    required: false 
+    multivalued: false
+    range: uriorcurie
 enums:
   EnumEntityAsserter:
     description: Who recorded this assertion about the Participant? This can 
@@ -66,3 +118,34 @@ enums:
       staff:
         title: Trained Research Staff 
         description: Trained research staff 
+  EnumAssertionType: 
+    description: Provides options to describe the expressed semantics of a condition. 
+    permissible_values: 
+      phenotypic_feature: 
+        title: Phenotypic Feature
+        description: This is a phenotypic feature
+        meaning: ncpi_cond_type:Phenotypic-Feature
+      disease: 
+        title: disease 
+        description: Disease 
+        meaning: ncpi_cond_type:Disease
+      comorbidity: 
+        title: comorbidity 
+        description: Comorbidity
+        meaning: ncpi_cond_type:Comorbidity
+      histology: 
+        title: histology 
+        description: Histology 
+        meaning: ncpi_cond_type:Histology
+      clinical_finding: 
+        title: clinical-finding 
+        description: Clinical Finding 
+        meaning: ncpi_cond_type:Clinical-Finding
+      ehr_billing_code:
+        title: EHR Billing Code 
+        description: From an EHR billing record, which may indicate only investigation into a possible diagnosis.
+        meaning: ncpi_cond_type:EHR-Condition-Code
+      measurement:
+        title: Measurement
+        description: A measurement of some feature, eg, height or glucose.
+        #meaning: 
