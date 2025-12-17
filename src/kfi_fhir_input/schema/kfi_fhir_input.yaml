@@ -26,6 +26,7 @@ prefixes:
   ncpi_data_access_type: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type
   ncpi_data_access_code: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
   ncpi_dob_method: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method
+  ncpi_cond_type: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
   ncpi_patient_knowledge_source: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
   linkml: https://w3id.org/linkml/
   duo: http://purl.obolibrary.org/obo/duo.owl

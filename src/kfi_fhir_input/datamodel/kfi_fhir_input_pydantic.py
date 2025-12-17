@@ -128,6 +128,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                              'prefix_reference': 'https://w3id.org/linkml/'},
                   'ncpi_collection_type': {'prefix_prefix': 'ncpi_collection_type',
                                            'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type'},
+                  'ncpi_cond_type': {'prefix_prefix': 'ncpi_cond_type',
+                                     'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/'},
                   'ncpi_data_access_code': {'prefix_prefix': 'ncpi_data_access_code',
                                             'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/'},
                   'ncpi_data_access_type': {'prefix_prefix': 'ncpi_data_access_type',
@@ -654,25 +656,145 @@ class ParticipantAssertion(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion',
+         'slot_usage': {'participant_id': {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                                                            'value': 'category'},
+                                                           'fhir_profile': {'tag': 'fhir_profile',
+                                                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                                                           'fhir_resource': {'tag': 'fhir_resource',
+                                                                             'value': 'Observation'}},
+                                           'name': 'participant_id'}},
          'title': 'Participant Assertion'})
 
-    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'participant_id'}},
+    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'category'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
          'domain_of': ['Participant', 'ParticipantAssertion']} })
-    age_at_assertion: Optional[str] = Field(default=None, title="Age At Assertion", description="""The date or age at which this condition is being asserted.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    age_at_onset: Optional[str] = Field(default=None, title="Age At Onset", description="""The age of onset for this condition. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    age_at_resolution: Optional[str] = Field(default=None, title="Age At Resolution", description="""The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
+    age_at_event: Optional[str] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'component[ageAtEvent] or maybe '
+                                                   'effectiveDateTime'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    age_at_assertion: Optional[str] = Field(default=None, title="Age At Assertion", description="""The date or age at which this condition is being asserted.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'component[ageAtAssertion]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    age_at_onset: Optional[str] = Field(default=None, title="Age At Onset", description="""The age of onset for this condition. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'component[ageAtOnset]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    age_at_resolution: Optional[str] = Field(default=None, title="Age At Resolution", description="""The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'component[ageAtResolution]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
     practitioner_role_id: Optional[str] = Field(default=None, title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'practitioner_role_id'}},
          'domain_of': ['Practitioner', 'ParticipantAssertion', 'PractitionerRole']} })
-    entity_asserter: Optional[EnumEntityAsserter] = Field(default=None, title="Entity Asserter", description="""Who recorded this assertion about the Participant? This can support understanding the differences between self-report, doctor, trained research staff.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    other_condition_modifiers: Optional[str] = Field(default=None, title="Other Condition Modifiers", description="""Any additional modifiers for this condition, such as severity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    assertion_type: EnumAssertionType = Field(default=..., title="Assertion Type", description="""Describe the type of assertion being made.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    assertion_code: str = Field(default=..., title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    value_code: Optional[str] = Field(default=None, title="Value Code", description="""Value as code""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    value_string: Optional[str] = Field(default=None, title="Value String", description="""Value as string""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    value_number: Optional[float] = Field(default=None, title="Value Number", description="""Value as numer""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
-    value_units: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value (ucum).""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
+    entity_asserter: Optional[EnumEntityAsserter] = Field(default=None, title="Entity Asserter", description="""Who recorded this assertion about the Participant? This can support understanding the differences between self-report, doctor, trained research staff.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
+                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/entity-asserter'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    other_condition_modifiers: Optional[str] = Field(default=None, title="Other Condition Modifiers", description="""Any additional modifiers for this condition, such as severity.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'component[otherModifiers]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    assertion_type: EnumAssertionType = Field(default=..., title="Assertion Type", description="""Describe the type of assertion being made.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'category'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    assertion_code: str = Field(default=..., title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'code.coding'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    assertion_text: Optional[str] = Field(default=None, title="Assertion Text", description="""Detailed description / free text about this assertion.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'code.text'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    assertion_source: Optional[str] = Field(default=None, title="Assertion Source", description="""Where or how was this this assertion about the Participant recorded? This can support understanding the differences between surveys, automated EHR extraction, manual chart abstraction, etc.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'method'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    value_code: Optional[str] = Field(default=None, title="Value Code", description="""Value as code""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'valueCodeableConcept'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    value_string: Optional[str] = Field(default=None, title="Value String", description="""Value as string""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'valueString'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    value_number: Optional[float] = Field(default=None, title="Value Number", description="""Value as numer""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'valueQuantity, valueInteger'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    value_units: Optional[str] = Field(default=None, title="Value Units", description="""The structured term defining the units of the value (ucum).""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    body_site: Optional[str] = Field(default=None, title="Body Site", description="""Location information for the observation, including site, laterality, and other qualifiers as appropriate. Multiple observations may be required if the same assertion is made in many locations, or complete location details can be provided in an NCPI Condition Summary.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'bodySite'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    body_location: Optional[str] = Field(default=None, title="Body Location", description="""Any location qualifiers""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
+                                            'value': 'http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-body-location-qualifier'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    body_laterality: Optional[str] = Field(default=None, title="Laterality Qualifier", description="""Laterality information for the condition site""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
+                                            'value': 'http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-laterality-qualifier'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
+    cancer_stage: Optional[str] = Field(default=None, title="Cancer Stage", description="""Cancer staging information""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'component[stage]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'domain_of': ['ParticipantAssertion']} })
     participant_assertion_id: str = Field(default=..., title="Participant Assertion ID", description="""Participant Assertion Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
 
 

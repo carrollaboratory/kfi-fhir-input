@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-16T16:44:11
+# Generation date: 2025-12-17T14:34:56
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kif-fhir-input
@@ -78,6 +78,7 @@ KFI = CurieNamespace('kfi', 'https://carrollaboratory.github.io/kfi-fhir-input/'
 KFI_FHIR_SPARKS = CurieNamespace('kfi_fhir_sparks', 'https://carrollaboratory.github.io/kif-fhir-input')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type')
+NCPI_COND_TYPE = CurieNamespace('ncpi_cond_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/')
 NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')

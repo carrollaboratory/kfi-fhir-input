@@ -48,6 +48,7 @@
 --     * Slot: participant_id Description: Participant Global ID
 -- # Class: ParticipantAssertion Description: Assertion about a particular Participant. May include Conditions, Measurements, etc.
 --     * Slot: participant_id Description: The Global ID for the Participant
+--     * Slot: age_at_event Description: The date or age at which the event relating to this assertion occured.
 --     * Slot: age_at_assertion Description: The date or age at which this condition is being asserted.
 --     * Slot: age_at_onset Description: The age of onset for this condition. Could be expressed with a term, an age, or an age range.
 --     * Slot: age_at_resolution Description: The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.
@@ -56,10 +57,16 @@
 --     * Slot: other_condition_modifiers Description: Any additional modifiers for this condition, such as severity.
 --     * Slot: assertion_type Description: Describe the type of assertion being made.
 --     * Slot: assertion_code Description: The structured term defining the meaning of the assertion.
+--     * Slot: assertion_text Description: Detailed description / free text about this assertion.
+--     * Slot: assertion_source Description: Where or how was this this assertion about the Participant recorded? This can support understanding the differences between surveys, automated EHR extraction, manual chart abstraction, etc.
 --     * Slot: value_code Description: Value as code
 --     * Slot: value_string Description: Value as string
 --     * Slot: value_number Description: Value as numer
 --     * Slot: value_units Description: The structured term defining the units of the value (ucum).
+--     * Slot: body_site Description: Location information for the observation, including site, laterality, and other qualifiers as appropriate. Multiple observations may be required if the same assertion is made in many locations, or complete location details can be provided in an NCPI Condition Summary.
+--     * Slot: body_location Description: Any location qualifiers
+--     * Slot: body_laterality Description: Laterality information for the condition site
+--     * Slot: cancer_stage Description: Cancer staging information
 --     * Slot: participant_assertion_id Description: Participant Assertion Global ID
 -- # Class: Period Description: Time period associated with some FHIR resource
 --     * Slot: start Description: Start attribute for a FHIR period data type.
@@ -343,6 +350,7 @@ CREATE TABLE "Practitioner" (
 );CREATE INDEX "ix_Practitioner_practitioner_id" ON "Practitioner" (practitioner_id);
 CREATE TABLE "ParticipantAssertion" (
 	participant_id TEXT NOT NULL,
+	age_at_event TEXT,
 	age_at_assertion TEXT,
 	age_at_onset TEXT,
 	age_at_resolution TEXT,
@@ -351,13 +359,20 @@ CREATE TABLE "ParticipantAssertion" (
 	other_condition_modifiers TEXT,
 	assertion_type VARCHAR(18) NOT NULL,
 	assertion_code TEXT NOT NULL,
+	assertion_text TEXT,
+	assertion_source TEXT,
 	value_code TEXT,
 	value_string TEXT,
 	value_number FLOAT,
 	value_units TEXT,
+	body_site TEXT,
+	body_location TEXT,
+	body_laterality TEXT,
+	cancer_stage TEXT,
 	participant_assertion_id TEXT NOT NULL,
 	PRIMARY KEY (participant_assertion_id),
 	FOREIGN KEY(participant_id) REFERENCES "Participant" (participant_id),
+	FOREIGN KEY(age_at_event) REFERENCES "AgeAt" (id),
 	FOREIGN KEY(age_at_assertion) REFERENCES "AgeAt" (id),
 	FOREIGN KEY(age_at_onset) REFERENCES "AgeAt" (id),
 	FOREIGN KEY(age_at_resolution) REFERENCES "AgeAt" (id),
@@ -368,7 +383,7 @@ CREATE TABLE "AssociatedParty_classifier" (
 	classifier VARCHAR(10),
 	PRIMARY KEY ("AssociatedParty_id", classifier),
 	FOREIGN KEY("AssociatedParty_id") REFERENCES "AssociatedParty" (id)
-);CREATE INDEX "ix_AssociatedParty_classifier_classifier" ON "AssociatedParty_classifier" (classifier);CREATE INDEX "ix_AssociatedParty_classifier_AssociatedParty_id" ON "AssociatedParty_classifier" ("AssociatedParty_id");
+);CREATE INDEX "ix_AssociatedParty_classifier_AssociatedParty_id" ON "AssociatedParty_classifier" ("AssociatedParty_id");CREATE INDEX "ix_AssociatedParty_classifier_classifier" ON "AssociatedParty_classifier" (classifier);
 CREATE TABLE "AssociatedParty_external_id" (
 	"AssociatedParty_id" TEXT,
 	external_id TEXT,

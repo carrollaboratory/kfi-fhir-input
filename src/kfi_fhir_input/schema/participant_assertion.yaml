@@ -19,6 +19,7 @@ classes:
         required: true
     slots:
       - participant_id 
+      - age_at_event
       - age_at_assertion
       - age_at_onset 
       - age_at_resolution
@@ -27,17 +28,43 @@ classes:
       - other_condition_modifiers
       - assertion_type 
       - assertion_code
+      - assertion_text
+      - assertion_source
       - value_code 
       - value_string 
       - value_number
       - value_units
+      - body_site 
+      - body_location
+      - body_laterality
+      - cancer_stage
+    slot_usage:
+      participant_id:
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+          fhir_element: category
+          fhir_resource: Observation
 slots:
+  age_at_event:
+    title: Age At Event 
+    description: The date or age at which the event relating to this assertion occured.
+    required: false 
+    multivalued: false 
+    range: AgeAt
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: component[ageAtEvent] or maybe effectiveDateTime
+      fhir_resource: Observation
   age_at_assertion:
     title: Age At Assertion 
     description: The date or age at which this condition is being asserted.
     required: false 
     multivalued: false 
     range: AgeAt
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: component[ageAtAssertion]
+      fhir_resource: Observation
   age_at_onset:
     title: Age At Onset 
     description: The age of onset for this condition. Could be expressed with a
@@ -45,6 +72,10 @@ slots:
     required: false 
     multivalued: false 
     range: AgeAt
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: component[ageAtOnset]
+      fhir_resource: Observation
   age_at_resolution:
     title: Age At Resolution 
     description: The age at which this condition was resolved, abated, or cured. 
@@ -53,6 +84,10 @@ slots:
     required: false 
     multivalued: false 
     range: AgeAt
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: component[ageAtResolution]
+      fhir_resource: Observation
   entity_asserter: 
     title: Entity Asserter 
     description: Who recorded this assertion about the Participant? This can 
@@ -61,48 +96,146 @@ slots:
     required: false 
     multivalued: false 
     range: EnumEntityAsserter 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/entity-asserter
+      fhir_resource: Observation
   other_condition_modifiers:
     title: Other Condition Modifiers 
     description: Any additional modifiers for this condition, such as severity.
     required: false 
     multivalued: false 
     range: uriorcurie
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: component[otherModifiers]
+      fhir_resource: Observation
   assertion_type:
     title: Assertion Type 
     description: Describe the type of assertion being made.
     required: true 
     multivalued: false 
     range: EnumAssertionType
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: category
+      fhir_resource: Observation
   assertion_code:
     title: Assertion Code 
     description: The structured term defining the meaning of the assertion.
     required: true 
     multivalued: false 
     range: uriorcurie 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: code.coding
+      fhir_resource: Observation
+  assertion_text:
+    title: Assertion Text 
+    description: Detailed description / free text about this assertion.	
+    required: false
+    multivalued: false 
+    range: string 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: code.text
+      fhir_resource: Observation
+  assertion_source:
+    title: Assertion Source
+    description: Where or how was this this assertion about the Participant 
+                 recorded? This can support understanding the differences 
+                 between surveys, automated EHR extraction, manual chart 
+                 abstraction, etc.
+    required: false 
+    multivalued: false
+    range: uriorcurie 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: method 
+      fhir_resource: Observation
   value_code:
     title: Value Code 
     description: Value as code 
     required: false 
     multivalued: false 
     range: uriorcurie 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: valueCodeableConcept
+      fhir_resource: Observation
   value_string:
     title: Value String 
     description: Value as string 
     required: false 
     multivalued: false
     range: string
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: valueString
+      fhir_resource: Observation
   value_number:
     title: Value Number 
     description: Value as numer
     required: false 
     multivalued: false
     range: float
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: valueQuantity, valueInteger
+      fhir_resource: Observation
   value_units:
     title: Value Units
     description: The structured term defining the units of the value (ucum). 
     required: false 
     multivalued: false
     range: uriorcurie
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_resource: Observation
+  body_site:
+    title: Body Site 
+    description: Location information for the observation, including site, 
+                 laterality, and other qualifiers as appropriate. Multiple 
+                 observations may be required if the same assertion is made in 
+                 many locations, or complete location details can be provided 
+                 in an NCPI Condition Summary.
+    required: false 
+    multivalued: false
+    range: uriorcurie
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: bodySite 
+      fhir_resource: Observation
+  body_location:
+    title: Body Location 
+    description: Any location qualifiers
+    required: false 
+    multivalued: false
+    range: uriorcurie
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-body-location-qualifier
+      fhir_resource: Observation
+  body_laterality:
+    title: Laterality Qualifier  
+    description: Laterality information for the condition site
+    required: false 
+    multivalued: false
+    range: uriorcurie
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-laterality-qualifier
+      fhir_resource: Observation
+  cancer_stage:
+    title: Cancer Stage
+    description: Cancer staging information
+    required: false 
+    multivalued: false 
+    range: uriorcurie 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: component[stage]
+      fhir_resource: Observation
 enums:
   EnumEntityAsserter:
     description: Who recorded this assertion about the Participant? This can 
