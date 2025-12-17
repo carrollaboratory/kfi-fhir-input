@@ -225,10 +225,16 @@ ParticipantAssertion {
     uriorcurie other_condition_modifiers  
     EnumAssertionType assertion_type  
     uriorcurie assertion_code  
+    string assertion_text  
+    uriorcurie assertion_source  
     uriorcurie value_code  
     string value_string  
     float value_number  
     uriorcurie value_units  
+    uriorcurie body_site  
+    uriorcurie body_location  
+    uriorcurie body_laterality  
+    uriorcurie cancer_stage  
     string participant_assertion_id  
 }
 Period {
@@ -288,6 +294,7 @@ AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
 Participant ||--|o RelativeDateTime : "deceased_rel"
 ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
+ParticipantAssertion ||--|o AgeAt : "age_at_event"
 ParticipantAssertion ||--|o AgeAt : "age_at_onset"
 ParticipantAssertion ||--|o AgeAt : "age_at_resolution"
 ParticipantAssertion ||--|o PractitionerRole : "practitioner_role_id"

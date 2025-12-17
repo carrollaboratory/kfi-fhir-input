@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_resolution/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_text/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Age At Resolution (age_at_resolution) - kfi-fhir-input</title>
+        <title>Slot: Assertion Text (assertion_text) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-age-at-resolution-age_at_resolution" class="md-skip">
+        <a href="#slot-assertion-text-assertion_text" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Age At Resolution (age_at_resolution)
+              Slot: Assertion Text (assertion_text)
             
           </span>
         </div>
@@ -427,10 +427,10 @@
   
 
 
-<h1 id="slot-age-at-resolution-age_at_resolution">Slot: Age At Resolution (age_at_resolution)</h1>
-<p><em>The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputage_at_resolution">kfi_fhir_sparks:age_at_resolution</a>
-Alias: age_at_resolution</p>
+<h1 id="slot-assertion-text-assertion_text">Slot: Assertion Text (assertion_text)</h1>
+<p><em>Detailed description / free text about this assertion.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputassertion_text">kfi_fhir_sparks:assertion_text</a>
+Alias: assertion_text</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -452,7 +452,7 @@ Alias: age_at_resolution</p>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../AgeAt/">AgeAt</a></li>
+<li>Range: <a href="../String/">String</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="annotations">Annotations</h3>
@@ -470,7 +470,7 @@ Alias: age_at_resolution</p>
 </tr>
 <tr>
 <td>fhir_element</td>
-<td>component[ageAtResolution]</td>
+<td>code.text</td>
 </tr>
 <tr>
 <td>fhir_resource</td>
@@ -493,38 +493,36 @@ Alias: age_at_resolution</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:age_at_resolution</td>
+<td>kfi_fhir_sparks:assertion_text</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:age_at_resolution</td>
+<td>kfi_fhir_sparks:assertion_text</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: age_at_resolution
+<pre><code class="language-yaml">name: assertion_text
 annotations:
   fhir_profile:
     tag: fhir_profile
     value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
   fhir_element:
     tag: fhir_element
-    value: component[ageAtResolution]
+    value: code.text
   fhir_resource:
     tag: fhir_resource
     value: Observation
-description: The age at which this condition was resolved, abated, or cured. Should
-  be left empty in cases of current active status. Could be expressed with a term,
-  an age, or an age range.
-title: Age At Resolution
+description: Detailed description / free text about this assertion.
+title: Assertion Text
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 rank: 1000
-alias: age_at_resolution
+alias: assertion_text
 domain_of:
 - ParticipantAssertion
-range: AgeAt
+range: string
 required: false
 multivalued: false
 

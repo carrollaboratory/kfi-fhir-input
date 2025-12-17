@@ -274,6 +274,17 @@
 
 
 
+      ParticipantAssertion : age_at_event
+
+
+
+
+
+        ParticipantAssertion --&gt; "0..1" AgeAt : age_at_event
+        click AgeAt href "../AgeAt/"
+
+
+
       ParticipantAssertion : age_at_onset
 
 
@@ -298,6 +309,10 @@
 
       ParticipantAssertion : assertion_code
 
+      ParticipantAssertion : assertion_source
+
+      ParticipantAssertion : assertion_text
+
       ParticipantAssertion : assertion_type
 
 
@@ -308,6 +323,14 @@
         click EnumAssertionType href "../EnumAssertionType/"
 
 
+
+      ParticipantAssertion : body_laterality
+
+      ParticipantAssertion : body_location
+
+      ParticipantAssertion : body_site
+
+      ParticipantAssertion : cancer_stage
 
       ParticipantAssertion : entity_asserter
 
@@ -375,6 +398,12 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../age_at_event/">age_at_event</a></td>
+<td>0..1 <br/> <a href="../AgeAt/">AgeAt</a></td>
+<td>The date or age at which the event relating to this assertion occured</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../age_at_assertion/">age_at_assertion</a></td>
 <td>0..1 <br/> <a href="../AgeAt/">AgeAt</a></td>
 <td>The date or age at which this condition is being asserted</td>
@@ -423,6 +452,18 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../assertion_text/">assertion_text</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Detailed description / free text about this assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../assertion_source/">assertion_source</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Where or how was this this assertion about the Participant recorded? This can...</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../value_code/">value_code</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Value as code</td>
@@ -444,6 +485,30 @@
 <td><a href="../value_units/">value_units</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>The structured term defining the units of the value (ucum)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../body_site/">body_site</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Location information for the observation, including site, laterality, and oth...</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../body_location/">body_location</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Any location qualifiers</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../body_laterality/">body_laterality</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Laterality information for the condition site</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../cancer_stage/">cancer_stage</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Cancer staging information</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -508,6 +573,7 @@ title: Participant Assertion
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 slots:
 - participant_id
+- age_at_event
 - age_at_assertion
 - age_at_onset
 - age_at_resolution
@@ -516,10 +582,29 @@ slots:
 - other_condition_modifiers
 - assertion_type
 - assertion_code
+- assertion_text
+- assertion_source
 - value_code
 - value_string
 - value_number
 - value_units
+- body_site
+- body_location
+- body_laterality
+- cancer_stage
+slot_usage:
+  participant_id:
+    name: participant_id
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
 attributes:
   participant_assertion_id:
     name: participant_assertion_id
@@ -546,6 +631,19 @@ description: Assertion about a particular Participant. May include Conditions, M
   etc.
 title: Participant Assertion
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
+slot_usage:
+  participant_id:
+    name: participant_id
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
 attributes:
   participant_assertion_id:
     name: participant_assertion_id
@@ -563,9 +661,15 @@ attributes:
   participant_id:
     name: participant_id
     annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: The Global ID for the Participant
     title: Participant ID
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -577,8 +681,41 @@ attributes:
     - ParticipantAssertion
     range: Participant
     required: true
+  age_at_event:
+    name: age_at_event
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtEvent] or maybe effectiveDateTime
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The date or age at which the event relating to this assertion occured.
+    title: Age At Event
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: age_at_event
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: AgeAt
+    required: false
+    multivalued: false
   age_at_assertion:
     name: age_at_assertion
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtAssertion]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: The date or age at which this condition is being asserted.
     title: Age At Assertion
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -592,6 +729,16 @@ attributes:
     multivalued: false
   age_at_onset:
     name: age_at_onset
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtOnset]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: The age of onset for this condition. Could be expressed with a term,
       an age, or an age range.
     title: Age At Onset
@@ -606,6 +753,16 @@ attributes:
     multivalued: false
   age_at_resolution:
     name: age_at_resolution
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtResolution]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: The age at which this condition was resolved, abated, or cured. Should
       be left empty in cases of current active status. Could be expressed with a term,
       an age, or an age range.
@@ -639,6 +796,16 @@ attributes:
     required: false
   entity_asserter:
     name: entity_asserter
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension:
+        tag: fhir_extension
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/entity-asserter
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: Who recorded this assertion about the Participant? This can support
       understanding the differences between self-report, doctor, trained research
       staff.
@@ -654,6 +821,16 @@ attributes:
     multivalued: false
   other_condition_modifiers:
     name: other_condition_modifiers
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[otherModifiers]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: Any additional modifiers for this condition, such as severity.
     title: Other Condition Modifiers
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -667,6 +844,16 @@ attributes:
     multivalued: false
   assertion_type:
     name: assertion_type
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: Describe the type of assertion being made.
     title: Assertion Type
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -680,6 +867,16 @@ attributes:
     multivalued: false
   assertion_code:
     name: assertion_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: code.coding
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: The structured term defining the meaning of the assertion.
     title: Assertion Code
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -691,8 +888,66 @@ attributes:
     range: uriorcurie
     required: true
     multivalued: false
+  assertion_text:
+    name: assertion_text
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: code.text
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Detailed description / free text about this assertion.
+    title: Assertion Text
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: assertion_text
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: string
+    required: false
+    multivalued: false
+  assertion_source:
+    name: assertion_source
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: method
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Where or how was this this assertion about the Participant recorded?
+      This can support understanding the differences between surveys, automated EHR
+      extraction, manual chart abstraction, etc.
+    title: Assertion Source
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: assertion_source
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
   value_code:
     name: value_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: valueCodeableConcept
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: Value as code
     title: Value Code
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -706,6 +961,16 @@ attributes:
     multivalued: false
   value_string:
     name: value_string
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: valueString
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: Value as string
     title: Value String
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -719,6 +984,16 @@ attributes:
     multivalued: false
   value_number:
     name: value_number
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: valueQuantity, valueInteger
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: Value as numer
     title: Value Number
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
@@ -732,11 +1007,113 @@ attributes:
     multivalued: false
   value_units:
     name: value_units
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
     description: The structured term defining the units of the value (ucum).
     title: Value Units
     from_schema: https://carrollaboratory.github.io/kif-fhir-input
     rank: 1000
     alias: value_units
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  body_site:
+    name: body_site
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: bodySite
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Location information for the observation, including site, laterality,
+      and other qualifiers as appropriate. Multiple observations may be required if
+      the same assertion is made in many locations, or complete location details can
+      be provided in an NCPI Condition Summary.
+    title: Body Site
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: body_site
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  body_location:
+    name: body_location
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension:
+        tag: fhir_extension
+        value: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-body-location-qualifier
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Any location qualifiers
+    title: Body Location
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: body_location
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  body_laterality:
+    name: body_laterality
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension:
+        tag: fhir_extension
+        value: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-laterality-qualifier
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Laterality information for the condition site
+    title: Laterality Qualifier
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: body_laterality
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  cancer_stage:
+    name: cancer_stage
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[stage]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Cancer staging information
+    title: Cancer Stage
+    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    rank: 1000
+    alias: cancer_stage
     owner: ParticipantAssertion
     domain_of:
     - ParticipantAssertion

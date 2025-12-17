@@ -70,6 +70,9 @@ prefixes:
   ncpi_dob_method:
     prefix_prefix: ncpi_dob_method
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method
+  ncpi_cond_type:
+    prefix_prefix: ncpi_cond_type
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
   ncpi_patient_knowledge_source:
     prefix_prefix: ncpi_patient_knowledge_source
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
@@ -2304,7 +2307,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-16T22:49:02'
-source_file_size: 4933
-generation_date: '2025-12-16T22:49:11'
+source_file_date: '2025-12-17T20:35:40'
+source_file_size: 5020
+generation_date: '2025-12-17T20:35:51'
 
