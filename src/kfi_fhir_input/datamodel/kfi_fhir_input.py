@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-19T16:22:02
+# Generation date: 2025-12-19T16:29:53
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -119,6 +119,10 @@ class InstitutionInstitutionId(extended_str):
 
 
 class ParticipantParticipantId(extended_str):
+    pass
+
+
+class PersonPersonId(extended_str):
     pass
 
 
@@ -611,6 +615,36 @@ class Participant(HasExternalId):
 
 
 @dataclass(repr=False)
+class Person(YAMLRoot):
+    """
+    Relate one or more participants to a single person entity
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["person/Person"]
+    class_class_curie: ClassVar[str] = "kfi:person/Person"
+    class_name: ClassVar[str] = "Person"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Person
+
+    person_id: Union[str, PersonPersonId] = None
+    participant_id: Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.person_id):
+            self.MissingRequiredField("person_id")
+        if not isinstance(self.person_id, PersonPersonId):
+            self.person_id = PersonPersonId(self.person_id)
+
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, list):
+            self.participant_id = [self.participant_id] if self.participant_id is not None else []
+        self.participant_id = [v if isinstance(v, ParticipantParticipantId) else ParticipantParticipantId(v) for v in self.participant_id]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class Period(Record):
     """
     Time period associated with some FHIR resource
@@ -730,7 +764,7 @@ class ResearchStudy(HasExternalId):
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     study_status: Union[str, "EnumStudyStatus"] = None
     study_personnel: Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]] = None
-    study_membership_id: Union[str, list[str]] = None
+    study_membership_id: Union[Union[str, StudyMembershipStudyMembershipId], list[Union[str, StudyMembershipStudyMembershipId]]] = None
     study_title: Optional[str] = None
     parent_study_id: Optional[Union[str, ResearchStudyResearchStudyId]] = None
     study_focus: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
@@ -760,7 +794,7 @@ class ResearchStudy(HasExternalId):
             self.MissingRequiredField("study_membership_id")
         if not isinstance(self.study_membership_id, list):
             self.study_membership_id = [self.study_membership_id] if self.study_membership_id is not None else []
-        self.study_membership_id = [v if isinstance(v, str) else str(v) for v in self.study_membership_id]
+        self.study_membership_id = [v if isinstance(v, StudyMembershipStudyMembershipId) else StudyMembershipStudyMembershipId(v) for v in self.study_membership_id]
 
         if self.study_title is not None and not isinstance(self.study_title, str):
             self.study_title = str(self.study_title)
@@ -1768,7 +1802,7 @@ slots.study_personnel = Slot(uri=KFI['research_study/study_personnel'], name="st
                    model_uri=KFI_FHIR_SPARKS.study_personnel, domain=None, range=Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]])
 
 slots.study_membership_id = Slot(uri=KFI['research_study/study_membership_id'], name="study_membership_id", curie=KFI.curie('research_study/study_membership_id'),
-                   model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=Union[str, list[str]])
+                   model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=Union[Union[str, StudyMembershipStudyMembershipId], list[Union[str, StudyMembershipStudyMembershipId]]])
 
 slots.collection_title = Slot(uri=KFI['research-study-collection/collection_title'], name="collection_title", curie=KFI.curie('research-study-collection/collection_title'),
                    model_uri=KFI_FHIR_SPARKS.collection_title, domain=None, range=str)
@@ -1814,6 +1848,12 @@ slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], 
 
 slots.participant__participant_id = Slot(uri=KFI['participant/participant_id'], name="participant__participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.participant__participant_id, domain=None, range=URIRef)
+
+slots.person__person_id = Slot(uri=KFI['person/person_id'], name="person__person_id", curie=KFI.curie('person/person_id'),
+                   model_uri=KFI_FHIR_SPARKS.person__person_id, domain=None, range=URIRef)
+
+slots.person__participant_id = Slot(uri=KFI['person/participant_id'], name="person__participant_id", curie=KFI.curie('person/participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.person__participant_id, domain=None, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
 
 slots.period__start = Slot(uri=KFI['period/start'], name="period__start", curie=KFI.curie('period/start'),
                    model_uri=KFI_FHIR_SPARKS.period__start, domain=None, range=Optional[Union[str, XSDDate]])

@@ -54,6 +54,7 @@ imports:
   - associated_party
   - institution
   - participant
+  - person
   - period 
   - practitioner_role 
   - practitioner

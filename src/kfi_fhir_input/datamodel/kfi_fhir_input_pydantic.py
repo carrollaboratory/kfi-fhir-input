@@ -91,6 +91,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'associated_party',
                  'institution',
                  'participant',
+                 'person',
                  'period',
                  'practitioner_role',
                  'practitioner',
@@ -683,7 +684,10 @@ class ParticipantAssertion(ConfiguredBaseModel):
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
-         'domain_of': ['ParticipantAssertion', 'Participant', 'StudyMembership']} })
+         'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership']} })
     age_at_event: Optional[AgeAt] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtEvent] or maybe '
                                                    'effectiveDateTime'},
@@ -808,6 +812,22 @@ class ParticipantAssertion(ConfiguredBaseModel):
     participant_assertion_id: str = Field(default=..., title="Participant Assertion ID", description="""Participant Assertion Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
 
 
+class Person(ConfiguredBaseModel):
+    """
+    Relate one or more participants to a single person entity
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/person',
+         'title': 'Person'})
+
+    person_id: str = Field(default=..., title="Person ID", description="""Person Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Person']} })
+    participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'participant_id'}},
+         'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership']} })
+
+
 class PractitionerRole(ConfiguredBaseModel):
     """
     PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
@@ -840,7 +860,10 @@ class StudyMembership(ConfiguredBaseModel):
     study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
     participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'participant_id'}},
-         'domain_of': ['ParticipantAssertion', 'Participant', 'StudyMembership']} })
+         'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership']} })
 
 
 class HasExternalId(ConfiguredBaseModel):
@@ -918,7 +941,10 @@ class Participant(HasExternalId):
     is_deceased: Optional[bool] = Field(default=None, title="Is Deceased", description="""Is the participant known to be Deceased, T, or Alive, F""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     deceased_rel: Optional[str] = Field(default=None, title="Deceased Relative Date", description="""Implementers can provide relativeDateTime if information is available.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion', 'Participant', 'StudyMembership']} })
+    participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1026,6 +1052,7 @@ AccessPolicy.model_rebuild()
 RelativeDateTime.model_rebuild()
 AgeAt.model_rebuild()
 ParticipantAssertion.model_rebuild()
+Person.model_rebuild()
 PractitionerRole.model_rebuild()
 StudyMembership.model_rebuild()
 HasExternalId.model_rebuild()

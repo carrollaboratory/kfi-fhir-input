@@ -1,0 +1,27 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/person
+name: kfi-fhir-input-person
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+  - participant
+classes:
+  Person: 
+    title: Person
+    description: Relate one or more participants to a single person entity
+    attributes:
+      person_id: 
+        title: Person ID 
+        description: Person Global ID (group)
+        range: string 
+        identifier: true 
+        required: true 
+        multivalued: false
+      participant_id:  # Having trouble getting correct syntax for slot_usage
+        title: Participant ID 
+        description: The Global ID for the Participant 
+        range: Participant 
+        annotations: 
+          target_slot: participant_id 
+        required: true 
+        multivalued: true 
