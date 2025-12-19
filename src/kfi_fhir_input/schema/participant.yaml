@@ -59,7 +59,7 @@ slots:
     multivalued: false 
   dob: 
     title: Date of Birth 
-    description: 	Date of Birth of the participant. Details of privacy method should be included in DOBMethod 
+    description: Date of Birth of the participant. Details of privacy method should be included in DOBMethod 
     range: string # date or string
     required: false 
     multivalued: false 

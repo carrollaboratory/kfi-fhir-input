@@ -131,8 +131,8 @@ slots:
       fhir_element: code.coding
       fhir_resource: Observation
   assertion_text:
-    title: Assertion Text 
-    description: Detailed description / free text about this assertion.	
+    title: Assertion Text
+    description: Detailed description / free text about this assertion.
     required: false
     multivalued: false 
     range: string 

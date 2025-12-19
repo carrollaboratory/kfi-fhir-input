@@ -1,0 +1,34 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+name: kfi-fhir-input-study-membership
+imports:
+  - linkml:types 
+  - kfi_fhir_input
+classes:
+  StudyMembership: 
+    title: Study Membership
+    description: Grouping subject participation within a research study is 
+                 helpful to provide definitive lists of participants that fit 
+                 a specific criteria such as All Participants or Participants 
+                 From a Particular Consent Group, etc.
+    attributes:
+      study_membership_id: 
+        title: Study Membership ID 
+        description: Study Membership Global ID (group)
+        range: string 
+        identifier: true 
+        required: true 
+        multivalued: false
+      participant_id:  # Having trouble getting correct syntax for slot_usage
+        title: Participant ID 
+        description: The Global ID for the Participant 
+        range: Participant 
+        annotations: 
+          target_slot: participant_id 
+        required: true 
+        multivalued: true 
+    slots:
+      - access_policy_id 
+    #slot_usage:
+    #  participant_id:
+    #    multivalued: true

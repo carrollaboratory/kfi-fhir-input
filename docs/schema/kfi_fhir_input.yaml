@@ -17,6 +17,7 @@ imports:
 - period
 - practitioner_role
 - practitioner
+- study_membership
 - research_study
 - research_study_collection
 - kfi_fhir_input
@@ -1169,6 +1170,23 @@ slots:
     - ParticipantAssertion
     range: Participant
     required: true
+  access_policy_id:
+    name: access_policy_id
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputaccess_policy_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: access_policy_id
+    description: Access Policy Global ID
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    slot_uri: kfi_fhir_sparks:access_policy_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    range: AccessPolicy
+    required: true
+    multivalued: false
   period_id:
     name: period_id
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputperiod_id
@@ -2134,6 +2152,19 @@ slots:
     range: AssociatedParty
     required: true
     multivalued: true
+  study_membership_id:
+    name: study_membership_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_membership_id
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    range: StudyMembership
+    required: true
+    multivalued: true
   collection_title:
     name: collection_title
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_title
@@ -2209,7 +2240,7 @@ slots:
     name: accessPolicy__access_policy_id
     description: Access policy communicates the limitations and/or requirements that
       define how a user may gain access to a particular set of data.
-    title: Access Policy ID
+    title: Access Policy Global ID (Consent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
     identifier: true
@@ -2381,6 +2412,37 @@ slots:
     - PractitionerRole
     range: string
     required: true
+  studyMembership__study_membership_id:
+    name: studyMembership__study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    identifier: true
+    alias: study_membership_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    range: string
+    required: true
+    multivalued: false
+  studyMembership__participant_id:
+    name: studyMembership__participant_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/participant_id
+    alias: participant_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    range: Participant
+    required: true
+    multivalued: true
   researchStudy__research_study_id:
     name: researchStudy__research_study_id
     description: The Global ID for the Research Study.
@@ -2505,7 +2567,7 @@ classes:
         name: access_policy_id
         description: Access policy communicates the limitations and/or requirements
           that define how a user may gain access to a particular set of data.
-        title: Access Policy ID
+        title: Access Policy Global ID (Consent)
         identifier: true
         range: string
         required: true
@@ -2792,6 +2854,39 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/PractitionerRole
+  StudyMembership:
+    name: StudyMembership
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/StudyMembership
+    description: Grouping subject participation within a research study is helpful
+      to provide definitive lists of participants that fit a specific criteria such
+      as All Participants or Participants From a Particular Consent Group, etc.
+    title: Study Membership
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    slots:
+    - access_policy_id
+    - studyMembership__study_membership_id
+    - studyMembership__participant_id
+    attributes:
+      study_membership_id:
+        name: study_membership_id
+        description: Study Membership Global ID (group)
+        title: Study Membership ID
+        identifier: true
+        range: string
+        required: true
+        multivalued: false
+      participant_id:
+        name: participant_id
+        annotations:
+          target_slot:
+            tag: target_slot
+            value: participant_id
+        description: The Global ID for the Participant
+        title: Participant ID
+        range: Participant
+        required: true
+        multivalued: true
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/StudyMembership
   ResearchStudy:
     name: ResearchStudy
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
@@ -2816,6 +2911,7 @@ classes:
     - study_status
     - study_design
     - study_personnel
+    - study_membership_id
     - researchStudy__research_study_id
     attributes:
       research_study_id:
@@ -2866,7 +2962,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-19T13:22:25'
-source_file_size: 5020
-generation_date: '2025-12-19T13:48:24'
+source_file_date: '2025-12-19T16:01:10'
+source_file_size: 5254
+generation_date: '2025-12-19T16:23:00'
 

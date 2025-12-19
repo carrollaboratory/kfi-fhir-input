@@ -12,7 +12,7 @@ classes:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
     attributes:
       access_policy_id:
-        title: Access Policy ID
+        title: Access Policy Global ID (Consent)
         description: Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.
         range: string         
         identifier: true

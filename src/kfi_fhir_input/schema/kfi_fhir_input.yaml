@@ -57,6 +57,7 @@ imports:
   - period 
   - practitioner_role 
   - practitioner
+  - study_membership
   - research_study
   - research_study_collection
 classes:
@@ -123,6 +124,14 @@ slots:
     annotations: 
       target_slot: participant_id 
     required: true 
+  access_policy_id:
+    title: Access Policy ID 
+    description: Access Policy Global ID 
+    range: AccessPolicy 
+    multivalued: false 
+    required: true
+    annotations:
+      target_slot: access_policy_id 
   period_id:
     title: Period ID
     description: Reference to a time period which defines a Start and End datatime period. 
