@@ -12,12 +12,38 @@
 --     * Slot: disease_limitation Description: Disease Use Limitations
 --     * Slot: access_policy_id Description: Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.
 --     * Slot: status Description: Indicates the state of the consent.
--- # Class: AgeAt Description: These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
+-- # Class: RelativeDateTime Description: In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
 --     * Slot: id Description: Unique Identifier for a table entry. This is probably not the Global ID
+--     * Slot: offset Description: The point after the target being described. For ranges, this can be used for the starting point
+--     * Slot: offset_end Description: The end of a relative date/time range
+--     * Slot: offset_type Description: What is the datatype associated with the offset (days, years, etc)
+-- # Class: AgeAt Description: These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
+--     * Slot: id
 --     * Slot: value_type Description: Age Value Type
 --     * Slot: age Description: Age either numeric value or range
 --     * Slot: age_code Description: Age expressed as an enumerated value representing an age category
 --     * Slot: as_date Description: Event Date (rather than age)
+-- # Class: ParticipantAssertion Description: Assertion about a particular Participant. May include Conditions, Measurements, etc.
+--     * Slot: participant_id Description: The Global ID for the Participant
+--     * Slot: entity_asserter Description: Who recorded this assertion about the Participant? This can support understanding the differences between self-report, doctor, trained research staff.
+--     * Slot: other_condition_modifiers Description: Any additional modifiers for this condition, such as severity.
+--     * Slot: assertion_type Description: Describe the type of assertion being made.
+--     * Slot: assertion_code Description: The structured term defining the meaning of the assertion.
+--     * Slot: assertion_text Description: Detailed description / free text about this assertion.
+--     * Slot: assertion_source Description: Where or how was this this assertion about the Participant recorded? This can support understanding the differences between surveys, automated EHR extraction, manual chart abstraction, etc.
+--     * Slot: value_code Description: Value as code
+--     * Slot: value_string Description: Value as string
+--     * Slot: value_number Description: Value as numer
+--     * Slot: value_units Description: The structured term defining the units of the value (ucum).
+--     * Slot: body_site Description: Location information for the observation, including site, laterality, and other qualifiers as appropriate. Multiple observations may be required if the same assertion is made in many locations, or complete location details can be provided in an NCPI Condition Summary.
+--     * Slot: body_location Description: Any location qualifiers
+--     * Slot: body_laterality Description: Laterality information for the condition site
+--     * Slot: cancer_stage Description: Cancer staging information
+--     * Slot: participant_assertion_id Description: Participant Assertion Global ID
+--     * Slot: age_at_event_id Description: The date or age at which the event relating to this assertion occured.
+--     * Slot: age_at_assertion_id Description: The date or age at which this condition is being asserted.
+--     * Slot: age_at_onset_id Description: The age of onset for this condition. Could be expressed with a term, an age, or an age range.
+--     * Slot: age_at_resolution_id Description: The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.
 -- # Class: Practitioner Description: For our purposes, this will be an investigator.
 --     * Slot: name Description: Name of the entity.
 --     * Slot: email Description: An email address to reach the entity.
@@ -46,28 +72,6 @@
 --     * Slot: deceased_rel Description: Implementers can provide relativeDateTime if information is available.
 --     * Slot: patient_knowledge_source Description: The source of the knowledge represented by this Patient resource.
 --     * Slot: participant_id Description: Participant Global ID
--- # Class: ParticipantAssertion Description: Assertion about a particular Participant. May include Conditions, Measurements, etc.
---     * Slot: participant_id Description: The Global ID for the Participant
---     * Slot: age_at_event Description: The date or age at which the event relating to this assertion occured.
---     * Slot: age_at_assertion Description: The date or age at which this condition is being asserted.
---     * Slot: age_at_onset Description: The age of onset for this condition. Could be expressed with a term, an age, or an age range.
---     * Slot: age_at_resolution Description: The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.
---     * Slot: practitioner_role_id Description: Global ID for this record
---     * Slot: entity_asserter Description: Who recorded this assertion about the Participant? This can support understanding the differences between self-report, doctor, trained research staff.
---     * Slot: other_condition_modifiers Description: Any additional modifiers for this condition, such as severity.
---     * Slot: assertion_type Description: Describe the type of assertion being made.
---     * Slot: assertion_code Description: The structured term defining the meaning of the assertion.
---     * Slot: assertion_text Description: Detailed description / free text about this assertion.
---     * Slot: assertion_source Description: Where or how was this this assertion about the Participant recorded? This can support understanding the differences between surveys, automated EHR extraction, manual chart abstraction, etc.
---     * Slot: value_code Description: Value as code
---     * Slot: value_string Description: Value as string
---     * Slot: value_number Description: Value as numer
---     * Slot: value_units Description: The structured term defining the units of the value (ucum).
---     * Slot: body_site Description: Location information for the observation, including site, laterality, and other qualifiers as appropriate. Multiple observations may be required if the same assertion is made in many locations, or complete location details can be provided in an NCPI Condition Summary.
---     * Slot: body_location Description: Any location qualifiers
---     * Slot: body_laterality Description: Laterality information for the condition site
---     * Slot: cancer_stage Description: Cancer staging information
---     * Slot: participant_assertion_id Description: Participant Assertion Global ID
 -- # Class: Period Description: Time period associated with some FHIR resource
 --     * Slot: start Description: Start attribute for a FHIR period data type.
 --     * Slot: end Description: End attribute for a FHIR period data type.
@@ -77,13 +81,6 @@
 --     * Slot: practitioner_id Description: The Global ID for the PractitionerRole that links a Practitioner to their Institution.
 --     * Slot: period_id Description: Reference to a time period which defines a Start and End datatime period.
 --     * Slot: practitioner_role_id Description: Global ID for this record
--- # Class: RelativeDateTime Description: In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
---     * Slot: id Description: Unique Identifier for a table entry. This is probably not the Global ID
---     * Slot: target_resource Description: FHIR Resource Type for target (i.e. Patient)
---     * Slot: target_path Description: resource property about which this is related
---     * Slot: offset Description: The point after the target being described. For ranges, this can be used for the starting point
---     * Slot: offset_end Description: The end of a relative date/time range
---     * Slot: offset_type Description: What is the datatype associated with the offset (days, years, etc)
 -- # Class: ResearchStudy Description: The NCPI Research Study FHIR resource represents an individual research effort and acts as a grouper or “container” for that effort’s study participants and their related data files.
 --     * Slot: study_title Description: Research Study's formal title.
 --     * Slot: parent_study_id Description: ID For Parent Study if this is a substudy
@@ -177,6 +174,13 @@ CREATE TABLE "AccessPolicy" (
 	status VARCHAR(16) NOT NULL,
 	PRIMARY KEY (access_policy_id)
 );CREATE INDEX "ix_AccessPolicy_access_policy_id" ON "AccessPolicy" (access_policy_id);
+CREATE TABLE "RelativeDateTime" (
+	id TEXT NOT NULL,
+	"offset" INTEGER NOT NULL,
+	offset_end INTEGER,
+	offset_type VARCHAR(5) NOT NULL,
+	PRIMARY KEY (id)
+);CREATE INDEX "ix_RelativeDateTime_id" ON "RelativeDateTime" (id);
 CREATE TABLE "Institution" (
 	name TEXT,
 	institution_id TEXT NOT NULL,
@@ -188,15 +192,6 @@ CREATE TABLE "Period" (
 	id TEXT NOT NULL,
 	PRIMARY KEY (id)
 );CREATE INDEX "ix_Period_id" ON "Period" (id);
-CREATE TABLE "RelativeDateTime" (
-	id TEXT NOT NULL,
-	target_resource TEXT NOT NULL,
-	target_path TEXT NOT NULL,
-	"offset" INTEGER NOT NULL,
-	offset_end INTEGER,
-	offset_type VARCHAR(5) NOT NULL,
-	PRIMARY KEY (id)
-);CREATE INDEX "ix_RelativeDateTime_id" ON "RelativeDateTime" (id);
 CREATE TABLE "ResearchStudy" (
 	study_title TEXT,
 	parent_study_id TEXT,
@@ -216,7 +211,7 @@ CREATE TABLE "ResearchStudyCollection" (
 	PRIMARY KEY (research_study_collection_id)
 );CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection" (research_study_collection_id);
 CREATE TABLE "AgeAt" (
-	id TEXT NOT NULL,
+	id INTEGER NOT NULL,
 	value_type VARCHAR(9) NOT NULL,
 	age TEXT,
 	age_code TEXT,
@@ -262,13 +257,13 @@ CREATE TABLE "HasExternalId_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("HasExternalId_id", external_id),
 	FOREIGN KEY("HasExternalId_id") REFERENCES "HasExternalId" (id)
-);CREATE INDEX "ix_HasExternalId_external_id_HasExternalId_id" ON "HasExternalId_external_id" ("HasExternalId_id");CREATE INDEX "ix_HasExternalId_external_id_external_id" ON "HasExternalId_external_id" (external_id);
+);CREATE INDEX "ix_HasExternalId_external_id_external_id" ON "HasExternalId_external_id" (external_id);CREATE INDEX "ix_HasExternalId_external_id_HasExternalId_id" ON "HasExternalId_external_id" ("HasExternalId_id");
 CREATE TABLE "Record_external_id" (
 	"Record_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("Record_id", external_id),
 	FOREIGN KEY("Record_id") REFERENCES "Record" (id)
-);CREATE INDEX "ix_Record_external_id_external_id" ON "Record_external_id" (external_id);CREATE INDEX "ix_Record_external_id_Record_id" ON "Record_external_id" ("Record_id");
+);CREATE INDEX "ix_Record_external_id_Record_id" ON "Record_external_id" ("Record_id");CREATE INDEX "ix_Record_external_id_external_id" ON "Record_external_id" (external_id);
 CREATE TABLE "AccessPolicy_access_policy_code" (
 	"AccessPolicy_access_policy_id" TEXT,
 	access_policy_code VARCHAR(11) NOT NULL,
@@ -329,32 +324,15 @@ CREATE TABLE "ResearchStudyCollection_research_study_collection_member_id" (
 	PRIMARY KEY ("ResearchStudyCollection_research_study_collection_id", research_study_collection_member_id_research_study_id),
 	FOREIGN KEY("ResearchStudyCollection_research_study_collection_id") REFERENCES "ResearchStudyCollection" (research_study_collection_id),
 	FOREIGN KEY(research_study_collection_member_id_research_study_id) REFERENCES "ResearchStudy" (research_study_id)
-);CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_research_study_collection_member_id_research_study_id" ON "ResearchStudyCollection_research_study_collection_member_id" (research_study_collection_member_id_research_study_id);CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_research_study_collection_member_id" ("ResearchStudyCollection_research_study_collection_id");
+);CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_research_study_collection_member_id" ("ResearchStudyCollection_research_study_collection_id");CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_research_study_collection_member_id_research_study_id" ON "ResearchStudyCollection_research_study_collection_member_id" (research_study_collection_member_id_research_study_id);
 CREATE TABLE "ResearchStudyCollection_external_id" (
 	"ResearchStudyCollection_research_study_collection_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("ResearchStudyCollection_research_study_collection_id", external_id),
 	FOREIGN KEY("ResearchStudyCollection_research_study_collection_id") REFERENCES "ResearchStudyCollection" (research_study_collection_id)
 );CREATE INDEX "ix_ResearchStudyCollection_external_id_external_id" ON "ResearchStudyCollection_external_id" (external_id);CREATE INDEX "ix_ResearchStudyCollection_external_id_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_external_id" ("ResearchStudyCollection_research_study_collection_id");
-CREATE TABLE "Practitioner" (
-	name TEXT,
-	email TEXT,
-	institution_id TEXT,
-	practitioner_role_id TEXT,
-	description TEXT,
-	practitioner_title TEXT,
-	practitioner_id TEXT NOT NULL,
-	PRIMARY KEY (practitioner_id),
-	FOREIGN KEY(institution_id) REFERENCES "Institution" (institution_id),
-	FOREIGN KEY(practitioner_role_id) REFERENCES "PractitionerRole" (practitioner_role_id)
-);CREATE INDEX "ix_Practitioner_practitioner_id" ON "Practitioner" (practitioner_id);
 CREATE TABLE "ParticipantAssertion" (
 	participant_id TEXT NOT NULL,
-	age_at_event TEXT,
-	age_at_assertion TEXT,
-	age_at_onset TEXT,
-	age_at_resolution TEXT,
-	practitioner_role_id TEXT,
 	entity_asserter VARCHAR(11),
 	other_condition_modifiers TEXT,
 	assertion_type VARCHAR(18) NOT NULL,
@@ -370,20 +348,35 @@ CREATE TABLE "ParticipantAssertion" (
 	body_laterality TEXT,
 	cancer_stage TEXT,
 	participant_assertion_id TEXT NOT NULL,
+	age_at_event_id INTEGER,
+	age_at_assertion_id INTEGER,
+	age_at_onset_id INTEGER,
+	age_at_resolution_id INTEGER,
 	PRIMARY KEY (participant_assertion_id),
 	FOREIGN KEY(participant_id) REFERENCES "Participant" (participant_id),
-	FOREIGN KEY(age_at_event) REFERENCES "AgeAt" (id),
-	FOREIGN KEY(age_at_assertion) REFERENCES "AgeAt" (id),
-	FOREIGN KEY(age_at_onset) REFERENCES "AgeAt" (id),
-	FOREIGN KEY(age_at_resolution) REFERENCES "AgeAt" (id),
-	FOREIGN KEY(practitioner_role_id) REFERENCES "PractitionerRole" (practitioner_role_id)
+	FOREIGN KEY(age_at_event_id) REFERENCES "AgeAt" (id),
+	FOREIGN KEY(age_at_assertion_id) REFERENCES "AgeAt" (id),
+	FOREIGN KEY(age_at_onset_id) REFERENCES "AgeAt" (id),
+	FOREIGN KEY(age_at_resolution_id) REFERENCES "AgeAt" (id)
 );CREATE INDEX "ix_ParticipantAssertion_participant_assertion_id" ON "ParticipantAssertion" (participant_assertion_id);
+CREATE TABLE "Practitioner" (
+	name TEXT,
+	email TEXT,
+	institution_id TEXT,
+	practitioner_role_id TEXT,
+	description TEXT,
+	practitioner_title TEXT,
+	practitioner_id TEXT NOT NULL,
+	PRIMARY KEY (practitioner_id),
+	FOREIGN KEY(institution_id) REFERENCES "Institution" (institution_id),
+	FOREIGN KEY(practitioner_role_id) REFERENCES "PractitionerRole" (practitioner_role_id)
+);CREATE INDEX "ix_Practitioner_practitioner_id" ON "Practitioner" (practitioner_id);
 CREATE TABLE "AssociatedParty_classifier" (
 	"AssociatedParty_id" TEXT,
 	classifier VARCHAR(10),
 	PRIMARY KEY ("AssociatedParty_id", classifier),
 	FOREIGN KEY("AssociatedParty_id") REFERENCES "AssociatedParty" (id)
-);CREATE INDEX "ix_AssociatedParty_classifier_AssociatedParty_id" ON "AssociatedParty_classifier" ("AssociatedParty_id");CREATE INDEX "ix_AssociatedParty_classifier_classifier" ON "AssociatedParty_classifier" (classifier);
+);CREATE INDEX "ix_AssociatedParty_classifier_classifier" ON "AssociatedParty_classifier" (classifier);CREATE INDEX "ix_AssociatedParty_classifier_AssociatedParty_id" ON "AssociatedParty_classifier" ("AssociatedParty_id");
 CREATE TABLE "AssociatedParty_external_id" (
 	"AssociatedParty_id" TEXT,
 	external_id TEXT,

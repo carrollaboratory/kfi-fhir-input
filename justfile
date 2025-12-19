@@ -108,7 +108,7 @@ testdoc: gen-doc _serve
 
 # Generate the Python data models (dataclasses & pydantic)
 gen-python:
-  uv run gen-project -d  {{pymodel}} -I python {{source_schema_path}}
+  uv run gen-project -d  {{pymodel}} -I python --mergeimports  {{source_schema_path}}
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
 
 # Generate project files including Python data model

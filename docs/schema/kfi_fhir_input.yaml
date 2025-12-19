@@ -2,21 +2,21 @@ name: kfi-fhir-input
 description: DBT Output Schema for FHIR Ingest
 title: KF/Include FHIR Input Model
 see_also:
-- https://carrollaboratory.github.io/kif-fhir-input
-id: https://carrollaboratory.github.io/kif-fhir-input
+- https://carrollaboratory.github.io/kfi-fhir-input
+id: https://carrollaboratory.github.io/kfi-fhir-input
 imports:
 - linkml:types
 - access_policy
+- relative_date_time
 - age_at
+- participant_assertion
 - practitioner
 - associated_party
 - institution
 - participant
-- participant_assertion
 - period
 - practitioner_role
 - practitioner
-- relative_date_time
 - research_study
 - research_study_collection
 - kfi_fhir_input
@@ -636,11 +636,25 @@ enums:
         text: gsr_allowed
         meaning: ncpi_data_access_type:gsr-allowed
         title: GSR Allowed
+  EnumOffsetType:
+    name: EnumOffsetType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/EnumOffsetType
+    description: Offset Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    permissible_values:
+      days:
+        text: days
+        description: The offset is represented in days
+        title: Days
+      years:
+        text: years
+        description: The offset is represented in Years
+        title: Years
   EnumAgeValueType:
     name: EnumAgeValueType
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/EnumAgeValueType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/EnumAgeValueType
     description: Describes where to look for the data (as value, code, range, etc)
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
     permissible_values:
       age:
         text: age
@@ -658,6 +672,67 @@ enums:
         text: date
         description: Rather than an age, we have an actual date for the event's occurence
         title: Date
+  EnumEntityAsserter:
+    name: EnumEntityAsserter
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/EnumEntityAsserter
+    description: Who recorded this assertion about the Participant? This can support
+      understanding the differences between self-report, doctor, trained research
+      staff.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    permissible_values:
+      self_report:
+        text: self_report
+        description: The participant reported the assertion
+        title: Self Report
+      doctor:
+        text: doctor
+        description: Physician
+        title: Doctor
+      staff:
+        text: staff
+        description: Trained research staff
+        title: Trained Research Staff
+  EnumAssertionType:
+    name: EnumAssertionType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/EnumAssertionType
+    description: Provides options to describe the expressed semantics of a condition.
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    permissible_values:
+      phenotypic_feature:
+        text: phenotypic_feature
+        description: This is a phenotypic feature
+        meaning: ncpi_cond_type:Phenotypic-Feature
+        title: Phenotypic Feature
+      disease:
+        text: disease
+        description: Disease
+        meaning: ncpi_cond_type:Disease
+        title: disease
+      comorbidity:
+        text: comorbidity
+        description: Comorbidity
+        meaning: ncpi_cond_type:Comorbidity
+        title: comorbidity
+      histology:
+        text: histology
+        description: Histology
+        meaning: ncpi_cond_type:Histology
+        title: histology
+      clinical_finding:
+        text: clinical_finding
+        description: Clinical Finding
+        meaning: ncpi_cond_type:Clinical-Finding
+        title: clinical-finding
+      ehr_billing_code:
+        text: ehr_billing_code
+        description: From an EHR billing record, which may indicate only investigation
+          into a possible diagnosis.
+        meaning: ncpi_cond_type:EHR-Condition-Code
+        title: EHR Billing Code
+      measurement:
+        text: measurement
+        description: A measurement of some feature, eg, height or glucose.
+        title: Measurement
   EnumResearchStudyPartyOrganizationType:
     name: EnumResearchStudyPartyOrganizationType
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/EnumResearchStudyPartyOrganizationType
@@ -904,20 +979,6 @@ enums:
           of the patient.
         meaning: ncpi_patient_knowledge_source:traditional
         title: Inferred
-  EnumOffsetType:
-    name: EnumOffsetType
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/EnumOffsetType
-    description: Offset Type
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    permissible_values:
-      days:
-        text: days
-        description: The offset is represented in days
-        title: Days
-      years:
-        text: years
-        description: The offset is represented in Years
-        title: Years
   EnumStudyStatus:
     name: EnumStudyStatus
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/EnumStudyStatus
@@ -1010,13 +1071,12 @@ slots:
     description: Unique Identifier for a table entry. This is probably not the Global
       ID
     title: ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:id
     identifier: true
     owner: RelativeDateTime
     domain_of:
     - Record
-    - AgeAt
     - RelativeDateTime
     range: string
     required: true
@@ -1027,7 +1087,7 @@ slots:
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:external_id
     owner: HasExternalId
     domain_of:
@@ -1040,7 +1100,7 @@ slots:
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputname
     description: Name of the entity.
     title: Name
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:name
     owner: Institution
     domain_of:
@@ -1054,7 +1114,7 @@ slots:
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputdescription
     description: More details associated with the given resource
     title: Description
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:description
     owner: ResearchStudy
     domain_of:
@@ -1072,7 +1132,7 @@ slots:
         value: practitioner_role_id
     description: Global ID for this record
     title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:practitioner_role_id
     owner: Practitioner
     domain_of:
@@ -1088,7 +1148,7 @@ slots:
         value: research_study_id
     description: The Global ID for the Research Study.
     title: Research Study ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:research_study_id
     identifier: true
     range: ResearchStudy
@@ -1102,8 +1162,11 @@ slots:
         value: participant_id
     description: The Global ID for the Participant
     title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:participant_id
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
     range: Participant
     required: true
   period_id:
@@ -1119,7 +1182,7 @@ slots:
     description: Reference to a time period which defines a Start and End datatime
       period.
     title: Period ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:period_id
     owner: PractitionerRole
     domain_of:
@@ -1136,7 +1199,7 @@ slots:
       website, such as the Entity's website, or to an online document describing the
       entity.
     title: Website
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:website
     owner: ResearchStudyCollection
     domain_of:
@@ -1150,7 +1213,7 @@ slots:
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputlabel
     description: Alias such as acronym and alternate names.
     title: Label
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:label
     owner: ResearchStudyCollection
     domain_of:
@@ -1249,6 +1312,475 @@ slots:
     - AccessPolicy
     range: EnumConsentScope
     required: true
+    multivalued: false
+  offset:
+    name: offset
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
+    description: The point after the target being described. For ranges, this can
+      be used for the starting point
+    title: Offset
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: integer
+    required: true
+    multivalued: false
+  offset_end:
+    name: offset_end
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_end
+    description: The end of a relative date/time range
+    title: Offset End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_end
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: integer
+    required: false
+    multivalued: false
+  offset_type:
+    name: offset_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_type
+    description: What is the datatype associated with the offset (days, years, etc)
+    title: Offset Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_type
+    owner: RelativeDateTime
+    domain_of:
+    - RelativeDateTime
+    range: EnumOffsetType
+    required: true
+    multivalued: false
+  age_at_event:
+    name: age_at_event
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_event
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtEvent] or maybe effectiveDateTime
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The date or age at which the event relating to this assertion occured.
+    title: Age At Event
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_event
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: AgeAt
+    required: false
+    multivalued: false
+    inlined: true
+    inlined_as_list: true
+  age_at_assertion:
+    name: age_at_assertion
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_assertion
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtAssertion]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The date or age at which this condition is being asserted.
+    title: Age At Assertion
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_assertion
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: AgeAt
+    required: false
+    multivalued: false
+    inlined: true
+    inlined_as_list: true
+  age_at_onset:
+    name: age_at_onset
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_onset
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtOnset]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The age of onset for this condition. Could be expressed with a term,
+      an age, or an age range.
+    title: Age At Onset
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_onset
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: AgeAt
+    required: false
+    multivalued: false
+    inlined: true
+    inlined_as_list: true
+  age_at_resolution:
+    name: age_at_resolution
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_resolution
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[ageAtResolution]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The age at which this condition was resolved, abated, or cured. Should
+      be left empty in cases of current active status. Could be expressed with a term,
+      an age, or an age range.
+    title: Age At Resolution
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_resolution
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: AgeAt
+    required: false
+    multivalued: false
+    inlined: true
+    inlined_as_list: true
+  entity_asserter:
+    name: entity_asserter
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/entity_asserter
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension:
+        tag: fhir_extension
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/entity-asserter
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Who recorded this assertion about the Participant? This can support
+      understanding the differences between self-report, doctor, trained research
+      staff.
+    title: Entity Asserter
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/entity_asserter
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: EnumEntityAsserter
+    required: false
+    multivalued: false
+  other_condition_modifiers:
+    name: other_condition_modifiers
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/other_condition_modifiers
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[otherModifiers]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Any additional modifiers for this condition, such as severity.
+    title: Other Condition Modifiers
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/other_condition_modifiers
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  assertion_type:
+    name: assertion_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_type
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Describe the type of assertion being made.
+    title: Assertion Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_type
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: EnumAssertionType
+    required: true
+    multivalued: false
+  assertion_code:
+    name: assertion_code
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: code.coding
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The structured term defining the meaning of the assertion.
+    title: Assertion Code
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_code
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: true
+    multivalued: false
+  assertion_text:
+    name: assertion_text
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_text
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: code.text
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Detailed description / free text about this assertion.
+    title: Assertion Text
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_text
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: string
+    required: false
+    multivalued: false
+  assertion_source:
+    name: assertion_source
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_source
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: method
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Where or how was this this assertion about the Participant recorded?
+      This can support understanding the differences between surveys, automated EHR
+      extraction, manual chart abstraction, etc.
+    title: Assertion Source
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_source
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  value_code:
+    name: value_code
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_code
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: valueCodeableConcept
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Value as code
+    title: Value Code
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_code
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  value_string:
+    name: value_string
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_string
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: valueString
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Value as string
+    title: Value String
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_string
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: string
+    required: false
+    multivalued: false
+  value_number:
+    name: value_number
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_number
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: valueQuantity, valueInteger
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Value as numer
+    title: Value Number
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_number
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: float
+    required: false
+    multivalued: false
+  value_units:
+    name: value_units
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_units
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The structured term defining the units of the value (ucum).
+    title: Value Units
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_units
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  body_site:
+    name: body_site
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/body_site
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: bodySite
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Location information for the observation, including site, laterality,
+      and other qualifiers as appropriate. Multiple observations may be required if
+      the same assertion is made in many locations, or complete location details can
+      be provided in an NCPI Condition Summary.
+    title: Body Site
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/body_site
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  body_location:
+    name: body_location
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/body_location
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension:
+        tag: fhir_extension
+        value: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-body-location-qualifier
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Any location qualifiers
+    title: Body Location
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/body_location
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  body_laterality:
+    name: body_laterality
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/body_laterality
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_extension:
+        tag: fhir_extension
+        value: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-laterality-qualifier
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Laterality information for the condition site
+    title: Laterality Qualifier
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/body_laterality
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
+    multivalued: false
+  cancer_stage:
+    name: cancer_stage
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/cancer_stage
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: component[stage]
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Cancer staging information
+    title: Cancer Stage
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/cancer_stage
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: uriorcurie
+    required: false
     multivalued: false
   email:
     name: email
@@ -1486,72 +2018,6 @@ slots:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
-  target_resource:
-    name: target_resource
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_resource
-    description: FHIR Resource Type for target (i.e. Patient)
-    title: Target Resource
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_resource
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
-  target_path:
-    name: target_path
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_path
-    description: resource property about which this is related
-    title: Target Path
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_path
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
-  offset:
-    name: offset
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
-    description: The point after the target being described. For ranges, this can
-      be used for the starting point
-    title: Offset
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: integer
-    required: true
-    multivalued: false
-  offset_end:
-    name: offset_end
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_end
-    description: The end of a relative date/time range
-    title: Offset End
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_end
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: integer
-    required: false
-    multivalued: false
-  offset_type:
-    name: offset_type
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_type
-    description: What is the datatype associated with the offset (days, years, etc)
-    title: Offset Type
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset_type
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: EnumOffsetType
-    required: true
-    multivalued: false
   parent_study_id:
     name: parent_study_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
@@ -1780,8 +2246,8 @@ slots:
     name: ageAt__value_type
     description: Age Value Type
     title: Value Type
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/value_type
     identifier: false
     alias: value_type
     owner: AgeAt
@@ -1793,8 +2259,8 @@ slots:
     name: ageAt__age
     description: Age either numeric value or range
     title: Age
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/age
     alias: age
     owner: AgeAt
     domain_of:
@@ -1805,8 +2271,8 @@ slots:
     name: ageAt__age_code
     description: Age expressed as an enumerated value representing an age category
     title: Age Code
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_code
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/age_code
     alias: age_code
     owner: AgeAt
     domain_of:
@@ -1817,14 +2283,28 @@ slots:
     name: ageAt__as_date
     description: Event Date (rather than age)
     title: Age As Date
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/as_date
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/as_date
     alias: as_date
     owner: AgeAt
     domain_of:
     - AgeAt
     range: date
     required: false
+  participantAssertion__participant_assertion_id:
+    name: participantAssertion__participant_assertion_id
+    description: Participant Assertion Global ID
+    title: Participant Assertion ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/participant_assertion_id
+    identifier: true
+    alias: participant_assertion_id
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: string
+    required: true
+    multivalued: false
   practitioner__practitioner_id:
     name: practitioner__practitioner_id
     description: The Global ID for the Practitioner.
@@ -1940,13 +2420,40 @@ slots:
     range: string
     required: false
     multivalued: false
+  ParticipantAssertion_participant_id:
+    name: ParticipantAssertion_participant_id
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputparticipant_id
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    is_a: participant_id
+    domain: ParticipantAssertion
+    slot_uri: kfi_fhir_sparks:participant_id
+    alias: participant_id
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    is_usage_slot: true
+    usage_slot_name: participant_id
+    range: Participant
+    required: true
 classes:
   Any:
     name: Any
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputAny
     description: This is a placeholder for the experimental linkml:any behavior for
       unions
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     mappings:
     - linkml:Any
     abstract: true
@@ -1956,7 +2463,7 @@ classes:
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputHasExternalId
     description: Has an external ID
     title: Has
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     abstract: true
     slots:
     - external_id
@@ -1966,7 +2473,7 @@ classes:
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputRecord
     description: One row / entity within the database
     title: Record
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     is_a: HasExternalId
     abstract: true
     slots:
@@ -2020,15 +2527,27 @@ classes:
         required: true
         multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/AccessPolicy
-  AgeAt:
-    name: AgeAt
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/AgeAt
-    description: These represent a flexible age value that could represent one of
-      the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
-    title: Age At ...
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+  RelativeDateTime:
+    name: RelativeDateTime
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
+    description: In FHIR, we can express events using relative date/times from the
+      participant's DOB to avoid exposing sensitive information
+    title: Relative Date Time
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
     slots:
     - id
+    - offset
+    - offset_end
+    - offset_type
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
+  AgeAt:
+    name: AgeAt
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/AgeAt
+    description: These represent a flexible age value that could represent one of
+      the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
+    title: Age At
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+    slots:
     - ageAt__value_type
     - ageAt__age
     - ageAt__age_code
@@ -2059,7 +2578,62 @@ classes:
         title: Age As Date
         range: date
         required: false
-    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/AgeAt
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/age-at/AgeAt
+  ParticipantAssertion:
+    name: ParticipantAssertion
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/ParticipantAssertion
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+    description: Assertion about a particular Participant. May include Conditions,
+      Measurements, etc.
+    title: Participant Assertion
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slots:
+    - ParticipantAssertion_participant_id
+    - age_at_event
+    - age_at_assertion
+    - age_at_onset
+    - age_at_resolution
+    - entity_asserter
+    - other_condition_modifiers
+    - assertion_type
+    - assertion_code
+    - assertion_text
+    - assertion_source
+    - value_code
+    - value_string
+    - value_number
+    - value_units
+    - body_site
+    - body_location
+    - body_laterality
+    - cancer_stage
+    - participantAssertion__participant_assertion_id
+    slot_usage:
+      participant_id:
+        name: participant_id
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+          fhir_element:
+            tag: fhir_element
+            value: category
+          fhir_resource:
+            tag: fhir_resource
+            value: Observation
+    attributes:
+      participant_assertion_id:
+        name: participant_assertion_id
+        description: Participant Assertion Global ID
+        title: Participant Assertion ID
+        identifier: true
+        range: string
+        required: true
+        multivalued: false
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/ParticipantAssertion
   Practitioner:
     name: Practitioner
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/Practitioner
@@ -2218,21 +2792,6 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/PractitionerRole
-  RelativeDateTime:
-    name: RelativeDateTime
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
-    description: In FHIR, we can express events using relative date/times from the
-      participant's DOB to avoid exposing sensitive information
-    title: Relative Date Time
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slots:
-    - id
-    - target_resource
-    - target_path
-    - offset
-    - offset_end
-    - offset_type
-    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/RelativeDateTime
   ResearchStudy:
     name: ResearchStudy
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/ResearchStudy
@@ -2307,7 +2866,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-17T12:48:31'
+source_file_date: '2025-12-19T13:22:25'
 source_file_size: 5020
-generation_date: '2025-12-17T14:34:48'
+generation_date: '2025-12-19T13:48:24'
 

@@ -1,8 +1,8 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-17T14:34:56
+# Generation date: 2025-12-19T13:48:32
 # Schema: kfi-fhir-input
 #
-# id: https://carrollaboratory.github.io/kif-fhir-input
+# id: https://carrollaboratory.github.io/kfi-fhir-input
 # description: DBT Output Schema for FHIR Ingest
 # license: MIT
 
@@ -56,7 +56,7 @@ from rdflib import (
     URIRef
 )
 
-from linkml_runtime.linkml_model.types import Boolean, Date, Integer, String, Uri, Uriorcurie
+from linkml_runtime.linkml_model.types import Boolean, Date, Float, Integer, String, Uri, Uriorcurie
 from linkml_runtime.utils.metamodelcore import Bool, URI, URIorCURIE, XSDDate
 
 metamodel_version = "1.7.0"
@@ -98,7 +98,11 @@ class AccessPolicyAccessPolicyId(extended_str):
     pass
 
 
-class AgeAtId(extended_str):
+class RelativeDateTimeId(extended_str):
+    pass
+
+
+class ParticipantAssertionParticipantAssertionId(extended_str):
     pass
 
 
@@ -123,10 +127,6 @@ class PeriodId(RecordId):
 
 
 class PractitionerRolePractitionerRoleId(extended_str):
-    pass
-
-
-class RelativeDateTimeId(extended_str):
     pass
 
 
@@ -246,6 +246,46 @@ class AccessPolicy(YAMLRoot):
 
 
 @dataclass(repr=False)
+class RelativeDateTime(YAMLRoot):
+    """
+    In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive
+    information
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["relative-date-time/RelativeDateTime"]
+    class_class_curie: ClassVar[str] = "kfi:relative-date-time/RelativeDateTime"
+    class_name: ClassVar[str] = "RelativeDateTime"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.RelativeDateTime
+
+    id: Union[str, RelativeDateTimeId] = None
+    offset: int = None
+    offset_type: Union[str, "EnumOffsetType"] = None
+    offset_end: Optional[int] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, RelativeDateTimeId):
+            self.id = RelativeDateTimeId(self.id)
+
+        if self._is_empty(self.offset):
+            self.MissingRequiredField("offset")
+        if not isinstance(self.offset, int):
+            self.offset = int(self.offset)
+
+        if self._is_empty(self.offset_type):
+            self.MissingRequiredField("offset_type")
+        if not isinstance(self.offset_type, EnumOffsetType):
+            self.offset_type = EnumOffsetType(self.offset_type)
+
+        if self.offset_end is not None and not isinstance(self.offset_end, int):
+            self.offset_end = int(self.offset_end)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class AgeAt(YAMLRoot):
     """
     These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as
@@ -253,23 +293,17 @@ class AgeAt(YAMLRoot):
     """
     _inherited_slots: ClassVar[list[str]] = []
 
-    class_class_uri: ClassVar[URIRef] = KFI["participant-assertion/AgeAt"]
-    class_class_curie: ClassVar[str] = "kfi:participant-assertion/AgeAt"
+    class_class_uri: ClassVar[URIRef] = KFI["age-at/AgeAt"]
+    class_class_curie: ClassVar[str] = "kfi:age-at/AgeAt"
     class_name: ClassVar[str] = "AgeAt"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AgeAt
 
-    id: Union[str, AgeAtId] = None
     value_type: Union[str, "EnumAgeValueType"] = None
     age: Optional[Union[str, RelativeDateTimeId]] = None
     age_code: Optional[Union[str, URIorCURIE]] = None
     as_date: Optional[Union[str, XSDDate]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, AgeAtId):
-            self.id = AgeAtId(self.id)
-
         if self._is_empty(self.value_type):
             self.MissingRequiredField("value_type")
         if not isinstance(self.value_type, EnumAgeValueType):
@@ -283,6 +317,111 @@ class AgeAt(YAMLRoot):
 
         if self.as_date is not None and not isinstance(self.as_date, XSDDate):
             self.as_date = XSDDate(self.as_date)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class ParticipantAssertion(YAMLRoot):
+    """
+    Assertion about a particular Participant. May include Conditions, Measurements, etc.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["participant-assertion/ParticipantAssertion"]
+    class_class_curie: ClassVar[str] = "kfi:participant-assertion/ParticipantAssertion"
+    class_name: ClassVar[str] = "ParticipantAssertion"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ParticipantAssertion
+
+    participant_assertion_id: Union[str, ParticipantAssertionParticipantAssertionId] = None
+    participant_id: Union[str, ParticipantParticipantId] = None
+    assertion_type: Union[str, "EnumAssertionType"] = None
+    assertion_code: Union[str, URIorCURIE] = None
+    age_at_event: Optional[Union[dict, AgeAt]] = None
+    age_at_assertion: Optional[Union[dict, AgeAt]] = None
+    age_at_onset: Optional[Union[dict, AgeAt]] = None
+    age_at_resolution: Optional[Union[dict, AgeAt]] = None
+    entity_asserter: Optional[Union[str, "EnumEntityAsserter"]] = None
+    other_condition_modifiers: Optional[Union[str, URIorCURIE]] = None
+    assertion_text: Optional[str] = None
+    assertion_source: Optional[Union[str, URIorCURIE]] = None
+    value_code: Optional[Union[str, URIorCURIE]] = None
+    value_string: Optional[str] = None
+    value_number: Optional[float] = None
+    value_units: Optional[Union[str, URIorCURIE]] = None
+    body_site: Optional[Union[str, URIorCURIE]] = None
+    body_location: Optional[Union[str, URIorCURIE]] = None
+    body_laterality: Optional[Union[str, URIorCURIE]] = None
+    cancer_stage: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.participant_assertion_id):
+            self.MissingRequiredField("participant_assertion_id")
+        if not isinstance(self.participant_assertion_id, ParticipantAssertionParticipantAssertionId):
+            self.participant_assertion_id = ParticipantAssertionParticipantAssertionId(self.participant_assertion_id)
+
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, ParticipantParticipantId):
+            self.participant_id = ParticipantParticipantId(self.participant_id)
+
+        if self._is_empty(self.assertion_type):
+            self.MissingRequiredField("assertion_type")
+        if not isinstance(self.assertion_type, EnumAssertionType):
+            self.assertion_type = EnumAssertionType(self.assertion_type)
+
+        if self._is_empty(self.assertion_code):
+            self.MissingRequiredField("assertion_code")
+        if not isinstance(self.assertion_code, URIorCURIE):
+            self.assertion_code = URIorCURIE(self.assertion_code)
+
+        if self.age_at_event is not None and not isinstance(self.age_at_event, AgeAt):
+            self.age_at_event = AgeAt(**as_dict(self.age_at_event))
+
+        if self.age_at_assertion is not None and not isinstance(self.age_at_assertion, AgeAt):
+            self.age_at_assertion = AgeAt(**as_dict(self.age_at_assertion))
+
+        if self.age_at_onset is not None and not isinstance(self.age_at_onset, AgeAt):
+            self.age_at_onset = AgeAt(**as_dict(self.age_at_onset))
+
+        if self.age_at_resolution is not None and not isinstance(self.age_at_resolution, AgeAt):
+            self.age_at_resolution = AgeAt(**as_dict(self.age_at_resolution))
+
+        if self.entity_asserter is not None and not isinstance(self.entity_asserter, EnumEntityAsserter):
+            self.entity_asserter = EnumEntityAsserter(self.entity_asserter)
+
+        if self.other_condition_modifiers is not None and not isinstance(self.other_condition_modifiers, URIorCURIE):
+            self.other_condition_modifiers = URIorCURIE(self.other_condition_modifiers)
+
+        if self.assertion_text is not None and not isinstance(self.assertion_text, str):
+            self.assertion_text = str(self.assertion_text)
+
+        if self.assertion_source is not None and not isinstance(self.assertion_source, URIorCURIE):
+            self.assertion_source = URIorCURIE(self.assertion_source)
+
+        if self.value_code is not None and not isinstance(self.value_code, URIorCURIE):
+            self.value_code = URIorCURIE(self.value_code)
+
+        if self.value_string is not None and not isinstance(self.value_string, str):
+            self.value_string = str(self.value_string)
+
+        if self.value_number is not None and not isinstance(self.value_number, float):
+            self.value_number = float(self.value_number)
+
+        if self.value_units is not None and not isinstance(self.value_units, URIorCURIE):
+            self.value_units = URIorCURIE(self.value_units)
+
+        if self.body_site is not None and not isinstance(self.body_site, URIorCURIE):
+            self.body_site = URIorCURIE(self.body_site)
+
+        if self.body_location is not None and not isinstance(self.body_location, URIorCURIE):
+            self.body_location = URIorCURIE(self.body_location)
+
+        if self.body_laterality is not None and not isinstance(self.body_laterality, URIorCURIE):
+            self.body_laterality = URIorCURIE(self.body_laterality)
+
+        if self.cancer_stage is not None and not isinstance(self.cancer_stage, URIorCURIE):
+            self.cancer_stage = URIorCURIE(self.cancer_stage)
 
         super().__post_init__(**kwargs)
 
@@ -530,58 +669,6 @@ class PractitionerRole(YAMLRoot):
 
         if self.period_id is not None and not isinstance(self.period_id, PeriodId):
             self.period_id = PeriodId(self.period_id)
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass(repr=False)
-class RelativeDateTime(YAMLRoot):
-    """
-    In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive
-    information
-    """
-    _inherited_slots: ClassVar[list[str]] = []
-
-    class_class_uri: ClassVar[URIRef] = KFI["relative-date-time/RelativeDateTime"]
-    class_class_curie: ClassVar[str] = "kfi:relative-date-time/RelativeDateTime"
-    class_name: ClassVar[str] = "RelativeDateTime"
-    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.RelativeDateTime
-
-    id: Union[str, RelativeDateTimeId] = None
-    target_resource: str = None
-    target_path: str = None
-    offset: int = None
-    offset_type: Union[str, "EnumOffsetType"] = None
-    offset_end: Optional[int] = None
-
-    def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, RelativeDateTimeId):
-            self.id = RelativeDateTimeId(self.id)
-
-        if self._is_empty(self.target_resource):
-            self.MissingRequiredField("target_resource")
-        if not isinstance(self.target_resource, str):
-            self.target_resource = str(self.target_resource)
-
-        if self._is_empty(self.target_path):
-            self.MissingRequiredField("target_path")
-        if not isinstance(self.target_path, str):
-            self.target_path = str(self.target_path)
-
-        if self._is_empty(self.offset):
-            self.MissingRequiredField("offset")
-        if not isinstance(self.offset, int):
-            self.offset = int(self.offset)
-
-        if self._is_empty(self.offset_type):
-            self.MissingRequiredField("offset_type")
-        if not isinstance(self.offset_type, EnumOffsetType):
-            self.offset_type = EnumOffsetType(self.offset_type)
-
-        if self.offset_end is not None and not isinstance(self.offset_end, int):
-            self.offset_end = int(self.offset_end)
 
         super().__post_init__(**kwargs)
 
@@ -988,6 +1075,24 @@ class EnumDataAccessType(EnumDefinitionImpl):
         description="""Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'""",
     )
 
+class EnumOffsetType(EnumDefinitionImpl):
+    """
+    Offset Type
+    """
+    days = PermissibleValue(
+        text="days",
+        title="Days",
+        description="The offset is represented in days")
+    years = PermissibleValue(
+        text="years",
+        title="Years",
+        description="The offset is represented in Years")
+
+    _defn = EnumDefinition(
+        name="EnumOffsetType",
+        description="Offset Type",
+    )
+
 class EnumAgeValueType(EnumDefinitionImpl):
     """
     Describes where to look for the data (as value, code, range, etc)
@@ -1012,6 +1117,73 @@ class EnumAgeValueType(EnumDefinitionImpl):
     _defn = EnumDefinition(
         name="EnumAgeValueType",
         description="Describes where to look for the data (as value, code, range, etc)",
+    )
+
+class EnumEntityAsserter(EnumDefinitionImpl):
+    """
+    Who recorded this assertion about the Participant? This can support understanding the differences between
+    self-report, doctor, trained research staff.
+    """
+    self_report = PermissibleValue(
+        text="self_report",
+        title="Self Report",
+        description="The participant reported the assertion")
+    doctor = PermissibleValue(
+        text="doctor",
+        title="Doctor",
+        description="Physician")
+    staff = PermissibleValue(
+        text="staff",
+        title="Trained Research Staff",
+        description="Trained research staff")
+
+    _defn = EnumDefinition(
+        name="EnumEntityAsserter",
+        description="""Who recorded this assertion about the Participant? This can support understanding the differences between self-report, doctor, trained research staff.""",
+    )
+
+class EnumAssertionType(EnumDefinitionImpl):
+    """
+    Provides options to describe the expressed semantics of a condition.
+    """
+    phenotypic_feature = PermissibleValue(
+        text="phenotypic_feature",
+        title="Phenotypic Feature",
+        description="This is a phenotypic feature",
+        meaning=NCPI_COND_TYPE["Phenotypic-Feature"])
+    disease = PermissibleValue(
+        text="disease",
+        title="disease",
+        description="Disease",
+        meaning=NCPI_COND_TYPE["Disease"])
+    comorbidity = PermissibleValue(
+        text="comorbidity",
+        title="comorbidity",
+        description="Comorbidity",
+        meaning=NCPI_COND_TYPE["Comorbidity"])
+    histology = PermissibleValue(
+        text="histology",
+        title="histology",
+        description="Histology",
+        meaning=NCPI_COND_TYPE["Histology"])
+    clinical_finding = PermissibleValue(
+        text="clinical_finding",
+        title="clinical-finding",
+        description="Clinical Finding",
+        meaning=NCPI_COND_TYPE["Clinical-Finding"])
+    ehr_billing_code = PermissibleValue(
+        text="ehr_billing_code",
+        title="EHR Billing Code",
+        description="From an EHR billing record, which may indicate only investigation into a possible diagnosis.",
+        meaning=NCPI_COND_TYPE["EHR-Condition-Code"])
+    measurement = PermissibleValue(
+        text="measurement",
+        title="Measurement",
+        description="A measurement of some feature, eg, height or glucose.")
+
+    _defn = EnumDefinition(
+        name="EnumAssertionType",
+        description="Provides options to describe the expressed semantics of a condition.",
     )
 
 class EnumResearchStudyPartyOrganizationType(EnumDefinitionImpl):
@@ -1264,24 +1436,6 @@ class EnumPatientKnowledgeSource(EnumDefinitionImpl):
         description="The source of the knowledge represented in a Patient resource.",
     )
 
-class EnumOffsetType(EnumDefinitionImpl):
-    """
-    Offset Type
-    """
-    days = PermissibleValue(
-        text="days",
-        title="Days",
-        description="The offset is represented in days")
-    years = PermissibleValue(
-        text="years",
-        title="Years",
-        description="The offset is represented in Years")
-
-    _defn = EnumDefinition(
-        name="EnumOffsetType",
-        description="Offset Type",
-    )
-
 class EnumStudyStatus(EnumDefinitionImpl):
     """
     Codes indicating the study's current status
@@ -1424,6 +1578,69 @@ slots.data_access_type = Slot(uri=KFI['access-policy/data_access_type'], name="d
 slots.consent_scope = Slot(uri=KFI['access-policy/consent_scope'], name="consent_scope", curie=KFI.curie('access-policy/consent_scope'),
                    model_uri=KFI_FHIR_SPARKS.consent_scope, domain=None, range=Union[str, "EnumConsentScope"])
 
+slots.offset = Slot(uri=KFI['relative-date-time/offset'], name="offset", curie=KFI.curie('relative-date-time/offset'),
+                   model_uri=KFI_FHIR_SPARKS.offset, domain=None, range=int)
+
+slots.offset_end = Slot(uri=KFI['relative-date-time/offset_end'], name="offset_end", curie=KFI.curie('relative-date-time/offset_end'),
+                   model_uri=KFI_FHIR_SPARKS.offset_end, domain=None, range=Optional[int])
+
+slots.offset_type = Slot(uri=KFI['relative-date-time/offset_type'], name="offset_type", curie=KFI.curie('relative-date-time/offset_type'),
+                   model_uri=KFI_FHIR_SPARKS.offset_type, domain=None, range=Union[str, "EnumOffsetType"])
+
+slots.age_at_event = Slot(uri=KFI['participant-assertion/age_at_event'], name="age_at_event", curie=KFI.curie('participant-assertion/age_at_event'),
+                   model_uri=KFI_FHIR_SPARKS.age_at_event, domain=None, range=Optional[Union[dict, AgeAt]])
+
+slots.age_at_assertion = Slot(uri=KFI['participant-assertion/age_at_assertion'], name="age_at_assertion", curie=KFI.curie('participant-assertion/age_at_assertion'),
+                   model_uri=KFI_FHIR_SPARKS.age_at_assertion, domain=None, range=Optional[Union[dict, AgeAt]])
+
+slots.age_at_onset = Slot(uri=KFI['participant-assertion/age_at_onset'], name="age_at_onset", curie=KFI.curie('participant-assertion/age_at_onset'),
+                   model_uri=KFI_FHIR_SPARKS.age_at_onset, domain=None, range=Optional[Union[dict, AgeAt]])
+
+slots.age_at_resolution = Slot(uri=KFI['participant-assertion/age_at_resolution'], name="age_at_resolution", curie=KFI.curie('participant-assertion/age_at_resolution'),
+                   model_uri=KFI_FHIR_SPARKS.age_at_resolution, domain=None, range=Optional[Union[dict, AgeAt]])
+
+slots.entity_asserter = Slot(uri=KFI['participant-assertion/entity_asserter'], name="entity_asserter", curie=KFI.curie('participant-assertion/entity_asserter'),
+                   model_uri=KFI_FHIR_SPARKS.entity_asserter, domain=None, range=Optional[Union[str, "EnumEntityAsserter"]])
+
+slots.other_condition_modifiers = Slot(uri=KFI['participant-assertion/other_condition_modifiers'], name="other_condition_modifiers", curie=KFI.curie('participant-assertion/other_condition_modifiers'),
+                   model_uri=KFI_FHIR_SPARKS.other_condition_modifiers, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.assertion_type = Slot(uri=KFI['participant-assertion/assertion_type'], name="assertion_type", curie=KFI.curie('participant-assertion/assertion_type'),
+                   model_uri=KFI_FHIR_SPARKS.assertion_type, domain=None, range=Union[str, "EnumAssertionType"])
+
+slots.assertion_code = Slot(uri=KFI['participant-assertion/assertion_code'], name="assertion_code", curie=KFI.curie('participant-assertion/assertion_code'),
+                   model_uri=KFI_FHIR_SPARKS.assertion_code, domain=None, range=Union[str, URIorCURIE])
+
+slots.assertion_text = Slot(uri=KFI['participant-assertion/assertion_text'], name="assertion_text", curie=KFI.curie('participant-assertion/assertion_text'),
+                   model_uri=KFI_FHIR_SPARKS.assertion_text, domain=None, range=Optional[str])
+
+slots.assertion_source = Slot(uri=KFI['participant-assertion/assertion_source'], name="assertion_source", curie=KFI.curie('participant-assertion/assertion_source'),
+                   model_uri=KFI_FHIR_SPARKS.assertion_source, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.value_code = Slot(uri=KFI['participant-assertion/value_code'], name="value_code", curie=KFI.curie('participant-assertion/value_code'),
+                   model_uri=KFI_FHIR_SPARKS.value_code, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.value_string = Slot(uri=KFI['participant-assertion/value_string'], name="value_string", curie=KFI.curie('participant-assertion/value_string'),
+                   model_uri=KFI_FHIR_SPARKS.value_string, domain=None, range=Optional[str])
+
+slots.value_number = Slot(uri=KFI['participant-assertion/value_number'], name="value_number", curie=KFI.curie('participant-assertion/value_number'),
+                   model_uri=KFI_FHIR_SPARKS.value_number, domain=None, range=Optional[float])
+
+slots.value_units = Slot(uri=KFI['participant-assertion/value_units'], name="value_units", curie=KFI.curie('participant-assertion/value_units'),
+                   model_uri=KFI_FHIR_SPARKS.value_units, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.body_site = Slot(uri=KFI['participant-assertion/body_site'], name="body_site", curie=KFI.curie('participant-assertion/body_site'),
+                   model_uri=KFI_FHIR_SPARKS.body_site, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.body_location = Slot(uri=KFI['participant-assertion/body_location'], name="body_location", curie=KFI.curie('participant-assertion/body_location'),
+                   model_uri=KFI_FHIR_SPARKS.body_location, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.body_laterality = Slot(uri=KFI['participant-assertion/body_laterality'], name="body_laterality", curie=KFI.curie('participant-assertion/body_laterality'),
+                   model_uri=KFI_FHIR_SPARKS.body_laterality, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.cancer_stage = Slot(uri=KFI['participant-assertion/cancer_stage'], name="cancer_stage", curie=KFI.curie('participant-assertion/cancer_stage'),
+                   model_uri=KFI_FHIR_SPARKS.cancer_stage, domain=None, range=Optional[Union[str, URIorCURIE]])
+
 slots.email = Slot(uri=KFI['practitioner/email'], name="email", curie=KFI.curie('practitioner/email'),
                    model_uri=KFI_FHIR_SPARKS.email, domain=None, range=Optional[str])
 
@@ -1475,21 +1692,6 @@ slots.deceased_rel = Slot(uri=KFI['participant/deceased_rel'], name="deceased_re
 slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_source'], name="patient_knowledge_source", curie=KFI.curie('participant/patient_knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.patient_knowledge_source, domain=None, range=Optional[Union[str, "EnumPatientKnowledgeSource"]])
 
-slots.target_resource = Slot(uri=KFI['relative-date-time/target_resource'], name="target_resource", curie=KFI.curie('relative-date-time/target_resource'),
-                   model_uri=KFI_FHIR_SPARKS.target_resource, domain=None, range=str)
-
-slots.target_path = Slot(uri=KFI['relative-date-time/target_path'], name="target_path", curie=KFI.curie('relative-date-time/target_path'),
-                   model_uri=KFI_FHIR_SPARKS.target_path, domain=None, range=str)
-
-slots.offset = Slot(uri=KFI['relative-date-time/offset'], name="offset", curie=KFI.curie('relative-date-time/offset'),
-                   model_uri=KFI_FHIR_SPARKS.offset, domain=None, range=int)
-
-slots.offset_end = Slot(uri=KFI['relative-date-time/offset_end'], name="offset_end", curie=KFI.curie('relative-date-time/offset_end'),
-                   model_uri=KFI_FHIR_SPARKS.offset_end, domain=None, range=Optional[int])
-
-slots.offset_type = Slot(uri=KFI['relative-date-time/offset_type'], name="offset_type", curie=KFI.curie('relative-date-time/offset_type'),
-                   model_uri=KFI_FHIR_SPARKS.offset_type, domain=None, range=Union[str, "EnumOffsetType"])
-
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
 
@@ -1535,17 +1737,20 @@ slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy
 slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])
 
-slots.ageAt__value_type = Slot(uri=KFI['participant-assertion/value_type'], name="ageAt__value_type", curie=KFI.curie('participant-assertion/value_type'),
+slots.ageAt__value_type = Slot(uri=KFI['age-at/value_type'], name="ageAt__value_type", curie=KFI.curie('age-at/value_type'),
                    model_uri=KFI_FHIR_SPARKS.ageAt__value_type, domain=None, range=Union[str, "EnumAgeValueType"])
 
-slots.ageAt__age = Slot(uri=KFI['participant-assertion/age'], name="ageAt__age", curie=KFI.curie('participant-assertion/age'),
+slots.ageAt__age = Slot(uri=KFI['age-at/age'], name="ageAt__age", curie=KFI.curie('age-at/age'),
                    model_uri=KFI_FHIR_SPARKS.ageAt__age, domain=None, range=Optional[Union[str, RelativeDateTimeId]])
 
-slots.ageAt__age_code = Slot(uri=KFI['participant-assertion/age_code'], name="ageAt__age_code", curie=KFI.curie('participant-assertion/age_code'),
+slots.ageAt__age_code = Slot(uri=KFI['age-at/age_code'], name="ageAt__age_code", curie=KFI.curie('age-at/age_code'),
                    model_uri=KFI_FHIR_SPARKS.ageAt__age_code, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.ageAt__as_date = Slot(uri=KFI['participant-assertion/as_date'], name="ageAt__as_date", curie=KFI.curie('participant-assertion/as_date'),
+slots.ageAt__as_date = Slot(uri=KFI['age-at/as_date'], name="ageAt__as_date", curie=KFI.curie('age-at/as_date'),
                    model_uri=KFI_FHIR_SPARKS.ageAt__as_date, domain=None, range=Optional[Union[str, XSDDate]])
+
+slots.participantAssertion__participant_assertion_id = Slot(uri=KFI['participant-assertion/participant_assertion_id'], name="participantAssertion__participant_assertion_id", curie=KFI.curie('participant-assertion/participant_assertion_id'),
+                   model_uri=KFI_FHIR_SPARKS.participantAssertion__participant_assertion_id, domain=None, range=URIRef)
 
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)
@@ -1573,3 +1778,6 @@ slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['rese
 
 slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collection/description'], name="researchStudyCollection__description", curie=KFI.curie('research-study-collection/description'),
                    model_uri=KFI_FHIR_SPARKS.researchStudyCollection__description, domain=None, range=Optional[str])
+
+slots.ParticipantAssertion_participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="ParticipantAssertion_participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])

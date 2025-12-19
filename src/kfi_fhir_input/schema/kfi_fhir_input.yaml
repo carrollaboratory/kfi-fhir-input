@@ -1,12 +1,12 @@
 ---
-id: https://carrollaboratory.github.io/kif-fhir-input
+id: https://carrollaboratory.github.io/kfi-fhir-input
 name: kfi-fhir-input
 title: KF/Include FHIR Input Model
 description: |-
   DBT Output Schema for FHIR Ingest
 license: MIT
 see_also:
-  - https://carrollaboratory.github.io/kif-fhir-input
+  - https://carrollaboratory.github.io/kfi-fhir-input
 
 prefixes:
   cdc_rec: https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC
@@ -47,16 +47,16 @@ default_range: string
 imports:
   - linkml:types
   - access_policy
+  - relative_date_time
   - age_at 
+  - participant_assertion
   - practitioner
   - associated_party
   - institution
   - participant
-  - participant_assertion
   - period 
   - practitioner_role 
   - practitioner
-  - relative_date_time
   - research_study
   - research_study_collection
 classes:

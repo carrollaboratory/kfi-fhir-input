@@ -1,0 +1,22 @@
+---
+participant_assertion_id: ob-0001
+participant_id: par-01234
+age_at_event: 
+  value_type: age 
+  age: rt-001
+age_at_assertion: 
+  value_type: age 
+  age:  rt-002
+age_at_onset: 
+  value_type: age 
+  age: rt-0003
+age_at_resolution: 
+  value_type: age 
+  age: rt-0003
+entity_asserter: doctor
+assertion_type: measurement 
+assertion_code: LOINC:8302-2
+assertion_text: Body Height 
+assertion_source: NCIT:C17176 # Survey
+value_number: 18
+value_units: in # inches

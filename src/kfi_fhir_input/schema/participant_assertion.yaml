@@ -17,13 +17,13 @@ classes:
         range: string         
         identifier: true
         required: true
+        multivalued: false
     slots:
       - participant_id 
       - age_at_event
       - age_at_assertion
       - age_at_onset 
       - age_at_resolution
-      - practitioner_role_id
       - entity_asserter 
       - other_condition_modifiers
       - assertion_type 
@@ -281,4 +281,3 @@ enums:
       measurement:
         title: Measurement
         description: A measurement of some feature, eg, height or glucose.
-        #meaning: 
