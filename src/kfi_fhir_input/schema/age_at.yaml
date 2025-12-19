@@ -1,11 +1,11 @@
-id: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
-name: kfi-fhir-input-participant-assertion
+id: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+name: kfi-fhir-input-age-at
 imports:
   - linkml:types 
   - kfi_fhir_input
 classes:
   AgeAt:
-    title: Age At ...
+    title: Age At
     description: These represent a flexible age value that could represent one 
                  of the following-Relative Age Offset, Age Range as Code, Date 
                  Range, DateTime 
@@ -31,8 +31,8 @@ classes:
         description: Event Date (rather than age) 
         range: date 
         required: false      
-    slots:
-      - id # These will not get global IDs 
+    #slots:
+    #  - id # These will not get global IDs 
 enums: 
   EnumAgeValueType:
     description: Describes where to look for the data (as value, code, range, etc)
