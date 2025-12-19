@@ -1486,32 +1486,6 @@ slots:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
-  target_resource:
-    name: target_resource
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_resource
-    description: FHIR Resource Type for target (i.e. Patient)
-    title: Target Resource
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_resource
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
-  target_path:
-    name: target_path
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_path
-    description: resource property about which this is related
-    title: Target Path
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/target_path
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
   offset:
     name: offset
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time/offset
@@ -2227,8 +2201,6 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
     slots:
     - id
-    - target_resource
-    - target_path
     - offset
     - offset_end
     - offset_type
@@ -2307,7 +2279,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2025-12-17T20:35:40'
+source_file_date: '2025-12-19T19:50:33'
 source_file_size: 5020
-generation_date: '2025-12-17T20:35:51'
+generation_date: '2025-12-19T19:50:43'
 

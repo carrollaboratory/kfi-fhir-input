@@ -280,10 +280,6 @@
 
 
 
-      RelativeDateTime : target_path
-
-      RelativeDateTime : target_resource
-
 
 </div>
 <!-- no inheritance hierarchy -->
@@ -302,18 +298,6 @@
 <td><a href="../id/">id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Unique Identifier for a table entry</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../target_resource/">target_resource</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>FHIR Resource Type for target (i</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../target_path/">target_path</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>resource property about which this is related</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -396,8 +380,6 @@ title: Relative Date Time
 from_schema: https://carrollaboratory.github.io/kif-fhir-input
 slots:
 - id
-- target_resource
-- target_path
 - offset
 - offset_end
 - offset_type
@@ -425,32 +407,6 @@ attributes:
     domain_of:
     - Record
     - AgeAt
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
-  target_resource:
-    name: target_resource
-    description: FHIR Resource Type for target (i.e. Patient)
-    title: Target Resource
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: target_resource
-    owner: RelativeDateTime
-    domain_of:
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
-  target_path:
-    name: target_path
-    description: resource property about which this is related
-    title: Target Path
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: target_path
-    owner: RelativeDateTime
-    domain_of:
     - RelativeDateTime
     range: string
     required: true
