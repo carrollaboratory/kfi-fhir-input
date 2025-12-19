@@ -1,6 +1,4 @@
 ---
 id: rt-0003
-target_resource: Patient 
-target_path: dob 
 offset: 13
 offset_type: years

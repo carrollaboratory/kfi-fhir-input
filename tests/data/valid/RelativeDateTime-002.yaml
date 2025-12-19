@@ -1,6 +1,4 @@
 ---
 id: rt-0002
-target_resource: Patient 
-target_path: dob 
 offset: 110
 offset_type: days
