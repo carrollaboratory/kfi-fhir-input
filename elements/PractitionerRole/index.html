@@ -361,12 +361,6 @@
 <td>any_of[range]</td>
 <td><a href="./">PractitionerRole</a></td>
 </tr>
-<tr>
-<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
-<td><a href="../practitioner_role_id/">practitioner_role_id</a></td>
-<td>range</td>
-<td><a href="./">PractitionerRole</a></td>
-</tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
@@ -387,7 +381,7 @@
 </table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -420,7 +414,7 @@ annotations:
 description: PractitionerRole covers the recording of the location and types of services
   that Practitioners are able to provide for an organization.
 title: Practitioner Role
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
 - institution_id
 - practitioner_id
@@ -434,7 +428,6 @@ attributes:
     identifier: true
     domain_of:
     - Practitioner
-    - ParticipantAssertion
     - PractitionerRole
     range: string
     required: true
@@ -451,7 +444,7 @@ annotations:
 description: PractitionerRole covers the recording of the location and types of services
   that Practitioners are able to provide for an organization.
 title: Practitioner Role
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 attributes:
   practitioner_role_id:
     name: practitioner_role_id
@@ -463,7 +456,6 @@ attributes:
     owner: PractitionerRole
     domain_of:
     - Practitioner
-    - ParticipantAssertion
     - PractitionerRole
     range: string
     required: true
@@ -475,7 +467,7 @@ attributes:
         value: institution_id
     description: The institution this record is associated with.
     title: Institution
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: institution_id
     owner: PractitionerRole
@@ -490,7 +482,7 @@ attributes:
     description: The Global ID for the PractitionerRole that links a Practitioner
       to their Institution.
     title: Practitioner ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: practitioner_id
     owner: PractitionerRole
@@ -511,7 +503,7 @@ attributes:
     description: Reference to a time period which defines a Start and End datatime
       period.
     title: Period ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: period_id
     owner: PractitionerRole

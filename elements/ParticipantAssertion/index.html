@@ -358,17 +358,6 @@
 
 
 
-      ParticipantAssertion : practitioner_role_id
-
-
-
-
-
-        ParticipantAssertion --&gt; "0..1" PractitionerRole : practitioner_role_id
-        click PractitionerRole href "../PractitionerRole/"
-
-
-
       ParticipantAssertion : value_code
 
       ParticipantAssertion : value_number
@@ -419,12 +408,6 @@
 <td><a href="../age_at_resolution/">age_at_resolution</a></td>
 <td>0..1 <br/> <a href="../AgeAt/">AgeAt</a></td>
 <td>The age at which this condition was resolved, abated, or cured</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../practitioner_role_id/">practitioner_role_id</a></td>
-<td>0..1 <br/> <a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>Global ID for this record</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -537,7 +520,7 @@
 </table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -570,14 +553,13 @@ annotations:
 description: Assertion about a particular Participant. May include Conditions, Measurements,
   etc.
 title: Participant Assertion
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
 - participant_id
 - age_at_event
 - age_at_assertion
 - age_at_onset
 - age_at_resolution
-- practitioner_role_id
 - entity_asserter
 - other_condition_modifiers
 - assertion_type
@@ -617,6 +599,7 @@ attributes:
     - ParticipantAssertion
     range: string
     required: true
+    multivalued: false
 
 </code></pre>
 </details>
@@ -630,7 +613,7 @@ annotations:
 description: Assertion about a particular Participant. May include Conditions, Measurements,
   etc.
 title: Participant Assertion
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slot_usage:
   participant_id:
     name: participant_id
@@ -658,6 +641,7 @@ attributes:
     - ParticipantAssertion
     range: string
     required: true
+    multivalued: false
   participant_id:
     name: participant_id
     annotations:
@@ -672,13 +656,13 @@ attributes:
         value: Observation
     description: The Global ID for the Participant
     title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: participant_id
     owner: ParticipantAssertion
     domain_of:
-    - Participant
     - ParticipantAssertion
+    - Participant
     range: Participant
     required: true
   age_at_event:
@@ -695,7 +679,7 @@ attributes:
         value: Observation
     description: The date or age at which the event relating to this assertion occured.
     title: Age At Event
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: age_at_event
     owner: ParticipantAssertion
@@ -718,7 +702,7 @@ attributes:
         value: Observation
     description: The date or age at which this condition is being asserted.
     title: Age At Assertion
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: age_at_assertion
     owner: ParticipantAssertion
@@ -742,7 +726,7 @@ attributes:
     description: The age of onset for this condition. Could be expressed with a term,
       an age, or an age range.
     title: Age At Onset
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: age_at_onset
     owner: ParticipantAssertion
@@ -767,7 +751,7 @@ attributes:
       be left empty in cases of current active status. Could be expressed with a term,
       an age, or an age range.
     title: Age At Resolution
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: age_at_resolution
     owner: ParticipantAssertion
@@ -776,24 +760,6 @@ attributes:
     range: AgeAt
     required: false
     multivalued: false
-  practitioner_role_id:
-    name: practitioner_role_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: practitioner_role_id
-    description: Global ID for this record
-    title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
-    rank: 1000
-    alias: practitioner_role_id
-    owner: ParticipantAssertion
-    domain_of:
-    - Practitioner
-    - ParticipantAssertion
-    - PractitionerRole
-    range: PractitionerRole
-    required: false
   entity_asserter:
     name: entity_asserter
     annotations:
@@ -810,7 +776,7 @@ attributes:
       understanding the differences between self-report, doctor, trained research
       staff.
     title: Entity Asserter
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: entity_asserter
     owner: ParticipantAssertion
@@ -833,7 +799,7 @@ attributes:
         value: Observation
     description: Any additional modifiers for this condition, such as severity.
     title: Other Condition Modifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: other_condition_modifiers
     owner: ParticipantAssertion
@@ -856,7 +822,7 @@ attributes:
         value: Observation
     description: Describe the type of assertion being made.
     title: Assertion Type
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: assertion_type
     owner: ParticipantAssertion
@@ -879,7 +845,7 @@ attributes:
         value: Observation
     description: The structured term defining the meaning of the assertion.
     title: Assertion Code
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: assertion_code
     owner: ParticipantAssertion
@@ -902,7 +868,7 @@ attributes:
         value: Observation
     description: Detailed description / free text about this assertion.
     title: Assertion Text
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: assertion_text
     owner: ParticipantAssertion
@@ -927,7 +893,7 @@ attributes:
       This can support understanding the differences between surveys, automated EHR
       extraction, manual chart abstraction, etc.
     title: Assertion Source
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: assertion_source
     owner: ParticipantAssertion
@@ -950,7 +916,7 @@ attributes:
         value: Observation
     description: Value as code
     title: Value Code
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: value_code
     owner: ParticipantAssertion
@@ -973,7 +939,7 @@ attributes:
         value: Observation
     description: Value as string
     title: Value String
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: value_string
     owner: ParticipantAssertion
@@ -996,7 +962,7 @@ attributes:
         value: Observation
     description: Value as numer
     title: Value Number
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: value_number
     owner: ParticipantAssertion
@@ -1016,7 +982,7 @@ attributes:
         value: Observation
     description: The structured term defining the units of the value (ucum).
     title: Value Units
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: value_units
     owner: ParticipantAssertion
@@ -1042,7 +1008,7 @@ attributes:
       the same assertion is made in many locations, or complete location details can
       be provided in an NCPI Condition Summary.
     title: Body Site
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: body_site
     owner: ParticipantAssertion
@@ -1065,7 +1031,7 @@ attributes:
         value: Observation
     description: Any location qualifiers
     title: Body Location
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: body_location
     owner: ParticipantAssertion
@@ -1088,7 +1054,7 @@ attributes:
         value: Observation
     description: Laterality information for the condition site
     title: Laterality Qualifier
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: body_laterality
     owner: ParticipantAssertion
@@ -1111,7 +1077,7 @@ attributes:
         value: Observation
     description: Cancer staging information
     title: Cancer Stage
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: cancer_stage
     owner: ParticipantAssertion

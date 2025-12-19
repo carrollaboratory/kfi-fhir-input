@@ -438,6 +438,11 @@ Alias: id</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../RelativeDateTime/">RelativeDateTime</a></td>
+<td>In FHIR, we can express events using relative date/times from the participant...</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../AssociatedParty/">AssociatedParty</a></td>
 <td>Sponsors, collaborators, and other parties affiliated with a research study</td>
 <td>no</td>
@@ -445,16 +450,6 @@ Alias: id</p>
 <tr>
 <td><a href="../Record/">Record</a></td>
 <td>One row / entity within the database</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../RelativeDateTime/">RelativeDateTime</a></td>
-<td>In FHIR, we can express events using relative date/times from the participant...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../AgeAt/">AgeAt</a></td>
-<td>These represent a flexible age value that could represent one of the followin...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -471,7 +466,7 @@ Alias: id</p>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -499,13 +494,12 @@ Alias: id</p>
 description: Unique Identifier for a table entry. This is probably not the Global
   ID
 title: ID
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
 identifier: true
 alias: id
 domain_of:
 - Record
-- AgeAt
 - RelativeDateTime
 range: string
 required: true

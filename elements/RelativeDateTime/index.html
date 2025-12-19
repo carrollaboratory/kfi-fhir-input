@@ -348,7 +348,7 @@
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -377,7 +377,7 @@
 description: In FHIR, we can express events using relative date/times from the participant's
   DOB to avoid exposing sensitive information
 title: Relative Date Time
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
 - id
 - offset
@@ -392,21 +392,20 @@ slots:
 description: In FHIR, we can express events using relative date/times from the participant's
   DOB to avoid exposing sensitive information
 title: Relative Date Time
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 attributes:
   id:
     name: id
     description: Unique Identifier for a table entry. This is probably not the Global
       ID
     title: ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: true
     alias: id
     owner: RelativeDateTime
     domain_of:
     - Record
-    - AgeAt
     - RelativeDateTime
     range: string
     required: true
@@ -416,7 +415,7 @@ attributes:
     description: The point after the target being described. For ranges, this can
       be used for the starting point
     title: Offset
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: offset
     owner: RelativeDateTime
@@ -429,7 +428,7 @@ attributes:
     name: offset_end
     description: The end of a relative date/time range
     title: Offset End
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: offset_end
     owner: RelativeDateTime
@@ -442,7 +441,7 @@ attributes:
     name: offset_type
     description: What is the datatype associated with the offset (days, years, etc)
     title: Offset Type
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: offset_type
     owner: RelativeDateTime

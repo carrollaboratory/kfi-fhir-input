@@ -397,7 +397,7 @@
 </table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -429,7 +429,7 @@ annotations:
     value: Practitioner
 description: For our purposes, this will be an investigator.
 title: FHIR Practitioner Resource Content
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
 - name
@@ -462,7 +462,7 @@ annotations:
     value: Practitioner
 description: For our purposes, this will be an investigator.
 title: FHIR Practitioner Resource Content
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 attributes:
   practitioner_id:
@@ -482,7 +482,7 @@ attributes:
     name: name
     description: Name of the entity.
     title: Name
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: name
     owner: Practitioner
@@ -496,7 +496,7 @@ attributes:
     name: email
     description: An email address to reach the entity.
     title: Email Address
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: email
     owner: Practitioner
@@ -512,7 +512,7 @@ attributes:
         value: institution_id
     description: The institution this record is associated with.
     title: Institution
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: institution_id
     owner: Practitioner
@@ -530,13 +530,12 @@ attributes:
         value: practitioner_role_id
     description: Global ID for this record
     title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: practitioner_role_id
     owner: Practitioner
     domain_of:
     - Practitioner
-    - ParticipantAssertion
     - PractitionerRole
     range: PractitionerRole
     required: false
@@ -544,7 +543,7 @@ attributes:
     name: description
     description: More details associated with the given resource
     title: Description
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: description
     owner: Practitioner
@@ -559,7 +558,7 @@ attributes:
     name: practitioner_title
     description: The title of the Investigator, eg, "Assistant Professor"
     title: Title
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: practitioner_title
     owner: Practitioner
@@ -572,7 +571,7 @@ attributes:
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: external_id
     owner: Practitioner

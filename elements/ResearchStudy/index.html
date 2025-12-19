@@ -464,7 +464,7 @@
 </table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -498,7 +498,7 @@ description: The NCPI Research Study FHIR resource represents an individual rese
   effort and acts as a grouper or “container” for that effort’s study participants
   and their related data files.
 title: Research Study
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
 - study_title
@@ -535,7 +535,7 @@ description: The NCPI Research Study FHIR resource represents an individual rese
   effort and acts as a grouper or “container” for that effort’s study participants
   and their related data files.
 title: Research Study
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 attributes:
   research_study_id:
@@ -554,7 +554,7 @@ attributes:
     name: study_title
     description: Research Study's formal title.
     title: Title
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_title
     owner: ResearchStudy
@@ -573,7 +573,7 @@ attributes:
         value: research_study_id
     description: ID For Parent Study if this is a substudy
     title: Parent Study
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: parent_study_id
     owner: ResearchStudy
@@ -586,7 +586,7 @@ attributes:
     description: The primary, non-disease focus(es) of the study. This can include
       terms related to intervention, drug, device, or other focus.
     title: Study Focus
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_focus
     owner: ResearchStudy
@@ -599,7 +599,7 @@ attributes:
     name: description
     description: More details associated with the given resource
     title: Description
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: description
     owner: ResearchStudy
@@ -615,7 +615,7 @@ attributes:
     description: The primary focus(es) of the study. This is specific to the disease.
       MeSH terms are preferred.
     title: Study Condition
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_condition
     owner: ResearchStudy
@@ -630,7 +630,7 @@ attributes:
       include but is not limited to funding sources, organizational affiliations or
       sponsors.
     title: Study Acknowledgement
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_acknowledgement
     owner: ResearchStudy
@@ -643,7 +643,7 @@ attributes:
     name: study_status
     description: The current state of the study.
     title: Study Status
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_status
     owner: ResearchStudy
@@ -656,7 +656,7 @@ attributes:
     name: study_design
     description: Study Design and Study Type ([example ValueSet can be found here](https://hl7.org/fhir/valueset-study-design.html))
     title: Study Design
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_design
     owner: ResearchStudy
@@ -672,7 +672,7 @@ attributes:
       or other roles may also be included. If there are no appropriate individuals
       who can serve as primary contact for a study, an organization may be provided.
     title: Study Personnel
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: study_personnel
     owner: ResearchStudy
@@ -686,7 +686,7 @@ attributes:
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: external_id
     owner: ResearchStudy

@@ -502,7 +502,7 @@
 </table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -534,7 +534,7 @@ annotations:
     value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
 description: Research oriented patient
 title: Participant
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
 - birthsex
@@ -555,8 +555,8 @@ attributes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     identifier: true
     domain_of:
-    - Participant
     - ParticipantAssertion
+    - Participant
     range: string
     required: true
 
@@ -571,7 +571,7 @@ annotations:
     value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
 description: Research oriented patient
 title: Participant
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 attributes:
   participant_id:
@@ -583,8 +583,8 @@ attributes:
     alias: participant_id
     owner: Participant
     domain_of:
-    - Participant
     - ParticipantAssertion
+    - Participant
     range: string
     required: true
   birthsex:
@@ -601,7 +601,7 @@ attributes:
         value: Consent
     description: Sex assigned at birth (or pre-natal observed sex)
     title: Birth Sex
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: birthsex
     owner: Participant
@@ -614,7 +614,7 @@ attributes:
     name: race
     description: Reported race as defined by the 1997 OMB directives.
     title: Race
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: race
     owner: Participant
@@ -627,7 +627,7 @@ attributes:
     name: ethnicity
     description: Reported ethnicity as defined by the 1997 OMB directives.
     title: Ethnicity
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: ethnicity
     owner: Participant
@@ -639,7 +639,7 @@ attributes:
     name: population
     description: opulation, Race, and/or Ethnicity information.
     title: Population
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: population
     owner: Participant
@@ -653,7 +653,7 @@ attributes:
     description: Date of Birth of the participant. Details of privacy method should
       be included in DOBMethod
     title: Date of Birth
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: dob
     owner: Participant
@@ -667,7 +667,7 @@ attributes:
     description: Specifies method used to alter DOB for research sharing. Details
       should be available in the study protocols.
     title: Date of Birth Method
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: dob_method
     owner: Participant
@@ -680,7 +680,7 @@ attributes:
     name: age_at_last_vital
     description: Age or date of last vital status
     title: Age At Last Vital Status
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: age_at_last_vital
     owner: Participant
@@ -693,7 +693,7 @@ attributes:
     name: is_deceased
     description: Is the participant known to be Deceased, T, or Alive, F
     title: Is Deceased
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: is_deceased
     owner: Participant
@@ -706,7 +706,7 @@ attributes:
     name: deceased_rel
     description: Implementers can provide relativeDateTime if information is available.
     title: Deceased Relative Date
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: deceased_rel
     owner: Participant
@@ -719,7 +719,7 @@ attributes:
     name: patient_knowledge_source
     description: The source of the knowledge represented by this Patient resource.
     title: Patient Knowledge Source
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: patient_knowledge_source
     owner: Participant
@@ -733,7 +733,7 @@ attributes:
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: external_id
     owner: Participant

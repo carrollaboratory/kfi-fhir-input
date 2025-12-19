@@ -438,7 +438,7 @@
 </table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
-<li>from schema: https://carrollaboratory.github.io/kif-fhir-input</li>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
 <h2 id="mappings">Mappings</h2>
 <table>
@@ -471,7 +471,7 @@ annotations:
 description: Sponsors, collaborators, and other parties affiliated with a research
   study.
 title: Associated Party
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: Record
 slots:
 - name
@@ -492,14 +492,14 @@ annotations:
 description: Sponsors, collaborators, and other parties affiliated with a research
   study.
 title: Associated Party
-from_schema: https://carrollaboratory.github.io/kif-fhir-input
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: Record
 attributes:
   name:
     name: name
     description: Name of the entity.
     title: Name
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: name
     owner: AssociatedParty
@@ -513,7 +513,7 @@ attributes:
     name: role
     description: Research Study Party Role
     title: Role
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: role
     owner: AssociatedParty
@@ -533,7 +533,7 @@ attributes:
     description: Reference to a time period which defines a Start and End datatime
       period.
     title: Period ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: period_id
     owner: AssociatedParty
@@ -549,7 +549,7 @@ attributes:
     description: Research Study Party Organization Type (what type of institution
       is party)
     title: Classifier
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: classifier
     owner: AssociatedParty
@@ -562,7 +562,7 @@ attributes:
     name: party
     description: Individual or organization associated with study
     title: Associated Party
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: party
     owner: AssociatedParty
@@ -576,14 +576,13 @@ attributes:
     description: Unique Identifier for a table entry. This is probably not the Global
       ID
     title: ID
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: true
     alias: id
     owner: AssociatedParty
     domain_of:
     - Record
-    - AgeAt
     - RelativeDateTime
     range: string
     required: true
@@ -593,7 +592,7 @@ attributes:
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kif-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: external_id
     owner: AssociatedParty
