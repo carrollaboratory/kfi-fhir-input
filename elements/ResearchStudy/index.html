@@ -309,6 +309,17 @@
 
       ResearchStudy : study_focus
 
+      ResearchStudy : study_membership_id
+
+
+
+
+
+        ResearchStudy --&gt; "1..*" StudyMembership : study_membership_id
+        click StudyMembership href "../StudyMembership/"
+
+
+
       ResearchStudy : study_personnel
 
 
@@ -405,6 +416,12 @@
 <td><a href="../study_personnel/">study_personnel</a></td>
 <td>1..* <br/> <a href="../AssociatedParty/">AssociatedParty</a></td>
 <td>Every study must have at least one Primary Contact defined</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../study_membership_id/">study_membership_id</a></td>
+<td>1..* <br/> <a href="../StudyMembership/">StudyMembership</a></td>
+<td>Study Membership Global ID (group)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -510,6 +527,7 @@ slots:
 - study_status
 - study_design
 - study_personnel
+- study_membership_id
 attributes:
   research_study_id:
     name: research_study_id
@@ -679,6 +697,20 @@ attributes:
     domain_of:
     - ResearchStudy
     range: AssociatedParty
+    required: true
+    multivalued: true
+  study_membership_id:
+    name: study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: study_membership_id
+    owner: ResearchStudy
+    domain_of:
+    - StudyMembership
+    - ResearchStudy
+    range: StudyMembership
     required: true
     multivalued: true
   external_id:

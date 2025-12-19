@@ -5,12 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/erdiagram/" rel="canonical"/>
-<link href="../" rel="prev"/>
-<link href="../../about/" rel="next"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/StudyMembership/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>ER Diagram - kfi-fhir-input</title>
+<title>Class: Study Membership (StudyMembership) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -25,6 +23,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#class-study-membership-studymembership">
+          Skip to content
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -46,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              ER Diagram
+              Class: Study Membership (StudyMembership)
             
           </span>
 </div>
@@ -131,9 +132,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../erdiagram/">
 <span class="md-ellipsis">
     
   
@@ -165,151 +165,311 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slots">
+<span class="md-ellipsis">
+      
+        Slots
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#usages">
+<span class="md-ellipsis">
+      
+        Usages
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifier-and-mapping-information">
+<span class="md-ellipsis">
+      
+        Identifier and Mapping Information
+      
+    </span>
+</a>
+<nav aria-label="Identifier and Mapping Information" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#schema-source">
+<span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mappings">
+<span class="md-ellipsis">
+      
+        Mappings
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#linkml-source">
+<span class="md-ellipsis">
+      
+        LinkML Source
+      
+    </span>
+</a>
+<nav aria-label="LinkML Source" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#direct">
+<span class="md-ellipsis">
+      
+        Direct
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#induced">
+<span class="md-ellipsis">
+      
+        Induced
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1>ER Diagram</h1>
-<div class="mermaid">erDiagram
-AccessPolicy {
-    string description  
-    EnumDataAccessType data_access_type  
-    uri website  
-    EnumConsentScope consent_scope  
-    EnumAccessPolicyCodeList access_policy_code  
-    string disease_limitation  
-    string access_policy_id  
-    EnumConsentStateCodes status  
-}
-AgeAt {
-    EnumAgeValueType value_type  
-    uriorcurie age_code  
-    date as_date  
-}
-Any {
+<h1 id="class-study-membership-studymembership">Class: Study Membership (StudyMembership)</h1>
+<p><em>Grouping subject participation within a research study is helpful to provide definitive lists of participants that fit a specific criteria such as All Participants or Participants From a Particular Consent Group, etc.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputStudyMembership">kfi_fhir_sparks:StudyMembership</a></p>
+<div class="mermaid"> classDiagram
+    class StudyMembership
+    click StudyMembership href "../StudyMembership/"
+      StudyMembership : access_policy_id
 
-}
-AssociatedParty {
-    string name  
-    EnumResearchStudyPartyRole role  
-    EnumResearchStudyPartyOrganizationTypeList classifier  
-    string id  
-    uriorcurieList external_id  
-}
-HasExternalId {
-    uriorcurieList external_id  
-}
-Institution {
-    string name  
-    string institution_id  
-    uriorcurieList external_id  
-}
-Participant {
-    EnumBirthSex birthsex  
-    EnumRaceList race  
-    EnumEthnicity ethnicity  
-    EnumPopulation population  
-    string dob  
-    EnumDobMethod dob_method  
-    string age_at_last_vital  
-    boolean is_deceased  
-    EnumPatientKnowledgeSource patient_knowledge_source  
-    string participant_id  
-    uriorcurieList external_id  
-}
-ParticipantAssertion {
-    EnumEntityAsserter entity_asserter  
-    uriorcurie other_condition_modifiers  
-    EnumAssertionType assertion_type  
-    uriorcurie assertion_code  
-    string assertion_text  
-    uriorcurie assertion_source  
-    uriorcurie value_code  
-    string value_string  
-    float value_number  
-    uriorcurie value_units  
-    uriorcurie body_site  
-    uriorcurie body_location  
-    uriorcurie body_laterality  
-    uriorcurie cancer_stage  
-    string participant_assertion_id  
-}
-Period {
-    date start  
-    date end  
-    string id  
-    uriorcurieList external_id  
-}
-Practitioner {
-    string name  
-    string email  
-    string description  
-    string practitioner_title  
-    string practitioner_id  
-    uriorcurieList external_id  
-}
-PractitionerRole {
-    string practitioner_id  
-    string practitioner_role_id  
-}
-Record {
-    string id  
-    uriorcurieList external_id  
-}
-RelativeDateTime {
-    string id  
-    integer offset  
-    integer offset_end  
-    EnumOffsetType offset_type  
-}
-ResearchStudy {
-    string study_title  
-    uriorcurieList study_focus  
-    string description  
-    uriorcurieList study_condition  
-    stringList study_acknowledgement  
-    EnumStudyStatus study_status  
-    uriorcurieList study_design  
-    string research_study_id  
-    uriorcurieList external_id  
-}
-ResearchStudyCollection {
-    string collection_title  
-    EnumResearchCollectionType research_study_collection_type  
-    stringList label  
-    uri website  
-    EnumCollectionStatus collection_status  
-    string research_study_collection_id  
-    string description  
-    uriorcurieList external_id  
-}
-StudyMembership {
-    string study_membership_id  
-}
 
-AgeAt ||--|o RelativeDateTime : "age"
-AssociatedParty ||--|o Any : "party"
-AssociatedParty ||--|o Period : "period_id"
-Participant ||--|o RelativeDateTime : "deceased_rel"
-ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
-ParticipantAssertion ||--|o AgeAt : "age_at_event"
-ParticipantAssertion ||--|o AgeAt : "age_at_onset"
-ParticipantAssertion ||--|o AgeAt : "age_at_resolution"
-ParticipantAssertion ||--|| Participant : "participant_id"
-Practitioner ||--|o Institution : "institution_id"
-Practitioner ||--|o PractitionerRole : "practitioner_role_id"
-PractitionerRole ||--|o Institution : "institution_id"
-PractitionerRole ||--|o Period : "period_id"
-ResearchStudy ||--|o ResearchStudy : "parent_study_id"
-ResearchStudy ||--}| AssociatedParty : "study_personnel"
-ResearchStudy ||--}| StudyMembership : "study_membership_id"
-ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
-StudyMembership ||--|| AccessPolicy : "access_policy_id"
-StudyMembership ||--}| Participant : "participant_id"
+
+
+
+        StudyMembership --&gt; "1" AccessPolicy : access_policy_id
+        click AccessPolicy href "../AccessPolicy/"
+
+
+
+      StudyMembership : participant_id
+
+
+
+
+
+        StudyMembership --&gt; "1..*" Participant : participant_id
+        click Participant href "../Participant/"
+
+
+
+      StudyMembership : study_membership_id
+
 
 </div>
+<!-- no inheritance hierarchy -->
+<h2 id="slots">Slots</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Cardinality and Range</th>
+<th>Description</th>
+<th>Inheritance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Access Policy Global ID</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../study_membership_id/">study_membership_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Study Membership Global ID (group)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../participant_id/">participant_id</a></td>
+<td>1..* <br/> <a href="../Participant/">Participant</a></td>
+<td>The Global ID for the Participant</td>
+<td>direct</td>
+</tr>
+</tbody>
+</table>
+<h2 id="usages">Usages</h2>
+<table>
+<thead>
+<tr>
+<th>used by</th>
+<th>used in</th>
+<th>type</th>
+<th>used</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../ResearchStudy/">ResearchStudy</a></td>
+<td><a href="../study_membership_id/">study_membership_id</a></td>
+<td>range</td>
+<td><a href="./">StudyMembership</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>kfi_fhir_sparks:StudyMembership</td>
+</tr>
+<tr>
+<td>native</td>
+<td>kfi_fhir_sparks:StudyMembership</td>
+</tr>
+</tbody>
+</table>
+<h2 id="linkml-source">LinkML Source</h2>
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+<h3 id="direct">Direct</h3>
+<details>
+<pre><code class="language-yaml">name: StudyMembership
+description: Grouping subject participation within a research study is helpful to
+  provide definitive lists of participants that fit a specific criteria such as All
+  Participants or Participants From a Particular Consent Group, etc.
+title: Study Membership
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+slots:
+- access_policy_id
+attributes:
+  study_membership_id:
+    name: study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    identifier: true
+    domain_of:
+    - StudyMembership
+    - ResearchStudy
+    range: string
+    required: true
+    multivalued: false
+  participant_id:
+    name: participant_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    domain_of:
+    - ParticipantAssertion
+    - Participant
+    - StudyMembership
+    range: Participant
+    required: true
+    multivalued: true
+
+</code></pre>
+</details>
+<h3 id="induced">Induced</h3>
+<details>
+<pre><code class="language-yaml">name: StudyMembership
+description: Grouping subject participation within a research study is helpful to
+  provide definitive lists of participants that fit a specific criteria such as All
+  Participants or Participants From a Particular Consent Group, etc.
+title: Study Membership
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+attributes:
+  study_membership_id:
+    name: study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    identifier: true
+    alias: study_membership_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    - ResearchStudy
+    range: string
+    required: true
+    multivalued: false
+  participant_id:
+    name: participant_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    alias: participant_id
+    owner: StudyMembership
+    domain_of:
+    - ParticipantAssertion
+    - Participant
+    - StudyMembership
+    range: Participant
+    required: true
+    multivalued: true
+  access_policy_id:
+    name: access_policy_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: access_policy_id
+    description: Access Policy Global ID
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: access_policy_id
+    owner: StudyMembership
+    domain_of:
+    - AccessPolicy
+    - StudyMembership
+    range: AccessPolicy
+    required: true
+    multivalued: false
+
+</code></pre>
+</details>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>

@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/participant_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/study_membership_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Participant ID (participant_id) - kfi-fhir-input</title>
+        <title>Slot: Study Membership ID (study_membership_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-participant-id-participant_id" class="md-skip">
+        <a href="#slot-study-membership-id-study_membership_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Participant ID (participant_id)
+              Slot: Study Membership ID (study_membership_id)
             
           </span>
         </div>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -427,10 +416,10 @@
   
 
 
-<h1 id="slot-participant-id-participant_id">Slot: Participant ID (participant_id)</h1>
-<p><em>The Global ID for the Participant</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputparticipant_id">kfi_fhir_sparks:participant_id</a>
-Alias: participant_id</p>
+<h1 id="slot-study-membership-id-study_membership_id">Slot: Study Membership ID (study_membership_id)</h1>
+<p><em>Study Membership Global ID (group)</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputstudy_membership_id">kfi_fhir_sparks:study_membership_id</a>
+Alias: study_membership_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -449,13 +438,8 @@ Alias: participant_id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
-<td>Assertion about a particular Participant</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../Participant/">Participant</a></td>
-<td>Research oriented patient</td>
+<td><a href="../ResearchStudy/">ResearchStudy</a></td>
+<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -463,28 +447,16 @@ Alias: participant_id</p>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>
-<p>Range: <a href="../Participant/">Participant</a></p>
+<p>Range: <a href="../StudyMembership/">StudyMembership</a></p>
+</li>
+<li>
+<p>Multivalued: True</p>
 </li>
 <li>
 <p>Required: True</p>
 </li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>participant_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -500,33 +472,29 @@ Alias: participant_id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:participant_id</td>
+<td>kfi_fhir_sparks:study_membership_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:participant_id</td>
+<td>kfi_fhir_sparks:study_membership_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: participant_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: participant_id
-description: The Global ID for the Participant
-title: Participant ID
+<pre><code class="language-yaml">name: study_membership_id
+description: Study Membership Global ID (group)
+title: Study Membership ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-alias: participant_id
+alias: study_membership_id
 domain_of:
-- ParticipantAssertion
-- Participant
 - StudyMembership
-range: Participant
+- ResearchStudy
+range: StudyMembership
 required: true
+multivalued: true
 
 </code></pre>
 

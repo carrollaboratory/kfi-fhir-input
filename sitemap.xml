@@ -213,6 +213,10 @@
          <lastmod>2025-12-19</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/StudyMembership/</loc>
+         <lastmod>2025-12-19</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Time/</loc>
          <lastmod>2025-12-19</lastmod>
     </url>
@@ -490,6 +494,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_focus/</loc>
+         <lastmod>2025-12-19</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_membership_id/</loc>
          <lastmod>2025-12-19</lastmod>
     </url>
     <url>
