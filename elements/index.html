@@ -533,6 +533,10 @@
 <td>Has an external ID</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Aliquot/">Aliquot</a></td>
+<td>A Portion of a sample extracted from a participant</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Institution/">Institution</a></td>
 <td>Institution related to study or research personnel</td>
 </tr>
@@ -563,6 +567,10 @@
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ResearchStudyCollection/">ResearchStudyCollection</a></td>
 <td>Collections of research data including, but not limited, to Consortia, Progra...</td>
+</tr>
+<tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Sample/">Sample</a></td>
+<td>Sample encompasses biospecimen collection, sample information, and aliquot in...</td>
 </tr>
 <tr>
 <td><a href="ParticipantAssertion/">ParticipantAssertion</a></td>
@@ -612,6 +620,10 @@
 <td>The date or age at which this condition is being asserted</td>
 </tr>
 <tr>
+<td><a href="age_at_collection/">age_at_collection</a></td>
+<td>The age at which this biospecimen was collected</td>
+</tr>
+<tr>
 <td><a href="age_at_event/">age_at_event</a></td>
 <td>The date or age at which the event relating to this assertion occured</td>
 </tr>
@@ -632,6 +644,10 @@
 <td>Age expressed as an enumerated value representing an age category</td>
 </tr>
 <tr>
+<td><a href="aliquot_id/">aliquot_id</a></td>
+<td>Aliquot Global ID</td>
+</tr>
+<tr>
 <td><a href="as_date/">as_date</a></td>
 <td>Event Date (rather than age)</td>
 </tr>
@@ -650,6 +666,10 @@
 <tr>
 <td><a href="assertion_type/">assertion_type</a></td>
 <td>Describe the type of assertion being made</td>
+</tr>
+<tr>
+<td><a href="availability_status/">availability_status</a></td>
+<td>Can this Sample be requested for further analysis?</td>
 </tr>
 <tr>
 <td><a href="birthsex/">birthsex</a></td>
@@ -676,12 +696,28 @@
 <td>Research Study Party Organization Type (what type of institution is party)</td>
 </tr>
 <tr>
+<td><a href="collection_method/">collection_method</a></td>
+<td>The approach used to collect the biospecimen ([LOINC](https://loinc</td>
+</tr>
+<tr>
+<td><a href="collection_site/">collection_site</a></td>
+<td>The location of the specimen collection</td>
+</tr>
+<tr>
 <td><a href="collection_status/">collection_status</a></td>
 <td>The current state of the collection</td>
 </tr>
 <tr>
 <td><a href="collection_title/">collection_title</a></td>
 <td>The collection's title</td>
+</tr>
+<tr>
+<td><a href="concentration/">concentration</a></td>
+<td>What is the concentration of the analyte in the Aliquot?</td>
+</tr>
+<tr>
+<td><a href="concentration_units/">concentration_units</a></td>
+<td>Units for the aliquot concentration (ucum)</td>
 </tr>
 <tr>
 <td><a href="consent_scope/">consent_scope</a></td>
@@ -748,6 +784,10 @@
 <td>Alias such as acronym and alternate names</td>
 </tr>
 <tr>
+<td><a href="laterality/">laterality</a></td>
+<td>Laterality information for the site</td>
+</tr>
+<tr>
 <td><a href="name/">name</a></td>
 <td>Name of the entity</td>
 </tr>
@@ -766,6 +806,10 @@
 <tr>
 <td><a href="other_condition_modifiers/">other_condition_modifiers</a></td>
 <td>Any additional modifiers for this condition, such as severity</td>
+</tr>
+<tr>
+<td><a href="parent_sample_id/">parent_sample_id</a></td>
+<td>Sample Global ID associated with the parent sample</td>
 </tr>
 <tr>
 <td><a href="parent_study_id/">parent_study_id</a></td>
@@ -812,6 +856,14 @@
 <td>The title of the Investigator, eg, "Assistant Professor"</td>
 </tr>
 <tr>
+<td><a href="processing/">processing</a></td>
+<td>Processing that was applied to the Parent Sample or from the Biospecimen Coll...</td>
+</tr>
+<tr>
+<td><a href="quantity/">quantity</a></td>
+<td>Can this Sample be requested for further analysis?</td>
+</tr>
+<tr>
 <td><a href="race/">race</a></td>
 <td>Reported race as defined by the 1997 OMB directives</td>
 </tr>
@@ -836,12 +888,28 @@
 <td>Research Study Party Role</td>
 </tr>
 <tr>
+<td><a href="sample_id/">sample_id</a></td>
+<td>Sample Global ID</td>
+</tr>
+<tr>
+<td><a href="sample_type/">sample_type</a></td>
+<td>The type of material of which this Sample is comprised</td>
+</tr>
+<tr>
+<td><a href="spatial_qualifier/">spatial_qualifier</a></td>
+<td>Any spatial/location qualifiers</td>
+</tr>
+<tr>
 <td><a href="start/">start</a></td>
 <td>Start attribute for a FHIR period data type</td>
 </tr>
 <tr>
 <td><a href="status/">status</a></td>
 <td>Indicates the state of the consent</td>
+</tr>
+<tr>
+<td><a href="storage_method/">storage_method</a></td>
+<td>How is the Sample stored, eg, Frozen or with additives (e</td>
 </tr>
 <tr>
 <td><a href="study_acknowledgement/">study_acknowledgement</a></td>
@@ -894,6 +962,14 @@
 <tr>
 <td><a href="value_units/">value_units</a></td>
 <td>The structured term defining the units of the value (ucum)</td>
+</tr>
+<tr>
+<td><a href="volume/">volume</a></td>
+<td>What is the volume of the Aliquot?</td>
+</tr>
+<tr>
+<td><a href="volume_units/">volume_units</a></td>
+<td>Units associated with the volume (ucum)</td>
 </tr>
 <tr>
 <td><a href="website/">website</a></td>

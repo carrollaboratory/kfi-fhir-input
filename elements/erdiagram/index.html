@@ -188,6 +188,13 @@ AgeAt {
     uriorcurie age_code  
     date as_date  
 }
+Aliquot {
+    boolean availability_status  
+    float volume  
+    uriorcurie concentration  
+    string aliquot_id  
+    uriorcurieList external_id  
+}
 Any {
 
 }
@@ -288,11 +295,25 @@ ResearchStudyCollection {
     string description  
     uriorcurieList external_id  
 }
+Sample {
+    uriorcurie sample_type  
+    uriorcurie collection_method  
+    uriorcurie collection_site  
+    uriorcurie spatial_qualifier  
+    uriorcurie laterality  
+    uriorcurieList processing  
+    boolean availability_status  
+    uriorcurie storage_method  
+    boolean quantity  
+    string sample_id  
+    uriorcurieList external_id  
+}
 StudyMembership {
     string study_membership_id  
 }
 
 AgeAt ||--|o RelativeDateTime : "age"
+Aliquot ||--|o Sample : "parent_sample_id"
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
 Participant ||--|o RelativeDateTime : "deceased_rel"
@@ -310,6 +331,9 @@ ResearchStudy ||--|o ResearchStudy : "parent_study_id"
 ResearchStudy ||--}| AssociatedParty : "study_personnel"
 ResearchStudy ||--}| StudyMembership : "study_membership_id"
 ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
+Sample ||--|o AgeAt : "age_at_collection"
+Sample ||--|o Sample : "parent_sample_id"
+Sample ||--|| Participant : "participant_id"
 StudyMembership ||--|| AccessPolicy : "access_policy_id"
 StudyMembership ||--}| Participant : "participant_id"
 
