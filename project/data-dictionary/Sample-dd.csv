@@ -1,0 +1,13 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+parent_sample_id,Sample Global ID associated with the parent sample,string,,,,,Foreign Key: Sample.sample_id
+participant_id,The Global ID for the Participant,string,,,,,Foreign Key: Participant.participant_id
+sample_type,The type of material of which this Sample is comprised,string,,,,,
+collection_method,The approach used to collect the biospecimen ([LOINC](https://loinc.org)),string,,,,,
+collection_site,The location of the specimen collection,string,,,,,
+spatial_qualifier,Any spatial/location qualifiers,string,,,,,
+laterality,Laterality information for the site,string,,,,,
+availability_status,Can this Sample be requested for further analysis?,string,,,,,
+storage_method,"How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)",string,,,,,
+quantity,Can this Sample be requested for further analysis?,string,,,,,
+sample_id,Sample Global ID,string,,,,,
+age_at_collection_id,"The age at which this biospecimen was collected. Could be expressed with a term, an age, or an age range.",integer,,,,,Foreign Key: AgeAt.id

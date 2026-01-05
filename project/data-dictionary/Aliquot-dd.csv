@@ -1,0 +1,6 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+parent_sample_id,Sample Global ID associated with the parent sample,string,,,,,Foreign Key: Sample.sample_id
+availability_status,Can this Sample be requested for further analysis?,string,,,,,
+volume,What is the volume of the Aliquot?,number,,,,,
+concentration,What is the concentration of the analyte in the Aliquot?,string,,,,,
+aliquot_id,Aliquot Global ID,string,,,,,

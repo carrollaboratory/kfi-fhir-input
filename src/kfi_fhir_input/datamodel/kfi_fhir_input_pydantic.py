@@ -97,7 +97,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'practitioner',
                  'study_membership',
                  'research_study',
-                 'research_study_collection'],
+                 'research_study_collection',
+                 'sample'],
      'license': 'MIT',
      'name': 'kfi-fhir-input',
      'prefixes': {'cdc_rec': {'prefix_prefix': 'cdc_rec',
@@ -140,6 +141,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                       'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method'},
                   'ncpi_patient_knowledge_source': {'prefix_prefix': 'ncpi_patient_knowledge_source',
                                                     'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source'},
+                  'umls': {'prefix_prefix': 'umls',
+                           'prefix_reference': 'https://uts.nlm.nih.gov/uts/umls/concept'},
                   'usc_birthsex': {'prefix_prefix': 'usc_birthsex',
                                    'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender'}},
      'see_also': ['https://carrollaboratory.github.io/kfi-fhir-input'],
@@ -687,7 +690,8 @@ class ParticipantAssertion(ConfiguredBaseModel):
          'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership']} })
+                       'StudyMembership',
+                       'Sample']} })
     age_at_event: Optional[AgeAt] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtEvent] or maybe '
                                                    'effectiveDateTime'},
@@ -825,7 +829,8 @@ class Person(ConfiguredBaseModel):
          'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership']} })
+                       'StudyMembership',
+                       'Sample']} })
 
 
 class PractitionerRole(ConfiguredBaseModel):
@@ -863,7 +868,8 @@ class StudyMembership(ConfiguredBaseModel):
          'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership']} })
+                       'StudyMembership',
+                       'Sample']} })
 
 
 class HasExternalId(ConfiguredBaseModel):
@@ -944,7 +950,8 @@ class Participant(HasExternalId):
     participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership']} })
+                       'StudyMembership',
+                       'Sample']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -974,6 +981,30 @@ class ResearchStudy(HasExternalId):
     study_personnel: list[str] = Field(default=..., title="Study Personnel", description="""Every study must have at least one Primary Contact defined. Additional personnel such as Primary Investigator(s), Administrator(s), Collaborator(s) or other roles may also be included. If there are no appropriate individuals who can serve as primary contact for a study, an organization may be provided.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_membership_id: list[str] = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
     research_study_id: str = Field(default=..., title="Research Study ID", description="""The Global ID for the Research Study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
+class ResearchStudyCollection(HasExternalId):
+    """
+    Collections of research data including, but not limited, to Consortia, Programs, adhoc collections of Studies and datasets among other types of collections.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource', 'value': 'List'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection',
+         'title': 'Research Study Collection'})
+
+    collection_title: str = Field(default=..., title="Collection Title", description="""The collection's title.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
+    research_study_collection_type: EnumResearchCollectionType = Field(default=..., title="Research Study Collection Type", description="""The type of collection being described.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
+    label: Optional[list[str]] = Field(default=[], title="Label", description="""Alias such as acronym and alternate names.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
+    website: Optional[str] = Field(default=None, title="Website", description="""URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'ResearchStudyCollection']} })
+    collection_status: EnumCollectionStatus = Field(default=..., title="Collection Status", description="""The current state of the collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
+    research_study_collection_member_id: list[str] = Field(default=..., title="Research Study Collection Member ID", description="""ID associated with a member of the collection (Research Study, Dataset, etc)""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'research_study_id'}},
+         'domain_of': ['ResearchStudyCollection']} })
+    research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""The description of the collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
+                       'ResearchStudy',
+                       'ResearchStudyCollection']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1022,27 +1053,142 @@ class Period(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
-class ResearchStudyCollection(HasExternalId):
+class Sample(HasExternalId):
     """
-    Collections of research data including, but not limited, to Consortia, Programs, adhoc collections of Studies and datasets among other types of collections.
+    Sample encompasses biospecimen collection, sample information, and aliquot information.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource', 'value': 'List'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection',
-         'title': 'Research Study Collection'})
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/sample',
+         'title': 'Sample'})
 
-    collection_title: str = Field(default=..., title="Collection Title", description="""The collection's title.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    research_study_collection_type: EnumResearchCollectionType = Field(default=..., title="Research Study Collection Type", description="""The type of collection being described.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    label: Optional[list[str]] = Field(default=[], title="Label", description="""Alias such as acronym and alternate names.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    website: Optional[str] = Field(default=None, title="Website", description="""URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'ResearchStudyCollection']} })
-    collection_status: EnumCollectionStatus = Field(default=..., title="Collection Status", description="""The current state of the collection""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    research_study_collection_member_id: list[str] = Field(default=..., title="Research Study Collection Member ID", description="""ID associated with a member of the collection (Research Study, Dataset, etc)""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'research_study_id'}},
-         'domain_of': ['ResearchStudyCollection']} })
-    research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    description: Optional[str] = Field(default=None, title="Description", description="""The description of the collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
-                       'Practitioner',
-                       'ResearchStudy',
-                       'ResearchStudyCollection']} })
+    parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample Global ID associated with the parent sample""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'parent'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample', 'Aliquot']} })
+    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'participant_id'}},
+         'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership',
+                       'Sample']} })
+    sample_type: str = Field(default=..., title="Sample Type", description="""The type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'type'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    age_at_collection: Optional[AgeAt] = Field(default=None, title="Age at Collection", description="""The age at which this biospecimen was collected. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collectedDateTime'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    collection_method: Optional[str] = Field(default=None, title="Collection Method", description="""The approach used to collect the biospecimen ([LOINC](https://loinc.org))""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection.method'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    collection_site: Optional[str] = Field(default=None, title="Collection Site", description="""The location of the specimen collection""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'bodySite'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    spatial_qualifier: Optional[str] = Field(default=None, title="Spatial Qualifier", description="""Any spatial/location qualifiers""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection.extension[biospecimenSpatial]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    laterality: Optional[str] = Field(default=None, title="Laterality", description="""Laterality information for the site""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection.extension[biospecimenLaterality]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    processing: Optional[list[str]] = Field(default=[], title="Processing", description="""Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'processing[].procedure'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    availability_status: Optional[bool] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'extension[AliquotAvailability].valueCode'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample', 'Aliquot']} })
+    storage_method: Optional[str] = Field(default=None, title="Storage Method", description="""How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection.method'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    quantity: Optional[bool] = Field(default=None, title="Quantity", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection[].quantity'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
+class Aliquot(HasExternalId):
+    """
+    A Portion of a sample extracted from a participant.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'container'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/sample',
+         'title': 'Aliquot'})
+
+    parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample Global ID associated with the parent sample""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'parent'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample', 'Aliquot']} })
+    availability_status: Optional[bool] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'extension[AliquotAvailability].valueCode'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Sample', 'Aliquot']} })
+    volume: Optional[float] = Field(default=None, title="Volume", description="""What is the volume of the Aliquot?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection[].quantity.value'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Aliquot']} })
+    concentration: Optional[str] = Field(default=None, title="Concentration", description="""What is the concentration of the analyte in the Aliquot?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection[].extension[AliquotConcentration].valueQuantity.value'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Aliquot']} })
+    aliquot_id: str = Field(default=..., title="aliquot ID", description="""Aliquot Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1060,7 +1206,9 @@ Practitioner.model_rebuild()
 Institution.model_rebuild()
 Participant.model_rebuild()
 ResearchStudy.model_rebuild()
+ResearchStudyCollection.model_rebuild()
 Record.model_rebuild()
 AssociatedParty.model_rebuild()
 Period.model_rebuild()
-ResearchStudyCollection.model_rebuild()
+Sample.model_rebuild()
+Aliquot.model_rebuild()

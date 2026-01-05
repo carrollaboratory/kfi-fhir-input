@@ -1,0 +1,207 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/sample
+name: kfi-fhir-input-sample
+imports: 
+  - linkml:types 
+  - kfi_fhir_input 
+  - relative_date_time 
+  - age_at
+classes:
+  Sample:
+    title: Sample 
+    description: Sample encompasses biospecimen collection, sample information, and aliquot information.
+    is_a: HasExternalId 
+    annotations:
+        fhir_resource: Specimen
+        fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+    attributes:
+      sample_id:
+        title: Sample ID
+        description: Sample Global ID
+        range: string         
+        identifier: true
+        required: true
+    slots: 
+      - parent_sample_id
+      - participant_id
+      - sample_type
+      - age_at_collection
+      - collection_method 
+      - collection_site
+      - spatial_qualifier 
+      - laterality 
+      - processing
+      - availability_status 
+      - storage_method 
+      - quantity
+  Aliquot: 
+    title: Aliquot
+    description: A Portion of a sample extracted from a participant.
+    is_a: HasExternalId
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: container
+    attributes:
+      aliquot_id:
+        title: aliquot ID
+        description: Aliquot Global ID
+        range: string         
+        identifier: true
+        required: true
+    slots: 
+      - parent_sample_id 
+      - availability_status 
+      - volume
+      - concentration
+slots:
+  parent_sample_id:
+    title: Parent Sample ID 
+    description: Sample Global ID associated with the parent sample 
+    range: Sample 
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: parent 
+  sample_type: 
+    title: Sample Type 
+    description: The type of material of which this Sample is comprised
+    range: uriorcurie
+    required: true 
+    multivalued: false 
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: type  
+  age_at_collection: 
+    title: Age at Collection 
+    description: The age at which this biospecimen was collected. Could be expressed with a term, an age, or an age range.
+    required: false 
+    multivalued: false 
+    range: AgeAt
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: collectedDateTime 
+  collection_method: 
+    title: Collection Method 
+    description: The approach used to collect the biospecimen ([LOINC](https://loinc.org))
+    range: uriorcurie
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: collection.method  
+  collection_site:
+    title: Collection Site 
+    description: The location of the specimen collection
+    range: uriorcurie 
+    required: false 
+    multivalued: false
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: bodySite 
+  spatial_qualifier: 
+    title: Spatial Qualifier 
+    description: Any spatial/location qualifiers
+    range: uriorcurie 
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: collection.extension[biospecimenSpatial] 
+  laterality: 
+    title: Laterality 
+    description: Laterality information for the site
+    range: uriorcurie 
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: collection.extension[biospecimenLaterality] 
+  processing: 
+    title: Processing  
+    description: Processing that was applied to the Parent Sample or from the Biospecimen Collection that yielded this distinct sample
+    range: uriorcurie 
+    required: false 
+    multivalued: true  
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: processing[].procedure     
+  availability_status:
+    title: Availability Status   
+    description: Can this Sample be requested for further analysis?
+    range: boolean 
+    required: false 
+    multivalued: false   
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: extension[AliquotAvailability].valueCode
+  storage_method:
+    title: Storage Method 
+    description: How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)
+    range: uriorcurie
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: collection.method  
+  quantity:
+    title: Quantity   
+    description: Can this Sample be requested for further analysis?
+    range: boolean 
+    required: false 
+    multivalued: false   
+    annotations:
+      fhir_resource: Specimen
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
+      fhir_element: collection[].quantity
+  volume: 
+    title: Volume 
+    description: What is the volume of the Aliquot?
+    range: float 
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: collection[].quantity.value 
+      fhir_resource: Specimen
+  volume_units: 
+    title: Volume Units 
+    description: Units associated with the volume (ucum)
+    range: uriorcurie
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: collection[].quantity.unit 
+      fhir_resource: Specimen
+  concentration: 
+    title: Concentration
+    description: What is the concentration of the analyte in the Aliquot?
+    range: uriorcurie
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: collection[].extension[AliquotConcentration].valueQuantity.value
+      fhir_resource: Specimen
+  concentration_units: 
+    title: Concentration Units 
+    description: Units for the aliquot concentration (ucum)
+    range: uriorcurie
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: collection[].extension[AliquotConcentration].valueQuantity.unit
+      fhir_resource: Specimen

@@ -31,6 +31,7 @@ prefixes:
   linkml: https://w3id.org/linkml/
   duo: http://purl.obolibrary.org/obo/duo.owl
   usc_birthsex: http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender
+  umls: https://uts.nlm.nih.gov/uts/umls/concept
 
 
   # I think the linter is wrong on this one, but we'll use the recommendation
@@ -61,6 +62,7 @@ imports:
   - study_membership
   - research_study
   - research_study_collection
+  - sample
 classes:
   Any:
     class_uri: linkml:Any

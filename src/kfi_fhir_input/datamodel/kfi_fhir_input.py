@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2025-12-19T16:29:53
+# Generation date: 2026-01-05T16:42:20
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -83,6 +83,7 @@ NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncp
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
 NCPI_PATIENT_KNOWLEDGE_SOURCE = CurieNamespace('ncpi_patient_knowledge_source', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source')
+UMLS = CurieNamespace('umls', 'https://uts.nlm.nih.gov/uts/umls/concept')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
 DEFAULT_ = KFI_FHIR_SPARKS
 
@@ -143,6 +144,14 @@ class ResearchStudyResearchStudyId(extended_str):
 
 
 class ResearchStudyCollectionResearchStudyCollectionId(extended_str):
+    pass
+
+
+class SampleSampleId(extended_str):
+    pass
+
+
+class AliquotAliquotId(extended_str):
     pass
 
 
@@ -882,6 +891,121 @@ class ResearchStudyCollection(HasExternalId):
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Sample(HasExternalId):
+    """
+    Sample encompasses biospecimen collection, sample information, and aliquot information.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["sample/Sample"]
+    class_class_curie: ClassVar[str] = "kfi:sample/Sample"
+    class_name: ClassVar[str] = "Sample"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Sample
+
+    sample_id: Union[str, SampleSampleId] = None
+    participant_id: Union[str, ParticipantParticipantId] = None
+    sample_type: Union[str, URIorCURIE] = None
+    parent_sample_id: Optional[Union[str, SampleSampleId]] = None
+    age_at_collection: Optional[Union[dict, AgeAt]] = None
+    collection_method: Optional[Union[str, URIorCURIE]] = None
+    collection_site: Optional[Union[str, URIorCURIE]] = None
+    spatial_qualifier: Optional[Union[str, URIorCURIE]] = None
+    laterality: Optional[Union[str, URIorCURIE]] = None
+    processing: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    availability_status: Optional[Union[bool, Bool]] = None
+    storage_method: Optional[Union[str, URIorCURIE]] = None
+    quantity: Optional[Union[bool, Bool]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.sample_id):
+            self.MissingRequiredField("sample_id")
+        if not isinstance(self.sample_id, SampleSampleId):
+            self.sample_id = SampleSampleId(self.sample_id)
+
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, ParticipantParticipantId):
+            self.participant_id = ParticipantParticipantId(self.participant_id)
+
+        if self._is_empty(self.sample_type):
+            self.MissingRequiredField("sample_type")
+        if not isinstance(self.sample_type, URIorCURIE):
+            self.sample_type = URIorCURIE(self.sample_type)
+
+        if self.parent_sample_id is not None and not isinstance(self.parent_sample_id, SampleSampleId):
+            self.parent_sample_id = SampleSampleId(self.parent_sample_id)
+
+        if self.age_at_collection is not None and not isinstance(self.age_at_collection, AgeAt):
+            self.age_at_collection = AgeAt(**as_dict(self.age_at_collection))
+
+        if self.collection_method is not None and not isinstance(self.collection_method, URIorCURIE):
+            self.collection_method = URIorCURIE(self.collection_method)
+
+        if self.collection_site is not None and not isinstance(self.collection_site, URIorCURIE):
+            self.collection_site = URIorCURIE(self.collection_site)
+
+        if self.spatial_qualifier is not None and not isinstance(self.spatial_qualifier, URIorCURIE):
+            self.spatial_qualifier = URIorCURIE(self.spatial_qualifier)
+
+        if self.laterality is not None and not isinstance(self.laterality, URIorCURIE):
+            self.laterality = URIorCURIE(self.laterality)
+
+        if not isinstance(self.processing, list):
+            self.processing = [self.processing] if self.processing is not None else []
+        self.processing = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.processing]
+
+        if self.availability_status is not None and not isinstance(self.availability_status, Bool):
+            self.availability_status = Bool(self.availability_status)
+
+        if self.storage_method is not None and not isinstance(self.storage_method, URIorCURIE):
+            self.storage_method = URIorCURIE(self.storage_method)
+
+        if self.quantity is not None and not isinstance(self.quantity, Bool):
+            self.quantity = Bool(self.quantity)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Aliquot(HasExternalId):
+    """
+    A Portion of a sample extracted from a participant.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["sample/Aliquot"]
+    class_class_curie: ClassVar[str] = "kfi:sample/Aliquot"
+    class_name: ClassVar[str] = "Aliquot"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Aliquot
+
+    aliquot_id: Union[str, AliquotAliquotId] = None
+    parent_sample_id: Optional[Union[str, SampleSampleId]] = None
+    availability_status: Optional[Union[bool, Bool]] = None
+    volume: Optional[float] = None
+    concentration: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.aliquot_id):
+            self.MissingRequiredField("aliquot_id")
+        if not isinstance(self.aliquot_id, AliquotAliquotId):
+            self.aliquot_id = AliquotAliquotId(self.aliquot_id)
+
+        if self.parent_sample_id is not None and not isinstance(self.parent_sample_id, SampleSampleId):
+            self.parent_sample_id = SampleSampleId(self.parent_sample_id)
+
+        if self.availability_status is not None and not isinstance(self.availability_status, Bool):
+            self.availability_status = Bool(self.availability_status)
+
+        if self.volume is not None and not isinstance(self.volume, float):
+            self.volume = float(self.volume)
+
+        if self.concentration is not None and not isinstance(self.concentration, URIorCURIE):
+            self.concentration = URIorCURIE(self.concentration)
 
         super().__post_init__(**kwargs)
 
@@ -1819,6 +1943,51 @@ slots.research_study_collection_member_id = Slot(uri=KFI['research-study-collect
 slots.collection_status = Slot(uri=KFI['research-study-collection/collection_status'], name="collection_status", curie=KFI.curie('research-study-collection/collection_status'),
                    model_uri=KFI_FHIR_SPARKS.collection_status, domain=None, range=Union[str, "EnumCollectionStatus"])
 
+slots.parent_sample_id = Slot(uri=KFI['sample/parent_sample_id'], name="parent_sample_id", curie=KFI.curie('sample/parent_sample_id'),
+                   model_uri=KFI_FHIR_SPARKS.parent_sample_id, domain=None, range=Optional[Union[str, SampleSampleId]])
+
+slots.sample_type = Slot(uri=KFI['sample/sample_type'], name="sample_type", curie=KFI.curie('sample/sample_type'),
+                   model_uri=KFI_FHIR_SPARKS.sample_type, domain=None, range=Union[str, URIorCURIE])
+
+slots.age_at_collection = Slot(uri=KFI['sample/age_at_collection'], name="age_at_collection", curie=KFI.curie('sample/age_at_collection'),
+                   model_uri=KFI_FHIR_SPARKS.age_at_collection, domain=None, range=Optional[Union[dict, AgeAt]])
+
+slots.collection_method = Slot(uri=KFI['sample/collection_method'], name="collection_method", curie=KFI.curie('sample/collection_method'),
+                   model_uri=KFI_FHIR_SPARKS.collection_method, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.collection_site = Slot(uri=KFI['sample/collection_site'], name="collection_site", curie=KFI.curie('sample/collection_site'),
+                   model_uri=KFI_FHIR_SPARKS.collection_site, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.spatial_qualifier = Slot(uri=KFI['sample/spatial_qualifier'], name="spatial_qualifier", curie=KFI.curie('sample/spatial_qualifier'),
+                   model_uri=KFI_FHIR_SPARKS.spatial_qualifier, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.laterality = Slot(uri=KFI['sample/laterality'], name="laterality", curie=KFI.curie('sample/laterality'),
+                   model_uri=KFI_FHIR_SPARKS.laterality, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.processing = Slot(uri=KFI['sample/processing'], name="processing", curie=KFI.curie('sample/processing'),
+                   model_uri=KFI_FHIR_SPARKS.processing, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
+
+slots.availability_status = Slot(uri=KFI['sample/availability_status'], name="availability_status", curie=KFI.curie('sample/availability_status'),
+                   model_uri=KFI_FHIR_SPARKS.availability_status, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.storage_method = Slot(uri=KFI['sample/storage_method'], name="storage_method", curie=KFI.curie('sample/storage_method'),
+                   model_uri=KFI_FHIR_SPARKS.storage_method, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.quantity = Slot(uri=KFI['sample/quantity'], name="quantity", curie=KFI.curie('sample/quantity'),
+                   model_uri=KFI_FHIR_SPARKS.quantity, domain=None, range=Optional[Union[bool, Bool]])
+
+slots.volume = Slot(uri=KFI['sample/volume'], name="volume", curie=KFI.curie('sample/volume'),
+                   model_uri=KFI_FHIR_SPARKS.volume, domain=None, range=Optional[float])
+
+slots.volume_units = Slot(uri=KFI['sample/volume_units'], name="volume_units", curie=KFI.curie('sample/volume_units'),
+                   model_uri=KFI_FHIR_SPARKS.volume_units, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.concentration = Slot(uri=KFI['sample/concentration'], name="concentration", curie=KFI.curie('sample/concentration'),
+                   model_uri=KFI_FHIR_SPARKS.concentration, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.concentration_units = Slot(uri=KFI['sample/concentration_units'], name="concentration_units", curie=KFI.curie('sample/concentration_units'),
+                   model_uri=KFI_FHIR_SPARKS.concentration_units, domain=None, range=Optional[Union[str, URIorCURIE]])
+
 slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)
 
@@ -1878,6 +2047,12 @@ slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['rese
 
 slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collection/description'], name="researchStudyCollection__description", curie=KFI.curie('research-study-collection/description'),
                    model_uri=KFI_FHIR_SPARKS.researchStudyCollection__description, domain=None, range=Optional[str])
+
+slots.sample__sample_id = Slot(uri=KFI['sample/sample_id'], name="sample__sample_id", curie=KFI.curie('sample/sample_id'),
+                   model_uri=KFI_FHIR_SPARKS.sample__sample_id, domain=None, range=URIRef)
+
+slots.aliquot__aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="aliquot__aliquot_id", curie=KFI.curie('sample/aliquot_id'),
+                   model_uri=KFI_FHIR_SPARKS.aliquot__aliquot_id, domain=None, range=URIRef)
 
 slots.ParticipantAssertion_participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="ParticipantAssertion_participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
                    model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])
