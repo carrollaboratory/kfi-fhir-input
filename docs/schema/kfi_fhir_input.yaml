@@ -76,18 +76,27 @@ prefixes:
   ncpi_cond_type:
     prefix_prefix: ncpi_cond_type
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
+  ncpi_sample_availability:
+    prefix_prefix: ncpi_sample_availability
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability
   ncpi_patient_knowledge_source:
     prefix_prefix: ncpi_patient_knowledge_source
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
+  ucum:
+    prefix_prefix: ucum
+    prefix_reference: http://unitsofmeasure.org
   duo:
     prefix_prefix: duo
     prefix_reference: http://purl.obolibrary.org/obo/duo.owl
   usc_birthsex:
     prefix_prefix: usc_birthsex
     prefix_reference: http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender
+  umls:
+    prefix_prefix: umls
+    prefix_reference: https://uts.nlm.nih.gov/uts/umls/concept
 default_prefix: kfi_fhir_sparks
 default_range: string
 types:
@@ -1067,6 +1076,22 @@ enums:
         text: retired
         meaning: hl7_list_status:retired
         title: Retired
+  EnumSpecimenAvailability:
+    name: EnumSpecimenAvailability
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/EnumSpecimenAvailability
+    description: Can this sample be requested for further analysis
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    permissible_values:
+      available:
+        text: available
+        description: Specimen is currently available
+        meaning: ncpi_sample_availability:available
+        title: Available
+      unavailable:
+        text: unavailable
+        description: Specimen is currently unavailable
+        meaning: ncpi_sample_availability:unavailable
+        title: Unavailable
 slots:
   id:
     name: id
@@ -2449,7 +2474,7 @@ slots:
     domain_of:
     - Sample
     - Aliquot
-    range: boolean
+    range: EnumSpecimenAvailability
     required: false
     multivalued: false
   storage_method:
@@ -2464,7 +2489,7 @@ slots:
         value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample
       fhir_element:
         tag: fhir_element
-        value: collection.method
+        value: condition
     description: How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)
     title: Storage Method
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
@@ -2488,14 +2513,37 @@ slots:
       fhir_element:
         tag: fhir_element
         value: collection[].quantity
-    description: Can this Sample be requested for further analysis?
+    description: The total quantity of the specimen
     title: Quantity
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/quantity
     owner: Sample
     domain_of:
     - Sample
-    range: boolean
+    range: float
+    required: false
+    multivalued: false
+  quantity_units:
+    name: quantity_units
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/quantity_units
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: collection[].quantity.unit
+      fhir_resource:
+        tag: fhir_resource
+        value: collection[].quantity.units
+    description: Units associated with the quantity (ucum)
+    title: Quantity Units
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/quantity_units
+    owner: Sample
+    domain_of:
+    - Sample
+    range: uriorcurie
     required: false
     multivalued: false
   volume:
@@ -2538,6 +2586,9 @@ slots:
     title: Volume Units
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/volume_units
+    owner: Aliquot
+    domain_of:
+    - Aliquot
     range: uriorcurie
     required: false
     multivalued: false
@@ -3424,6 +3475,7 @@ classes:
     - availability_status
     - storage_method
     - quantity
+    - quantity_units
     - sample__sample_id
     attributes:
       sample_id:
@@ -3456,6 +3508,7 @@ classes:
     - parent_sample_id
     - availability_status
     - volume
+    - volume_units
     - concentration
     - aliquot__aliquot_id
     attributes:
@@ -3469,7 +3522,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Aliquot
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-05T15:08:29'
-source_file_size: 5276
-generation_date: '2026-01-05T15:18:40'
+source_file_date: '2026-01-06T13:49:15'
+source_file_size: 5465
+generation_date: '2026-01-06T14:02:23'
 

@@ -5,3 +5,8 @@ participant_id: par-01234
 age_at_collection: 
   value_type: age 
   age: rt-001
+collection_method: SNOMED:129316008
+collection_site: SNOMED:2453002
+availability_status: available 
+quantity: 1.0
+quantity_units: ucum:ml 

@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-05T16:42:20
+# Generation date: 2026-01-06T14:02:31
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -83,6 +83,8 @@ NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncp
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
 NCPI_PATIENT_KNOWLEDGE_SOURCE = CurieNamespace('ncpi_patient_knowledge_source', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source')
+NCPI_SAMPLE_AVAILABILITY = CurieNamespace('ncpi_sample_availability', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability')
+UCUM = CurieNamespace('ucum', 'http://unitsofmeasure.org')
 UMLS = CurieNamespace('umls', 'https://uts.nlm.nih.gov/uts/umls/concept')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
 DEFAULT_ = KFI_FHIR_SPARKS
@@ -917,9 +919,10 @@ class Sample(HasExternalId):
     spatial_qualifier: Optional[Union[str, URIorCURIE]] = None
     laterality: Optional[Union[str, URIorCURIE]] = None
     processing: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
-    availability_status: Optional[Union[bool, Bool]] = None
+    availability_status: Optional[Union[str, "EnumSpecimenAvailability"]] = None
     storage_method: Optional[Union[str, URIorCURIE]] = None
-    quantity: Optional[Union[bool, Bool]] = None
+    quantity: Optional[float] = None
+    quantity_units: Optional[Union[str, URIorCURIE]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.sample_id):
@@ -959,14 +962,17 @@ class Sample(HasExternalId):
             self.processing = [self.processing] if self.processing is not None else []
         self.processing = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.processing]
 
-        if self.availability_status is not None and not isinstance(self.availability_status, Bool):
-            self.availability_status = Bool(self.availability_status)
+        if self.availability_status is not None and not isinstance(self.availability_status, EnumSpecimenAvailability):
+            self.availability_status = EnumSpecimenAvailability(self.availability_status)
 
         if self.storage_method is not None and not isinstance(self.storage_method, URIorCURIE):
             self.storage_method = URIorCURIE(self.storage_method)
 
-        if self.quantity is not None and not isinstance(self.quantity, Bool):
-            self.quantity = Bool(self.quantity)
+        if self.quantity is not None and not isinstance(self.quantity, float):
+            self.quantity = float(self.quantity)
+
+        if self.quantity_units is not None and not isinstance(self.quantity_units, URIorCURIE):
+            self.quantity_units = URIorCURIE(self.quantity_units)
 
         super().__post_init__(**kwargs)
 
@@ -985,8 +991,9 @@ class Aliquot(HasExternalId):
 
     aliquot_id: Union[str, AliquotAliquotId] = None
     parent_sample_id: Optional[Union[str, SampleSampleId]] = None
-    availability_status: Optional[Union[bool, Bool]] = None
+    availability_status: Optional[Union[str, "EnumSpecimenAvailability"]] = None
     volume: Optional[float] = None
+    volume_units: Optional[Union[str, URIorCURIE]] = None
     concentration: Optional[Union[str, URIorCURIE]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -998,11 +1005,14 @@ class Aliquot(HasExternalId):
         if self.parent_sample_id is not None and not isinstance(self.parent_sample_id, SampleSampleId):
             self.parent_sample_id = SampleSampleId(self.parent_sample_id)
 
-        if self.availability_status is not None and not isinstance(self.availability_status, Bool):
-            self.availability_status = Bool(self.availability_status)
+        if self.availability_status is not None and not isinstance(self.availability_status, EnumSpecimenAvailability):
+            self.availability_status = EnumSpecimenAvailability(self.availability_status)
 
         if self.volume is not None and not isinstance(self.volume, float):
             self.volume = float(self.volume)
+
+        if self.volume_units is not None and not isinstance(self.volume_units, URIorCURIE):
+            self.volume_units = URIorCURIE(self.volume_units)
 
         if self.concentration is not None and not isinstance(self.concentration, URIorCURIE):
             self.concentration = URIorCURIE(self.concentration)
@@ -1738,6 +1748,26 @@ class EnumCollectionStatus(EnumDefinitionImpl):
         description="The current state of the collection",
     )
 
+class EnumSpecimenAvailability(EnumDefinitionImpl):
+    """
+    Can this sample be requested for further analysis
+    """
+    available = PermissibleValue(
+        text="available",
+        title="Available",
+        description="Specimen is currently available",
+        meaning=NCPI_SAMPLE_AVAILABILITY["available"])
+    unavailable = PermissibleValue(
+        text="unavailable",
+        title="Unavailable",
+        description="Specimen is currently unavailable",
+        meaning=NCPI_SAMPLE_AVAILABILITY["unavailable"])
+
+    _defn = EnumDefinition(
+        name="EnumSpecimenAvailability",
+        description="Can this sample be requested for further analysis",
+    )
+
 # Slots
 class slots:
     pass
@@ -1968,13 +1998,16 @@ slots.processing = Slot(uri=KFI['sample/processing'], name="processing", curie=K
                    model_uri=KFI_FHIR_SPARKS.processing, domain=None, range=Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]])
 
 slots.availability_status = Slot(uri=KFI['sample/availability_status'], name="availability_status", curie=KFI.curie('sample/availability_status'),
-                   model_uri=KFI_FHIR_SPARKS.availability_status, domain=None, range=Optional[Union[bool, Bool]])
+                   model_uri=KFI_FHIR_SPARKS.availability_status, domain=None, range=Optional[Union[str, "EnumSpecimenAvailability"]])
 
 slots.storage_method = Slot(uri=KFI['sample/storage_method'], name="storage_method", curie=KFI.curie('sample/storage_method'),
                    model_uri=KFI_FHIR_SPARKS.storage_method, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.quantity = Slot(uri=KFI['sample/quantity'], name="quantity", curie=KFI.curie('sample/quantity'),
-                   model_uri=KFI_FHIR_SPARKS.quantity, domain=None, range=Optional[Union[bool, Bool]])
+                   model_uri=KFI_FHIR_SPARKS.quantity, domain=None, range=Optional[float])
+
+slots.quantity_units = Slot(uri=KFI['sample/quantity_units'], name="quantity_units", curie=KFI.curie('sample/quantity_units'),
+                   model_uri=KFI_FHIR_SPARKS.quantity_units, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.volume = Slot(uri=KFI['sample/volume'], name="volume", curie=KFI.curie('sample/volume'),
                    model_uri=KFI_FHIR_SPARKS.volume, domain=None, range=Optional[float])

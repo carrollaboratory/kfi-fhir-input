@@ -34,6 +34,7 @@ classes:
       - availability_status 
       - storage_method 
       - quantity
+      - quantity_units
   Aliquot: 
     title: Aliquot
     description: A Portion of a sample extracted from a participant.
@@ -53,6 +54,7 @@ classes:
       - parent_sample_id 
       - availability_status 
       - volume
+      - volume_units
       - concentration
 slots:
   parent_sample_id:
@@ -138,7 +140,7 @@ slots:
   availability_status:
     title: Availability Status   
     description: Can this Sample be requested for further analysis?
-    range: boolean 
+    range: EnumSpecimenAvailability 
     required: false 
     multivalued: false   
     annotations:
@@ -154,17 +156,27 @@ slots:
     annotations:
       fhir_resource: Specimen
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
-      fhir_element: collection.method  
+      fhir_element: condition  
   quantity:
     title: Quantity   
-    description: Can this Sample be requested for further analysis?
-    range: boolean 
+    description: The total quantity of the specimen
+    range: float 
     required: false 
     multivalued: false   
     annotations:
       fhir_resource: Specimen
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
       fhir_element: collection[].quantity
+  quantity_units: 
+    title: Quantity Units 
+    description: Units associated with the quantity (ucum)
+    range: uriorcurie
+    required: false 
+    multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element: collection[].quantity.unit 
+      fhir_resource: collection[].quantity.units
   volume: 
     title: Volume 
     description: What is the volume of the Aliquot?
@@ -205,3 +217,15 @@ slots:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: collection[].extension[AliquotConcentration].valueQuantity.unit
       fhir_resource: Specimen
+enums:
+  EnumSpecimenAvailability:
+    description: Can this sample be requested for further analysis 
+    permissible_values:
+      available: 
+        title: Available 
+        description: Specimen is currently available 
+        meaning: ncpi_sample_availability:available
+      unavailable: 
+        title: Unavailable 
+        description: Specimen is currently unavailable 
+        meaning: ncpi_sample_availability:unavailable

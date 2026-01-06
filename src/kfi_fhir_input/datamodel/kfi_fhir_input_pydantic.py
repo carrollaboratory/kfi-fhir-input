@@ -141,6 +141,10 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                       'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method'},
                   'ncpi_patient_knowledge_source': {'prefix_prefix': 'ncpi_patient_knowledge_source',
                                                     'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source'},
+                  'ncpi_sample_availability': {'prefix_prefix': 'ncpi_sample_availability',
+                                               'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability'},
+                  'ucum': {'prefix_prefix': 'ucum',
+                           'prefix_reference': 'http://unitsofmeasure.org'},
                   'umls': {'prefix_prefix': 'umls',
                            'prefix_reference': 'https://uts.nlm.nih.gov/uts/umls/concept'},
                   'usc_birthsex': {'prefix_prefix': 'usc_birthsex',
@@ -593,6 +597,20 @@ class EnumCollectionStatus(str, Enum):
     """
     Current = "current"
     Retired = "retired"
+
+
+class EnumSpecimenAvailability(str, Enum):
+    """
+    Can this sample be requested for further analysis
+    """
+    Available = "available"
+    """
+    Specimen is currently available
+    """
+    Unavailable = "unavailable"
+    """
+    Specimen is currently unavailable
+    """
 
 
 
@@ -1124,26 +1142,32 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample']} })
-    availability_status: Optional[bool] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    availability_status: Optional[EnumSpecimenAvailability] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'extension[AliquotAvailability].valueCode'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample', 'Aliquot']} })
-    storage_method: Optional[str] = Field(default=None, title="Storage Method", description="""How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
-                                          'value': 'collection.method'},
+    storage_method: Optional[str] = Field(default=None, title="Storage Method", description="""How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'condition'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample']} })
-    quantity: Optional[bool] = Field(default=None, title="Quantity", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    quantity: Optional[float] = Field(default=None, title="Quantity", description="""The total quantity of the specimen""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'collection[].quantity'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
+         'domain_of': ['Sample']} })
+    quantity_units: Optional[str] = Field(default=None, title="Quantity Units", description="""Units associated with the quantity (ucum)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection[].quantity.unit'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'collection[].quantity.units'}},
          'domain_of': ['Sample']} })
     sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
@@ -1167,7 +1191,7 @@ class Aliquot(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample', 'Aliquot']} })
-    availability_status: Optional[bool] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    availability_status: Optional[EnumSpecimenAvailability] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'extension[AliquotAvailability].valueCode'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
@@ -1176,6 +1200,13 @@ class Aliquot(HasExternalId):
          'domain_of': ['Sample', 'Aliquot']} })
     volume: Optional[float] = Field(default=None, title="Volume", description="""What is the volume of the Aliquot?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'collection[].quantity.value'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Specimen'}},
+         'domain_of': ['Aliquot']} })
+    volume_units: Optional[str] = Field(default=None, title="Volume Units", description="""Units associated with the volume (ucum)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'collection[].quantity.unit'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
                          'fhir_resource': {'tag': 'fhir_resource',
