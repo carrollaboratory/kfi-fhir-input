@@ -206,12 +206,22 @@ AssociatedParty {
     string id  
     uriorcurieList external_id  
 }
+FileLocation {
+    uriList location_uri  
+    string id  
+    uriorcurieList external_id  
+}
 HasExternalId {
     uriorcurieList external_id  
 }
 Institution {
     string name  
     string institution_id  
+    uriorcurieList external_id  
+}
+NCPIFile {
+    uriorcurie file_format  
+    string file_global_id  
     uriorcurieList external_id  
 }
 Participant {
@@ -318,6 +328,9 @@ AgeAt ||--|o RelativeDateTime : "age"
 Aliquot ||--|o Sample : "parent_sample_id"
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
+FileLocation ||--|| AccessPolicy : "access_policy_id"
+NCPIFile ||--|| Participant : "participant_id"
+NCPIFile ||--}| FileLocation : "file_location"
 Participant ||--|o RelativeDateTime : "deceased_rel"
 ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
 ParticipantAssertion ||--|o AgeAt : "age_at_event"

@@ -22,6 +22,8 @@ imports:
 - research_study
 - research_study_collection
 - sample
+- file
+- file_location
 - kfi_fhir_input
 license: MIT
 prefixes:
@@ -1192,10 +1194,11 @@ slots:
     title: Participant ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:participant_id
-    owner: Sample
+    owner: NCPIFile
     domain_of:
     - ParticipantAssertion
     - Sample
+    - NCPIFile
     range: Participant
     required: true
   access_policy_id:
@@ -1209,9 +1212,10 @@ slots:
     title: Access Policy ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:access_policy_id
-    owner: StudyMembership
+    owner: FileLocation
     domain_of:
     - StudyMembership
+    - FileLocation
     range: AccessPolicy
     required: true
     multivalued: false
@@ -2635,6 +2639,45 @@ slots:
     range: uriorcurie
     required: false
     multivalued: false
+  file_format:
+    name: file_format
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_format
+    description: The file format used ([EDAM](http://edamontology.org) where possible)
+    title: File Format
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_format
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
+    required: true
+    multivalued: false
+  file_location:
+    name: file_location
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_location
+    description: Details relating to the links where documents are found
+    title: File Location
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_location
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: FileLocation
+    required: true
+    multivalued: true
+  location_uri:
+    name: location_uri
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/location_uri
+    description: The URI at which this data can be accessed
+    title: Location URI
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/location_uri
+    owner: FileLocation
+    domain_of:
+    - FileLocation
+    range: uri
+    required: true
+    multivalued: true
   accessPolicy__access_policy_id:
     name: accessPolicy__access_policy_id
     description: Access policy communicates the limitations and/or requirements that
@@ -2936,6 +2979,19 @@ slots:
     owner: Aliquot
     domain_of:
     - Aliquot
+    range: string
+    required: true
+  nCPIFile__file_global_id:
+    name: nCPIFile__file_global_id
+    description: File Global ID
+    title: File Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_global_id
+    identifier: true
+    alias: file_global_id
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
     range: string
     required: true
   ParticipantAssertion_participant_id:
@@ -3520,9 +3576,61 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Aliquot
+  NCPIFile:
+    name: NCPIFile
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/NCPIFile
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: DocumentReference
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
+    description: Information about a file related to a research participant
+    title: NCPI File
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    is_a: HasExternalId
+    slots:
+    - external_id
+    - participant_id
+    - file_format
+    - file_location
+    - nCPIFile__file_global_id
+    attributes:
+      file_global_id:
+        name: file_global_id
+        description: File Global ID
+        title: File Global ID
+        identifier: true
+        range: string
+        required: true
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/NCPIFile
+  FileLocation:
+    name: FileLocation
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: DocumentReference
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
+      fhir_element:
+        tag: fhir_element
+        value: content
+    description: Details relating to the links where documents are found
+    title: File Location
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+    is_a: Record
+    slots:
+    - external_id
+    - id
+    - location_uri
+    - access_policy_id
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-06T20:03:23'
-source_file_size: 5465
-generation_date: '2026-01-06T20:03:32'
+source_file_date: '2026-01-06T23:08:17'
+source_file_size: 5493
+generation_date: '2026-01-06T23:08:25'
 

@@ -141,6 +141,10 @@
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/FileLocation/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Float/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
@@ -162,6 +166,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Jsonpointer/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/NCPIFile/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
@@ -413,6 +421,18 @@
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_format/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_global_id/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_location/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/id/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
@@ -434,6 +454,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/laterality/</loc>
+         <lastmod>2026-01-06</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/location_uri/</loc>
          <lastmod>2026-01-06</lastmod>
     </url>
     <url>

@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/Record/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/NCPIFile/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>Class: Record (Record) - kfi-fhir-input</title>
+<title>Class: NCPI File (NCPIFile) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-record-record">
+<a class="md-skip" href="#class-ncpi-file-ncpifile">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Record (Record)
+              Class: NCPI File (NCPIFile)
             
           </span>
 </div>
@@ -199,6 +199,15 @@
 <nav aria-label="Identifier and Mapping Information" class="md-nav">
 <ul class="md-nav__list">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#annotations">
+<span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#schema-source">
 <span class="md-ellipsis">
       
@@ -257,42 +266,49 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-record-record">Class: Record (Record)</h1>
-<p><em>One row / entity within the database</em></p>
-<ul>
-<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
-</ul>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputRecord">kfi_fhir_sparks:Record</a></p>
+<h1 id="class-ncpi-file-ncpifile">Class: NCPI File (NCPIFile)</h1>
+<p><em>Information about a file related to a research participant</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputNCPIFile">kfi_fhir_sparks:NCPIFile</a></p>
 <div class="mermaid"> classDiagram
-    class Record
-    click Record href "../Record/"
-      HasExternalId &lt;|-- Record
+    class NCPIFile
+    click NCPIFile href "../NCPIFile/"
+      HasExternalId &lt;|-- NCPIFile
         click HasExternalId href "../HasExternalId/"
 
+      NCPIFile : external_id
 
-      Record &lt;|-- AssociatedParty
-        click AssociatedParty href "../AssociatedParty/"
-      Record &lt;|-- Period
-        click Period href "../Period/"
-      Record &lt;|-- FileLocation
+      NCPIFile : file_format
+
+      NCPIFile : file_global_id
+
+      NCPIFile : file_location
+
+
+
+
+
+        NCPIFile --&gt; "1..*" FileLocation : file_location
         click FileLocation href "../FileLocation/"
 
 
-      Record : external_id
 
-      Record : id
+      NCPIFile : participant_id
+
+
+
+
+
+        NCPIFile --&gt; "1" Participant : participant_id
+        click Participant href "../Participant/"
+
+
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
 <li><a href="../HasExternalId/">HasExternalId</a><ul>
-<li><strong>Record</strong><ul>
-<li><a href="../AssociatedParty/">AssociatedParty</a></li>
-<li><a href="../Period/">Period</a></li>
-<li><a href="../FileLocation/">FileLocation</a></li>
-</ul>
-</li>
+<li><strong>NCPIFile</strong></li>
 </ul>
 </li>
 </ul>
@@ -308,9 +324,27 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../id/">id</a></td>
+<td><a href="../participant_id/">participant_id</a></td>
+<td>1 <br/> <a href="../Participant/">Participant</a></td>
+<td>The Global ID for the Participant</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_format/">file_format</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The file format used ([EDAM](http://edamontology</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_location/">file_location</a></td>
+<td>1..* <br/> <a href="../FileLocation/">FileLocation</a></td>
+<td>Details relating to the links where documents are found</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_global_id/">file_global_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
-<td>Unique Identifier for a table entry</td>
+<td>File Global ID</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -322,6 +356,25 @@
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fhir_resource</td>
+<td>DocumentReference</td>
+</tr>
+<tr>
+<td>fhir_profile</td>
+<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -337,11 +390,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:Record</td>
+<td>kfi_fhir_sparks:NCPIFile</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:Record</td>
+<td>kfi_fhir_sparks:NCPIFile</td>
 </tr>
 </tbody>
 </table>
@@ -349,42 +402,112 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: Record
-description: One row / entity within the database
-title: Record
+<pre><code class="language-yaml">name: NCPIFile
+annotations:
+  fhir_resource:
+    tag: fhir_resource
+    value: DocumentReference
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
+description: Information about a file related to a research participant
+title: NCPI File
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
-abstract: true
 slots:
-- id
+- participant_id
+- file_format
+- file_location
+attributes:
+  file_global_id:
+    name: file_global_id
+    description: File Global ID
+    title: File Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    rank: 1000
+    identifier: true
+    domain_of:
+    - NCPIFile
+    range: string
+    required: true
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: Record
-description: One row / entity within the database
-title: Record
+<pre><code class="language-yaml">name: NCPIFile
+annotations:
+  fhir_resource:
+    tag: fhir_resource
+    value: DocumentReference
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
+description: Information about a file related to a research participant
+title: NCPI File
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
-abstract: true
 attributes:
-  id:
-    name: id
-    description: Unique Identifier for a table entry. This is probably not the Global
-      ID
-    title: ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+  file_global_id:
+    name: file_global_id
+    description: File Global ID
+    title: File Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
     rank: 1000
     identifier: true
-    alias: id
-    owner: Record
+    alias: file_global_id
+    owner: NCPIFile
     domain_of:
-    - Record
-    - RelativeDateTime
+    - NCPIFile
     range: string
     required: true
+  participant_id:
+    name: participant_id
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: participant_id
+    owner: NCPIFile
+    domain_of:
+    - ParticipantAssertion
+    - Participant
+    - Person
+    - StudyMembership
+    - Sample
+    - NCPIFile
+    range: Participant
+    required: true
+  file_format:
+    name: file_format
+    description: The file format used ([EDAM](http://edamontology.org) where possible)
+    title: File Format
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_format
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
+    required: true
     multivalued: false
+  file_location:
+    name: file_location
+    description: Details relating to the links where documents are found
+    title: File Location
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_location
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: FileLocation
+    required: true
+    multivalued: true
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study
@@ -393,7 +516,7 @@ attributes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: external_id
-    owner: Record
+    owner: NCPIFile
     domain_of:
     - HasExternalId
     range: uriorcurie
