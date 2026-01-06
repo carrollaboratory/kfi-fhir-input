@@ -428,7 +428,7 @@
 
 
 <h1 id="slot-quantity-quantity">Slot: Quantity (quantity)</h1>
-<p><em>Can this Sample be requested for further analysis?</em></p>
+<p><em>The total quantity of the specimen</em></p>
 <p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputquantity">kfi_fhir_sparks:quantity</a>
 Alias: quantity</p>
 <!-- no inheritance hierarchy -->
@@ -452,7 +452,7 @@ Alias: quantity</p>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../Boolean/">Boolean</a></li>
+<li>Range: <a href="../Float/">Float</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="annotations">Annotations</h3>
@@ -515,14 +515,14 @@ annotations:
   fhir_element:
     tag: fhir_element
     value: collection[].quantity
-description: Can this Sample be requested for further analysis?
+description: The total quantity of the specimen
 title: Quantity
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
 alias: quantity
 domain_of:
 - Sample
-range: boolean
+range: float
 required: false
 multivalued: false
 

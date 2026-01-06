@@ -189,8 +189,9 @@ AgeAt {
     date as_date  
 }
 Aliquot {
-    boolean availability_status  
+    EnumSpecimenAvailability availability_status  
     float volume  
+    uriorcurie volume_units  
     uriorcurie concentration  
     string aliquot_id  
     uriorcurieList external_id  
@@ -302,9 +303,10 @@ Sample {
     uriorcurie spatial_qualifier  
     uriorcurie laterality  
     uriorcurieList processing  
-    boolean availability_status  
+    EnumSpecimenAvailability availability_status  
     uriorcurie storage_method  
-    boolean quantity  
+    float quantity  
+    uriorcurie quantity_units  
     string sample_id  
     uriorcurieList external_id  
 }

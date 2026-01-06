@@ -279,6 +279,15 @@
 
       Aliquot : availability_status
 
+
+
+
+
+        Aliquot --&gt; "0..1" EnumSpecimenAvailability : availability_status
+        click EnumSpecimenAvailability href "../EnumSpecimenAvailability/"
+
+
+
       Aliquot : concentration
 
       Aliquot : external_id
@@ -295,6 +304,8 @@
 
 
       Aliquot : volume
+
+      Aliquot : volume_units
 
 
 </div>
@@ -324,7 +335,7 @@
 </tr>
 <tr>
 <td><a href="../availability_status/">availability_status</a></td>
-<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
+<td>0..1 <br/> <a href="../EnumSpecimenAvailability/">EnumSpecimenAvailability</a></td>
 <td>Can this Sample be requested for further analysis?</td>
 <td>direct</td>
 </tr>
@@ -332,6 +343,12 @@
 <td><a href="../volume/">volume</a></td>
 <td>0..1 <br/> <a href="../Float/">Float</a></td>
 <td>What is the volume of the Aliquot?</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../volume_units/">volume_units</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Units associated with the volume (ucum)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -424,6 +441,7 @@ slots:
 - parent_sample_id
 - availability_status
 - volume
+- volume_units
 - concentration
 attributes:
   aliquot_id:
@@ -516,7 +534,7 @@ attributes:
     domain_of:
     - Sample
     - Aliquot
-    range: boolean
+    range: EnumSpecimenAvailability
     required: false
     multivalued: false
   volume:
@@ -540,6 +558,29 @@ attributes:
     domain_of:
     - Aliquot
     range: float
+    required: false
+    multivalued: false
+  volume_units:
+    name: volume_units
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: collection[].quantity.unit
+      fhir_resource:
+        tag: fhir_resource
+        value: Specimen
+    description: Units associated with the volume (ucum)
+    title: Volume Units
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: volume_units
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    range: uriorcurie
     required: false
     multivalued: false
   concentration:

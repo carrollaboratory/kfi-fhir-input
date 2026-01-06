@@ -297,6 +297,15 @@
 
       Sample : availability_status
 
+
+
+
+
+        Sample --&gt; "0..1" EnumSpecimenAvailability : availability_status
+        click EnumSpecimenAvailability href "../EnumSpecimenAvailability/"
+
+
+
       Sample : collection_method
 
       Sample : collection_site
@@ -330,6 +339,8 @@
       Sample : processing
 
       Sample : quantity
+
+      Sample : quantity_units
 
       Sample : sample_id
 
@@ -415,7 +426,7 @@
 </tr>
 <tr>
 <td><a href="../availability_status/">availability_status</a></td>
-<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
+<td>0..1 <br/> <a href="../EnumSpecimenAvailability/">EnumSpecimenAvailability</a></td>
 <td>Can this Sample be requested for further analysis?</td>
 <td>direct</td>
 </tr>
@@ -427,8 +438,14 @@
 </tr>
 <tr>
 <td><a href="../quantity/">quantity</a></td>
-<td>0..1 <br/> <a href="../Boolean/">Boolean</a></td>
-<td>Can this Sample be requested for further analysis?</td>
+<td>0..1 <br/> <a href="../Float/">Float</a></td>
+<td>The total quantity of the specimen</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../quantity_units/">quantity_units</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Units associated with the quantity (ucum)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -543,6 +560,7 @@ slots:
 - availability_status
 - storage_method
 - quantity
+- quantity_units
 attributes:
   sample_id:
     name: sample_id
@@ -815,7 +833,7 @@ attributes:
     domain_of:
     - Sample
     - Aliquot
-    range: boolean
+    range: EnumSpecimenAvailability
     required: false
     multivalued: false
   storage_method:
@@ -829,7 +847,7 @@ attributes:
         value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample
       fhir_element:
         tag: fhir_element
-        value: collection.method
+        value: condition
     description: How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)
     title: Storage Method
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -853,7 +871,7 @@ attributes:
       fhir_element:
         tag: fhir_element
         value: collection[].quantity
-    description: Can this Sample be requested for further analysis?
+    description: The total quantity of the specimen
     title: Quantity
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
@@ -861,7 +879,30 @@ attributes:
     owner: Sample
     domain_of:
     - Sample
-    range: boolean
+    range: float
+    required: false
+    multivalued: false
+  quantity_units:
+    name: quantity_units
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: collection[].quantity.unit
+      fhir_resource:
+        tag: fhir_resource
+        value: collection[].quantity.units
+    description: Units associated with the quantity (ucum)
+    title: Quantity Units
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: quantity_units
+    owner: Sample
+    domain_of:
+    - Sample
+    range: uriorcurie
     required: false
     multivalued: false
   external_id:
