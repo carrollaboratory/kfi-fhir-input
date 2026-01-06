@@ -1,0 +1,4 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+participant_id,The Global ID for the Participant,string,,,,,Foreign Key: Participant.participant_id
+file_format,The file format used ([EDAM](http://edamontology.org) where possible),string,,,,,
+file_global_id,File Global ID,string,,,,,

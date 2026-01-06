@@ -65,6 +65,8 @@ imports:
   - research_study
   - research_study_collection
   - sample
+  - file 
+  - file_location
 classes:
   Any:
     class_uri: linkml:Any

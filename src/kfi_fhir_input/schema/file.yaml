@@ -1,0 +1,45 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+name: kfi-fhir-input-ncpi-file
+imports: 
+  - linkml:types 
+  - kfi_fhir_input 
+  - file_location 
+classes:
+  NCPIFile:
+    title: NCPI File    # File is not a legal class name for LinkML models
+    description: Information about a file related to a research participant
+    is_a: HasExternalId 
+    annotations:
+        fhir_resource: DocumentReference
+        # If we end up with files that don't have a DRS ID, we could always
+        # make this be a regular ncpi-file profile. Technically, this is 
+        # literally here for my benefit...
+        fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
+    attributes:
+      file_global_id:
+        title: File Global ID
+        description: File Global ID
+        range: string         
+        identifier: true
+        required: true
+    slots:
+      - participant_id 
+      - file_format 
+      - file_location
+slots: 
+  file_format:
+    title: File Format
+    description: The file format used ([EDAM](http://edamontology.org) where possible)
+    required: true 
+    multivalued: false 
+    range: uriorcurie
+  file_location: 
+    title: File Location
+    description: Details relating to the links where documents are found
+    range: FileLocation 
+    required: true 
+    multivalued: true 
+
+
+  

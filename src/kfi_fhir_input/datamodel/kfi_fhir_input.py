@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-06T14:02:31
+# Generation date: 2026-01-06T17:07:28
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -154,6 +154,14 @@ class SampleSampleId(extended_str):
 
 
 class AliquotAliquotId(extended_str):
+    pass
+
+
+class NCPIFileFileGlobalId(extended_str):
+    pass
+
+
+class FileLocationId(RecordId):
     pass
 
 
@@ -1016,6 +1024,84 @@ class Aliquot(HasExternalId):
 
         if self.concentration is not None and not isinstance(self.concentration, URIorCURIE):
             self.concentration = URIorCURIE(self.concentration)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class NCPIFile(HasExternalId):
+    """
+    Information about a file related to a research participant
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["ncpi-file/NCPIFile"]
+    class_class_curie: ClassVar[str] = "kfi:ncpi-file/NCPIFile"
+    class_name: ClassVar[str] = "NCPIFile"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.NCPIFile
+
+    file_global_id: Union[str, NCPIFileFileGlobalId] = None
+    participant_id: Union[str, ParticipantParticipantId] = None
+    file_format: Union[str, URIorCURIE] = None
+    file_location: Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.file_global_id):
+            self.MissingRequiredField("file_global_id")
+        if not isinstance(self.file_global_id, NCPIFileFileGlobalId):
+            self.file_global_id = NCPIFileFileGlobalId(self.file_global_id)
+
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, ParticipantParticipantId):
+            self.participant_id = ParticipantParticipantId(self.participant_id)
+
+        if self._is_empty(self.file_format):
+            self.MissingRequiredField("file_format")
+        if not isinstance(self.file_format, URIorCURIE):
+            self.file_format = URIorCURIE(self.file_format)
+
+        if self._is_empty(self.file_location):
+            self.MissingRequiredField("file_location")
+        if not isinstance(self.file_location, list):
+            self.file_location = [self.file_location] if self.file_location is not None else []
+        self.file_location = [v if isinstance(v, FileLocationId) else FileLocationId(v) for v in self.file_location]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FileLocation(Record):
+    """
+    Details relating to the links where documents are found
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["file-location/FileLocation"]
+    class_class_curie: ClassVar[str] = "kfi:file-location/FileLocation"
+    class_name: ClassVar[str] = "FileLocation"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileLocation
+
+    id: Union[str, FileLocationId] = None
+    location_uri: Union[Union[str, URI], list[Union[str, URI]]] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FileLocationId):
+            self.id = FileLocationId(self.id)
+
+        if self._is_empty(self.location_uri):
+            self.MissingRequiredField("location_uri")
+        if not isinstance(self.location_uri, list):
+            self.location_uri = [self.location_uri] if self.location_uri is not None else []
+        self.location_uri = [v if isinstance(v, URI) else URI(v) for v in self.location_uri]
+
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
 
         super().__post_init__(**kwargs)
 
@@ -2021,6 +2107,15 @@ slots.concentration = Slot(uri=KFI['sample/concentration'], name="concentration"
 slots.concentration_units = Slot(uri=KFI['sample/concentration_units'], name="concentration_units", curie=KFI.curie('sample/concentration_units'),
                    model_uri=KFI_FHIR_SPARKS.concentration_units, domain=None, range=Optional[Union[str, URIorCURIE]])
 
+slots.file_format = Slot(uri=KFI['ncpi-file/file_format'], name="file_format", curie=KFI.curie('ncpi-file/file_format'),
+                   model_uri=KFI_FHIR_SPARKS.file_format, domain=None, range=Union[str, URIorCURIE])
+
+slots.file_location = Slot(uri=KFI['ncpi-file/file_location'], name="file_location", curie=KFI.curie('ncpi-file/file_location'),
+                   model_uri=KFI_FHIR_SPARKS.file_location, domain=None, range=Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]])
+
+slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_uri", curie=KFI.curie('file-location/location_uri'),
+                   model_uri=KFI_FHIR_SPARKS.location_uri, domain=None, range=Union[Union[str, URI], list[Union[str, URI]]])
+
 slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)
 
@@ -2086,6 +2181,9 @@ slots.sample__sample_id = Slot(uri=KFI['sample/sample_id'], name="sample__sample
 
 slots.aliquot__aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="aliquot__aliquot_id", curie=KFI.curie('sample/aliquot_id'),
                    model_uri=KFI_FHIR_SPARKS.aliquot__aliquot_id, domain=None, range=URIRef)
+
+slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
 
 slots.ParticipantAssertion_participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="ParticipantAssertion_participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
                    model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])

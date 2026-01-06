@@ -1,0 +1,3 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
+id,Unique Identifier for a table entry. This is probably not the Global ID,string,,,,,

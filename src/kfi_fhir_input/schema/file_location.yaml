@@ -1,0 +1,25 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+name: kfi-fhir-input-file-location
+imports: 
+  - linkml:types 
+  - kfi_fhir_input 
+classes:
+  FileLocation:
+    title: File Location    
+    description: Details relating to the links where documents are found
+    is_a: Record
+    annotations: 
+      fhir_resource: DocumentReference 
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
+      fhir_element: content 
+    slots: 
+      - location_uri
+      - access_policy_id    # content.extension[location-access].valueReference
+slots:
+  location_uri: 
+    title: Location URI
+    description: The URI at which this data can be accessed
+    required: true 
+    multivalued: true 
+    range: uri
