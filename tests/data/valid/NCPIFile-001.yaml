@@ -8,6 +8,8 @@ file_hash: 72ad9cc2c4f682c2985babd732bf9b8c48898afd6a5af7bd19e3feb3c65c344b
 file_hash_type: w3c:sha256
 file_location: 
   - fileloc-0001
+file_meta_data:
+  - filemeta-0001
 file_size: 3.3 
 file_size_unit: ucum:kB
 file_type: fluff:FFET #"Feline Fur Evaluation Test"

@@ -38,6 +38,7 @@ prefixes:
   obi: http://purl.obolibrary.org/obo/obi.owl
   w3c: https://w3c.github.io/N3/ns/
   fluff: https://fluffy.cat.onto/terms
+  unknown: https://need-more-info.org
 
   # I think the linter is wrong on this one, but we'll use the recommendation
   # to quiet the warnings. 

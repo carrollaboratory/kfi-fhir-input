@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-07T16:26:53
+# Generation date: 2026-01-07T16:28:56
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -89,6 +89,7 @@ NCPI_SAMPLE_AVAILABILITY = CurieNamespace('ncpi_sample_availability', 'https://n
 OBI = CurieNamespace('obi', 'http://purl.obolibrary.org/obo/obi.owl')
 UCUM = CurieNamespace('ucum', 'http://unitsofmeasure.org')
 UMLS = CurieNamespace('umls', 'https://uts.nlm.nih.gov/uts/umls/concept')
+UNKNOWN = CurieNamespace('unknown', 'https://need-more-info.org')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
 W3C = CurieNamespace('w3c', 'https://w3c.github.io/N3/ns/')
 DEFAULT_ = KFI_FHIR_SPARKS
