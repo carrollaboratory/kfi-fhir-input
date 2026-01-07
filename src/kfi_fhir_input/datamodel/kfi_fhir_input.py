@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-07T12:04:11
+# Generation date: 2026-01-07T16:06:03
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -65,7 +65,6 @@ version = None
 # Namespaces
 CDC_REC = CurieNamespace('cdc_rec', 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC')
 CDC_UNK = CurieNamespace('cdc_unk', 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion')
-CR = CurieNamespace('cr', 'https://w3c.github.io/N3/ns/')
 DUO = CurieNamespace('duo', 'http://purl.obolibrary.org/obo/duo.owl')
 EDAM = CurieNamespace('edam', 'https://edamontology.org')
 FLUFF = CurieNamespace('fluff', 'https://fluffy.cat.onto/terms')
@@ -90,6 +89,7 @@ NCPI_SAMPLE_AVAILABILITY = CurieNamespace('ncpi_sample_availability', 'https://n
 UCUM = CurieNamespace('ucum', 'http://unitsofmeasure.org')
 UMLS = CurieNamespace('umls', 'https://uts.nlm.nih.gov/uts/umls/concept')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
+W3C = CurieNamespace('w3c', 'https://w3c.github.io/N3/ns/')
 DEFAULT_ = KFI_FHIR_SPARKS
 
 
@@ -165,6 +165,10 @@ class NCPIFileFileGlobalId(extended_str):
 
 
 class FileLocationId(RecordId):
+    pass
+
+
+class FileMetaDataId(RecordId):
     pass
 
 
@@ -1051,6 +1055,7 @@ class NCPIFile(HasExternalId):
     file_size_unit: Union[str, URIorCURIE] = None
     file_type: Union[str, URIorCURIE] = None
     file_hash: str = None
+    file_meta_data: Optional[Union[Union[str, FileMetaDataId], list[Union[str, FileMetaDataId]]]] = empty_list()
     content_version: Optional[str] = None
     file_hash_type: Optional[Union[str, URIorCURIE]] = None
     description: Optional[str] = None
@@ -1096,6 +1101,10 @@ class NCPIFile(HasExternalId):
             self.MissingRequiredField("file_hash")
         if not isinstance(self.file_hash, str):
             self.file_hash = str(self.file_hash)
+
+        if not isinstance(self.file_meta_data, list):
+            self.file_meta_data = [self.file_meta_data] if self.file_meta_data is not None else []
+        self.file_meta_data = [v if isinstance(v, FileMetaDataId) else FileMetaDataId(v) for v in self.file_meta_data]
 
         if self.content_version is not None and not isinstance(self.content_version, str):
             self.content_version = str(self.content_version)
@@ -1146,6 +1155,87 @@ class FileLocation(Record):
             self.MissingRequiredField("access_policy_id")
         if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
             self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class FileMetaData(Record):
+    """
+    Representation of file metadata for NCPI
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["file-meta-data/FileMetaData"]
+    class_class_curie: ClassVar[str] = "kfi:file-meta-data/FileMetaData"
+    class_name: ClassVar[str] = "FileMetaData"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileMetaData
+
+    id: Union[str, FileMetaDataId] = None
+    meta_data_type: Union[str, "EnumFileMetaDataType"] = None
+    assay_strategy: Union[str, URIorCURIE] = None
+    platform_instrument: Union[str, URIorCURIE] = None
+    library_prep: Optional[Union[str, URIorCURIE]] = None
+    library_selection: Optional[Union[str, URIorCURIE]] = None
+    strandedness: Optional[Union[str, URIorCURIE]] = None
+    target_region: Optional[Union[str, URIorCURIE]] = None
+    is_paired_end: Optional[Union[str, URIorCURIE]] = None
+    adaptor_trimmed: Optional[Union[str, URIorCURIE]] = None
+    reference_genome: Optional[Union[str, URIorCURIE]] = None
+    workflow_type: Optional[Union[str, URIorCURIE]] = None
+    workflow_tool: Optional[Union[str, URIorCURIE]] = None
+    related_samples: Optional[Union[str, SampleSampleId]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, FileMetaDataId):
+            self.id = FileMetaDataId(self.id)
+
+        if self._is_empty(self.meta_data_type):
+            self.MissingRequiredField("meta_data_type")
+        if not isinstance(self.meta_data_type, EnumFileMetaDataType):
+            self.meta_data_type = EnumFileMetaDataType(self.meta_data_type)
+
+        if self._is_empty(self.assay_strategy):
+            self.MissingRequiredField("assay_strategy")
+        if not isinstance(self.assay_strategy, URIorCURIE):
+            self.assay_strategy = URIorCURIE(self.assay_strategy)
+
+        if self._is_empty(self.platform_instrument):
+            self.MissingRequiredField("platform_instrument")
+        if not isinstance(self.platform_instrument, URIorCURIE):
+            self.platform_instrument = URIorCURIE(self.platform_instrument)
+
+        if self.library_prep is not None and not isinstance(self.library_prep, URIorCURIE):
+            self.library_prep = URIorCURIE(self.library_prep)
+
+        if self.library_selection is not None and not isinstance(self.library_selection, URIorCURIE):
+            self.library_selection = URIorCURIE(self.library_selection)
+
+        if self.strandedness is not None and not isinstance(self.strandedness, URIorCURIE):
+            self.strandedness = URIorCURIE(self.strandedness)
+
+        if self.target_region is not None and not isinstance(self.target_region, URIorCURIE):
+            self.target_region = URIorCURIE(self.target_region)
+
+        if self.is_paired_end is not None and not isinstance(self.is_paired_end, URIorCURIE):
+            self.is_paired_end = URIorCURIE(self.is_paired_end)
+
+        if self.adaptor_trimmed is not None and not isinstance(self.adaptor_trimmed, URIorCURIE):
+            self.adaptor_trimmed = URIorCURIE(self.adaptor_trimmed)
+
+        if self.reference_genome is not None and not isinstance(self.reference_genome, URIorCURIE):
+            self.reference_genome = URIorCURIE(self.reference_genome)
+
+        if self.workflow_type is not None and not isinstance(self.workflow_type, URIorCURIE):
+            self.workflow_type = URIorCURIE(self.workflow_type)
+
+        if self.workflow_tool is not None and not isinstance(self.workflow_tool, URIorCURIE):
+            self.workflow_tool = URIorCURIE(self.workflow_tool)
+
+        if self.related_samples is not None and not isinstance(self.related_samples, SampleSampleId):
+            self.related_samples = SampleSampleId(self.related_samples)
 
         super().__post_init__(**kwargs)
 
@@ -1898,6 +1988,36 @@ class EnumSpecimenAvailability(EnumDefinitionImpl):
         description="Can this sample be requested for further analysis",
     )
 
+class EnumFileMetaDataType(EnumDefinitionImpl):
+    """
+    Identify the type of profile to use
+    """
+    bam_cram = PermissibleValue(
+        text="bam_cram",
+        title="BAM/CRAM",
+        description="Bam or Cram file")
+    fastq = PermissibleValue(
+        text="fastq",
+        title="FASTQ",
+        description="FASTQ File")
+    maf = PermissibleValue(
+        text="maf",
+        title="MAF (Somatic Mutation) file",
+        description="MAF (Somatic Mutation)")
+    proteomics = PermissibleValue(
+        text="proteomics",
+        title="Proteomics file",
+        description="Proteomics file")
+    vcf = PermissibleValue(
+        text="vcf",
+        title="VCF (and gVCF) file",
+        description="GC or gVCF file")
+
+    _defn = EnumDefinition(
+        name="EnumFileMetaDataType",
+        description="Identify the type of profile to use",
+    )
+
 # Slots
 class slots:
     pass
@@ -2175,11 +2295,53 @@ slots.file_hash = Slot(uri=KFI['ncpi-file/file_hash'], name="file_hash", curie=K
 slots.file_hash_type = Slot(uri=KFI['ncpi-file/file_hash_type'], name="file_hash_type", curie=KFI.curie('ncpi-file/file_hash_type'),
                    model_uri=KFI_FHIR_SPARKS.file_hash_type, domain=None, range=Optional[Union[str, URIorCURIE]])
 
+slots.file_meta_data = Slot(uri=KFI['ncpi-file/file_meta_data'], name="file_meta_data", curie=KFI.curie('ncpi-file/file_meta_data'),
+                   model_uri=KFI_FHIR_SPARKS.file_meta_data, domain=None, range=Optional[Union[Union[str, FileMetaDataId], list[Union[str, FileMetaDataId]]]])
+
 slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_uri", curie=KFI.curie('file-location/location_uri'),
                    model_uri=KFI_FHIR_SPARKS.location_uri, domain=None, range=Union[str, URI])
 
 slots.file_name = Slot(uri=KFI['file-location/file_name'], name="file_name", curie=KFI.curie('file-location/file_name'),
                    model_uri=KFI_FHIR_SPARKS.file_name, domain=None, range=str)
+
+slots.meta_data_type = Slot(uri=KFI['file-meta-data/meta_data_type'], name="meta_data_type", curie=KFI.curie('file-meta-data/meta_data_type'),
+                   model_uri=KFI_FHIR_SPARKS.meta_data_type, domain=None, range=Union[str, "EnumFileMetaDataType"])
+
+slots.assay_strategy = Slot(uri=KFI['file-meta-data/assay_strategy'], name="assay_strategy", curie=KFI.curie('file-meta-data/assay_strategy'),
+                   model_uri=KFI_FHIR_SPARKS.assay_strategy, domain=None, range=Union[str, URIorCURIE])
+
+slots.platform_instrument = Slot(uri=KFI['file-meta-data/platform_instrument'], name="platform_instrument", curie=KFI.curie('file-meta-data/platform_instrument'),
+                   model_uri=KFI_FHIR_SPARKS.platform_instrument, domain=None, range=Union[str, URIorCURIE])
+
+slots.library_prep = Slot(uri=KFI['file-meta-data/library_prep'], name="library_prep", curie=KFI.curie('file-meta-data/library_prep'),
+                   model_uri=KFI_FHIR_SPARKS.library_prep, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.library_selection = Slot(uri=KFI['file-meta-data/library_selection'], name="library_selection", curie=KFI.curie('file-meta-data/library_selection'),
+                   model_uri=KFI_FHIR_SPARKS.library_selection, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.strandedness = Slot(uri=KFI['file-meta-data/strandedness'], name="strandedness", curie=KFI.curie('file-meta-data/strandedness'),
+                   model_uri=KFI_FHIR_SPARKS.strandedness, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.target_region = Slot(uri=KFI['file-meta-data/target_region'], name="target_region", curie=KFI.curie('file-meta-data/target_region'),
+                   model_uri=KFI_FHIR_SPARKS.target_region, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.is_paired_end = Slot(uri=KFI['file-meta-data/is_paired_end'], name="is_paired_end", curie=KFI.curie('file-meta-data/is_paired_end'),
+                   model_uri=KFI_FHIR_SPARKS.is_paired_end, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.adaptor_trimmed = Slot(uri=KFI['file-meta-data/adaptor_trimmed'], name="adaptor_trimmed", curie=KFI.curie('file-meta-data/adaptor_trimmed'),
+                   model_uri=KFI_FHIR_SPARKS.adaptor_trimmed, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.reference_genome = Slot(uri=KFI['file-meta-data/reference_genome'], name="reference_genome", curie=KFI.curie('file-meta-data/reference_genome'),
+                   model_uri=KFI_FHIR_SPARKS.reference_genome, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.workflow_type = Slot(uri=KFI['file-meta-data/workflow_type'], name="workflow_type", curie=KFI.curie('file-meta-data/workflow_type'),
+                   model_uri=KFI_FHIR_SPARKS.workflow_type, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.workflow_tool = Slot(uri=KFI['file-meta-data/workflow_tool'], name="workflow_tool", curie=KFI.curie('file-meta-data/workflow_tool'),
+                   model_uri=KFI_FHIR_SPARKS.workflow_tool, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.related_samples = Slot(uri=KFI['file-meta-data/related_samples'], name="related_samples", curie=KFI.curie('file-meta-data/related_samples'),
+                   model_uri=KFI_FHIR_SPARKS.related_samples, domain=None, range=Optional[Union[str, SampleSampleId]])
 
 slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)

@@ -25,6 +25,7 @@ imports:
 - file
 - file_location
 - kfi_fhir_input
+- file_meta_data
 license: MIT
 prefixes:
   cdc_rec:
@@ -99,6 +100,15 @@ prefixes:
   umls:
     prefix_prefix: umls
     prefix_reference: https://uts.nlm.nih.gov/uts/umls/concept
+  edam:
+    prefix_prefix: edam
+    prefix_reference: https://edamontology.org
+  w3c:
+    prefix_prefix: w3c
+    prefix_reference: https://w3c.github.io/N3/ns/
+  fluff:
+    prefix_prefix: fluff
+    prefix_reference: https://fluffy.cat.onto/terms
 default_prefix: kfi_fhir_sparks
 default_range: string
 types:
@@ -1094,6 +1104,52 @@ enums:
         description: Specimen is currently unavailable
         meaning: ncpi_sample_availability:unavailable
         title: Unavailable
+  EnumFileMetaDataType:
+    name: EnumFileMetaDataType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/EnumFileMetaDataType
+    description: Identify the type of profile to use
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    permissible_values:
+      bam_cram:
+        text: bam_cram
+        description: Bam or Cram file
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-bamcram.html
+        title: BAM/CRAM
+      fastq:
+        text: fastq
+        description: FASTQ File
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-fastq.html
+        title: FASTQ
+      maf:
+        text: maf
+        description: MAF (Somatic Mutation)
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-maf.html
+        title: MAF (Somatic Mutation) file
+      proteomics:
+        text: proteomics
+        description: Proteomics file
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-proteomics.html
+        title: Proteomics file
+      vcf:
+        text: vcf
+        description: GC or gVCF file
+        annotations:
+          fhir_profile:
+            tag: fhir_profile
+            value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-vcf.html
+        title: VCF (and gVCF) file
 slots:
   id:
     name: id
@@ -2686,6 +2742,9 @@ slots:
     title: File Size Units
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_size_unit
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
     range: uriorcurie
     required: true
     multivalued: false
@@ -2742,6 +2801,19 @@ slots:
     range: uriorcurie
     required: false
     multivalued: false
+  file_meta_data:
+    name: file_meta_data
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_meta_data
+    description: Representation of file metadata for NCPI
+    title: File Meta Data
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_meta_data
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: FileMetaData
+    required: false
+    multivalued: true
   location_uri:
     name: location_uri
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/location_uri
@@ -2754,7 +2826,7 @@ slots:
     - FileLocation
     range: uri
     required: true
-    multivalued: true
+    multivalued: false
   file_name:
     name: file_name
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_name
@@ -2767,6 +2839,175 @@ slots:
     - FileLocation
     range: string
     required: true
+    multivalued: false
+  meta_data_type:
+    name: meta_data_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/meta_data_type
+    description: Clarify which type of meta data this file has recorded
+    title: Meta Data Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/meta_data_type
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: EnumFileMetaDataType
+    required: true
+    multivalued: false
+  assay_strategy:
+    name: assay_strategy
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/assay_strategy
+    description: e.g., Whole Genome Sequencing
+    title: Assay Strategy
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/assay_strategy
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: true
+    multivalued: false
+  platform_instrument:
+    name: platform_instrument
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/platform_instrument
+    description: e.g., Illumina HiSeq2000
+    title: Platform Instrument
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/platform_instrument
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: true
+    multivalued: false
+  library_prep:
+    name: library_prep
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/library_prep
+    description: e.g., polyA
+    title: Library Prep
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/library_prep
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  library_selection:
+    name: library_selection
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/library_selection
+    description: '...'
+    title: Library Selection
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/library_selection
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  strandedness:
+    name: strandedness
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/strandedness
+    description: stranded, unstranded
+    title: Strandedness
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/strandedness
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  target_region:
+    name: target_region
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/target_region
+    description: Target region
+    title: Target Region
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/target_region
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  is_paired_end:
+    name: is_paired_end
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/is_paired_end
+    description: True, False
+    title: Is Paired End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/is_paired_end
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  adaptor_trimmed:
+    name: adaptor_trimmed
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/adaptor_trimmed
+    description: True, False
+    title: Adaptor Trimmed
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/adaptor_trimmed
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  reference_genome:
+    name: reference_genome
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/reference_genome
+    description: GRCh37, GRCh38
+    title: Reference Genome
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/reference_genome
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  workflow_type:
+    name: workflow_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/workflow_type
+    description: e.g., alignment, somatic
+    title: Workflow Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/workflow_type
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  workflow_tool:
+    name: workflow_tool
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/workflow_tool
+    description: e.g., BAM-MEM, GATK-Haplotype Caller
+    title: Workflow Tool
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/workflow_tool
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: uriorcurie
+    required: false
+    multivalued: false
+  related_samples:
+    name: related_samples
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/related_samples
+    description: e.g., Reference(Participant_ID)
+    title: Related Samples
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/related_samples
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    range: Sample
+    required: false
     multivalued: false
   accessPolicy__access_policy_id:
     name: accessPolicy__access_policy_id
@@ -3685,7 +3926,9 @@ classes:
     - participant_id
     - file_format
     - file_location
+    - file_meta_data
     - file_size
+    - file_size_unit
     - content_version
     - file_type
     - file_hash
@@ -3725,9 +3968,40 @@ classes:
     - file_name
     - access_policy_id
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
+  FileMetaData:
+    name: FileMetaData
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-file-metadata
+    description: Representation of file metadata for NCPI
+    title: File Meta Data
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    is_a: Record
+    slots:
+    - external_id
+    - id
+    - meta_data_type
+    - assay_strategy
+    - platform_instrument
+    - library_prep
+    - library_selection
+    - strandedness
+    - target_region
+    - is_paired_end
+    - adaptor_trimmed
+    - reference_genome
+    - workflow_type
+    - workflow_tool
+    - related_samples
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-06T17:05:51'
-source_file_size: 5493
-generation_date: '2026-01-07T10:26:04'
+source_file_date: '2026-01-07T16:01:41'
+source_file_size: 5600
+generation_date: '2026-01-07T16:05:53'
 

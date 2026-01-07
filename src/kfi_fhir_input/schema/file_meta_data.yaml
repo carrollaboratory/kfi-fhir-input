@@ -1,0 +1,138 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+name: kfi-fhir-input-file-file-meta-data
+imports: 
+  - linkml:types 
+  - kfi_fhir_input 
+  - sample 
+classes:
+  FileMetaData:
+    title: File Meta Data    
+    description: Representation of file metadata for NCPI
+    is_a: Record
+    annotations: 
+      fhir_resource: Observation 
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-file-metadata
+    slots: 
+      - meta_data_type
+      - assay_strategy 
+      - platform_instrument
+      - library_prep 
+      - library_selection 
+      - strandedness 
+      - target_region 
+      - is_paired_end 
+      - adaptor_trimmed 
+      - reference_genome 
+      - workflow_type 
+      - workflow_tool 
+      - related_samples
+slots:
+  meta_data_type: 
+    title: Meta Data Type 
+    description: Clarify which type of meta data this file has recorded 
+    required: true 
+    multivalued: false 
+    range: EnumFileMetaDataType 
+  assay_strategy: 
+    title: Assay Strategy 
+    description: 	e.g., Whole Genome Sequencing
+    required: true 
+    multivalued: false 
+    range: uriorcurie 
+  platform_instrument: 
+    title: Platform Instrument 
+    description: e.g., Illumina HiSeq2000
+    required: true 
+    multivalued: false 
+    range: uriorcurie
+  library_prep: 
+    title: Library Prep 
+    description: e.g., polyA
+    required: false       # Required for BAM, FASTQ
+    multivalued: false 
+    range: uriorcurie
+  library_selection: 
+    title: Library Selection
+    description: ...
+    required: false       # Required for BAM, FASTQ
+    multivalued: false 
+    range: uriorcurie
+  strandedness:
+    title: Strandedness
+    description: stranded, unstranded
+    required: false       # Required for BAM, FASTQ 
+    multivalued: false 
+    range: uriorcurie
+  target_region: 
+    title: Target Region 
+    description: Target region 
+    required: false 
+    multivalued: false 
+    range: uriorcurie
+  is_paired_end:
+    title: Is Paired End 
+    description: True, False 
+    required: false       # Required for FASTQ 
+    multivalued: false 
+    range: uriorcurie
+  adaptor_trimmed:
+    title: Adaptor Trimmed 
+    description: True, False 
+    required: false       # Required for FASTQ  
+    multivalued: false 
+    range: uriorcurie
+  reference_genome:
+    title: Reference Genome 
+    description: GRCh37, GRCh38
+    required: false       # Required all but FASTQ  
+    multivalued: false 
+    range: uriorcurie    
+  workflow_type:
+    title: Workflow Type 
+    description: e.g., alignment, somatic
+    required: false       # Required for FASTQ   
+    multivalued: false 
+    range: uriorcurie
+  workflow_tool: 
+    title: Workflow Tool 
+    description: e.g., BAM-MEM, GATK-Haplotype Caller
+    required: false       # Required for FASTQ   
+    multivalued: false 
+    range: uriorcurie
+  related_samples:
+    title: Related Samples 
+    description: e.g., Reference(Participant_ID)
+    required: false 
+    multivalued: false 
+    range: Sample 
+enums:
+  EnumFileMetaDataType:
+    description: Identify the type of profile to use
+    permissible_values:
+      bam_cram:
+        title: BAM/CRAM
+        description: Bam or Cram file
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-bamcram.html
+      fastq:
+        title: FASTQ
+        description: FASTQ File 
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-fastq.html
+      maf:
+        title: MAF (Somatic Mutation) file 
+        description: MAF (Somatic Mutation)
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-maf.html
+      proteomics:
+        title: Proteomics file 
+        description: Proteomics file 
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-proteomics.html
+      vcf: 
+        title: VCF (and gVCF) file 
+        description: GC or gVCF file 
+        annotations:
+          fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-ncpi-vcf.html
+      

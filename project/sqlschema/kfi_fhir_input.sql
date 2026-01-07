@@ -124,6 +124,7 @@
 --     * Slot: participant_id Description: The Global ID for the Participant
 --     * Slot: file_format Description: The file format used ([EDAM](http://edamontology.org) where possible)
 --     * Slot: file_size Description: The size of the file, e.g., in bytes.
+--     * Slot: file_size_unit Description: Units associated with the file_size value (ucum)
 --     * Slot: content_version Description: Version of the file content
 --     * Slot: file_type Description: The type of data contained in this file. Should be as detailed as possible, e.g., Whole Exome Variant Calls.
 --     * Slot: file_hash Description: Value of hashing the file
@@ -131,8 +132,24 @@
 --     * Slot: description Description: More details associated with the given resource
 --     * Slot: file_global_id Description: File Global ID
 -- # Class: FileLocation Description: Details relating to the links where documents are found
+--     * Slot: location_uri Description: The URI at which this data can be accessed
 --     * Slot: file_name Description: The file's name (no path)
 --     * Slot: access_policy_id Description: Access Policy Global ID
+--     * Slot: id Description: Unique Identifier for a table entry. This is probably not the Global ID
+-- # Class: FileMetaData Description: Representation of file metadata for NCPI
+--     * Slot: meta_data_type Description: Clarify which type of meta data this file has recorded
+--     * Slot: assay_strategy Description: e.g., Whole Genome Sequencing
+--     * Slot: platform_instrument Description: e.g., Illumina HiSeq2000
+--     * Slot: library_prep Description: e.g., polyA
+--     * Slot: library_selection Description: ...
+--     * Slot: strandedness Description: stranded, unstranded
+--     * Slot: target_region Description: Target region
+--     * Slot: is_paired_end Description: True, False
+--     * Slot: adaptor_trimmed Description: True, False
+--     * Slot: reference_genome Description: GRCh37, GRCh38
+--     * Slot: workflow_type Description: e.g., alignment, somatic
+--     * Slot: workflow_tool Description: e.g., BAM-MEM, GATK-Haplotype Caller
+--     * Slot: related_samples Description: e.g., Reference(Participant_ID)
 --     * Slot: id Description: Unique Identifier for a table entry. This is probably not the Global ID
 -- # Class: HasExternalId_external_id
 --     * Slot: HasExternalId_id Description: Autocreated FK slot
@@ -212,14 +229,17 @@
 -- # Class: NCPIFile_file_location
 --     * Slot: NCPIFile_file_global_id Description: Autocreated FK slot
 --     * Slot: file_location_id Description: Details relating to the links where documents are found
+-- # Class: NCPIFile_file_meta_data
+--     * Slot: NCPIFile_file_global_id Description: Autocreated FK slot
+--     * Slot: file_meta_data_id Description: Representation of file metadata for NCPI
 -- # Class: NCPIFile_external_id
 --     * Slot: NCPIFile_file_global_id Description: Autocreated FK slot
 --     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
--- # Class: FileLocation_location_uri
---     * Slot: FileLocation_id Description: Autocreated FK slot
---     * Slot: location_uri Description: The URI at which this data can be accessed
 -- # Class: FileLocation_external_id
 --     * Slot: FileLocation_id Description: Autocreated FK slot
+--     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
+-- # Class: FileMetaData_external_id
+--     * Slot: FileMetaData_id Description: Autocreated FK slot
 --     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
 
 CREATE TABLE "Any" (
@@ -333,6 +353,7 @@ CREATE TABLE "StudyMembership" (
 	FOREIGN KEY(access_policy_id) REFERENCES "AccessPolicy" (access_policy_id)
 );CREATE INDEX "ix_StudyMembership_study_membership_id" ON "StudyMembership" (study_membership_id);
 CREATE TABLE "FileLocation" (
+	location_uri TEXT NOT NULL,
 	file_name TEXT NOT NULL,
 	access_policy_id TEXT NOT NULL,
 	id TEXT NOT NULL,
@@ -344,7 +365,7 @@ CREATE TABLE "HasExternalId_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("HasExternalId_id", external_id),
 	FOREIGN KEY("HasExternalId_id") REFERENCES "HasExternalId" (id)
-);CREATE INDEX "ix_HasExternalId_external_id_HasExternalId_id" ON "HasExternalId_external_id" ("HasExternalId_id");CREATE INDEX "ix_HasExternalId_external_id_external_id" ON "HasExternalId_external_id" (external_id);
+);CREATE INDEX "ix_HasExternalId_external_id_external_id" ON "HasExternalId_external_id" (external_id);CREATE INDEX "ix_HasExternalId_external_id_HasExternalId_id" ON "HasExternalId_external_id" ("HasExternalId_id");
 CREATE TABLE "Record_external_id" (
 	"Record_id" TEXT,
 	external_id TEXT,
@@ -362,7 +383,7 @@ CREATE TABLE "Institution_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("Institution_institution_id", external_id),
 	FOREIGN KEY("Institution_institution_id") REFERENCES "Institution" (institution_id)
-);CREATE INDEX "ix_Institution_external_id_external_id" ON "Institution_external_id" (external_id);CREATE INDEX "ix_Institution_external_id_Institution_institution_id" ON "Institution_external_id" ("Institution_institution_id");
+);CREATE INDEX "ix_Institution_external_id_Institution_institution_id" ON "Institution_external_id" ("Institution_institution_id");CREATE INDEX "ix_Institution_external_id_external_id" ON "Institution_external_id" (external_id);
 CREATE TABLE "Period_external_id" (
 	"Period_id" TEXT,
 	external_id TEXT,
@@ -392,26 +413,26 @@ CREATE TABLE "ResearchStudy_study_design" (
 	study_design TEXT,
 	PRIMARY KEY ("ResearchStudy_research_study_id", study_design),
 	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
-);CREATE INDEX "ix_ResearchStudy_study_design_ResearchStudy_research_study_id" ON "ResearchStudy_study_design" ("ResearchStudy_research_study_id");CREATE INDEX "ix_ResearchStudy_study_design_study_design" ON "ResearchStudy_study_design" (study_design);
+);CREATE INDEX "ix_ResearchStudy_study_design_study_design" ON "ResearchStudy_study_design" (study_design);CREATE INDEX "ix_ResearchStudy_study_design_ResearchStudy_research_study_id" ON "ResearchStudy_study_design" ("ResearchStudy_research_study_id");
 CREATE TABLE "ResearchStudy_external_id" (
 	"ResearchStudy_research_study_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("ResearchStudy_research_study_id", external_id),
 	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id)
-);CREATE INDEX "ix_ResearchStudy_external_id_external_id" ON "ResearchStudy_external_id" (external_id);CREATE INDEX "ix_ResearchStudy_external_id_ResearchStudy_research_study_id" ON "ResearchStudy_external_id" ("ResearchStudy_research_study_id");
+);CREATE INDEX "ix_ResearchStudy_external_id_ResearchStudy_research_study_id" ON "ResearchStudy_external_id" ("ResearchStudy_research_study_id");CREATE INDEX "ix_ResearchStudy_external_id_external_id" ON "ResearchStudy_external_id" (external_id);
 CREATE TABLE "ResearchStudyCollection_label" (
 	"ResearchStudyCollection_research_study_collection_id" TEXT,
 	label TEXT,
 	PRIMARY KEY ("ResearchStudyCollection_research_study_collection_id", label),
 	FOREIGN KEY("ResearchStudyCollection_research_study_collection_id") REFERENCES "ResearchStudyCollection" (research_study_collection_id)
-);CREATE INDEX "ix_ResearchStudyCollection_label_label" ON "ResearchStudyCollection_label" (label);CREATE INDEX "ix_ResearchStudyCollection_label_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_label" ("ResearchStudyCollection_research_study_collection_id");
+);CREATE INDEX "ix_ResearchStudyCollection_label_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_label" ("ResearchStudyCollection_research_study_collection_id");CREATE INDEX "ix_ResearchStudyCollection_label_label" ON "ResearchStudyCollection_label" (label);
 CREATE TABLE "ResearchStudyCollection_research_study_collection_member_id" (
 	"ResearchStudyCollection_research_study_collection_id" TEXT,
 	research_study_collection_member_id_research_study_id TEXT NOT NULL,
 	PRIMARY KEY ("ResearchStudyCollection_research_study_collection_id", research_study_collection_member_id_research_study_id),
 	FOREIGN KEY("ResearchStudyCollection_research_study_collection_id") REFERENCES "ResearchStudyCollection" (research_study_collection_id),
 	FOREIGN KEY(research_study_collection_member_id_research_study_id) REFERENCES "ResearchStudy" (research_study_id)
-);CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_research_study_collection_member_id" ("ResearchStudyCollection_research_study_collection_id");CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_research_study_collection_member_id_research_study_id" ON "ResearchStudyCollection_research_study_collection_member_id" (research_study_collection_member_id_research_study_id);
+);CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_research_study_collection_member_id_research_study_id" ON "ResearchStudyCollection_research_study_collection_member_id" (research_study_collection_member_id_research_study_id);CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_member_id_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection_research_study_collection_member_id" ("ResearchStudyCollection_research_study_collection_id");
 CREATE TABLE "ResearchStudyCollection_external_id" (
 	"ResearchStudyCollection_research_study_collection_id" TEXT,
 	external_id TEXT,
@@ -481,6 +502,7 @@ CREATE TABLE "NCPIFile" (
 	participant_id TEXT NOT NULL,
 	file_format TEXT NOT NULL,
 	file_size FLOAT NOT NULL,
+	file_size_unit TEXT NOT NULL,
 	content_version TEXT,
 	file_type TEXT NOT NULL,
 	file_hash TEXT NOT NULL,
@@ -501,13 +523,13 @@ CREATE TABLE "AssociatedParty_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("AssociatedParty_id", external_id),
 	FOREIGN KEY("AssociatedParty_id") REFERENCES "AssociatedParty" (id)
-);CREATE INDEX "ix_AssociatedParty_external_id_external_id" ON "AssociatedParty_external_id" (external_id);CREATE INDEX "ix_AssociatedParty_external_id_AssociatedParty_id" ON "AssociatedParty_external_id" ("AssociatedParty_id");
+);CREATE INDEX "ix_AssociatedParty_external_id_AssociatedParty_id" ON "AssociatedParty_external_id" ("AssociatedParty_id");CREATE INDEX "ix_AssociatedParty_external_id_external_id" ON "AssociatedParty_external_id" (external_id);
 CREATE TABLE "Participant_race" (
 	"Participant_participant_id" TEXT,
 	race VARCHAR(35) NOT NULL,
 	PRIMARY KEY ("Participant_participant_id", race),
 	FOREIGN KEY("Participant_participant_id") REFERENCES "Participant" (participant_id)
-);CREATE INDEX "ix_Participant_race_Participant_participant_id" ON "Participant_race" ("Participant_participant_id");CREATE INDEX "ix_Participant_race_race" ON "Participant_race" (race);
+);CREATE INDEX "ix_Participant_race_race" ON "Participant_race" (race);CREATE INDEX "ix_Participant_race_Participant_participant_id" ON "Participant_race" ("Participant_participant_id");
 CREATE TABLE "Participant_external_id" (
 	"Participant_participant_id" TEXT,
 	external_id TEXT,
@@ -520,14 +542,14 @@ CREATE TABLE "Person_participant_id" (
 	PRIMARY KEY ("Person_person_id", participant_id_participant_id),
 	FOREIGN KEY("Person_person_id") REFERENCES "Person" (person_id),
 	FOREIGN KEY(participant_id_participant_id) REFERENCES "Participant" (participant_id)
-);CREATE INDEX "ix_Person_participant_id_Person_person_id" ON "Person_participant_id" ("Person_person_id");CREATE INDEX "ix_Person_participant_id_participant_id_participant_id" ON "Person_participant_id" (participant_id_participant_id);
+);CREATE INDEX "ix_Person_participant_id_participant_id_participant_id" ON "Person_participant_id" (participant_id_participant_id);CREATE INDEX "ix_Person_participant_id_Person_person_id" ON "Person_participant_id" ("Person_person_id");
 CREATE TABLE "StudyMembership_participant_id" (
 	"StudyMembership_study_membership_id" TEXT,
 	participant_id_participant_id TEXT NOT NULL,
 	PRIMARY KEY ("StudyMembership_study_membership_id", participant_id_participant_id),
 	FOREIGN KEY("StudyMembership_study_membership_id") REFERENCES "StudyMembership" (study_membership_id),
 	FOREIGN KEY(participant_id_participant_id) REFERENCES "Participant" (participant_id)
-);CREATE INDEX "ix_StudyMembership_participant_id_StudyMembership_study_membership_id" ON "StudyMembership_participant_id" ("StudyMembership_study_membership_id");CREATE INDEX "ix_StudyMembership_participant_id_participant_id_participant_id" ON "StudyMembership_participant_id" (participant_id_participant_id);
+);CREATE INDEX "ix_StudyMembership_participant_id_participant_id_participant_id" ON "StudyMembership_participant_id" (participant_id_participant_id);CREATE INDEX "ix_StudyMembership_participant_id_StudyMembership_study_membership_id" ON "StudyMembership_participant_id" ("StudyMembership_study_membership_id");
 CREATE TABLE "ResearchStudy_study_personnel" (
 	"ResearchStudy_research_study_id" TEXT,
 	study_personnel_id TEXT NOT NULL,
@@ -542,18 +564,12 @@ CREATE TABLE "ResearchStudy_study_membership_id" (
 	FOREIGN KEY("ResearchStudy_research_study_id") REFERENCES "ResearchStudy" (research_study_id),
 	FOREIGN KEY(study_membership_id_study_membership_id) REFERENCES "StudyMembership" (study_membership_id)
 );CREATE INDEX "ix_ResearchStudy_study_membership_id_study_membership_id_study_membership_id" ON "ResearchStudy_study_membership_id" (study_membership_id_study_membership_id);CREATE INDEX "ix_ResearchStudy_study_membership_id_ResearchStudy_research_study_id" ON "ResearchStudy_study_membership_id" ("ResearchStudy_research_study_id");
-CREATE TABLE "FileLocation_location_uri" (
-	"FileLocation_id" TEXT,
-	location_uri TEXT NOT NULL,
-	PRIMARY KEY ("FileLocation_id", location_uri),
-	FOREIGN KEY("FileLocation_id") REFERENCES "FileLocation" (id)
-);CREATE INDEX "ix_FileLocation_location_uri_location_uri" ON "FileLocation_location_uri" (location_uri);CREATE INDEX "ix_FileLocation_location_uri_FileLocation_id" ON "FileLocation_location_uri" ("FileLocation_id");
 CREATE TABLE "FileLocation_external_id" (
 	"FileLocation_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("FileLocation_id", external_id),
 	FOREIGN KEY("FileLocation_id") REFERENCES "FileLocation" (id)
-);CREATE INDEX "ix_FileLocation_external_id_external_id" ON "FileLocation_external_id" (external_id);CREATE INDEX "ix_FileLocation_external_id_FileLocation_id" ON "FileLocation_external_id" ("FileLocation_id");
+);CREATE INDEX "ix_FileLocation_external_id_FileLocation_id" ON "FileLocation_external_id" ("FileLocation_id");CREATE INDEX "ix_FileLocation_external_id_external_id" ON "FileLocation_external_id" (external_id);
 CREATE TABLE "Aliquot" (
 	parent_sample_id TEXT,
 	availability_status VARCHAR(11),
@@ -564,24 +580,42 @@ CREATE TABLE "Aliquot" (
 	PRIMARY KEY (aliquot_id),
 	FOREIGN KEY(parent_sample_id) REFERENCES "Sample" (sample_id)
 );CREATE INDEX "ix_Aliquot_aliquot_id" ON "Aliquot" (aliquot_id);
+CREATE TABLE "FileMetaData" (
+	meta_data_type VARCHAR(10) NOT NULL,
+	assay_strategy TEXT NOT NULL,
+	platform_instrument TEXT NOT NULL,
+	library_prep TEXT,
+	library_selection TEXT,
+	strandedness TEXT,
+	target_region TEXT,
+	is_paired_end TEXT,
+	adaptor_trimmed TEXT,
+	reference_genome TEXT,
+	workflow_type TEXT,
+	workflow_tool TEXT,
+	related_samples TEXT,
+	id TEXT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY(related_samples) REFERENCES "Sample" (sample_id)
+);CREATE INDEX "ix_FileMetaData_id" ON "FileMetaData" (id);
 CREATE TABLE "Practitioner_external_id" (
 	"Practitioner_practitioner_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("Practitioner_practitioner_id", external_id),
 	FOREIGN KEY("Practitioner_practitioner_id") REFERENCES "Practitioner" (practitioner_id)
-);CREATE INDEX "ix_Practitioner_external_id_external_id" ON "Practitioner_external_id" (external_id);CREATE INDEX "ix_Practitioner_external_id_Practitioner_practitioner_id" ON "Practitioner_external_id" ("Practitioner_practitioner_id");
+);CREATE INDEX "ix_Practitioner_external_id_Practitioner_practitioner_id" ON "Practitioner_external_id" ("Practitioner_practitioner_id");CREATE INDEX "ix_Practitioner_external_id_external_id" ON "Practitioner_external_id" (external_id);
 CREATE TABLE "Sample_processing" (
 	"Sample_sample_id" TEXT,
 	processing TEXT,
 	PRIMARY KEY ("Sample_sample_id", processing),
 	FOREIGN KEY("Sample_sample_id") REFERENCES "Sample" (sample_id)
-);CREATE INDEX "ix_Sample_processing_Sample_sample_id" ON "Sample_processing" ("Sample_sample_id");CREATE INDEX "ix_Sample_processing_processing" ON "Sample_processing" (processing);
+);CREATE INDEX "ix_Sample_processing_processing" ON "Sample_processing" (processing);CREATE INDEX "ix_Sample_processing_Sample_sample_id" ON "Sample_processing" ("Sample_sample_id");
 CREATE TABLE "Sample_external_id" (
 	"Sample_sample_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("Sample_sample_id", external_id),
 	FOREIGN KEY("Sample_sample_id") REFERENCES "Sample" (sample_id)
-);CREATE INDEX "ix_Sample_external_id_external_id" ON "Sample_external_id" (external_id);CREATE INDEX "ix_Sample_external_id_Sample_sample_id" ON "Sample_external_id" ("Sample_sample_id");
+);CREATE INDEX "ix_Sample_external_id_Sample_sample_id" ON "Sample_external_id" ("Sample_sample_id");CREATE INDEX "ix_Sample_external_id_external_id" ON "Sample_external_id" (external_id);
 CREATE TABLE "NCPIFile_file_location" (
 	"NCPIFile_file_global_id" TEXT,
 	file_location_id TEXT NOT NULL,
@@ -594,10 +628,23 @@ CREATE TABLE "NCPIFile_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("NCPIFile_file_global_id", external_id),
 	FOREIGN KEY("NCPIFile_file_global_id") REFERENCES "NCPIFile" (file_global_id)
-);CREATE INDEX "ix_NCPIFile_external_id_external_id" ON "NCPIFile_external_id" (external_id);CREATE INDEX "ix_NCPIFile_external_id_NCPIFile_file_global_id" ON "NCPIFile_external_id" ("NCPIFile_file_global_id");
+);CREATE INDEX "ix_NCPIFile_external_id_NCPIFile_file_global_id" ON "NCPIFile_external_id" ("NCPIFile_file_global_id");CREATE INDEX "ix_NCPIFile_external_id_external_id" ON "NCPIFile_external_id" (external_id);
 CREATE TABLE "Aliquot_external_id" (
 	"Aliquot_aliquot_id" TEXT,
 	external_id TEXT,
 	PRIMARY KEY ("Aliquot_aliquot_id", external_id),
 	FOREIGN KEY("Aliquot_aliquot_id") REFERENCES "Aliquot" (aliquot_id)
-);CREATE INDEX "ix_Aliquot_external_id_external_id" ON "Aliquot_external_id" (external_id);CREATE INDEX "ix_Aliquot_external_id_Aliquot_aliquot_id" ON "Aliquot_external_id" ("Aliquot_aliquot_id");
+);CREATE INDEX "ix_Aliquot_external_id_Aliquot_aliquot_id" ON "Aliquot_external_id" ("Aliquot_aliquot_id");CREATE INDEX "ix_Aliquot_external_id_external_id" ON "Aliquot_external_id" (external_id);
+CREATE TABLE "NCPIFile_file_meta_data" (
+	"NCPIFile_file_global_id" TEXT,
+	file_meta_data_id TEXT,
+	PRIMARY KEY ("NCPIFile_file_global_id", file_meta_data_id),
+	FOREIGN KEY("NCPIFile_file_global_id") REFERENCES "NCPIFile" (file_global_id),
+	FOREIGN KEY(file_meta_data_id) REFERENCES "FileMetaData" (id)
+);CREATE INDEX "ix_NCPIFile_file_meta_data_file_meta_data_id" ON "NCPIFile_file_meta_data" (file_meta_data_id);CREATE INDEX "ix_NCPIFile_file_meta_data_NCPIFile_file_global_id" ON "NCPIFile_file_meta_data" ("NCPIFile_file_global_id");
+CREATE TABLE "FileMetaData_external_id" (
+	"FileMetaData_id" TEXT,
+	external_id TEXT,
+	PRIMARY KEY ("FileMetaData_id", external_id),
+	FOREIGN KEY("FileMetaData_id") REFERENCES "FileMetaData" (id)
+);CREATE INDEX "ix_FileMetaData_external_id_FileMetaData_id" ON "FileMetaData_external_id" ("FileMetaData_id");CREATE INDEX "ix_FileMetaData_external_id_external_id" ON "FileMetaData_external_id" (external_id);

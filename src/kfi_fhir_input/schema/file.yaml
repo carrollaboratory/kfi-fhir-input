@@ -5,6 +5,7 @@ imports:
   - linkml:types 
   - kfi_fhir_input 
   - file_location 
+  - file_meta_data
 classes:
   NCPIFile:
     title: NCPI File    # File is not a legal class name for LinkML models
@@ -27,6 +28,7 @@ classes:
       - participant_id 
       - file_format 
       - file_location
+      - file_meta_data
       - file_size
       - file_size_unit
       - content_version 
@@ -83,4 +85,9 @@ slots:
     required: false 
     multivalued: false 
     range: uriorcurie 
-  
+  file_meta_data:
+    title: File Meta Data 
+    description: Representation of file metadata for NCPI
+    required: false 
+    multivalued: true 
+    range: FileMetaData

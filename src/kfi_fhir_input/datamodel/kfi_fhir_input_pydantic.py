@@ -107,8 +107,6 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                               'prefix_reference': 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC'},
                   'cdc_unk': {'prefix_prefix': 'cdc_unk',
                               'prefix_reference': 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion'},
-                  'cr': {'prefix_prefix': 'cr',
-                         'prefix_reference': 'https://w3c.github.io/N3/ns/'},
                   'duo': {'prefix_prefix': 'duo',
                           'prefix_reference': 'http://purl.obolibrary.org/obo/duo.owl'},
                   'edam': {'prefix_prefix': 'edam',
@@ -156,7 +154,9 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                   'umls': {'prefix_prefix': 'umls',
                            'prefix_reference': 'https://uts.nlm.nih.gov/uts/umls/concept'},
                   'usc_birthsex': {'prefix_prefix': 'usc_birthsex',
-                                   'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender'}},
+                                   'prefix_reference': 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender'},
+                  'w3c': {'prefix_prefix': 'w3c',
+                          'prefix_reference': 'https://w3c.github.io/N3/ns/'}},
      'see_also': ['https://carrollaboratory.github.io/kfi-fhir-input'],
      'source_file': 'src/kfi_fhir_input/schema/kfi_fhir_input.yaml',
      'title': 'KF/Include FHIR Input Model'} )
@@ -618,6 +618,32 @@ class EnumSpecimenAvailability(str, Enum):
     Unavailable = "unavailable"
     """
     Specimen is currently unavailable
+    """
+
+
+class EnumFileMetaDataType(str, Enum):
+    """
+    Identify the type of profile to use
+    """
+    BAMSOLIDUSCRAM = "bam_cram"
+    """
+    Bam or Cram file
+    """
+    FASTQ = "fastq"
+    """
+    FASTQ File
+    """
+    MAF_LEFT_PARENTHESISSomatic_MutationRIGHT_PARENTHESIS_file = "maf"
+    """
+    MAF (Somatic Mutation)
+    """
+    Proteomics_file = "proteomics"
+    """
+    Proteomics file
+    """
+    VCF_LEFT_PARENTHESISand_gVCFRIGHT_PARENTHESIS_file = "vcf"
+    """
+    GC or gVCF file
     """
 
 
@@ -1216,6 +1242,7 @@ class NCPIFile(HasExternalId):
                        'NCPIFile']} })
     file_format: str = Field(default=..., title="File Format", description="""The file format used ([EDAM](http://edamontology.org) where possible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_location: list[str] = Field(default=..., title="File Location", description="""Details relating to the links where documents are found""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_meta_data: Optional[list[str]] = Field(default=[], title="File Meta Data", description="""Representation of file metadata for NCPI""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_size: float = Field(default=..., title="File Size", description="""The size of the file, e.g., in bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_size_unit: str = Field(default=..., title="File Size Units", description="""Units associated with the file_size value (ucum)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     content_version: Optional[str] = Field(default=None, title="Content Version", description="""Version of the file content""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
@@ -1297,6 +1324,34 @@ class FileLocation(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
+class FileMetaData(Record):
+    """
+    Representation of file metadata for NCPI
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-file-metadata'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'Observation'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data',
+         'title': 'File Meta Data'})
+
+    meta_data_type: EnumFileMetaDataType = Field(default=..., title="Meta Data Type", description="""Clarify which type of meta data this file has recorded""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    assay_strategy: str = Field(default=..., title="Assay Strategy", description="""e.g., Whole Genome Sequencing""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    platform_instrument: str = Field(default=..., title="Platform Instrument", description="""e.g., Illumina HiSeq2000""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    library_prep: Optional[str] = Field(default=None, title="Library Prep", description="""e.g., polyA""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    library_selection: Optional[str] = Field(default=None, title="Library Selection", description="""...""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    strandedness: Optional[str] = Field(default=None, title="Strandedness", description="""stranded, unstranded""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    target_region: Optional[str] = Field(default=None, title="Target Region", description="""Target region""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    is_paired_end: Optional[str] = Field(default=None, title="Is Paired End", description="""True, False""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    adaptor_trimmed: Optional[str] = Field(default=None, title="Adaptor Trimmed", description="""True, False""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    reference_genome: Optional[str] = Field(default=None, title="Reference Genome", description="""GRCh37, GRCh38""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    workflow_type: Optional[str] = Field(default=None, title="Workflow Type", description="""e.g., alignment, somatic""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    workflow_tool: Optional[str] = Field(default=None, title="Workflow Tool", description="""e.g., BAM-MEM, GATK-Haplotype Caller""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    related_samples: Optional[str] = Field(default=None, title="Related Samples", description="""e.g., Reference(Participant_ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
@@ -1319,3 +1374,4 @@ Record.model_rebuild()
 AssociatedParty.model_rebuild()
 Period.model_rebuild()
 FileLocation.model_rebuild()
+FileMetaData.model_rebuild()
