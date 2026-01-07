@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-06T17:07:28
+# Generation date: 2026-01-07T10:26:14
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -1044,6 +1044,12 @@ class NCPIFile(HasExternalId):
     participant_id: Union[str, ParticipantParticipantId] = None
     file_format: Union[str, URIorCURIE] = None
     file_location: Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]] = None
+    file_size: float = None
+    file_type: Union[str, URIorCURIE] = None
+    file_hash: str = None
+    content_version: Optional[str] = None
+    file_hash_type: Optional[Union[str, URIorCURIE]] = None
+    description: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.file_global_id):
@@ -1067,6 +1073,30 @@ class NCPIFile(HasExternalId):
             self.file_location = [self.file_location] if self.file_location is not None else []
         self.file_location = [v if isinstance(v, FileLocationId) else FileLocationId(v) for v in self.file_location]
 
+        if self._is_empty(self.file_size):
+            self.MissingRequiredField("file_size")
+        if not isinstance(self.file_size, float):
+            self.file_size = float(self.file_size)
+
+        if self._is_empty(self.file_type):
+            self.MissingRequiredField("file_type")
+        if not isinstance(self.file_type, URIorCURIE):
+            self.file_type = URIorCURIE(self.file_type)
+
+        if self._is_empty(self.file_hash):
+            self.MissingRequiredField("file_hash")
+        if not isinstance(self.file_hash, str):
+            self.file_hash = str(self.file_hash)
+
+        if self.content_version is not None and not isinstance(self.content_version, str):
+            self.content_version = str(self.content_version)
+
+        if self.file_hash_type is not None and not isinstance(self.file_hash_type, URIorCURIE):
+            self.file_hash_type = URIorCURIE(self.file_hash_type)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
         super().__post_init__(**kwargs)
 
 
@@ -1084,6 +1114,7 @@ class FileLocation(Record):
 
     id: Union[str, FileLocationId] = None
     location_uri: Union[Union[str, URI], list[Union[str, URI]]] = None
+    file_name: str = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -1097,6 +1128,11 @@ class FileLocation(Record):
         if not isinstance(self.location_uri, list):
             self.location_uri = [self.location_uri] if self.location_uri is not None else []
         self.location_uri = [v if isinstance(v, URI) else URI(v) for v in self.location_uri]
+
+        if self._is_empty(self.file_name):
+            self.MissingRequiredField("file_name")
+        if not isinstance(self.file_name, str):
+            self.file_name = str(self.file_name)
 
         if self._is_empty(self.access_policy_id):
             self.MissingRequiredField("access_policy_id")
@@ -2113,8 +2149,29 @@ slots.file_format = Slot(uri=KFI['ncpi-file/file_format'], name="file_format", c
 slots.file_location = Slot(uri=KFI['ncpi-file/file_location'], name="file_location", curie=KFI.curie('ncpi-file/file_location'),
                    model_uri=KFI_FHIR_SPARKS.file_location, domain=None, range=Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]])
 
+slots.file_size = Slot(uri=KFI['ncpi-file/file_size'], name="file_size", curie=KFI.curie('ncpi-file/file_size'),
+                   model_uri=KFI_FHIR_SPARKS.file_size, domain=None, range=float)
+
+slots.file_size_unit = Slot(uri=KFI['ncpi-file/file_size_unit'], name="file_size_unit", curie=KFI.curie('ncpi-file/file_size_unit'),
+                   model_uri=KFI_FHIR_SPARKS.file_size_unit, domain=None, range=Union[str, URIorCURIE])
+
+slots.content_version = Slot(uri=KFI['ncpi-file/content_version'], name="content_version", curie=KFI.curie('ncpi-file/content_version'),
+                   model_uri=KFI_FHIR_SPARKS.content_version, domain=None, range=Optional[str])
+
+slots.file_type = Slot(uri=KFI['ncpi-file/file_type'], name="file_type", curie=KFI.curie('ncpi-file/file_type'),
+                   model_uri=KFI_FHIR_SPARKS.file_type, domain=None, range=Union[str, URIorCURIE])
+
+slots.file_hash = Slot(uri=KFI['ncpi-file/file_hash'], name="file_hash", curie=KFI.curie('ncpi-file/file_hash'),
+                   model_uri=KFI_FHIR_SPARKS.file_hash, domain=None, range=str)
+
+slots.file_hash_type = Slot(uri=KFI['ncpi-file/file_hash_type'], name="file_hash_type", curie=KFI.curie('ncpi-file/file_hash_type'),
+                   model_uri=KFI_FHIR_SPARKS.file_hash_type, domain=None, range=Optional[Union[str, URIorCURIE]])
+
 slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_uri", curie=KFI.curie('file-location/location_uri'),
                    model_uri=KFI_FHIR_SPARKS.location_uri, domain=None, range=Union[Union[str, URI], list[Union[str, URI]]])
+
+slots.file_name = Slot(uri=KFI['file-location/file_name'], name="file_name", curie=KFI.curie('file-location/file_name'),
+                   model_uri=KFI_FHIR_SPARKS.file_name, domain=None, range=str)
 
 slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)

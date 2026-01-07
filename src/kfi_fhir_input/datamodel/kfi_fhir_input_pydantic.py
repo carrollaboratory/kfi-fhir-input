@@ -628,7 +628,8 @@ class AccessPolicy(ConfiguredBaseModel):
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
-                       'ResearchStudyCollection']} })
+                       'ResearchStudyCollection',
+                       'NCPIFile']} })
     data_access_type: EnumDataAccessType = Field(default=..., title="Access Type", description="""Type of access restrictions on file downloads ( open | registered | controlled )""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
                                             'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type'},
                          'fhir_profile': {'tag': 'fhir_profile',
@@ -926,7 +927,8 @@ class Practitioner(HasExternalId):
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
-                       'ResearchStudyCollection']} })
+                       'ResearchStudyCollection',
+                       'NCPIFile']} })
     practitioner_title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     practitioner_id: str = Field(default=..., title="Practitioner ID", description="""The Global ID for the Practitioner.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
@@ -997,7 +999,8 @@ class ResearchStudy(HasExternalId):
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
-                       'ResearchStudyCollection']} })
+                       'ResearchStudyCollection',
+                       'NCPIFile']} })
     study_condition: Optional[list[str]] = Field(default=[], title="Study Condition", description="""The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_acknowledgement: Optional[list[str]] = Field(default=[], title="Study Acknowledgement", description="""Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_status: EnumStudyStatus = Field(default=..., title="Study Status", description="""The current state of the study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
@@ -1028,7 +1031,8 @@ class ResearchStudyCollection(HasExternalId):
     description: Optional[str] = Field(default=None, title="Description", description="""The description of the collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
-                       'ResearchStudyCollection']} })
+                       'ResearchStudyCollection',
+                       'NCPIFile']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1206,6 +1210,16 @@ class NCPIFile(HasExternalId):
                        'NCPIFile']} })
     file_format: str = Field(default=..., title="File Format", description="""The file format used ([EDAM](http://edamontology.org) where possible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_location: list[str] = Field(default=..., title="File Location", description="""Details relating to the links where documents are found""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_size: float = Field(default=..., title="File Size", description="""The size of the file, e.g., in bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    content_version: Optional[str] = Field(default=None, title="Content Version", description="""Version of the file content""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_type: str = Field(default=..., title="File Type", description="""The type of data contained in this file. Should be as detailed as possible, e.g., Whole Exome Variant Calls.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_hash: str = Field(default=..., title="File Hash", description="""Value of hashing the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_hash_type: Optional[str] = Field(default=None, title="File Has Type", description="""Algorithm used to calculate the hash (and size, where applicable)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
+                       'ResearchStudy',
+                       'ResearchStudyCollection',
+                       'NCPIFile']} })
     file_global_id: str = Field(default=..., title="File Global ID", description="""File Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
@@ -1268,6 +1282,7 @@ class FileLocation(Record):
          'title': 'File Location'})
 
     location_uri: list[str] = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
+    file_name: str = Field(default=..., title="File Name", description="""The file's name (no path)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
     access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'access_policy_id'}},
          'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })

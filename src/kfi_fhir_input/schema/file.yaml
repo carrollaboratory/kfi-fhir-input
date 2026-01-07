@@ -27,6 +27,12 @@ classes:
       - participant_id 
       - file_format 
       - file_location
+      - file_size
+      - content_version 
+      - file_type
+      - file_hash 
+      - file_hash_type
+      - description 
 slots: 
   file_format:
     title: File Format
@@ -40,6 +46,40 @@ slots:
     range: FileLocation 
     required: true 
     multivalued: true 
-
-
+  file_size: 
+    title: File Size 
+    description: The size of the file, e.g., in bytes.
+    required: true 
+    multivalued: false 
+    range: float 
+  file_size_unit:
+    title: File Size Units
+    description: Units associated with the file_size value (ucum)
+    required: true 
+    multivalued: false 
+    range: uriorcurie
+  content_version:
+    title: Content Version 
+    description: Version of the file content
+    required: false 
+    multivalued: false 
+    range: string 
+  file_type: 
+    title: File Type 
+    description: 	The type of data contained in this file. Should be as detailed as possible, e.g., Whole Exome Variant Calls.
+    required: true 
+    multivalued: false 
+    range: uriorcurie
+  file_hash:
+    title: File Hash
+    description: Value of hashing the file
+    required: true 
+    multivalued: false 
+    range: string 
+  file_hash_type:
+    title: File Has Type 
+    description: Algorithm used to calculate the hash (and size, where applicable)
+    required: false 
+    multivalued: false 
+    range: uriorcurie 
   

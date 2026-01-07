@@ -15,6 +15,7 @@ classes:
       fhir_element: content 
     slots: 
       - location_uri
+      - file_name 
       - access_policy_id    # content.extension[location-access].valueReference
 slots:
   location_uri: 
@@ -23,3 +24,9 @@ slots:
     required: true 
     multivalued: true 
     range: uri
+  file_name: 
+    title: File Name 
+    description: The file's name (no path)
+    required: true 
+    multivalued: false 
+    range: string

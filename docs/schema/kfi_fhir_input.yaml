@@ -1146,11 +1146,12 @@ slots:
     title: Description
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:description
-    owner: ResearchStudy
+    owner: NCPIFile
     domain_of:
     - AccessPolicy
     - Practitioner
     - ResearchStudy
+    - NCPIFile
     range: string
     required: false
   practitioner_role_id:
@@ -2665,6 +2666,82 @@ slots:
     range: FileLocation
     required: true
     multivalued: true
+  file_size:
+    name: file_size
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_size
+    description: The size of the file, e.g., in bytes.
+    title: File Size
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_size
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: float
+    required: true
+    multivalued: false
+  file_size_unit:
+    name: file_size_unit
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_size_unit
+    description: Units associated with the file_size value (ucum)
+    title: File Size Units
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_size_unit
+    range: uriorcurie
+    required: true
+    multivalued: false
+  content_version:
+    name: content_version
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/content_version
+    description: Version of the file content
+    title: Content Version
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/content_version
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: string
+    required: false
+    multivalued: false
+  file_type:
+    name: file_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_type
+    description: The type of data contained in this file. Should be as detailed as
+      possible, e.g., Whole Exome Variant Calls.
+    title: File Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_type
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
+    required: true
+    multivalued: false
+  file_hash:
+    name: file_hash
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_hash
+    description: Value of hashing the file
+    title: File Hash
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_hash
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: string
+    required: true
+    multivalued: false
+  file_hash_type:
+    name: file_hash_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_hash_type
+    description: Algorithm used to calculate the hash (and size, where applicable)
+    title: File Has Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_hash_type
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
+    required: false
+    multivalued: false
   location_uri:
     name: location_uri
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/location_uri
@@ -2678,6 +2755,19 @@ slots:
     range: uri
     required: true
     multivalued: true
+  file_name:
+    name: file_name
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_name
+    description: The file's name (no path)
+    title: File Name
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_name
+    owner: FileLocation
+    domain_of:
+    - FileLocation
+    range: string
+    required: true
+    multivalued: false
   accessPolicy__access_policy_id:
     name: accessPolicy__access_policy_id
     description: Access policy communicates the limitations and/or requirements that
@@ -3595,6 +3685,12 @@ classes:
     - participant_id
     - file_format
     - file_location
+    - file_size
+    - content_version
+    - file_type
+    - file_hash
+    - file_hash_type
+    - description
     - nCPIFile__file_global_id
     attributes:
       file_global_id:
@@ -3626,11 +3722,12 @@ classes:
     - external_id
     - id
     - location_uri
+    - file_name
     - access_policy_id
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-06T17:05:51'
 source_file_size: 5493
-generation_date: '2026-01-06T17:07:19'
+generation_date: '2026-01-07T10:26:04'
 
