@@ -207,8 +207,24 @@ AssociatedParty {
     uriorcurieList external_id  
 }
 FileLocation {
-    uriList location_uri  
+    uri location_uri  
     string file_name  
+    string id  
+    uriorcurieList external_id  
+}
+FileMetaData {
+    EnumFileMetaDataType meta_data_type  
+    uriorcurie assay_strategy  
+    uriorcurie platform_instrument  
+    uriorcurie library_prep  
+    uriorcurie library_selection  
+    uriorcurie strandedness  
+    uriorcurie target_region  
+    uriorcurie is_paired_end  
+    uriorcurie adaptor_trimmed  
+    uriorcurie reference_genome  
+    uriorcurie workflow_type  
+    uriorcurie workflow_tool  
     string id  
     uriorcurieList external_id  
 }
@@ -223,6 +239,7 @@ Institution {
 NCPIFile {
     uriorcurie file_format  
     float file_size  
+    uriorcurie file_size_unit  
     string content_version  
     uriorcurie file_type  
     string file_hash  
@@ -336,7 +353,9 @@ Aliquot ||--|o Sample : "parent_sample_id"
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
 FileLocation ||--|| AccessPolicy : "access_policy_id"
+FileMetaData ||--|o Sample : "related_samples"
 NCPIFile ||--|| Participant : "participant_id"
+NCPIFile ||--}o FileMetaData : "file_meta_data"
 NCPIFile ||--}| FileLocation : "file_location"
 Participant ||--|o RelativeDateTime : "deceased_rel"
 ParticipantAssertion ||--|o AgeAt : "age_at_assertion"

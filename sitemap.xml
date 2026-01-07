@@ -105,6 +105,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumFileMetaDataType/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumOffsetType/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -142,6 +146,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/FileLocation/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/FileMetaData/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
@@ -261,6 +269,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/adaptor_trimmed/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -298,6 +310,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/as_date/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assay_strategy/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
@@ -445,6 +461,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_meta_data/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_name/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -473,6 +493,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/is_paired_end/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/kfi-fhir-input/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -485,7 +509,19 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/library_prep/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/library_selection/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/location_uri/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/meta_data_type/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
@@ -541,6 +577,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/platform_instrument/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/population/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -570,6 +610,14 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/race/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/reference_genome/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/related_samples/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
@@ -617,6 +665,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/strandedness/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_acknowledgement/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -649,6 +701,10 @@
          <lastmod>2026-01-07</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/target_region/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_code/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
@@ -678,6 +734,14 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/website/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/workflow_tool/</loc>
+         <lastmod>2026-01-07</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/workflow_type/</loc>
          <lastmod>2026-01-07</lastmod>
     </url>
 </urlset>

@@ -300,7 +300,20 @@
 
 
 
+      NCPIFile : file_meta_data
+
+
+
+
+
+        NCPIFile --&gt; "*" FileMetaData : file_meta_data
+        click FileMetaData href "../FileMetaData/"
+
+
+
       NCPIFile : file_size
+
+      NCPIFile : file_size_unit
 
       NCPIFile : file_type
 
@@ -354,9 +367,21 @@
 <td>direct</td>
 </tr>
 <tr>
+<td><a href="../file_meta_data/">file_meta_data</a></td>
+<td>* <br/> <a href="../FileMetaData/">FileMetaData</a></td>
+<td>Representation of file metadata for NCPI</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../file_size/">file_size</a></td>
 <td>1 <br/> <a href="../Float/">Float</a></td>
 <td>The size of the file, e</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_size_unit/">file_size_unit</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Units associated with the file_size value (ucum)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -466,7 +491,9 @@ slots:
 - participant_id
 - file_format
 - file_location
+- file_meta_data
 - file_size
+- file_size_unit
 - content_version
 - file_type
 - file_hash
@@ -562,6 +589,19 @@ attributes:
     range: FileLocation
     required: true
     multivalued: true
+  file_meta_data:
+    name: file_meta_data
+    description: Representation of file metadata for NCPI
+    title: File Meta Data
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_meta_data
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: FileMetaData
+    required: false
+    multivalued: true
   file_size:
     name: file_size
     description: The size of the file, e.g., in bytes.
@@ -573,6 +613,19 @@ attributes:
     domain_of:
     - NCPIFile
     range: float
+    required: true
+    multivalued: false
+  file_size_unit:
+    name: file_size_unit
+    description: Units associated with the file_size value (ucum)
+    title: File Size Units
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_size_unit
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
     required: true
     multivalued: false
   content_version:

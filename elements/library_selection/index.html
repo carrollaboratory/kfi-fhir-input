@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/participant_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/library_selection/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Participant ID (participant_id) - kfi-fhir-input</title>
+        <title>Slot: Library Selection (library_selection) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-participant-id-participant_id" class="md-skip">
+        <a href="#slot-library-selection-library_selection" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Participant ID (participant_id)
+              Slot: Library Selection (library_selection)
             
           </span>
         </div>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -427,10 +416,10 @@
   
 
 
-<h1 id="slot-participant-id-participant_id">Slot: Participant ID (participant_id)</h1>
-<p><em>The Global ID for the Participant</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputparticipant_id">kfi_fhir_sparks:participant_id</a>
-Alias: participant_id</p>
+<h1 id="slot-library-selection-library_selection">Slot: Library Selection (library_selection)</h1>
+<p><em>...</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputlibrary_selection">kfi_fhir_sparks:library_selection</a>
+Alias: library_selection</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -444,62 +433,17 @@ Alias: participant_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../Person/">Person</a></td>
-<td>Relate one or more participants to a single person entity</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
-<td>Assertion about a particular Participant</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../NCPIFile/">NCPIFile</a></td>
-<td>Information about a file related to a research participant</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Sample/">Sample</a></td>
-<td>Sample encompasses biospecimen collection, sample information, and aliquot in...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../StudyMembership/">StudyMembership</a></td>
-<td>Grouping subject participation within a research study is helpful to provide ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Participant/">Participant</a></td>
-<td>Research oriented patient</td>
+<td><a href="../FileMetaData/">FileMetaData</a></td>
+<td>Representation of file metadata for NCPI</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../Participant/">Participant</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../Uriorcurie/">Uriorcurie</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>participant_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -515,36 +459,28 @@ Alias: participant_id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:participant_id</td>
+<td>kfi_fhir_sparks:library_selection</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:participant_id</td>
+<td>kfi_fhir_sparks:library_selection</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: participant_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: participant_id
-description: The Global ID for the Participant
-title: Participant ID
+<pre><code class="language-yaml">name: library_selection
+description: '...'
+title: Library Selection
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-alias: participant_id
+alias: library_selection
 domain_of:
-- ParticipantAssertion
-- Participant
-- Person
-- StudyMembership
-- Sample
-- NCPIFile
-range: Participant
-required: true
+- FileMetaData
+range: uriorcurie
+required: false
+multivalued: false
 
 </code></pre>
 
