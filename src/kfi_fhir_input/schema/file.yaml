@@ -28,6 +28,7 @@ classes:
       - file_format 
       - file_location
       - file_size
+      - file_size_unit
       - content_version 
       - file_type
       - file_hash 

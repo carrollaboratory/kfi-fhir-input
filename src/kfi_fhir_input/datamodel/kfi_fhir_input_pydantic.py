@@ -107,8 +107,14 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                               'prefix_reference': 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC'},
                   'cdc_unk': {'prefix_prefix': 'cdc_unk',
                               'prefix_reference': 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion'},
+                  'cr': {'prefix_prefix': 'cr',
+                         'prefix_reference': 'https://w3c.github.io/N3/ns/'},
                   'duo': {'prefix_prefix': 'duo',
                           'prefix_reference': 'http://purl.obolibrary.org/obo/duo.owl'},
+                  'edam': {'prefix_prefix': 'edam',
+                           'prefix_reference': 'https://edamontology.org'},
+                  'fluff': {'prefix_prefix': 'fluff',
+                            'prefix_reference': 'https://fluffy.cat.onto/terms'},
                   'hl7_consent_scope': {'prefix_prefix': 'hl7_consent_scope',
                                         'prefix_reference': 'http://terminology.hl7.org/CodeSystem/consentscope'},
                   'hl7_consent_state_codes': {'prefix_prefix': 'hl7_consent_state_codes',
@@ -1211,6 +1217,7 @@ class NCPIFile(HasExternalId):
     file_format: str = Field(default=..., title="File Format", description="""The file format used ([EDAM](http://edamontology.org) where possible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_location: list[str] = Field(default=..., title="File Location", description="""Details relating to the links where documents are found""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_size: float = Field(default=..., title="File Size", description="""The size of the file, e.g., in bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_size_unit: str = Field(default=..., title="File Size Units", description="""Units associated with the file_size value (ucum)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     content_version: Optional[str] = Field(default=None, title="Content Version", description="""Version of the file content""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_type: str = Field(default=..., title="File Type", description="""The type of data contained in this file. Should be as detailed as possible, e.g., Whole Exome Variant Calls.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_hash: str = Field(default=..., title="File Hash", description="""Value of hashing the file""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
@@ -1281,7 +1288,7 @@ class FileLocation(Record):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/file-location',
          'title': 'File Location'})
 
-    location_uri: list[str] = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
+    location_uri: str = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
     file_name: str = Field(default=..., title="File Name", description="""The file's name (no path)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
     access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'access_policy_id'}},

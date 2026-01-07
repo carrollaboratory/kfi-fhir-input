@@ -34,7 +34,9 @@ prefixes:
   duo: http://purl.obolibrary.org/obo/duo.owl
   usc_birthsex: http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender
   umls: https://uts.nlm.nih.gov/uts/umls/concept
-
+  edam: https://edamontology.org
+  cr: https://w3c.github.io/N3/ns/
+  fluff: https://fluffy.cat.onto/terms
 
   # I think the linter is wrong on this one, but we'll use the recommendation
   # to quiet the warnings. 

@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-07T10:26:14
+# Generation date: 2026-01-07T12:04:11
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -65,7 +65,10 @@ version = None
 # Namespaces
 CDC_REC = CurieNamespace('cdc_rec', 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC')
 CDC_UNK = CurieNamespace('cdc_unk', 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion')
+CR = CurieNamespace('cr', 'https://w3c.github.io/N3/ns/')
 DUO = CurieNamespace('duo', 'http://purl.obolibrary.org/obo/duo.owl')
+EDAM = CurieNamespace('edam', 'https://edamontology.org')
+FLUFF = CurieNamespace('fluff', 'https://fluffy.cat.onto/terms')
 HL7_CONSENT_SCOPE = CurieNamespace('hl7_consent_scope', 'http://terminology.hl7.org/CodeSystem/consentscope')
 HL7_CONSENT_STATE_CODES = CurieNamespace('hl7_consent_state_codes', 'http://hl7.org/fhir/consent-state-codes')
 HL7_LIST_STATUS = CurieNamespace('hl7_list_status', 'https://hl7.org/fhir/R4/codesystem-list-status')
@@ -1045,6 +1048,7 @@ class NCPIFile(HasExternalId):
     file_format: Union[str, URIorCURIE] = None
     file_location: Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]] = None
     file_size: float = None
+    file_size_unit: Union[str, URIorCURIE] = None
     file_type: Union[str, URIorCURIE] = None
     file_hash: str = None
     content_version: Optional[str] = None
@@ -1077,6 +1081,11 @@ class NCPIFile(HasExternalId):
             self.MissingRequiredField("file_size")
         if not isinstance(self.file_size, float):
             self.file_size = float(self.file_size)
+
+        if self._is_empty(self.file_size_unit):
+            self.MissingRequiredField("file_size_unit")
+        if not isinstance(self.file_size_unit, URIorCURIE):
+            self.file_size_unit = URIorCURIE(self.file_size_unit)
 
         if self._is_empty(self.file_type):
             self.MissingRequiredField("file_type")
@@ -1113,7 +1122,7 @@ class FileLocation(Record):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileLocation
 
     id: Union[str, FileLocationId] = None
-    location_uri: Union[Union[str, URI], list[Union[str, URI]]] = None
+    location_uri: Union[str, URI] = None
     file_name: str = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
 
@@ -1125,9 +1134,8 @@ class FileLocation(Record):
 
         if self._is_empty(self.location_uri):
             self.MissingRequiredField("location_uri")
-        if not isinstance(self.location_uri, list):
-            self.location_uri = [self.location_uri] if self.location_uri is not None else []
-        self.location_uri = [v if isinstance(v, URI) else URI(v) for v in self.location_uri]
+        if not isinstance(self.location_uri, URI):
+            self.location_uri = URI(self.location_uri)
 
         if self._is_empty(self.file_name):
             self.MissingRequiredField("file_name")
@@ -2168,7 +2176,7 @@ slots.file_hash_type = Slot(uri=KFI['ncpi-file/file_hash_type'], name="file_hash
                    model_uri=KFI_FHIR_SPARKS.file_hash_type, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_uri", curie=KFI.curie('file-location/location_uri'),
-                   model_uri=KFI_FHIR_SPARKS.location_uri, domain=None, range=Union[Union[str, URI], list[Union[str, URI]]])
+                   model_uri=KFI_FHIR_SPARKS.location_uri, domain=None, range=Union[str, URI])
 
 slots.file_name = Slot(uri=KFI['file-location/file_name'], name="file_name", curie=KFI.curie('file-location/file_name'),
                    model_uri=KFI_FHIR_SPARKS.file_name, domain=None, range=str)

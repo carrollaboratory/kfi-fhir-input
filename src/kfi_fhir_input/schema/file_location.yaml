@@ -18,11 +18,14 @@ classes:
       - file_name 
       - access_policy_id    # content.extension[location-access].valueReference
 slots:
+  # At this point, I'm assuming these are all going to have at least one DRS attachment
+  # However, I don't know if we can expect more than that. If we do have other 
+  # sources, then we may want to designate which locations are DRS....not sure
   location_uri: 
     title: Location URI
     description: The URI at which this data can be accessed
     required: true 
-    multivalued: true 
+    multivalued: false 
     range: uri
   file_name: 
     title: File Name 
