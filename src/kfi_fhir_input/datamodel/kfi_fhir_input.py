@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-07T16:06:03
+# Generation date: 2026-01-07T16:26:53
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -86,6 +86,7 @@ NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncp
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
 NCPI_PATIENT_KNOWLEDGE_SOURCE = CurieNamespace('ncpi_patient_knowledge_source', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source')
 NCPI_SAMPLE_AVAILABILITY = CurieNamespace('ncpi_sample_availability', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability')
+OBI = CurieNamespace('obi', 'http://purl.obolibrary.org/obo/obi.owl')
 UCUM = CurieNamespace('ucum', 'http://unitsofmeasure.org')
 UMLS = CurieNamespace('umls', 'https://uts.nlm.nih.gov/uts/umls/concept')
 USC_BIRTHSEX = CurieNamespace('usc_birthsex', 'http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender')
