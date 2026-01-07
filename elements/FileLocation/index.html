@@ -297,6 +297,8 @@
 
       FileLocation : external_id
 
+      FileLocation : file_name
+
       FileLocation : id
 
       FileLocation : location_uri
@@ -328,6 +330,12 @@
 <td><a href="../location_uri/">location_uri</a></td>
 <td>1..* <br/> <a href="../Uri/">Uri</a></td>
 <td>The URI at which this data can be accessed</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_name/">file_name</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>The file's name (no path)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -437,6 +445,7 @@ from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: Record
 slots:
 - location_uri
+- file_name
 - access_policy_id
 
 </code></pre>
@@ -472,6 +481,19 @@ attributes:
     range: uri
     required: true
     multivalued: true
+  file_name:
+    name: file_name
+    description: The file's name (no path)
+    title: File Name
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_name
+    owner: FileLocation
+    domain_of:
+    - FileLocation
+    range: string
+    required: true
+    multivalued: false
   access_policy_id:
     name: access_policy_id
     annotations:

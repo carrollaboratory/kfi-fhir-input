@@ -208,6 +208,7 @@ AssociatedParty {
 }
 FileLocation {
     uriList location_uri  
+    string file_name  
     string id  
     uriorcurieList external_id  
 }
@@ -221,6 +222,12 @@ Institution {
 }
 NCPIFile {
     uriorcurie file_format  
+    float file_size  
+    string content_version  
+    uriorcurie file_type  
+    string file_hash  
+    uriorcurie file_hash_type  
+    string description  
     string file_global_id  
     uriorcurieList external_id  
 }

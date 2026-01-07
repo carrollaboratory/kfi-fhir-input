@@ -275,11 +275,19 @@
       HasExternalId &lt;|-- NCPIFile
         click HasExternalId href "../HasExternalId/"
 
+      NCPIFile : content_version
+
+      NCPIFile : description
+
       NCPIFile : external_id
 
       NCPIFile : file_format
 
       NCPIFile : file_global_id
+
+      NCPIFile : file_hash
+
+      NCPIFile : file_hash_type
 
       NCPIFile : file_location
 
@@ -291,6 +299,10 @@
         click FileLocation href "../FileLocation/"
 
 
+
+      NCPIFile : file_size
+
+      NCPIFile : file_type
 
       NCPIFile : participant_id
 
@@ -339,6 +351,42 @@
 <td><a href="../file_location/">file_location</a></td>
 <td>1..* <br/> <a href="../FileLocation/">FileLocation</a></td>
 <td>Details relating to the links where documents are found</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_size/">file_size</a></td>
+<td>1 <br/> <a href="../Float/">Float</a></td>
+<td>The size of the file, e</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../content_version/">content_version</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Version of the file content</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_type/">file_type</a></td>
+<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>The type of data contained in this file</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_hash/">file_hash</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Value of hashing the file</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../file_hash_type/">file_hash_type</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Algorithm used to calculate the hash (and size, where applicable)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../description/">description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>More details associated with the given resource</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -418,6 +466,12 @@ slots:
 - participant_id
 - file_format
 - file_location
+- file_size
+- content_version
+- file_type
+- file_hash
+- file_hash_type
+- description
 attributes:
   file_global_id:
     name: file_global_id
@@ -508,6 +562,88 @@ attributes:
     range: FileLocation
     required: true
     multivalued: true
+  file_size:
+    name: file_size
+    description: The size of the file, e.g., in bytes.
+    title: File Size
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_size
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: float
+    required: true
+    multivalued: false
+  content_version:
+    name: content_version
+    description: Version of the file content
+    title: Content Version
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: content_version
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: string
+    required: false
+    multivalued: false
+  file_type:
+    name: file_type
+    description: The type of data contained in this file. Should be as detailed as
+      possible, e.g., Whole Exome Variant Calls.
+    title: File Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_type
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
+    required: true
+    multivalued: false
+  file_hash:
+    name: file_hash
+    description: Value of hashing the file
+    title: File Hash
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_hash
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: string
+    required: true
+    multivalued: false
+  file_hash_type:
+    name: file_hash_type
+    description: Algorithm used to calculate the hash (and size, where applicable)
+    title: File Has Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: file_hash_type
+    owner: NCPIFile
+    domain_of:
+    - NCPIFile
+    range: uriorcurie
+    required: false
+    multivalued: false
+  description:
+    name: description
+    description: More details associated with the given resource
+    title: Description
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: description
+    owner: NCPIFile
+    domain_of:
+    - AccessPolicy
+    - Practitioner
+    - ResearchStudy
+    - ResearchStudyCollection
+    - NCPIFile
+    range: string
+    required: false
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study
