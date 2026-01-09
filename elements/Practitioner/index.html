@@ -281,17 +281,6 @@
 
       Practitioner : external_id
 
-      Practitioner : family
-
-
-
-
-
-        Practitioner --&gt; "0..1" Family : family
-        click Family href "../Family/"
-
-
-
       Practitioner : institution_id
 
 
@@ -377,12 +366,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../family/">family</a></td>
-<td>0..1 <br/> <a href="../Family/">Family</a></td>
-<td>The family the participant is a part of</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../practitioner_id/">practitioner_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>The Global ID for the Practitioner</td>
@@ -455,7 +438,6 @@ slots:
 - practitioner_role_id
 - description
 - practitioner_title
-- family
 attributes:
   practitioner_id:
     name: practitioner_id
@@ -586,20 +568,6 @@ attributes:
     - Practitioner
     range: string
     required: false
-  family:
-    name: family
-    description: The family the participant is a part of
-    title: Family
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: family
-    owner: Practitioner
-    domain_of:
-    - Practitioner
-    - Participant
-    range: Family
-    required: false
-    multivalued: false
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study

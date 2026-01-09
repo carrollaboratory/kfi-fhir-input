@@ -802,6 +802,10 @@ attributes:
     multivalued: false
   family:
     name: family
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: family_global_id
     description: The family the participant is a part of
     title: Family
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -809,7 +813,6 @@ attributes:
     alias: family
     owner: Participant
     domain_of:
-    - Practitioner
     - Participant
     range: Family
     required: false
