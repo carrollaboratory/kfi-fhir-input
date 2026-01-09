@@ -81,6 +81,10 @@
          <lastmod>2026-01-09</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumConsanguinity/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumConsentScope/</loc>
          <lastmod>2026-01-09</lastmod>
     </url>
@@ -106,6 +110,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumFamilyRelationship/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumFamilyType/</loc>
          <lastmod>2026-01-09</lastmod>
     </url>
     <url>
@@ -150,6 +158,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumStudyStatus/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Family/</loc>
          <lastmod>2026-01-09</lastmod>
     </url>
     <url>
@@ -397,6 +409,10 @@
          <lastmod>2026-01-09</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/consanguinity/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/consent_scope/</loc>
          <lastmod>2026-01-09</lastmod>
     </url>
@@ -453,7 +469,23 @@
          <lastmod>2026-01-09</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_focus/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_global_id/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_id/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_relationship_global_id/</loc>
+         <lastmod>2026-01-09</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_type/</loc>
          <lastmod>2026-01-09</lastmod>
     </url>
     <url>

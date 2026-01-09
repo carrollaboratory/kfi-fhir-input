@@ -531,8 +531,12 @@
 </thead>
 <tbody>
 <tr>
-<td>fhir_resource</td>
+<td>fhir_profile</td>
 <td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant</td>
+</tr>
+<tr>
+<td>fhir_resource</td>
+<td>Patient</td>
 </tr>
 </tbody>
 </table>
@@ -565,9 +569,12 @@
 <details>
 <pre><code class="language-yaml">name: Participant
 annotations:
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
   fhir_resource:
     tag: fhir_resource
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+    value: Patient
 description: Research oriented patient
 title: Participant
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -606,9 +613,12 @@ attributes:
 <details>
 <pre><code class="language-yaml">name: Participant
 annotations:
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
   fhir_resource:
     tag: fhir_resource
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+    value: Patient
 description: Research oriented patient
 title: Participant
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input

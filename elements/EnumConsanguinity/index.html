@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/participant_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumConsanguinity/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Participant ID (participant_id) - kfi-fhir-input</title>
+        <title>Enum: EnumConsanguinity - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-participant-id-participant_id" class="md-skip">
+        <a href="#enum-enumconsanguinity" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Participant ID (participant_id)
+              Enum: EnumConsanguinity
             
           </span>
         </div>
@@ -325,10 +325,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
+  <a href="#permissible-values" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Applicable Classes
+        Permissible Values
       
     </span>
   </a>
@@ -336,10 +336,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#properties" class="md-nav__link">
+  <a href="#slots" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Properties
+        Slots
       
     </span>
   </a>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -382,17 +371,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#mappings" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Mappings
-      
-    </span>
-  </a>
   
 </li>
       
@@ -427,124 +405,91 @@
   
 
 
-<h1 id="slot-participant-id-participant_id">Slot: Participant ID (participant_id)</h1>
-<p><em>The Global ID for the Participant</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputparticipant_id">kfi_fhir_sparks:participant_id</a>
-Alias: participant_id</p>
-<!-- no inheritance hierarchy -->
-
-<h2 id="applicable-classes">Applicable Classes</h2>
+<h1 id="enum-enumconsanguinity">Enum: EnumConsanguinity</h1>
+<p><em>List of codes indicates the level of known consanguinity (blood relation) within a study family.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputEnumConsanguinity">kfi_fhir_sparks:EnumConsanguinity</a></p>
+<h2 id="permissible-values">Permissible Values</h2>
+<table>
+<thead>
+<tr>
+<th>Value</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>not_suspected</td>
+<td>sct:428263003</td>
+<td>Not suspected</td>
+</tr>
+<tr>
+<td>suspected</td>
+<td>sct:415684004</td>
+<td>Suspected</td>
+</tr>
+<tr>
+<td>known_present</td>
+<td>sct:410515003</td>
+<td>Known present</td>
+</tr>
+<tr>
+<td>unknown</td>
+<td>sct:261665006</td>
+<td>Unknown</td>
+</tr>
+</tbody>
+</table>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Description</th>
-<th>Modifies Slot</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="../StudyMembership/">StudyMembership</a></td>
-<td>Grouping subject participation within a research study is helpful to provide ...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
-<td>Assertion about a particular Participant</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../NCPIFile/">NCPIFile</a></td>
-<td>Information about a file related to a research participant</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Person/">Person</a></td>
-<td>Relate one or more participants to a single person entity</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Sample/">Sample</a></td>
-<td>Sample encompasses biospecimen collection, sample information, and aliquot in...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Participant/">Participant</a></td>
-<td>Research oriented patient</td>
-<td>no</td>
+<td><a href="../consanguinity/">consanguinity</a></td>
+<td>Is there known or suspected consanguinity in this study family?</td>
 </tr>
 </tbody>
 </table>
-<h2 id="properties">Properties</h2>
-<ul>
-<li>
-<p>Range: <a href="../Participant/">Participant</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
-</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>participant_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
 </ul>
-<h2 id="mappings">Mappings</h2>
-<table>
-<thead>
-<tr>
-<th>Mapping Type</th>
-<th>Mapped Value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>self</td>
-<td>kfi_fhir_sparks:participant_id</td>
-</tr>
-<tr>
-<td>native</td>
-<td>kfi_fhir_sparks:participant_id</td>
-</tr>
-</tbody>
-</table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: participant_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: participant_id
-description: The Global ID for the Participant
-title: Participant ID
+<pre><code class="language-yaml">name: EnumConsanguinity
+description: List of codes indicates the level of known consanguinity (blood relation)
+  within a study family.
+title: Consanguinity
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-alias: participant_id
-domain_of:
-- ParticipantAssertion
-- Participant
-- Person
-- StudyMembership
-- Sample
-- NCPIFile
-range: Participant
-required: true
+permissible_values:
+  not_suspected:
+    text: not_suspected
+    description: Not suspected
+    meaning: sct:428263003
+    title: Not suspected
+  suspected:
+    text: suspected
+    description: Suspected
+    meaning: sct:415684004
+    title: Suspected
+  known_present:
+    text: known_present
+    description: Known present
+    meaning: sct:410515003
+    title: Known present
+  unknown:
+    text: unknown
+    description: Unknown
+    meaning: sct:261665006
+    title: Unknown
 
 </code></pre>
 

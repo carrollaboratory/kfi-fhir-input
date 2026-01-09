@@ -5,12 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/erdiagram/" rel="canonical"/>
-<link href="../" rel="prev"/>
-<link href="../../about/" rel="next"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/Family/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.0" name="generator"/>
-<title>ER Diagram - kfi-fhir-input</title>
+<title>Class: Family (Family) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.618322db.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -25,6 +23,9 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
+<a class="md-skip" href="#class-family-family">
+          Skip to content
+        </a>
 </div>
 <div data-md-component="announce">
 </div>
@@ -46,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              ER Diagram
+              Class: Family (Family)
             
           </span>
 </div>
@@ -131,9 +132,8 @@
   </span>
 </a>
 </li>
-<li class="md-nav__item md-nav__item--active">
-<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
-<a class="md-nav__link md-nav__link--active" href="./">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../erdiagram/">
 <span class="md-ellipsis">
     
   
@@ -165,236 +165,406 @@
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
 <nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#slots">
+<span class="md-ellipsis">
+      
+        Slots
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#identifier-and-mapping-information">
+<span class="md-ellipsis">
+      
+        Identifier and Mapping Information
+      
+    </span>
+</a>
+<nav aria-label="Identifier and Mapping Information" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#annotations">
+<span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#schema-source">
+<span class="md-ellipsis">
+      
+        Schema Source
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#mappings">
+<span class="md-ellipsis">
+      
+        Mappings
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#linkml-source">
+<span class="md-ellipsis">
+      
+        LinkML Source
+      
+    </span>
+</a>
+<nav aria-label="LinkML Source" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#direct">
+<span class="md-ellipsis">
+      
+        Direct
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#induced">
+<span class="md-ellipsis">
+      
+        Induced
+      
+    </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
 </nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1>ER Diagram</h1>
-<div class="mermaid">erDiagram
-AccessPolicy {
-    string description  
-    EnumDataAccessType data_access_type  
-    uri website  
-    EnumConsentScope consent_scope  
-    EnumAccessPolicyCodeList access_policy_code  
-    string disease_limitation  
-    string access_policy_id  
-    EnumConsentStateCodes status  
-}
-AgeAt {
-    EnumAgeValueType value_type  
-    uriorcurie age_code  
-    date as_date  
-}
-Aliquot {
-    EnumSpecimenAvailability availability_status  
-    float volume  
-    uriorcurie volume_units  
-    uriorcurie concentration  
-    string aliquot_id  
-    uriorcurieList external_id  
-}
-Any {
+<h1 id="class-family-family">Class: Family (Family)</h1>
+<p><em>Group of Participants that are related.</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputFamily">kfi_fhir_sparks:Family</a></p>
+<div class="mermaid"> classDiagram
+    class Family
+    click Family href "../Family/"
+      HasExternalId &lt;|-- Family
+        click HasExternalId href "../HasExternalId/"
 
-}
-AssociatedParty {
-    string name  
-    EnumResearchStudyPartyRole role  
-    EnumResearchStudyPartyOrganizationTypeList classifier  
-    string id  
-    uriorcurieList external_id  
-}
-Family {
-    string family_id  
-    EnumFamilyType family_type  
-    string description  
-    EnumConsanguinity consanguinity  
-    uriorcurie family_focus  
-    string family_global_id  
-    uriorcurieList external_id  
-}
-FamilyRelationship {
-    EnumFamilyRelationship relationship  
-    EnumRelationshipKnowledgeSource knowledge_source  
-    string family_relationship_global_id  
-}
-FileLocation {
-    uri location_uri  
-    string file_name  
-    string id  
-    uriorcurieList external_id  
-}
-FileMetaData {
-    EnumFileMetaDataType meta_data_type  
-    uriorcurie assay_strategy  
-    uriorcurie platform_instrument  
-    uriorcurie library_prep  
-    uriorcurie library_selection  
-    uriorcurie strandedness  
-    uriorcurie target_region  
-    uriorcurie is_paired_end  
-    uriorcurie adaptor_trimmed  
-    uriorcurie reference_genome  
-    uriorcurie workflow_type  
-    uriorcurie workflow_tool  
-    string id  
-    uriorcurieList external_id  
-}
-HasExternalId {
-    uriorcurieList external_id  
-}
-Institution {
-    string name  
-    string institution_id  
-    uriorcurieList external_id  
-}
-NCPIFile {
-    uriorcurie file_format  
-    float file_size  
-    uriorcurie file_size_unit  
-    string content_version  
-    uriorcurie file_type  
-    string file_hash  
-    uriorcurie file_hash_type  
-    string description  
-    string file_global_id  
-    uriorcurieList external_id  
-}
-Participant {
-    EnumBirthSex birthsex  
-    EnumRaceList race  
-    EnumEthnicity ethnicity  
-    EnumPopulation population  
-    string dob  
-    EnumDobMethod dob_method  
-    string age_at_last_vital  
-    boolean is_deceased  
-    EnumPatientKnowledgeSource patient_knowledge_source  
-    string participant_id  
-    uriorcurieList external_id  
-}
-ParticipantAssertion {
-    EnumEntityAsserter entity_asserter  
-    uriorcurie other_condition_modifiers  
-    EnumAssertionType assertion_type  
-    uriorcurie assertion_code  
-    string assertion_text  
-    uriorcurie assertion_source  
-    uriorcurie value_code  
-    string value_string  
-    float value_number  
-    uriorcurie value_units  
-    uriorcurie body_site  
-    uriorcurie body_location  
-    uriorcurie body_laterality  
-    uriorcurie cancer_stage  
-    string participant_assertion_id  
-}
-Period {
-    date start  
-    date end  
-    string id  
-    uriorcurieList external_id  
-}
-Person {
-    string person_id  
-}
-Practitioner {
-    string name  
-    string email  
-    string description  
-    string practitioner_title  
-    string practitioner_id  
-    uriorcurieList external_id  
-}
-PractitionerRole {
-    string practitioner_id  
-    string practitioner_role_id  
-}
-Record {
-    string id  
-    uriorcurieList external_id  
-}
-RelativeDateTime {
-    string id  
-    integer offset  
-    integer offset_end  
-    EnumOffsetType offset_type  
-}
-ResearchStudy {
-    string study_title  
-    uriorcurieList study_focus  
-    string description  
-    uriorcurieList study_condition  
-    stringList study_acknowledgement  
-    EnumStudyStatus study_status  
-    uriorcurieList study_design  
-    string research_study_id  
-    uriorcurieList external_id  
-}
-ResearchStudyCollection {
-    string collection_title  
-    EnumResearchCollectionType research_study_collection_type  
-    stringList label  
-    uri website  
-    EnumCollectionStatus collection_status  
-    string research_study_collection_id  
-    string description  
-    uriorcurieList external_id  
-}
-Sample {
-    uriorcurie sample_type  
-    uriorcurie collection_method  
-    uriorcurie collection_site  
-    uriorcurie spatial_qualifier  
-    uriorcurie laterality  
-    uriorcurieList processing  
-    EnumSpecimenAvailability availability_status  
-    uriorcurie storage_method  
-    float quantity  
-    uriorcurie quantity_units  
-    string sample_id  
-    uriorcurieList external_id  
-}
-StudyMembership {
-    string study_membership_id  
-}
+      Family : consanguinity
 
-AgeAt ||--|o RelativeDateTime : "age"
-Aliquot ||--|o Sample : "parent_sample_id"
-AssociatedParty ||--|o Any : "party"
-AssociatedParty ||--|o Period : "period_id"
-FamilyRelationship ||--|| Participant : "patient"
-FamilyRelationship ||--|| Participant : "relative"
-FileLocation ||--|| AccessPolicy : "access_policy_id"
-FileMetaData ||--|o Sample : "related_samples"
-NCPIFile ||--|| Participant : "participant_id"
-NCPIFile ||--}o FileMetaData : "file_meta_data"
-NCPIFile ||--}| FileLocation : "file_location"
-Participant ||--|o RelativeDateTime : "deceased_rel"
-ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
-ParticipantAssertion ||--|o AgeAt : "age_at_event"
-ParticipantAssertion ||--|o AgeAt : "age_at_onset"
-ParticipantAssertion ||--|o AgeAt : "age_at_resolution"
-ParticipantAssertion ||--|| Participant : "participant_id"
-Person ||--}| Participant : "participant_id"
-Practitioner ||--|o Institution : "institution_id"
-Practitioner ||--|o PractitionerRole : "practitioner_role_id"
-PractitionerRole ||--|o Institution : "institution_id"
-PractitionerRole ||--|o Period : "period_id"
-ResearchStudy ||--|o ResearchStudy : "parent_study_id"
-ResearchStudy ||--}| AssociatedParty : "study_personnel"
-ResearchStudy ||--}| StudyMembership : "study_membership_id"
-ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
-Sample ||--|o AgeAt : "age_at_collection"
-Sample ||--|o Sample : "parent_sample_id"
-Sample ||--|| Participant : "participant_id"
-StudyMembership ||--|| AccessPolicy : "access_policy_id"
-StudyMembership ||--}| Participant : "participant_id"
+
+
+
+
+        Family --&gt; "0..1" EnumConsanguinity : consanguinity
+        click EnumConsanguinity href "../EnumConsanguinity/"
+
+
+
+      Family : description
+
+      Family : external_id
+
+      Family : family_focus
+
+      Family : family_global_id
+
+      Family : family_id
+
+      Family : family_type
+
+
+
+
+
+        Family --&gt; "1" EnumFamilyType : family_type
+        click EnumFamilyType href "../EnumFamilyType/"
+
+
+
 
 </div>
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasExternalId/">HasExternalId</a><ul>
+<li><strong>Family</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="slots">Slots</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Cardinality and Range</th>
+<th>Description</th>
+<th>Inheritance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../family_id/">family_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>External ID common to all family members</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../family_type/">family_type</a></td>
+<td>1 <br/> <a href="../EnumFamilyType/">EnumFamilyType</a></td>
+<td>Describes the 'type' of study family, eg, trio</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../description/">description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>More details associated with the given resource</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../consanguinity/">consanguinity</a></td>
+<td>0..1 <br/> <a href="../EnumConsanguinity/">EnumConsanguinity</a></td>
+<td>Is there known or suspected consanguinity in this study family?</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../family_focus/">family_focus</a></td>
+<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>What is this study family investigating? EG, a specific condition</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../family_global_id/">family_global_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Family Global ID</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../external_id/">external_id</a></td>
+<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fhir_resource</td>
+<td>Group</td>
+</tr>
+<tr>
+<td>fhir_profile</td>
+<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schema-source">Schema Source</h3>
+<ul>
+<li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
+</ul>
+<h2 id="mappings">Mappings</h2>
+<table>
+<thead>
+<tr>
+<th>Mapping Type</th>
+<th>Mapped Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>self</td>
+<td>kfi_fhir_sparks:Family</td>
+</tr>
+<tr>
+<td>native</td>
+<td>kfi_fhir_sparks:Family</td>
+</tr>
+</tbody>
+</table>
+<h2 id="linkml-source">LinkML Source</h2>
+<!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
+<h3 id="direct">Direct</h3>
+<details>
+<pre><code class="language-yaml">name: Family
+annotations:
+  fhir_resource:
+    tag: fhir_resource
+    value: Group
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family
+description: Group of Participants that are related.
+title: Family
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: HasExternalId
+slots:
+- family_id
+- family_type
+- description
+- consanguinity
+- family_focus
+attributes:
+  family_global_id:
+    name: family_global_id
+    description: Family Global ID
+    title: Family Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    rank: 1000
+    identifier: true
+    domain_of:
+    - Family
+    range: string
+    required: true
+
+</code></pre>
+</details>
+<h3 id="induced">Induced</h3>
+<details>
+<pre><code class="language-yaml">name: Family
+annotations:
+  fhir_resource:
+    tag: fhir_resource
+    value: Group
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family
+description: Group of Participants that are related.
+title: Family
+from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: HasExternalId
+attributes:
+  family_global_id:
+    name: family_global_id
+    description: Family Global ID
+    title: Family Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    rank: 1000
+    identifier: true
+    alias: family_global_id
+    owner: Family
+    domain_of:
+    - Family
+    range: string
+    required: true
+  family_id:
+    name: family_id
+    description: External ID common to all family members
+    title: Family ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: family_id
+    owner: Family
+    domain_of:
+    - Family
+    range: string
+    required: true
+    multivalued: false
+  family_type:
+    name: family_type
+    description: Describes the 'type' of study family, eg, trio.
+    title: Family Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: family_type
+    owner: Family
+    domain_of:
+    - Family
+    range: EnumFamilyType
+    required: true
+    multivalued: false
+  description:
+    name: description
+    description: More details associated with the given resource
+    title: Description
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: description
+    owner: Family
+    domain_of:
+    - AccessPolicy
+    - Practitioner
+    - ResearchStudy
+    - ResearchStudyCollection
+    - NCPIFile
+    - Family
+    range: string
+    required: false
+  consanguinity:
+    name: consanguinity
+    description: Is there known or suspected consanguinity in this study family?
+    title: Consanguinity
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: consanguinity
+    owner: Family
+    domain_of:
+    - Family
+    range: EnumConsanguinity
+    required: false
+    multivalued: false
+  family_focus:
+    name: family_focus
+    description: What is this study family investigating? EG, a specific condition
+    title: Family Focus
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: family_focus
+    owner: Family
+    domain_of:
+    - Family
+    range: uriorcurie
+    required: false
+    multivalued: false
+  external_id:
+    name: external_id
+    description: Other identifiers for this entity, eg, from the submitting study
+      or in systems link dbGaP
+    title: External Identifiers
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: external_id
+    owner: Family
+    domain_of:
+    - HasExternalId
+    range: uriorcurie
+    required: false
+    multivalued: true
+
+</code></pre>
+</details>
 </article>
 </div>
 <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
