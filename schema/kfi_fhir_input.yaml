@@ -2079,6 +2079,20 @@ slots:
     - PractitionerRole
     range: string
     required: false
+  family:
+    name: family
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/family
+    description: The family the participant is a part of
+    title: Family
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/family
+    owner: Participant
+    domain_of:
+    - Practitioner
+    - Participant
+    range: Family
+    required: false
+    multivalued: false
   role:
     name: role
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/role
@@ -3886,6 +3900,7 @@ classes:
     - practitioner_role_id
     - description
     - practitioner_title
+    - family
     - practitioner__practitioner_id
     attributes:
       practitioner_id:
@@ -3967,6 +3982,7 @@ classes:
     - is_deceased
     - deceased_rel
     - patient_knowledge_source
+    - family
     - participant__participant_id
     attributes:
       participant_id:
@@ -4391,7 +4407,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-09T22:06:07'
+source_file_date: '2026-01-09T22:11:10'
 source_file_size: 5879
-generation_date: '2026-01-09T22:06:17'
+generation_date: '2026-01-09T22:11:18'
 

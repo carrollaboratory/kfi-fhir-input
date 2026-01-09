@@ -334,6 +334,17 @@
 
       Participant : external_id
 
+      Participant : family
+
+
+
+
+
+        Participant --&gt; "0..1" Family : family
+        click Family href "../Family/"
+
+
+
       Participant : is_deceased
 
       Participant : participant_id
@@ -449,6 +460,12 @@
 <td><a href="../patient_knowledge_source/">patient_knowledge_source</a></td>
 <td>0..1 <br/> <a href="../EnumPatientKnowledgeSource/">EnumPatientKnowledgeSource</a></td>
 <td>The source of the knowledge represented by this Patient resource</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../family/">family</a></td>
+<td>0..1 <br/> <a href="../Family/">Family</a></td>
+<td>The family the participant is a part of</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -590,6 +607,7 @@ slots:
 - is_deceased
 - deceased_rel
 - patient_knowledge_source
+- family
 attributes:
   participant_id:
     name: participant_id
@@ -780,6 +798,20 @@ attributes:
     domain_of:
     - Participant
     range: EnumPatientKnowledgeSource
+    required: false
+    multivalued: false
+  family:
+    name: family
+    description: The family the participant is a part of
+    title: Family
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: family
+    owner: Participant
+    domain_of:
+    - Practitioner
+    - Participant
+    range: Family
     required: false
     multivalued: false
   external_id:
