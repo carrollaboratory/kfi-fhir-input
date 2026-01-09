@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-09T16:04:54
+# Generation date: 2026-01-09T16:10:08
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -492,6 +492,7 @@ class Practitioner(HasExternalId):
     practitioner_role_id: Optional[Union[str, PractitionerRolePractitionerRoleId]] = None
     description: Optional[str] = None
     practitioner_title: Optional[str] = None
+    family: Optional[Union[str, FamilyFamilyGlobalId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.practitioner_id):
@@ -516,6 +517,9 @@ class Practitioner(HasExternalId):
 
         if self.practitioner_title is not None and not isinstance(self.practitioner_title, str):
             self.practitioner_title = str(self.practitioner_title)
+
+        if self.family is not None and not isinstance(self.family, FamilyFamilyGlobalId):
+            self.family = FamilyFamilyGlobalId(self.family)
 
         super().__post_init__(**kwargs)
 
@@ -611,6 +615,7 @@ class Participant(HasExternalId):
     is_deceased: Optional[Union[bool, Bool]] = None
     deceased_rel: Optional[Union[str, RelativeDateTimeId]] = None
     patient_knowledge_source: Optional[Union[str, "EnumPatientKnowledgeSource"]] = None
+    family: Optional[Union[str, FamilyFamilyGlobalId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.participant_id):
@@ -649,6 +654,9 @@ class Participant(HasExternalId):
 
         if self.patient_knowledge_source is not None and not isinstance(self.patient_knowledge_source, EnumPatientKnowledgeSource):
             self.patient_knowledge_source = EnumPatientKnowledgeSource(self.patient_knowledge_source)
+
+        if self.family is not None and not isinstance(self.family, FamilyFamilyGlobalId):
+            self.family = FamilyFamilyGlobalId(self.family)
 
         super().__post_init__(**kwargs)
 
@@ -2385,6 +2393,9 @@ slots.practitioner_title = Slot(uri=KFI['practitioner/practitioner_title'], name
 
 slots.practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner_id, domain=None, range=Optional[str])
+
+slots.family = Slot(uri=KFI['practitioner/family'], name="family", curie=KFI.curie('practitioner/family'),
+                   model_uri=KFI_FHIR_SPARKS.family, domain=None, range=Optional[Union[str, FamilyFamilyGlobalId]])
 
 slots.role = Slot(uri=KFI['associated_party/role'], name="role", curie=KFI.curie('associated_party/role'),
                    model_uri=KFI_FHIR_SPARKS.role, domain=None, range=Optional[Union[str, "EnumResearchStudyPartyRole"]])

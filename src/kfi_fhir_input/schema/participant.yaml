@@ -30,6 +30,7 @@ classes:
       - is_deceased
       - deceased_rel
       - patient_knowledge_source
+      - family
 slots:
   birthsex:
     title: Birth Sex 

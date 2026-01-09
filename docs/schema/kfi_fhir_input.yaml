@@ -1354,13 +1354,13 @@ slots:
     title: Description
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:description
-    owner: FamilyMembership
+    owner: Family
     domain_of:
     - AccessPolicy
     - Practitioner
     - ResearchStudy
     - NCPIFile
-    - FamilyMembership
+    - Family
     range: string
     required: false
   practitioner_role_id:
@@ -2079,6 +2079,20 @@ slots:
     - PractitionerRole
     range: string
     required: false
+  family:
+    name: family
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/family
+    description: The family the participant is a part of
+    title: Family
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/family
+    owner: Participant
+    domain_of:
+    - Practitioner
+    - Participant
+    range: Family
+    required: false
+    multivalued: false
   role:
     name: role
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/role
@@ -3097,9 +3111,9 @@ slots:
     title: Family ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_id
-    owner: FamilyMembership
+    owner: Family
     domain_of:
-    - FamilyMembership
+    - Family
     range: string
     required: true
     multivalued: false
@@ -3110,9 +3124,9 @@ slots:
     title: Family Type
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_type
-    owner: FamilyMembership
+    owner: Family
     domain_of:
-    - FamilyMembership
+    - Family
     range: EnumFamilyType
     required: true
     multivalued: false
@@ -3123,9 +3137,9 @@ slots:
     title: Consanguinity
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/consanguinity
-    owner: FamilyMembership
+    owner: Family
     domain_of:
-    - FamilyMembership
+    - Family
     range: EnumConsanguinity
     required: false
     multivalued: false
@@ -3136,9 +3150,9 @@ slots:
     title: Family Focus
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_focus
-    owner: FamilyMembership
+    owner: Family
     domain_of:
-    - FamilyMembership
+    - Family
     range: uriorcurie
     required: false
     multivalued: false
@@ -3640,17 +3654,17 @@ slots:
     - FamilyRelationship
     range: string
     required: true
-  familyMembership__family_relhip_global_id:
-    name: familyMembership__family_relhip_global_id
-    description: Family Membership Global ID
-    title: Family Membership Global ID
+  family__family_global_id:
+    name: family__family_global_id
+    description: Family Global ID
+    title: Family Global ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_relhip_global_id
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
     identifier: true
-    alias: family_relhip_global_id
-    owner: FamilyMembership
+    alias: family_global_id
+    owner: Family
     domain_of:
-    - FamilyMembership
+    - Family
     range: string
     required: true
   ParticipantAssertion_participant_id:
@@ -3886,6 +3900,7 @@ classes:
     - practitioner_role_id
     - description
     - practitioner_title
+    - family
     - practitioner__practitioner_id
     attributes:
       practitioner_id:
@@ -3967,6 +3982,7 @@ classes:
     - is_deceased
     - deceased_rel
     - patient_knowledge_source
+    - family
     - participant__participant_id
     attributes:
       participant_id:
@@ -4327,9 +4343,9 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/FamilyRelationship
-  FamilyMembership:
-    name: FamilyMembership
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/FamilyMembership
+  Family:
+    name: Family
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/Family
     annotations:
       fhir_resource:
         tag: fhir_resource
@@ -4338,7 +4354,7 @@ classes:
         tag: fhir_profile
         value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family
     description: Group of Participants that are related.
-    title: Family Membership
+    title: Family
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     is_a: HasExternalId
     slots:
@@ -4348,16 +4364,16 @@ classes:
     - description
     - consanguinity
     - family_focus
-    - familyMembership__family_relhip_global_id
+    - family__family_global_id
     attributes:
-      family_relhip_global_id:
-        name: family_relhip_global_id
-        description: Family Membership Global ID
-        title: Family Membership Global ID
+      family_global_id:
+        name: family_global_id
+        description: Family Global ID
+        title: Family Global ID
         identifier: true
         range: string
         required: true
-    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/FamilyMembership
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/Family
   FileMetaData:
     name: FileMetaData
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
@@ -4393,5 +4409,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-09T13:54:12'
 source_file_size: 5879
-generation_date: '2026-01-09T14:01:48'
+generation_date: '2026-01-09T16:09:57'
 

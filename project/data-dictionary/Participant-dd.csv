@@ -12,4 +12,5 @@ age_at_last_vital,Age or date of last vital status,string,,,,,
 is_deceased,"Is the participant known to be Deceased, T, or Alive, F",string,,,,,
 deceased_rel,Implementers can provide relativeDateTime if information is available.,string,,,,,Foreign Key: RelativeDateTime.id
 patient_knowledge_source,The source of the knowledge represented by this Patient resource.,enumeration,,,,"traditional=The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.;inferred=The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.",
+family,The family the participant is a part of,string,,,,,Foreign Key: Family.family_global_id
 participant_id,Participant Global ID,string,,,,,
