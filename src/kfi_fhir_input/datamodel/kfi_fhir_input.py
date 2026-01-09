@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-07T16:28:56
+# Generation date: 2026-01-09T11:40:52
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -78,6 +78,7 @@ HL7_STUDY_DESIGN = CurieNamespace('hl7_study_design', 'https://hl7.org/fhir/code
 HL7_STUDY_STATUS = CurieNamespace('hl7_study_status', 'https://hl7.org/fhir/R4/codesystem-research-study-status')
 KFI = CurieNamespace('kfi', 'https://carrollaboratory.github.io/kfi-fhir-input/')
 KFI_FHIR_SPARKS = CurieNamespace('kfi_fhir_sparks', 'https://carrollaboratory.github.io/kif-fhir-input')
+KIN = CurieNamespace('kin', 'http://purl.org/ga4gh/kin.fhir')
 LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type')
 NCPI_COND_TYPE = CurieNamespace('ncpi_cond_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/')
@@ -167,6 +168,10 @@ class NCPIFileFileGlobalId(extended_str):
 
 
 class FileLocationId(RecordId):
+    pass
+
+
+class FamilyRelationshipFamilyRelationshipGlobalId(extended_str):
     pass
 
 
@@ -1162,6 +1167,53 @@ class FileLocation(Record):
 
 
 @dataclass(repr=False)
+class FamilyRelationship(YAMLRoot):
+    """
+    A relationship between individuals in a pedigree or family.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["family-relationship/FamilyRelationship"]
+    class_class_curie: ClassVar[str] = "kfi:family-relationship/FamilyRelationship"
+    class_name: ClassVar[str] = "FamilyRelationship"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FamilyRelationship
+
+    family_relationship_global_id: Union[str, FamilyRelationshipFamilyRelationshipGlobalId] = None
+    patient: Union[str, ParticipantParticipantId] = None
+    relative: Union[str, ParticipantParticipantId] = None
+    relationship: Union[str, "EnumFamilyRelationship"] = None
+    knowledge_source: Union[str, "EnumRelationshipKnowledgeSource"] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.family_relationship_global_id):
+            self.MissingRequiredField("family_relationship_global_id")
+        if not isinstance(self.family_relationship_global_id, FamilyRelationshipFamilyRelationshipGlobalId):
+            self.family_relationship_global_id = FamilyRelationshipFamilyRelationshipGlobalId(self.family_relationship_global_id)
+
+        if self._is_empty(self.patient):
+            self.MissingRequiredField("patient")
+        if not isinstance(self.patient, ParticipantParticipantId):
+            self.patient = ParticipantParticipantId(self.patient)
+
+        if self._is_empty(self.relative):
+            self.MissingRequiredField("relative")
+        if not isinstance(self.relative, ParticipantParticipantId):
+            self.relative = ParticipantParticipantId(self.relative)
+
+        if self._is_empty(self.relationship):
+            self.MissingRequiredField("relationship")
+        if not isinstance(self.relationship, EnumFamilyRelationship):
+            self.relationship = EnumFamilyRelationship(self.relationship)
+
+        if self._is_empty(self.knowledge_source):
+            self.MissingRequiredField("knowledge_source")
+        if not isinstance(self.knowledge_source, EnumRelationshipKnowledgeSource):
+            self.knowledge_source = EnumRelationshipKnowledgeSource(self.knowledge_source)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class FileMetaData(Record):
     """
     Representation of file metadata for NCPI
@@ -1990,6 +2042,76 @@ class EnumSpecimenAvailability(EnumDefinitionImpl):
         description="Can this sample be requested for further analysis",
     )
 
+class EnumFamilyRelationship(EnumDefinitionImpl):
+    """
+    What is the relative's relationship to the patient
+    """
+    mother = PermissibleValue(
+        text="mother",
+        title="Mother",
+        description="The relative is the biological mother of the patient.",
+        meaning=KIN["027"])
+    father = PermissibleValue(
+        text="father",
+        title="Father",
+        description="The relative is the biological father of the patient.",
+        meaning=KIN["028"])
+    monozygotic_twin = PermissibleValue(
+        text="monozygotic_twin",
+        title="Monozygotic Twin",
+        description="The relative and patient are monozygotic twins",
+        meaning=KIN["010"])
+    polyzygotic_twin = PermissibleValue(
+        text="polyzygotic_twin",
+        title="Polyzygotic Twin",
+        description="The relative and patient are polyzygotic twins",
+        meaning=KIN["011"])
+    twin = PermissibleValue(
+        text="twin",
+        title="Twin",
+        description="""The relative and patient are twins, but no further clarification is available (always use the more specific form when possible)""",
+        meaning=KIN["009"])
+    full_sibling = PermissibleValue(
+        text="full_sibling",
+        title="Full Sibling",
+        description="The relative and child both share the same biological mother and father",
+        meaning=KIN["008"])
+    half_sibling = PermissibleValue(
+        text="half_sibling",
+        title="Half Sibling",
+        description="The relative and child only share one biological parent",
+        meaning=KIN["012"])
+    sibling = PermissibleValue(
+        text="sibling",
+        title="Biological Sibling",
+        description="""The relative share at least one biological parent, but there isn't enough information to confirm more then that.""",
+        meaning=KIN["007"])
+
+    _defn = EnumDefinition(
+        name="EnumFamilyRelationship",
+        description="What is the relative's relationship to the patient",
+    )
+
+class EnumRelationshipKnowledgeSource(EnumDefinitionImpl):
+    """
+    Indicate if the relationship is real or inferred
+    """
+    traditional = PermissibleValue(
+        text="traditional",
+        title="Traditional",
+        description="""The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.""",
+        meaning=NCPI_PATIENT_KNOWLEDGE_SOURCE["traditional"])
+    inferred = PermissibleValue(
+        text="inferred",
+        title="Inferred",
+        description="""The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.""",
+        meaning=NCPI_PATIENT_KNOWLEDGE_SOURCE["inferred"])
+
+    _defn = EnumDefinition(
+        name="EnumRelationshipKnowledgeSource",
+        description="Indicate if the relationship is real or inferred",
+    )
+
 class EnumFileMetaDataType(EnumDefinitionImpl):
     """
     Identify the type of profile to use
@@ -2306,6 +2428,18 @@ slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_
 slots.file_name = Slot(uri=KFI['file-location/file_name'], name="file_name", curie=KFI.curie('file-location/file_name'),
                    model_uri=KFI_FHIR_SPARKS.file_name, domain=None, range=str)
 
+slots.patient = Slot(uri=KFI['family-relationship/patient'], name="patient", curie=KFI.curie('family-relationship/patient'),
+                   model_uri=KFI_FHIR_SPARKS.patient, domain=None, range=Union[str, ParticipantParticipantId])
+
+slots.relative = Slot(uri=KFI['family-relationship/relative'], name="relative", curie=KFI.curie('family-relationship/relative'),
+                   model_uri=KFI_FHIR_SPARKS.relative, domain=None, range=Union[str, ParticipantParticipantId])
+
+slots.relationship = Slot(uri=KFI['family-relationship/relationship'], name="relationship", curie=KFI.curie('family-relationship/relationship'),
+                   model_uri=KFI_FHIR_SPARKS.relationship, domain=None, range=Union[str, "EnumFamilyRelationship"])
+
+slots.knowledge_source = Slot(uri=KFI['family-relationship/knowledge_source'], name="knowledge_source", curie=KFI.curie('family-relationship/knowledge_source'),
+                   model_uri=KFI_FHIR_SPARKS.knowledge_source, domain=None, range=Union[str, "EnumRelationshipKnowledgeSource"])
+
 slots.meta_data_type = Slot(uri=KFI['file-meta-data/meta_data_type'], name="meta_data_type", curie=KFI.curie('file-meta-data/meta_data_type'),
                    model_uri=KFI_FHIR_SPARKS.meta_data_type, domain=None, range=Union[str, "EnumFileMetaDataType"])
 
@@ -2413,6 +2547,9 @@ slots.aliquot__aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="aliquot__al
 
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
+
+slots.familyRelationship__family_relationship_global_id = Slot(uri=KFI['family-relationship/family_relationship_global_id'], name="familyRelationship__family_relationship_global_id", curie=KFI.curie('family-relationship/family_relationship_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.familyRelationship__family_relationship_global_id, domain=None, range=URIRef)
 
 slots.ParticipantAssertion_participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="ParticipantAssertion_participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
                    model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])

@@ -24,6 +24,7 @@ imports:
 - sample
 - file
 - file_location
+- family_relationship
 - kfi_fhir_input
 - file_meta_data
 license: MIT
@@ -85,6 +86,9 @@ prefixes:
   ncpi_patient_knowledge_source:
     prefix_prefix: ncpi_patient_knowledge_source
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
+  kin:
+    prefix_prefix: kin
+    prefix_reference: http://purl.org/ga4gh/kin.fhir
   linkml:
     prefix_prefix: linkml
     prefix_reference: https://w3id.org/linkml/
@@ -103,12 +107,18 @@ prefixes:
   edam:
     prefix_prefix: edam
     prefix_reference: https://edamontology.org
+  obi:
+    prefix_prefix: obi
+    prefix_reference: http://purl.obolibrary.org/obo/obi.owl
   w3c:
     prefix_prefix: w3c
     prefix_reference: https://w3c.github.io/N3/ns/
   fluff:
     prefix_prefix: fluff
     prefix_reference: https://fluffy.cat.onto/terms
+  unknown:
+    prefix_prefix: unknown
+    prefix_reference: https://need-more-info.org
 default_prefix: kfi_fhir_sparks
 default_range: string
 types:
@@ -1104,6 +1114,76 @@ enums:
         description: Specimen is currently unavailable
         meaning: ncpi_sample_availability:unavailable
         title: Unavailable
+  EnumFamilyRelationship:
+    name: EnumFamilyRelationship
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/EnumFamilyRelationship
+    description: What is the relative's relationship to the patient
+    title: Family Relationship
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    permissible_values:
+      mother:
+        text: mother
+        description: The relative is the biological mother of the patient.
+        meaning: kin:027
+        title: Mother
+      father:
+        text: father
+        description: The relative is the biological father of the patient.
+        meaning: kin:028
+        title: Father
+      monozygotic_twin:
+        text: monozygotic_twin
+        description: The relative and patient are monozygotic twins
+        meaning: kin:010
+        title: Monozygotic Twin
+      polyzygotic_twin:
+        text: polyzygotic_twin
+        description: The relative and patient are polyzygotic twins
+        meaning: kin:011
+        title: Polyzygotic Twin
+      twin:
+        text: twin
+        description: The relative and patient are twins, but no further clarification
+          is available (always use the more specific form when possible)
+        meaning: kin:009
+        title: Twin
+      full_sibling:
+        text: full_sibling
+        description: The relative and child both share the same biological mother
+          and father
+        meaning: kin:008
+        title: Full Sibling
+      half_sibling:
+        text: half_sibling
+        description: The relative and child only share one biological parent
+        meaning: kin:012
+        title: Half Sibling
+      sibling:
+        text: sibling
+        description: The relative share at least one biological parent, but there
+          isn't enough information to confirm more then that.
+        meaning: kin:007
+        title: Biological Sibling
+  EnumRelationshipKnowledgeSource:
+    name: EnumRelationshipKnowledgeSource
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/EnumRelationshipKnowledgeSource
+    description: Indicate if the relationship is real or inferred
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    permissible_values:
+      traditional:
+        text: traditional
+        description: The knowledge comes from traditional sources like a form filled
+          out by a patient or information copied from an external traditional source
+          like government records.
+        meaning: ncpi_patient_knowledge_source:traditional
+        title: Traditional
+      inferred:
+        text: inferred
+        description: The knowledge is inferred from indirect evidence. For example,
+          the existence of one patient's mother can be inferred from the existence
+          of the patient.
+        meaning: ncpi_patient_knowledge_source:inferred
+        title: Inferred
   EnumFileMetaDataType:
     name: EnumFileMetaDataType
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/EnumFileMetaDataType
@@ -2840,6 +2920,63 @@ slots:
     range: string
     required: true
     multivalued: false
+  patient:
+    name: patient
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient
+    description: The child from the parent-child relationship
+    title: Patient (Child)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient
+    identifier: false
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: Participant
+    required: true
+    multivalued: false
+  relative:
+    name: relative
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative
+    description: The parent from the parent-child relationship
+    title: Relative (Parent)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative
+    identifier: false
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: Participant
+    required: true
+    multivalued: false
+  relationship:
+    name: relationship
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relationship
+    description: The role the relative (parent) fills with respect to the patient
+      (child) for this relationship.
+    title: Relationship
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relationship
+    identifier: false
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: EnumFamilyRelationship
+    required: true
+    multivalued: false
+  knowledge_source:
+    name: knowledge_source
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/knowledge_source
+    description: The source for the reltionship term
+    title: Knowledge Source
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/knowledge_source
+    identifier: false
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: EnumRelationshipKnowledgeSource
+    required: true
+    multivalued: false
   meta_data_type:
     name: meta_data_type
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/meta_data_type
@@ -3323,6 +3460,19 @@ slots:
     owner: NCPIFile
     domain_of:
     - NCPIFile
+    range: string
+    required: true
+  familyRelationship__family_relationship_global_id:
+    name: familyRelationship__family_relationship_global_id
+    description: Family Relationship Global ID
+    title: Family Relationship Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/family_relationship_global_id
+    identifier: true
+    alias: family_relationship_global_id
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
     range: string
     required: true
   ParticipantAssertion_participant_id:
@@ -3968,6 +4118,34 @@ classes:
     - file_name
     - access_policy_id
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
+  FamilyRelationship:
+    name: FamilyRelationship
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/FamilyRelationship
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
+      fhir_profile:
+        tag: fhir_profile
+        value: http://purl.org/ga4gh/pedigree-fhir-ig/StructureDefinition/PedigreeRelationship
+    description: A relationship between individuals in a pedigree or family.
+    title: Family Relationship
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slots:
+    - patient
+    - relative
+    - relationship
+    - knowledge_source
+    - familyRelationship__family_relationship_global_id
+    attributes:
+      family_relationship_global_id:
+        name: family_relationship_global_id
+        description: Family Relationship Global ID
+        title: Family Relationship Global ID
+        identifier: true
+        range: string
+        required: true
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/FamilyRelationship
   FileMetaData:
     name: FileMetaData
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
@@ -4001,7 +4179,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-07T16:01:41'
-source_file_size: 5600
-generation_date: '2026-01-07T16:05:53'
+source_file_date: '2026-01-09T11:33:46'
+source_file_size: 5746
+generation_date: '2026-01-09T11:40:42'
 

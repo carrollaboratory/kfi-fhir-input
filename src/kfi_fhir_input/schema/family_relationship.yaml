@@ -1,0 +1,111 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+name: kfi-fhir-input-family-relationship
+imports: 
+  - linkml:types 
+  - kfi_fhir_input 
+classes:
+  FamilyRelationship:
+    title: Family Relationship
+    description: A relationship between individuals in a pedigree or family.
+    annotations:
+      fhir_resource: FamilyMemberHistory
+      fhir_profile: http://purl.org/ga4gh/pedigree-fhir-ig/StructureDefinition/PedigreeRelationship
+    attributes: 
+      family_relationship_global_id:
+        title: Family Relationship Global ID 
+        description: Family Relationship Global ID 
+        range: string 
+        identifier: true 
+        required: true 
+    slots: 
+      - patient # 
+      - relative 
+      - relationship
+      - knowledge_source
+slots:
+  patient: 
+    title: Patient (Child)
+    description: The child from the parent-child relationship 
+    range: Participant 
+    identifier: false 
+    required: true 
+    multivalued: false 
+  relative: 
+    title: Relative (Parent)
+    description: The parent from the parent-child relationship 
+    range: Participant 
+    identifier: false 
+    required: true 
+    multivalued: false 
+  relationship: 
+    title: Relationship 
+    description: The role the relative (parent) fills with respect to the patient (child) for this relationship.
+    range: EnumFamilyRelationship
+    identifier: false 
+    required: true 
+    multivalued: false 
+  knowledge_source:
+    title: Knowledge Source
+    description: The source for the reltionship term
+    range: EnumRelationshipKnowledgeSource
+    identifier: false 
+    required: true 
+    multivalued: false 
+enums:
+  EnumFamilyRelationship:
+    title: Family Relationship 
+    description: What is the relative's relationship to the patient
+    permissible_values:
+      mother: 
+        title: Mother 
+        description: The relative is the biological mother of the patient.
+        meaning: kin:027 
+      father: 
+        title: Father 
+        description: The relative is the biological father of the patient.
+        meaning: kin:028
+      monozygotic_twin:
+        title: Monozygotic Twin 
+        description: The relative and patient are monozygotic twins
+        meaning: kin:010
+      polyzygotic_twin:
+        title: Polyzygotic Twin
+        description: The relative and patient are polyzygotic twins
+        meaning: kin:011
+      twin:
+        title: Twin 
+        description: The relative and patient are twins, but no 
+                     further clarification is available (always use the 
+                     more specific form when possible)
+        meaning: kin:009
+      full_sibling:
+        title: Full Sibling 
+        description: The relative and child both share the same biological 
+                     mother and father 
+        meaning: kin:008
+      half_sibling:
+        title: Half Sibling 
+        description: The relative and child only share one biological parent
+        meaning: kin:012
+      sibling: 
+        title: Biological Sibling 
+        description: The relative share at least one biological parent, but
+                     there isn't enough information to confirm more then that.
+        meaning: kin:007      
+  EnumRelationshipKnowledgeSource:
+    description: Indicate if the relationship is real or inferred
+    permissible_values:
+      traditional: 
+        title: Traditional
+        description: The knowledge comes from traditional sources like a form 
+                     filled out by a patient or information copied from an 
+                     external traditional source like government records.
+        meaning: ncpi_patient_knowledge_source:traditional 
+      inferred: 
+        title: Inferred 
+        description: The knowledge is inferred from indirect evidence. For 
+                     example, the existence of one patient's mother can be 
+                     inferred from the existence of the patient.
+        meaning: ncpi_patient_knowledge_source:inferred 
+  

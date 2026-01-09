@@ -36,7 +36,7 @@ slots:
     range: EnumFileMetaDataType 
   assay_strategy: 
     title: Assay Strategy 
-    description: 	e.g., Whole Genome Sequencing
+    description: e.g., Whole Genome Sequencing
     required: true 
     multivalued: false 
     range: uriorcurie 

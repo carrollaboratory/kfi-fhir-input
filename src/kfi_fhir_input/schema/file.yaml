@@ -69,7 +69,7 @@ slots:
     range: string 
   file_type: 
     title: File Type 
-    description: 	The type of data contained in this file. Should be as detailed as possible, e.g., Whole Exome Variant Calls.
+    description: The type of data contained in this file. Should be as detailed as possible, e.g., Whole Exome Variant Calls.
     required: true 
     multivalued: false 
     range: uriorcurie

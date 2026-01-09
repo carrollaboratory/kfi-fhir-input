@@ -100,7 +100,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'research_study_collection',
                  'sample',
                  'file',
-                 'file_location'],
+                 'file_location',
+                 'family_relationship'],
      'license': 'MIT',
      'name': 'kfi-fhir-input',
      'prefixes': {'cdc_rec': {'prefix_prefix': 'cdc_rec',
@@ -133,6 +134,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                           'prefix_reference': 'https://carrollaboratory.github.io/kfi-fhir-input/'},
                   'kfi_fhir_sparks': {'prefix_prefix': 'kfi_fhir_sparks',
                                       'prefix_reference': 'https://carrollaboratory.github.io/kif-fhir-input'},
+                  'kin': {'prefix_prefix': 'kin',
+                          'prefix_reference': 'http://purl.org/ga4gh/kin.fhir'},
                   'linkml': {'prefix_prefix': 'linkml',
                              'prefix_reference': 'https://w3id.org/linkml/'},
                   'ncpi_collection_type': {'prefix_prefix': 'ncpi_collection_type',
@@ -648,6 +651,58 @@ class EnumFileMetaDataType(str, Enum):
     VCF_LEFT_PARENTHESISand_gVCFRIGHT_PARENTHESIS_file = "vcf"
     """
     GC or gVCF file
+    """
+
+
+class EnumFamilyRelationship(str, Enum):
+    """
+    What is the relative's relationship to the patient
+    """
+    Mother = "mother"
+    """
+    The relative is the biological mother of the patient.
+    """
+    Father = "father"
+    """
+    The relative is the biological father of the patient.
+    """
+    Monozygotic_Twin = "monozygotic_twin"
+    """
+    The relative and patient are monozygotic twins
+    """
+    Polyzygotic_Twin = "polyzygotic_twin"
+    """
+    The relative and patient are polyzygotic twins
+    """
+    Twin = "twin"
+    """
+    The relative and patient are twins, but no further clarification is available (always use the more specific form when possible)
+    """
+    Full_Sibling = "full_sibling"
+    """
+    The relative and child both share the same biological mother and father
+    """
+    Half_Sibling = "half_sibling"
+    """
+    The relative and child only share one biological parent
+    """
+    Biological_Sibling = "sibling"
+    """
+    The relative share at least one biological parent, but there isn't enough information to confirm more then that.
+    """
+
+
+class EnumRelationshipKnowledgeSource(str, Enum):
+    """
+    Indicate if the relationship is real or inferred
+    """
+    Traditional = "traditional"
+    """
+    The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.
+    """
+    Inferred = "inferred"
+    """
+    The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.
     """
 
 
@@ -1356,6 +1411,24 @@ class FileMetaData(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
+class FamilyRelationship(ConfiguredBaseModel):
+    """
+    A relationship between individuals in a pedigree or family.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'http://purl.org/ga4gh/pedigree-fhir-ig/StructureDefinition/PedigreeRelationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family-relationship',
+         'title': 'Family Relationship'})
+
+    patient: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    relative: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    relationship: EnumFamilyRelationship = Field(default=..., title="Relationship", description="""The role the relative (parent) fills with respect to the patient (child) for this relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    knowledge_source: EnumRelationshipKnowledgeSource = Field(default=..., title="Knowledge Source", description="""The source for the reltionship term""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    family_relationship_global_id: str = Field(default=..., title="Family Relationship Global ID", description="""Family Relationship Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+
+
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
@@ -1379,3 +1452,4 @@ AssociatedParty.model_rebuild()
 Period.model_rebuild()
 FileLocation.model_rebuild()
 FileMetaData.model_rebuild()
+FamilyRelationship.model_rebuild()

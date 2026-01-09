@@ -29,6 +29,7 @@ prefixes:
   ncpi_cond_type: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
   ncpi_sample_availability: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability
   ncpi_patient_knowledge_source: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
+  kin: http://purl.org/ga4gh/kin.fhir
   linkml: https://w3id.org/linkml/
   ucum: http://unitsofmeasure.org
   duo: http://purl.obolibrary.org/obo/duo.owl
@@ -71,6 +72,7 @@ imports:
   - sample
   - file 
   - file_location
+  - family_relationship
 classes:
   Any:
     class_uri: linkml:Any
