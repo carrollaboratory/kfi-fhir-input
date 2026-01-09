@@ -31,6 +31,10 @@ slots:
     identifier: false 
     required: true 
     multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element: patient
+      fhir_resource: FamilyMemberHistory
   relative: 
     title: Relative (Parent)
     description: The parent from the parent-child relationship 
@@ -38,6 +42,10 @@ slots:
     identifier: false 
     required: true 
     multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element: extension[relative] 
+      fhir_resource: FamilyMemberHistory
   relationship: 
     title: Relationship 
     description: The role the relative (parent) fills with respect to the patient (child) for this relationship.
@@ -45,6 +53,10 @@ slots:
     identifier: false 
     required: true 
     multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element: relationship
+      fhir_resource: FamilyMemberHistory
   knowledge_source:
     title: Knowledge Source
     description: The source for the reltionship term
@@ -52,6 +64,10 @@ slots:
     identifier: false 
     required: true 
     multivalued: false 
+    annotations:
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element: relationship
+      fhir_resource: exception[KnowledgeSource]
 enums:
   EnumFamilyRelationship:
     title: Family Relationship 

@@ -1422,10 +1422,33 @@ class FamilyRelationship(ConfiguredBaseModel):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family-relationship',
          'title': 'Family Relationship'})
 
-    patient: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
-    relative: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
-    relationship: EnumFamilyRelationship = Field(default=..., title="Relationship", description="""The role the relative (parent) fills with respect to the patient (child) for this relationship.""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
-    knowledge_source: EnumRelationshipKnowledgeSource = Field(default=..., title="Knowledge Source", description="""The source for the reltionship term""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    patient: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'patient'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'domain_of': ['FamilyRelationship']} })
+    relative: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'extension[relative]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'domain_of': ['FamilyRelationship']} })
+    relationship: EnumFamilyRelationship = Field(default=..., title="Relationship", description="""The role the relative (parent) fills with respect to the patient (child) for this relationship.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'relationship'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'domain_of': ['FamilyRelationship']} })
+    knowledge_source: EnumRelationshipKnowledgeSource = Field(default=..., title="Knowledge Source", description="""The source for the reltionship term""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'relationship'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'exception[KnowledgeSource]'}},
+         'domain_of': ['FamilyRelationship']} })
     family_relationship_global_id: str = Field(default=..., title="Family Relationship Global ID", description="""Family Relationship Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
 
 

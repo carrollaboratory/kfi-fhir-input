@@ -2923,6 +2923,16 @@ slots:
   patient:
     name: patient
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: patient
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
     description: The child from the parent-child relationship
     title: Patient (Child)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
@@ -2937,6 +2947,16 @@ slots:
   relative:
     name: relative
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: extension[relative]
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
     description: The parent from the parent-child relationship
     title: Relative (Parent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
@@ -2951,6 +2971,16 @@ slots:
   relationship:
     name: relationship
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relationship
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: relationship
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
     description: The role the relative (parent) fills with respect to the patient
       (child) for this relationship.
     title: Relationship
@@ -2966,6 +2996,16 @@ slots:
   knowledge_source:
     name: knowledge_source
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/knowledge_source
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: relationship
+      fhir_resource:
+        tag: fhir_resource
+        value: exception[KnowledgeSource]
     description: The source for the reltionship term
     title: Knowledge Source
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
@@ -4181,5 +4221,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-09T11:33:46'
 source_file_size: 5746
-generation_date: '2026-01-09T11:40:42'
+generation_date: '2026-01-09T11:46:36'
 
