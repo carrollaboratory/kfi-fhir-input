@@ -685,6 +685,32 @@ class EnumRelationshipKnowledgeSource(str, Enum):
     """
 
 
+class EnumFileMetaDataType(str, Enum):
+    """
+    Identify the type of profile to use
+    """
+    BAMSOLIDUSCRAM = "bam_cram"
+    """
+    Bam or Cram file
+    """
+    FASTQ = "fastq"
+    """
+    FASTQ File
+    """
+    MAF_LEFT_PARENTHESISSomatic_MutationRIGHT_PARENTHESIS_file = "maf"
+    """
+    MAF (Somatic Mutation)
+    """
+    Proteomics_file = "proteomics"
+    """
+    Proteomics file
+    """
+    VCF_LEFT_PARENTHESISand_gVCFRIGHT_PARENTHESIS_file = "vcf"
+    """
+    GC or gVCF file
+    """
+
+
 class EnumFamilyType(str, Enum):
     """
     Describes the 'type' of study family, eg, trio.
@@ -734,32 +760,6 @@ class EnumConsanguinity(str, Enum):
     Unknown = "unknown"
     """
     Unknown
-    """
-
-
-class EnumFileMetaDataType(str, Enum):
-    """
-    Identify the type of profile to use
-    """
-    BAMSOLIDUSCRAM = "bam_cram"
-    """
-    Bam or Cram file
-    """
-    FASTQ = "fastq"
-    """
-    FASTQ File
-    """
-    MAF_LEFT_PARENTHESISSomatic_MutationRIGHT_PARENTHESIS_file = "maf"
-    """
-    MAF (Somatic Mutation)
-    """
-    Proteomics_file = "proteomics"
-    """
-    Proteomics file
-    """
-    VCF_LEFT_PARENTHESISand_gVCFRIGHT_PARENTHESIS_file = "vcf"
-    """
-    GC or gVCF file
     """
 
 
@@ -1121,7 +1121,6 @@ class Practitioner(HasExternalId):
                        'NCPIFile',
                        'Family']} })
     practitioner_title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
-    family: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Participant']} })
     practitioner_id: str = Field(default=..., title="Practitioner ID", description="""The Global ID for the Practitioner.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
@@ -1165,7 +1164,9 @@ class Participant(HasExternalId):
     is_deceased: Optional[bool] = Field(default=None, title="Is Deceased", description="""Is the participant known to be Deceased, T, or Alive, F""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     deceased_rel: Optional[str] = Field(default=None, title="Deceased Relative Date", description="""Implementers can provide relativeDateTime if information is available.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    family: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Participant']} })
+    family: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'family_global_id'}},
+         'domain_of': ['Participant']} })
     participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
@@ -1489,30 +1490,6 @@ class FileLocation(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
-class Family(HasExternalId):
-    """
-    Group of Participants that are related.
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family'},
-                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Group'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family',
-         'title': 'Family'})
-
-    family_id: str = Field(default=..., title="Family ID", description="""External ID common to all family members""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    family_type: EnumFamilyType = Field(default=..., title="Family Type", description="""Describes the 'type' of study family, eg, trio.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
-                       'Practitioner',
-                       'ResearchStudy',
-                       'ResearchStudyCollection',
-                       'NCPIFile',
-                       'Family']} })
-    consanguinity: Optional[EnumConsanguinity] = Field(default=None, title="Consanguinity", description="""Is there known or suspected consanguinity in this study family?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    family_focus: Optional[str] = Field(default=None, title="Family Focus", description="""What is this study family investigating? EG, a specific condition""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    family_global_id: str = Field(default=..., title="Family Global ID", description="""Family Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
-
-
 class FileMetaData(Record):
     """
     Representation of file metadata for NCPI
@@ -1541,6 +1518,30 @@ class FileMetaData(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
+class Family(HasExternalId):
+    """
+    Group of Participants that are related.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Group'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family',
+         'title': 'Family'})
+
+    family_id: str = Field(default=..., title="Family ID", description="""External ID common to all family members""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_type: EnumFamilyType = Field(default=..., title="Family Type", description="""Describes the 'type' of study family, eg, trio.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
+                       'ResearchStudy',
+                       'ResearchStudyCollection',
+                       'NCPIFile',
+                       'Family']} })
+    consanguinity: Optional[EnumConsanguinity] = Field(default=None, title="Consanguinity", description="""Is there known or suspected consanguinity in this study family?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_focus: Optional[str] = Field(default=None, title="Family Focus", description="""What is this study family investigating? EG, a specific condition""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_global_id: str = Field(default=..., title="Family Global ID", description="""Family Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
@@ -1564,5 +1565,5 @@ Record.model_rebuild()
 AssociatedParty.model_rebuild()
 Period.model_rebuild()
 FileLocation.model_rebuild()
-Family.model_rebuild()
 FileMetaData.model_rebuild()
+Family.model_rebuild()

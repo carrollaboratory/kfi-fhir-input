@@ -2079,20 +2079,6 @@ slots:
     - PractitionerRole
     range: string
     required: false
-  family:
-    name: family
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/family
-    description: The family the participant is a part of
-    title: Family
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/family
-    owner: Participant
-    domain_of:
-    - Practitioner
-    - Participant
-    range: Family
-    required: false
-    multivalued: false
   role:
     name: role
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/role
@@ -2290,6 +2276,23 @@ slots:
     domain_of:
     - Participant
     range: EnumPatientKnowledgeSource
+    required: false
+    multivalued: false
+  family:
+    name: family
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family
+    annotations:
+      target_slot:
+        tag: target_slot
+        value: family_global_id
+    description: The family the participant is a part of
+    title: Family
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Family
     required: false
     multivalued: false
   parent_study_id:
@@ -3900,7 +3903,6 @@ classes:
     - practitioner_role_id
     - description
     - practitioner_title
-    - family
     - practitioner__practitioner_id
     attributes:
       practitioner_id:
@@ -4409,5 +4411,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-09T13:54:12'
 source_file_size: 5879
-generation_date: '2026-01-09T16:09:57'
+generation_date: '2026-01-09T16:56:45'
 

@@ -5,7 +5,6 @@ imports:
   - kfi_fhir_input
   - institution
   - practitioner_role
-  - family
 classes:
   Practitioner:
     title: FHIR Practitioner Resource Content
@@ -27,7 +26,6 @@ classes:
       - practitioner_role_id  # This will be a global ID generated specifically for the practitioner's role at an institution. 
       - description
       - practitioner_title
-      - family 
 slots:
   email:
     title: Email Address
@@ -44,9 +42,4 @@ slots:
     description: The Global ID for the PractitionerRole that links a Practitioner to their Institution. 
     range: string 
     required: false
-  family:
-    title: Family 
-    description: The family the participant is a part of 
-    range: Family 
-    multivalued: false 
-    required: false  
+

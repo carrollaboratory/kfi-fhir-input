@@ -97,6 +97,14 @@ slots:
     required: false 
     multivalued: false
     range: EnumPatientKnowledgeSource
+  family:
+    title: Family
+    description: The family the participant is a part of 
+    range: Family 
+    multivalued: false 
+    required: false  
+    annotations:
+      target_slot: family_global_id
 enums:
   EnumBirthSex:
     description: Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)
