@@ -462,6 +462,16 @@ attributes:
     required: true
   patient:
     name: patient
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: patient
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
     description: The child from the parent-child relationship
     title: Patient (Child)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -476,6 +486,16 @@ attributes:
     multivalued: false
   relative:
     name: relative
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: extension[relative]
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
     description: The parent from the parent-child relationship
     title: Relative (Parent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -490,6 +510,16 @@ attributes:
     multivalued: false
   relationship:
     name: relationship
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: relationship
+      fhir_resource:
+        tag: fhir_resource
+        value: FamilyMemberHistory
     description: The role the relative (parent) fills with respect to the patient
       (child) for this relationship.
     title: Relationship
@@ -505,6 +535,16 @@ attributes:
     multivalued: false
   knowledge_source:
     name: knowledge_source
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
+      fhir_element:
+        tag: fhir_element
+        value: relationship
+      fhir_resource:
+        tag: fhir_resource
+        value: exception[KnowledgeSource]
     description: The source for the reltionship term
     title: Knowledge Source
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
