@@ -25,6 +25,7 @@ imports:
 - file
 - file_location
 - family_relationship
+- family
 - kfi_fhir_input
 - file_meta_data
 license: MIT
@@ -86,6 +87,9 @@ prefixes:
   ncpi_patient_knowledge_source:
     prefix_prefix: ncpi_patient_knowledge_source
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
+  ncpi_family_types:
+    prefix_prefix: ncpi_family_types
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/ncpi-family-types
   kin:
     prefix_prefix: kin
     prefix_reference: http://purl.org/ga4gh/kin.fhir
@@ -104,6 +108,9 @@ prefixes:
   umls:
     prefix_prefix: umls
     prefix_reference: https://uts.nlm.nih.gov/uts/umls/concept
+  sct:
+    prefix_prefix: sct
+    prefix_reference: http://snomed.info/sct
   edam:
     prefix_prefix: edam
     prefix_reference: https://edamontology.org
@@ -1184,6 +1191,71 @@ enums:
           of the patient.
         meaning: ncpi_patient_knowledge_source:inferred
         title: Inferred
+  EnumFamilyType:
+    name: EnumFamilyType
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/EnumFamilyType
+    description: Describes the 'type' of study family, eg, trio.
+    title: Family Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    permissible_values:
+      control_only:
+        text: control_only
+        description: Control Only
+        meaning: ncpi_family_types:Control-only
+        title: Control Only
+      duo:
+        text: duo
+        description: Duo
+        meaning: ncpi_family_types:Duo
+        title: Duo
+      trio:
+        text: trio
+        description: Trio
+        meaning: ncpi_family_types:Trio
+        title: Trio
+      trioplus:
+        text: trioplus
+        description: Trio+
+        meaning: ncpi_family_types:Trio+
+        title: Trio+
+      proband_only:
+        text: proband_only
+        description: Proband Only
+        meaning: ncpi_family_types:Proband-only
+        title: Proband Only
+      other:
+        text: other
+        description: Other
+        meaning: ncpi_family_types:Other
+        title: Other
+  EnumConsanguinity:
+    name: EnumConsanguinity
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/EnumConsanguinity
+    description: List of codes indicates the level of known consanguinity (blood relation)
+      within a study family.
+    title: Consanguinity
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    permissible_values:
+      not_suspected:
+        text: not_suspected
+        description: Not suspected
+        meaning: sct:428263003
+        title: Not suspected
+      suspected:
+        text: suspected
+        description: Suspected
+        meaning: sct:415684004
+        title: Suspected
+      known_present:
+        text: known_present
+        description: Known present
+        meaning: sct:410515003
+        title: Known present
+      unknown:
+        text: unknown
+        description: Unknown
+        meaning: sct:261665006
+        title: Unknown
   EnumFileMetaDataType:
     name: EnumFileMetaDataType
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/EnumFileMetaDataType
@@ -1282,12 +1354,13 @@ slots:
     title: Description
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:description
-    owner: NCPIFile
+    owner: FamilyMembership
     domain_of:
     - AccessPolicy
     - Practitioner
     - ResearchStudy
     - NCPIFile
+    - FamilyMembership
     range: string
     required: false
   practitioner_role_id:
@@ -3017,6 +3090,58 @@ slots:
     range: EnumRelationshipKnowledgeSource
     required: true
     multivalued: false
+  family_id:
+    name: family_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_id
+    description: External ID common to all family members
+    title: Family ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_id
+    owner: FamilyMembership
+    domain_of:
+    - FamilyMembership
+    range: string
+    required: true
+    multivalued: false
+  family_type:
+    name: family_type
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_type
+    description: Describes the 'type' of study family, eg, trio.
+    title: Family Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_type
+    owner: FamilyMembership
+    domain_of:
+    - FamilyMembership
+    range: EnumFamilyType
+    required: true
+    multivalued: false
+  consanguinity:
+    name: consanguinity
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/consanguinity
+    description: Is there known or suspected consanguinity in this study family?
+    title: Consanguinity
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/consanguinity
+    owner: FamilyMembership
+    domain_of:
+    - FamilyMembership
+    range: EnumConsanguinity
+    required: false
+    multivalued: false
+  family_focus:
+    name: family_focus
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_focus
+    description: What is this study family investigating? EG, a specific condition
+    title: Family Focus
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_focus
+    owner: FamilyMembership
+    domain_of:
+    - FamilyMembership
+    range: uriorcurie
+    required: false
+    multivalued: false
   meta_data_type:
     name: meta_data_type
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/meta_data_type
@@ -3515,6 +3640,19 @@ slots:
     - FamilyRelationship
     range: string
     required: true
+  familyMembership__family_relhip_global_id:
+    name: familyMembership__family_relhip_global_id
+    description: Family Membership Global ID
+    title: Family Membership Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_relhip_global_id
+    identifier: true
+    alias: family_relhip_global_id
+    owner: FamilyMembership
+    domain_of:
+    - FamilyMembership
+    range: string
+    required: true
   ParticipantAssertion_participant_id:
     name: ParticipantAssertion_participant_id
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputparticipant_id
@@ -3807,9 +3945,12 @@ classes:
     name: Participant
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
     annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
       fhir_resource:
         tag: fhir_resource
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+        value: Patient
     description: Research oriented patient
     title: Participant
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
@@ -4186,6 +4327,37 @@ classes:
         range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/FamilyRelationship
+  FamilyMembership:
+    name: FamilyMembership
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/FamilyMembership
+    annotations:
+      fhir_resource:
+        tag: fhir_resource
+        value: Group
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family
+    description: Group of Participants that are related.
+    title: Family Membership
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    is_a: HasExternalId
+    slots:
+    - external_id
+    - family_id
+    - family_type
+    - description
+    - consanguinity
+    - family_focus
+    - familyMembership__family_relhip_global_id
+    attributes:
+      family_relhip_global_id:
+        name: family_relhip_global_id
+        description: Family Membership Global ID
+        title: Family Membership Global ID
+        identifier: true
+        range: string
+        required: true
+    class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/FamilyMembership
   FileMetaData:
     name: FileMetaData
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
@@ -4219,7 +4391,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-09T11:33:46'
-source_file_size: 5746
-generation_date: '2026-01-09T11:46:36'
+source_file_date: '2026-01-09T13:54:12'
+source_file_size: 5879
+generation_date: '2026-01-09T14:01:48'
 

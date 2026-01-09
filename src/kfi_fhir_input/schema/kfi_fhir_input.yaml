@@ -29,12 +29,14 @@ prefixes:
   ncpi_cond_type: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/
   ncpi_sample_availability: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability
   ncpi_patient_knowledge_source: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source
+  ncpi_family_types: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/ncpi-family-types
   kin: http://purl.org/ga4gh/kin.fhir
   linkml: https://w3id.org/linkml/
   ucum: http://unitsofmeasure.org
   duo: http://purl.obolibrary.org/obo/duo.owl
   usc_birthsex: http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender
   umls: https://uts.nlm.nih.gov/uts/umls/concept
+  sct: http://snomed.info/sct
   edam: https://edamontology.org
   obi: http://purl.obolibrary.org/obo/obi.owl
   w3c: https://w3c.github.io/N3/ns/
@@ -73,6 +75,7 @@ imports:
   - file 
   - file_location
   - family_relationship
+  - family
 classes:
   Any:
     class_uri: linkml:Any

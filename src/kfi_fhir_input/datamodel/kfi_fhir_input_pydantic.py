@@ -101,7 +101,8 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'sample',
                  'file',
                  'file_location',
-                 'family_relationship'],
+                 'family_relationship',
+                 'family'],
      'license': 'MIT',
      'name': 'kfi-fhir-input',
      'prefixes': {'cdc_rec': {'prefix_prefix': 'cdc_rec',
@@ -148,12 +149,16 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                                             'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type'},
                   'ncpi_dob_method': {'prefix_prefix': 'ncpi_dob_method',
                                       'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method'},
+                  'ncpi_family_types': {'prefix_prefix': 'ncpi_family_types',
+                                        'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/ncpi-family-types'},
                   'ncpi_patient_knowledge_source': {'prefix_prefix': 'ncpi_patient_knowledge_source',
                                                     'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source'},
                   'ncpi_sample_availability': {'prefix_prefix': 'ncpi_sample_availability',
                                                'prefix_reference': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability'},
                   'obi': {'prefix_prefix': 'obi',
                           'prefix_reference': 'http://purl.obolibrary.org/obo/obi.owl'},
+                  'sct': {'prefix_prefix': 'sct',
+                          'prefix_reference': 'http://snomed.info/sct'},
                   'ucum': {'prefix_prefix': 'ucum',
                            'prefix_reference': 'http://unitsofmeasure.org'},
                   'umls': {'prefix_prefix': 'umls',
@@ -628,32 +633,6 @@ class EnumSpecimenAvailability(str, Enum):
     """
 
 
-class EnumFileMetaDataType(str, Enum):
-    """
-    Identify the type of profile to use
-    """
-    BAMSOLIDUSCRAM = "bam_cram"
-    """
-    Bam or Cram file
-    """
-    FASTQ = "fastq"
-    """
-    FASTQ File
-    """
-    MAF_LEFT_PARENTHESISSomatic_MutationRIGHT_PARENTHESIS_file = "maf"
-    """
-    MAF (Somatic Mutation)
-    """
-    Proteomics_file = "proteomics"
-    """
-    Proteomics file
-    """
-    VCF_LEFT_PARENTHESISand_gVCFRIGHT_PARENTHESIS_file = "vcf"
-    """
-    GC or gVCF file
-    """
-
-
 class EnumFamilyRelationship(str, Enum):
     """
     What is the relative's relationship to the patient
@@ -706,6 +685,84 @@ class EnumRelationshipKnowledgeSource(str, Enum):
     """
 
 
+class EnumFileMetaDataType(str, Enum):
+    """
+    Identify the type of profile to use
+    """
+    BAMSOLIDUSCRAM = "bam_cram"
+    """
+    Bam or Cram file
+    """
+    FASTQ = "fastq"
+    """
+    FASTQ File
+    """
+    MAF_LEFT_PARENTHESISSomatic_MutationRIGHT_PARENTHESIS_file = "maf"
+    """
+    MAF (Somatic Mutation)
+    """
+    Proteomics_file = "proteomics"
+    """
+    Proteomics file
+    """
+    VCF_LEFT_PARENTHESISand_gVCFRIGHT_PARENTHESIS_file = "vcf"
+    """
+    GC or gVCF file
+    """
+
+
+class EnumFamilyType(str, Enum):
+    """
+    Describes the 'type' of study family, eg, trio.
+    """
+    Control_Only = "control_only"
+    """
+    Control Only
+    """
+    Duo = "duo"
+    """
+    Duo
+    """
+    Trio = "trio"
+    """
+    Trio
+    """
+    TrioPLUS_SIGN = "trioplus"
+    """
+    Trio+
+    """
+    Proband_Only = "proband_only"
+    """
+    Proband Only
+    """
+    Other = "other"
+    """
+    Other
+    """
+
+
+class EnumConsanguinity(str, Enum):
+    """
+    List of codes indicates the level of known consanguinity (blood relation) within a study family.
+    """
+    Not_suspected = "not_suspected"
+    """
+    Not suspected
+    """
+    Suspected = "suspected"
+    """
+    Suspected
+    """
+    Known_present = "known_present"
+    """
+    Known present
+    """
+    Unknown = "unknown"
+    """
+    Unknown
+    """
+
+
 
 class AccessPolicy(ConfiguredBaseModel):
     """
@@ -720,7 +777,8 @@ class AccessPolicy(ConfiguredBaseModel):
                        'Practitioner',
                        'ResearchStudy',
                        'ResearchStudyCollection',
-                       'NCPIFile']} })
+                       'NCPIFile',
+                       'Family']} })
     data_access_type: EnumDataAccessType = Field(default=..., title="Access Type", description="""Type of access restrictions on file downloads ( open | registered | controlled )""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
                                             'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type'},
                          'fhir_profile': {'tag': 'fhir_profile',
@@ -987,6 +1045,47 @@ class StudyMembership(ConfiguredBaseModel):
                        'NCPIFile']} })
 
 
+class FamilyRelationship(ConfiguredBaseModel):
+    """
+    A relationship between individuals in a pedigree or family.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'http://purl.org/ga4gh/pedigree-fhir-ig/StructureDefinition/PedigreeRelationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family-relationship',
+         'title': 'Family Relationship'})
+
+    patient: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'patient'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'domain_of': ['FamilyRelationship']} })
+    relative: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'extension[relative]'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'domain_of': ['FamilyRelationship']} })
+    relationship: EnumFamilyRelationship = Field(default=..., title="Relationship", description="""The role the relative (parent) fills with respect to the patient (child) for this relationship.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'relationship'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'FamilyMemberHistory'}},
+         'domain_of': ['FamilyRelationship']} })
+    knowledge_source: EnumRelationshipKnowledgeSource = Field(default=..., title="Knowledge Source", description="""The source for the reltionship term""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'relationship'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'exception[KnowledgeSource]'}},
+         'domain_of': ['FamilyRelationship']} })
+    family_relationship_global_id: str = Field(default=..., title="Family Relationship Global ID", description="""Family Relationship Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+
+
 class HasExternalId(ConfiguredBaseModel):
     """
     Has an external ID
@@ -1019,7 +1118,8 @@ class Practitioner(HasExternalId):
                        'Practitioner',
                        'ResearchStudy',
                        'ResearchStudyCollection',
-                       'NCPIFile']} })
+                       'NCPIFile',
+                       'Family']} })
     practitioner_title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     practitioner_id: str = Field(default=..., title="Practitioner ID", description="""The Global ID for the Practitioner.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
@@ -1043,8 +1143,9 @@ class Participant(HasExternalId):
     """
     Research oriented patient
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'}},
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Patient'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant',
          'title': 'Participant'})
 
@@ -1091,7 +1192,8 @@ class ResearchStudy(HasExternalId):
                        'Practitioner',
                        'ResearchStudy',
                        'ResearchStudyCollection',
-                       'NCPIFile']} })
+                       'NCPIFile',
+                       'Family']} })
     study_condition: Optional[list[str]] = Field(default=[], title="Study Condition", description="""The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_acknowledgement: Optional[list[str]] = Field(default=[], title="Study Acknowledgement", description="""Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_status: EnumStudyStatus = Field(default=..., title="Study Status", description="""The current state of the study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
@@ -1123,7 +1225,8 @@ class ResearchStudyCollection(HasExternalId):
                        'Practitioner',
                        'ResearchStudy',
                        'ResearchStudyCollection',
-                       'NCPIFile']} })
+                       'NCPIFile',
+                       'Family']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1312,7 +1415,8 @@ class NCPIFile(HasExternalId):
                        'Practitioner',
                        'ResearchStudy',
                        'ResearchStudyCollection',
-                       'NCPIFile']} })
+                       'NCPIFile',
+                       'Family']} })
     file_global_id: str = Field(default=..., title="File Global ID", description="""File Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
@@ -1411,45 +1515,28 @@ class FileMetaData(Record):
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
-class FamilyRelationship(ConfiguredBaseModel):
+class Family(HasExternalId):
     """
-    A relationship between individuals in a pedigree or family.
+    Group of Participants that are related.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'http://purl.org/ga4gh/pedigree-fhir-ig/StructureDefinition/PedigreeRelationship'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'FamilyMemberHistory'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family-relationship',
-         'title': 'Family Relationship'})
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family'},
+                         'fhir_resource': {'tag': 'fhir_resource', 'value': 'Group'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family',
+         'title': 'Family'})
 
-    patient: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'patient'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'FamilyMemberHistory'}},
-         'domain_of': ['FamilyRelationship']} })
-    relative: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
-                                          'value': 'extension[relative]'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'FamilyMemberHistory'}},
-         'domain_of': ['FamilyRelationship']} })
-    relationship: EnumFamilyRelationship = Field(default=..., title="Relationship", description="""The role the relative (parent) fills with respect to the patient (child) for this relationship.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
-                                          'value': 'relationship'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'FamilyMemberHistory'}},
-         'domain_of': ['FamilyRelationship']} })
-    knowledge_source: EnumRelationshipKnowledgeSource = Field(default=..., title="Knowledge Source", description="""The source for the reltionship term""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
-                                          'value': 'relationship'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'exception[KnowledgeSource]'}},
-         'domain_of': ['FamilyRelationship']} })
-    family_relationship_global_id: str = Field(default=..., title="Family Relationship Global ID", description="""Family Relationship Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['FamilyRelationship']} })
+    family_id: str = Field(default=..., title="Family ID", description="""External ID common to all family members""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_type: EnumFamilyType = Field(default=..., title="Family Type", description="""Describes the 'type' of study family, eg, trio.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
+                       'ResearchStudy',
+                       'ResearchStudyCollection',
+                       'NCPIFile',
+                       'Family']} })
+    consanguinity: Optional[EnumConsanguinity] = Field(default=None, title="Consanguinity", description="""Is there known or suspected consanguinity in this study family?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_focus: Optional[str] = Field(default=None, title="Family Focus", description="""What is this study family investigating? EG, a specific condition""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_global_id: str = Field(default=..., title="Family Global ID", description="""Family Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
 # Model rebuild
@@ -1461,6 +1548,7 @@ ParticipantAssertion.model_rebuild()
 Person.model_rebuild()
 PractitionerRole.model_rebuild()
 StudyMembership.model_rebuild()
+FamilyRelationship.model_rebuild()
 HasExternalId.model_rebuild()
 Practitioner.model_rebuild()
 Institution.model_rebuild()
@@ -1475,4 +1563,4 @@ AssociatedParty.model_rebuild()
 Period.model_rebuild()
 FileLocation.model_rebuild()
 FileMetaData.model_rebuild()
-FamilyRelationship.model_rebuild()
+Family.model_rebuild()

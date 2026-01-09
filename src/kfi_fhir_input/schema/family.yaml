@@ -1,0 +1,101 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/family
+name: kfi-fhir-input-family
+imports: 
+  - linkml:types 
+  - kfi_fhir_input 
+classes:
+  Family:
+    title: Family
+    description: Group of Participants that are related.
+    is_a: HasExternalId
+    annotations:
+      fhir_resource: Group
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family
+    attributes: 
+      family_global_id:
+        title: Family Global ID 
+        description: Family Global ID 
+        range: string 
+        identifier: true 
+        required: true     
+    slots: 
+      - family_id 
+      - family_type 
+      - description 
+      - consanguinity
+      - family_focus
+slots:
+  family_id:
+    title: Family ID
+    description: External ID common to all family members 
+    required: true 
+    multivalued: false 
+    range: string 
+  family_type:
+    title: Family Type 
+    description: Describes the 'type' of study family, eg, trio.
+    required: true # The IG has this as 0..1 is this correct?
+    range: EnumFamilyType 
+    multivalued: false 
+  consanguinity:
+    title: Consanguinity 
+    description: Is there known or suspected consanguinity in this study family?
+    required: false 
+    multivalued: false 
+    range: EnumConsanguinity
+  family_focus:
+    title: Family Focus
+    description: What is this study family investigating? EG, a specific condition
+    required: false 
+    multivalued: false 
+    range: uriorcurie
+enums:
+  EnumFamilyType:
+    title: Family Type 
+    description: Describes the 'type' of study family, eg, trio.
+    permissible_values:
+      control_only:
+        title: Control Only 
+        description: Control Only 
+        meaning: ncpi_family_types:Control-only 
+      duo:
+        title: Duo 
+        description: Duo 
+        meaning: ncpi_family_types:Duo 
+      trio: 
+        title: Trio 
+        description: Trio 
+        meaning: ncpi_family_types:Trio 
+      trioplus: 
+        title: Trio+
+        description: Trio+
+        meaning: ncpi_family_types:Trio+
+      proband_only:
+        title: Proband Only 
+        description: Proband Only 
+        meaning: ncpi_family_types:Proband-only 
+      other:
+        title: Other 
+        description: Other 
+        meaning: ncpi_family_types:Other
+  EnumConsanguinity:
+    title: Consanguinity
+    description: List of codes indicates the level of known consanguinity 
+                  (blood relation) within a study family.
+    permissible_values:
+      not_suspected:
+        title: Not suspected
+        description: Not suspected 
+        meaning: sct:428263003
+      suspected:
+        title: Suspected 
+        description: Suspected 
+        meaning: sct:415684004
+      known_present:
+        title: Known present 
+        description: Known present 
+        meaning: sct:410515003
+      unknown:
+        title: Unknown 
+        description: Unknown
+        meaning: sct:261665006

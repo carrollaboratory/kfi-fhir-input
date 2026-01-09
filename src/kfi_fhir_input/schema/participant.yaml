@@ -10,7 +10,8 @@ classes:
     description: Research oriented patient
     is_a: HasExternalId 
     annotations:
-      fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
+      fhir_resource: Patient 
     attributes:
       participant_id:
         title: Participant ID

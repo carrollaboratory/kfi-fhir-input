@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-09T11:46:47
+# Generation date: 2026-01-09T16:04:54
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -85,9 +85,11 @@ NCPI_COND_TYPE = CurieNamespace('ncpi_cond_type', 'https://nih-ncpi.github.io/nc
 NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
 NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
+NCPI_FAMILY_TYPES = CurieNamespace('ncpi_family_types', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/ncpi-family-types')
 NCPI_PATIENT_KNOWLEDGE_SOURCE = CurieNamespace('ncpi_patient_knowledge_source', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source')
 NCPI_SAMPLE_AVAILABILITY = CurieNamespace('ncpi_sample_availability', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/biospecimen-availability')
 OBI = CurieNamespace('obi', 'http://purl.obolibrary.org/obo/obi.owl')
+SCT = CurieNamespace('sct', 'http://snomed.info/sct')
 UCUM = CurieNamespace('ucum', 'http://unitsofmeasure.org')
 UMLS = CurieNamespace('umls', 'https://uts.nlm.nih.gov/uts/umls/concept')
 UNKNOWN = CurieNamespace('unknown', 'https://need-more-info.org')
@@ -172,6 +174,10 @@ class FileLocationId(RecordId):
 
 
 class FamilyRelationshipFamilyRelationshipGlobalId(extended_str):
+    pass
+
+
+class FamilyFamilyGlobalId(extended_str):
     pass
 
 
@@ -1214,6 +1220,53 @@ class FamilyRelationship(YAMLRoot):
 
 
 @dataclass(repr=False)
+class Family(HasExternalId):
+    """
+    Group of Participants that are related.
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["family/Family"]
+    class_class_curie: ClassVar[str] = "kfi:family/Family"
+    class_name: ClassVar[str] = "Family"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Family
+
+    family_global_id: Union[str, FamilyFamilyGlobalId] = None
+    family_id: str = None
+    family_type: Union[str, "EnumFamilyType"] = None
+    description: Optional[str] = None
+    consanguinity: Optional[Union[str, "EnumConsanguinity"]] = None
+    family_focus: Optional[Union[str, URIorCURIE]] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.family_global_id):
+            self.MissingRequiredField("family_global_id")
+        if not isinstance(self.family_global_id, FamilyFamilyGlobalId):
+            self.family_global_id = FamilyFamilyGlobalId(self.family_global_id)
+
+        if self._is_empty(self.family_id):
+            self.MissingRequiredField("family_id")
+        if not isinstance(self.family_id, str):
+            self.family_id = str(self.family_id)
+
+        if self._is_empty(self.family_type):
+            self.MissingRequiredField("family_type")
+        if not isinstance(self.family_type, EnumFamilyType):
+            self.family_type = EnumFamilyType(self.family_type)
+
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
+        if self.consanguinity is not None and not isinstance(self.consanguinity, EnumConsanguinity):
+            self.consanguinity = EnumConsanguinity(self.consanguinity)
+
+        if self.family_focus is not None and not isinstance(self.family_focus, URIorCURIE):
+            self.family_focus = URIorCURIE(self.family_focus)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
 class FileMetaData(Record):
     """
     Representation of file metadata for NCPI
@@ -2112,6 +2165,76 @@ class EnumRelationshipKnowledgeSource(EnumDefinitionImpl):
         description="Indicate if the relationship is real or inferred",
     )
 
+class EnumFamilyType(EnumDefinitionImpl):
+    """
+    Describes the 'type' of study family, eg, trio.
+    """
+    control_only = PermissibleValue(
+        text="control_only",
+        title="Control Only",
+        description="Control Only",
+        meaning=NCPI_FAMILY_TYPES["Control-only"])
+    duo = PermissibleValue(
+        text="duo",
+        title="Duo",
+        description="Duo",
+        meaning=NCPI_FAMILY_TYPES["Duo"])
+    trio = PermissibleValue(
+        text="trio",
+        title="Trio",
+        description="Trio",
+        meaning=NCPI_FAMILY_TYPES["Trio"])
+    trioplus = PermissibleValue(
+        text="trioplus",
+        title="Trio+",
+        description="Trio+",
+        meaning=NCPI_FAMILY_TYPES["Trio+"])
+    proband_only = PermissibleValue(
+        text="proband_only",
+        title="Proband Only",
+        description="Proband Only",
+        meaning=NCPI_FAMILY_TYPES["Proband-only"])
+    other = PermissibleValue(
+        text="other",
+        title="Other",
+        description="Other",
+        meaning=NCPI_FAMILY_TYPES["Other"])
+
+    _defn = EnumDefinition(
+        name="EnumFamilyType",
+        description="Describes the 'type' of study family, eg, trio.",
+    )
+
+class EnumConsanguinity(EnumDefinitionImpl):
+    """
+    List of codes indicates the level of known consanguinity (blood relation) within a study family.
+    """
+    not_suspected = PermissibleValue(
+        text="not_suspected",
+        title="Not suspected",
+        description="Not suspected",
+        meaning=SCT["428263003"])
+    suspected = PermissibleValue(
+        text="suspected",
+        title="Suspected",
+        description="Suspected",
+        meaning=SCT["415684004"])
+    known_present = PermissibleValue(
+        text="known_present",
+        title="Known present",
+        description="Known present",
+        meaning=SCT["410515003"])
+    unknown = PermissibleValue(
+        text="unknown",
+        title="Unknown",
+        description="Unknown",
+        meaning=SCT["261665006"])
+
+    _defn = EnumDefinition(
+        name="EnumConsanguinity",
+        description="List of codes indicates the level of known consanguinity (blood relation) within a study family.",
+    )
+
 class EnumFileMetaDataType(EnumDefinitionImpl):
     """
     Identify the type of profile to use
@@ -2440,6 +2563,18 @@ slots.relationship = Slot(uri=KFI['family-relationship/relationship'], name="rel
 slots.knowledge_source = Slot(uri=KFI['family-relationship/knowledge_source'], name="knowledge_source", curie=KFI.curie('family-relationship/knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.knowledge_source, domain=None, range=Union[str, "EnumRelationshipKnowledgeSource"])
 
+slots.family_id = Slot(uri=KFI['family/family_id'], name="family_id", curie=KFI.curie('family/family_id'),
+                   model_uri=KFI_FHIR_SPARKS.family_id, domain=None, range=str)
+
+slots.family_type = Slot(uri=KFI['family/family_type'], name="family_type", curie=KFI.curie('family/family_type'),
+                   model_uri=KFI_FHIR_SPARKS.family_type, domain=None, range=Union[str, "EnumFamilyType"])
+
+slots.consanguinity = Slot(uri=KFI['family/consanguinity'], name="consanguinity", curie=KFI.curie('family/consanguinity'),
+                   model_uri=KFI_FHIR_SPARKS.consanguinity, domain=None, range=Optional[Union[str, "EnumConsanguinity"]])
+
+slots.family_focus = Slot(uri=KFI['family/family_focus'], name="family_focus", curie=KFI.curie('family/family_focus'),
+                   model_uri=KFI_FHIR_SPARKS.family_focus, domain=None, range=Optional[Union[str, URIorCURIE]])
+
 slots.meta_data_type = Slot(uri=KFI['file-meta-data/meta_data_type'], name="meta_data_type", curie=KFI.curie('file-meta-data/meta_data_type'),
                    model_uri=KFI_FHIR_SPARKS.meta_data_type, domain=None, range=Union[str, "EnumFileMetaDataType"])
 
@@ -2550,6 +2685,9 @@ slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name=
 
 slots.familyRelationship__family_relationship_global_id = Slot(uri=KFI['family-relationship/family_relationship_global_id'], name="familyRelationship__family_relationship_global_id", curie=KFI.curie('family-relationship/family_relationship_global_id'),
                    model_uri=KFI_FHIR_SPARKS.familyRelationship__family_relationship_global_id, domain=None, range=URIRef)
+
+slots.family__family_global_id = Slot(uri=KFI['family/family_global_id'], name="family__family_global_id", curie=KFI.curie('family/family_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.family__family_global_id, domain=None, range=URIRef)
 
 slots.ParticipantAssertion_participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="ParticipantAssertion_participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
                    model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])
