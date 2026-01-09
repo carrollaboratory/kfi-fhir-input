@@ -206,6 +206,11 @@ AssociatedParty {
     string id  
     uriorcurieList external_id  
 }
+FamilyRelationship {
+    EnumFamilyRelationship relationship  
+    EnumRelationshipKnowledgeSource knowledge_source  
+    string family_relationship_global_id  
+}
 FileLocation {
     uri location_uri  
     string file_name  
@@ -352,6 +357,8 @@ AgeAt ||--|o RelativeDateTime : "age"
 Aliquot ||--|o Sample : "parent_sample_id"
 AssociatedParty ||--|o Any : "party"
 AssociatedParty ||--|o Period : "period_id"
+FamilyRelationship ||--|| Participant : "patient"
+FamilyRelationship ||--|| Participant : "relative"
 FileLocation ||--|| AccessPolicy : "access_policy_id"
 FileMetaData ||--|o Sample : "related_samples"
 NCPIFile ||--|| Participant : "participant_id"
