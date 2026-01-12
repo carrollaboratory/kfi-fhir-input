@@ -1,5 +1,5 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
+file_location_id,Location details (this is not a global ID),string,,,,,
 location_uri,The URI at which this data can be accessed,string,,,,,
 file_name,The file's name (no path),string,,,,,
 access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
-id,Unique Identifier for a table entry. This is probably not the Global ID,string,,,,,

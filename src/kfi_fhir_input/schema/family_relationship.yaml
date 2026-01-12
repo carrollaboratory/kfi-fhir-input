@@ -19,12 +19,12 @@ classes:
         identifier: true 
         required: true 
     slots: 
-      - patient # 
-      - relative 
+      - patient_id # 
+      - relative_id
       - relationship
       - knowledge_source
 slots:
-  patient: 
+  patient_id: 
     title: Patient (Child)
     description: The child from the parent-child relationship 
     range: Participant 
@@ -35,7 +35,7 @@ slots:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
       fhir_element: patient
       fhir_resource: FamilyMemberHistory
-  relative: 
+  relative_id: 
     title: Relative (Parent)
     description: The parent from the parent-child relationship 
     range: Participant 
@@ -46,6 +46,7 @@ slots:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
       fhir_element: extension[relative] 
       fhir_resource: FamilyMemberHistory
+      db_column: relative_id
   relationship: 
     title: Relationship 
     description: The role the relative (parent) fills with respect to the patient (child) for this relationship.

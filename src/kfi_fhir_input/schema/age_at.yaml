@@ -21,6 +21,8 @@ classes:
         description: Age either numeric value or range 
         range: RelativeDateTime 
         required: false 
+        annotations:
+          db_column: relative_date_time_id
       age_code: 
         title: Age Code 
         description: Age expressed as an enumerated value representing an age category

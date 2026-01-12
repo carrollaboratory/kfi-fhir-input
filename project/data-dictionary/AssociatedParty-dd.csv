@@ -1,6 +1,7 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
 name,Name of the entity.,string,,,,,
 role,Research Study Party Role,enumeration,,,,sponsor=sponsor;lead_sponsor=lead-sponsor;sponsor_investigator;primary_investigator;collaborator;funding_source;general_contact;recruitment_contact;sub_investigator;study_director;study_chair;irb=Institutional Review Board,
-period_id,Reference to a time period which defines a Start and End datatime period.,string,,,,,Foreign Key: Period.id
+associated_party_practitioner_id,Associated Party (is Practitioner).,string,,,,,Foreign Key: Practitioner.practitioner_id
+associated_party_practitioner_role_id,Associated Party (is Practitioner Role),string,,,,,Foreign Key: PractitionerRole.practitioner_role_id
+associated_party_institution_id,Associated Party (is Institution),string,,,,,Foreign Key: PractitionerRole.practitioner_role_id
 id,Unique Identifier for a table entry. This is probably not the Global ID,string,,,,,
-party_id,Individual or organization associated with study,integer,,,,,Foreign Key: Any.id

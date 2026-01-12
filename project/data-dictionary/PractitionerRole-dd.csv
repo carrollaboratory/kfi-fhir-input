@@ -1,5 +1,5 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
 institution_id,The institution this record is associated with.,string,,,,,Foreign Key: Institution.institution_id
 practitioner_id,The Global ID for the PractitionerRole that links a Practitioner to their Institution.,string,,,,,
-period_id,Reference to a time period which defines a Start and End datatime period.,string,,,,,Foreign Key: Period.id
+period_id,Reference to a time period which defines a Start and End datatime period.,string,,,,,Foreign Key: Period.period_id
 practitioner_role_id,Global ID for this record,string,,,,,

@@ -133,13 +133,7 @@ slots:
       target_slot: research_study_id     
     identifier: true
     required: true
-  participant_id:
-    title: Participant ID 
-    description: The Global ID for the Participant 
-    range: Participant 
-    annotations: 
-      target_slot: participant_id 
-    required: true 
+
   access_policy_id:
     title: Access Policy ID 
     description: Access Policy Global ID 
@@ -148,16 +142,6 @@ slots:
     required: true
     annotations:
       target_slot: access_policy_id 
-  period_id:
-    title: Period ID
-    description: Reference to a time period which defines a Start and End datatime period. 
-    range: Period 
-    required: false
-    inlined: false
-    multivalued: false
-    annotations:
-      db_column: period_id
-      target_slot: id 
   website: 
     title: Website 
     description: URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.

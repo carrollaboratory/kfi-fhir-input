@@ -27,8 +27,8 @@ classes:
     slots:
       - participant_id 
       - file_format 
-      - file_location
-      - file_meta_data
+      - file_location_id
+      - file_meta_data_id
       - file_size
       - file_size_unit
       - content_version 
@@ -43,12 +43,6 @@ slots:
     required: true 
     multivalued: false 
     range: uriorcurie
-  file_location: 
-    title: File Location
-    description: Details relating to the links where documents are found
-    range: FileLocation 
-    required: true 
-    multivalued: true 
   file_size: 
     title: File Size 
     description: The size of the file, e.g., in bytes.
@@ -85,9 +79,4 @@ slots:
     required: false 
     multivalued: false 
     range: uriorcurie 
-  file_meta_data:
-    title: File Meta Data 
-    description: Representation of file metadata for NCPI
-    required: false 
-    multivalued: true 
-    range: FileMetaData
+

@@ -1,5 +1,5 @@
 ---
-id: fileloc-0001
+file_location_id: fileloc-0001
 location_uri: https://mycloud.fluffy.com/files/fuzzball.txt
 file_name: fuzball.txt 
 access_policy_id: acp-0001

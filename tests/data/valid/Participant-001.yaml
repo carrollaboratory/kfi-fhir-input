@@ -10,3 +10,5 @@ dob_method: year_only
 age_at_last_vital: rt-0001
 is_deceased: False
 family: fam-12345
+sample:
+  - sample001 

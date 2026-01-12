@@ -5,6 +5,6 @@ role: primary_investigator
 name: Cat McStevens
 classifier: 
   - academic
-#party: prol-0001
-#period: 
-#  - prd-00001
+associated_party_practitioner_role_id: prol-0001
+period_id: 
+  - prd-00001

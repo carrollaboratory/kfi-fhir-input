@@ -1,7 +1,7 @@
 ---
 sample_id: sample001 
 sample_type: UMLS:C0005834
-participant_id: par-01234
+#participant_id: par-01234
 age_at_collection: 
   value_type: age 
   age: rt-001

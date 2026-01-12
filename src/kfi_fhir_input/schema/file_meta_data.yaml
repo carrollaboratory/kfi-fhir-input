@@ -9,11 +9,12 @@ classes:
   FileMetaData:
     title: File Meta Data    
     description: Representation of file metadata for NCPI
-    is_a: Record
+    #is_a: Record
     annotations: 
       fhir_resource: Observation 
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-file-metadata
     slots: 
+      - file_meta_data_id
       - meta_data_type
       - assay_strategy 
       - platform_instrument
@@ -27,7 +28,23 @@ classes:
       - workflow_type 
       - workflow_tool 
       - related_samples
+    slot_usage: 
+      file_meta_data_id:
+        multivalued: false 
+        identifier: true 
+        required: true
+        range: string
+        annotations:
+          db_column: file_meta_data_id 
+          target_slot: file_meta_data_id
 slots:
+  file_meta_data_id:
+    title: File Meta Data 
+    description: Representation of file metadata for NCPI
+    required: false 
+    multivalued: true 
+    range: FileMetaData
+
   meta_data_type: 
     title: Meta Data Type 
     description: Clarify which type of meta data this file has recorded 

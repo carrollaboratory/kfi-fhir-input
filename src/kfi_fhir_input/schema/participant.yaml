@@ -4,6 +4,7 @@ imports:
   - linkml:types 
   - kfi_fhir_input
   - relative_date_time
+  - sample 
 classes:
   Participant:
     title: Participant  
@@ -12,14 +13,8 @@ classes:
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant
       fhir_resource: Patient 
-    attributes:
-      participant_id:
-        title: Participant ID
-        description: Participant Global ID
-        range: string         
-        identifier: true
-        required: true
     slots:
+      - participant_id
       - birthsex 
       - race 
       - ethnicity 
@@ -31,7 +26,28 @@ classes:
       - deceased_rel
       - patient_knowledge_source
       - family
+      - sample
+    slot_usage:
+      participant_id:
+        identifier: true
+        range: string
+    #    required: true
+        
 slots:
+  sample:
+    title: Sample 
+    description: Samples associated with this participant 
+    range: Sample 
+    required: false
+    multivalued: true 
+    # inlined: true
+  participant_id:
+    title: Participant ID 
+    description: The Global ID for the Participant 
+    range: Participant 
+    #annotations: 
+    #  target_slot: participant_id 
+    required: true 
   birthsex:
     title: Birth Sex 
     description: Sex assigned at birth (or pre-natal observed sex)

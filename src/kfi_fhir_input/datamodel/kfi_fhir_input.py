@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-12T11:13:50
+# Generation date: 2026-01-12T16:31:18
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -137,7 +137,7 @@ class PersonPersonId(extended_str):
     pass
 
 
-class PeriodId(RecordId):
+class PeriodPeriodId(extended_str):
     pass
 
 
@@ -169,7 +169,7 @@ class NCPIFileFileGlobalId(extended_str):
     pass
 
 
-class FileLocationId(RecordId):
+class FileLocationFileLocationId(extended_str):
     pass
 
 
@@ -181,7 +181,7 @@ class FamilyFamilyGlobalId(extended_str):
     pass
 
 
-class FileMetaDataId(RecordId):
+class FileMetaDataFileMetaDataId(extended_str):
     pass
 
 
@@ -535,9 +535,11 @@ class AssociatedParty(Record):
     id: Union[str, AssociatedPartyId] = None
     name: Optional[str] = None
     role: Optional[Union[str, "EnumResearchStudyPartyRole"]] = None
-    period_id: Optional[Union[str, PeriodId]] = None
+    period_id: Optional[Union[Union[str, PeriodPeriodId], list[Union[str, PeriodPeriodId]]]] = empty_list()
     classifier: Optional[Union[Union[str, "EnumResearchStudyPartyOrganizationType"], list[Union[str, "EnumResearchStudyPartyOrganizationType"]]]] = empty_list()
-    party: Optional[Union[dict, Any]] = None
+    associated_party_practitioner_id: Optional[Union[str, PractitionerPractitionerId]] = None
+    associated_party_practitioner_role_id: Optional[Union[str, PractitionerRolePractitionerRoleId]] = None
+    associated_party_institution_id: Optional[Union[str, PractitionerRolePractitionerRoleId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -551,12 +553,22 @@ class AssociatedParty(Record):
         if self.role is not None and not isinstance(self.role, EnumResearchStudyPartyRole):
             self.role = EnumResearchStudyPartyRole(self.role)
 
-        if self.period_id is not None and not isinstance(self.period_id, PeriodId):
-            self.period_id = PeriodId(self.period_id)
+        if not isinstance(self.period_id, list):
+            self.period_id = [self.period_id] if self.period_id is not None else []
+        self.period_id = [v if isinstance(v, PeriodPeriodId) else PeriodPeriodId(v) for v in self.period_id]
 
         if not isinstance(self.classifier, list):
             self.classifier = [self.classifier] if self.classifier is not None else []
         self.classifier = [v if isinstance(v, EnumResearchStudyPartyOrganizationType) else EnumResearchStudyPartyOrganizationType(v) for v in self.classifier]
+
+        if self.associated_party_practitioner_id is not None and not isinstance(self.associated_party_practitioner_id, PractitionerPractitionerId):
+            self.associated_party_practitioner_id = PractitionerPractitionerId(self.associated_party_practitioner_id)
+
+        if self.associated_party_practitioner_role_id is not None and not isinstance(self.associated_party_practitioner_role_id, PractitionerRolePractitionerRoleId):
+            self.associated_party_practitioner_role_id = PractitionerRolePractitionerRoleId(self.associated_party_practitioner_role_id)
+
+        if self.associated_party_institution_id is not None and not isinstance(self.associated_party_institution_id, PractitionerRolePractitionerRoleId):
+            self.associated_party_institution_id = PractitionerRolePractitionerRoleId(self.associated_party_institution_id)
 
         super().__post_init__(**kwargs)
 
@@ -612,6 +624,7 @@ class Participant(HasExternalId):
     deceased_rel: Optional[Union[str, RelativeDateTimeId]] = None
     patient_knowledge_source: Optional[Union[str, "EnumPatientKnowledgeSource"]] = None
     family: Optional[Union[str, FamilyFamilyGlobalId]] = None
+    sample: Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.participant_id):
@@ -654,6 +667,10 @@ class Participant(HasExternalId):
         if self.family is not None and not isinstance(self.family, FamilyFamilyGlobalId):
             self.family = FamilyFamilyGlobalId(self.family)
 
+        if not isinstance(self.sample, list):
+            self.sample = [self.sample] if self.sample is not None else []
+        self.sample = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.sample]
+
         super().__post_init__(**kwargs)
 
 
@@ -688,7 +705,7 @@ class Person(YAMLRoot):
 
 
 @dataclass(repr=False)
-class Period(Record):
+class Period(YAMLRoot):
     """
     Time period associated with some FHIR resource
     """
@@ -699,15 +716,15 @@ class Period(Record):
     class_name: ClassVar[str] = "Period"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Period
 
-    id: Union[str, PeriodId] = None
+    period_id: Union[str, PeriodPeriodId] = None
     start: Optional[Union[str, XSDDate]] = None
     end: Optional[Union[str, XSDDate]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, PeriodId):
-            self.id = PeriodId(self.id)
+        if self._is_empty(self.period_id):
+            self.MissingRequiredField("period_id")
+        if not isinstance(self.period_id, PeriodPeriodId):
+            self.period_id = PeriodPeriodId(self.period_id)
 
         if self.start is not None and not isinstance(self.start, XSDDate):
             self.start = XSDDate(self.start)
@@ -734,7 +751,7 @@ class PractitionerRole(YAMLRoot):
     practitioner_role_id: Union[str, PractitionerRolePractitionerRoleId] = None
     institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
     practitioner_id: Optional[str] = None
-    period_id: Optional[Union[str, PeriodId]] = None
+    period_id: Optional[Union[str, PeriodPeriodId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.practitioner_role_id):
@@ -748,8 +765,8 @@ class PractitionerRole(YAMLRoot):
         if self.practitioner_id is not None and not isinstance(self.practitioner_id, str):
             self.practitioner_id = str(self.practitioner_id)
 
-        if self.period_id is not None and not isinstance(self.period_id, PeriodId):
-            self.period_id = PeriodId(self.period_id)
+        if self.period_id is not None and not isinstance(self.period_id, PeriodPeriodId):
+            self.period_id = PeriodPeriodId(self.period_id)
 
         super().__post_init__(**kwargs)
 
@@ -942,7 +959,6 @@ class Sample(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Sample
 
     sample_id: Union[str, SampleSampleId] = None
-    participant_id: Union[str, ParticipantParticipantId] = None
     sample_type: Union[str, URIorCURIE] = None
     parent_sample_id: Optional[Union[str, SampleSampleId]] = None
     age_at_collection: Optional[Union[dict, AgeAt]] = None
@@ -961,11 +977,6 @@ class Sample(HasExternalId):
             self.MissingRequiredField("sample_id")
         if not isinstance(self.sample_id, SampleSampleId):
             self.sample_id = SampleSampleId(self.sample_id)
-
-        if self._is_empty(self.participant_id):
-            self.MissingRequiredField("participant_id")
-        if not isinstance(self.participant_id, ParticipantParticipantId):
-            self.participant_id = ParticipantParticipantId(self.participant_id)
 
         if self._is_empty(self.sample_type):
             self.MissingRequiredField("sample_type")
@@ -1067,12 +1078,12 @@ class NCPIFile(HasExternalId):
     file_global_id: Union[str, NCPIFileFileGlobalId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     file_format: Union[str, URIorCURIE] = None
-    file_location: Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]] = None
+    file_location_id: Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]] = None
     file_size: float = None
     file_size_unit: Union[str, URIorCURIE] = None
     file_type: Union[str, URIorCURIE] = None
     file_hash: str = None
-    file_meta_data: Optional[Union[Union[str, FileMetaDataId], list[Union[str, FileMetaDataId]]]] = empty_list()
+    file_meta_data_id: Optional[Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]]] = empty_list()
     content_version: Optional[str] = None
     file_hash_type: Optional[Union[str, URIorCURIE]] = None
     description: Optional[str] = None
@@ -1093,11 +1104,11 @@ class NCPIFile(HasExternalId):
         if not isinstance(self.file_format, URIorCURIE):
             self.file_format = URIorCURIE(self.file_format)
 
-        if self._is_empty(self.file_location):
-            self.MissingRequiredField("file_location")
-        if not isinstance(self.file_location, list):
-            self.file_location = [self.file_location] if self.file_location is not None else []
-        self.file_location = [v if isinstance(v, FileLocationId) else FileLocationId(v) for v in self.file_location]
+        if self._is_empty(self.file_location_id):
+            self.MissingRequiredField("file_location_id")
+        if not isinstance(self.file_location_id, list):
+            self.file_location_id = [self.file_location_id] if self.file_location_id is not None else []
+        self.file_location_id = [v if isinstance(v, FileLocationFileLocationId) else FileLocationFileLocationId(v) for v in self.file_location_id]
 
         if self._is_empty(self.file_size):
             self.MissingRequiredField("file_size")
@@ -1119,9 +1130,9 @@ class NCPIFile(HasExternalId):
         if not isinstance(self.file_hash, str):
             self.file_hash = str(self.file_hash)
 
-        if not isinstance(self.file_meta_data, list):
-            self.file_meta_data = [self.file_meta_data] if self.file_meta_data is not None else []
-        self.file_meta_data = [v if isinstance(v, FileMetaDataId) else FileMetaDataId(v) for v in self.file_meta_data]
+        if not isinstance(self.file_meta_data_id, list):
+            self.file_meta_data_id = [self.file_meta_data_id] if self.file_meta_data_id is not None else []
+        self.file_meta_data_id = [v if isinstance(v, FileMetaDataFileMetaDataId) else FileMetaDataFileMetaDataId(v) for v in self.file_meta_data_id]
 
         if self.content_version is not None and not isinstance(self.content_version, str):
             self.content_version = str(self.content_version)
@@ -1136,7 +1147,7 @@ class NCPIFile(HasExternalId):
 
 
 @dataclass(repr=False)
-class FileLocation(Record):
+class FileLocation(YAMLRoot):
     """
     Details relating to the links where documents are found
     """
@@ -1147,16 +1158,17 @@ class FileLocation(Record):
     class_name: ClassVar[str] = "FileLocation"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileLocation
 
-    id: Union[str, FileLocationId] = None
+    file_location_id: Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]] = None
     location_uri: Union[str, URI] = None
     file_name: str = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, FileLocationId):
-            self.id = FileLocationId(self.id)
+        if self._is_empty(self.file_location_id):
+            self.MissingRequiredField("file_location_id")
+        if not isinstance(self.file_location_id, list):
+            self.file_location_id = [self.file_location_id] if self.file_location_id is not None else []
+        self.file_location_id = [v if isinstance(v, FileLocationFileLocationId) else FileLocationFileLocationId(v) for v in self.file_location_id]
 
         if self._is_empty(self.location_uri):
             self.MissingRequiredField("location_uri")
@@ -1189,8 +1201,8 @@ class FamilyRelationship(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FamilyRelationship
 
     family_relationship_global_id: Union[str, FamilyRelationshipFamilyRelationshipGlobalId] = None
-    patient: Union[str, ParticipantParticipantId] = None
-    relative: Union[str, ParticipantParticipantId] = None
+    patient_id: Union[str, ParticipantParticipantId] = None
+    relative_id: Union[str, ParticipantParticipantId] = None
     relationship: Union[str, "EnumFamilyRelationship"] = None
     knowledge_source: Union[str, "EnumRelationshipKnowledgeSource"] = None
 
@@ -1200,15 +1212,15 @@ class FamilyRelationship(YAMLRoot):
         if not isinstance(self.family_relationship_global_id, FamilyRelationshipFamilyRelationshipGlobalId):
             self.family_relationship_global_id = FamilyRelationshipFamilyRelationshipGlobalId(self.family_relationship_global_id)
 
-        if self._is_empty(self.patient):
-            self.MissingRequiredField("patient")
-        if not isinstance(self.patient, ParticipantParticipantId):
-            self.patient = ParticipantParticipantId(self.patient)
+        if self._is_empty(self.patient_id):
+            self.MissingRequiredField("patient_id")
+        if not isinstance(self.patient_id, ParticipantParticipantId):
+            self.patient_id = ParticipantParticipantId(self.patient_id)
 
-        if self._is_empty(self.relative):
-            self.MissingRequiredField("relative")
-        if not isinstance(self.relative, ParticipantParticipantId):
-            self.relative = ParticipantParticipantId(self.relative)
+        if self._is_empty(self.relative_id):
+            self.MissingRequiredField("relative_id")
+        if not isinstance(self.relative_id, ParticipantParticipantId):
+            self.relative_id = ParticipantParticipantId(self.relative_id)
 
         if self._is_empty(self.relationship):
             self.MissingRequiredField("relationship")
@@ -1271,7 +1283,7 @@ class Family(HasExternalId):
 
 
 @dataclass(repr=False)
-class FileMetaData(Record):
+class FileMetaData(YAMLRoot):
     """
     Representation of file metadata for NCPI
     """
@@ -1282,7 +1294,7 @@ class FileMetaData(Record):
     class_name: ClassVar[str] = "FileMetaData"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileMetaData
 
-    id: Union[str, FileMetaDataId] = None
+    file_meta_data_id: Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]] = None
     meta_data_type: Union[str, "EnumFileMetaDataType"] = None
     assay_strategy: Union[str, URIorCURIE] = None
     platform_instrument: Union[str, URIorCURIE] = None
@@ -1298,10 +1310,11 @@ class FileMetaData(Record):
     related_samples: Optional[Union[str, SampleSampleId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, FileMetaDataId):
-            self.id = FileMetaDataId(self.id)
+        if self._is_empty(self.file_meta_data_id):
+            self.MissingRequiredField("file_meta_data_id")
+        if not isinstance(self.file_meta_data_id, list):
+            self.file_meta_data_id = [self.file_meta_data_id] if self.file_meta_data_id is not None else []
+        self.file_meta_data_id = [v if isinstance(v, FileMetaDataFileMetaDataId) else FileMetaDataFileMetaDataId(v) for v in self.file_meta_data_id]
 
         if self._is_empty(self.meta_data_type):
             self.MissingRequiredField("meta_data_type")
@@ -2291,14 +2304,8 @@ slots.practitioner_role_id = Slot(uri=KFI_FHIR_SPARKS.practitioner_role_id, name
 slots.research_study_id = Slot(uri=KFI_FHIR_SPARKS.research_study_id, name="research_study_id", curie=KFI_FHIR_SPARKS.curie('research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=URIRef)
 
-slots.participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
-                   model_uri=KFI_FHIR_SPARKS.participant_id, domain=None, range=Union[str, ParticipantParticipantId])
-
 slots.access_policy_id = Slot(uri=KFI_FHIR_SPARKS.access_policy_id, name="access_policy_id", curie=KFI_FHIR_SPARKS.curie('access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.access_policy_id, domain=None, range=Union[str, AccessPolicyAccessPolicyId])
-
-slots.period_id = Slot(uri=KFI_FHIR_SPARKS.period_id, name="period_id", curie=KFI_FHIR_SPARKS.curie('period_id'),
-                   model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodId]])
 
 slots.website = Slot(uri=KFI_FHIR_SPARKS.website, name="website", curie=KFI_FHIR_SPARKS.curie('website'),
                    model_uri=KFI_FHIR_SPARKS.website, domain=None, range=Optional[Union[str, URI]])
@@ -2396,11 +2403,26 @@ slots.role = Slot(uri=KFI['associated_party/role'], name="role", curie=KFI.curie
 slots.classifier = Slot(uri=KFI['associated_party/classifier'], name="classifier", curie=KFI.curie('associated_party/classifier'),
                    model_uri=KFI_FHIR_SPARKS.classifier, domain=None, range=Optional[Union[Union[str, "EnumResearchStudyPartyOrganizationType"], list[Union[str, "EnumResearchStudyPartyOrganizationType"]]]])
 
+slots.associated_party_practitioner_id = Slot(uri=KFI['associated_party/associated_party_practitioner_id'], name="associated_party_practitioner_id", curie=KFI.curie('associated_party/associated_party_practitioner_id'),
+                   model_uri=KFI_FHIR_SPARKS.associated_party_practitioner_id, domain=None, range=Optional[Union[str, PractitionerPractitionerId]])
+
+slots.associated_party_practitioner_role_id = Slot(uri=KFI['associated_party/associated_party_practitioner_role_id'], name="associated_party_practitioner_role_id", curie=KFI.curie('associated_party/associated_party_practitioner_role_id'),
+                   model_uri=KFI_FHIR_SPARKS.associated_party_practitioner_role_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])
+
+slots.associated_party_institution_id = Slot(uri=KFI['associated_party/associated_party_institution_id'], name="associated_party_institution_id", curie=KFI.curie('associated_party/associated_party_institution_id'),
+                   model_uri=KFI_FHIR_SPARKS.associated_party_institution_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])
+
 slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.curie('associated_party/party'),
                    model_uri=KFI_FHIR_SPARKS.party, domain=None, range=Optional[Union[dict, Any]])
 
 slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
+
+slots.sample = Slot(uri=KFI['participant/sample'], name="sample", curie=KFI.curie('participant/sample'),
+                   model_uri=KFI_FHIR_SPARKS.sample, domain=None, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
+
+slots.participant_id = Slot(uri=KFI['participant/participant_id'], name="participant_id", curie=KFI.curie('participant/participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.participant_id, domain=None, range=Union[str, ParticipantParticipantId])
 
 slots.birthsex = Slot(uri=KFI['participant/birthsex'], name="birthsex", curie=KFI.curie('participant/birthsex'),
                    model_uri=KFI_FHIR_SPARKS.birthsex, domain=None, range=Optional[Union[str, "EnumBirthSex"]])
@@ -2434,6 +2456,9 @@ slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_sou
 
 slots.family = Slot(uri=KFI['participant/family'], name="family", curie=KFI.curie('participant/family'),
                    model_uri=KFI_FHIR_SPARKS.family, domain=None, range=Optional[Union[str, FamilyFamilyGlobalId]])
+
+slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
+                   model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
 
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
@@ -2528,9 +2553,6 @@ slots.concentration_units = Slot(uri=KFI['sample/concentration_units'], name="co
 slots.file_format = Slot(uri=KFI['ncpi-file/file_format'], name="file_format", curie=KFI.curie('ncpi-file/file_format'),
                    model_uri=KFI_FHIR_SPARKS.file_format, domain=None, range=Union[str, URIorCURIE])
 
-slots.file_location = Slot(uri=KFI['ncpi-file/file_location'], name="file_location", curie=KFI.curie('ncpi-file/file_location'),
-                   model_uri=KFI_FHIR_SPARKS.file_location, domain=None, range=Union[Union[str, FileLocationId], list[Union[str, FileLocationId]]])
-
 slots.file_size = Slot(uri=KFI['ncpi-file/file_size'], name="file_size", curie=KFI.curie('ncpi-file/file_size'),
                    model_uri=KFI_FHIR_SPARKS.file_size, domain=None, range=float)
 
@@ -2549,8 +2571,8 @@ slots.file_hash = Slot(uri=KFI['ncpi-file/file_hash'], name="file_hash", curie=K
 slots.file_hash_type = Slot(uri=KFI['ncpi-file/file_hash_type'], name="file_hash_type", curie=KFI.curie('ncpi-file/file_hash_type'),
                    model_uri=KFI_FHIR_SPARKS.file_hash_type, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.file_meta_data = Slot(uri=KFI['ncpi-file/file_meta_data'], name="file_meta_data", curie=KFI.curie('ncpi-file/file_meta_data'),
-                   model_uri=KFI_FHIR_SPARKS.file_meta_data, domain=None, range=Optional[Union[Union[str, FileMetaDataId], list[Union[str, FileMetaDataId]]]])
+slots.file_location_id = Slot(uri=KFI['file-location/file_location_id'], name="file_location_id", curie=KFI.curie('file-location/file_location_id'),
+                   model_uri=KFI_FHIR_SPARKS.file_location_id, domain=None, range=Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]])
 
 slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_uri", curie=KFI.curie('file-location/location_uri'),
                    model_uri=KFI_FHIR_SPARKS.location_uri, domain=None, range=Union[str, URI])
@@ -2558,11 +2580,11 @@ slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_
 slots.file_name = Slot(uri=KFI['file-location/file_name'], name="file_name", curie=KFI.curie('file-location/file_name'),
                    model_uri=KFI_FHIR_SPARKS.file_name, domain=None, range=str)
 
-slots.patient = Slot(uri=KFI['family-relationship/patient'], name="patient", curie=KFI.curie('family-relationship/patient'),
-                   model_uri=KFI_FHIR_SPARKS.patient, domain=None, range=Union[str, ParticipantParticipantId])
+slots.patient_id = Slot(uri=KFI['family-relationship/patient_id'], name="patient_id", curie=KFI.curie('family-relationship/patient_id'),
+                   model_uri=KFI_FHIR_SPARKS.patient_id, domain=None, range=Union[str, ParticipantParticipantId])
 
-slots.relative = Slot(uri=KFI['family-relationship/relative'], name="relative", curie=KFI.curie('family-relationship/relative'),
-                   model_uri=KFI_FHIR_SPARKS.relative, domain=None, range=Union[str, ParticipantParticipantId])
+slots.relative_id = Slot(uri=KFI['family-relationship/relative_id'], name="relative_id", curie=KFI.curie('family-relationship/relative_id'),
+                   model_uri=KFI_FHIR_SPARKS.relative_id, domain=None, range=Union[str, ParticipantParticipantId])
 
 slots.relationship = Slot(uri=KFI['family-relationship/relationship'], name="relationship", curie=KFI.curie('family-relationship/relationship'),
                    model_uri=KFI_FHIR_SPARKS.relationship, domain=None, range=Union[str, "EnumFamilyRelationship"])
@@ -2581,6 +2603,9 @@ slots.consanguinity = Slot(uri=KFI['family/consanguinity'], name="consanguinity"
 
 slots.family_focus = Slot(uri=KFI['family/family_focus'], name="family_focus", curie=KFI.curie('family/family_focus'),
                    model_uri=KFI_FHIR_SPARKS.family_focus, domain=None, range=Optional[Union[str, URIorCURIE]])
+
+slots.file_meta_data_id = Slot(uri=KFI['file-meta-data/file_meta_data_id'], name="file_meta_data_id", curie=KFI.curie('file-meta-data/file_meta_data_id'),
+                   model_uri=KFI_FHIR_SPARKS.file_meta_data_id, domain=None, range=Optional[Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]]])
 
 slots.meta_data_type = Slot(uri=KFI['file-meta-data/meta_data_type'], name="meta_data_type", curie=KFI.curie('file-meta-data/meta_data_type'),
                    model_uri=KFI_FHIR_SPARKS.meta_data_type, domain=None, range=Union[str, "EnumFileMetaDataType"])
@@ -2648,9 +2673,6 @@ slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id
 slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], name="institution__institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution__institution_id, domain=None, range=URIRef)
 
-slots.participant__participant_id = Slot(uri=KFI['participant/participant_id'], name="participant__participant_id", curie=KFI.curie('participant/participant_id'),
-                   model_uri=KFI_FHIR_SPARKS.participant__participant_id, domain=None, range=URIRef)
-
 slots.person__person_id = Slot(uri=KFI['person/person_id'], name="person__person_id", curie=KFI.curie('person/person_id'),
                    model_uri=KFI_FHIR_SPARKS.person__person_id, domain=None, range=URIRef)
 
@@ -2696,5 +2718,20 @@ slots.familyRelationship__family_relationship_global_id = Slot(uri=KFI['family-r
 slots.family__family_global_id = Slot(uri=KFI['family/family_global_id'], name="family__family_global_id", curie=KFI.curie('family/family_global_id'),
                    model_uri=KFI_FHIR_SPARKS.family__family_global_id, domain=None, range=URIRef)
 
-slots.ParticipantAssertion_participant_id = Slot(uri=KFI_FHIR_SPARKS.participant_id, name="ParticipantAssertion_participant_id", curie=KFI_FHIR_SPARKS.curie('participant_id'),
+slots.ParticipantAssertion_participant_id = Slot(uri=KFI['participant/participant_id'], name="ParticipantAssertion_participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])
+
+slots.AssociatedParty_period_id = Slot(uri=KFI['period/period_id'], name="AssociatedParty_period_id", curie=KFI.curie('period/period_id'),
+                   model_uri=KFI_FHIR_SPARKS.AssociatedParty_period_id, domain=AssociatedParty, range=Optional[Union[Union[str, PeriodPeriodId], list[Union[str, PeriodPeriodId]]]])
+
+slots.Participant_participant_id = Slot(uri=KFI['participant/participant_id'], name="Participant_participant_id", curie=KFI.curie('participant/participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.Participant_participant_id, domain=Participant, range=Union[str, ParticipantParticipantId])
+
+slots.Period_period_id = Slot(uri=KFI['period/period_id'], name="Period_period_id", curie=KFI.curie('period/period_id'),
+                   model_uri=KFI_FHIR_SPARKS.Period_period_id, domain=Period, range=Union[str, PeriodPeriodId])
+
+slots.FileLocation_file_location_id = Slot(uri=KFI['file-location/file_location_id'], name="FileLocation_file_location_id", curie=KFI.curie('file-location/file_location_id'),
+                   model_uri=KFI_FHIR_SPARKS.FileLocation_file_location_id, domain=FileLocation, range=Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]])
+
+slots.FileMetaData_file_meta_data_id = Slot(uri=KFI['file-meta-data/file_meta_data_id'], name="FileMetaData_file_meta_data_id", curie=KFI.curie('file-meta-data/file_meta_data_id'),
+                   model_uri=KFI_FHIR_SPARKS.FileMetaData_file_meta_data_id, domain=FileMetaData, range=Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]])

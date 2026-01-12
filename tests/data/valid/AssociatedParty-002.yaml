@@ -1,0 +1,11 @@
+# Example Associated Party
+---
+id: asp0001
+role: sponsor
+name: Feline Research Institute
+classifier: 
+  - government
+associated_party_institution_id: or-00001
+#party: prol-0001
+period_id: 
+  - prd-00001

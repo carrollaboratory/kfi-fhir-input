@@ -7,7 +7,7 @@ classes:
   Period:
     title: Period 
     description: Time period associated with some FHIR resource     
-    is_a: Record
+    # is_a: Record
     attributes:
       start:
         title: Start 
@@ -19,3 +19,22 @@ classes:
         description: End attribute for a FHIR period data type. 
         range: date
         required: false
+    slots: 
+      - period_id
+    slot_usage:
+      period_id:
+        range: string 
+        identifier: true 
+        required: true
+        description: ID for period (not a global ID)
+slots:
+  period_id:
+    title: Period ID
+    description: Reference to a time period which defines a Start and End datatime period. 
+    range: Period 
+    required: false
+    inlined: false
+    multivalued: false
+    #annotations:
+    #  db_column: period_id
+    #  target_slot: id 

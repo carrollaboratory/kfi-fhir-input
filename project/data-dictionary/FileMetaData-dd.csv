@@ -1,4 +1,5 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
+file_meta_data_id,Representation of file metadata for NCPI,string,,,,,
 meta_data_type,Clarify which type of meta data this file has recorded,enumeration,,,,bam_cram=Bam or Cram file;fastq=FASTQ File;maf=MAF (Somatic Mutation);proteomics=Proteomics file;vcf=GC or gVCF file,
 assay_strategy,"e.g., Whole Genome Sequencing",string,,,,,
 platform_instrument,"e.g., Illumina HiSeq2000",string,,,,,
@@ -12,4 +13,3 @@ reference_genome,"GRCh37, GRCh38",string,,,,,
 workflow_type,"e.g., alignment, somatic",string,,,,,
 workflow_tool,"e.g., BAM-MEM, GATK-Haplotype Caller",string,,,,,
 related_samples,"e.g., Reference(Participant_ID)",string,,,,,Foreign Key: Sample.sample_id
-id,Unique Identifier for a table entry. This is probably not the Global ID,string,,,,,

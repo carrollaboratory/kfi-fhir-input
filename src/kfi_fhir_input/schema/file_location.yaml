@@ -8,16 +8,28 @@ classes:
   FileLocation:
     title: File Location    
     description: Details relating to the links where documents are found
-    is_a: Record
+    #is_a: Record
     annotations: 
       fhir_resource: DocumentReference 
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
       fhir_element: content 
     slots: 
+      - file_location_id
       - location_uri
       - file_name 
       - access_policy_id    # content.extension[location-access].valueReference
+    slot_usage:
+      file_location_id:
+        multivalued: false 
+        identifier: true 
+        range: string
 slots:
+  file_location_id:
+    title: File Location 
+    description: Location details (this is not a global ID)
+    required: true 
+    range: FileLocation 
+    multivalued: true 
   # At this point, I'm assuming these are all going to have at least one DRS attachment
   # However, I don't know if we can expect more than that. If we do have other 
   # sources, then we may want to designate which locations are DRS....not sure

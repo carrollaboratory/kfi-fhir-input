@@ -1,6 +1,6 @@
 ---
 family_relationship_global_id: fr-0001
-patient: par-01234
-relative: par-431
+patient_id: par-01234
+relative_id: par-431
 relationship: mother 
 knowledge_source: traditional

@@ -1,5 +1,5 @@
 ---
-id: filemeta-0001
+file_meta_data_id: filemeta-0001
 meta_data_type: fastq
 assay_strategy: obi:0002117 # whole genome sequencing assay
 platform_instrument: obi:0002001 # Illumina HiSeq 2000

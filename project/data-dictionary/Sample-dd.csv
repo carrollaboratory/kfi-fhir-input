@@ -1,6 +1,5 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
 parent_sample_id,Sample Global ID associated with the parent sample,string,,,,,Foreign Key: Sample.sample_id
-participant_id,The Global ID for the Participant,string,,,,,Foreign Key: Participant.participant_id
 sample_type,The type of material of which this Sample is comprised,string,,,,,
 collection_method,The approach used to collect the biospecimen ([LOINC](https://loinc.org)),string,,,,,
 collection_site,The location of the specimen collection,string,,,,,

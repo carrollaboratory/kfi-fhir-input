@@ -18,10 +18,12 @@ classes:
       - role 
       - period_id 
       - classifier
-      - party 
+      - associated_party_practitioner_id
+      - associated_party_practitioner_role_id
+      - associated_party_institution_id
     slot_usage:
-      #period_id:
-      #  multivalued: true
+      period_id:
+        multivalued: true
 slots: 
   role: 
     title: Role 
@@ -34,10 +36,34 @@ slots:
     range: EnumResearchStudyPartyOrganizationType
     required: false 
     multivalued: true 
+  # Each individial associated party can have one party:
+  #   Practitioner 
+  #   Practitioner Role 
+  #   Institution
+  associated_party_practitioner_id:
+    title: Associated Party (Practitioner)
+    description: Associated Party (is Practitioner). 
+    range: Practitioner
+    required: false 
+    multivalued: false
+  associated_party_practitioner_role_id:
+    title: Associated Party (Practitioner Role)
+    description: Associated Party (is Practitioner Role) 
+    range: PractitionerRole 
+    required: false 
+    multivalued: false
+  associated_party_institution_id:
+    title: Associated Party (Institution)
+    description: Associated Party (is Institution)
+    range: PractitionerRole 
+    required: false 
+    multivalued: false
   party:
     title: Associated Party 
     description: Individual or organization associated with study 
     range: Any
+    annotations:
+      db_column: associated_party_id
     any_of: 
       #- range: Practitioner 
       #- range: Institution

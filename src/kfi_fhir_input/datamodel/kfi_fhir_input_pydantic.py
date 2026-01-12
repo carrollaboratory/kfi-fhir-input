@@ -831,7 +831,9 @@ class AgeAt(ConfiguredBaseModel):
          'title': 'Age At'})
 
     value_type: EnumAgeValueType = Field(default=..., title="Value Type", description="""Age Value Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
-    age: Optional[str] = Field(default=None, title="Age", description="""Age either numeric value or range""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
+    age: Optional[str] = Field(default=None, title="Age", description="""Age either numeric value or range""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column',
+                                       'value': 'relative_date_time_id'}},
+         'domain_of': ['AgeAt']} })
     age_code: Optional[str] = Field(default=None, title="Age Code", description="""Age expressed as an enumerated value representing an age category""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
     as_date: Optional[date] = Field(default=None, title="Age As Date", description="""Event Date (rather than age)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
 
@@ -861,7 +863,6 @@ class ParticipantAssertion(ConfiguredBaseModel):
                        'Participant',
                        'Person',
                        'StudyMembership',
-                       'Sample',
                        'NCPIFile']} })
     age_at_event: Optional[AgeAt] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtEvent] or maybe '
@@ -1001,8 +1002,24 @@ class Person(ConfiguredBaseModel):
                        'Participant',
                        'Person',
                        'StudyMembership',
-                       'Sample',
                        'NCPIFile']} })
+
+
+class Period(ConfiguredBaseModel):
+    """
+    Time period associated with some FHIR resource
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/period',
+         'slot_usage': {'period_id': {'description': 'ID for period (not a global ID)',
+                                      'identifier': True,
+                                      'name': 'period_id',
+                                      'range': 'string',
+                                      'required': True}},
+         'title': 'Period'})
+
+    period_id: str = Field(default=..., title="Period ID", description="""ID for period (not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
+    start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
+    end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
 
 
 class PractitionerRole(ConfiguredBaseModel):
@@ -1018,9 +1035,7 @@ class PractitionerRole(ConfiguredBaseModel):
                                          'value': 'institution_id'}},
          'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
     practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
-    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'period_id'},
-                         'target_slot': {'tag': 'target_slot', 'value': 'id'}},
-         'domain_of': ['AssociatedParty', 'PractitionerRole']} })
+    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
     practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
 
 
@@ -1041,8 +1056,31 @@ class StudyMembership(ConfiguredBaseModel):
                        'Participant',
                        'Person',
                        'StudyMembership',
-                       'Sample',
                        'NCPIFile']} })
+
+
+class FileLocation(ConfiguredBaseModel):
+    """
+    Details relating to the links where documents are found
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'content'},
+                         'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'DocumentReference'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/file-location',
+         'slot_usage': {'file_location_id': {'identifier': True,
+                                             'multivalued': False,
+                                             'name': 'file_location_id',
+                                             'range': 'string'}},
+         'title': 'File Location'})
+
+    file_location_id: str = Field(default=..., title="File Location", description="""Location details (this is not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileLocation']} })
+    location_uri: str = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
+    file_name: str = Field(default=..., title="File Name", description="""The file's name (no path)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'access_policy_id'}},
+         'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
 
 
 class FamilyRelationship(ConfiguredBaseModel):
@@ -1056,13 +1094,14 @@ class FamilyRelationship(ConfiguredBaseModel):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/family-relationship',
          'title': 'Family Relationship'})
 
-    patient: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'patient'},
+    patient_id: str = Field(default=..., title="Patient (Child)", description="""The child from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'patient'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'FamilyMemberHistory'}},
          'domain_of': ['FamilyRelationship']} })
-    relative: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    relative_id: str = Field(default=..., title="Relative (Parent)", description="""The parent from the parent-child relationship""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'relative_id'},
+                         'fhir_element': {'tag': 'fhir_element',
                                           'value': 'extension[relative]'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship'},
@@ -1147,8 +1186,16 @@ class Participant(HasExternalId):
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant'},
                          'fhir_resource': {'tag': 'fhir_resource', 'value': 'Patient'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant',
+         'slot_usage': {'participant_id': {'identifier': True,
+                                           'name': 'participant_id',
+                                           'range': 'string'}},
          'title': 'Participant'})
 
+    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership',
+                       'NCPIFile']} })
     birthsex: Optional[EnumBirthSex] = Field(default=None, title="Birth Sex", description="""Sex assigned at birth (or pre-natal observed sex)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
                                             'value': 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex'},
                          'fhir_profile': {'tag': 'fhir_profile',
@@ -1168,12 +1215,7 @@ class Participant(HasExternalId):
                          'target_slot': {'tag': 'target_slot',
                                          'value': 'family_global_id'}},
          'domain_of': ['Participant']} })
-    participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
-                       'Participant',
-                       'Person',
-                       'StudyMembership',
-                       'Sample',
-                       'NCPIFile']} })
+    sample: Optional[list[str]] = Field(default=[], title="Sample", description="""Samples associated with this participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1251,14 +1293,6 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample', 'Aliquot']} })
-    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'participant_id'}},
-         'domain_of': ['ParticipantAssertion',
-                       'Participant',
-                       'Person',
-                       'StudyMembership',
-                       'Sample',
-                       'NCPIFile']} })
     sample_type: str = Field(default=..., title="Sample Type", description="""The type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'type'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
@@ -1398,17 +1432,14 @@ class NCPIFile(HasExternalId):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file',
          'title': 'NCPI File'})
 
-    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'participant_id'}},
-         'domain_of': ['ParticipantAssertion',
+    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
                        'StudyMembership',
-                       'Sample',
                        'NCPIFile']} })
     file_format: str = Field(default=..., title="File Format", description="""The file format used ([EDAM](http://edamontology.org) where possible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
-    file_location: list[str] = Field(default=..., title="File Location", description="""Details relating to the links where documents are found""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
-    file_meta_data: Optional[list[str]] = Field(default=[], title="File Meta Data", description="""Representation of file metadata for NCPI""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
+    file_location_id: list[str] = Field(default=..., title="File Location", description="""Location details (this is not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileLocation']} })
+    file_meta_data_id: Optional[list[str]] = Field(default=[], title="File Meta Data", description="""Representation of file metadata for NCPI""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileMetaData']} })
     file_size: float = Field(default=..., title="File Size", description="""The size of the file, e.g., in bytes.""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_size_unit: str = Field(default=..., title="File Size Units", description="""Units associated with the file_size value (ucum)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     content_version: Optional[str] = Field(default=None, title="Content Version", description="""Version of the file content""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
@@ -1444,54 +1475,21 @@ class AssociatedParty(Record):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/associated_party',
+         'slot_usage': {'period_id': {'multivalued': True, 'name': 'period_id'}},
          'title': 'Associated Party'})
 
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'AssociatedParty', 'Institution']} })
     role: Optional[EnumResearchStudyPartyRole] = Field(default=None, title="Role", description="""Research Study Party Role""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
-    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'period_id'},
-                         'target_slot': {'tag': 'target_slot', 'value': 'id'}},
-         'domain_of': ['AssociatedParty', 'PractitionerRole']} })
+    period_id: Optional[list[str]] = Field(default=[], title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
     classifier: Optional[list[EnumResearchStudyPartyOrganizationType]] = Field(default=[], title="Classifier", description="""Research Study Party Organization Type (what type of institution is party)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
-    party: Optional[str] = Field(default=None, title="Associated Party", description="""Individual or organization associated with study""", json_schema_extra = { "linkml_meta": {'any_of': [{'range': 'PractitionerRole'}], 'domain_of': ['AssociatedParty']} })
+    associated_party_practitioner_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner)", description="""Associated Party (is Practitioner).""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
+    associated_party_practitioner_role_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner Role)", description="""Associated Party (is Practitioner Role)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
+    associated_party_institution_id: Optional[str] = Field(default=None, title="Associated Party (Institution)", description="""Associated Party (is Institution)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
-class Period(Record):
-    """
-    Time period associated with some FHIR resource
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/period',
-         'title': 'Period'})
-
-    start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-    end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
-
-
-class FileLocation(Record):
-    """
-    Details relating to the links where documents are found
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'content'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'DocumentReference'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/file-location',
-         'title': 'File Location'})
-
-    location_uri: str = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
-    file_name: str = Field(default=..., title="File Name", description="""The file's name (no path)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
-    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'access_policy_id'}},
-         'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
-
-
-class FileMetaData(Record):
+class FileMetaData(ConfiguredBaseModel):
     """
     Representation of file metadata for NCPI
     """
@@ -1500,8 +1498,22 @@ class FileMetaData(Record):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data',
+         'slot_usage': {'file_meta_data_id': {'annotations': {'db_column': {'tag': 'db_column',
+                                                                            'value': 'file_meta_data_id'},
+                                                              'target_slot': {'tag': 'target_slot',
+                                                                              'value': 'file_meta_data_id'}},
+                                              'identifier': True,
+                                              'multivalued': False,
+                                              'name': 'file_meta_data_id',
+                                              'range': 'string',
+                                              'required': True}},
          'title': 'File Meta Data'})
 
+    file_meta_data_id: str = Field(default=..., title="File Meta Data", description="""Representation of file metadata for NCPI""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column',
+                                       'value': 'file_meta_data_id'},
+                         'target_slot': {'tag': 'target_slot',
+                                         'value': 'file_meta_data_id'}},
+         'domain_of': ['NCPIFile', 'FileMetaData']} })
     meta_data_type: EnumFileMetaDataType = Field(default=..., title="Meta Data Type", description="""Clarify which type of meta data this file has recorded""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     assay_strategy: str = Field(default=..., title="Assay Strategy", description="""e.g., Whole Genome Sequencing""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     platform_instrument: str = Field(default=..., title="Platform Instrument", description="""e.g., Illumina HiSeq2000""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
@@ -1515,8 +1527,6 @@ class FileMetaData(Record):
     workflow_type: Optional[str] = Field(default=None, title="Workflow Type", description="""e.g., alignment, somatic""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     workflow_tool: Optional[str] = Field(default=None, title="Workflow Tool", description="""e.g., BAM-MEM, GATK-Haplotype Caller""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     related_samples: Optional[str] = Field(default=None, title="Related Samples", description="""e.g., Reference(Participant_ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
 class Family(HasExternalId):
@@ -1550,8 +1560,10 @@ RelativeDateTime.model_rebuild()
 AgeAt.model_rebuild()
 ParticipantAssertion.model_rebuild()
 Person.model_rebuild()
+Period.model_rebuild()
 PractitionerRole.model_rebuild()
 StudyMembership.model_rebuild()
+FileLocation.model_rebuild()
 FamilyRelationship.model_rebuild()
 HasExternalId.model_rebuild()
 Practitioner.model_rebuild()
@@ -1564,7 +1576,5 @@ Aliquot.model_rebuild()
 NCPIFile.model_rebuild()
 Record.model_rebuild()
 AssociatedParty.model_rebuild()
-Period.model_rebuild()
-FileLocation.model_rebuild()
 FileMetaData.model_rebuild()
 Family.model_rebuild()
