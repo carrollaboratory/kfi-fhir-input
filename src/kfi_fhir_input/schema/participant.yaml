@@ -105,6 +105,7 @@ slots:
     required: false  
     annotations:
       target_slot: family_global_id
+      db_column: family_global_id
 enums:
   EnumBirthSex:
     description: Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)

@@ -1164,7 +1164,8 @@ class Participant(HasExternalId):
     is_deceased: Optional[bool] = Field(default=None, title="Is Deceased", description="""Is the participant known to be Deceased, T, or Alive, F""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     deceased_rel: Optional[str] = Field(default=None, title="Deceased Relative Date", description="""Implementers can provide relativeDateTime if information is available.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    family: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+    family: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'family_global_id'},
+                         'target_slot': {'tag': 'target_slot',
                                          'value': 'family_global_id'}},
          'domain_of': ['Participant']} })
     participant_id: str = Field(default=..., title="Participant ID", description="""Participant Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
