@@ -221,12 +221,12 @@ FamilyRelationship {
     string family_relationship_global_id  
 }
 FileLocation {
+    string file_location_id  
     uri location_uri  
     string file_name  
-    string id  
-    uriorcurieList external_id  
 }
 FileMetaData {
+    string file_meta_data_id  
     EnumFileMetaDataType meta_data_type  
     uriorcurie assay_strategy  
     uriorcurie platform_instrument  
@@ -239,8 +239,6 @@ FileMetaData {
     uriorcurie reference_genome  
     uriorcurie workflow_type  
     uriorcurie workflow_tool  
-    string id  
-    uriorcurieList external_id  
 }
 HasExternalId {
     uriorcurieList external_id  
@@ -263,6 +261,7 @@ NCPIFile {
     uriorcurieList external_id  
 }
 Participant {
+    string participant_id  
     EnumBirthSex birthsex  
     EnumRaceList race  
     EnumEthnicity ethnicity  
@@ -272,7 +271,6 @@ Participant {
     string age_at_last_vital  
     boolean is_deceased  
     EnumPatientKnowledgeSource patient_knowledge_source  
-    string participant_id  
     uriorcurieList external_id  
 }
 ParticipantAssertion {
@@ -293,10 +291,9 @@ ParticipantAssertion {
     string participant_assertion_id  
 }
 Period {
+    string period_id  
     date start  
     date end  
-    string id  
-    uriorcurieList external_id  
 }
 Person {
     string person_id  
@@ -364,17 +361,20 @@ StudyMembership {
 
 AgeAt ||--|o RelativeDateTime : "age"
 Aliquot ||--|o Sample : "parent_sample_id"
-AssociatedParty ||--|o Any : "party"
-AssociatedParty ||--|o Period : "period_id"
-FamilyRelationship ||--|| Participant : "patient"
-FamilyRelationship ||--|| Participant : "relative"
+AssociatedParty ||--|o Practitioner : "associated_party_practitioner_id"
+AssociatedParty ||--|o PractitionerRole : "associated_party_institution_id"
+AssociatedParty ||--|o PractitionerRole : "associated_party_practitioner_role_id"
+AssociatedParty ||--}o Period : "period_id"
+FamilyRelationship ||--|| Participant : "patient_id"
+FamilyRelationship ||--|| Participant : "relative_id"
 FileLocation ||--|| AccessPolicy : "access_policy_id"
 FileMetaData ||--|o Sample : "related_samples"
 NCPIFile ||--|| Participant : "participant_id"
-NCPIFile ||--}o FileMetaData : "file_meta_data"
-NCPIFile ||--}| FileLocation : "file_location"
+NCPIFile ||--}o FileMetaData : "file_meta_data_id"
+NCPIFile ||--}| FileLocation : "file_location_id"
 Participant ||--|o Family : "family"
 Participant ||--|o RelativeDateTime : "deceased_rel"
+Participant ||--}o Sample : "sample"
 ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
 ParticipantAssertion ||--|o AgeAt : "age_at_event"
 ParticipantAssertion ||--|o AgeAt : "age_at_onset"
@@ -391,7 +391,6 @@ ResearchStudy ||--}| StudyMembership : "study_membership_id"
 ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
 Sample ||--|o AgeAt : "age_at_collection"
 Sample ||--|o Sample : "parent_sample_id"
-Sample ||--|| Participant : "participant_id"
 StudyMembership ||--|| AccessPolicy : "access_policy_id"
 StudyMembership ||--}| Participant : "participant_id"
 

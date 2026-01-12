@@ -284,6 +284,39 @@
       Record &lt;|-- AssociatedParty
         click Record href "../Record/"
 
+      AssociatedParty : associated_party_institution_id
+
+
+
+
+
+        AssociatedParty --&gt; "0..1" PractitionerRole : associated_party_institution_id
+        click PractitionerRole href "../PractitionerRole/"
+
+
+
+      AssociatedParty : associated_party_practitioner_id
+
+
+
+
+
+        AssociatedParty --&gt; "0..1" Practitioner : associated_party_practitioner_id
+        click Practitioner href "../Practitioner/"
+
+
+
+      AssociatedParty : associated_party_practitioner_role_id
+
+
+
+
+
+        AssociatedParty --&gt; "0..1" PractitionerRole : associated_party_practitioner_role_id
+        click PractitionerRole href "../PractitionerRole/"
+
+
+
       AssociatedParty : classifier
 
 
@@ -301,24 +334,13 @@
 
       AssociatedParty : name
 
-      AssociatedParty : party
-
-
-
-
-
-        AssociatedParty --&gt; "0..1" Any : party
-        click Any href "../Any/"
-
-
-
       AssociatedParty : period_id
 
 
 
 
 
-        AssociatedParty --&gt; "0..1" Period : period_id
+        AssociatedParty --&gt; "*" Period : period_id
         click Period href "../Period/"
 
 
@@ -371,7 +393,7 @@
 </tr>
 <tr>
 <td><a href="../period_id/">period_id</a></td>
-<td>0..1 <br/> <a href="../Period/">Period</a></td>
+<td>* <br/> <a href="../Period/">Period</a></td>
 <td>Reference to a time period which defines a Start and End datatime period</td>
 <td>direct</td>
 </tr>
@@ -382,9 +404,21 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../party/">party</a></td>
-<td>0..1 <br/> <a href="../Any/">Any</a> or <br/><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>Individual or organization associated with study</td>
+<td><a href="../associated_party_practitioner_id/">associated_party_practitioner_id</a></td>
+<td>0..1 <br/> <a href="../Practitioner/">Practitioner</a></td>
+<td>Associated Party (is Practitioner)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../associated_party_practitioner_role_id/">associated_party_practitioner_role_id</a></td>
+<td>0..1 <br/> <a href="../PractitionerRole/">PractitionerRole</a></td>
+<td>Associated Party (is Practitioner Role)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../associated_party_institution_id/">associated_party_institution_id</a></td>
+<td>0..1 <br/> <a href="../PractitionerRole/">PractitionerRole</a></td>
+<td>Associated Party (is Institution)</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -478,7 +512,13 @@ slots:
 - role
 - period_id
 - classifier
-- party
+- associated_party_practitioner_id
+- associated_party_practitioner_role_id
+- associated_party_institution_id
+slot_usage:
+  period_id:
+    name: period_id
+    multivalued: true
 
 </code></pre>
 </details>
@@ -494,6 +534,10 @@ description: Sponsors, collaborators, and other parties affiliated with a resear
 title: Associated Party
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: Record
+slot_usage:
+  period_id:
+    name: period_id
+    multivalued: true
 attributes:
   name:
     name: name
@@ -523,13 +567,6 @@ attributes:
     required: false
   period_id:
     name: period_id
-    annotations:
-      db_column:
-        tag: db_column
-        value: period_id
-      target_slot:
-        tag: target_slot
-        value: id
     description: Reference to a time period which defines a Start and End datatime
       period.
     title: Period ID
@@ -539,10 +576,11 @@ attributes:
     owner: AssociatedParty
     domain_of:
     - AssociatedParty
+    - Period
     - PractitionerRole
     range: Period
     required: false
-    multivalued: false
+    multivalued: true
     inlined: false
   classifier:
     name: classifier
@@ -558,19 +596,45 @@ attributes:
     range: EnumResearchStudyPartyOrganizationType
     required: false
     multivalued: true
-  party:
-    name: party
-    description: Individual or organization associated with study
-    title: Associated Party
+  associated_party_practitioner_id:
+    name: associated_party_practitioner_id
+    description: Associated Party (is Practitioner).
+    title: Associated Party (Practitioner)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: party
+    alias: associated_party_practitioner_id
     owner: AssociatedParty
     domain_of:
     - AssociatedParty
-    range: Any
-    any_of:
-    - range: PractitionerRole
+    range: Practitioner
+    required: false
+    multivalued: false
+  associated_party_practitioner_role_id:
+    name: associated_party_practitioner_role_id
+    description: Associated Party (is Practitioner Role)
+    title: Associated Party (Practitioner Role)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: associated_party_practitioner_role_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: PractitionerRole
+    required: false
+    multivalued: false
+  associated_party_institution_id:
+    name: associated_party_institution_id
+    description: Associated Party (is Institution)
+    title: Associated Party (Institution)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: associated_party_institution_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: PractitionerRole
+    required: false
+    multivalued: false
   id:
     name: id
     description: Unique Identifier for a table entry. This is probably not the Global

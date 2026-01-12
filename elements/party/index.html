@@ -325,17 +325,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#applicable-classes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Applicable Classes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#properties" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -357,6 +346,17 @@
   
     <nav class="md-nav" aria-label="Identifier and Mapping Information">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
@@ -422,28 +422,26 @@
 Alias: party</p>
 <!-- no inheritance hierarchy -->
 
-<h2 id="applicable-classes">Applicable Classes</h2>
-<table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Description</th>
-<th>Modifies Slot</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>Range: <a href="../Any/">Any</a>&nbsp;or&nbsp;<br /><a href="../PractitionerRole/">PractitionerRole</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>db_column</td>
+<td>associated_party_id</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -471,13 +469,15 @@ Alias: party</p>
 <details>
 
 <pre><code class="language-yaml">name: party
+annotations:
+  db_column:
+    tag: db_column
+    value: associated_party_id
 description: Individual or organization associated with study
 title: Associated Party
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
 alias: party
-domain_of:
-- AssociatedParty
 range: Any
 any_of:
 - range: PractitionerRole

@@ -289,24 +289,24 @@
 
       NCPIFile : file_hash_type
 
-      NCPIFile : file_location
+      NCPIFile : file_location_id
 
 
 
 
 
-        NCPIFile --&gt; "1..*" FileLocation : file_location
+        NCPIFile --&gt; "1..*" FileLocation : file_location_id
         click FileLocation href "../FileLocation/"
 
 
 
-      NCPIFile : file_meta_data
+      NCPIFile : file_meta_data_id
 
 
 
 
 
-        NCPIFile --&gt; "*" FileMetaData : file_meta_data
+        NCPIFile --&gt; "*" FileMetaData : file_meta_data_id
         click FileMetaData href "../FileMetaData/"
 
 
@@ -361,13 +361,13 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../file_location/">file_location</a></td>
+<td><a href="../file_location_id/">file_location_id</a></td>
 <td>1..* <br/> <a href="../FileLocation/">FileLocation</a></td>
-<td>Details relating to the links where documents are found</td>
+<td>Location details (this is not a global ID)</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../file_meta_data/">file_meta_data</a></td>
+<td><a href="../file_meta_data_id/">file_meta_data_id</a></td>
 <td>* <br/> <a href="../FileMetaData/">FileMetaData</a></td>
 <td>Representation of file metadata for NCPI</td>
 <td>direct</td>
@@ -490,8 +490,8 @@ is_a: HasExternalId
 slots:
 - participant_id
 - file_format
-- file_location
-- file_meta_data
+- file_location_id
+- file_meta_data_id
 - file_size
 - file_size_unit
 - content_version
@@ -544,10 +544,6 @@ attributes:
     required: true
   participant_id:
     name: participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
     description: The Global ID for the Participant
     title: Participant ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -559,7 +555,6 @@ attributes:
     - Participant
     - Person
     - StudyMembership
-    - Sample
     - NCPIFile
     range: Participant
     required: true
@@ -576,29 +571,31 @@ attributes:
     range: uriorcurie
     required: true
     multivalued: false
-  file_location:
-    name: file_location
-    description: Details relating to the links where documents are found
+  file_location_id:
+    name: file_location_id
+    description: Location details (this is not a global ID)
     title: File Location
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: file_location
+    alias: file_location_id
     owner: NCPIFile
     domain_of:
     - NCPIFile
+    - FileLocation
     range: FileLocation
     required: true
     multivalued: true
-  file_meta_data:
-    name: file_meta_data
+  file_meta_data_id:
+    name: file_meta_data_id
     description: Representation of file metadata for NCPI
     title: File Meta Data
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: file_meta_data
+    alias: file_meta_data_id
     owner: NCPIFile
     domain_of:
     - NCPIFile
+    - FileMetaData
     range: FileMetaData
     required: false
     multivalued: true

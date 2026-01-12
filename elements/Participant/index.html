@@ -382,6 +382,17 @@
 
 
 
+      Participant : sample
+
+
+
+
+
+        Participant --&gt; "*" Sample : sample
+        click Sample href "../Sample/"
+
+
+
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
@@ -402,6 +413,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../participant_id/">participant_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>The Global ID for the Participant</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../birthsex/">birthsex</a></td>
 <td>0..1 <br/> <a href="../EnumBirthSex/">EnumBirthSex</a></td>
@@ -469,9 +486,9 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../participant_id/">participant_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Participant Global ID</td>
+<td><a href="../sample/">sample</a></td>
+<td>* <br/> <a href="../Sample/">Sample</a></td>
+<td>Samples associated with this participant</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -512,12 +529,6 @@
 <td><a href="./">Participant</a></td>
 </tr>
 <tr>
-<td><a href="../Sample/">Sample</a></td>
-<td><a href="../participant_id/">participant_id</a></td>
-<td>range</td>
-<td><a href="./">Participant</a></td>
-</tr>
-<tr>
 <td><a href="../NCPIFile/">NCPIFile</a></td>
 <td><a href="../participant_id/">participant_id</a></td>
 <td>range</td>
@@ -525,13 +536,13 @@
 </tr>
 <tr>
 <td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
-<td><a href="../patient/">patient</a></td>
+<td><a href="../patient_id/">patient_id</a></td>
 <td>range</td>
 <td><a href="./">Participant</a></td>
 </tr>
 <tr>
 <td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
-<td><a href="../relative/">relative</a></td>
+<td><a href="../relative_id/">relative_id</a></td>
 <td>range</td>
 <td><a href="./">Participant</a></td>
 </tr>
@@ -597,6 +608,7 @@ title: Participant
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- participant_id
 - birthsex
 - race
 - ethnicity
@@ -608,22 +620,12 @@ slots:
 - deceased_rel
 - patient_knowledge_source
 - family
-attributes:
+- sample
+slot_usage:
   participant_id:
     name: participant_id
-    description: Participant Global ID
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     identifier: true
-    domain_of:
-    - ParticipantAssertion
-    - Participant
-    - Person
-    - StudyMembership
-    - Sample
-    - NCPIFile
     range: string
-    required: true
 
 </code></pre>
 </details>
@@ -641,12 +643,18 @@ description: Research oriented patient
 title: Participant
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  participant_id:
+    name: participant_id
+    identifier: true
+    range: string
 attributes:
   participant_id:
     name: participant_id
-    description: Participant Global ID
+    description: The Global ID for the Participant
     title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: participant_id
     owner: Participant
@@ -655,7 +663,6 @@ attributes:
     - Participant
     - Person
     - StudyMembership
-    - Sample
     - NCPIFile
     range: string
     required: true
@@ -820,6 +827,19 @@ attributes:
     range: Family
     required: false
     multivalued: false
+  sample:
+    name: sample
+    description: Samples associated with this participant
+    title: Sample
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: sample
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Sample
+    required: false
+    multivalued: true
   external_id:
     name: external_id
     description: Other identifiers for this entity, eg, from the submitting study

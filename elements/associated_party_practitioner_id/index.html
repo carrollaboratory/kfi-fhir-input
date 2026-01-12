@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/relative/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_practitioner_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Relative (Parent) (relative) - kfi-fhir-input</title>
+        <title>Slot: Associated Party (Practitioner) (associated_party_practitioner_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-relative-parent-relative" class="md-skip">
+        <a href="#slot-associated-party-practitioner-associated_party_practitioner_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Relative (Parent) (relative)
+              Slot: Associated Party (Practitioner) (associated_party_practitioner_id)
             
           </span>
         </div>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -427,10 +416,10 @@
   
 
 
-<h1 id="slot-relative-parent-relative">Slot: Relative (Parent) (relative)</h1>
-<p><em>The parent from the parent-child relationship</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputrelative">kfi_fhir_sparks:relative</a>
-Alias: relative</p>
+<h1 id="slot-associated-party-practitioner-associated_party_practitioner_id">Slot: Associated Party (Practitioner) (associated_party_practitioner_id)</h1>
+<p><em>Associated Party (is Practitioner).</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputassociated_party_practitioner_id">kfi_fhir_sparks:associated_party_practitioner_id</a>
+Alias: associated_party_practitioner_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -444,45 +433,17 @@ Alias: relative</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
-<td>A relationship between individuals in a pedigree or family</td>
+<td><a href="../AssociatedParty/">AssociatedParty</a></td>
+<td>Sponsors, collaborators, and other parties affiliated with a research study</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../Participant/">Participant</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../Practitioner/">Practitioner</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fhir_profile</td>
-<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship</td>
-</tr>
-<tr>
-<td>fhir_element</td>
-<td>extension[relative]</td>
-</tr>
-<tr>
-<td>fhir_resource</td>
-<td>FamilyMemberHistory</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -498,38 +459,27 @@ Alias: relative</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:relative</td>
+<td>kfi_fhir_sparks:associated_party_practitioner_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:relative</td>
+<td>kfi_fhir_sparks:associated_party_practitioner_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: relative
-annotations:
-  fhir_profile:
-    tag: fhir_profile
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-family-relationship
-  fhir_element:
-    tag: fhir_element
-    value: extension[relative]
-  fhir_resource:
-    tag: fhir_resource
-    value: FamilyMemberHistory
-description: The parent from the parent-child relationship
-title: Relative (Parent)
+<pre><code class="language-yaml">name: associated_party_practitioner_id
+description: Associated Party (is Practitioner).
+title: Associated Party (Practitioner)
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-identifier: false
-alias: relative
+alias: associated_party_practitioner_id
 domain_of:
-- FamilyRelationship
-range: Participant
-required: true
+- AssociatedParty
+range: Practitioner
+required: false
 multivalued: false
 
 </code></pre>

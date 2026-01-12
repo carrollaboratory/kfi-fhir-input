@@ -276,13 +276,13 @@
 
 
 
-      FamilyRelationship : patient
+      FamilyRelationship : patient_id
 
 
 
 
 
-        FamilyRelationship --&gt; "1" Participant : patient
+        FamilyRelationship --&gt; "1" Participant : patient_id
         click Participant href "../Participant/"
 
 
@@ -298,13 +298,13 @@
 
 
 
-      FamilyRelationship : relative
+      FamilyRelationship : relative_id
 
 
 
 
 
-        FamilyRelationship --&gt; "1" Participant : relative
+        FamilyRelationship --&gt; "1" Participant : relative_id
         click Participant href "../Participant/"
 
 
@@ -324,13 +324,13 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../patient/">patient</a></td>
+<td><a href="../patient_id/">patient_id</a></td>
 <td>1 <br/> <a href="../Participant/">Participant</a></td>
 <td>The child from the parent-child relationship</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../relative/">relative</a></td>
+<td><a href="../relative_id/">relative_id</a></td>
 <td>1 <br/> <a href="../Participant/">Participant</a></td>
 <td>The parent from the parent-child relationship</td>
 <td>direct</td>
@@ -414,8 +414,8 @@ description: A relationship between individuals in a pedigree or family.
 title: Family Relationship
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
-- patient
-- relative
+- patient_id
+- relative_id
 - relationship
 - knowledge_source
 attributes:
@@ -460,8 +460,8 @@ attributes:
     - FamilyRelationship
     range: string
     required: true
-  patient:
-    name: patient
+  patient_id:
+    name: patient_id
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -477,15 +477,15 @@ attributes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: false
-    alias: patient
+    alias: patient_id
     owner: FamilyRelationship
     domain_of:
     - FamilyRelationship
     range: Participant
     required: true
     multivalued: false
-  relative:
-    name: relative
+  relative_id:
+    name: relative_id
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -496,12 +496,15 @@ attributes:
       fhir_resource:
         tag: fhir_resource
         value: FamilyMemberHistory
+      db_column:
+        tag: db_column
+        value: relative_id
     description: The parent from the parent-child relationship
     title: Relative (Parent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: false
-    alias: relative
+    alias: relative_id
     owner: FamilyRelationship
     domain_of:
     - FamilyRelationship

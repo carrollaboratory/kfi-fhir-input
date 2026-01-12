@@ -1393,24 +1393,6 @@ slots:
     identifier: true
     range: ResearchStudy
     required: true
-  participant_id:
-    name: participant_id
-    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputparticipant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    slot_uri: kfi_fhir_sparks:participant_id
-    owner: NCPIFile
-    domain_of:
-    - ParticipantAssertion
-    - Sample
-    - NCPIFile
-    range: Participant
-    required: true
   access_policy_id:
     name: access_policy_id
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputaccess_policy_id
@@ -1429,29 +1411,6 @@ slots:
     range: AccessPolicy
     required: true
     multivalued: false
-  period_id:
-    name: period_id
-    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputperiod_id
-    annotations:
-      db_column:
-        tag: db_column
-        value: period_id
-      target_slot:
-        tag: target_slot
-        value: id
-    description: Reference to a time period which defines a Start and End datatime
-      period.
-    title: Period ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    slot_uri: kfi_fhir_sparks:period_id
-    owner: PractitionerRole
-    domain_of:
-    - AssociatedParty
-    - PractitionerRole
-    range: Period
-    required: false
-    multivalued: false
-    inlined: false
   website:
     name: website
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputwebsite
@@ -2105,16 +2064,56 @@ slots:
     range: EnumResearchStudyPartyOrganizationType
     required: false
     multivalued: true
+  associated_party_practitioner_id:
+    name: associated_party_practitioner_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/associated_party_practitioner_id
+    description: Associated Party (is Practitioner).
+    title: Associated Party (Practitioner)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/associated_party_practitioner_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: Practitioner
+    required: false
+    multivalued: false
+  associated_party_practitioner_role_id:
+    name: associated_party_practitioner_role_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/associated_party_practitioner_role_id
+    description: Associated Party (is Practitioner Role)
+    title: Associated Party (Practitioner Role)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/associated_party_practitioner_role_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: PractitionerRole
+    required: false
+    multivalued: false
+  associated_party_institution_id:
+    name: associated_party_institution_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/associated_party_institution_id
+    description: Associated Party (is Institution)
+    title: Associated Party (Institution)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/associated_party_institution_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    range: PractitionerRole
+    required: false
+    multivalued: false
   party:
     name: party
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/party
+    annotations:
+      db_column:
+        tag: db_column
+        value: associated_party_id
     description: Individual or organization associated with study
     title: Associated Party
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/party
-    owner: AssociatedParty
-    domain_of:
-    - AssociatedParty
     range: Any
     inlined: true
     inlined_as_list: true
@@ -2137,6 +2136,33 @@ slots:
     - PractitionerRole
     range: Institution
     required: false
+  sample:
+    name: sample
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/sample
+    description: Samples associated with this participant
+    title: Sample
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/sample
+    owner: Participant
+    domain_of:
+    - Participant
+    range: Sample
+    required: false
+    multivalued: true
+  participant_id:
+    name: participant_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    owner: NCPIFile
+    domain_of:
+    - ParticipantAssertion
+    - Participant
+    - NCPIFile
+    range: Participant
+    required: true
   birthsex:
     name: birthsex
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/birthsex
@@ -2298,6 +2324,23 @@ slots:
     range: Family
     required: false
     multivalued: false
+  period_id:
+    name: period_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    description: Reference to a time period which defines a Start and End datatime
+      period.
+    title: Period ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    owner: PractitionerRole
+    domain_of:
+    - AssociatedParty
+    - Period
+    - PractitionerRole
+    range: Period
+    required: false
+    multivalued: false
+    inlined: false
   parent_study_id:
     name: parent_study_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
@@ -2882,19 +2925,6 @@ slots:
     range: uriorcurie
     required: true
     multivalued: false
-  file_location:
-    name: file_location
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_location
-    description: Details relating to the links where documents are found
-    title: File Location
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_location
-    owner: NCPIFile
-    domain_of:
-    - NCPIFile
-    range: FileLocation
-    required: true
-    multivalued: true
   file_size:
     name: file_size
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_size
@@ -2974,18 +3004,19 @@ slots:
     range: uriorcurie
     required: false
     multivalued: false
-  file_meta_data:
-    name: file_meta_data
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_meta_data
-    description: Representation of file metadata for NCPI
-    title: File Meta Data
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file/file_meta_data
-    owner: NCPIFile
+  file_location_id:
+    name: file_location_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
+    description: Location details (this is not a global ID)
+    title: File Location
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
+    owner: FileLocation
     domain_of:
     - NCPIFile
-    range: FileMetaData
-    required: false
+    - FileLocation
+    range: FileLocation
+    required: true
     multivalued: true
   location_uri:
     name: location_uri
@@ -3013,9 +3044,9 @@ slots:
     range: string
     required: true
     multivalued: false
-  patient:
-    name: patient
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient
+  patient_id:
+    name: patient_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient_id
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -3029,7 +3060,7 @@ slots:
     description: The child from the parent-child relationship
     title: Patient (Child)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient_id
     identifier: false
     owner: FamilyRelationship
     domain_of:
@@ -3037,9 +3068,9 @@ slots:
     range: Participant
     required: true
     multivalued: false
-  relative:
-    name: relative
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative
+  relative_id:
+    name: relative_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative_id
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -3050,10 +3081,13 @@ slots:
       fhir_resource:
         tag: fhir_resource
         value: FamilyMemberHistory
+      db_column:
+        tag: db_column
+        value: relative_id
     description: The parent from the parent-child relationship
     title: Relative (Parent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/relative_id
     identifier: false
     owner: FamilyRelationship
     domain_of:
@@ -3162,6 +3196,20 @@ slots:
     range: uriorcurie
     required: false
     multivalued: false
+  file_meta_data_id:
+    name: file_meta_data_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/file_meta_data_id
+    description: Representation of file metadata for NCPI
+    title: File Meta Data
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/file_meta_data_id
+    owner: FileMetaData
+    domain_of:
+    - NCPIFile
+    - FileMetaData
+    range: FileMetaData
+    required: false
+    multivalued: true
   meta_data_type:
     name: meta_data_type
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/meta_data_type
@@ -3383,6 +3431,10 @@ slots:
     required: true
   ageAt__age:
     name: ageAt__age
+    annotations:
+      db_column:
+        tag: db_column
+        value: relative_date_time_id
     description: Age either numeric value or range
     title: Age
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
@@ -3455,19 +3507,6 @@ slots:
     owner: Institution
     domain_of:
     - Institution
-    range: string
-    required: true
-  participant__participant_id:
-    name: participant__participant_id
-    description: Participant Global ID
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
-    identifier: true
-    alias: participant_id
-    owner: Participant
-    domain_of:
-    - Participant
     range: string
     required: true
   person__person_id:
@@ -3675,7 +3714,7 @@ slots:
     required: true
   ParticipantAssertion_participant_id:
     name: ParticipantAssertion_participant_id
-    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputparticipant_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
     annotations:
       fhir_profile:
         tag: fhir_profile
@@ -3688,10 +3727,10 @@ slots:
         value: Observation
     description: The Global ID for the Participant
     title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     is_a: participant_id
     domain: ParticipantAssertion
-    slot_uri: kfi_fhir_sparks:participant_id
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
     alias: participant_id
     owner: ParticipantAssertion
     domain_of:
@@ -3700,6 +3739,109 @@ slots:
     usage_slot_name: participant_id
     range: Participant
     required: true
+  AssociatedParty_period_id:
+    name: AssociatedParty_period_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    description: Reference to a time period which defines a Start and End datatime
+      period.
+    title: Period ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    is_a: period_id
+    domain: AssociatedParty
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    alias: period_id
+    owner: AssociatedParty
+    domain_of:
+    - AssociatedParty
+    is_usage_slot: true
+    usage_slot_name: period_id
+    range: Period
+    required: false
+    multivalued: true
+    inlined: false
+  Participant_participant_id:
+    name: Participant_participant_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    is_a: participant_id
+    domain: Participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    identifier: true
+    alias: participant_id
+    owner: Participant
+    domain_of:
+    - Participant
+    is_usage_slot: true
+    usage_slot_name: participant_id
+    range: string
+    required: true
+  Period_period_id:
+    name: Period_period_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    description: ID for period (not a global ID)
+    title: Period ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    is_a: period_id
+    domain: Period
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
+    identifier: true
+    alias: period_id
+    owner: Period
+    domain_of:
+    - Period
+    is_usage_slot: true
+    usage_slot_name: period_id
+    range: string
+    required: true
+    multivalued: false
+    inlined: false
+  FileLocation_file_location_id:
+    name: FileLocation_file_location_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
+    description: Location details (this is not a global ID)
+    title: File Location
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+    is_a: file_location_id
+    domain: FileLocation
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
+    identifier: true
+    alias: file_location_id
+    owner: FileLocation
+    domain_of:
+    - FileLocation
+    is_usage_slot: true
+    usage_slot_name: file_location_id
+    range: string
+    required: true
+    multivalued: true
+  FileMetaData_file_meta_data_id:
+    name: FileMetaData_file_meta_data_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/file_meta_data_id
+    annotations:
+      db_column:
+        tag: db_column
+        value: file_meta_data_id
+      target_slot:
+        tag: target_slot
+        value: file_meta_data_id
+    description: Representation of file metadata for NCPI
+    title: File Meta Data
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    is_a: file_meta_data_id
+    domain: FileMetaData
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/file_meta_data_id
+    identifier: true
+    alias: file_meta_data_id
+    owner: FileMetaData
+    domain_of:
+    - FileMetaData
+    is_usage_slot: true
+    usage_slot_name: file_meta_data_id
+    range: string
+    required: true
+    multivalued: true
 classes:
   Any:
     name: Any
@@ -3815,6 +3957,10 @@ classes:
         required: true
       age:
         name: age
+        annotations:
+          db_column:
+            tag: db_column
+            value: relative_date_time_id
         description: Age either numeric value or range
         title: Age
         range: RelativeDateTime
@@ -3933,9 +4079,15 @@ classes:
     - id
     - name
     - role
-    - period_id
+    - AssociatedParty_period_id
     - classifier
-    - party
+    - associated_party_practitioner_id
+    - associated_party_practitioner_role_id
+    - associated_party_institution_id
+    slot_usage:
+      period_id:
+        name: period_id
+        multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/AssociatedParty
   Institution:
     name: Institution
@@ -3977,6 +4129,7 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - Participant_participant_id
     - birthsex
     - race
     - ethnicity
@@ -3988,15 +4141,12 @@ classes:
     - deceased_rel
     - patient_knowledge_source
     - family
-    - participant__participant_id
-    attributes:
+    - sample
+    slot_usage:
       participant_id:
         name: participant_id
-        description: Participant Global ID
-        title: Participant ID
         identifier: true
         range: string
-        required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
   Person:
     name: Person
@@ -4034,12 +4184,17 @@ classes:
     description: Time period associated with some FHIR resource
     title: Period
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    is_a: Record
     slots:
-    - external_id
-    - id
+    - Period_period_id
     - period__start
     - period__end
+    slot_usage:
+      period_id:
+        name: period_id
+        description: ID for period (not a global ID)
+        identifier: true
+        range: string
+        required: true
     attributes:
       start:
         name: start
@@ -4203,7 +4358,6 @@ classes:
     slots:
     - external_id
     - parent_sample_id
-    - participant_id
     - sample_type
     - age_at_collection
     - collection_method
@@ -4277,8 +4431,8 @@ classes:
     - external_id
     - participant_id
     - file_format
-    - file_location
-    - file_meta_data
+    - file_location_id
+    - file_meta_data_id
     - file_size
     - file_size_unit
     - content_version
@@ -4312,13 +4466,17 @@ classes:
     description: Details relating to the links where documents are found
     title: File Location
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
-    is_a: Record
     slots:
-    - external_id
-    - id
+    - FileLocation_file_location_id
     - location_uri
     - file_name
     - access_policy_id
+    slot_usage:
+      file_location_id:
+        name: file_location_id
+        identifier: true
+        range: string
+        multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
   FamilyRelationship:
     name: FamilyRelationship
@@ -4334,8 +4492,8 @@ classes:
     title: Family Relationship
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
     slots:
-    - patient
-    - relative
+    - patient_id
+    - relative_id
     - relationship
     - knowledge_source
     - familyRelationship__family_relationship_global_id
@@ -4392,10 +4550,8 @@ classes:
     description: Representation of file metadata for NCPI
     title: File Meta Data
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
-    is_a: Record
     slots:
-    - external_id
-    - id
+    - FileMetaData_file_meta_data_id
     - meta_data_type
     - assay_strategy
     - platform_instrument
@@ -4409,10 +4565,24 @@ classes:
     - workflow_type
     - workflow_tool
     - related_samples
+    slot_usage:
+      file_meta_data_id:
+        name: file_meta_data_id
+        annotations:
+          db_column:
+            tag: db_column
+            value: file_meta_data_id
+          target_slot:
+            tag: target_slot
+            value: file_meta_data_id
+        identifier: true
+        range: string
+        required: true
+        multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-12T17:15:14'
-source_file_size: 5879
-generation_date: '2026-01-12T17:15:26'
+source_file_date: '2026-01-12T22:42:54'
+source_file_size: 5412
+generation_date: '2026-01-12T22:43:03'
 

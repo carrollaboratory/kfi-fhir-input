@@ -325,17 +325,6 @@
 
 
 
-      Sample : participant_id
-
-
-
-
-
-        Sample --&gt; "1" Participant : participant_id
-        click Participant href "../Participant/"
-
-
-
       Sample : processing
 
       Sample : quantity
@@ -374,12 +363,6 @@
 <td><a href="../parent_sample_id/">parent_sample_id</a></td>
 <td>0..1 <br/> <a href="./">Sample</a></td>
 <td>Sample Global ID associated with the parent sample</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../participant_id/">participant_id</a></td>
-<td>1 <br/> <a href="../Participant/">Participant</a></td>
-<td>The Global ID for the Participant</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -474,6 +457,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../Participant/">Participant</a></td>
+<td><a href="../sample/">sample</a></td>
+<td>range</td>
+<td><a href="./">Sample</a></td>
+</tr>
+<tr>
 <td><a href="./">Sample</a></td>
 <td><a href="../parent_sample_id/">parent_sample_id</a></td>
 <td>range</td>
@@ -555,7 +544,6 @@ from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
 - parent_sample_id
-- participant_id
 - sample_type
 - age_at_collection
 - collection_method
@@ -635,27 +623,6 @@ attributes:
     range: Sample
     required: false
     multivalued: false
-  participant_id:
-    name: participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: participant_id
-    owner: Sample
-    domain_of:
-    - ParticipantAssertion
-    - Participant
-    - Person
-    - StudyMembership
-    - Sample
-    - NCPIFile
-    range: Participant
-    required: true
   sample_type:
     name: sample_type
     annotations:

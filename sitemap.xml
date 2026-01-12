@@ -357,6 +357,18 @@
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_institution_id/</loc>
+         <lastmod>2026-01-12</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_practitioner_id/</loc>
+         <lastmod>2026-01-12</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_practitioner_role_id/</loc>
+         <lastmod>2026-01-12</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/availability_status/</loc>
          <lastmod>2026-01-12</lastmod>
     </url>
@@ -509,11 +521,11 @@
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_location/</loc>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_location_id/</loc>
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_meta_data/</loc>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_meta_data_id/</loc>
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
@@ -621,7 +633,7 @@
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/patient/</loc>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/patient_id/</loc>
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
@@ -685,7 +697,7 @@
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/relative/</loc>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/relative_id/</loc>
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>
@@ -706,6 +718,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/role/</loc>
+         <lastmod>2026-01-12</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/sample/</loc>
          <lastmod>2026-01-12</lastmod>
     </url>
     <url>

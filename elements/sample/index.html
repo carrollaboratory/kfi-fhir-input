@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/file_meta_data/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/sample/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: File Meta Data (file_meta_data) - kfi-fhir-input</title>
+        <title>Slot: Sample (sample) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-file-meta-data-file_meta_data" class="md-skip">
+        <a href="#slot-sample-sample" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: File Meta Data (file_meta_data)
+              Slot: Sample (sample)
             
           </span>
         </div>
@@ -416,10 +416,10 @@
   
 
 
-<h1 id="slot-file-meta-data-file_meta_data">Slot: File Meta Data (file_meta_data)</h1>
-<p><em>Representation of file metadata for NCPI</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputfile_meta_data">kfi_fhir_sparks:file_meta_data</a>
-Alias: file_meta_data</p>
+<h1 id="slot-sample-sample">Slot: Sample (sample)</h1>
+<p><em>Samples associated with this participant</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputsample">kfi_fhir_sparks:sample</a>
+Alias: sample</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -433,8 +433,8 @@ Alias: file_meta_data</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../NCPIFile/">NCPIFile</a></td>
-<td>Information about a file related to a research participant</td>
+<td><a href="../Participant/">Participant</a></td>
+<td>Research oriented patient</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -442,7 +442,7 @@ Alias: file_meta_data</p>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>
-<p>Range: <a href="../FileMetaData/">FileMetaData</a></p>
+<p>Range: <a href="../Sample/">Sample</a></p>
 </li>
 <li>
 <p>Multivalued: True</p>
@@ -464,26 +464,26 @@ Alias: file_meta_data</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:file_meta_data</td>
+<td>kfi_fhir_sparks:sample</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:file_meta_data</td>
+<td>kfi_fhir_sparks:sample</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: file_meta_data
-description: Representation of file metadata for NCPI
-title: File Meta Data
+<pre><code class="language-yaml">name: sample
+description: Samples associated with this participant
+title: Sample
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-alias: file_meta_data
+alias: sample
 domain_of:
-- NCPIFile
-range: FileMetaData
+- Participant
+range: Sample
 required: false
 multivalued: true
 

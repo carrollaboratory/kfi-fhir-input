@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/period_id/">
+        <link rel="canonical" href="https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_institution_id/">
       
       
       
@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Period ID (period_id) - kfi-fhir-input</title>
+        <title>Slot: Associated Party (Institution) (associated_party_institution_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-period-id-period_id" class="md-skip">
+        <a href="#slot-associated-party-institution-associated_party_institution_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Period ID (period_id)
+              Slot: Associated Party (Institution) (associated_party_institution_id)
             
           </span>
         </div>
@@ -416,10 +416,10 @@
   
 
 
-<h1 id="slot-period-id-period_id">Slot: Period ID (period_id)</h1>
-<p><em>Reference to a time period which defines a Start and End datatime period.</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputperiod_id">kfi_fhir_sparks:period_id</a>
-Alias: period_id</p>
+<h1 id="slot-associated-party-institution-associated_party_institution_id">Slot: Associated Party (Institution) (associated_party_institution_id)</h1>
+<p><em>Associated Party (is Institution)</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputassociated_party_institution_id">kfi_fhir_sparks:associated_party_institution_id</a>
+Alias: associated_party_institution_id</p>
 <!-- no inheritance hierarchy -->
 
 <h2 id="applicable-classes">Applicable Classes</h2>
@@ -435,23 +435,13 @@ Alias: period_id</p>
 <tr>
 <td><a href="../AssociatedParty/">AssociatedParty</a></td>
 <td>Sponsors, collaborators, and other parties affiliated with a research study</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../Period/">Period</a></td>
-<td>Time period associated with some FHIR resource</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
-<td>PractitionerRole covers the recording of the location and types of services t...</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../Period/">Period</a></li>
+<li>Range: <a href="../PractitionerRole/">PractitionerRole</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -469,31 +459,28 @@ Alias: period_id</p>
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:period_id</td>
+<td>kfi_fhir_sparks:associated_party_institution_id</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:period_id</td>
+<td>kfi_fhir_sparks:associated_party_institution_id</td>
 </tr>
 </tbody>
 </table>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: period_id
-description: Reference to a time period which defines a Start and End datatime period.
-title: Period ID
+<pre><code class="language-yaml">name: associated_party_institution_id
+description: Associated Party (is Institution)
+title: Associated Party (Institution)
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-alias: period_id
+alias: associated_party_institution_id
 domain_of:
 - AssociatedParty
-- Period
-- PractitionerRole
-range: Period
+range: PractitionerRole
 required: false
 multivalued: false
-inlined: false
 
 </code></pre>
 

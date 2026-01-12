@@ -533,6 +533,14 @@
 <td>A relationship between individuals in a pedigree or family</td>
 </tr>
 <tr>
+<td><a href="FileLocation/">FileLocation</a></td>
+<td>Details relating to the links where documents are found</td>
+</tr>
+<tr>
+<td><a href="FileMetaData/">FileMetaData</a></td>
+<td>Representation of file metadata for NCPI</td>
+</tr>
+<tr>
 <td><a href="HasExternalId/">HasExternalId</a></td>
 <td>Has an external ID</td>
 </tr>
@@ -569,18 +577,6 @@
 <td>Sponsors, collaborators, and other parties affiliated with a research study</td>
 </tr>
 <tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="FileLocation/">FileLocation</a></td>
-<td>Details relating to the links where documents are found</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="FileMetaData/">FileMetaData</a></td>
-<td>Representation of file metadata for NCPI</td>
-</tr>
-<tr>
-<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Period/">Period</a></td>
-<td>Time period associated with some FHIR resource</td>
-</tr>
-<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ResearchStudy/">ResearchStudy</a></td>
 <td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
 </tr>
@@ -595,6 +591,10 @@
 <tr>
 <td><a href="ParticipantAssertion/">ParticipantAssertion</a></td>
 <td>Assertion about a particular Participant</td>
+</tr>
+<tr>
+<td><a href="Period/">Period</a></td>
+<td>Time period associated with some FHIR resource</td>
 </tr>
 <tr>
 <td><a href="Person/">Person</a></td>
@@ -694,6 +694,18 @@
 <tr>
 <td><a href="assertion_type/">assertion_type</a></td>
 <td>Describe the type of assertion being made</td>
+</tr>
+<tr>
+<td><a href="associated_party_institution_id/">associated_party_institution_id</a></td>
+<td>Associated Party (is Institution)</td>
+</tr>
+<tr>
+<td><a href="associated_party_practitioner_id/">associated_party_practitioner_id</a></td>
+<td>Associated Party (is Practitioner)</td>
+</tr>
+<tr>
+<td><a href="associated_party_practitioner_role_id/">associated_party_practitioner_role_id</a></td>
+<td>Associated Party (is Practitioner Role)</td>
 </tr>
 <tr>
 <td><a href="availability_status/">availability_status</a></td>
@@ -844,11 +856,11 @@
 <td>Algorithm used to calculate the hash (and size, where applicable)</td>
 </tr>
 <tr>
-<td><a href="file_location/">file_location</a></td>
-<td>Details relating to the links where documents are found</td>
+<td><a href="file_location_id/">file_location_id</a></td>
+<td>Location details (this is not a global ID)</td>
 </tr>
 <tr>
-<td><a href="file_meta_data/">file_meta_data</a></td>
+<td><a href="file_meta_data_id/">file_meta_data_id</a></td>
 <td>Representation of file metadata for NCPI</td>
 </tr>
 <tr>
@@ -952,7 +964,7 @@
 <td>Individual or organization associated with study</td>
 </tr>
 <tr>
-<td><a href="patient/">patient</a></td>
+<td><a href="patient_id/">patient_id</a></td>
 <td>The child from the parent-child relationship</td>
 </tr>
 <tr>
@@ -1016,7 +1028,7 @@
 <td>The role the relative (parent) fills with respect to the patient (child) for ...</td>
 </tr>
 <tr>
-<td><a href="relative/">relative</a></td>
+<td><a href="relative_id/">relative_id</a></td>
 <td>The parent from the parent-child relationship</td>
 </tr>
 <tr>
@@ -1038,6 +1050,10 @@
 <tr>
 <td><a href="role/">role</a></td>
 <td>Research Study Party Role</td>
+</tr>
+<tr>
+<td><a href="sample/">sample</a></td>
+<td>Samples associated with this participant</td>
 </tr>
 <tr>
 <td><a href="sample_id/">sample_id</a></td>

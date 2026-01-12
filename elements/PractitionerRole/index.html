@@ -357,8 +357,14 @@
 </tr>
 <tr>
 <td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td><a href="../party/">party</a></td>
-<td>any_of[range]</td>
+<td><a href="../associated_party_practitioner_role_id/">associated_party_practitioner_role_id</a></td>
+<td>range</td>
+<td><a href="./">PractitionerRole</a></td>
+</tr>
+<tr>
+<td><a href="../AssociatedParty/">AssociatedParty</a></td>
+<td><a href="../associated_party_institution_id/">associated_party_institution_id</a></td>
+<td>range</td>
 <td><a href="./">PractitionerRole</a></td>
 </tr>
 </tbody>
@@ -493,13 +499,6 @@ attributes:
     required: false
   period_id:
     name: period_id
-    annotations:
-      db_column:
-        tag: db_column
-        value: period_id
-      target_slot:
-        tag: target_slot
-        value: id
     description: Reference to a time period which defines a Start and End datatime
       period.
     title: Period ID
@@ -509,6 +508,7 @@ attributes:
     owner: PractitionerRole
     domain_of:
     - AssociatedParty
+    - Period
     - PractitionerRole
     range: Period
     required: false

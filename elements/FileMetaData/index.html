@@ -171,15 +171,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -281,16 +272,11 @@
 <div class="mermaid"> classDiagram
     class FileMetaData
     click FileMetaData href "../FileMetaData/"
-      Record &lt;|-- FileMetaData
-        click Record href "../Record/"
-
       FileMetaData : adaptor_trimmed
 
       FileMetaData : assay_strategy
 
-      FileMetaData : external_id
-
-      FileMetaData : id
+      FileMetaData : file_meta_data_id
 
       FileMetaData : is_paired_end
 
@@ -334,16 +320,7 @@
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../HasExternalId/">HasExternalId</a><ul>
-<li><a href="../Record/">Record</a><ul>
-<li><strong>FileMetaData</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -355,6 +332,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../file_meta_data_id/">file_meta_data_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Representation of file metadata for NCPI</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../meta_data_type/">meta_data_type</a></td>
 <td>1 <br/> <a href="../EnumFileMetaDataType/">EnumFileMetaDataType</a></td>
@@ -433,18 +416,6 @@
 <td>e</td>
 <td>direct</td>
 </tr>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Unique Identifier for a table entry</td>
-<td><a href="../Record/">Record</a></td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../HasExternalId/">HasExternalId</a></td>
-</tr>
 </tbody>
 </table>
 <h2 id="usages">Usages</h2>
@@ -460,7 +431,7 @@
 <tbody>
 <tr>
 <td><a href="../NCPIFile/">NCPIFile</a></td>
-<td><a href="../file_meta_data/">file_meta_data</a></td>
+<td><a href="../file_meta_data_id/">file_meta_data_id</a></td>
 <td>range</td>
 <td><a href="./">FileMetaData</a></td>
 </tr>
@@ -524,8 +495,8 @@ annotations:
 description: Representation of file metadata for NCPI
 title: File Meta Data
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: Record
 slots:
+- file_meta_data_id
 - meta_data_type
 - assay_strategy
 - platform_instrument
@@ -539,6 +510,20 @@ slots:
 - workflow_type
 - workflow_tool
 - related_samples
+slot_usage:
+  file_meta_data_id:
+    name: file_meta_data_id
+    annotations:
+      db_column:
+        tag: db_column
+        value: file_meta_data_id
+      target_slot:
+        tag: target_slot
+        value: file_meta_data_id
+    identifier: true
+    range: string
+    required: true
+    multivalued: false
 
 </code></pre>
 </details>
@@ -555,8 +540,43 @@ annotations:
 description: Representation of file metadata for NCPI
 title: File Meta Data
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: Record
+slot_usage:
+  file_meta_data_id:
+    name: file_meta_data_id
+    annotations:
+      db_column:
+        tag: db_column
+        value: file_meta_data_id
+      target_slot:
+        tag: target_slot
+        value: file_meta_data_id
+    identifier: true
+    range: string
+    required: true
+    multivalued: false
 attributes:
+  file_meta_data_id:
+    name: file_meta_data_id
+    annotations:
+      db_column:
+        tag: db_column
+        value: file_meta_data_id
+      target_slot:
+        tag: target_slot
+        value: file_meta_data_id
+    description: Representation of file metadata for NCPI
+    title: File Meta Data
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: true
+    alias: file_meta_data_id
+    owner: FileMetaData
+    domain_of:
+    - NCPIFile
+    - FileMetaData
+    range: string
+    required: true
+    multivalued: false
   meta_data_type:
     name: meta_data_type
     description: Clarify which type of meta data this file has recorded
@@ -726,36 +746,6 @@ attributes:
     range: Sample
     required: false
     multivalued: false
-  id:
-    name: id
-    description: Unique Identifier for a table entry. This is probably not the Global
-      ID
-    title: ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    identifier: true
-    alias: id
-    owner: FileMetaData
-    domain_of:
-    - Record
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
-  external_id:
-    name: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: external_id
-    owner: FileMetaData
-    domain_of:
-    - HasExternalId
-    range: uriorcurie
-    required: false
-    multivalued: true
 
 </code></pre>
 </details>
