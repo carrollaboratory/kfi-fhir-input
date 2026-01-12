@@ -2285,6 +2285,9 @@ slots:
       target_slot:
         tag: target_slot
         value: family_global_id
+      db_column:
+        tag: db_column
+        value: family_global_id
     description: The family the participant is a part of
     title: Family
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
@@ -4409,7 +4412,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-09T22:59:47'
+source_file_date: '2026-01-12T17:15:14'
 source_file_size: 5879
-generation_date: '2026-01-09T22:59:58'
+generation_date: '2026-01-12T17:15:26'
 
