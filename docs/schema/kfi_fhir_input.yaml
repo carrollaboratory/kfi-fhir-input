@@ -2136,19 +2136,6 @@ slots:
     - PractitionerRole
     range: Institution
     required: false
-  sample:
-    name: sample
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/sample
-    description: Samples associated with this participant
-    title: Sample
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/sample
-    owner: Participant
-    domain_of:
-    - Participant
-    range: Sample
-    required: false
-    multivalued: true
   participant_id:
     name: participant_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
@@ -2160,6 +2147,7 @@ slots:
     domain_of:
     - ParticipantAssertion
     - Participant
+    - StudyMembership
     - NCPIFile
     range: Participant
     required: true
@@ -2304,9 +2292,9 @@ slots:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
-  family:
-    name: family
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family
+  family_global_id:
+    name: family_global_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family_global_id
     annotations:
       target_slot:
         tag: target_slot
@@ -2317,7 +2305,7 @@ slots:
     description: The family the participant is a part of
     title: Family
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family_global_id
     owner: Participant
     domain_of:
     - Participant
@@ -2341,6 +2329,20 @@ slots:
     required: false
     multivalued: false
     inlined: false
+  study_membership_id:
+    name: study_membership_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    owner: ResearchStudy
+    domain_of:
+    - StudyMembership
+    - ResearchStudy
+    range: string
+    required: true
+    multivalued: false
   parent_study_id:
     name: parent_study_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
@@ -2457,19 +2459,6 @@ slots:
     range: AssociatedParty
     required: true
     multivalued: true
-  study_membership_id:
-    name: study_membership_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_membership_id
-    description: Study Membership Global ID (group)
-    title: Study Membership ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/study_membership_id
-    owner: ResearchStudy
-    domain_of:
-    - ResearchStudy
-    range: StudyMembership
-    required: true
-    multivalued: true
   collection_title:
     name: collection_title
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/collection_title
@@ -2541,6 +2530,19 @@ slots:
     range: EnumCollectionStatus
     required: true
     multivalued: false
+  sample_id:
+    name: sample_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    description: Sample Global ID
+    title: Sample ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    owner: Sample
+    domain_of:
+    - Participant
+    - Sample
+    range: string
+    required: true
   parent_sample_id:
     name: parent_sample_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/parent_sample_id
@@ -3577,37 +3579,6 @@ slots:
     - PractitionerRole
     range: string
     required: true
-  studyMembership__study_membership_id:
-    name: studyMembership__study_membership_id
-    description: Study Membership Global ID (group)
-    title: Study Membership ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
-    identifier: true
-    alias: study_membership_id
-    owner: StudyMembership
-    domain_of:
-    - StudyMembership
-    range: string
-    required: true
-    multivalued: false
-  studyMembership__participant_id:
-    name: studyMembership__participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/participant_id
-    alias: participant_id
-    owner: StudyMembership
-    domain_of:
-    - StudyMembership
-    range: Participant
-    required: true
-    multivalued: true
   researchStudy__research_study_id:
     name: researchStudy__research_study_id
     description: The Global ID for the Research Study.
@@ -3647,19 +3618,6 @@ slots:
     range: string
     required: false
     multivalued: false
-  sample__sample_id:
-    name: sample__sample_id
-    description: Sample Global ID
-    title: Sample ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
-    identifier: true
-    alias: sample_id
-    owner: Sample
-    domain_of:
-    - Sample
-    range: string
-    required: true
   aliquot__aliquot_id:
     name: aliquot__aliquot_id
     description: Aliquot Global ID
@@ -3777,6 +3735,24 @@ slots:
     usage_slot_name: participant_id
     range: string
     required: true
+  Participant_sample_id:
+    name: Participant_sample_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    description: Samples associated with this participant
+    title: Sample ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    is_a: sample_id
+    domain: Participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    alias: sample_id
+    owner: Participant
+    domain_of:
+    - Participant
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: string
+    required: true
+    multivalued: true
   Period_period_id:
     name: Period_period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -3797,6 +3773,79 @@ slots:
     required: true
     multivalued: false
     inlined: false
+  StudyMembership_participant_id:
+    name: StudyMembership_participant_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    is_a: participant_id
+    domain: StudyMembership
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    alias: participant_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    is_usage_slot: true
+    usage_slot_name: participant_id
+    range: Participant
+    required: true
+    multivalued: true
+  StudyMembership_study_membership_id:
+    name: StudyMembership_study_membership_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    is_a: study_membership_id
+    domain: StudyMembership
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    identifier: true
+    alias: study_membership_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    is_usage_slot: true
+    usage_slot_name: study_membership_id
+    range: string
+    required: true
+    multivalued: false
+  ResearchStudy_study_membership_id:
+    name: ResearchStudy_study_membership_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    is_a: study_membership_id
+    domain: ResearchStudy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    alias: study_membership_id
+    owner: ResearchStudy
+    domain_of:
+    - ResearchStudy
+    is_usage_slot: true
+    usage_slot_name: study_membership_id
+    range: string
+    required: true
+    multivalued: true
+  Sample_sample_id:
+    name: Sample_sample_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    description: Sample Global ID
+    title: Sample ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    is_a: sample_id
+    domain: Sample
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    identifier: true
+    alias: sample_id
+    owner: Sample
+    domain_of:
+    - Sample
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: string
+    required: true
   FileLocation_file_location_id:
     name: FileLocation_file_location_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
@@ -4140,13 +4189,18 @@ classes:
     - is_deceased
     - deceased_rel
     - patient_knowledge_source
-    - family
-    - sample
+    - family_global_id
+    - Participant_sample_id
     slot_usage:
       participant_id:
         name: participant_id
         identifier: true
         range: string
+      sample_id:
+        name: sample_id
+        description: Samples associated with this participant
+        required: false
+        multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
   Person:
     name: Person
@@ -4243,29 +4297,16 @@ classes:
     title: Study Membership
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
     slots:
+    - StudyMembership_study_membership_id
     - access_policy_id
-    - studyMembership__study_membership_id
-    - studyMembership__participant_id
-    attributes:
-      study_membership_id:
-        name: study_membership_id
-        description: Study Membership Global ID (group)
-        title: Study Membership ID
-        identifier: true
-        range: string
-        required: true
-        multivalued: false
+    - StudyMembership_participant_id
+    slot_usage:
       participant_id:
         name: participant_id
-        annotations:
-          target_slot:
-            tag: target_slot
-            value: participant_id
-        description: The Global ID for the Participant
-        title: Participant ID
-        range: Participant
-        required: true
         multivalued: true
+      study_membership_id:
+        name: study_membership_id
+        identifier: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/StudyMembership
   ResearchStudy:
     name: ResearchStudy
@@ -4291,8 +4332,12 @@ classes:
     - study_status
     - study_design
     - study_personnel
-    - study_membership_id
+    - ResearchStudy_study_membership_id
     - researchStudy__research_study_id
+    slot_usage:
+      study_membership_id:
+        name: study_membership_id
+        multivalued: true
     attributes:
       research_study_id:
         name: research_study_id
@@ -4357,6 +4402,7 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - Sample_sample_id
     - parent_sample_id
     - sample_type
     - age_at_collection
@@ -4369,15 +4415,10 @@ classes:
     - storage_method
     - quantity
     - quantity_units
-    - sample__sample_id
-    attributes:
+    slot_usage:
       sample_id:
         name: sample_id
-        description: Sample Global ID
-        title: Sample ID
         identifier: true
-        range: string
-        required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Sample
   Aliquot:
     name: Aliquot
@@ -4584,5 +4625,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-12T15:49:39'
 source_file_size: 5412
-generation_date: '2026-01-12T16:31:07'
+generation_date: '2026-01-13T14:32:15'
 

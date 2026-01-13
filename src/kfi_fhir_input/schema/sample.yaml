@@ -15,13 +15,9 @@ classes:
         fhir_resource: Specimen
         fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
     attributes:
-      sample_id:
-        title: Sample ID
-        description: Sample Global ID
-        range: string         
-        identifier: true
-        required: true
+
     slots: 
+      - sample_id 
       - parent_sample_id
       #- participant_id
       - sample_type
@@ -35,6 +31,10 @@ classes:
       - storage_method 
       - quantity
       - quantity_units
+    slot_usage:
+      sample_id: 
+        identifier: true 
+        required: true 
   Aliquot: 
     title: Aliquot
     description: A Portion of a sample extracted from a participant.
@@ -57,6 +57,12 @@ classes:
       - volume_units
       - concentration
 slots:
+  sample_id:
+    title: Sample ID
+    description: Sample Global ID
+    range: string         
+    #identifier: true
+    required: false
   parent_sample_id:
     title: Parent Sample ID 
     description: Sample Global ID associated with the parent sample 

@@ -32,6 +32,9 @@ classes:
       - study_design
       - study_personnel
       - study_membership_id 
+    slot_usage:
+      study_membership_id:
+        multivalued: true
 slots:
   parent_study_id: 
     title: Parent Study 
@@ -80,12 +83,6 @@ slots:
     title: Study Personnel 
     description: Every study must have at least one Primary Contact defined. Additional personnel such as Primary Investigator(s), Administrator(s), Collaborator(s) or other roles may also be included. If there are no appropriate individuals who can serve as primary contact for a study, an organization may be provided.
     range: AssociatedParty 
-    required: true 
-    multivalued: true
-  study_membership_id: 
-    title: Study Membership ID 
-    description: Study Membership Global ID (group)
-    range: StudyMembership 
     required: true 
     multivalued: true
 enums:  

@@ -9,6 +9,6 @@ dob: '2017'
 dob_method: year_only
 age_at_last_vital: rt-0001
 is_deceased: False
-family: fam-12345
-sample:
+family_global_id: fam-12345
+sample_id:
   - sample001 

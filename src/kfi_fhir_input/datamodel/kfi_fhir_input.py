@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-12T16:31:18
+# Generation date: 2026-01-13T14:44:33
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -623,8 +623,8 @@ class Participant(HasExternalId):
     is_deceased: Optional[Union[bool, Bool]] = None
     deceased_rel: Optional[Union[str, RelativeDateTimeId]] = None
     patient_knowledge_source: Optional[Union[str, "EnumPatientKnowledgeSource"]] = None
-    family: Optional[Union[str, FamilyFamilyGlobalId]] = None
-    sample: Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]] = empty_list()
+    family_global_id: Optional[Union[str, FamilyFamilyGlobalId]] = None
+    sample_id: Optional[Union[str, list[str]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.participant_id):
@@ -664,12 +664,12 @@ class Participant(HasExternalId):
         if self.patient_knowledge_source is not None and not isinstance(self.patient_knowledge_source, EnumPatientKnowledgeSource):
             self.patient_knowledge_source = EnumPatientKnowledgeSource(self.patient_knowledge_source)
 
-        if self.family is not None and not isinstance(self.family, FamilyFamilyGlobalId):
-            self.family = FamilyFamilyGlobalId(self.family)
+        if self.family_global_id is not None and not isinstance(self.family_global_id, FamilyFamilyGlobalId):
+            self.family_global_id = FamilyFamilyGlobalId(self.family_global_id)
 
-        if not isinstance(self.sample, list):
-            self.sample = [self.sample] if self.sample is not None else []
-        self.sample = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.sample]
+        if not isinstance(self.sample_id, list):
+            self.sample_id = [self.sample_id] if self.sample_id is not None else []
+        self.sample_id = [v if isinstance(v, str) else str(v) for v in self.sample_id]
 
         super().__post_init__(**kwargs)
 
@@ -824,7 +824,7 @@ class ResearchStudy(HasExternalId):
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     study_status: Union[str, "EnumStudyStatus"] = None
     study_personnel: Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]] = None
-    study_membership_id: Union[Union[str, StudyMembershipStudyMembershipId], list[Union[str, StudyMembershipStudyMembershipId]]] = None
+    study_membership_id: Union[str, list[str]] = None
     study_title: Optional[str] = None
     parent_study_id: Optional[Union[str, ResearchStudyResearchStudyId]] = None
     study_focus: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
@@ -854,7 +854,7 @@ class ResearchStudy(HasExternalId):
             self.MissingRequiredField("study_membership_id")
         if not isinstance(self.study_membership_id, list):
             self.study_membership_id = [self.study_membership_id] if self.study_membership_id is not None else []
-        self.study_membership_id = [v if isinstance(v, StudyMembershipStudyMembershipId) else StudyMembershipStudyMembershipId(v) for v in self.study_membership_id]
+        self.study_membership_id = [v if isinstance(v, str) else str(v) for v in self.study_membership_id]
 
         if self.study_title is not None and not isinstance(self.study_title, str):
             self.study_title = str(self.study_title)
@@ -2418,9 +2418,6 @@ slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.cu
 slots.institution_id = Slot(uri=KFI['institution/institution_id'], name="institution_id", curie=KFI.curie('institution/institution_id'),
                    model_uri=KFI_FHIR_SPARKS.institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
 
-slots.sample = Slot(uri=KFI['participant/sample'], name="sample", curie=KFI.curie('participant/sample'),
-                   model_uri=KFI_FHIR_SPARKS.sample, domain=None, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
-
 slots.participant_id = Slot(uri=KFI['participant/participant_id'], name="participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.participant_id, domain=None, range=Union[str, ParticipantParticipantId])
 
@@ -2454,11 +2451,14 @@ slots.deceased_rel = Slot(uri=KFI['participant/deceased_rel'], name="deceased_re
 slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_source'], name="patient_knowledge_source", curie=KFI.curie('participant/patient_knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.patient_knowledge_source, domain=None, range=Optional[Union[str, "EnumPatientKnowledgeSource"]])
 
-slots.family = Slot(uri=KFI['participant/family'], name="family", curie=KFI.curie('participant/family'),
-                   model_uri=KFI_FHIR_SPARKS.family, domain=None, range=Optional[Union[str, FamilyFamilyGlobalId]])
+slots.family_global_id = Slot(uri=KFI['participant/family_global_id'], name="family_global_id", curie=KFI.curie('participant/family_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.family_global_id, domain=None, range=Optional[Union[str, FamilyFamilyGlobalId]])
 
 slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
+
+slots.study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
+                   model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=str)
 
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
@@ -2484,9 +2484,6 @@ slots.study_design = Slot(uri=KFI['research_study/study_design'], name="study_de
 slots.study_personnel = Slot(uri=KFI['research_study/study_personnel'], name="study_personnel", curie=KFI.curie('research_study/study_personnel'),
                    model_uri=KFI_FHIR_SPARKS.study_personnel, domain=None, range=Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]])
 
-slots.study_membership_id = Slot(uri=KFI['research_study/study_membership_id'], name="study_membership_id", curie=KFI.curie('research_study/study_membership_id'),
-                   model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=Union[Union[str, StudyMembershipStudyMembershipId], list[Union[str, StudyMembershipStudyMembershipId]]])
-
 slots.collection_title = Slot(uri=KFI['research-study-collection/collection_title'], name="collection_title", curie=KFI.curie('research-study-collection/collection_title'),
                    model_uri=KFI_FHIR_SPARKS.collection_title, domain=None, range=str)
 
@@ -2501,6 +2498,9 @@ slots.research_study_collection_member_id = Slot(uri=KFI['research-study-collect
 
 slots.collection_status = Slot(uri=KFI['research-study-collection/collection_status'], name="collection_status", curie=KFI.curie('research-study-collection/collection_status'),
                    model_uri=KFI_FHIR_SPARKS.collection_status, domain=None, range=Union[str, "EnumCollectionStatus"])
+
+slots.sample_id = Slot(uri=KFI['sample/sample_id'], name="sample_id", curie=KFI.curie('sample/sample_id'),
+                   model_uri=KFI_FHIR_SPARKS.sample_id, domain=None, range=Optional[str])
 
 slots.parent_sample_id = Slot(uri=KFI['sample/parent_sample_id'], name="parent_sample_id", curie=KFI.curie('sample/parent_sample_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_sample_id, domain=None, range=Optional[Union[str, SampleSampleId]])
@@ -2688,12 +2688,6 @@ slots.period__end = Slot(uri=KFI['period/end'], name="period__end", curie=KFI.cu
 slots.practitionerRole__practitioner_role_id = Slot(uri=KFI['practitioner_role/practitioner_role_id'], name="practitionerRole__practitioner_role_id", curie=KFI.curie('practitioner_role/practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.practitionerRole__practitioner_role_id, domain=None, range=URIRef)
 
-slots.studyMembership__study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="studyMembership__study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
-                   model_uri=KFI_FHIR_SPARKS.studyMembership__study_membership_id, domain=None, range=URIRef)
-
-slots.studyMembership__participant_id = Slot(uri=KFI['study-membership/participant_id'], name="studyMembership__participant_id", curie=KFI.curie('study-membership/participant_id'),
-                   model_uri=KFI_FHIR_SPARKS.studyMembership__participant_id, domain=None, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
-
 slots.researchStudy__research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="researchStudy__research_study_id", curie=KFI.curie('research_study/research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.researchStudy__research_study_id, domain=None, range=URIRef)
 
@@ -2702,9 +2696,6 @@ slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['rese
 
 slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collection/description'], name="researchStudyCollection__description", curie=KFI.curie('research-study-collection/description'),
                    model_uri=KFI_FHIR_SPARKS.researchStudyCollection__description, domain=None, range=Optional[str])
-
-slots.sample__sample_id = Slot(uri=KFI['sample/sample_id'], name="sample__sample_id", curie=KFI.curie('sample/sample_id'),
-                   model_uri=KFI_FHIR_SPARKS.sample__sample_id, domain=None, range=URIRef)
 
 slots.aliquot__aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="aliquot__aliquot_id", curie=KFI.curie('sample/aliquot_id'),
                    model_uri=KFI_FHIR_SPARKS.aliquot__aliquot_id, domain=None, range=URIRef)
@@ -2727,8 +2718,23 @@ slots.AssociatedParty_period_id = Slot(uri=KFI['period/period_id'], name="Associ
 slots.Participant_participant_id = Slot(uri=KFI['participant/participant_id'], name="Participant_participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.Participant_participant_id, domain=Participant, range=Union[str, ParticipantParticipantId])
 
+slots.Participant_sample_id = Slot(uri=KFI['sample/sample_id'], name="Participant_sample_id", curie=KFI.curie('sample/sample_id'),
+                   model_uri=KFI_FHIR_SPARKS.Participant_sample_id, domain=Participant, range=Optional[Union[str, list[str]]])
+
 slots.Period_period_id = Slot(uri=KFI['period/period_id'], name="Period_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.Period_period_id, domain=Period, range=Union[str, PeriodPeriodId])
+
+slots.StudyMembership_participant_id = Slot(uri=KFI['participant/participant_id'], name="StudyMembership_participant_id", curie=KFI.curie('participant/participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.StudyMembership_participant_id, domain=StudyMembership, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
+
+slots.StudyMembership_study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="StudyMembership_study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
+                   model_uri=KFI_FHIR_SPARKS.StudyMembership_study_membership_id, domain=StudyMembership, range=Union[str, StudyMembershipStudyMembershipId])
+
+slots.ResearchStudy_study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="ResearchStudy_study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
+                   model_uri=KFI_FHIR_SPARKS.ResearchStudy_study_membership_id, domain=ResearchStudy, range=Union[str, list[str]])
+
+slots.Sample_sample_id = Slot(uri=KFI['sample/sample_id'], name="Sample_sample_id", curie=KFI.curie('sample/sample_id'),
+                   model_uri=KFI_FHIR_SPARKS.Sample_sample_id, domain=Sample, range=Union[str, SampleSampleId])
 
 slots.FileLocation_file_location_id = Slot(uri=KFI['file-location/file_location_id'], name="FileLocation_file_location_id", curie=KFI.curie('file-location/file_location_id'),
                    model_uri=KFI_FHIR_SPARKS.FileLocation_file_location_id, domain=FileLocation, range=Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]])

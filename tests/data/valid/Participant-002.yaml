@@ -9,4 +9,4 @@ dob_method: exact
 age_at_last_vital: rt-0003
 is_deceased: True 
 deceased_rel: rt-0003
-family: fam-12345
+family_global_id: fam-12345

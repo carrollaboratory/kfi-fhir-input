@@ -12,23 +12,28 @@ classes:
                  a specific criteria such as All Participants or Participants 
                  From a Particular Consent Group, etc.
     attributes:
-      study_membership_id: 
-        title: Study Membership ID 
-        description: Study Membership Global ID (group)
-        range: string 
-        identifier: true 
-        required: true 
-        multivalued: false
-      participant_id:  # Having trouble getting correct syntax for slot_usage
-        title: Participant ID 
-        description: The Global ID for the Participant 
-        range: Participant 
-        annotations: 
-          target_slot: participant_id 
-        required: true 
-        multivalued: true 
+
+      # participant_id:  # Having trouble getting correct syntax for slot_usage
+      #   title: Participant ID 
+      #   description: The Global ID for the Participant 
+      #   range: Participant 
+      #   annotations: 
+      #     target_slot: participant_id 
+      #   required: true 
+      #   multivalued: true 
     slots:
+      - study_membership_id
       - access_policy_id 
-    #slot_usage:
-    #  participant_id:
-    #    multivalued: true
+      - participant_id 
+    slot_usage:
+      participant_id:
+        multivalued: true
+      study_membership_id:
+        identifier: true 
+slots:
+  study_membership_id: 
+    title: Study Membership ID 
+    description: Study Membership Global ID (group)
+    range: string 
+    required: true 
+    multivalued: false

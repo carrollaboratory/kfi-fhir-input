@@ -1,0 +1,14 @@
+---
+# This does prove that we can force sample_id to be required, but it seems that
+# we can't go the other way (making it not required) 
+#sample_id: sample001 
+sample_type: UMLS:C0005834
+#participant_id: par-01234
+age_at_collection: 
+  value_type: age 
+  age: rt-001
+collection_method: SNOMED:129316008
+collection_site: SNOMED:2453002
+availability_status: available 
+quantity: 1.0
+quantity_units: ucum:ml 

@@ -25,22 +25,18 @@ classes:
       - is_deceased
       - deceased_rel
       - patient_knowledge_source
-      - family
-      - sample
+      - family_global_id
+      - sample_id
     slot_usage:
       participant_id:
         identifier: true
         range: string
     #    required: true
-        
+      sample_id:
+        required: false
+        multivalued: true 
+        description: Samples associated with this participant 
 slots:
-  sample:
-    title: Sample 
-    description: Samples associated with this participant 
-    range: Sample 
-    required: false
-    multivalued: true 
-    # inlined: true
   participant_id:
     title: Participant ID 
     description: The Global ID for the Participant 
@@ -113,7 +109,7 @@ slots:
     required: false 
     multivalued: false
     range: EnumPatientKnowledgeSource
-  family:
+  family_global_id:
     title: Family
     description: The family the participant is a part of 
     range: Family 

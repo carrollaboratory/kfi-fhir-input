@@ -1044,15 +1044,17 @@ class StudyMembership(ConfiguredBaseModel):
     Grouping subject participation within a research study is helpful to provide definitive lists of participants that fit a specific criteria such as All Participants or Participants From a Particular Consent Group, etc.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/study-membership',
+         'slot_usage': {'participant_id': {'multivalued': True,
+                                           'name': 'participant_id'},
+                        'study_membership_id': {'identifier': True,
+                                                'name': 'study_membership_id'}},
          'title': 'Study Membership'})
 
+    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
     access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'access_policy_id'}},
          'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
-    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
-    participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'participant_id'}},
-         'domain_of': ['ParticipantAssertion',
+    participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
                        'StudyMembership',
@@ -1188,7 +1190,12 @@ class Participant(HasExternalId):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/participant',
          'slot_usage': {'participant_id': {'identifier': True,
                                            'name': 'participant_id',
-                                           'range': 'string'}},
+                                           'range': 'string'},
+                        'sample_id': {'description': 'Samples associated with this '
+                                                     'participant',
+                                      'multivalued': True,
+                                      'name': 'sample_id',
+                                      'required': False}},
          'title': 'Participant'})
 
     participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
@@ -1211,11 +1218,11 @@ class Participant(HasExternalId):
     is_deceased: Optional[bool] = Field(default=None, title="Is Deceased", description="""Is the participant known to be Deceased, T, or Alive, F""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     deceased_rel: Optional[str] = Field(default=None, title="Deceased Relative Date", description="""Implementers can provide relativeDateTime if information is available.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
-    family: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'family_global_id'},
+    family_global_id: Optional[str] = Field(default=None, title="Family", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'family_global_id'},
                          'target_slot': {'tag': 'target_slot',
                                          'value': 'family_global_id'}},
-         'domain_of': ['Participant']} })
-    sample: Optional[list[str]] = Field(default=[], title="Sample", description="""Samples associated with this participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
+         'domain_of': ['Participant', 'Family']} })
+    sample_id: Optional[list[str]] = Field(default=[], title="Sample ID", description="""Samples associated with this participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1226,6 +1233,8 @@ class ResearchStudy(HasExternalId):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'ResearchStudy'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/research_study',
+         'slot_usage': {'study_membership_id': {'multivalued': True,
+                                                'name': 'study_membership_id'}},
          'title': 'Research Study'})
 
     study_title: Optional[str] = Field(default=None, title="Title", description="""Research Study's formal title.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
@@ -1285,8 +1294,12 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/sample',
+         'slot_usage': {'sample_id': {'identifier': True,
+                                      'name': 'sample_id',
+                                      'required': True}},
          'title': 'Sample'})
 
+    sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample']} })
     parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample Global ID associated with the parent sample""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'parent'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
@@ -1367,7 +1380,6 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'collection[].quantity.units'}},
          'domain_of': ['Sample']} })
-    sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sample']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1549,7 +1561,7 @@ class Family(HasExternalId):
                        'Family']} })
     consanguinity: Optional[EnumConsanguinity] = Field(default=None, title="Consanguinity", description="""Is there known or suspected consanguinity in this study family?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
     family_focus: Optional[str] = Field(default=None, title="Family Focus", description="""What is this study family investigating? EG, a specific condition""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    family_global_id: str = Field(default=..., title="Family Global ID", description="""Family Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
+    family_global_id: str = Field(default=..., title="Family Global ID", description="""Family Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Family']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
