@@ -435,22 +435,19 @@ Alias: study_membership_id</p>
 <tr>
 <td><a href="../ResearchStudy/">ResearchStudy</a></td>
 <td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../StudyMembership/">StudyMembership</a></td>
 <td>Grouping subject participation within a research study is helpful to provide ...</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
 <li>
-<p>Range: <a href="../StudyMembership/">StudyMembership</a></p>
-</li>
-<li>
-<p>Multivalued: True</p>
+<p>Range: <a href="../String/">String</a></p>
 </li>
 <li>
 <p>Required: True</p>
@@ -492,9 +489,9 @@ alias: study_membership_id
 domain_of:
 - StudyMembership
 - ResearchStudy
-range: StudyMembership
+range: string
 required: true
-multivalued: true
+multivalued: false
 
 </code></pre>
 

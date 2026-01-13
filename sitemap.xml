@@ -2,830 +2,822 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/about/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/AccessPolicy/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/AgeAt/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Aliquot/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Any/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/AssociatedParty/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Boolean/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Curie/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Date/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/DateOrDatetime/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Datetime/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Decimal/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Double/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumAccessPolicyCode/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumAgeValueType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumAssertionType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumBirthSex/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumCollectionStatus/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumConsanguinity/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumConsentScope/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumConsentStateCodes/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumDataAccessType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumDobMethod/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumEntityAsserter/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumEthnicity/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumFamilyRelationship/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumFamilyType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumFileMetaDataType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumOffsetType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumPatientKnowledgeSource/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumPopulation/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumRace/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumRelationshipKnowledgeSource/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumResearchCollectionType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumResearchStudyPartyOrganizationType/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumResearchStudyPartyRole/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumSpecimenAvailability/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/EnumStudyStatus/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Family/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/FamilyRelationship/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/FileLocation/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/FileMetaData/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Float/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/HasExternalId/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Institution/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Integer/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Jsonpath/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Jsonpointer/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/NCPIFile/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Ncname/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Nodeidentifier/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Objectidentifier/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Participant/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/ParticipantAssertion/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Period/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Person/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Practitioner/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/PractitionerRole/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Record/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/RelativeDateTime/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/ResearchStudy/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/ResearchStudyCollection/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Sample/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Sparqlpath/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/String/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/StudyMembership/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Time/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Uri/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/Uriorcurie/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/access_policy_code/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/access_policy_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/adaptor_trimmed/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_assertion/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_collection/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_event/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_last_vital/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_onset/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_at_resolution/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/age_code/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/aliquot_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/as_date/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assay_strategy/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_code/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_source/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_text/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/assertion_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_institution_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_practitioner_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/associated_party_practitioner_role_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/availability_status/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/birthsex/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/body_laterality/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/body_location/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/body_site/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/cancer_stage/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/classifier/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/collection_method/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/collection_site/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/collection_status/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/collection_title/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/concentration/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/concentration_units/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/consanguinity/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/consent_scope/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/content_version/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/data_access_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/deceased_rel/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/description/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/disease_limitation/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/dob/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/dob_method/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/email/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/end/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/entity_asserter/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/erdiagram/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/ethnicity/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/external_id/</loc>
-         <lastmod>2026-01-12</lastmod>
-    </url>
-    <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_focus/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_global_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_relationship_global_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/family_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_format/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_global_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_hash/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_hash_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_location_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_meta_data_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_name/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_size/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_size_unit/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/file_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/institution_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/is_deceased/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/is_paired_end/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/kfi-fhir-input/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/knowledge_source/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/label/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/laterality/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/library_prep/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/library_selection/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/location_uri/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/meta_data_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/name/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/offset/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/offset_end/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/offset_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/other_condition_modifiers/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/parent_sample_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/parent_study_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/participant_assertion_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/participant_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/party/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/patient_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/patient_knowledge_source/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/period_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/person_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/platform_instrument/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/population/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/practitioner_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/practitioner_role_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/practitioner_title/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/processing/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/quantity/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/quantity_units/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/race/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/reference_genome/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/related_samples/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/relationship/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/relative_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/research_study_collection_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/research_study_collection_member_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/research_study_collection_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/research_study_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/role/</loc>
-         <lastmod>2026-01-12</lastmod>
-    </url>
-    <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/sample/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/sample_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/sample_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/spatial_qualifier/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/start/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/status/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/storage_method/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/strandedness/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_acknowledgement/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_condition/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_design/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_focus/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_membership_id/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_personnel/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_status/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/study_title/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/target_region/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_code/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_number/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_string/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/value_units/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/volume/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/volume_units/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/website/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/workflow_tool/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/workflow_type/</loc>
-         <lastmod>2026-01-12</lastmod>
+         <lastmod>2026-01-13</lastmod>
     </url>
 </urlset>

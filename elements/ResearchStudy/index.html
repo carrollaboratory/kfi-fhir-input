@@ -311,15 +311,6 @@
 
       ResearchStudy : study_membership_id
 
-
-
-
-
-        ResearchStudy --&gt; "1..*" StudyMembership : study_membership_id
-        click StudyMembership href "../StudyMembership/"
-
-
-
       ResearchStudy : study_personnel
 
 
@@ -420,7 +411,7 @@
 </tr>
 <tr>
 <td><a href="../study_membership_id/">study_membership_id</a></td>
-<td>1..* <br/> <a href="../StudyMembership/">StudyMembership</a></td>
+<td>1..* <br/> <a href="../String/">String</a></td>
 <td>Study Membership Global ID (group)</td>
 <td>direct</td>
 </tr>
@@ -528,6 +519,10 @@ slots:
 - study_design
 - study_personnel
 - study_membership_id
+slot_usage:
+  study_membership_id:
+    name: study_membership_id
+    multivalued: true
 attributes:
   research_study_id:
     name: research_study_id
@@ -555,6 +550,10 @@ description: The NCPI Research Study FHIR resource represents an individual rese
 title: Research Study
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  study_membership_id:
+    name: study_membership_id
+    multivalued: true
 attributes:
   research_study_id:
     name: research_study_id
@@ -712,7 +711,7 @@ attributes:
     domain_of:
     - StudyMembership
     - ResearchStudy
-    range: StudyMembership
+    range: string
     required: true
     multivalued: true
   external_id:

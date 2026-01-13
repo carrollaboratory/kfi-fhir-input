@@ -334,13 +334,13 @@
 
       Participant : external_id
 
-      Participant : family
+      Participant : family_global_id
 
 
 
 
 
-        Participant --&gt; "0..1" Family : family
+        Participant --&gt; "0..1" Family : family_global_id
         click Family href "../Family/"
 
 
@@ -382,16 +382,7 @@
 
 
 
-      Participant : sample
-
-
-
-
-
-        Participant --&gt; "*" Sample : sample
-        click Sample href "../Sample/"
-
-
+      Participant : sample_id
 
 
 </div>
@@ -480,14 +471,14 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../family/">family</a></td>
+<td><a href="../family_global_id/">family_global_id</a></td>
 <td>0..1 <br/> <a href="../Family/">Family</a></td>
 <td>The family the participant is a part of</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../sample/">sample</a></td>
-<td>* <br/> <a href="../Sample/">Sample</a></td>
+<td><a href="../sample_id/">sample_id</a></td>
+<td>* <br/> <a href="../String/">String</a></td>
 <td>Samples associated with this participant</td>
 <td>direct</td>
 </tr>
@@ -619,13 +610,18 @@ slots:
 - is_deceased
 - deceased_rel
 - patient_knowledge_source
-- family
-- sample
+- family_global_id
+- sample_id
 slot_usage:
   participant_id:
     name: participant_id
     identifier: true
     range: string
+  sample_id:
+    name: sample_id
+    description: Samples associated with this participant
+    required: false
+    multivalued: true
 
 </code></pre>
 </details>
@@ -648,6 +644,11 @@ slot_usage:
     name: participant_id
     identifier: true
     range: string
+  sample_id:
+    name: sample_id
+    description: Samples associated with this participant
+    required: false
+    multivalued: true
 attributes:
   participant_id:
     name: participant_id
@@ -807,8 +808,8 @@ attributes:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
-  family:
-    name: family
+  family_global_id:
+    name: family_global_id
     annotations:
       target_slot:
         tag: target_slot
@@ -820,24 +821,26 @@ attributes:
     title: Family
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: family
+    alias: family_global_id
     owner: Participant
     domain_of:
     - Participant
+    - Family
     range: Family
     required: false
     multivalued: false
-  sample:
-    name: sample
+  sample_id:
+    name: sample_id
     description: Samples associated with this participant
-    title: Sample
+    title: Sample ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: sample
+    alias: sample_id
     owner: Participant
     domain_of:
     - Participant
-    range: Sample
+    - Sample
+    range: string
     required: false
     multivalued: true
   external_id:

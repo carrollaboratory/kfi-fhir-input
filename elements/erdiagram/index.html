@@ -271,6 +271,7 @@ Participant {
     string age_at_last_vital  
     boolean is_deceased  
     EnumPatientKnowledgeSource patient_knowledge_source  
+    stringList sample_id  
     uriorcurieList external_id  
 }
 ParticipantAssertion {
@@ -328,6 +329,7 @@ ResearchStudy {
     stringList study_acknowledgement  
     EnumStudyStatus study_status  
     uriorcurieList study_design  
+    stringList study_membership_id  
     string research_study_id  
     uriorcurieList external_id  
 }
@@ -342,6 +344,7 @@ ResearchStudyCollection {
     uriorcurieList external_id  
 }
 Sample {
+    string sample_id  
     uriorcurie sample_type  
     uriorcurie collection_method  
     uriorcurie collection_site  
@@ -352,7 +355,6 @@ Sample {
     uriorcurie storage_method  
     float quantity  
     uriorcurie quantity_units  
-    string sample_id  
     uriorcurieList external_id  
 }
 StudyMembership {
@@ -372,9 +374,8 @@ FileMetaData ||--|o Sample : "related_samples"
 NCPIFile ||--|| Participant : "participant_id"
 NCPIFile ||--}o FileMetaData : "file_meta_data_id"
 NCPIFile ||--}| FileLocation : "file_location_id"
-Participant ||--|o Family : "family"
+Participant ||--|o Family : "family_global_id"
 Participant ||--|o RelativeDateTime : "deceased_rel"
-Participant ||--}o Sample : "sample"
 ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
 ParticipantAssertion ||--|o AgeAt : "age_at_event"
 ParticipantAssertion ||--|o AgeAt : "age_at_onset"
@@ -387,7 +388,6 @@ PractitionerRole ||--|o Institution : "institution_id"
 PractitionerRole ||--|o Period : "period_id"
 ResearchStudy ||--|o ResearchStudy : "parent_study_id"
 ResearchStudy ||--}| AssociatedParty : "study_personnel"
-ResearchStudy ||--}| StudyMembership : "study_membership_id"
 ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
 Sample ||--|o AgeAt : "age_at_collection"
 Sample ||--|o Sample : "parent_sample_id"

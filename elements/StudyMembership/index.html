@@ -180,15 +180,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
 <span class="md-ellipsis">
       
@@ -302,15 +293,15 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../access_policy_id/">access_policy_id</a></td>
-<td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
-<td>Access Policy Global ID</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../study_membership_id/">study_membership_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Study Membership Global ID (group)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Access Policy Global ID</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -318,25 +309,6 @@
 <td>1..* <br/> <a href="../Participant/">Participant</a></td>
 <td>The Global ID for the Participant</td>
 <td>direct</td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../ResearchStudy/">ResearchStudy</a></td>
-<td><a href="../study_membership_id/">study_membership_id</a></td>
-<td>range</td>
-<td><a href="./">StudyMembership</a></td>
 </tr>
 </tbody>
 </table>
@@ -375,38 +347,16 @@ description: Grouping subject participation within a research study is helpful t
 title: Study Membership
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
+- study_membership_id
 - access_policy_id
-attributes:
-  study_membership_id:
-    name: study_membership_id
-    description: Study Membership Global ID (group)
-    title: Study Membership ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
-    identifier: true
-    domain_of:
-    - StudyMembership
-    - ResearchStudy
-    range: string
-    required: true
-    multivalued: false
+- participant_id
+slot_usage:
   participant_id:
     name: participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
-    domain_of:
-    - ParticipantAssertion
-    - Participant
-    - Person
-    - StudyMembership
-    - NCPIFile
-    range: Participant
-    required: true
     multivalued: true
+  study_membership_id:
+    name: study_membership_id
+    identifier: true
 
 </code></pre>
 </details>
@@ -418,12 +368,20 @@ description: Grouping subject participation within a research study is helpful t
   Participants or Participants From a Particular Consent Group, etc.
 title: Study Membership
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+slot_usage:
+  participant_id:
+    name: participant_id
+    multivalued: true
+  study_membership_id:
+    name: study_membership_id
+    identifier: true
 attributes:
   study_membership_id:
     name: study_membership_id
     description: Study Membership Global ID (group)
     title: Study Membership ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: study_membership_id
     owner: StudyMembership
@@ -433,26 +391,6 @@ attributes:
     range: string
     required: true
     multivalued: false
-  participant_id:
-    name: participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
-    alias: participant_id
-    owner: StudyMembership
-    domain_of:
-    - ParticipantAssertion
-    - Participant
-    - Person
-    - StudyMembership
-    - NCPIFile
-    range: Participant
-    required: true
-    multivalued: true
   access_policy_id:
     name: access_policy_id
     annotations:
@@ -472,6 +410,23 @@ attributes:
     range: AccessPolicy
     required: true
     multivalued: false
+  participant_id:
+    name: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: participant_id
+    owner: StudyMembership
+    domain_of:
+    - ParticipantAssertion
+    - Participant
+    - Person
+    - StudyMembership
+    - NCPIFile
+    range: Participant
+    required: true
+    multivalued: true
 
 </code></pre>
 </details>

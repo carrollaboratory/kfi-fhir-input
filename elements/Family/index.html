@@ -393,7 +393,7 @@
 <tbody>
 <tr>
 <td><a href="../Participant/">Participant</a></td>
-<td><a href="../family/">family</a></td>
+<td><a href="../family_global_id/">family_global_id</a></td>
 <td>range</td>
 <td><a href="./">Family</a></td>
 </tr>
@@ -470,9 +470,9 @@ attributes:
     description: Family Global ID
     title: Family Global ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
-    rank: 1000
     identifier: true
     domain_of:
+    - Participant
     - Family
     range: string
     required: true
@@ -499,11 +499,11 @@ attributes:
     description: Family Global ID
     title: Family Global ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
-    rank: 1000
     identifier: true
     alias: family_global_id
     owner: Family
     domain_of:
+    - Participant
     - Family
     range: string
     required: true

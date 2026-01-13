@@ -360,6 +360,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../sample_id/">sample_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Sample Global ID</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../parent_sample_id/">parent_sample_id</a></td>
 <td>0..1 <br/> <a href="./">Sample</a></td>
 <td>Sample Global ID associated with the parent sample</td>
@@ -432,12 +438,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../sample_id/">sample_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Sample Global ID</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
@@ -456,12 +456,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="../Participant/">Participant</a></td>
-<td><a href="../sample/">sample</a></td>
-<td>range</td>
-<td><a href="./">Sample</a></td>
-</tr>
 <tr>
 <td><a href="./">Sample</a></td>
 <td><a href="../parent_sample_id/">parent_sample_id</a></td>
@@ -543,6 +537,7 @@ title: Sample
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- sample_id
 - parent_sample_id
 - sample_type
 - age_at_collection
@@ -555,17 +550,10 @@ slots:
 - storage_method
 - quantity
 - quantity_units
-attributes:
+slot_usage:
   sample_id:
     name: sample_id
-    description: Sample Global ID
-    title: Sample ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
-    rank: 1000
     identifier: true
-    domain_of:
-    - Sample
-    range: string
     required: true
 
 </code></pre>
@@ -585,17 +573,23 @@ description: Sample encompasses biospecimen collection, sample information, and 
 title: Sample
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  sample_id:
+    name: sample_id
+    identifier: true
+    required: true
 attributes:
   sample_id:
     name: sample_id
     description: Sample Global ID
     title: Sample ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: true
     alias: sample_id
     owner: Sample
     domain_of:
+    - Participant
     - Sample
     range: string
     required: true
