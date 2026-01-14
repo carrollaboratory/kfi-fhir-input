@@ -263,7 +263,7 @@
 <div class="mermaid"> classDiagram
     class FamilyRelationship
     click FamilyRelationship href "../FamilyRelationship/"
-      FamilyRelationship : family_relationship_global_id
+      FamilyRelationship : family_relationship_id
 
       FamilyRelationship : knowledge_source
 
@@ -324,6 +324,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../family_relationship_id/">family_relationship_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Family Relationship Global ID</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../patient_id/">patient_id</a></td>
 <td>1 <br/> <a href="../Participant/">Participant</a></td>
 <td>The child from the parent-child relationship</td>
@@ -345,12 +351,6 @@
 <td><a href="../knowledge_source/">knowledge_source</a></td>
 <td>1 <br/> <a href="../EnumRelationshipKnowledgeSource/">EnumRelationshipKnowledgeSource</a></td>
 <td>The source for the reltionship term</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../family_relationship_global_id/">family_relationship_global_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Family Relationship Global ID</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -414,22 +414,11 @@ description: A relationship between individuals in a pedigree or family.
 title: Family Relationship
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
+- family_relationship_id
 - patient_id
 - relative_id
 - relationship
 - knowledge_source
-attributes:
-  family_relationship_global_id:
-    name: family_relationship_global_id
-    description: Family Relationship Global ID
-    title: Family Relationship Global ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
-    rank: 1000
-    identifier: true
-    domain_of:
-    - FamilyRelationship
-    range: string
-    required: true
 
 </code></pre>
 </details>
@@ -447,14 +436,14 @@ description: A relationship between individuals in a pedigree or family.
 title: Family Relationship
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 attributes:
-  family_relationship_global_id:
-    name: family_relationship_global_id
+  family_relationship_id:
+    name: family_relationship_id
     description: Family Relationship Global ID
     title: Family Relationship Global ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: true
-    alias: family_relationship_global_id
+    alias: family_relationship_id
     owner: FamilyRelationship
     domain_of:
     - FamilyRelationship
@@ -499,6 +488,9 @@ attributes:
       db_column:
         tag: db_column
         value: relative_id
+      target_slot:
+        tag: target_slot
+        value: participant_id
     description: The parent from the parent-child relationship
     title: Relative (Parent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
