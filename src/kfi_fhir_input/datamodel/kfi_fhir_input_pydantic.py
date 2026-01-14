@@ -1043,7 +1043,7 @@ class StudyMembership(ConfiguredBaseModel):
                                                 'name': 'study_membership_id'}},
          'title': 'Study Membership'})
 
-    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
+    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership']} })
     access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
     participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
@@ -1051,6 +1051,7 @@ class StudyMembership(ConfiguredBaseModel):
                        'StudyMembership',
                        'Sample',
                        'NCPIFile']} })
+    research_study_id: str = Field(default=..., title="Research Study ID", description="""The Global ID for the Research Study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
 
 
 class FileLocation(ConfiguredBaseModel):
@@ -1232,10 +1233,15 @@ class ResearchStudy(HasExternalId):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'ResearchStudy'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/research_study',
-         'slot_usage': {'study_membership_id': {'multivalued': True,
-                                                'name': 'study_membership_id'}},
+         'slot_usage': {'research_study_id': {'description': 'The Global ID for the '
+                                                             'Research Study.',
+                                              'identifier': True,
+                                              'name': 'research_study_id',
+                                              'range': 'string',
+                                              'required': True}},
          'title': 'Research Study'})
 
+    research_study_id: str = Field(default=..., title="Research Study ID", description="""The Global ID for the Research Study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
     study_title: Optional[str] = Field(default=None, title="Title", description="""Research Study's formal title.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     parent_study_id: Optional[str] = Field(default=None, title="Parent Study", description="""ID For Parent Study if this is a substudy""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column', 'value': 'parent_study_id'},
                          'target_slot': {'tag': 'target_slot',
@@ -1253,8 +1259,6 @@ class ResearchStudy(HasExternalId):
     study_status: EnumStudyStatus = Field(default=..., title="Study Status", description="""The current state of the study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_design: Optional[list[str]] = Field(default=[], title="Study Design", description="""Study Design and Study Type ([example ValueSet can be found here](https://hl7.org/fhir/valueset-study-design.html))""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_personnel: list[str] = Field(default=..., title="Study Personnel", description="""Every study must have at least one Primary Contact defined. Additional personnel such as Primary Investigator(s), Administrator(s), Collaborator(s) or other roles may also be included. If there are no appropriate individuals who can serve as primary contact for a study, an organization may be provided.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
-    study_membership_id: list[str] = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
-    research_study_id: str = Field(default=..., title="Research Study ID", description="""The Global ID for the Research Study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1271,9 +1275,7 @@ class ResearchStudyCollection(HasExternalId):
                                                          'required': True}},
          'title': 'Research Study Collection'})
 
-    research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'research_study_collection_id'}},
-         'domain_of': ['ResearchStudyCollection']} })
+    research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',

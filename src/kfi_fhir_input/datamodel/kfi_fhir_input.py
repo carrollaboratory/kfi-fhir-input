@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T14:41:52
+# Generation date: 2026-01-14T15:03:08
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -797,6 +797,7 @@ class StudyMembership(YAMLRoot):
     study_membership_id: Union[str, StudyMembershipStudyMembershipId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     participant_id: Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.study_membership_id):
@@ -814,6 +815,11 @@ class StudyMembership(YAMLRoot):
         if not isinstance(self.participant_id, list):
             self.participant_id = [self.participant_id] if self.participant_id is not None else []
         self.participant_id = [v if isinstance(v, ParticipantParticipantId) else ParticipantParticipantId(v) for v in self.participant_id]
+
+        if self._is_empty(self.research_study_id):
+            self.MissingRequiredField("research_study_id")
+        if not isinstance(self.research_study_id, ResearchStudyResearchStudyId):
+            self.research_study_id = ResearchStudyResearchStudyId(self.research_study_id)
 
         super().__post_init__(**kwargs)
 
@@ -834,7 +840,6 @@ class ResearchStudy(HasExternalId):
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     study_status: Union[str, "EnumStudyStatus"] = None
     study_personnel: Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]] = None
-    study_membership_id: Union[str, list[str]] = None
     study_title: Optional[str] = None
     parent_study_id: Optional[Union[str, ResearchStudyResearchStudyId]] = None
     study_focus: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
@@ -859,12 +864,6 @@ class ResearchStudy(HasExternalId):
         if not isinstance(self.study_personnel, list):
             self.study_personnel = [self.study_personnel] if self.study_personnel is not None else []
         self.study_personnel = [v if isinstance(v, AssociatedPartyId) else AssociatedPartyId(v) for v in self.study_personnel]
-
-        if self._is_empty(self.study_membership_id):
-            self.MissingRequiredField("study_membership_id")
-        if not isinstance(self.study_membership_id, list):
-            self.study_membership_id = [self.study_membership_id] if self.study_membership_id is not None else []
-        self.study_membership_id = [v if isinstance(v, str) else str(v) for v in self.study_membership_id]
 
         if self.study_title is not None and not isinstance(self.study_title, str):
             self.study_title = str(self.study_title)
@@ -2317,9 +2316,6 @@ slots.name = Slot(uri=KFI_FHIR_SPARKS.name, name="name", curie=KFI_FHIR_SPARKS.c
 slots.description = Slot(uri=KFI_FHIR_SPARKS.description, name="description", curie=KFI_FHIR_SPARKS.curie('description'),
                    model_uri=KFI_FHIR_SPARKS.description, domain=None, range=Optional[str])
 
-slots.research_study_id = Slot(uri=KFI_FHIR_SPARKS.research_study_id, name="research_study_id", curie=KFI_FHIR_SPARKS.curie('research_study_id'),
-                   model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=URIRef)
-
 slots.website = Slot(uri=KFI_FHIR_SPARKS.website, name="website", curie=KFI_FHIR_SPARKS.curie('website'),
                    model_uri=KFI_FHIR_SPARKS.website, domain=None, range=Optional[Union[str, URI]])
 
@@ -2481,6 +2477,9 @@ slots.practitioner_role_id = Slot(uri=KFI['practitioner_role/practitioner_role_i
 
 slots.study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
                    model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=str)
+
+slots.research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="research_study_id", curie=KFI.curie('research_study/research_study_id'),
+                   model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=Union[str, ResearchStudyResearchStudyId])
 
 slots.parent_study_id = Slot(uri=KFI['research_study/parent_study_id'], name="parent_study_id", curie=KFI.curie('research_study/parent_study_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_study_id, domain=None, range=Optional[Union[str, ResearchStudyResearchStudyId]])
@@ -2698,9 +2697,6 @@ slots.period__start = Slot(uri=KFI['period/start'], name="period__start", curie=
 slots.period__end = Slot(uri=KFI['period/end'], name="period__end", curie=KFI.curie('period/end'),
                    model_uri=KFI_FHIR_SPARKS.period__end, domain=None, range=Optional[Union[str, XSDDate]])
 
-slots.researchStudy__research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="researchStudy__research_study_id", curie=KFI.curie('research_study/research_study_id'),
-                   model_uri=KFI_FHIR_SPARKS.researchStudy__research_study_id, domain=None, range=URIRef)
-
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
 
@@ -2746,8 +2742,8 @@ slots.StudyMembership_participant_id = Slot(uri=KFI['participant/participant_id'
 slots.StudyMembership_study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="StudyMembership_study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
                    model_uri=KFI_FHIR_SPARKS.StudyMembership_study_membership_id, domain=StudyMembership, range=Union[str, StudyMembershipStudyMembershipId])
 
-slots.ResearchStudy_study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="ResearchStudy_study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
-                   model_uri=KFI_FHIR_SPARKS.ResearchStudy_study_membership_id, domain=ResearchStudy, range=Union[str, list[str]])
+slots.ResearchStudy_research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="ResearchStudy_research_study_id", curie=KFI.curie('research_study/research_study_id'),
+                   model_uri=KFI_FHIR_SPARKS.ResearchStudy_research_study_id, domain=ResearchStudy, range=Union[str, ResearchStudyResearchStudyId])
 
 slots.ResearchStudyCollection_research_study_collection_id = Slot(uri=KFI['research-study-collection/research_study_collection_id'], name="ResearchStudyCollection_research_study_collection_id", curie=KFI.curie('research-study-collection/research_study_collection_id'),
                    model_uri=KFI_FHIR_SPARKS.ResearchStudyCollection_research_study_collection_id, domain=ResearchStudyCollection, range=Union[str, ResearchStudyCollectionResearchStudyCollectionId])
