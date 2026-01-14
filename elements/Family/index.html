@@ -337,6 +337,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../family_global_id/">family_global_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Family Global ID</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../family_id/">family_id</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>External ID common to all family members</td>
@@ -364,12 +370,6 @@
 <td><a href="../family_focus/">family_focus</a></td>
 <td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>What is this study family investigating? EG, a specific condition</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../family_global_id/">family_global_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Family Global ID</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -459,21 +459,16 @@ title: Family
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- family_global_id
 - family_id
 - family_type
 - description
 - consanguinity
 - family_focus
-attributes:
+slot_usage:
   family_global_id:
     name: family_global_id
-    description: Family Global ID
-    title: Family Global ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     identifier: true
-    domain_of:
-    - Participant
-    - Family
     range: string
     required: true
 
@@ -493,12 +488,19 @@ description: Group of Participants that are related.
 title: Family
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  family_global_id:
+    name: family_global_id
+    identifier: true
+    range: string
+    required: true
 attributes:
   family_global_id:
     name: family_global_id
     description: Family Global ID
     title: Family Global ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: family_global_id
     owner: Family

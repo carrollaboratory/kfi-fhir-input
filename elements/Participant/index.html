@@ -638,6 +638,9 @@ slot_usage:
     identifier: false
     required: false
     multivalued: true
+  family_global_id:
+    name: family_global_id
+    description: The family the participant is a part of
 
 </code></pre>
 </details>
@@ -666,6 +669,9 @@ slot_usage:
     identifier: false
     required: false
     multivalued: true
+  family_global_id:
+    name: family_global_id
+    description: The family the participant is a part of
 attributes:
   participant_id:
     name: participant_id
@@ -828,17 +834,11 @@ attributes:
     multivalued: false
   family_global_id:
     name: family_global_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: family_global_id
-      db_column:
-        tag: db_column
-        value: family_global_id
     description: The family the participant is a part of
-    title: Family
+    title: Family Global ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
+    identifier: false
     alias: family_global_id
     owner: Participant
     domain_of:
@@ -846,7 +846,6 @@ attributes:
     - Family
     range: Family
     required: false
-    multivalued: false
   sample_id:
     name: sample_id
     description: Samples associated with this participant

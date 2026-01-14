@@ -2282,26 +2282,6 @@ slots:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
-  family_global_id:
-    name: family_global_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family_global_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: family_global_id
-      db_column:
-        tag: db_column
-        value: family_global_id
-    description: The family the participant is a part of
-    title: Family
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/family_global_id
-    owner: Participant
-    domain_of:
-    - Participant
-    range: Family
-    required: false
-    multivalued: false
   period_id:
     name: period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -3164,6 +3144,20 @@ slots:
     range: EnumRelationshipKnowledgeSource
     required: true
     multivalued: false
+  family_global_id:
+    name: family_global_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
+    description: Family Global ID
+    title: Family Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
+    identifier: false
+    owner: Family
+    domain_of:
+    - Participant
+    - Family
+    range: Family
+    required: false
   family_id:
     name: family_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_id
@@ -3635,19 +3629,6 @@ slots:
     - NCPIFile
     range: string
     required: true
-  family__family_global_id:
-    name: family__family_global_id
-    description: Family Global ID
-    title: Family Global ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
-    identifier: true
-    alias: family_global_id
-    owner: Family
-    domain_of:
-    - Family
-    range: string
-    required: true
   AccessPolicy_access_policy_id:
     name: AccessPolicy_access_policy_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
@@ -3752,6 +3733,24 @@ slots:
     range: Sample
     required: false
     multivalued: true
+  Participant_family_global_id:
+    name: Participant_family_global_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
+    description: The family the participant is a part of
+    title: Family Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    is_a: family_global_id
+    domain: Participant
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
+    identifier: false
+    alias: family_global_id
+    owner: Participant
+    domain_of:
+    - Participant
+    is_usage_slot: true
+    usage_slot_name: family_global_id
+    range: Family
+    required: false
   Period_period_id:
     name: Period_period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -3902,6 +3901,24 @@ slots:
     range: string
     required: true
     multivalued: true
+  Family_family_global_id:
+    name: Family_family_global_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
+    description: Family Global ID
+    title: Family Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
+    is_a: family_global_id
+    domain: Family
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family/family_global_id
+    identifier: true
+    alias: family_global_id
+    owner: Family
+    domain_of:
+    - Family
+    is_usage_slot: true
+    usage_slot_name: family_global_id
+    range: string
+    required: true
   FileMetaData_file_meta_data_id:
     name: FileMetaData_file_meta_data_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/file_meta_data_id
@@ -4229,7 +4246,7 @@ classes:
     - is_deceased
     - deceased_rel
     - patient_knowledge_source
-    - family_global_id
+    - Participant_family_global_id
     - Participant_sample_id
     slot_usage:
       participant_id:
@@ -4242,6 +4259,9 @@ classes:
         identifier: false
         required: false
         multivalued: true
+      family_global_id:
+        name: family_global_id
+        description: The family the participant is a part of
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
   Person:
     name: Person
@@ -4601,17 +4621,15 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - Family_family_global_id
     - family_id
     - family_type
     - description
     - consanguinity
     - family_focus
-    - family__family_global_id
-    attributes:
+    slot_usage:
       family_global_id:
         name: family_global_id
-        description: Family Global ID
-        title: Family Global ID
         identifier: true
         range: string
         required: true
@@ -4661,7 +4679,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-14T18:39:48'
+source_file_date: '2026-01-14T18:48:14'
 source_file_size: 5198
-generation_date: '2026-01-14T18:39:59'
+generation_date: '2026-01-14T18:48:23'
 

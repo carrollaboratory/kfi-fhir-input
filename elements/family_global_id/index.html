@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Family (family_global_id) - kfi-fhir-input</title>
+        <title>Slot: Family Global ID (family_global_id) - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-family-family_global_id" class="md-skip">
+        <a href="#slot-family-global-id-family_global_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Family (family_global_id)
+              Slot: Family Global ID (family_global_id)
             
           </span>
         </div>
@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -427,8 +416,8 @@
   
 
 
-<h1 id="slot-family-family_global_id">Slot: Family (family_global_id)</h1>
-<p><em>The family the participant is a part of</em></p>
+<h1 id="slot-family-global-id-family_global_id">Slot: Family Global ID (family_global_id)</h1>
+<p><em>Family Global ID</em></p>
 <p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputfamily_global_id">kfi_fhir_sparks:family_global_id</a>
 Alias: family_global_id</p>
 <!-- no inheritance hierarchy -->
@@ -446,12 +435,12 @@ Alias: family_global_id</p>
 <tr>
 <td><a href="../Family/">Family</a></td>
 <td>Group of Participants that are related</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../Participant/">Participant</a></td>
 <td>Research oriented patient</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
@@ -460,25 +449,6 @@ Alias: family_global_id</p>
 <li>Range: <a href="../Family/">Family</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>family_global_id</td>
-</tr>
-<tr>
-<td>db_column</td>
-<td>family_global_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -506,24 +476,17 @@ Alias: family_global_id</p>
 <details>
 
 <pre><code class="language-yaml">name: family_global_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: family_global_id
-  db_column:
-    tag: db_column
-    value: family_global_id
-description: The family the participant is a part of
-title: Family
+description: Family Global ID
+title: Family Global ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
+identifier: false
 alias: family_global_id
 domain_of:
 - Participant
 - Family
 range: Family
 required: false
-multivalued: false
 
 </code></pre>
 
