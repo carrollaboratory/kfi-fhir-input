@@ -139,11 +139,11 @@
 --     * Slot: file_name Description: The file's name (no path)
 --     * Slot: access_policy_id Description: Access Policy Global ID
 -- # Class: FamilyRelationship Description: A relationship between individuals in a pedigree or family.
+--     * Slot: family_relationship_id Description: Family Relationship Global ID
 --     * Slot: patient_id Description: The child from the parent-child relationship
 --     * Slot: relative_id Description: The parent from the parent-child relationship
 --     * Slot: relationship Description: The role the relative (parent) fills with respect to the patient (child) for this relationship.
 --     * Slot: knowledge_source Description: The source for the reltionship term
---     * Slot: family_relationship_global_id Description: Family Relationship Global ID
 -- # Class: FileMetaData Description: Representation of file metadata for NCPI
 --     * Slot: file_meta_data_id Description: Representation of file metadata for NCPI
 --     * Slot: meta_data_type Description: Clarify which type of meta data this file has recorded
@@ -538,15 +538,15 @@ CREATE TABLE "NCPIFile" (
 	FOREIGN KEY(participant_id) REFERENCES "Participant" (participant_id)
 );CREATE INDEX "ix_NCPIFile_file_global_id" ON "NCPIFile" (file_global_id);
 CREATE TABLE "FamilyRelationship" (
+	family_relationship_id TEXT NOT NULL,
 	patient_id TEXT NOT NULL,
 	relative_id TEXT NOT NULL,
 	relationship VARCHAR(16) NOT NULL,
 	knowledge_source VARCHAR(11) NOT NULL,
-	family_relationship_global_id TEXT NOT NULL,
-	PRIMARY KEY (family_relationship_global_id),
+	PRIMARY KEY (family_relationship_id),
 	FOREIGN KEY(patient_id) REFERENCES "Participant" (participant_id),
 	FOREIGN KEY(relative_id) REFERENCES "Participant" (participant_id)
-);CREATE INDEX "ix_FamilyRelationship_family_relationship_global_id" ON "FamilyRelationship" (family_relationship_global_id);
+);CREATE INDEX "ix_FamilyRelationship_family_relationship_id" ON "FamilyRelationship" (family_relationship_id);
 CREATE TABLE "AgeAt_external_id" (
 	"AgeAt_id" TEXT,
 	external_id TEXT,

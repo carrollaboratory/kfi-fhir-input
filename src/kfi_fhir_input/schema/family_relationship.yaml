@@ -11,19 +11,19 @@ classes:
     annotations:
       fhir_resource: FamilyMemberHistory
       fhir_profile: http://purl.org/ga4gh/pedigree-fhir-ig/StructureDefinition/PedigreeRelationship
-    attributes: 
-      family_relationship_global_id:
-        title: Family Relationship Global ID 
-        description: Family Relationship Global ID 
-        range: string 
-        identifier: true 
-        required: true 
     slots: 
-      - patient_id # 
+      - family_relationship_id 
+      - patient_id
       - relative_id
       - relationship
       - knowledge_source
 slots:
+  family_relationship_id:
+    title: Family Relationship Global ID 
+    description: Family Relationship Global ID 
+    range: string 
+    identifier: true 
+    required: true 
   patient_id: 
     title: Patient (Child)
     description: The child from the parent-child relationship 
@@ -47,6 +47,7 @@ slots:
       fhir_element: extension[relative] 
       fhir_resource: FamilyMemberHistory
       db_column: relative_id
+      target_slot: participant_id
   relationship: 
     title: Relationship 
     description: The role the relative (parent) fills with respect to the patient (child) for this relationship.

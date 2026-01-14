@@ -3048,6 +3048,19 @@ slots:
     range: string
     required: true
     multivalued: false
+  family_relationship_id:
+    name: family_relationship_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/family_relationship_id
+    description: Family Relationship Global ID
+    title: Family Relationship Global ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/family_relationship_id
+    identifier: true
+    owner: FamilyRelationship
+    domain_of:
+    - FamilyRelationship
+    range: string
+    required: true
   patient_id:
     name: patient_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/patient_id
@@ -3088,6 +3101,9 @@ slots:
       db_column:
         tag: db_column
         value: relative_id
+      target_slot:
+        tag: target_slot
+        value: participant_id
     description: The parent from the parent-child relationship
     title: Relative (Parent)
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
@@ -3617,19 +3633,6 @@ slots:
     owner: NCPIFile
     domain_of:
     - NCPIFile
-    range: string
-    required: true
-  familyRelationship__family_relationship_global_id:
-    name: familyRelationship__family_relationship_global_id
-    description: Family Relationship Global ID
-    title: Family Relationship Global ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/family_relationship_global_id
-    identifier: true
-    alias: family_relationship_global_id
-    owner: FamilyRelationship
-    domain_of:
-    - FamilyRelationship
     range: string
     required: true
   family__family_global_id:
@@ -4576,19 +4579,11 @@ classes:
     title: Family Relationship
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
     slots:
+    - family_relationship_id
     - patient_id
     - relative_id
     - relationship
     - knowledge_source
-    - familyRelationship__family_relationship_global_id
-    attributes:
-      family_relationship_global_id:
-        name: family_relationship_global_id
-        description: Family Relationship Global ID
-        title: Family Relationship Global ID
-        identifier: true
-        range: string
-        required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship/FamilyRelationship
   Family:
     name: Family
@@ -4668,5 +4663,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-14T11:21:45'
 source_file_size: 5198
-generation_date: '2026-01-14T11:36:17'
+generation_date: '2026-01-14T12:37:53'
 

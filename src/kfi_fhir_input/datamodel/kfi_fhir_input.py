@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T11:36:29
+# Generation date: 2026-01-14T12:38:04
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -177,7 +177,7 @@ class FileLocationFileLocationId(extended_str):
     pass
 
 
-class FamilyRelationshipFamilyRelationshipGlobalId(extended_str):
+class FamilyRelationshipFamilyRelationshipId(extended_str):
     pass
 
 
@@ -1218,17 +1218,17 @@ class FamilyRelationship(YAMLRoot):
     class_name: ClassVar[str] = "FamilyRelationship"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FamilyRelationship
 
-    family_relationship_global_id: Union[str, FamilyRelationshipFamilyRelationshipGlobalId] = None
+    family_relationship_id: Union[str, FamilyRelationshipFamilyRelationshipId] = None
     patient_id: Union[str, ParticipantParticipantId] = None
     relative_id: Union[str, ParticipantParticipantId] = None
     relationship: Union[str, "EnumFamilyRelationship"] = None
     knowledge_source: Union[str, "EnumRelationshipKnowledgeSource"] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.family_relationship_global_id):
-            self.MissingRequiredField("family_relationship_global_id")
-        if not isinstance(self.family_relationship_global_id, FamilyRelationshipFamilyRelationshipGlobalId):
-            self.family_relationship_global_id = FamilyRelationshipFamilyRelationshipGlobalId(self.family_relationship_global_id)
+        if self._is_empty(self.family_relationship_id):
+            self.MissingRequiredField("family_relationship_id")
+        if not isinstance(self.family_relationship_id, FamilyRelationshipFamilyRelationshipId):
+            self.family_relationship_id = FamilyRelationshipFamilyRelationshipId(self.family_relationship_id)
 
         if self._is_empty(self.patient_id):
             self.MissingRequiredField("patient_id")
@@ -2601,6 +2601,9 @@ slots.location_uri = Slot(uri=KFI['file-location/location_uri'], name="location_
 slots.file_name = Slot(uri=KFI['file-location/file_name'], name="file_name", curie=KFI.curie('file-location/file_name'),
                    model_uri=KFI_FHIR_SPARKS.file_name, domain=None, range=str)
 
+slots.family_relationship_id = Slot(uri=KFI['family-relationship/family_relationship_id'], name="family_relationship_id", curie=KFI.curie('family-relationship/family_relationship_id'),
+                   model_uri=KFI_FHIR_SPARKS.family_relationship_id, domain=None, range=URIRef)
+
 slots.patient_id = Slot(uri=KFI['family-relationship/patient_id'], name="patient_id", curie=KFI.curie('family-relationship/patient_id'),
                    model_uri=KFI_FHIR_SPARKS.patient_id, domain=None, range=Union[str, ParticipantParticipantId])
 
@@ -2717,9 +2720,6 @@ slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collec
 
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
-
-slots.familyRelationship__family_relationship_global_id = Slot(uri=KFI['family-relationship/family_relationship_global_id'], name="familyRelationship__family_relationship_global_id", curie=KFI.curie('family-relationship/family_relationship_global_id'),
-                   model_uri=KFI_FHIR_SPARKS.familyRelationship__family_relationship_global_id, domain=None, range=URIRef)
 
 slots.family__family_global_id = Slot(uri=KFI['family/family_global_id'], name="family__family_global_id", curie=KFI.curie('family/family_global_id'),
                    model_uri=KFI_FHIR_SPARKS.family__family_global_id, domain=None, range=URIRef)
