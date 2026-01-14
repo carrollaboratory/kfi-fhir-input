@@ -246,8 +246,8 @@ HasExternalId {
     uriorcurieList external_id  
 }
 Institution {
-    string name  
     string institution_id  
+    string name  
     uriorcurieList external_id  
 }
 NCPIFile {
@@ -276,6 +276,7 @@ Participant {
     uriorcurieList external_id  
 }
 ParticipantAssertion {
+    string participant_assertion_id  
     EnumEntityAsserter entity_asserter  
     uriorcurie other_condition_modifiers  
     EnumAssertionType assertion_type  
@@ -290,7 +291,6 @@ ParticipantAssertion {
     uriorcurie body_location  
     uriorcurie body_laterality  
     uriorcurie cancer_stage  
-    string participant_assertion_id  
 }
 Period {
     string period_id  
@@ -301,15 +301,14 @@ Person {
     string person_id  
 }
 Practitioner {
+    string practitioner_id  
     string name  
     string email  
     string description  
     string practitioner_title  
-    string practitioner_id  
     uriorcurieList external_id  
 }
 PractitionerRole {
-    string practitioner_id  
     string practitioner_role_id  
 }
 Record {
@@ -388,6 +387,7 @@ Practitioner ||--|o Institution : "institution_id"
 Practitioner ||--|o PractitionerRole : "practitioner_role_id"
 PractitionerRole ||--|o Institution : "institution_id"
 PractitionerRole ||--|o Period : "period_id"
+PractitionerRole ||--|o Practitioner : "practitioner_id"
 ResearchStudy ||--|o ResearchStudy : "parent_study_id"
 ResearchStudy ||--}| AssociatedParty : "study_personnel"
 ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"

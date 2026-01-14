@@ -339,6 +339,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../practitioner_id/">practitioner_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>The Global ID for the PractitionerRole that links a Practitioner to their Ins...</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Name of the entity</td>
@@ -375,12 +381,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../practitioner_id/">practitioner_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>The Global ID for the Practitioner</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
@@ -402,6 +402,12 @@
 <tr>
 <td><a href="../AssociatedParty/">AssociatedParty</a></td>
 <td><a href="../associated_party_practitioner_id/">associated_party_practitioner_id</a></td>
+<td>range</td>
+<td><a href="./">Practitioner</a></td>
+</tr>
+<tr>
+<td><a href="../PractitionerRole/">PractitionerRole</a></td>
+<td><a href="../practitioner_id/">practitioner_id</a></td>
 <td>range</td>
 <td><a href="./">Practitioner</a></td>
 </tr>
@@ -460,22 +466,17 @@ title: FHIR Practitioner Resource Content
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- practitioner_id
 - name
 - email
 - institution_id
 - practitioner_role_id
 - description
 - practitioner_title
-attributes:
+slot_usage:
   practitioner_id:
     name: practitioner_id
-    description: The Global ID for the Practitioner.
-    title: Practitioner ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
     identifier: true
-    domain_of:
-    - Practitioner
-    - PractitionerRole
     range: string
     required: true
 
@@ -492,12 +493,20 @@ description: For our purposes, this will be an investigator.
 title: FHIR Practitioner Resource Content
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  practitioner_id:
+    name: practitioner_id
+    identifier: true
+    range: string
+    required: true
 attributes:
   practitioner_id:
     name: practitioner_id
-    description: The Global ID for the Practitioner.
+    description: The Global ID for the PractitionerRole that links a Practitioner
+      to their Institution.
     title: Practitioner ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: practitioner_id
     owner: Practitioner
@@ -534,10 +543,6 @@ attributes:
     required: false
   institution_id:
     name: institution_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: institution_id
     description: The institution this record is associated with.
     title: Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -552,10 +557,6 @@ attributes:
     required: false
   practitioner_role_id:
     name: practitioner_role_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: practitioner_role_id
     description: Global ID for this record
     title: Practitioner Role ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input

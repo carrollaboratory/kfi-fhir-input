@@ -296,6 +296,15 @@
 
       PractitionerRole : practitioner_id
 
+
+
+
+
+        PractitionerRole --&gt; "0..1" Practitioner : practitioner_id
+        click Practitioner href "../Practitioner/"
+
+
+
       PractitionerRole : practitioner_role_id
 
 
@@ -313,6 +322,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../practitioner_role_id/">practitioner_role_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Global ID for this record</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../institution_id/">institution_id</a></td>
 <td>0..1 <br/> <a href="../Institution/">Institution</a></td>
 <td>The institution this record is associated with</td>
@@ -320,7 +335,7 @@
 </tr>
 <tr>
 <td><a href="../practitioner_id/">practitioner_id</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>0..1 <br/> <a href="../Practitioner/">Practitioner</a></td>
 <td>The Global ID for the PractitionerRole that links a Practitioner to their Ins...</td>
 <td>direct</td>
 </tr>
@@ -328,12 +343,6 @@
 <td><a href="../period_id/">period_id</a></td>
 <td>0..1 <br/> <a href="../Period/">Period</a></td>
 <td>Reference to a time period which defines a Start and End datatime period</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../practitioner_role_id/">practitioner_role_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Global ID for this record</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -422,19 +431,14 @@ description: PractitionerRole covers the recording of the location and types of 
 title: Practitioner Role
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
+- practitioner_role_id
 - institution_id
 - practitioner_id
 - period_id
-attributes:
+slot_usage:
   practitioner_role_id:
     name: practitioner_role_id
-    description: Global ID for this record
-    title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
     identifier: true
-    domain_of:
-    - Practitioner
-    - PractitionerRole
     range: string
     required: true
 
@@ -451,12 +455,19 @@ description: PractitionerRole covers the recording of the location and types of 
   that Practitioners are able to provide for an organization.
 title: Practitioner Role
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+slot_usage:
+  practitioner_role_id:
+    name: practitioner_role_id
+    identifier: true
+    range: string
+    required: true
 attributes:
   practitioner_role_id:
     name: practitioner_role_id
     description: Global ID for this record
     title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: practitioner_role_id
     owner: PractitionerRole
@@ -467,10 +478,6 @@ attributes:
     required: true
   institution_id:
     name: institution_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: institution_id
     description: The institution this record is associated with.
     title: Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -490,12 +497,13 @@ attributes:
     title: Practitioner ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
+    identifier: false
     alias: practitioner_id
     owner: PractitionerRole
     domain_of:
     - Practitioner
     - PractitionerRole
-    range: string
+    range: Practitioner
     required: false
   period_id:
     name: period_id

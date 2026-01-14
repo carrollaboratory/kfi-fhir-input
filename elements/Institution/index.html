@@ -311,15 +311,15 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../name/">name</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>Name of the entity</td>
+<td><a href="../institution_id/">institution_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>The institution this record is associated with</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../institution_id/">institution_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Global ID for this record</td>
+<td><a href="../name/">name</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>Name of the entity</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -408,18 +408,12 @@ title: Research Institution
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- institution_id
 - name
-attributes:
+slot_usage:
   institution_id:
     name: institution_id
-    description: Global ID for this record
-    title: Institution ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
     identifier: true
-    domain_of:
-    - Practitioner
-    - Institution
-    - PractitionerRole
     range: string
     required: true
 
@@ -436,12 +430,19 @@ description: Institution related to study or research personnel
 title: Research Institution
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  institution_id:
+    name: institution_id
+    identifier: true
+    range: string
+    required: true
 attributes:
   institution_id:
     name: institution_id
-    description: Global ID for this record
-    title: Institution ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
+    description: The institution this record is associated with.
+    title: Institution
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: institution_id
     owner: Institution
