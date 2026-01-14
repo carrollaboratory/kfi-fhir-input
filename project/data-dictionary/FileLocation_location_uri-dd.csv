@@ -1,3 +1,0 @@
-variable_name,description,data_type,min,max,units,enumerations,comment
-FileLocation_id,Autocreated FK slot,string,,,,,Foreign Key: FileLocation.id
-location_uri,The URI at which this data can be accessed,string,,,,,
