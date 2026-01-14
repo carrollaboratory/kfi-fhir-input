@@ -37,6 +37,8 @@ classes:
         identifier: false
         multivalued: true 
         description: Samples associated with this participant 
+      family_global_id:
+        description: The family the participant is a part of 
 slots:
   participant_id:
     title: Participant ID 
@@ -110,15 +112,6 @@ slots:
     required: false 
     multivalued: false
     range: EnumPatientKnowledgeSource
-  family_global_id:
-    title: Family
-    description: The family the participant is a part of 
-    range: Family 
-    multivalued: false 
-    required: false  
-    annotations:
-      target_slot: family_global_id
-      db_column: family_global_id
 enums:
   EnumBirthSex:
     description: Codes for assigning sex at birth as specified by the Office of the National Coordinator for Health IT (ONC)

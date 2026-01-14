@@ -160,12 +160,12 @@
 --     * Slot: workflow_tool Description: e.g., BAM-MEM, GATK-Haplotype Caller
 --     * Slot: related_samples Description: e.g., Reference(Participant_ID)
 -- # Class: Family Description: Group of Participants that are related.
+--     * Slot: family_global_id Description: Family Global ID
 --     * Slot: family_id Description: External ID common to all family members
 --     * Slot: family_type Description: Describes the 'type' of study family, eg, trio.
 --     * Slot: description Description: More details associated with the given resource
 --     * Slot: consanguinity Description: Is there known or suspected consanguinity in this study family?
 --     * Slot: family_focus Description: What is this study family investigating? EG, a specific condition
---     * Slot: family_global_id Description: Family Global ID
 -- # Class: HasExternalId_external_id
 --     * Slot: HasExternalId_id Description: Autocreated FK slot
 --     * Slot: external_id Description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
@@ -323,12 +323,12 @@ CREATE TABLE "ResearchStudyCollection" (
 	PRIMARY KEY (research_study_collection_id)
 );CREATE INDEX "ix_ResearchStudyCollection_research_study_collection_id" ON "ResearchStudyCollection" (research_study_collection_id);
 CREATE TABLE "Family" (
+	family_global_id TEXT NOT NULL,
 	family_id TEXT NOT NULL,
 	family_type VARCHAR(12) NOT NULL,
 	description TEXT,
 	consanguinity VARCHAR(13),
 	family_focus TEXT,
-	family_global_id TEXT NOT NULL,
 	PRIMARY KEY (family_global_id)
 );CREATE INDEX "ix_Family_family_global_id" ON "Family" (family_global_id);
 CREATE TABLE "AgeAt" (
@@ -564,7 +564,7 @@ CREATE TABLE "Participant_external_id" (
 	external_id TEXT,
 	PRIMARY KEY ("Participant_participant_id", external_id),
 	FOREIGN KEY("Participant_participant_id") REFERENCES "Participant" (participant_id)
-);CREATE INDEX "ix_Participant_external_id_external_id" ON "Participant_external_id" (external_id);CREATE INDEX "ix_Participant_external_id_Participant_participant_id" ON "Participant_external_id" ("Participant_participant_id");
+);CREATE INDEX "ix_Participant_external_id_Participant_participant_id" ON "Participant_external_id" ("Participant_participant_id");CREATE INDEX "ix_Participant_external_id_external_id" ON "Participant_external_id" (external_id);
 CREATE TABLE "Person_participant_id" (
 	"Person_person_id" TEXT,
 	participant_id_participant_id TEXT NOT NULL,

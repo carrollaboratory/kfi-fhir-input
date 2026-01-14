@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T12:38:04
+# Generation date: 2026-01-14T12:47:31
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -2469,9 +2469,6 @@ slots.deceased_rel = Slot(uri=KFI['participant/deceased_rel'], name="deceased_re
 slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_source'], name="patient_knowledge_source", curie=KFI.curie('participant/patient_knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.patient_knowledge_source, domain=None, range=Optional[Union[str, "EnumPatientKnowledgeSource"]])
 
-slots.family_global_id = Slot(uri=KFI['participant/family_global_id'], name="family_global_id", curie=KFI.curie('participant/family_global_id'),
-                   model_uri=KFI_FHIR_SPARKS.family_global_id, domain=None, range=Optional[Union[str, FamilyFamilyGlobalId]])
-
 slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
 
@@ -2616,6 +2613,9 @@ slots.relationship = Slot(uri=KFI['family-relationship/relationship'], name="rel
 slots.knowledge_source = Slot(uri=KFI['family-relationship/knowledge_source'], name="knowledge_source", curie=KFI.curie('family-relationship/knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.knowledge_source, domain=None, range=Union[str, "EnumRelationshipKnowledgeSource"])
 
+slots.family_global_id = Slot(uri=KFI['family/family_global_id'], name="family_global_id", curie=KFI.curie('family/family_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.family_global_id, domain=None, range=Optional[Union[str, FamilyFamilyGlobalId]])
+
 slots.family_id = Slot(uri=KFI['family/family_id'], name="family_id", curie=KFI.curie('family/family_id'),
                    model_uri=KFI_FHIR_SPARKS.family_id, domain=None, range=str)
 
@@ -2721,9 +2721,6 @@ slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collec
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
 
-slots.family__family_global_id = Slot(uri=KFI['family/family_global_id'], name="family__family_global_id", curie=KFI.curie('family/family_global_id'),
-                   model_uri=KFI_FHIR_SPARKS.family__family_global_id, domain=None, range=URIRef)
-
 slots.AccessPolicy_access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="AccessPolicy_access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.AccessPolicy_access_policy_id, domain=AccessPolicy, range=Union[str, AccessPolicyAccessPolicyId])
 
@@ -2738,6 +2735,9 @@ slots.Participant_participant_id = Slot(uri=KFI['participant/participant_id'], n
 
 slots.Participant_sample_id = Slot(uri=KFI['sample/sample_id'], name="Participant_sample_id", curie=KFI.curie('sample/sample_id'),
                    model_uri=KFI_FHIR_SPARKS.Participant_sample_id, domain=Participant, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
+
+slots.Participant_family_global_id = Slot(uri=KFI['family/family_global_id'], name="Participant_family_global_id", curie=KFI.curie('family/family_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.Participant_family_global_id, domain=Participant, range=Optional[Union[str, FamilyFamilyGlobalId]])
 
 slots.Period_period_id = Slot(uri=KFI['period/period_id'], name="Period_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.Period_period_id, domain=Period, range=Union[str, PeriodPeriodId])
@@ -2762,6 +2762,9 @@ slots.Aliquot_sample_id = Slot(uri=KFI['sample/sample_id'], name="Aliquot_sample
 
 slots.FileLocation_file_location_id = Slot(uri=KFI['file-location/file_location_id'], name="FileLocation_file_location_id", curie=KFI.curie('file-location/file_location_id'),
                    model_uri=KFI_FHIR_SPARKS.FileLocation_file_location_id, domain=FileLocation, range=Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]])
+
+slots.Family_family_global_id = Slot(uri=KFI['family/family_global_id'], name="Family_family_global_id", curie=KFI.curie('family/family_global_id'),
+                   model_uri=KFI_FHIR_SPARKS.Family_family_global_id, domain=Family, range=Union[str, FamilyFamilyGlobalId])
 
 slots.FileMetaData_file_meta_data_id = Slot(uri=KFI['file-meta-data/file_meta_data_id'], name="FileMetaData_file_meta_data_id", curie=KFI.curie('file-meta-data/file_meta_data_id'),
                    model_uri=KFI_FHIR_SPARKS.FileMetaData_file_meta_data_id, domain=FileMetaData, range=Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]])

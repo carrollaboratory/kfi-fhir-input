@@ -11,20 +11,25 @@ classes:
     annotations:
       fhir_resource: Group
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-study-family
-    attributes: 
-      family_global_id:
-        title: Family Global ID 
-        description: Family Global ID 
-        range: string 
-        identifier: true 
-        required: true     
     slots: 
+      - family_global_id
       - family_id 
       - family_type 
       - description 
       - consanguinity
       - family_focus
+    slot_usage:
+      family_global_id:
+        required: true 
+        identifier: true 
+        range: string 
 slots:
+  family_global_id: 
+    title: Family Global ID 
+    description: Family Global ID 
+    range: Family 
+    identifier: false  
+    required: false  
   family_id:
     title: Family ID
     description: External ID common to all family members 
