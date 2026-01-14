@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T10:42:56
+# Generation date: 2026-01-14T11:36:29
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -969,6 +969,7 @@ class Sample(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Sample
 
     sample_id: Union[str, SampleSampleId] = None
+    participant_id: Union[str, ParticipantParticipantId] = None
     sample_type: Union[str, URIorCURIE] = None
     parent_sample_id: Optional[Union[str, SampleSampleId]] = None
     age_at_collection: Optional[Union[str, AgeAtId]] = None
@@ -981,13 +982,17 @@ class Sample(HasExternalId):
     storage_method: Optional[Union[str, URIorCURIE]] = None
     quantity: Optional[float] = None
     quantity_units: Optional[Union[str, URIorCURIE]] = None
-    aliquot_id: Optional[Union[Union[str, AliquotAliquotId], list[Union[str, AliquotAliquotId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.sample_id):
             self.MissingRequiredField("sample_id")
         if not isinstance(self.sample_id, SampleSampleId):
             self.sample_id = SampleSampleId(self.sample_id)
+
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, ParticipantParticipantId):
+            self.participant_id = ParticipantParticipantId(self.participant_id)
 
         if self._is_empty(self.sample_type):
             self.MissingRequiredField("sample_type")
@@ -1027,10 +1032,6 @@ class Sample(HasExternalId):
 
         if self.quantity_units is not None and not isinstance(self.quantity_units, URIorCURIE):
             self.quantity_units = URIorCURIE(self.quantity_units)
-
-        if not isinstance(self.aliquot_id, list):
-            self.aliquot_id = [self.aliquot_id] if self.aliquot_id is not None else []
-        self.aliquot_id = [v if isinstance(v, AliquotAliquotId) else AliquotAliquotId(v) for v in self.aliquot_id]
 
         super().__post_init__(**kwargs)
 
@@ -2321,14 +2322,14 @@ slots.practitioner_role_id = Slot(uri=KFI_FHIR_SPARKS.practitioner_role_id, name
 slots.research_study_id = Slot(uri=KFI_FHIR_SPARKS.research_study_id, name="research_study_id", curie=KFI_FHIR_SPARKS.curie('research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=URIRef)
 
-slots.access_policy_id = Slot(uri=KFI_FHIR_SPARKS.access_policy_id, name="access_policy_id", curie=KFI_FHIR_SPARKS.curie('access_policy_id'),
-                   model_uri=KFI_FHIR_SPARKS.access_policy_id, domain=None, range=Union[str, AccessPolicyAccessPolicyId])
-
 slots.website = Slot(uri=KFI_FHIR_SPARKS.website, name="website", curie=KFI_FHIR_SPARKS.curie('website'),
                    model_uri=KFI_FHIR_SPARKS.website, domain=None, range=Optional[Union[str, URI]])
 
 slots.label = Slot(uri=KFI_FHIR_SPARKS.label, name="label", curie=KFI_FHIR_SPARKS.curie('label'),
                    model_uri=KFI_FHIR_SPARKS.label, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
+                   model_uri=KFI_FHIR_SPARKS.access_policy_id, domain=None, range=Union[str, AccessPolicyAccessPolicyId])
 
 slots.disease_limitation = Slot(uri=KFI['access-policy/disease_limitation'], name="disease_limitation", curie=KFI.curie('access-policy/disease_limitation'),
                    model_uri=KFI_FHIR_SPARKS.disease_limitation, domain=None, range=Optional[str])
@@ -2666,9 +2667,6 @@ slots.workflow_tool = Slot(uri=KFI['file-meta-data/workflow_tool'], name="workfl
 slots.related_samples = Slot(uri=KFI['file-meta-data/related_samples'], name="related_samples", curie=KFI.curie('file-meta-data/related_samples'),
                    model_uri=KFI_FHIR_SPARKS.related_samples, domain=None, range=Optional[Union[str, SampleSampleId]])
 
-slots.accessPolicy__access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="accessPolicy__access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
-                   model_uri=KFI_FHIR_SPARKS.accessPolicy__access_policy_id, domain=None, range=URIRef)
-
 slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])
 
@@ -2726,6 +2724,9 @@ slots.familyRelationship__family_relationship_global_id = Slot(uri=KFI['family-r
 slots.family__family_global_id = Slot(uri=KFI['family/family_global_id'], name="family__family_global_id", curie=KFI.curie('family/family_global_id'),
                    model_uri=KFI_FHIR_SPARKS.family__family_global_id, domain=None, range=URIRef)
 
+slots.AccessPolicy_access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="AccessPolicy_access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
+                   model_uri=KFI_FHIR_SPARKS.AccessPolicy_access_policy_id, domain=AccessPolicy, range=Union[str, AccessPolicyAccessPolicyId])
+
 slots.ParticipantAssertion_participant_id = Slot(uri=KFI['participant/participant_id'], name="ParticipantAssertion_participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.ParticipantAssertion_participant_id, domain=ParticipantAssertion, range=Union[str, ParticipantParticipantId])
 
@@ -2752,9 +2753,6 @@ slots.ResearchStudy_study_membership_id = Slot(uri=KFI['study-membership/study_m
 
 slots.Sample_sample_id = Slot(uri=KFI['sample/sample_id'], name="Sample_sample_id", curie=KFI.curie('sample/sample_id'),
                    model_uri=KFI_FHIR_SPARKS.Sample_sample_id, domain=Sample, range=Union[str, SampleSampleId])
-
-slots.Sample_aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="Sample_aliquot_id", curie=KFI.curie('sample/aliquot_id'),
-                   model_uri=KFI_FHIR_SPARKS.Sample_aliquot_id, domain=Sample, range=Optional[Union[Union[str, AliquotAliquotId], list[Union[str, AliquotAliquotId]]]])
 
 slots.Aliquot_aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="Aliquot_aliquot_id", curie=KFI.curie('sample/aliquot_id'),
                    model_uri=KFI_FHIR_SPARKS.Aliquot_aliquot_id, domain=Aliquot, range=Union[str, AliquotAliquotId])

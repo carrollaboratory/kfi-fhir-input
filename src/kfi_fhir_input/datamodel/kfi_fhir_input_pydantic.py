@@ -771,8 +771,20 @@ class AccessPolicy(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/access-policy',
+         'slot_usage': {'access_policy_id': {'description': 'Access policy '
+                                                            'communicates the '
+                                                            'limitations and/or '
+                                                            'requirements that define '
+                                                            'how a user may gain '
+                                                            'access to a particular '
+                                                            'set of data.',
+                                             'identifier': True,
+                                             'name': 'access_policy_id',
+                                             'range': 'string',
+                                             'required': True}},
          'title': 'Access Policy'})
 
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
@@ -802,7 +814,6 @@ class AccessPolicy(ConfiguredBaseModel):
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
                          'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
          'domain_of': ['AccessPolicy']} })
-    access_policy_id: str = Field(default=..., title="Access Policy Global ID (Consent)", description="""Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
     status: EnumConsentStateCodes = Field(default=..., title="Status", description="""Indicates the state of the consent.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'status'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
@@ -848,6 +859,7 @@ class ParticipantAssertion(ConfiguredBaseModel):
                        'Participant',
                        'Person',
                        'StudyMembership',
+                       'Sample',
                        'NCPIFile']} })
     age_at_event: Optional[str] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtEvent] or maybe '
@@ -987,6 +999,7 @@ class Person(ConfiguredBaseModel):
                        'Participant',
                        'Person',
                        'StudyMembership',
+                       'Sample',
                        'NCPIFile']} })
 
 
@@ -1036,13 +1049,12 @@ class StudyMembership(ConfiguredBaseModel):
          'title': 'Study Membership'})
 
     study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
-    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'access_policy_id'}},
-         'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
     participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
                        'StudyMembership',
+                       'Sample',
                        'NCPIFile']} })
 
 
@@ -1065,9 +1077,7 @@ class FileLocation(ConfiguredBaseModel):
     file_location_id: str = Field(default=..., title="File Location", description="""Location details (this is not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileLocation']} })
     location_uri: str = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
     file_name: str = Field(default=..., title="File Name", description="""The file's name (no path)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
-    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'access_policy_id'}},
-         'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
 
 
 class FamilyRelationship(ConfiguredBaseModel):
@@ -1188,6 +1198,7 @@ class Participant(HasExternalId):
                        'Participant',
                        'Person',
                        'StudyMembership',
+                       'Sample',
                        'NCPIFile']} })
     birthsex: Optional[EnumBirthSex] = Field(default=None, title="Birth Sex", description="""Sex assigned at birth (or pre-natal observed sex)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
                                             'value': 'http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex'},
@@ -1280,8 +1291,7 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/sample',
-         'slot_usage': {'aliquot_id': {'multivalued': True, 'name': 'aliquot_id'},
-                        'sample_id': {'identifier': True,
+         'slot_usage': {'sample_id': {'identifier': True,
                                       'name': 'sample_id',
                                       'range': 'string',
                                       'required': True}},
@@ -1294,6 +1304,12 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample']} })
+    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'StudyMembership',
+                       'Sample',
+                       'NCPIFile']} })
     sample_type: str = Field(default=..., title="Sample Type", description="""The type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'type'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
@@ -1438,6 +1454,7 @@ class NCPIFile(HasExternalId):
                        'Participant',
                        'Person',
                        'StudyMembership',
+                       'Sample',
                        'NCPIFile']} })
     file_format: str = Field(default=..., title="File Format", description="""The file format used ([EDAM](http://edamontology.org) where possible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
     file_location_id: list[str] = Field(default=..., title="File Location", description="""Location details (this is not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileLocation']} })

@@ -1393,24 +1393,6 @@ slots:
     identifier: true
     range: ResearchStudy
     required: true
-  access_policy_id:
-    name: access_policy_id
-    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputaccess_policy_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: access_policy_id
-    description: Access Policy Global ID
-    title: Access Policy ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    slot_uri: kfi_fhir_sparks:access_policy_id
-    owner: FileLocation
-    domain_of:
-    - StudyMembership
-    - FileLocation
-    range: AccessPolicy
-    required: true
-    multivalued: false
   website:
     name: website
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputwebsite
@@ -1440,6 +1422,21 @@ slots:
     range: string
     required: false
     multivalued: true
+  access_policy_id:
+    name: access_policy_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
+    description: Access Policy Global ID
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
+    owner: FileLocation
+    domain_of:
+    - AccessPolicy
+    - StudyMembership
+    - FileLocation
+    range: AccessPolicy
+    required: true
+    multivalued: false
   disease_limitation:
     name: disease_limitation
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/disease_limitation
@@ -2140,6 +2137,7 @@ slots:
     - ParticipantAssertion
     - Participant
     - StudyMembership
+    - Sample
     - NCPIFile
     range: Participant
     required: true
@@ -2541,6 +2539,7 @@ slots:
     title: Sample ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    identifier: false
     owner: Aliquot
     domain_of:
     - Participant
@@ -2548,6 +2547,7 @@ slots:
     - Aliquot
     range: Sample
     required: false
+    multivalued: false
   parent_sample_id:
     name: parent_sample_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/parent_sample_id
@@ -3383,20 +3383,6 @@ slots:
     range: Sample
     required: false
     multivalued: false
-  accessPolicy__access_policy_id:
-    name: accessPolicy__access_policy_id
-    description: Access policy communicates the limitations and/or requirements that
-      define how a user may gain access to a particular set of data.
-    title: Access Policy Global ID (Consent)
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
-    identifier: true
-    alias: access_policy_id
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    range: string
-    required: true
   accessPolicy__status:
     name: accessPolicy__status
     annotations:
@@ -3659,6 +3645,26 @@ slots:
     - Family
     range: string
     required: true
+  AccessPolicy_access_policy_id:
+    name: AccessPolicy_access_policy_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
+    description: Access policy communicates the limitations and/or requirements that
+      define how a user may gain access to a particular set of data.
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    is_a: access_policy_id
+    domain: AccessPolicy
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
+    identifier: true
+    alias: access_policy_id
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    is_usage_slot: true
+    usage_slot_name: access_policy_id
+    range: string
+    required: true
+    multivalued: false
   ParticipantAssertion_participant_id:
     name: ParticipantAssertion_participant_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
@@ -3733,6 +3739,7 @@ slots:
     is_a: sample_id
     domain: Participant
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    identifier: false
     alias: sample_id
     owner: Participant
     domain_of:
@@ -3835,24 +3842,7 @@ slots:
     usage_slot_name: sample_id
     range: string
     required: true
-  Sample_aliquot_id:
-    name: Sample_aliquot_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
-    description: Aliquot Global ID
-    title: aliquot ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
-    is_a: aliquot_id
-    domain: Sample
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
-    alias: aliquot_id
-    owner: Sample
-    domain_of:
-    - Sample
-    is_usage_slot: true
-    usage_slot_name: aliquot_id
-    range: Aliquot
-    required: false
-    multivalued: true
+    multivalued: false
   Aliquot_aliquot_id:
     name: Aliquot_aliquot_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
@@ -3871,6 +3861,25 @@ slots:
     usage_slot_name: aliquot_id
     range: string
     required: true
+  Aliquot_sample_id:
+    name: Aliquot_sample_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    description: Sample Global ID
+    title: Sample ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    is_a: sample_id
+    domain: Aliquot
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    identifier: false
+    alias: sample_id
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: Sample
+    required: true
+    multivalued: false
   FileLocation_file_location_id:
     name: FileLocation_file_location_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
@@ -3961,23 +3970,23 @@ classes:
     title: Access Policy
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     slots:
+    - AccessPolicy_access_policy_id
     - description
     - data_access_type
     - website
     - consent_scope
     - access_policy_code
     - disease_limitation
-    - accessPolicy__access_policy_id
     - accessPolicy__status
-    attributes:
+    slot_usage:
       access_policy_id:
         name: access_policy_id
         description: Access policy communicates the limitations and/or requirements
           that define how a user may gain access to a particular set of data.
-        title: Access Policy Global ID (Consent)
         identifier: true
         range: string
         required: true
+    attributes:
       status:
         name: status
         annotations:
@@ -4227,6 +4236,7 @@ classes:
       sample_id:
         name: sample_id
         description: Samples associated with this participant
+        identifier: false
         required: false
         multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
@@ -4432,6 +4442,7 @@ classes:
     - external_id
     - Sample_sample_id
     - parent_sample_id
+    - participant_id
     - sample_type
     - age_at_collection
     - collection_method
@@ -4443,16 +4454,12 @@ classes:
     - storage_method
     - quantity
     - quantity_units
-    - Sample_aliquot_id
     slot_usage:
       sample_id:
         name: sample_id
         identifier: true
         range: string
         required: true
-      aliquot_id:
-        name: aliquot_id
-        multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Sample
   Aliquot:
     name: Aliquot
@@ -4478,12 +4485,16 @@ classes:
     - volume
     - volume_units
     - concentration
-    - sample_id
+    - Aliquot_sample_id
     slot_usage:
       aliquot_id:
         name: aliquot_id
         identifier: true
         range: string
+        required: true
+      sample_id:
+        name: sample_id
+        identifier: false
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Aliquot
   NCPIFile:
@@ -4655,7 +4666,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-13T15:17:37'
-source_file_size: 5411
-generation_date: '2026-01-13T17:07:04'
+source_file_date: '2026-01-14T11:21:45'
+source_file_size: 5198
+generation_date: '2026-01-14T11:36:17'
 

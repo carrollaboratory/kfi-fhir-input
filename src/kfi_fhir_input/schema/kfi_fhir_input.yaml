@@ -133,14 +133,6 @@ slots:
       target_slot: research_study_id     
     identifier: true
     required: true
-  access_policy_id:
-    title: Access Policy ID 
-    description: Access Policy Global ID 
-    range: AccessPolicy 
-    multivalued: false 
-    required: true
-    annotations:
-      target_slot: access_policy_id 
   website: 
     title: Website 
     description: URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.

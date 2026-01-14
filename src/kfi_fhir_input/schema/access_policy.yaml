@@ -11,12 +11,6 @@ classes:
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
     attributes:
-      access_policy_id:
-        title: Access Policy Global ID (Consent)
-        description: Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.
-        range: string         
-        identifier: true
-        required: true
       status: 
         title: Status 
         description: Indicates the state of the consent.
@@ -28,13 +22,26 @@ classes:
           fhir_element: status
           fhir_resource: Consent
     slots:
+      - access_policy_id 
       - description 
       - data_access_type 
       - website
       - consent_scope 
       - access_policy_code
       - disease_limitation
+    slot_usage:
+      access_policy_id:
+        range: string
+        required: true 
+        identifier: true 
+        description: Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.
 slots:
+  access_policy_id:
+    title: Access Policy ID 
+    description: Access Policy Global ID 
+    range: AccessPolicy 
+    multivalued: false 
+    required: true
   disease_limitation: 
     description: Disease Use Limitations  
     required: false 

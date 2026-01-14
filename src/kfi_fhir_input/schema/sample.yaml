@@ -19,7 +19,7 @@ classes:
     slots: 
       - sample_id 
       - parent_sample_id
-      #- participant_id
+      - participant_id
       - sample_type
       - age_at_collection
       - collection_method 
@@ -31,14 +31,11 @@ classes:
       - storage_method 
       - quantity
       - quantity_units
-      #- aliquot_id
     slot_usage:
       sample_id: 
         range: string
         identifier: true 
         required: true 
-      aliquot_id:
-        multivalued: true 
   Aliquot: 
     title: Aliquot
     description: A Portion of a sample extracted from a participant.
