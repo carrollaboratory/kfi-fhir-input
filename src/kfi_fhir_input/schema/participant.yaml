@@ -34,6 +34,7 @@ classes:
     #    required: true
       sample_id:
         required: false
+        identifier: false
         multivalued: true 
         description: Samples associated with this participant 
 slots:

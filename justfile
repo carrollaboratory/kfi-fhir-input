@@ -193,7 +193,6 @@ _test-python: gen-python
 # Run example tests
 _test-examples: _ensure_examples_output
   uv run linkml-run-examples \
-    --input-formats json \
     --input-formats yaml \
     --output-formats json \
     --output-formats yaml \

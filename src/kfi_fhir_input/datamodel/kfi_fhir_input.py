@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-13T14:44:33
+# Generation date: 2026-01-14T10:42:56
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -110,6 +110,10 @@ class AccessPolicyAccessPolicyId(extended_str):
 
 
 class RelativeDateTimeId(extended_str):
+    pass
+
+
+class AgeAtId(RecordId):
     pass
 
 
@@ -333,7 +337,7 @@ class RelativeDateTime(YAMLRoot):
 
 
 @dataclass(repr=False)
-class AgeAt(YAMLRoot):
+class AgeAt(Record):
     """
     These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as
     Code, Date Range, DateTime
@@ -345,12 +349,18 @@ class AgeAt(YAMLRoot):
     class_name: ClassVar[str] = "AgeAt"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.AgeAt
 
+    id: Union[str, AgeAtId] = None
     value_type: Union[str, "EnumAgeValueType"] = None
     age: Optional[Union[str, RelativeDateTimeId]] = None
     age_code: Optional[Union[str, URIorCURIE]] = None
     as_date: Optional[Union[str, XSDDate]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, AgeAtId):
+            self.id = AgeAtId(self.id)
+
         if self._is_empty(self.value_type):
             self.MissingRequiredField("value_type")
         if not isinstance(self.value_type, EnumAgeValueType):
@@ -384,10 +394,10 @@ class ParticipantAssertion(YAMLRoot):
     participant_id: Union[str, ParticipantParticipantId] = None
     assertion_type: Union[str, "EnumAssertionType"] = None
     assertion_code: Union[str, URIorCURIE] = None
-    age_at_event: Optional[Union[dict, AgeAt]] = None
-    age_at_assertion: Optional[Union[dict, AgeAt]] = None
-    age_at_onset: Optional[Union[dict, AgeAt]] = None
-    age_at_resolution: Optional[Union[dict, AgeAt]] = None
+    age_at_event: Optional[Union[str, AgeAtId]] = None
+    age_at_assertion: Optional[Union[str, AgeAtId]] = None
+    age_at_onset: Optional[Union[str, AgeAtId]] = None
+    age_at_resolution: Optional[Union[str, AgeAtId]] = None
     entity_asserter: Optional[Union[str, "EnumEntityAsserter"]] = None
     other_condition_modifiers: Optional[Union[str, URIorCURIE]] = None
     assertion_text: Optional[str] = None
@@ -422,17 +432,17 @@ class ParticipantAssertion(YAMLRoot):
         if not isinstance(self.assertion_code, URIorCURIE):
             self.assertion_code = URIorCURIE(self.assertion_code)
 
-        if self.age_at_event is not None and not isinstance(self.age_at_event, AgeAt):
-            self.age_at_event = AgeAt(**as_dict(self.age_at_event))
+        if self.age_at_event is not None and not isinstance(self.age_at_event, AgeAtId):
+            self.age_at_event = AgeAtId(self.age_at_event)
 
-        if self.age_at_assertion is not None and not isinstance(self.age_at_assertion, AgeAt):
-            self.age_at_assertion = AgeAt(**as_dict(self.age_at_assertion))
+        if self.age_at_assertion is not None and not isinstance(self.age_at_assertion, AgeAtId):
+            self.age_at_assertion = AgeAtId(self.age_at_assertion)
 
-        if self.age_at_onset is not None and not isinstance(self.age_at_onset, AgeAt):
-            self.age_at_onset = AgeAt(**as_dict(self.age_at_onset))
+        if self.age_at_onset is not None and not isinstance(self.age_at_onset, AgeAtId):
+            self.age_at_onset = AgeAtId(self.age_at_onset)
 
-        if self.age_at_resolution is not None and not isinstance(self.age_at_resolution, AgeAt):
-            self.age_at_resolution = AgeAt(**as_dict(self.age_at_resolution))
+        if self.age_at_resolution is not None and not isinstance(self.age_at_resolution, AgeAtId):
+            self.age_at_resolution = AgeAtId(self.age_at_resolution)
 
         if self.entity_asserter is not None and not isinstance(self.entity_asserter, EnumEntityAsserter):
             self.entity_asserter = EnumEntityAsserter(self.entity_asserter)
@@ -624,7 +634,7 @@ class Participant(HasExternalId):
     deceased_rel: Optional[Union[str, RelativeDateTimeId]] = None
     patient_knowledge_source: Optional[Union[str, "EnumPatientKnowledgeSource"]] = None
     family_global_id: Optional[Union[str, FamilyFamilyGlobalId]] = None
-    sample_id: Optional[Union[str, list[str]]] = empty_list()
+    sample_id: Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.participant_id):
@@ -669,7 +679,7 @@ class Participant(HasExternalId):
 
         if not isinstance(self.sample_id, list):
             self.sample_id = [self.sample_id] if self.sample_id is not None else []
-        self.sample_id = [v if isinstance(v, str) else str(v) for v in self.sample_id]
+        self.sample_id = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.sample_id]
 
         super().__post_init__(**kwargs)
 
@@ -961,7 +971,7 @@ class Sample(HasExternalId):
     sample_id: Union[str, SampleSampleId] = None
     sample_type: Union[str, URIorCURIE] = None
     parent_sample_id: Optional[Union[str, SampleSampleId]] = None
-    age_at_collection: Optional[Union[dict, AgeAt]] = None
+    age_at_collection: Optional[Union[str, AgeAtId]] = None
     collection_method: Optional[Union[str, URIorCURIE]] = None
     collection_site: Optional[Union[str, URIorCURIE]] = None
     spatial_qualifier: Optional[Union[str, URIorCURIE]] = None
@@ -971,6 +981,7 @@ class Sample(HasExternalId):
     storage_method: Optional[Union[str, URIorCURIE]] = None
     quantity: Optional[float] = None
     quantity_units: Optional[Union[str, URIorCURIE]] = None
+    aliquot_id: Optional[Union[Union[str, AliquotAliquotId], list[Union[str, AliquotAliquotId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.sample_id):
@@ -986,8 +997,8 @@ class Sample(HasExternalId):
         if self.parent_sample_id is not None and not isinstance(self.parent_sample_id, SampleSampleId):
             self.parent_sample_id = SampleSampleId(self.parent_sample_id)
 
-        if self.age_at_collection is not None and not isinstance(self.age_at_collection, AgeAt):
-            self.age_at_collection = AgeAt(**as_dict(self.age_at_collection))
+        if self.age_at_collection is not None and not isinstance(self.age_at_collection, AgeAtId):
+            self.age_at_collection = AgeAtId(self.age_at_collection)
 
         if self.collection_method is not None and not isinstance(self.collection_method, URIorCURIE):
             self.collection_method = URIorCURIE(self.collection_method)
@@ -1017,6 +1028,10 @@ class Sample(HasExternalId):
         if self.quantity_units is not None and not isinstance(self.quantity_units, URIorCURIE):
             self.quantity_units = URIorCURIE(self.quantity_units)
 
+        if not isinstance(self.aliquot_id, list):
+            self.aliquot_id = [self.aliquot_id] if self.aliquot_id is not None else []
+        self.aliquot_id = [v if isinstance(v, AliquotAliquotId) else AliquotAliquotId(v) for v in self.aliquot_id]
+
         super().__post_init__(**kwargs)
 
 
@@ -1033,7 +1048,7 @@ class Aliquot(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Aliquot
 
     aliquot_id: Union[str, AliquotAliquotId] = None
-    parent_sample_id: Optional[Union[str, SampleSampleId]] = None
+    sample_id: Union[str, SampleSampleId] = None
     availability_status: Optional[Union[str, "EnumSpecimenAvailability"]] = None
     volume: Optional[float] = None
     volume_units: Optional[Union[str, URIorCURIE]] = None
@@ -1045,8 +1060,10 @@ class Aliquot(HasExternalId):
         if not isinstance(self.aliquot_id, AliquotAliquotId):
             self.aliquot_id = AliquotAliquotId(self.aliquot_id)
 
-        if self.parent_sample_id is not None and not isinstance(self.parent_sample_id, SampleSampleId):
-            self.parent_sample_id = SampleSampleId(self.parent_sample_id)
+        if self._is_empty(self.sample_id):
+            self.MissingRequiredField("sample_id")
+        if not isinstance(self.sample_id, SampleSampleId):
+            self.sample_id = SampleSampleId(self.sample_id)
 
         if self.availability_status is not None and not isinstance(self.availability_status, EnumSpecimenAvailability):
             self.availability_status = EnumSpecimenAvailability(self.availability_status)
@@ -2335,16 +2352,16 @@ slots.offset_type = Slot(uri=KFI['relative-date-time/offset_type'], name="offset
                    model_uri=KFI_FHIR_SPARKS.offset_type, domain=None, range=Union[str, "EnumOffsetType"])
 
 slots.age_at_event = Slot(uri=KFI['participant-assertion/age_at_event'], name="age_at_event", curie=KFI.curie('participant-assertion/age_at_event'),
-                   model_uri=KFI_FHIR_SPARKS.age_at_event, domain=None, range=Optional[Union[dict, AgeAt]])
+                   model_uri=KFI_FHIR_SPARKS.age_at_event, domain=None, range=Optional[Union[str, AgeAtId]])
 
 slots.age_at_assertion = Slot(uri=KFI['participant-assertion/age_at_assertion'], name="age_at_assertion", curie=KFI.curie('participant-assertion/age_at_assertion'),
-                   model_uri=KFI_FHIR_SPARKS.age_at_assertion, domain=None, range=Optional[Union[dict, AgeAt]])
+                   model_uri=KFI_FHIR_SPARKS.age_at_assertion, domain=None, range=Optional[Union[str, AgeAtId]])
 
 slots.age_at_onset = Slot(uri=KFI['participant-assertion/age_at_onset'], name="age_at_onset", curie=KFI.curie('participant-assertion/age_at_onset'),
-                   model_uri=KFI_FHIR_SPARKS.age_at_onset, domain=None, range=Optional[Union[dict, AgeAt]])
+                   model_uri=KFI_FHIR_SPARKS.age_at_onset, domain=None, range=Optional[Union[str, AgeAtId]])
 
 slots.age_at_resolution = Slot(uri=KFI['participant-assertion/age_at_resolution'], name="age_at_resolution", curie=KFI.curie('participant-assertion/age_at_resolution'),
-                   model_uri=KFI_FHIR_SPARKS.age_at_resolution, domain=None, range=Optional[Union[dict, AgeAt]])
+                   model_uri=KFI_FHIR_SPARKS.age_at_resolution, domain=None, range=Optional[Union[str, AgeAtId]])
 
 slots.entity_asserter = Slot(uri=KFI['participant-assertion/entity_asserter'], name="entity_asserter", curie=KFI.curie('participant-assertion/entity_asserter'),
                    model_uri=KFI_FHIR_SPARKS.entity_asserter, domain=None, range=Optional[Union[str, "EnumEntityAsserter"]])
@@ -2499,8 +2516,11 @@ slots.research_study_collection_member_id = Slot(uri=KFI['research-study-collect
 slots.collection_status = Slot(uri=KFI['research-study-collection/collection_status'], name="collection_status", curie=KFI.curie('research-study-collection/collection_status'),
                    model_uri=KFI_FHIR_SPARKS.collection_status, domain=None, range=Union[str, "EnumCollectionStatus"])
 
+slots.aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="aliquot_id", curie=KFI.curie('sample/aliquot_id'),
+                   model_uri=KFI_FHIR_SPARKS.aliquot_id, domain=None, range=Optional[Union[str, AliquotAliquotId]])
+
 slots.sample_id = Slot(uri=KFI['sample/sample_id'], name="sample_id", curie=KFI.curie('sample/sample_id'),
-                   model_uri=KFI_FHIR_SPARKS.sample_id, domain=None, range=Optional[str])
+                   model_uri=KFI_FHIR_SPARKS.sample_id, domain=None, range=Optional[Union[str, SampleSampleId]])
 
 slots.parent_sample_id = Slot(uri=KFI['sample/parent_sample_id'], name="parent_sample_id", curie=KFI.curie('sample/parent_sample_id'),
                    model_uri=KFI_FHIR_SPARKS.parent_sample_id, domain=None, range=Optional[Union[str, SampleSampleId]])
@@ -2509,7 +2529,7 @@ slots.sample_type = Slot(uri=KFI['sample/sample_type'], name="sample_type", curi
                    model_uri=KFI_FHIR_SPARKS.sample_type, domain=None, range=Union[str, URIorCURIE])
 
 slots.age_at_collection = Slot(uri=KFI['sample/age_at_collection'], name="age_at_collection", curie=KFI.curie('sample/age_at_collection'),
-                   model_uri=KFI_FHIR_SPARKS.age_at_collection, domain=None, range=Optional[Union[dict, AgeAt]])
+                   model_uri=KFI_FHIR_SPARKS.age_at_collection, domain=None, range=Optional[Union[str, AgeAtId]])
 
 slots.collection_method = Slot(uri=KFI['sample/collection_method'], name="collection_method", curie=KFI.curie('sample/collection_method'),
                    model_uri=KFI_FHIR_SPARKS.collection_method, domain=None, range=Optional[Union[str, URIorCURIE]])
@@ -2697,9 +2717,6 @@ slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['rese
 slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collection/description'], name="researchStudyCollection__description", curie=KFI.curie('research-study-collection/description'),
                    model_uri=KFI_FHIR_SPARKS.researchStudyCollection__description, domain=None, range=Optional[str])
 
-slots.aliquot__aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="aliquot__aliquot_id", curie=KFI.curie('sample/aliquot_id'),
-                   model_uri=KFI_FHIR_SPARKS.aliquot__aliquot_id, domain=None, range=URIRef)
-
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
 
@@ -2719,7 +2736,7 @@ slots.Participant_participant_id = Slot(uri=KFI['participant/participant_id'], n
                    model_uri=KFI_FHIR_SPARKS.Participant_participant_id, domain=Participant, range=Union[str, ParticipantParticipantId])
 
 slots.Participant_sample_id = Slot(uri=KFI['sample/sample_id'], name="Participant_sample_id", curie=KFI.curie('sample/sample_id'),
-                   model_uri=KFI_FHIR_SPARKS.Participant_sample_id, domain=Participant, range=Optional[Union[str, list[str]]])
+                   model_uri=KFI_FHIR_SPARKS.Participant_sample_id, domain=Participant, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
 
 slots.Period_period_id = Slot(uri=KFI['period/period_id'], name="Period_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.Period_period_id, domain=Period, range=Union[str, PeriodPeriodId])
@@ -2735,6 +2752,15 @@ slots.ResearchStudy_study_membership_id = Slot(uri=KFI['study-membership/study_m
 
 slots.Sample_sample_id = Slot(uri=KFI['sample/sample_id'], name="Sample_sample_id", curie=KFI.curie('sample/sample_id'),
                    model_uri=KFI_FHIR_SPARKS.Sample_sample_id, domain=Sample, range=Union[str, SampleSampleId])
+
+slots.Sample_aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="Sample_aliquot_id", curie=KFI.curie('sample/aliquot_id'),
+                   model_uri=KFI_FHIR_SPARKS.Sample_aliquot_id, domain=Sample, range=Optional[Union[Union[str, AliquotAliquotId], list[Union[str, AliquotAliquotId]]]])
+
+slots.Aliquot_aliquot_id = Slot(uri=KFI['sample/aliquot_id'], name="Aliquot_aliquot_id", curie=KFI.curie('sample/aliquot_id'),
+                   model_uri=KFI_FHIR_SPARKS.Aliquot_aliquot_id, domain=Aliquot, range=Union[str, AliquotAliquotId])
+
+slots.Aliquot_sample_id = Slot(uri=KFI['sample/sample_id'], name="Aliquot_sample_id", curie=KFI.curie('sample/sample_id'),
+                   model_uri=KFI_FHIR_SPARKS.Aliquot_sample_id, domain=Aliquot, range=Union[str, SampleSampleId])
 
 slots.FileLocation_file_location_id = Slot(uri=KFI['file-location/file_location_id'], name="FileLocation_file_location_id", curie=KFI.curie('file-location/file_location_id'),
                    model_uri=KFI_FHIR_SPARKS.FileLocation_file_location_id, domain=FileLocation, range=Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]])

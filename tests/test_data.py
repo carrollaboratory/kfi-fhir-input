@@ -6,6 +6,7 @@ from pathlib import Path
 
 import kfi_fhir_input.datamodel.kfi_fhir_input
 from linkml_runtime.loaders import yaml_loader
+from linkml_runtime.dumpers import yaml_dumper
 
 DATA_DIR_VALID = Path(__file__).parent / "data" / "valid"
 DATA_DIR_INVALID = Path(__file__).parent / "data" / "invalid"

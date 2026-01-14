@@ -2,11 +2,11 @@
 sample_id: sample001 
 sample_type: UMLS:C0005834
 #participant_id: par-01234
-age_at_collection: 
-  value_type: age 
-  age: rt-001
+age_at_collection: age-0001
 collection_method: SNOMED:129316008
 collection_site: SNOMED:2453002
 availability_status: available 
 quantity: 1.0
 quantity_units: ucum:ml 
+#aliquot_id: 
+#  - aliquot0001.b

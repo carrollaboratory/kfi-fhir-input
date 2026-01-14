@@ -31,10 +31,14 @@ classes:
       - storage_method 
       - quantity
       - quantity_units
+      #- aliquot_id
     slot_usage:
       sample_id: 
+        range: string
         identifier: true 
         required: true 
+      aliquot_id:
+        multivalued: true 
   Aliquot: 
     title: Aliquot
     description: A Portion of a sample extracted from a participant.
@@ -43,26 +47,36 @@ classes:
       fhir_resource: Specimen
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample 
       fhir_element: container
-    attributes:
-      aliquot_id:
-        title: aliquot ID
-        description: Aliquot Global ID
-        range: string         
-        identifier: true
-        required: true
+
     slots: 
-      - parent_sample_id 
+      - aliquot_id 
+      #- parent_sample_id 
       - availability_status 
       - volume
       - volume_units
       - concentration
+      - sample_id
+    slot_usage: 
+      aliquot_id:
+        range: string 
+        identifier: true 
+        required: true 
+      sample_id:
+        identifier: false 
+        required: true 
 slots:
+  aliquot_id:
+    title: aliquot ID
+    description: Aliquot Global ID
+    range: Aliquot         
+    required: false
   sample_id:
     title: Sample ID
     description: Sample Global ID
-    range: string         
-    #identifier: true
+    range: Sample         
+    identifier: false
     required: false
+    multivalued: false
   parent_sample_id:
     title: Parent Sample ID 
     description: Sample Global ID associated with the parent sample 

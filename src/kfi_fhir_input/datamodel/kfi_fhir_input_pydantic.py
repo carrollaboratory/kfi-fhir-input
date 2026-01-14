@@ -823,21 +823,6 @@ class RelativeDateTime(ConfiguredBaseModel):
     offset_type: EnumOffsetType = Field(default=..., title="Offset Type", description="""What is the datatype associated with the offset (days, years, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
 
 
-class AgeAt(ConfiguredBaseModel):
-    """
-    These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/age-at',
-         'title': 'Age At'})
-
-    value_type: EnumAgeValueType = Field(default=..., title="Value Type", description="""Age Value Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
-    age: Optional[str] = Field(default=None, title="Age", description="""Age either numeric value or range""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column',
-                                       'value': 'relative_date_time_id'}},
-         'domain_of': ['AgeAt']} })
-    age_code: Optional[str] = Field(default=None, title="Age Code", description="""Age expressed as an enumerated value representing an age category""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
-    as_date: Optional[date] = Field(default=None, title="Age As Date", description="""Event Date (rather than age)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
-
-
 class ParticipantAssertion(ConfiguredBaseModel):
     """
     Assertion about a particular Participant. May include Conditions, Measurements, etc.
@@ -864,7 +849,7 @@ class ParticipantAssertion(ConfiguredBaseModel):
                        'Person',
                        'StudyMembership',
                        'NCPIFile']} })
-    age_at_event: Optional[AgeAt] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    age_at_event: Optional[str] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtEvent] or maybe '
                                                    'effectiveDateTime'},
                          'fhir_profile': {'tag': 'fhir_profile',
@@ -872,21 +857,21 @@ class ParticipantAssertion(ConfiguredBaseModel):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    age_at_assertion: Optional[AgeAt] = Field(default=None, title="Age At Assertion", description="""The date or age at which this condition is being asserted.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    age_at_assertion: Optional[str] = Field(default=None, title="Age At Assertion", description="""The date or age at which this condition is being asserted.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtAssertion]'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    age_at_onset: Optional[AgeAt] = Field(default=None, title="Age At Onset", description="""The age of onset for this condition. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    age_at_onset: Optional[str] = Field(default=None, title="Age At Onset", description="""The age of onset for this condition. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtOnset]'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    age_at_resolution: Optional[AgeAt] = Field(default=None, title="Age At Resolution", description="""The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    age_at_resolution: Optional[str] = Field(default=None, title="Age At Resolution", description="""The age at which this condition was resolved, abated, or cured. Should be left empty in cases of current active status. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'component[ageAtResolution]'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
@@ -1193,6 +1178,7 @@ class Participant(HasExternalId):
                                            'range': 'string'},
                         'sample_id': {'description': 'Samples associated with this '
                                                      'participant',
+                                      'identifier': False,
                                       'multivalued': True,
                                       'name': 'sample_id',
                                       'required': False}},
@@ -1222,7 +1208,7 @@ class Participant(HasExternalId):
                          'target_slot': {'tag': 'target_slot',
                                          'value': 'family_global_id'}},
          'domain_of': ['Participant', 'Family']} })
-    sample_id: Optional[list[str]] = Field(default=[], title="Sample ID", description="""Samples associated with this participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample']} })
+    sample_id: Optional[list[str]] = Field(default=[], title="Sample ID", description="""Samples associated with this participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample', 'Aliquot']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1294,25 +1280,27 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/sample',
-         'slot_usage': {'sample_id': {'identifier': True,
+         'slot_usage': {'aliquot_id': {'multivalued': True, 'name': 'aliquot_id'},
+                        'sample_id': {'identifier': True,
                                       'name': 'sample_id',
+                                      'range': 'string',
                                       'required': True}},
          'title': 'Sample'})
 
-    sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample']} })
+    sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample', 'Aliquot']} })
     parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample Global ID associated with the parent sample""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'parent'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
-         'domain_of': ['Sample', 'Aliquot']} })
+         'domain_of': ['Sample']} })
     sample_type: str = Field(default=..., title="Sample Type", description="""The type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'type'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Sample']} })
-    age_at_collection: Optional[AgeAt] = Field(default=None, title="Age at Collection", description="""The age at which this biospecimen was collected. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    age_at_collection: Optional[str] = Field(default=None, title="Age at Collection", description="""The age at which this biospecimen was collected. Could be expressed with a term, an age, or an age range.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'collectedDateTime'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
@@ -1393,14 +1381,16 @@ class Aliquot(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/sample',
+         'slot_usage': {'aliquot_id': {'identifier': True,
+                                       'name': 'aliquot_id',
+                                       'range': 'string',
+                                       'required': True},
+                        'sample_id': {'identifier': False,
+                                      'name': 'sample_id',
+                                      'required': True}},
          'title': 'Aliquot'})
 
-    parent_sample_id: Optional[str] = Field(default=None, title="Parent Sample ID", description="""Sample Global ID associated with the parent sample""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'parent'},
-                         'fhir_profile': {'tag': 'fhir_profile',
-                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample'},
-                         'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'Specimen'}},
-         'domain_of': ['Sample', 'Aliquot']} })
+    aliquot_id: str = Field(default=..., title="aliquot ID", description="""Aliquot Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
     availability_status: Optional[EnumSpecimenAvailability] = Field(default=None, title="Availability Status", description="""Can this Sample be requested for further analysis?""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'extension[AliquotAvailability].valueCode'},
                          'fhir_profile': {'tag': 'fhir_profile',
@@ -1429,7 +1419,7 @@ class Aliquot(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Specimen'}},
          'domain_of': ['Aliquot']} })
-    aliquot_id: str = Field(default=..., title="aliquot ID", description="""Aliquot Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Aliquot']} })
+    sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample', 'Aliquot']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1476,6 +1466,23 @@ class Record(HasExternalId):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input',
          'title': 'Record'})
 
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
+class AgeAt(Record):
+    """
+    These represent a flexible age value that could represent one of the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/age-at',
+         'title': 'Age At'})
+
+    value_type: EnumAgeValueType = Field(default=..., title="Value Type", description="""Age Value Type""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
+    age: Optional[str] = Field(default=None, title="Age", description="""Age either numeric value or range""", json_schema_extra = { "linkml_meta": {'annotations': {'db_column': {'tag': 'db_column',
+                                       'value': 'relative_date_time_id'}},
+         'domain_of': ['AgeAt']} })
+    age_code: Optional[str] = Field(default=None, title="Age Code", description="""Age expressed as an enumerated value representing an age category""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
+    as_date: Optional[date] = Field(default=None, title="Age As Date", description="""Event Date (rather than age)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
@@ -1569,7 +1576,6 @@ class Family(HasExternalId):
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
 RelativeDateTime.model_rebuild()
-AgeAt.model_rebuild()
 ParticipantAssertion.model_rebuild()
 Person.model_rebuild()
 Period.model_rebuild()
@@ -1587,6 +1593,7 @@ Sample.model_rebuild()
 Aliquot.model_rebuild()
 NCPIFile.model_rebuild()
 Record.model_rebuild()
+AgeAt.model_rebuild()
 AssociatedParty.model_rebuild()
 FileMetaData.model_rebuild()
 Family.model_rebuild()

@@ -1,18 +1,10 @@
 ---
 participant_assertion_id: ob-0001
 participant_id: par-01234
-age_at_event: 
-  value_type: age 
-  age: rt-001
-age_at_assertion: 
-  value_type: age 
-  age:  rt-002
-age_at_onset: 
-  value_type: age 
-  age: rt-0003
-age_at_resolution: 
-  value_type: age 
-  age: rt-0003
+age_at_event: age-0001
+age_at_assertion: age-0002
+age_at_onset: age-0003
+age_at_resolution: age-0003
 entity_asserter: doctor
 assertion_type: measurement 
 assertion_code: LOINC:8302-2

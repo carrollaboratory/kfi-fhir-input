@@ -133,7 +133,6 @@ slots:
       target_slot: research_study_id     
     identifier: true
     required: true
-
   access_policy_id:
     title: Access Policy ID 
     description: Access Policy Global ID 

@@ -1,6 +1,6 @@
 ---
 aliquot_id: aliquot0001
-parent_sample_id: sample001
+sample_id: sample001
 availability_status: available 
 volume: 1.0
 volume_units: ucum:ml 

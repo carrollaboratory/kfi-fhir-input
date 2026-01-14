@@ -9,6 +9,7 @@ classes:
     description: These represent a flexible age value that could represent one 
                  of the following-Relative Age Offset, Age Range as Code, Date 
                  Range, DateTime 
+    is_a: Record
     attributes: 
       value_type:
         title: Value Type 
@@ -32,7 +33,7 @@ classes:
         title: Age As Date
         description: Event Date (rather than age) 
         range: date 
-        required: false      
+        required: false     
     #slots:
     #  - id # These will not get global IDs 
 enums: 
