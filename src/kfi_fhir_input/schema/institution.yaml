@@ -10,20 +10,18 @@ classes:
     is_a: HasExternalId 
     annotations:
       fhir_resource: Organization
-    attributes:
+    slots:
+      - institution_id 
+      - name          # Institution.name
+    slot_usage:
       institution_id:
-        title: Institution ID
-        description: Global ID for this record
         identifier: true
         required: true
         range: string
-    slots:
-      - name          # Institution.name
+
 slots: 
   institution_id:
     title: Institution
     description: The institution this record is associated with.
     range: Institution 
-    annotations: 
-      target_slot: institution_id 
     required: false

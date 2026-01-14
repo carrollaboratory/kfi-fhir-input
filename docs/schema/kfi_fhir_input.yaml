@@ -2111,10 +2111,6 @@ slots:
   institution_id:
     name: institution_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: institution_id
     description: The institution this record is associated with.
     title: Institution
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
@@ -2122,6 +2118,7 @@ slots:
     owner: PractitionerRole
     domain_of:
     - Practitioner
+    - Institution
     - PractitionerRole
     range: Institution
     required: false
@@ -3496,19 +3493,6 @@ slots:
     - Practitioner
     range: string
     required: true
-  institution__institution_id:
-    name: institution__institution_id
-    description: Global ID for this record
-    title: Institution ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
-    identifier: true
-    alias: institution_id
-    owner: Institution
-    domain_of:
-    - Institution
-    range: string
-    required: true
   person__person_id:
     name: person__person_id
     description: Person Global ID (group)
@@ -3696,6 +3680,24 @@ slots:
     required: false
     multivalued: true
     inlined: false
+  Institution_institution_id:
+    name: Institution_institution_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
+    description: The institution this record is associated with.
+    title: Institution
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
+    is_a: institution_id
+    domain: Institution
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
+    identifier: true
+    alias: institution_id
+    owner: Institution
+    domain_of:
+    - Institution
+    is_usage_slot: true
+    usage_slot_name: institution_id
+    range: string
+    required: true
   Participant_participant_id:
     name: Participant_participant_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
@@ -4208,13 +4210,11 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - Institution_institution_id
     - name
-    - institution__institution_id
-    attributes:
+    slot_usage:
       institution_id:
         name: institution_id
-        description: Global ID for this record
-        title: Institution ID
         identifier: true
         range: string
         required: true
@@ -4682,5 +4682,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-14T11:21:45'
 source_file_size: 5198
-generation_date: '2026-01-14T12:57:05'
+generation_date: '2026-01-14T13:01:14'
 

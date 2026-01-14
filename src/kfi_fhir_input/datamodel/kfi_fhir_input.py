@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T12:57:16
+# Generation date: 2026-01-14T13:01:01
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -2692,9 +2692,6 @@ slots.participantAssertion__participant_assertion_id = Slot(uri=KFI['participant
 slots.practitioner__practitioner_id = Slot(uri=KFI['practitioner/practitioner_id'], name="practitioner__practitioner_id", curie=KFI.curie('practitioner/practitioner_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner__practitioner_id, domain=None, range=URIRef)
 
-slots.institution__institution_id = Slot(uri=KFI['institution/institution_id'], name="institution__institution_id", curie=KFI.curie('institution/institution_id'),
-                   model_uri=KFI_FHIR_SPARKS.institution__institution_id, domain=None, range=URIRef)
-
 slots.person__person_id = Slot(uri=KFI['person/person_id'], name="person__person_id", curie=KFI.curie('person/person_id'),
                    model_uri=KFI_FHIR_SPARKS.person__person_id, domain=None, range=URIRef)
 
@@ -2730,6 +2727,9 @@ slots.ParticipantAssertion_participant_id = Slot(uri=KFI['participant/participan
 
 slots.AssociatedParty_period_id = Slot(uri=KFI['period/period_id'], name="AssociatedParty_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.AssociatedParty_period_id, domain=AssociatedParty, range=Optional[Union[Union[str, PeriodPeriodId], list[Union[str, PeriodPeriodId]]]])
+
+slots.Institution_institution_id = Slot(uri=KFI['institution/institution_id'], name="Institution_institution_id", curie=KFI.curie('institution/institution_id'),
+                   model_uri=KFI_FHIR_SPARKS.Institution_institution_id, domain=Institution, range=Union[str, InstitutionInstitutionId])
 
 slots.Participant_participant_id = Slot(uri=KFI['participant/participant_id'], name="Participant_participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.Participant_participant_id, domain=Participant, range=Union[str, ParticipantParticipantId])
