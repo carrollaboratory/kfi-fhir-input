@@ -685,10 +685,6 @@
          <lastmod>2026-01-14</lastmod>
     </url>
     <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/related_samples/</loc>
-         <lastmod>2026-01-14</lastmod>
-    </url>
-    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/relationship/</loc>
          <lastmod>2026-01-14</lastmod>
     </url>
@@ -722,6 +718,10 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/sample_type/</loc>
+         <lastmod>2026-01-14</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/samples/</loc>
          <lastmod>2026-01-14</lastmod>
     </url>
     <url>

@@ -299,13 +299,13 @@
 
       FileMetaData : reference_genome
 
-      FileMetaData : related_samples
+      FileMetaData : samples
 
 
 
 
 
-        FileMetaData --&gt; "0..1" Sample : related_samples
+        FileMetaData --&gt; "*" Sample : samples
         click Sample href "../Sample/"
 
 
@@ -411,8 +411,8 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../related_samples/">related_samples</a></td>
-<td>0..1 <br/> <a href="../Sample/">Sample</a></td>
+<td><a href="../samples/">samples</a></td>
+<td>* <br/> <a href="../Sample/">Sample</a></td>
 <td>e</td>
 <td>direct</td>
 </tr>
@@ -509,7 +509,7 @@ slots:
 - reference_genome
 - workflow_type
 - workflow_tool
-- related_samples
+- samples
 slot_usage:
   file_meta_data_id:
     name: file_meta_data_id
@@ -733,19 +733,19 @@ attributes:
     range: uriorcurie
     required: false
     multivalued: false
-  related_samples:
-    name: related_samples
-    description: e.g., Reference(Participant_ID)
-    title: Related Samples
+  samples:
+    name: samples
+    description: e.g., Reference(sample)
+    title: Samples associated with the file's content
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: related_samples
+    alias: samples
     owner: FileMetaData
     domain_of:
     - FileMetaData
     range: Sample
     required: false
-    multivalued: false
+    multivalued: true
 
 </code></pre>
 </details>

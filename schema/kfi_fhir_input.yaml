@@ -3380,19 +3380,19 @@ slots:
     range: uriorcurie
     required: false
     multivalued: false
-  related_samples:
-    name: related_samples
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/related_samples
-    description: e.g., Reference(Participant_ID)
-    title: Related Samples
+  samples:
+    name: samples
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/samples
+    description: e.g., Reference(sample)
+    title: Samples associated with the file's content
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/related_samples
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/samples
     owner: FileMetaData
     domain_of:
     - FileMetaData
     range: Sample
     required: false
-    multivalued: false
+    multivalued: true
   accessPolicy__status:
     name: accessPolicy__status
     annotations:
@@ -4583,6 +4583,7 @@ classes:
         name: file_location_id
         identifier: true
         range: string
+        required: true
         multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/FileLocation
   FamilyRelationship:
@@ -4661,7 +4662,7 @@ classes:
     - reference_genome
     - workflow_type
     - workflow_tool
-    - related_samples
+    - samples
     slot_usage:
       file_meta_data_id:
         name: file_meta_data_id
@@ -4679,7 +4680,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-14T18:48:14'
+source_file_date: '2026-01-14T18:58:10'
 source_file_size: 5198
-generation_date: '2026-01-14T18:48:23'
+generation_date: '2026-01-14T18:58:21'
 
