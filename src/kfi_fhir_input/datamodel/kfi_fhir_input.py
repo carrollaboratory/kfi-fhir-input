@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T13:13:32
+# Generation date: 2026-01-14T13:19:09
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -2470,6 +2470,9 @@ slots.deceased_rel = Slot(uri=KFI['participant/deceased_rel'], name="deceased_re
 slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_source'], name="patient_knowledge_source", curie=KFI.curie('participant/patient_knowledge_source'),
                    model_uri=KFI_FHIR_SPARKS.patient_knowledge_source, domain=None, range=Optional[Union[str, "EnumPatientKnowledgeSource"]])
 
+slots.person_id = Slot(uri=KFI['person/person_id'], name="person_id", curie=KFI.curie('person/person_id'),
+                   model_uri=KFI_FHIR_SPARKS.person_id, domain=None, range=Optional[Union[str, PersonPersonId]])
+
 slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
 
@@ -2689,12 +2692,6 @@ slots.ageAt__age_code = Slot(uri=KFI['age-at/age_code'], name="ageAt__age_code",
 slots.ageAt__as_date = Slot(uri=KFI['age-at/as_date'], name="ageAt__as_date", curie=KFI.curie('age-at/as_date'),
                    model_uri=KFI_FHIR_SPARKS.ageAt__as_date, domain=None, range=Optional[Union[str, XSDDate]])
 
-slots.person__person_id = Slot(uri=KFI['person/person_id'], name="person__person_id", curie=KFI.curie('person/person_id'),
-                   model_uri=KFI_FHIR_SPARKS.person__person_id, domain=None, range=URIRef)
-
-slots.person__participant_id = Slot(uri=KFI['person/participant_id'], name="person__participant_id", curie=KFI.curie('person/participant_id'),
-                   model_uri=KFI_FHIR_SPARKS.person__participant_id, domain=None, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
-
 slots.period__start = Slot(uri=KFI['period/start'], name="period__start", curie=KFI.curie('period/start'),
                    model_uri=KFI_FHIR_SPARKS.period__start, domain=None, range=Optional[Union[str, XSDDate]])
 
@@ -2736,6 +2733,12 @@ slots.Participant_sample_id = Slot(uri=KFI['sample/sample_id'], name="Participan
 
 slots.Participant_family_global_id = Slot(uri=KFI['family/family_global_id'], name="Participant_family_global_id", curie=KFI.curie('family/family_global_id'),
                    model_uri=KFI_FHIR_SPARKS.Participant_family_global_id, domain=Participant, range=Optional[Union[str, FamilyFamilyGlobalId]])
+
+slots.Person_person_id = Slot(uri=KFI['person/person_id'], name="Person_person_id", curie=KFI.curie('person/person_id'),
+                   model_uri=KFI_FHIR_SPARKS.Person_person_id, domain=Person, range=Union[str, PersonPersonId])
+
+slots.Person_participant_id = Slot(uri=KFI['participant/participant_id'], name="Person_participant_id", curie=KFI.curie('participant/participant_id'),
+                   model_uri=KFI_FHIR_SPARKS.Person_participant_id, domain=Person, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
 
 slots.Period_period_id = Slot(uri=KFI['period/period_id'], name="Period_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.Period_period_id, domain=Period, range=Union[str, PeriodPeriodId])

@@ -2089,7 +2089,7 @@ slots:
     owner: AssociatedParty
     domain_of:
     - AssociatedParty
-    range: PractitionerRole
+    range: Institution
     required: false
     multivalued: false
   party:
@@ -2133,6 +2133,7 @@ slots:
     domain_of:
     - ParticipantAssertion
     - Participant
+    - Person
     - StudyMembership
     - Sample
     - NCPIFile
@@ -2279,6 +2280,18 @@ slots:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
+  person_id:
+    name: person_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    description: Person Global ID (group)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    identifier: false
+    owner: Person
+    domain_of:
+    - Person
+    range: Person
+    required: false
   period_id:
     name: period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -3479,37 +3492,6 @@ slots:
     - AgeAt
     range: date
     required: false
-  person__person_id:
-    name: person__person_id
-    description: Person Global ID (group)
-    title: Person ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
-    identifier: true
-    alias: person_id
-    owner: Person
-    domain_of:
-    - Person
-    range: string
-    required: true
-    multivalued: false
-  person__participant_id:
-    name: person__participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/participant_id
-    alias: participant_id
-    owner: Person
-    domain_of:
-    - Person
-    range: Participant
-    required: true
-    multivalued: true
   period__start:
     name: period__start
     description: Start attribute for a FHIR period data type.
@@ -3745,6 +3727,42 @@ slots:
     usage_slot_name: family_global_id
     range: Family
     required: false
+  Person_person_id:
+    name: Person_person_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    description: Person Global ID (group)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    is_a: person_id
+    domain: Person
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    identifier: true
+    alias: person_id
+    owner: Person
+    domain_of:
+    - Person
+    is_usage_slot: true
+    usage_slot_name: person_id
+    range: string
+    required: true
+    multivalued: false
+  Person_participant_id:
+    name: Person_participant_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    is_a: participant_id
+    domain: Person
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    alias: participant_id
+    owner: Person
+    domain_of:
+    - Person
+    is_usage_slot: true
+    usage_slot_name: participant_id
+    range: Participant
+    required: true
+    multivalued: true
   Period_period_id:
     name: Period_period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -4269,26 +4287,17 @@ classes:
     title: Person
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
     slots:
-    - person__person_id
-    - person__participant_id
-    attributes:
+    - Person_person_id
+    - Person_participant_id
+    slot_usage:
       person_id:
         name: person_id
-        description: Person Global ID (group)
-        title: Person ID
         identifier: true
         range: string
         required: true
         multivalued: false
       participant_id:
         name: participant_id
-        annotations:
-          target_slot:
-            tag: target_slot
-            value: participant_id
-        description: The Global ID for the Participant
-        title: Participant ID
-        range: Participant
         required: true
         multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/Person
@@ -4679,5 +4688,5 @@ metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
 source_file_date: '2026-01-14T13:07:57'
 source_file_size: 4990
-generation_date: '2026-01-14T13:13:47'
+generation_date: '2026-01-14T13:20:49'
 

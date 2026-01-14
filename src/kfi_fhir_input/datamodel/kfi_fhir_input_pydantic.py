@@ -990,12 +990,18 @@ class Person(ConfiguredBaseModel):
     Relate one or more participants to a single person entity
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/person',
+         'slot_usage': {'participant_id': {'multivalued': True,
+                                           'name': 'participant_id',
+                                           'required': True},
+                        'person_id': {'identifier': True,
+                                      'multivalued': False,
+                                      'name': 'person_id',
+                                      'range': 'string',
+                                      'required': True}},
          'title': 'Person'})
 
-    person_id: str = Field(default=..., title="Person ID", description="""Person Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Person']} })
-    participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'participant_id'}},
-         'domain_of': ['ParticipantAssertion',
+    person_id: str = Field(default=..., description="""Person Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['Person']} })
+    participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
                        'StudyMembership',

@@ -55,7 +55,7 @@ slots:
   associated_party_institution_id:
     title: Associated Party (Institution)
     description: Associated Party (is Institution)
-    range: PractitionerRole 
+    range: Institution 
     required: false 
     multivalued: false
   party:

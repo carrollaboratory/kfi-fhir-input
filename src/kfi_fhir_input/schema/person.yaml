@@ -9,19 +9,22 @@ classes:
   Person: 
     title: Person
     description: Relate one or more participants to a single person entity
-    attributes:
-      person_id: 
-        title: Person ID 
-        description: Person Global ID (group)
+    slots:
+      - person_id 
+      - participant_id
+    slot_usage:
+      person_id:
         range: string 
         identifier: true 
         required: true 
         multivalued: false
       participant_id:  # Having trouble getting correct syntax for slot_usage
-        title: Participant ID 
-        description: The Global ID for the Participant 
-        range: Participant 
-        annotations: 
-          target_slot: participant_id 
         required: true 
         multivalued: true 
+slots:
+  person_id: 
+    range: Person 
+    description: Person Global ID (group)
+    identifier: false 
+    required: false 
+
