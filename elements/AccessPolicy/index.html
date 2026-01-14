@@ -339,6 +339,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Access policy communicates the limitations and/or requirements that define ho...</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../description/">description</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>More details associated with the given resource</td>
@@ -372,12 +378,6 @@
 <td><a href="../disease_limitation/">disease_limitation</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
 <td>Disease Use Limitations</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../access_policy_id/">access_policy_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Access policy communicates the limitations and/or requirements that define ho...</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -466,26 +466,22 @@ description: Limitations and/or requirements that define how a user may gain acc
 title: Access Policy
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
+- access_policy_id
 - description
 - data_access_type
 - website
 - consent_scope
 - access_policy_code
 - disease_limitation
-attributes:
+slot_usage:
   access_policy_id:
     name: access_policy_id
     description: Access policy communicates the limitations and/or requirements that
       define how a user may gain access to a particular set of data.
-    title: Access Policy Global ID (Consent)
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     identifier: true
-    domain_of:
-    - AccessPolicy
-    - StudyMembership
-    - FileLocation
     range: string
     required: true
+attributes:
   status:
     name: status
     annotations:
@@ -521,22 +517,15 @@ description: Limitations and/or requirements that define how a user may gain acc
   to a particular set of data.
 title: Access Policy
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-attributes:
+slot_usage:
   access_policy_id:
     name: access_policy_id
     description: Access policy communicates the limitations and/or requirements that
       define how a user may gain access to a particular set of data.
-    title: Access Policy Global ID (Consent)
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     identifier: true
-    alias: access_policy_id
-    owner: AccessPolicy
-    domain_of:
-    - AccessPolicy
-    - StudyMembership
-    - FileLocation
     range: string
     required: true
+attributes:
   status:
     name: status
     annotations:
@@ -558,6 +547,23 @@ attributes:
     domain_of:
     - AccessPolicy
     range: EnumConsentStateCodes
+    required: true
+    multivalued: false
+  access_policy_id:
+    name: access_policy_id
+    description: Access policy communicates the limitations and/or requirements that
+      define how a user may gain access to a particular set of data.
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: true
+    alias: access_policy_id
+    owner: AccessPolicy
+    domain_of:
+    - AccessPolicy
+    - StudyMembership
+    - FileLocation
+    range: string
     required: true
     multivalued: false
   description:

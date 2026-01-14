@@ -393,10 +393,6 @@ attributes:
     multivalued: false
   access_policy_id:
     name: access_policy_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: access_policy_id
     description: Access Policy Global ID
     title: Access Policy ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -423,6 +419,7 @@ attributes:
     - Participant
     - Person
     - StudyMembership
+    - Sample
     - NCPIFile
     range: Participant
     required: true

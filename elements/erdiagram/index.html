@@ -174,13 +174,13 @@
 <h1>ER Diagram</h1>
 <div class="mermaid">erDiagram
 AccessPolicy {
+    string access_policy_id  
     string description  
     EnumDataAccessType data_access_type  
     uri website  
     EnumConsentScope consent_scope  
     EnumAccessPolicyCodeList access_policy_code  
     string disease_limitation  
-    string access_policy_id  
     EnumConsentStateCodes status  
 }
 AgeAt {
@@ -393,6 +393,7 @@ ResearchStudy ||--}| AssociatedParty : "study_personnel"
 ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
 Sample ||--|o AgeAt : "age_at_collection"
 Sample ||--|o Sample : "parent_sample_id"
+Sample ||--|| Participant : "participant_id"
 StudyMembership ||--|| AccessPolicy : "access_policy_id"
 StudyMembership ||--}| Participant : "participant_id"
 

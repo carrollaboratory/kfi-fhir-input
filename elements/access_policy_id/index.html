@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -444,18 +433,18 @@ Alias: access_policy_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../StudyMembership/">StudyMembership</a></td>
-<td>Grouping subject participation within a research study is helpful to provide ...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../AccessPolicy/">AccessPolicy</a></td>
 <td>Limitations and/or requirements that define how a user may gain access to a p...</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 <tr>
 <td><a href="../FileLocation/">FileLocation</a></td>
 <td>Details relating to the links where documents are found</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../StudyMembership/">StudyMembership</a></td>
+<td>Grouping subject participation within a research study is helpful to provide ...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -470,21 +459,6 @@ Alias: access_policy_id</p>
 </li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>access_policy_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -512,10 +486,6 @@ Alias: access_policy_id</p>
 <details>
 
 <pre><code class="language-yaml">name: access_policy_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: access_policy_id
 description: Access Policy Global ID
 title: Access Policy ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
