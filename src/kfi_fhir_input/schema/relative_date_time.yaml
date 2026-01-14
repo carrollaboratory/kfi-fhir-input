@@ -7,8 +7,8 @@ classes:
   RelativeDateTime: 
     title: Relative Date Time
     description: In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
+    is_a: Record
     slots:
-      - id 
       - offset
       - offset_end 
       - offset_type

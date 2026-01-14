@@ -118,14 +118,6 @@ slots:
     description: More details associated with the given resource
     range: string 
     required: false
-  research_study_id:
-    title: Research Study ID 
-    description: The Global ID for the Research Study.
-    range: ResearchStudy     
-    annotations:
-      target_slot: research_study_id     
-    identifier: true
-    required: true
   website: 
     title: Website 
     description: URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.

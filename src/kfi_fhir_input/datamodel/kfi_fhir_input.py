@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T13:19:09
+# Generation date: 2026-01-14T14:41:52
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -109,7 +109,7 @@ class AccessPolicyAccessPolicyId(extended_str):
     pass
 
 
-class RelativeDateTimeId(extended_str):
+class RelativeDateTimeId(RecordId):
     pass
 
 
@@ -297,7 +297,7 @@ class AccessPolicy(YAMLRoot):
 
 
 @dataclass(repr=False)
-class RelativeDateTime(YAMLRoot):
+class RelativeDateTime(Record):
     """
     In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive
     information
@@ -549,7 +549,7 @@ class AssociatedParty(Record):
     classifier: Optional[Union[Union[str, "EnumResearchStudyPartyOrganizationType"], list[Union[str, "EnumResearchStudyPartyOrganizationType"]]]] = empty_list()
     associated_party_practitioner_id: Optional[Union[str, PractitionerPractitionerId]] = None
     associated_party_practitioner_role_id: Optional[Union[str, PractitionerRolePractitionerRoleId]] = None
-    associated_party_institution_id: Optional[Union[str, PractitionerRolePractitionerRoleId]] = None
+    associated_party_institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.id):
@@ -577,8 +577,8 @@ class AssociatedParty(Record):
         if self.associated_party_practitioner_role_id is not None and not isinstance(self.associated_party_practitioner_role_id, PractitionerRolePractitionerRoleId):
             self.associated_party_practitioner_role_id = PractitionerRolePractitionerRoleId(self.associated_party_practitioner_role_id)
 
-        if self.associated_party_institution_id is not None and not isinstance(self.associated_party_institution_id, PractitionerRolePractitionerRoleId):
-            self.associated_party_institution_id = PractitionerRolePractitionerRoleId(self.associated_party_institution_id)
+        if self.associated_party_institution_id is not None and not isinstance(self.associated_party_institution_id, InstitutionInstitutionId):
+            self.associated_party_institution_id = InstitutionInstitutionId(self.associated_party_institution_id)
 
         super().__post_init__(**kwargs)
 
@@ -912,9 +912,9 @@ class ResearchStudyCollection(HasExternalId):
     research_study_collection_type: Union[str, "EnumResearchCollectionType"] = None
     collection_status: Union[str, "EnumCollectionStatus"] = None
     research_study_collection_member_id: Union[Union[str, ResearchStudyResearchStudyId], list[Union[str, ResearchStudyResearchStudyId]]] = None
+    description: Optional[str] = None
     label: Optional[Union[str, list[str]]] = empty_list()
     website: Optional[Union[str, URI]] = None
-    description: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.research_study_collection_id):
@@ -943,15 +943,15 @@ class ResearchStudyCollection(HasExternalId):
             self.research_study_collection_member_id = [self.research_study_collection_member_id] if self.research_study_collection_member_id is not None else []
         self.research_study_collection_member_id = [v if isinstance(v, ResearchStudyResearchStudyId) else ResearchStudyResearchStudyId(v) for v in self.research_study_collection_member_id]
 
+        if self.description is not None and not isinstance(self.description, str):
+            self.description = str(self.description)
+
         if not isinstance(self.label, list):
             self.label = [self.label] if self.label is not None else []
         self.label = [v if isinstance(v, str) else str(v) for v in self.label]
 
         if self.website is not None and not isinstance(self.website, URI):
             self.website = URI(self.website)
-
-        if self.description is not None and not isinstance(self.description, str):
-            self.description = str(self.description)
 
         super().__post_init__(**kwargs)
 
@@ -2429,7 +2429,7 @@ slots.associated_party_practitioner_role_id = Slot(uri=KFI['associated_party/ass
                    model_uri=KFI_FHIR_SPARKS.associated_party_practitioner_role_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])
 
 slots.associated_party_institution_id = Slot(uri=KFI['associated_party/associated_party_institution_id'], name="associated_party_institution_id", curie=KFI.curie('associated_party/associated_party_institution_id'),
-                   model_uri=KFI_FHIR_SPARKS.associated_party_institution_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])
+                   model_uri=KFI_FHIR_SPARKS.associated_party_institution_id, domain=None, range=Optional[Union[str, InstitutionInstitutionId]])
 
 slots.party = Slot(uri=KFI['associated_party/party'], name="party", curie=KFI.curie('associated_party/party'),
                    model_uri=KFI_FHIR_SPARKS.party, domain=None, range=Optional[Union[dict, Any]])
@@ -2513,7 +2513,7 @@ slots.research_study_collection_type = Slot(uri=KFI['research-study-collection/r
                    model_uri=KFI_FHIR_SPARKS.research_study_collection_type, domain=None, range=Union[str, "EnumResearchCollectionType"])
 
 slots.research_study_collection_id = Slot(uri=KFI['research-study-collection/research_study_collection_id'], name="research_study_collection_id", curie=KFI.curie('research-study-collection/research_study_collection_id'),
-                   model_uri=KFI_FHIR_SPARKS.research_study_collection_id, domain=None, range=Optional[str])
+                   model_uri=KFI_FHIR_SPARKS.research_study_collection_id, domain=None, range=Optional[Union[str, ResearchStudyCollectionResearchStudyCollectionId]])
 
 slots.research_study_collection_member_id = Slot(uri=KFI['research-study-collection/research_study_collection_member_id'], name="research_study_collection_member_id", curie=KFI.curie('research-study-collection/research_study_collection_member_id'),
                    model_uri=KFI_FHIR_SPARKS.research_study_collection_member_id, domain=None, range=Union[Union[str, ResearchStudyResearchStudyId], list[Union[str, ResearchStudyResearchStudyId]]])
@@ -2701,12 +2701,6 @@ slots.period__end = Slot(uri=KFI['period/end'], name="period__end", curie=KFI.cu
 slots.researchStudy__research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="researchStudy__research_study_id", curie=KFI.curie('research_study/research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.researchStudy__research_study_id, domain=None, range=URIRef)
 
-slots.researchStudyCollection__research_study_collection_id = Slot(uri=KFI['research-study-collection/research_study_collection_id'], name="researchStudyCollection__research_study_collection_id", curie=KFI.curie('research-study-collection/research_study_collection_id'),
-                   model_uri=KFI_FHIR_SPARKS.researchStudyCollection__research_study_collection_id, domain=None, range=URIRef)
-
-slots.researchStudyCollection__description = Slot(uri=KFI['research-study-collection/description'], name="researchStudyCollection__description", curie=KFI.curie('research-study-collection/description'),
-                   model_uri=KFI_FHIR_SPARKS.researchStudyCollection__description, domain=None, range=Optional[str])
-
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
 
@@ -2754,6 +2748,12 @@ slots.StudyMembership_study_membership_id = Slot(uri=KFI['study-membership/study
 
 slots.ResearchStudy_study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="ResearchStudy_study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
                    model_uri=KFI_FHIR_SPARKS.ResearchStudy_study_membership_id, domain=ResearchStudy, range=Union[str, list[str]])
+
+slots.ResearchStudyCollection_research_study_collection_id = Slot(uri=KFI['research-study-collection/research_study_collection_id'], name="ResearchStudyCollection_research_study_collection_id", curie=KFI.curie('research-study-collection/research_study_collection_id'),
+                   model_uri=KFI_FHIR_SPARKS.ResearchStudyCollection_research_study_collection_id, domain=ResearchStudyCollection, range=Union[str, ResearchStudyCollectionResearchStudyCollectionId])
+
+slots.ResearchStudyCollection_description = Slot(uri=KFI_FHIR_SPARKS.description, name="ResearchStudyCollection_description", curie=KFI_FHIR_SPARKS.curie('description'),
+                   model_uri=KFI_FHIR_SPARKS.ResearchStudyCollection_description, domain=ResearchStudyCollection, range=Optional[str])
 
 slots.Sample_sample_id = Slot(uri=KFI['sample/sample_id'], name="Sample_sample_id", curie=KFI.curie('sample/sample_id'),
                    model_uri=KFI_FHIR_SPARKS.Sample_sample_id, domain=Sample, range=Union[str, SampleSampleId])

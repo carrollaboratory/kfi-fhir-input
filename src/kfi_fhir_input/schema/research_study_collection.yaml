@@ -13,25 +13,22 @@ classes:
     annotations:
       fhir_resource: List
     attributes:
-      research_study_collection_id:
-        title: Research Study Collection ID
-        description: Global ID for this record
-        identifier: true
-        required: true
-        range: string
-      description:
-        title: Description 
-        description: The description of the collection.
-        required: false 
-        range: string 
-        multivalued: false        # technically, the IG says this is multivalued, but it doesn't really make sense
     slots:
+      - research_study_collection_id 
+      - description
       - collection_title          # Collection's title
       - research_study_collection_type
       - label 
       - website 
       - collection_status
       - research_study_collection_member_id
+    slot_usage:
+      research_study_collection_id:
+        identifier: true 
+        required: true 
+        range: string
+      description:
+        multivalued: false        # technically, the IG says this is multivalued, but it doesn't really make sense
 slots: 
   collection_title:
     title: Collection Title 
@@ -49,9 +46,7 @@ slots:
     description: Global ID for this record
     identifier: false
     required: false
-    range: string
-    annotations: 
-      target_slot: research_study_collection_id 
+    range: ResearchStudyCollection
   research_study_collection_member_id:
     title: Research Study Collection Member ID 
     description: ID associated with a member of the collection (Research Study, Dataset, etc)

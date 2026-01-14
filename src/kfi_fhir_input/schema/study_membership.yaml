@@ -25,6 +25,7 @@ classes:
       - study_membership_id
       - access_policy_id 
       - participant_id 
+      - research_study_id 
     slot_usage:
       participant_id:
         multivalued: true

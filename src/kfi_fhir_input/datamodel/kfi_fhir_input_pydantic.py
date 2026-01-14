@@ -821,19 +821,6 @@ class AccessPolicy(ConfiguredBaseModel):
          'domain_of': ['AccessPolicy']} })
 
 
-class RelativeDateTime(ConfiguredBaseModel):
-    """
-    In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time',
-         'title': 'Relative Date Time'})
-
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
-    offset: int = Field(default=..., title="Offset", description="""The point after the target being described. For ranges, this can be used for the starting point""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
-    offset_end: Optional[int] = Field(default=None, title="Offset End", description="""The end of a relative date/time range""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
-    offset_type: EnumOffsetType = Field(default=..., title="Offset Type", description="""What is the datatype associated with the offset (days, years, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
-
-
 class ParticipantAssertion(ConfiguredBaseModel):
     """
     Assertion about a particular Participant. May include Conditions, Measurements, etc.
@@ -1277,8 +1264,22 @@ class ResearchStudyCollection(HasExternalId):
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource', 'value': 'List'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection',
+         'slot_usage': {'description': {'multivalued': False, 'name': 'description'},
+                        'research_study_collection_id': {'identifier': True,
+                                                         'name': 'research_study_collection_id',
+                                                         'range': 'string',
+                                                         'required': True}},
          'title': 'Research Study Collection'})
 
+    research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
+                                         'value': 'research_study_collection_id'}},
+         'domain_of': ['ResearchStudyCollection']} })
+    description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
+                       'Practitioner',
+                       'ResearchStudy',
+                       'ResearchStudyCollection',
+                       'NCPIFile',
+                       'Family']} })
     collection_title: str = Field(default=..., title="Collection Title", description="""The collection's title.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
     research_study_collection_type: EnumResearchCollectionType = Field(default=..., title="Research Study Collection Type", description="""The type of collection being described.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
     label: Optional[list[str]] = Field(default=[], title="Label", description="""Alias such as acronym and alternate names.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
@@ -1287,13 +1288,6 @@ class ResearchStudyCollection(HasExternalId):
     research_study_collection_member_id: list[str] = Field(default=..., title="Research Study Collection Member ID", description="""ID associated with a member of the collection (Research Study, Dataset, etc)""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'research_study_id'}},
          'domain_of': ['ResearchStudyCollection']} })
-    research_study_collection_id: str = Field(default=..., title="Research Study Collection ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudyCollection']} })
-    description: Optional[str] = Field(default=None, title="Description", description="""The description of the collection.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
-                       'Practitioner',
-                       'ResearchStudy',
-                       'ResearchStudyCollection',
-                       'NCPIFile',
-                       'Family']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1498,7 +1492,21 @@ class Record(HasExternalId):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input',
          'title': 'Record'})
 
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+
+
+class RelativeDateTime(Record):
+    """
+    In FHIR, we can express events using relative date/times from the participant's DOB to avoid exposing sensitive information
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time',
+         'title': 'Relative Date Time'})
+
+    offset: int = Field(default=..., title="Offset", description="""The point after the target being described. For ranges, this can be used for the starting point""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset_end: Optional[int] = Field(default=None, title="Offset End", description="""The end of a relative date/time range""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    offset_type: EnumOffsetType = Field(default=..., title="Offset Type", description="""What is the datatype associated with the offset (days, years, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1515,7 +1523,7 @@ class AgeAt(Record):
          'domain_of': ['AgeAt']} })
     age_code: Optional[str] = Field(default=None, title="Age Code", description="""Age expressed as an enumerated value representing an age category""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
     as_date: Optional[date] = Field(default=None, title="Age As Date", description="""Event Date (rather than age)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1536,7 +1544,7 @@ class AssociatedParty(Record):
     associated_party_practitioner_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner)", description="""Associated Party (is Practitioner).""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     associated_party_practitioner_role_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner Role)", description="""Associated Party (is Practitioner Role)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     associated_party_institution_id: Optional[str] = Field(default=None, title="Associated Party (Institution)", description="""Associated Party (is Institution)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
-    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime', 'Record']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
@@ -1611,7 +1619,6 @@ class Family(HasExternalId):
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
-RelativeDateTime.model_rebuild()
 ParticipantAssertion.model_rebuild()
 Person.model_rebuild()
 Period.model_rebuild()
@@ -1629,6 +1636,7 @@ Sample.model_rebuild()
 Aliquot.model_rebuild()
 NCPIFile.model_rebuild()
 Record.model_rebuild()
+RelativeDateTime.model_rebuild()
 AgeAt.model_rebuild()
 AssociatedParty.model_rebuild()
 FileMetaData.model_rebuild()

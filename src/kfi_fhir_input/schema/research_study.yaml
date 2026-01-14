@@ -6,7 +6,6 @@ imports:
   - institution
   - practitioner_role
   - associated_party
-  - study_membership
 classes:
   ResearchStudy:
     title: Research Study 
@@ -14,14 +13,8 @@ classes:
     is_a: HasExternalId 
     annotations:
       fhir_resource: ResearchStudy 
-    attributes:
-      research_study_id:
-        title: Research Study ID 
-        description: The Global ID for the Research Study.
-        range: string         
-        identifier: true
-        required: true
     slots:
+      - research_study_id
       - study_title       
       - parent_study_id
       - study_focus 
@@ -31,11 +24,19 @@ classes:
       - study_status
       - study_design
       - study_personnel
-      - study_membership_id 
     slot_usage:
-      study_membership_id:
-        multivalued: true
+      research_study_id:
+        description: The Global ID for the Research Study.
+        range: string         
+        identifier: true
+        required: true
 slots:
+  research_study_id:
+    title: Research Study ID 
+    description: The Global ID for the Research Study.
+    range: ResearchStudy     
+    identifier: false
+    required: true
   parent_study_id: 
     title: Parent Study 
     description: ID For Parent Study if this is a substudy
