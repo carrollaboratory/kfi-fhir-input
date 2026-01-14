@@ -309,8 +309,6 @@
 
       ResearchStudy : study_focus
 
-      ResearchStudy : study_membership_id
-
       ResearchStudy : study_personnel
 
 
@@ -355,6 +353,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>The Global ID for the Research Study</td>
+<td>direct</td>
+</tr>
 <tr>
 <td><a href="../study_title/">study_title</a></td>
 <td>0..1 <br/> <a href="../String/">String</a></td>
@@ -410,18 +414,6 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../study_membership_id/">study_membership_id</a></td>
-<td>1..* <br/> <a href="../String/">String</a></td>
-<td>Study Membership Global ID (group)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../research_study_id/">research_study_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>The Global ID for the Research Study</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
@@ -440,6 +432,12 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><a href="../StudyMembership/">StudyMembership</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
 <tr>
 <td><a href="./">ResearchStudy</a></td>
 <td><a href="../parent_study_id/">parent_study_id</a></td>
@@ -509,6 +507,7 @@ title: Research Study
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- research_study_id
 - study_title
 - parent_study_id
 - study_focus
@@ -518,20 +517,11 @@ slots:
 - study_status
 - study_design
 - study_personnel
-- study_membership_id
 slot_usage:
-  study_membership_id:
-    name: study_membership_id
-    multivalued: true
-attributes:
   research_study_id:
     name: research_study_id
     description: The Global ID for the Research Study.
-    title: Research Study ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
     identifier: true
-    domain_of:
-    - ResearchStudy
     range: string
     required: true
 
@@ -551,19 +541,24 @@ title: Research Study
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slot_usage:
-  study_membership_id:
-    name: study_membership_id
-    multivalued: true
+  research_study_id:
+    name: research_study_id
+    description: The Global ID for the Research Study.
+    identifier: true
+    range: string
+    required: true
 attributes:
   research_study_id:
     name: research_study_id
     description: The Global ID for the Research Study.
     title: Research Study ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: research_study_id
     owner: ResearchStudy
     domain_of:
+    - StudyMembership
     - ResearchStudy
     range: string
     required: true
@@ -698,20 +693,6 @@ attributes:
     domain_of:
     - ResearchStudy
     range: AssociatedParty
-    required: true
-    multivalued: true
-  study_membership_id:
-    name: study_membership_id
-    description: Study Membership Global ID (group)
-    title: Study Membership ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: study_membership_id
-    owner: ResearchStudy
-    domain_of:
-    - StudyMembership
-    - ResearchStudy
-    range: string
     required: true
     multivalued: true
   external_id:

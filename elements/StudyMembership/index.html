@@ -276,6 +276,17 @@
 
 
 
+      StudyMembership : research_study_id
+
+
+
+
+
+        StudyMembership --&gt; "1" ResearchStudy : research_study_id
+        click ResearchStudy href "../ResearchStudy/"
+
+
+
       StudyMembership : study_membership_id
 
 
@@ -308,6 +319,12 @@
 <td><a href="../participant_id/">participant_id</a></td>
 <td>1..* <br/> <a href="../Participant/">Participant</a></td>
 <td>The Global ID for the Participant</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>1 <br/> <a href="../ResearchStudy/">ResearchStudy</a></td>
+<td>The Global ID for the Research Study</td>
 <td>direct</td>
 </tr>
 </tbody>
@@ -350,6 +367,7 @@ slots:
 - study_membership_id
 - access_policy_id
 - participant_id
+- research_study_id
 slot_usage:
   participant_id:
     name: participant_id
@@ -387,7 +405,6 @@ attributes:
     owner: StudyMembership
     domain_of:
     - StudyMembership
-    - ResearchStudy
     range: string
     required: true
     multivalued: false
@@ -424,6 +441,20 @@ attributes:
     range: Participant
     required: true
     multivalued: true
+  research_study_id:
+    name: research_study_id
+    description: The Global ID for the Research Study.
+    title: Research Study ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: false
+    alias: research_study_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    - ResearchStudy
+    range: ResearchStudy
+    required: true
 
 </code></pre>
 </details>

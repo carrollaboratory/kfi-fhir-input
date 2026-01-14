@@ -359,17 +359,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -446,30 +435,15 @@ Alias: research_study_collection_id</p>
 <tr>
 <td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
 <td>Collections of research data including, but not limited, to Consortia, Progra...</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../ResearchStudyCollection/">ResearchStudyCollection</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>target_slot</td>
-<td>research_study_collection_id</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -497,10 +471,6 @@ Alias: research_study_collection_id</p>
 <details>
 
 <pre><code class="language-yaml">name: research_study_collection_id
-annotations:
-  target_slot:
-    tag: target_slot
-    value: research_study_collection_id
 description: Global ID for this record
 title: Research Study Collection ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
@@ -509,7 +479,7 @@ identifier: false
 alias: research_study_collection_id
 domain_of:
 - ResearchStudyCollection
-range: string
+range: ResearchStudyCollection
 required: false
 
 </code></pre>

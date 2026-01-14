@@ -327,36 +327,18 @@
 description: Relate one or more participants to a single person entity
 title: Person
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-attributes:
+slots:
+- person_id
+- participant_id
+slot_usage:
   person_id:
     name: person_id
-    description: Person Global ID (group)
-    title: Person ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
-    rank: 1000
     identifier: true
-    domain_of:
-    - Person
     range: string
     required: true
     multivalued: false
   participant_id:
     name: participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
-    domain_of:
-    - ParticipantAssertion
-    - Participant
-    - Person
-    - StudyMembership
-    - Sample
-    - NCPIFile
-    range: Participant
     required: true
     multivalued: true
 
@@ -368,12 +350,22 @@ attributes:
 description: Relate one or more participants to a single person entity
 title: Person
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+slot_usage:
+  person_id:
+    name: person_id
+    identifier: true
+    range: string
+    required: true
+    multivalued: false
+  participant_id:
+    name: participant_id
+    required: true
+    multivalued: true
 attributes:
   person_id:
     name: person_id
     description: Person Global ID (group)
-    title: Person ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: true
     alias: person_id
@@ -385,13 +377,10 @@ attributes:
     multivalued: false
   participant_id:
     name: participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
     description: The Global ID for the Participant
     title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     alias: participant_id
     owner: Person
     domain_of:

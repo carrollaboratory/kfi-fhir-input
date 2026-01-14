@@ -1312,10 +1312,9 @@ slots:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:id
     identifier: true
-    owner: RelativeDateTime
+    owner: Record
     domain_of:
     - Record
-    - RelativeDateTime
     range: string
     required: true
     multivalued: false
@@ -1359,24 +1358,11 @@ slots:
     - AccessPolicy
     - Practitioner
     - ResearchStudy
+    - ResearchStudyCollection
     - NCPIFile
     - Family
     range: string
     required: false
-  research_study_id:
-    name: research_study_id
-    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputresearch_study_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: research_study_id
-    description: The Global ID for the Research Study.
-    title: Research Study ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    slot_uri: kfi_fhir_sparks:research_study_id
-    identifier: true
-    range: ResearchStudy
-    required: true
   website:
     name: website
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputwebsite
@@ -2089,7 +2075,7 @@ slots:
     owner: AssociatedParty
     domain_of:
     - AssociatedParty
-    range: PractitionerRole
+    range: Institution
     required: false
     multivalued: false
   party:
@@ -2133,6 +2119,7 @@ slots:
     domain_of:
     - ParticipantAssertion
     - Participant
+    - Person
     - StudyMembership
     - Sample
     - NCPIFile
@@ -2279,6 +2266,18 @@ slots:
     range: EnumPatientKnowledgeSource
     required: false
     multivalued: false
+  person_id:
+    name: person_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    description: Person Global ID (group)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    identifier: false
+    owner: Person
+    domain_of:
+    - Person
+    range: Person
+    required: false
   period_id:
     name: period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -2316,13 +2315,26 @@ slots:
     title: Study Membership ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
+    owner: StudyMembership
+    domain_of:
+    - StudyMembership
+    range: string
+    required: true
+    multivalued: false
+  research_study_id:
+    name: research_study_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/research_study_id
+    description: The Global ID for the Research Study.
+    title: Research Study ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/research_study_id
+    identifier: false
     owner: ResearchStudy
     domain_of:
     - StudyMembership
     - ResearchStudy
-    range: string
+    range: ResearchStudy
     required: true
-    multivalued: false
   parent_study_id:
     name: parent_study_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/parent_study_id
@@ -2467,16 +2479,15 @@ slots:
   research_study_collection_id:
     name: research_study_collection_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: research_study_collection_id
     description: Global ID for this record
     title: Research Study Collection ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
     identifier: false
-    range: string
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    range: ResearchStudyCollection
     required: false
   research_study_collection_member_id:
     name: research_study_collection_member_id
@@ -3479,37 +3490,6 @@ slots:
     - AgeAt
     range: date
     required: false
-  person__person_id:
-    name: person__person_id
-    description: Person Global ID (group)
-    title: Person ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
-    identifier: true
-    alias: person_id
-    owner: Person
-    domain_of:
-    - Person
-    range: string
-    required: true
-    multivalued: false
-  person__participant_id:
-    name: person__participant_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/participant_id
-    alias: participant_id
-    owner: Person
-    domain_of:
-    - Person
-    range: Participant
-    required: true
-    multivalued: true
   period__start:
     name: period__start
     description: Start attribute for a FHIR period data type.
@@ -3534,45 +3514,6 @@ slots:
     - Period
     range: date
     required: false
-  researchStudy__research_study_id:
-    name: researchStudy__research_study_id
-    description: The Global ID for the Research Study.
-    title: Research Study ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/research_study_id
-    identifier: true
-    alias: research_study_id
-    owner: ResearchStudy
-    domain_of:
-    - ResearchStudy
-    range: string
-    required: true
-  researchStudyCollection__research_study_collection_id:
-    name: researchStudyCollection__research_study_collection_id
-    description: Global ID for this record
-    title: Research Study Collection ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
-    identifier: true
-    alias: research_study_collection_id
-    owner: ResearchStudyCollection
-    domain_of:
-    - ResearchStudyCollection
-    range: string
-    required: true
-  researchStudyCollection__description:
-    name: researchStudyCollection__description
-    description: The description of the collection.
-    title: Description
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/description
-    alias: description
-    owner: ResearchStudyCollection
-    domain_of:
-    - ResearchStudyCollection
-    range: string
-    required: false
-    multivalued: false
   nCPIFile__file_global_id:
     name: nCPIFile__file_global_id
     description: File Global ID
@@ -3745,6 +3686,42 @@ slots:
     usage_slot_name: family_global_id
     range: Family
     required: false
+  Person_person_id:
+    name: Person_person_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    description: Person Global ID (group)
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    is_a: person_id
+    domain: Person
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/person_id
+    identifier: true
+    alias: person_id
+    owner: Person
+    domain_of:
+    - Person
+    is_usage_slot: true
+    usage_slot_name: person_id
+    range: string
+    required: true
+    multivalued: false
+  Person_participant_id:
+    name: Person_participant_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
+    is_a: participant_id
+    domain: Person
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
+    alias: participant_id
+    owner: Person
+    domain_of:
+    - Person
+    is_usage_slot: true
+    usage_slot_name: participant_id
+    range: Participant
+    required: true
+    multivalued: true
   Period_period_id:
     name: Period_period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -3820,24 +3797,60 @@ slots:
     range: string
     required: true
     multivalued: false
-  ResearchStudy_study_membership_id:
-    name: ResearchStudy_study_membership_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
-    description: Study Membership Global ID (group)
-    title: Study Membership ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
-    is_a: study_membership_id
+  ResearchStudy_research_study_id:
+    name: ResearchStudy_research_study_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/research_study_id
+    description: The Global ID for the Research Study.
+    title: Research Study ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
+    is_a: research_study_id
     domain: ResearchStudy
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
-    alias: study_membership_id
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research_study/research_study_id
+    identifier: true
+    alias: research_study_id
     owner: ResearchStudy
     domain_of:
     - ResearchStudy
     is_usage_slot: true
-    usage_slot_name: study_membership_id
+    usage_slot_name: research_study_id
     range: string
     required: true
-    multivalued: true
+  ResearchStudyCollection_research_study_collection_id:
+    name: ResearchStudyCollection_research_study_collection_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
+    description: Global ID for this record
+    title: Research Study Collection ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    is_a: research_study_collection_id
+    domain: ResearchStudyCollection
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/research_study_collection_id
+    identifier: true
+    alias: research_study_collection_id
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    is_usage_slot: true
+    usage_slot_name: research_study_collection_id
+    range: string
+    required: true
+  ResearchStudyCollection_description:
+    name: ResearchStudyCollection_description
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputdescription
+    description: More details associated with the given resource
+    title: Description
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    is_a: description
+    domain: ResearchStudyCollection
+    slot_uri: kfi_fhir_sparks:description
+    alias: description
+    owner: ResearchStudyCollection
+    domain_of:
+    - ResearchStudyCollection
+    is_usage_slot: true
+    usage_slot_name: description
+    range: string
+    required: false
+    multivalued: false
   Sample_sample_id:
     name: Sample_sample_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
@@ -4044,7 +4057,9 @@ classes:
       participant's DOB to avoid exposing sensitive information
     title: Relative Date Time
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
+    is_a: Record
     slots:
+    - external_id
     - id
     - offset
     - offset_end
@@ -4269,26 +4284,17 @@ classes:
     title: Person
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
     slots:
-    - person__person_id
-    - person__participant_id
-    attributes:
+    - Person_person_id
+    - Person_participant_id
+    slot_usage:
       person_id:
         name: person_id
-        description: Person Global ID (group)
-        title: Person ID
         identifier: true
         range: string
         required: true
         multivalued: false
       participant_id:
         name: participant_id
-        annotations:
-          target_slot:
-            tag: target_slot
-            value: participant_id
-        description: The Global ID for the Participant
-        title: Participant ID
-        range: Participant
         required: true
         multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/person/Person
@@ -4358,6 +4364,7 @@ classes:
     - StudyMembership_study_membership_id
     - access_policy_id
     - StudyMembership_participant_id
+    - research_study_id
     slot_usage:
       participant_id:
         name: participant_id
@@ -4381,6 +4388,7 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - ResearchStudy_research_study_id
     - study_title
     - parent_study_id
     - study_focus
@@ -4390,17 +4398,10 @@ classes:
     - study_status
     - study_design
     - study_personnel
-    - ResearchStudy_study_membership_id
-    - researchStudy__research_study_id
     slot_usage:
-      study_membership_id:
-        name: study_membership_id
-        multivalued: true
-    attributes:
       research_study_id:
         name: research_study_id
         description: The Global ID for the Research Study.
-        title: Research Study ID
         identifier: true
         range: string
         required: true
@@ -4419,28 +4420,22 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - ResearchStudyCollection_research_study_collection_id
+    - ResearchStudyCollection_description
     - collection_title
     - research_study_collection_type
     - label
     - website
     - collection_status
     - research_study_collection_member_id
-    - researchStudyCollection__research_study_collection_id
-    - researchStudyCollection__description
-    attributes:
+    slot_usage:
       research_study_collection_id:
         name: research_study_collection_id
-        description: Global ID for this record
-        title: Research Study Collection ID
         identifier: true
         range: string
         required: true
       description:
         name: description
-        description: The description of the collection.
-        title: Description
-        range: string
-        required: false
         multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection/ResearchStudyCollection
   Sample:
@@ -4677,7 +4672,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-14T19:14:56'
-source_file_size: 4990
-generation_date: '2026-01-14T19:15:05'
+source_file_date: '2026-01-14T20:51:39'
+source_file_size: 4755
+generation_date: '2026-01-14T20:51:47'
 

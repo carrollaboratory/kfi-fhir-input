@@ -341,6 +341,18 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../research_study_collection_id/">research_study_collection_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Global ID for this record</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../description/">description</a></td>
+<td>0..1 <br/> <a href="../String/">String</a></td>
+<td>More details associated with the given resource</td>
+<td>direct</td>
+</tr>
+<tr>
 <td><a href="../collection_title/">collection_title</a></td>
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>The collection's title</td>
@@ -374,18 +386,6 @@
 <td><a href="../research_study_collection_member_id/">research_study_collection_member_id</a></td>
 <td>1..* <br/> <a href="../ResearchStudy/">ResearchStudy</a></td>
 <td>ID associated with a member of the collection (Research Study, Dataset, etc)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../research_study_collection_id/">research_study_collection_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Global ID for this record</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../description/">description</a></td>
-<td>0..1 <br/> <a href="../String/">String</a></td>
-<td>The description of the collection</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -450,37 +450,22 @@ title: Research Study Collection
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
+- research_study_collection_id
+- description
 - collection_title
 - research_study_collection_type
 - label
 - website
 - collection_status
 - research_study_collection_member_id
-attributes:
+slot_usage:
   research_study_collection_id:
     name: research_study_collection_id
-    description: Global ID for this record
-    title: Research Study Collection ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
     identifier: true
-    domain_of:
-    - ResearchStudyCollection
     range: string
     required: true
   description:
     name: description
-    description: The description of the collection.
-    title: Description
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
-    domain_of:
-    - AccessPolicy
-    - Practitioner
-    - ResearchStudy
-    - ResearchStudyCollection
-    - NCPIFile
-    - Family
-    range: string
-    required: false
     multivalued: false
 
 </code></pre>
@@ -497,12 +482,22 @@ description: Collections of research data including, but not limited, to Consort
 title: Research Study Collection
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  research_study_collection_id:
+    name: research_study_collection_id
+    identifier: true
+    range: string
+    required: true
+  description:
+    name: description
+    multivalued: false
 attributes:
   research_study_collection_id:
     name: research_study_collection_id
     description: Global ID for this record
     title: Research Study Collection ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     identifier: true
     alias: research_study_collection_id
     owner: ResearchStudyCollection
@@ -512,9 +507,10 @@ attributes:
     required: true
   description:
     name: description
-    description: The description of the collection.
+    description: More details associated with the given resource
     title: Description
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
     alias: description
     owner: ResearchStudyCollection
     domain_of:

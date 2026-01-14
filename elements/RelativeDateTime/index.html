@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -263,6 +272,11 @@
 <div class="mermaid"> classDiagram
     class RelativeDateTime
     click RelativeDateTime href "../RelativeDateTime/"
+      Record &lt;|-- RelativeDateTime
+        click Record href "../Record/"
+
+      RelativeDateTime : external_id
+
       RelativeDateTime : id
 
       RelativeDateTime : offset
@@ -282,7 +296,16 @@
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasExternalId/">HasExternalId</a><ul>
+<li><a href="../Record/">Record</a><ul>
+<li><strong>RelativeDateTime</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -294,12 +317,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href="../id/">id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Unique Identifier for a table entry</td>
-<td>direct</td>
-</tr>
 <tr>
 <td><a href="../offset/">offset</a></td>
 <td>1 <br/> <a href="../Integer/">Integer</a></td>
@@ -317,6 +334,18 @@
 <td>1 <br/> <a href="../EnumOffsetType/">EnumOffsetType</a></td>
 <td>What is the datatype associated with the offset (days, years, etc)</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Unique Identifier for a table entry</td>
+<td><a href="../Record/">Record</a></td>
+</tr>
+<tr>
+<td><a href="../external_id/">external_id</a></td>
+<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -378,8 +407,8 @@ description: In FHIR, we can express events using relative date/times from the p
   DOB to avoid exposing sensitive information
 title: Relative Date Time
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: Record
 slots:
-- id
 - offset
 - offset_end
 - offset_type
@@ -393,23 +422,8 @@ description: In FHIR, we can express events using relative date/times from the p
   DOB to avoid exposing sensitive information
 title: Relative Date Time
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: Record
 attributes:
-  id:
-    name: id
-    description: Unique Identifier for a table entry. This is probably not the Global
-      ID
-    title: ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    identifier: true
-    alias: id
-    owner: RelativeDateTime
-    domain_of:
-    - Record
-    - RelativeDateTime
-    range: string
-    required: true
-    multivalued: false
   offset:
     name: offset
     description: The point after the target being described. For ranges, this can
@@ -450,6 +464,35 @@ attributes:
     range: EnumOffsetType
     required: true
     multivalued: false
+  id:
+    name: id
+    description: Unique Identifier for a table entry. This is probably not the Global
+      ID
+    title: ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: RelativeDateTime
+    domain_of:
+    - Record
+    range: string
+    required: true
+    multivalued: false
+  external_id:
+    name: external_id
+    description: Other identifiers for this entity, eg, from the submitting study
+      or in systems link dbGaP
+    title: External Identifiers
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: external_id
+    owner: RelativeDateTime
+    domain_of:
+    - HasExternalId
+    range: uriorcurie
+    required: false
+    multivalued: true
 
 </code></pre>
 </details>

@@ -290,8 +290,8 @@
 
 
 
-        AssociatedParty --&gt; "0..1" PractitionerRole : associated_party_institution_id
-        click PractitionerRole href "../PractitionerRole/"
+        AssociatedParty --&gt; "0..1" Institution : associated_party_institution_id
+        click Institution href "../Institution/"
 
 
 
@@ -417,7 +417,7 @@
 </tr>
 <tr>
 <td><a href="../associated_party_institution_id/">associated_party_institution_id</a></td>
-<td>0..1 <br/> <a href="../PractitionerRole/">PractitionerRole</a></td>
+<td>0..1 <br/> <a href="../Institution/">Institution</a></td>
 <td>Associated Party (is Institution)</td>
 <td>direct</td>
 </tr>
@@ -632,7 +632,7 @@ attributes:
     owner: AssociatedParty
     domain_of:
     - AssociatedParty
-    range: PractitionerRole
+    range: Institution
     required: false
     multivalued: false
   id:
@@ -647,7 +647,6 @@ attributes:
     owner: AssociatedParty
     domain_of:
     - Record
-    - RelativeDateTime
     range: string
     required: true
     multivalued: false

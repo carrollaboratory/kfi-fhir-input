@@ -270,6 +270,8 @@
         click HasExternalId href "../HasExternalId/"
 
 
+      Record &lt;|-- RelativeDateTime
+        click RelativeDateTime href "../RelativeDateTime/"
       Record &lt;|-- AgeAt
         click AgeAt href "../AgeAt/"
       Record &lt;|-- AssociatedParty
@@ -286,6 +288,7 @@
 <ul>
 <li><a href="../HasExternalId/">HasExternalId</a><ul>
 <li><strong>Record</strong><ul>
+<li><a href="../RelativeDateTime/">RelativeDateTime</a></li>
 <li><a href="../AgeAt/">AgeAt</a></li>
 <li><a href="../AssociatedParty/">AssociatedParty</a></li>
 </ul>
@@ -378,7 +381,6 @@ attributes:
     owner: Record
     domain_of:
     - Record
-    - RelativeDateTime
     range: string
     required: true
     multivalued: false

@@ -316,12 +316,14 @@ Record {
     uriorcurieList external_id  
 }
 RelativeDateTime {
-    string id  
     integer offset  
     integer offset_end  
     EnumOffsetType offset_type  
+    string id  
+    uriorcurieList external_id  
 }
 ResearchStudy {
+    string research_study_id  
     string study_title  
     uriorcurieList study_focus  
     string description  
@@ -329,18 +331,16 @@ ResearchStudy {
     stringList study_acknowledgement  
     EnumStudyStatus study_status  
     uriorcurieList study_design  
-    stringList study_membership_id  
-    string research_study_id  
     uriorcurieList external_id  
 }
 ResearchStudyCollection {
+    string research_study_collection_id  
+    string description  
     string collection_title  
     EnumResearchCollectionType research_study_collection_type  
     stringList label  
     uri website  
     EnumCollectionStatus collection_status  
-    string research_study_collection_id  
-    string description  
     uriorcurieList external_id  
 }
 Sample {
@@ -363,8 +363,8 @@ StudyMembership {
 
 AgeAt ||--|o RelativeDateTime : "age"
 Aliquot ||--|| Sample : "sample_id"
+AssociatedParty ||--|o Institution : "associated_party_institution_id"
 AssociatedParty ||--|o Practitioner : "associated_party_practitioner_id"
-AssociatedParty ||--|o PractitionerRole : "associated_party_institution_id"
 AssociatedParty ||--|o PractitionerRole : "associated_party_practitioner_role_id"
 AssociatedParty ||--}o Period : "period_id"
 FamilyRelationship ||--|| Participant : "patient_id"
@@ -395,6 +395,7 @@ Sample ||--|o AgeAt : "age_at_collection"
 Sample ||--|o Sample : "parent_sample_id"
 Sample ||--|| Participant : "participant_id"
 StudyMembership ||--|| AccessPolicy : "access_policy_id"
+StudyMembership ||--|| ResearchStudy : "research_study_id"
 StudyMembership ||--}| Participant : "participant_id"
 
 </div>

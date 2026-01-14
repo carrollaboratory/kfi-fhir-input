@@ -21,7 +21,7 @@
     
     
       
-        <title>Slot: Person ID (person_id) - kfi-fhir-input</title>
+        <title>Slot: person_id - kfi-fhir-input</title>
       
     
     
@@ -68,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-person-id-person_id" class="md-skip">
+        <a href="#slot-person_id" class="md-skip">
           Skip to content
         </a>
       
@@ -104,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: Person ID (person_id)
+              Slot: person_id
             
           </span>
         </div>
@@ -416,7 +416,7 @@
   
 
 
-<h1 id="slot-person-id-person_id">Slot: Person ID (person_id)</h1>
+<h1 id="slot-person_id">Slot: person_id</h1>
 <p><em>Person Global ID (group)</em></p>
 <p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputperson_id">kfi_fhir_sparks:person_id</a>
 Alias: person_id</p>
@@ -435,18 +435,13 @@ Alias: person_id</p>
 <tr>
 <td><a href="../Person/">Person</a></td>
 <td>Relate one or more participants to a single person entity</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../String/">String</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../Person/">Person</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -477,17 +472,14 @@ Alias: person_id</p>
 
 <pre><code class="language-yaml">name: person_id
 description: Person Global ID (group)
-title: Person ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-identifier: true
+identifier: false
 alias: person_id
-owner: Person
 domain_of:
 - Person
-range: string
-required: true
-multivalued: false
+range: Person
+required: false
 
 </code></pre>
 
