@@ -457,6 +457,12 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../Participant/">Participant</a></td>
+<td><a href="../sample_id/">sample_id</a></td>
+<td>range</td>
+<td><a href="./">Sample</a></td>
+</tr>
+<tr>
 <td><a href="./">Sample</a></td>
 <td><a href="../parent_sample_id/">parent_sample_id</a></td>
 <td>range</td>
@@ -464,7 +470,7 @@
 </tr>
 <tr>
 <td><a href="../Aliquot/">Aliquot</a></td>
-<td><a href="../parent_sample_id/">parent_sample_id</a></td>
+<td><a href="../sample_id/">sample_id</a></td>
 <td>range</td>
 <td><a href="./">Sample</a></td>
 </tr>
@@ -554,7 +560,11 @@ slot_usage:
   sample_id:
     name: sample_id
     identifier: true
+    range: string
     required: true
+  aliquot_id:
+    name: aliquot_id
+    multivalued: true
 
 </code></pre>
 </details>
@@ -577,7 +587,11 @@ slot_usage:
   sample_id:
     name: sample_id
     identifier: true
+    range: string
     required: true
+  aliquot_id:
+    name: aliquot_id
+    multivalued: true
 attributes:
   sample_id:
     name: sample_id
@@ -591,8 +605,10 @@ attributes:
     domain_of:
     - Participant
     - Sample
+    - Aliquot
     range: string
     required: true
+    multivalued: false
   parent_sample_id:
     name: parent_sample_id
     annotations:
@@ -613,7 +629,6 @@ attributes:
     owner: Sample
     domain_of:
     - Sample
-    - Aliquot
     range: Sample
     required: false
     multivalued: false

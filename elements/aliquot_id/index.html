@@ -435,18 +435,13 @@ Alias: aliquot_id</p>
 <tr>
 <td><a href="../Aliquot/">Aliquot</a></td>
 <td>A Portion of a sample extracted from a participant</td>
-<td>no</td>
+<td>yes</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../String/">String</a></p>
-</li>
-<li>
-<p>Required: True</p>
-</li>
+<li>Range: <a href="../Aliquot/">Aliquot</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -480,13 +475,11 @@ description: Aliquot Global ID
 title: aliquot ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
-identifier: true
 alias: aliquot_id
-owner: Aliquot
 domain_of:
 - Aliquot
-range: string
-required: true
+range: Aliquot
+required: false
 
 </code></pre>
 

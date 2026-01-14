@@ -433,20 +433,25 @@ Alias: sample_id</p>
 </thead>
 <tbody>
 <tr>
+<td><a href="../Participant/">Participant</a></td>
+<td>Research oriented patient</td>
+<td>yes</td>
+</tr>
+<tr>
 <td><a href="../Sample/">Sample</a></td>
 <td>Sample encompasses biospecimen collection, sample information, and aliquot in...</td>
 <td>yes</td>
 </tr>
 <tr>
-<td><a href="../Participant/">Participant</a></td>
-<td>Research oriented patient</td>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td>A Portion of a sample extracted from a participant</td>
 <td>yes</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>Range: <a href="../String/">String</a></li>
+<li>Range: <a href="../Sample/">Sample</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -480,12 +485,15 @@ description: Sample Global ID
 title: Sample ID
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 rank: 1000
+identifier: false
 alias: sample_id
 domain_of:
 - Participant
 - Sample
-range: string
+- Aliquot
+range: Sample
 required: false
+multivalued: false
 
 </code></pre>
 

@@ -1595,8 +1595,6 @@ slots:
     range: AgeAt
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
   age_at_assertion:
     name: age_at_assertion
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_assertion
@@ -1620,8 +1618,6 @@ slots:
     range: AgeAt
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
   age_at_onset:
     name: age_at_onset
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_onset
@@ -1646,8 +1642,6 @@ slots:
     range: AgeAt
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
   age_at_resolution:
     name: age_at_resolution
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/age_at_resolution
@@ -1673,8 +1667,6 @@ slots:
     range: AgeAt
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
   entity_asserter:
     name: entity_asserter
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/entity_asserter
@@ -2530,6 +2522,18 @@ slots:
     range: EnumCollectionStatus
     required: true
     multivalued: false
+  aliquot_id:
+    name: aliquot_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
+    description: Aliquot Global ID
+    title: aliquot ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    range: Aliquot
+    required: false
   sample_id:
     name: sample_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
@@ -2537,12 +2541,15 @@ slots:
     title: Sample ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
-    owner: Sample
+    identifier: false
+    owner: Aliquot
     domain_of:
     - Participant
     - Sample
-    range: string
+    - Aliquot
+    range: Sample
     required: false
+    multivalued: false
   parent_sample_id:
     name: parent_sample_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/parent_sample_id
@@ -2560,10 +2567,9 @@ slots:
     title: Parent Sample ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/parent_sample_id
-    owner: Aliquot
+    owner: Sample
     domain_of:
     - Sample
-    - Aliquot
     range: Sample
     required: false
     multivalued: false
@@ -2614,8 +2620,6 @@ slots:
     range: AgeAt
     required: false
     multivalued: false
-    inlined: true
-    inlined_as_list: true
   collection_method:
     name: collection_method
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/collection_method
@@ -3618,19 +3622,6 @@ slots:
     range: string
     required: false
     multivalued: false
-  aliquot__aliquot_id:
-    name: aliquot__aliquot_id
-    description: Aliquot Global ID
-    title: aliquot ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
-    identifier: true
-    alias: aliquot_id
-    owner: Aliquot
-    domain_of:
-    - Aliquot
-    range: string
-    required: true
   nCPIFile__file_global_id:
     name: nCPIFile__file_global_id
     description: File Global ID
@@ -3744,13 +3735,14 @@ slots:
     is_a: sample_id
     domain: Participant
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    identifier: false
     alias: sample_id
     owner: Participant
     domain_of:
     - Participant
     is_usage_slot: true
     usage_slot_name: sample_id
-    range: string
+    range: Sample
     required: false
     multivalued: true
   Period_period_id:
@@ -3846,6 +3838,62 @@ slots:
     usage_slot_name: sample_id
     range: string
     required: true
+    multivalued: false
+  Sample_aliquot_id:
+    name: Sample_aliquot_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
+    description: Aliquot Global ID
+    title: aliquot ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    is_a: aliquot_id
+    domain: Sample
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
+    alias: aliquot_id
+    owner: Sample
+    domain_of:
+    - Sample
+    is_usage_slot: true
+    usage_slot_name: aliquot_id
+    range: Aliquot
+    required: false
+    multivalued: true
+  Aliquot_aliquot_id:
+    name: Aliquot_aliquot_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
+    description: Aliquot Global ID
+    title: aliquot ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    is_a: aliquot_id
+    domain: Aliquot
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/aliquot_id
+    identifier: true
+    alias: aliquot_id
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    is_usage_slot: true
+    usage_slot_name: aliquot_id
+    range: string
+    required: true
+  Aliquot_sample_id:
+    name: Aliquot_sample_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    description: Sample Global ID
+    title: Sample ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    is_a: sample_id
+    domain: Aliquot
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/sample_id
+    identifier: false
+    alias: sample_id
+    owner: Aliquot
+    domain_of:
+    - Aliquot
+    is_usage_slot: true
+    usage_slot_name: sample_id
+    range: Sample
+    required: true
+    multivalued: false
   FileLocation_file_location_id:
     name: FileLocation_file_location_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-location/file_location_id
@@ -3991,7 +4039,10 @@ classes:
       the following-Relative Age Offset, Age Range as Code, Date Range, DateTime
     title: Age At
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
+    is_a: Record
     slots:
+    - external_id
+    - id
     - ageAt__value_type
     - ageAt__age
     - ageAt__age_code
@@ -4199,6 +4250,7 @@ classes:
       sample_id:
         name: sample_id
         description: Samples associated with this participant
+        identifier: false
         required: false
         multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/Participant
@@ -4415,11 +4467,16 @@ classes:
     - storage_method
     - quantity
     - quantity_units
+    - Sample_aliquot_id
     slot_usage:
       sample_id:
         name: sample_id
         identifier: true
+        range: string
         required: true
+      aliquot_id:
+        name: aliquot_id
+        multivalued: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Sample
   Aliquot:
     name: Aliquot
@@ -4440,19 +4497,21 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
-    - parent_sample_id
+    - Aliquot_aliquot_id
     - availability_status
     - volume
     - volume_units
     - concentration
-    - aliquot__aliquot_id
-    attributes:
+    - Aliquot_sample_id
+    slot_usage:
       aliquot_id:
         name: aliquot_id
-        description: Aliquot Global ID
-        title: aliquot ID
         identifier: true
         range: string
+        required: true
+      sample_id:
+        name: sample_id
+        identifier: false
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/sample/Aliquot
   NCPIFile:
@@ -4624,7 +4683,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-13T20:47:53'
-source_file_size: 5412
-generation_date: '2026-01-13T20:48:03'
+source_file_date: '2026-01-14T17:15:53'
+source_file_size: 5411
+generation_date: '2026-01-14T17:16:02'
 

@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -263,6 +272,9 @@
 <div class="mermaid"> classDiagram
     class AgeAt
     click AgeAt href "../AgeAt/"
+      Record &lt;|-- AgeAt
+        click Record href "../Record/"
+
       AgeAt : age
 
 
@@ -278,6 +290,10 @@
 
       AgeAt : as_date
 
+      AgeAt : external_id
+
+      AgeAt : id
+
       AgeAt : value_type
 
 
@@ -291,7 +307,16 @@
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasExternalId/">HasExternalId</a><ul>
+<li><a href="../Record/">Record</a><ul>
+<li><strong>AgeAt</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -326,6 +351,18 @@
 <td>0..1 <br/> <a href="../Date/">Date</a></td>
 <td>Event Date (rather than age)</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Unique Identifier for a table entry</td>
+<td><a href="../Record/">Record</a></td>
+</tr>
+<tr>
+<td><a href="../external_id/">external_id</a></td>
+<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -405,6 +442,7 @@ description: These represent a flexible age value that could represent one of th
   following-Relative Age Offset, Age Range as Code, Date Range, DateTime
 title: Age At
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: Record
 attributes:
   value_type:
     name: value_type
@@ -461,6 +499,7 @@ description: These represent a flexible age value that could represent one of th
   following-Relative Age Offset, Age Range as Code, Date Range, DateTime
 title: Age At
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: Record
 attributes:
   value_type:
     name: value_type
@@ -515,6 +554,36 @@ attributes:
     - AgeAt
     range: date
     required: false
+  id:
+    name: id
+    description: Unique Identifier for a table entry. This is probably not the Global
+      ID
+    title: ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: AgeAt
+    domain_of:
+    - Record
+    - RelativeDateTime
+    range: string
+    required: true
+    multivalued: false
+  external_id:
+    name: external_id
+    description: Other identifiers for this entity, eg, from the submitting study
+      or in systems link dbGaP
+    title: External Identifiers
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: external_id
+    owner: AgeAt
+    domain_of:
+    - HasExternalId
+    range: uriorcurie
+    required: false
+    multivalued: true
 
 </code></pre>
 </details>

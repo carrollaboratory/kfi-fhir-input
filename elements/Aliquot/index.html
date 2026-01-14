@@ -292,13 +292,13 @@
 
       Aliquot : external_id
 
-      Aliquot : parent_sample_id
+      Aliquot : sample_id
 
 
 
 
 
-        Aliquot --&gt; "0..1" Sample : parent_sample_id
+        Aliquot --&gt; "1" Sample : sample_id
         click Sample href "../Sample/"
 
 
@@ -328,9 +328,9 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../parent_sample_id/">parent_sample_id</a></td>
-<td>0..1 <br/> <a href="../Sample/">Sample</a></td>
-<td>Sample Global ID associated with the parent sample</td>
+<td><a href="../aliquot_id/">aliquot_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Aliquot Global ID</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -358,9 +358,9 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../aliquot_id/">aliquot_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Aliquot Global ID</td>
+<td><a href="../sample_id/">sample_id</a></td>
+<td>1 <br/> <a href="../Sample/">Sample</a></td>
+<td>Sample Global ID</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -438,22 +438,21 @@ title: Aliquot
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
 slots:
-- parent_sample_id
+- aliquot_id
 - availability_status
 - volume
 - volume_units
 - concentration
-attributes:
+- sample_id
+slot_usage:
   aliquot_id:
     name: aliquot_id
-    description: Aliquot Global ID
-    title: aliquot ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
-    rank: 1000
     identifier: true
-    domain_of:
-    - Aliquot
     range: string
+    required: true
+  sample_id:
+    name: sample_id
+    identifier: false
     required: true
 
 </code></pre>
@@ -475,12 +474,22 @@ description: A Portion of a sample extracted from a participant.
 title: Aliquot
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 is_a: HasExternalId
+slot_usage:
+  aliquot_id:
+    name: aliquot_id
+    identifier: true
+    range: string
+    required: true
+  sample_id:
+    name: sample_id
+    identifier: false
+    required: true
 attributes:
   aliquot_id:
     name: aliquot_id
     description: Aliquot Global ID
     title: aliquot ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     identifier: true
     alias: aliquot_id
@@ -489,30 +498,6 @@ attributes:
     - Aliquot
     range: string
     required: true
-  parent_sample_id:
-    name: parent_sample_id
-    annotations:
-      fhir_resource:
-        tag: fhir_resource
-        value: Specimen
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-sample
-      fhir_element:
-        tag: fhir_element
-        value: parent
-    description: Sample Global ID associated with the parent sample
-    title: Parent Sample ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: parent_sample_id
-    owner: Aliquot
-    domain_of:
-    - Sample
-    - Aliquot
-    range: Sample
-    required: false
-    multivalued: false
   availability_status:
     name: availability_status
     annotations:
@@ -605,6 +590,22 @@ attributes:
     - Aliquot
     range: uriorcurie
     required: false
+    multivalued: false
+  sample_id:
+    name: sample_id
+    description: Sample Global ID
+    title: Sample ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: false
+    alias: sample_id
+    owner: Aliquot
+    domain_of:
+    - Participant
+    - Sample
+    - Aliquot
+    range: Sample
+    required: true
     multivalued: false
   external_id:
     name: external_id

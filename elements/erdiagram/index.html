@@ -187,13 +187,15 @@ AgeAt {
     EnumAgeValueType value_type  
     uriorcurie age_code  
     date as_date  
+    string id  
+    uriorcurieList external_id  
 }
 Aliquot {
+    string aliquot_id  
     EnumSpecimenAvailability availability_status  
     float volume  
     uriorcurie volume_units  
     uriorcurie concentration  
-    string aliquot_id  
     uriorcurieList external_id  
 }
 Any {
@@ -271,7 +273,6 @@ Participant {
     string age_at_last_vital  
     boolean is_deceased  
     EnumPatientKnowledgeSource patient_knowledge_source  
-    stringList sample_id  
     uriorcurieList external_id  
 }
 ParticipantAssertion {
@@ -362,7 +363,7 @@ StudyMembership {
 }
 
 AgeAt ||--|o RelativeDateTime : "age"
-Aliquot ||--|o Sample : "parent_sample_id"
+Aliquot ||--|| Sample : "sample_id"
 AssociatedParty ||--|o Practitioner : "associated_party_practitioner_id"
 AssociatedParty ||--|o PractitionerRole : "associated_party_institution_id"
 AssociatedParty ||--|o PractitionerRole : "associated_party_practitioner_role_id"
@@ -376,6 +377,7 @@ NCPIFile ||--}o FileMetaData : "file_meta_data_id"
 NCPIFile ||--}| FileLocation : "file_location_id"
 Participant ||--|o Family : "family_global_id"
 Participant ||--|o RelativeDateTime : "deceased_rel"
+Participant ||--}o Sample : "sample_id"
 ParticipantAssertion ||--|o AgeAt : "age_at_assertion"
 ParticipantAssertion ||--|o AgeAt : "age_at_event"
 ParticipantAssertion ||--|o AgeAt : "age_at_onset"

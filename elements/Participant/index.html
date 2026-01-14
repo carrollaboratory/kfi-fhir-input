@@ -385,6 +385,15 @@
       Participant : sample_id
 
 
+
+
+
+        Participant --&gt; "*" Sample : sample_id
+        click Sample href "../Sample/"
+
+
+
+
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
@@ -478,7 +487,7 @@
 </tr>
 <tr>
 <td><a href="../sample_id/">sample_id</a></td>
-<td>* <br/> <a href="../String/">String</a></td>
+<td>* <br/> <a href="../Sample/">Sample</a></td>
 <td>Samples associated with this participant</td>
 <td>direct</td>
 </tr>
@@ -620,6 +629,7 @@ slot_usage:
   sample_id:
     name: sample_id
     description: Samples associated with this participant
+    identifier: false
     required: false
     multivalued: true
 
@@ -647,6 +657,7 @@ slot_usage:
   sample_id:
     name: sample_id
     description: Samples associated with this participant
+    identifier: false
     required: false
     multivalued: true
 attributes:
@@ -835,12 +846,14 @@ attributes:
     title: Sample ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
+    identifier: false
     alias: sample_id
     owner: Participant
     domain_of:
     - Participant
     - Sample
-    range: string
+    - Aliquot
+    range: Sample
     required: false
     multivalued: true
   external_id:
