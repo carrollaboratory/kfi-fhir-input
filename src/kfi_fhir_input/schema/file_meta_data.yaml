@@ -27,7 +27,7 @@ classes:
       - reference_genome 
       - workflow_type 
       - workflow_tool 
-      - related_samples
+      - samples
     slot_usage: 
       file_meta_data_id:
         multivalued: false 
@@ -117,11 +117,11 @@ slots:
     required: false       # Required for FASTQ   
     multivalued: false 
     range: uriorcurie
-  related_samples:
-    title: Related Samples 
-    description: e.g., Reference(Participant_ID)
+  samples:
+    title: Samples associated with the file's content
+    description: e.g., Reference(sample)
     required: false 
-    multivalued: false 
+    multivalued: true 
     range: Sample 
 enums:
   EnumFileMetaDataType:

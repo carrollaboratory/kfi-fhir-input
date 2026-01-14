@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-01-14T12:47:31
+# Generation date: 2026-01-14T12:57:16
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -1325,7 +1325,7 @@ class FileMetaData(YAMLRoot):
     reference_genome: Optional[Union[str, URIorCURIE]] = None
     workflow_type: Optional[Union[str, URIorCURIE]] = None
     workflow_tool: Optional[Union[str, URIorCURIE]] = None
-    related_samples: Optional[Union[str, SampleSampleId]] = None
+    samples: Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.file_meta_data_id):
@@ -1376,8 +1376,9 @@ class FileMetaData(YAMLRoot):
         if self.workflow_tool is not None and not isinstance(self.workflow_tool, URIorCURIE):
             self.workflow_tool = URIorCURIE(self.workflow_tool)
 
-        if self.related_samples is not None and not isinstance(self.related_samples, SampleSampleId):
-            self.related_samples = SampleSampleId(self.related_samples)
+        if not isinstance(self.samples, list):
+            self.samples = [self.samples] if self.samples is not None else []
+        self.samples = [v if isinstance(v, SampleSampleId) else SampleSampleId(v) for v in self.samples]
 
         super().__post_init__(**kwargs)
 
@@ -2667,8 +2668,8 @@ slots.workflow_type = Slot(uri=KFI['file-meta-data/workflow_type'], name="workfl
 slots.workflow_tool = Slot(uri=KFI['file-meta-data/workflow_tool'], name="workflow_tool", curie=KFI.curie('file-meta-data/workflow_tool'),
                    model_uri=KFI_FHIR_SPARKS.workflow_tool, domain=None, range=Optional[Union[str, URIorCURIE]])
 
-slots.related_samples = Slot(uri=KFI['file-meta-data/related_samples'], name="related_samples", curie=KFI.curie('file-meta-data/related_samples'),
-                   model_uri=KFI_FHIR_SPARKS.related_samples, domain=None, range=Optional[Union[str, SampleSampleId]])
+slots.samples = Slot(uri=KFI['file-meta-data/samples'], name="samples", curie=KFI.curie('file-meta-data/samples'),
+                   model_uri=KFI_FHIR_SPARKS.samples, domain=None, range=Optional[Union[Union[str, SampleSampleId], list[Union[str, SampleSampleId]]]])
 
 slots.accessPolicy__status = Slot(uri=KFI['access-policy/status'], name="accessPolicy__status", curie=KFI.curie('access-policy/status'),
                    model_uri=KFI_FHIR_SPARKS.accessPolicy__status, domain=None, range=Union[str, "EnumConsentStateCodes"])

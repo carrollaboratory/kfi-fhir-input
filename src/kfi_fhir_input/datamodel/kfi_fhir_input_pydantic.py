@@ -1071,7 +1071,8 @@ class FileLocation(ConfiguredBaseModel):
          'slot_usage': {'file_location_id': {'identifier': True,
                                              'multivalued': False,
                                              'name': 'file_location_id',
-                                             'range': 'string'}},
+                                             'range': 'string',
+                                             'required': True}},
          'title': 'File Location'})
 
     file_location_id: str = Field(default=..., title="File Location", description="""Location details (this is not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileLocation']} })
@@ -1564,7 +1565,7 @@ class FileMetaData(ConfiguredBaseModel):
     reference_genome: Optional[str] = Field(default=None, title="Reference Genome", description="""GRCh37, GRCh38""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     workflow_type: Optional[str] = Field(default=None, title="Workflow Type", description="""e.g., alignment, somatic""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     workflow_tool: Optional[str] = Field(default=None, title="Workflow Tool", description="""e.g., BAM-MEM, GATK-Haplotype Caller""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
-    related_samples: Optional[str] = Field(default=None, title="Related Samples", description="""e.g., Reference(Participant_ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    samples: Optional[list[str]] = Field(default=[], title="Samples associated with the file's content", description="""e.g., Reference(sample)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
 
 
 class Family(HasExternalId):

@@ -12,4 +12,3 @@ adaptor_trimmed,"True, False",string,,,,,
 reference_genome,"GRCh37, GRCh38",string,,,,,
 workflow_type,"e.g., alignment, somatic",string,,,,,
 workflow_tool,"e.g., BAM-MEM, GATK-Haplotype Caller",string,,,,,
-related_samples,"e.g., Reference(Participant_ID)",string,,,,,Foreign Key: Sample.sample_id
