@@ -6,6 +6,7 @@
 
 # ============ Variables used in recipes ============
 
+
 # Load environment variables from config.public.mk or specified file
 set dotenv-load := true
 # set dotenv-filename := env_var_or_default("LINKML_ENVIRONMENT_FILENAME", "config.public.mk")
@@ -43,7 +44,10 @@ merged_schema_path := "docs/schema" / schema_name + ".yaml"
 # ============== Project recipes ==============
 
 # List all commands as default command. The prefix "_" hides the command.
-_default: _status
+default: all 
+
+#_default: _status
+help: _status
     @just --list
 
 # Initialize a new project (use this for projects not yet under version control)
@@ -74,9 +78,18 @@ clean: _clean_project
   rm -rf tmp
   rm -rf {{docdir}}/*.md
 
+
 # (Re-)Generate project and documentation locally
+# Generate project, lint, run tests and build docs.
+all: site test _gen_ftddd 
+
+# Just build the model
 [group('model development')]
-site: gen-project lint gen-doc _gen_ftddd test
+model: _test-schema lint 
+
+# Build model and docs
+[group('model development')]
+site: gen-project lint gen-doc
 
 # Deploy documentation site to Github Pages
 [group('deployment')]
@@ -113,7 +126,7 @@ gen-python:
 
 # Generate project files including Python data model
 [group('model development')]
-gen-project:
+gen-project: 
   uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}}
   mv {{dest}}/*.py {{pymodel}}
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
@@ -251,3 +264,4 @@ _ensure_examples_output:  # Ensure a clean examples/output directory exists
 # ============== Include project-specific recipes ==============
 
 import "project.justfile"
+
