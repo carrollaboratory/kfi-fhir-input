@@ -118,13 +118,6 @@ slots:
     description: More details associated with the given resource
     range: string 
     required: false
-  practitioner_role_id:
-    title: Practitioner Role ID
-    description: Global ID for this record
-    range: PractitionerRole  
-    annotations: 
-      target_slot: practitioner_role_id 
-    required: false
   research_study_id:
     title: Research Study ID 
     description: The Global ID for the Research Study.

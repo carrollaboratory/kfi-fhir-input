@@ -12,20 +12,19 @@ classes:
     is_a: HasExternalId 
     annotations:
       fhir_resource: Practitioner 
-    attributes:
-      practitioner_id:
-        title: Practitioner ID 
-        description: The Global ID for the Practitioner.
-        range: string         
-        identifier: true
-        required: true
     slots:
+      - practitioner_id
       - name 
       - email 
       - institution_id        # We link Practitioners to institutions through the PractitionerRole resource
       - practitioner_role_id  # This will be a global ID generated specifically for the practitioner's role at an institution. 
       - description
       - practitioner_title
+    slot_usage:
+      practitioner_id:
+        range: string         
+        identifier: true
+        required: true
 slots:
   email:
     title: Email Address
@@ -40,6 +39,7 @@ slots:
   practitioner_id:
     title: Practitioner ID 
     description: The Global ID for the PractitionerRole that links a Practitioner to their Institution. 
-    range: string 
+    range: Practitioner 
+    identifier: false
     required: false
 

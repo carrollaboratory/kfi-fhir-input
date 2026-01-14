@@ -1,4 +1,5 @@
 variable_name,description,data_type,min,max,units,enumerations,comment
+participant_assertion_id,Participant Assertion Global ID,string,,,,,
 participant_id,The Global ID for the Participant,string,,,,,Foreign Key: Participant.participant_id
 age_at_event,The date or age at which the event relating to this assertion occured.,string,,,,,Foreign Key: AgeAt.id
 age_at_assertion,The date or age at which this condition is being asserted.,string,,,,,Foreign Key: AgeAt.id
@@ -18,4 +19,3 @@ body_site,"Location information for the observation, including site, laterality,
 body_location,Any location qualifiers,string,,,,,
 body_laterality,Laterality information for the condition site,string,,,,,
 cancer_stage,Cancer staging information,string,,,,,
-participant_assertion_id,Participant Assertion Global ID,string,,,,,

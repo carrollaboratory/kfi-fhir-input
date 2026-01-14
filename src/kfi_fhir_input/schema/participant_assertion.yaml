@@ -11,14 +11,9 @@ classes:
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
     attributes:
-      participant_assertion_id:
-        title: Participant Assertion ID
-        description: Participant Assertion Global ID
-        range: string         
-        identifier: true
-        required: true
-        multivalued: false
+
     slots:
+      - participant_assertion_id 
       - participant_id 
       - age_at_event
       - age_at_assertion
@@ -45,6 +40,13 @@ classes:
           fhir_element: category
           fhir_resource: Observation
 slots:
+  participant_assertion_id:
+    title: Participant Assertion ID
+    description: Participant Assertion Global ID
+    range: string         
+    identifier: true
+    required: true
+    multivalued: false
   age_at_event:
     title: Age At Event 
     description: The date or age at which the event relating to this assertion occured.

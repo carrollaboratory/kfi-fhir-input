@@ -1363,22 +1363,6 @@ slots:
     - Family
     range: string
     required: false
-  practitioner_role_id:
-    name: practitioner_role_id
-    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputpractitioner_role_id
-    annotations:
-      target_slot:
-        tag: target_slot
-        value: practitioner_role_id
-    description: Global ID for this record
-    title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    slot_uri: kfi_fhir_sparks:practitioner_role_id
-    owner: Practitioner
-    domain_of:
-    - Practitioner
-    range: PractitionerRole
-    required: false
   research_study_id:
     name: research_study_id
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputresearch_study_id
@@ -1567,6 +1551,20 @@ slots:
     domain_of:
     - RelativeDateTime
     range: EnumOffsetType
+    required: true
+    multivalued: false
+  participant_assertion_id:
+    name: participant_assertion_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/participant_assertion_id
+    description: Participant Assertion Global ID
+    title: Participant Assertion ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/participant_assertion_id
+    identifier: true
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: string
     required: true
     multivalued: false
   age_at_event:
@@ -2022,10 +2020,12 @@ slots:
     title: Practitioner ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    identifier: false
     owner: PractitionerRole
     domain_of:
+    - Practitioner
     - PractitionerRole
-    range: string
+    range: Practitioner
     required: false
   role:
     name: role
@@ -2296,6 +2296,19 @@ slots:
     required: false
     multivalued: false
     inlined: false
+  practitioner_role_id:
+    name: practitioner_role_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
+    description: Global ID for this record
+    title: Practitioner Role ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
+    owner: PractitionerRole
+    domain_of:
+    - Practitioner
+    - PractitionerRole
+    range: PractitionerRole
+    required: false
   study_membership_id:
     name: study_membership_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/study_membership_id
@@ -3466,33 +3479,6 @@ slots:
     - AgeAt
     range: date
     required: false
-  participantAssertion__participant_assertion_id:
-    name: participantAssertion__participant_assertion_id
-    description: Participant Assertion Global ID
-    title: Participant Assertion ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/participant_assertion_id
-    identifier: true
-    alias: participant_assertion_id
-    owner: ParticipantAssertion
-    domain_of:
-    - ParticipantAssertion
-    range: string
-    required: true
-    multivalued: false
-  practitioner__practitioner_id:
-    name: practitioner__practitioner_id
-    description: The Global ID for the Practitioner.
-    title: Practitioner ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
-    identifier: true
-    alias: practitioner_id
-    owner: Practitioner
-    domain_of:
-    - Practitioner
-    range: string
-    required: true
   person__person_id:
     name: person__person_id
     description: Person Global ID (group)
@@ -3548,19 +3534,6 @@ slots:
     - Period
     range: date
     required: false
-  practitionerRole__practitioner_role_id:
-    name: practitionerRole__practitioner_role_id
-    description: Global ID for this record
-    title: Practitioner Role ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
-    identifier: true
-    alias: practitioner_role_id
-    owner: PractitionerRole
-    domain_of:
-    - PractitionerRole
-    range: string
-    required: true
   researchStudy__research_study_id:
     name: researchStudy__research_study_id
     description: The Global ID for the Research Study.
@@ -3659,6 +3632,25 @@ slots:
     is_usage_slot: true
     usage_slot_name: participant_id
     range: Participant
+    required: true
+  Practitioner_practitioner_id:
+    name: Practitioner_practitioner_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    description: The Global ID for the PractitionerRole that links a Practitioner
+      to their Institution.
+    title: Practitioner ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
+    is_a: practitioner_id
+    domain: Practitioner
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner/practitioner_id
+    identifier: true
+    alias: practitioner_id
+    owner: Practitioner
+    domain_of:
+    - Practitioner
+    is_usage_slot: true
+    usage_slot_name: practitioner_id
+    range: string
     required: true
   AssociatedParty_period_id:
     name: AssociatedParty_period_id
@@ -3773,6 +3765,24 @@ slots:
     required: true
     multivalued: false
     inlined: false
+  PractitionerRole_practitioner_role_id:
+    name: PractitionerRole_practitioner_role_id
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
+    description: Global ID for this record
+    title: Practitioner Role ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
+    is_a: practitioner_role_id
+    domain: PractitionerRole
+    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
+    identifier: true
+    alias: practitioner_role_id
+    owner: PractitionerRole
+    domain_of:
+    - PractitionerRole
+    is_usage_slot: true
+    usage_slot_name: practitioner_role_id
+    range: string
+    required: true
   StudyMembership_participant_id:
     name: StudyMembership_participant_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant/participant_id
@@ -4098,6 +4108,7 @@ classes:
     title: Participant Assertion
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
     slots:
+    - participant_assertion_id
     - ParticipantAssertion_participant_id
     - age_at_event
     - age_at_assertion
@@ -4117,7 +4128,6 @@ classes:
     - body_location
     - body_laterality
     - cancer_stage
-    - participantAssertion__participant_assertion_id
     slot_usage:
       participant_id:
         name: participant_id
@@ -4131,15 +4141,6 @@ classes:
           fhir_resource:
             tag: fhir_resource
             value: Observation
-    attributes:
-      participant_assertion_id:
-        name: participant_assertion_id
-        description: Participant Assertion Global ID
-        title: Participant Assertion ID
-        identifier: true
-        range: string
-        required: true
-        multivalued: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/ParticipantAssertion
   Practitioner:
     name: Practitioner
@@ -4154,18 +4155,16 @@ classes:
     is_a: HasExternalId
     slots:
     - external_id
+    - Practitioner_practitioner_id
     - name
     - email
     - institution_id
     - practitioner_role_id
     - description
     - practitioner_title
-    - practitioner__practitioner_id
-    attributes:
+    slot_usage:
       practitioner_id:
         name: practitioner_id
-        description: The Global ID for the Practitioner.
-        title: Practitioner ID
         identifier: true
         range: string
         required: true
@@ -4336,15 +4335,13 @@ classes:
     title: Practitioner Role
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
     slots:
+    - PractitionerRole_practitioner_role_id
     - institution_id
     - practitioner_id
     - period_id
-    - practitionerRole__practitioner_role_id
-    attributes:
+    slot_usage:
       practitioner_role_id:
         name: practitioner_role_id
-        description: Global ID for this record
-        title: Practitioner Role ID
         identifier: true
         range: string
         required: true
@@ -4680,7 +4677,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-01-14T11:21:45'
-source_file_size: 5198
-generation_date: '2026-01-14T13:01:14'
+source_file_date: '2026-01-14T13:07:57'
+source_file_size: 4990
+generation_date: '2026-01-14T13:13:47'
 

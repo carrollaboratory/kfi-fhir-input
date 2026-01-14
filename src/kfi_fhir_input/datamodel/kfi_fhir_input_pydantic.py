@@ -850,6 +850,7 @@ class ParticipantAssertion(ConfiguredBaseModel):
                                            'name': 'participant_id'}},
          'title': 'Participant Assertion'})
 
+    participant_assertion_id: str = Field(default=..., title="Participant Assertion ID", description="""Participant Assertion Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
     participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'category'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
@@ -982,7 +983,6 @@ class ParticipantAssertion(ConfiguredBaseModel):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    participant_assertion_id: str = Field(default=..., title="Participant Assertion ID", description="""Participant Assertion Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion']} })
 
 
 class Person(ConfiguredBaseModel):
@@ -1027,12 +1027,16 @@ class PractitionerRole(ConfiguredBaseModel):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'PractitionerRole'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role',
+         'slot_usage': {'practitioner_role_id': {'identifier': True,
+                                                 'name': 'practitioner_role_id',
+                                                 'range': 'string',
+                                                 'required': True}},
          'title': 'Practitioner Role'})
 
+    practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
     practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
-    practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
 
 
 class StudyMembership(ConfiguredBaseModel):
@@ -1141,14 +1145,17 @@ class Practitioner(HasExternalId):
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Practitioner'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner',
+         'slot_usage': {'practitioner_id': {'identifier': True,
+                                            'name': 'practitioner_id',
+                                            'range': 'string',
+                                            'required': True}},
          'title': 'FHIR Practitioner Resource Content'})
 
+    practitioner_id: str = Field(default=..., title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'AssociatedParty', 'Institution']} })
     email: Optional[str] = Field(default=None, title="Email Address", description="""An email address to reach the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
     institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
-    practitioner_role_id: Optional[str] = Field(default=None, title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
-                                         'value': 'practitioner_role_id'}},
-         'domain_of': ['Practitioner', 'PractitionerRole']} })
+    practitioner_role_id: Optional[str] = Field(default=None, title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
@@ -1156,7 +1163,6 @@ class Practitioner(HasExternalId):
                        'NCPIFile',
                        'Family']} })
     practitioner_title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
-    practitioner_id: str = Field(default=..., title="Practitioner ID", description="""The Global ID for the Practitioner.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 

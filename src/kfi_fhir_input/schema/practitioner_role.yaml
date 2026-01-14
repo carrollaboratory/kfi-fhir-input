@@ -12,15 +12,20 @@ classes:
     # is_a: Record 
     annotations:
       fhir_resource: PractitionerRole 
-    attributes:
-      practitioner_role_id: 
-        title: Practitioner Role ID
-        description: Global ID for this record
-        identifier: true
-        required: true
-        range: string
+
     slots: 
+      - practitioner_role_id
       - institution_id 
       - practitioner_id 
       - period_id 
-      # - practitioner_role 
+    slot_usage:
+      practitioner_role_id: 
+        identifier: true
+        required: true
+        range: string
+slots:
+  practitioner_role_id:
+    title: Practitioner Role ID
+    description: Global ID for this record
+    range: PractitionerRole  
+    required: false
