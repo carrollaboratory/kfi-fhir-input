@@ -44,7 +44,7 @@ merged_schema_path := "docs/schema" / schema_name + ".yaml"
 # ============== Project recipes ==============
 
 # List all commands as default command. The prefix "_" hides the command.
-default: all 
+default: all
 
 #_default: _status
 help: _status
@@ -81,11 +81,13 @@ clean: _clean_project
 
 # (Re-)Generate project and documentation locally
 # Generate project, lint, run tests and build docs.
-all: site test _gen_ftddd 
+all: site test _gen_ftddd _gen_sqla
+
+gensqla: _gen_sqla
 
 # Just build the model
 [group('model development')]
-model: _test-schema lint 
+model: _test-schema lint
 
 # Build model and docs
 [group('model development')]
@@ -126,7 +128,7 @@ gen-python:
 
 # Generate project files including Python data model
 [group('model development')]
-gen-project: 
+gen-project:
   uv run gen-project {{config_yaml}} -d {{dest}} {{source_schema_path}}
   mv {{dest}}/*.py {{pymodel}}
   uv run gen-pydantic {{gen_pydantic_args}} {{source_schema_path}} > {{pymodel}}/{{schema_name}}_pydantic.py
@@ -264,4 +266,3 @@ _ensure_examples_output:  # Ensure a clean examples/output directory exists
 # ============== Include project-specific recipes ==============
 
 import "project.justfile"
-

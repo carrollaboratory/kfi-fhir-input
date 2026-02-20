@@ -3,3 +3,8 @@
 [group('model development')]
 _gen_ftddd:
   uv run linkml_extract_dd {{source_schema_path}}
+
+[group('model development')]
+_gen_sqla:
+    mkdir -p {{dest}}/sqlalchemy && \
+    uv run gen-sqla {{source_schema_path}} --declarative > {{dest}}/sqlalchemy/{{schema_name}}.py
