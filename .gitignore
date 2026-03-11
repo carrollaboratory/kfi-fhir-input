@@ -2,6 +2,8 @@
 /docs/elements/*.md
 # linkml-run-examples output (not useful to have in git in its current form)
 /examples/output/
+kfi_fhir_input/*.py
+kfi_fhir_input/*.csv
 
 # direnv
 .direnv
