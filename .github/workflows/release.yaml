@@ -3,7 +3,9 @@ name: Model Release
 on:
   push:
     tags:
-      - "v*"
+      - "v*" # We will trigger on any tag that starts with a 'v'
+  release:
+    types: [published]
   workflow_dispatch:
     inputs:
       tag:
@@ -65,6 +67,7 @@ jobs:
           tag_name: ${{ github.ref_name || inputs.tag }}
           name: "Release ${{ github.ref_name || inputs.tag }}"
           generate_release_notes: true # Auto-generates notes from commits since last tag
+          update_release: true # update instead of failing if release exists
           files: |
             dist/*.whl
             dist/*.tar.gz
