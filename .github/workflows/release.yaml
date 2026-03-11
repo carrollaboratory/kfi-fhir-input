@@ -48,28 +48,6 @@ jobs:
         # Runs gen-project, gen-doc, _gen_ftddd, _gen_sqla, _gen_harmony
         # Produces: project/sqlalchemy/, project/harmony/, project/owl/, etc.
 
-      - name: Debug - confirm sqla file exists
-        run: |
-          echo "--- project/sqlalchemy contents ---"
-          ls -la project/sqlalchemy/ || echo "directory not found"
-          echo "--- schema name ---"
-          grep '^name' pyproject.toml
-
-      - name: Debug - confirm hatch_build sees the file
-        run: |
-          uv run python -c "
-          from pathlib import Path
-          import tomli as tomllib
-          root = Path('.').resolve()
-          with open(root / 'pyproject.toml', 'rb') as f:
-              pyproject = tomllib.load(f)
-          schema_name = pyproject['project']['name']
-          sqla_file = root / 'project' / 'sqlalchemy' / f'{schema_name}.py'
-          print(f'root: {root}')
-          print(f'sqla_file: {sqla_file}')
-          print(f'exists: {sqla_file.exists()}')
-          "
-
       - name: Build wheel and sdist
         run: uv build
         # Triggers hatch_build.py which bundles the SQLAlchemy file
