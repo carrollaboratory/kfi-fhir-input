@@ -48,7 +48,9 @@ exclude = [
   ".venv",
   "scratch"
 ]
-
+include = [
+  "project/sqlalchemy/",
+]
 # Release the SQL Alchemy files
 [tool.hatch.build.hooks.custom]
 path = "scripts/hatch_build.py"
