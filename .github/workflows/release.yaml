@@ -57,7 +57,7 @@ jobs:
 
       - name: Debug - confirm hatch_build sees the file
         run: |
-          python -c "
+          uv run python -c "
           from pathlib import Path
           import tomli as tomllib
           root = Path('.').resolve()
