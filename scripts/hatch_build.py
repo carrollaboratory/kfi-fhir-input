@@ -13,6 +13,8 @@ from hatchling.builders.hooks.plugin.interface import BuildHookInterface
 class CustomBuildHook(BuildHookInterface):
     def initialize(self, version, build_data):
         root = Path(self.root)
+        print(f"DEBUG hatch_build: self.root = {self.root}")
+        print(f"DEBUG hatch_build: root = {root}")
 
         # Read project name from pyproject.toml - no hardcoding needed
         with open(root / "pyproject.toml", "rb") as f:
@@ -26,6 +28,8 @@ class CustomBuildHook(BuildHookInterface):
         sqla_file = sqla_dir / f"{schema_name}.py"
         dest_file = root / schema_name / f"{schema_name}.py"
 
+        print(f"DEBUG hatch_build: sqla_file = {sqla_file}")
+        print(f"DEBUG hatch_build: sqla_file.exists() = {sqla_file.exists()}")
         # Dynamically configure wheel targets - avoids hardcoding project name
         # in pyproject.toml which would need updating for each new model repo
         build_data["shared_data"] = {}
