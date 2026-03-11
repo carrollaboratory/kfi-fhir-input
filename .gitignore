@@ -3,6 +3,13 @@
 # linkml-run-examples output (not useful to have in git in its current form)
 /examples/output/
 
+# direnv
+.direnv
+.bash_history_local
+.envrc
+devnotes
+scratch
+
 # Derived schemas, generated from the schema.yaml
 tmp/
 project/*
