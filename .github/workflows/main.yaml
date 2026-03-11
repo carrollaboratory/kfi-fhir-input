@@ -3,7 +3,7 @@
 ---
 name: Build and test
 
-on:  # yamllint disable-line rule:truthy
+on: # yamllint disable-line rule:truthy
   push:
     branches: [main]
   pull_request:
@@ -15,7 +15,6 @@ permissions: {}
 
 jobs:
   test:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,7 +22,6 @@ jobs:
       fail-fast: false
 
     steps:
-
       # https://github.com/actions/checkout
       - name: Check out repository
         uses: actions/checkout@v4.2.2
@@ -48,8 +46,11 @@ jobs:
         run: |
           uv tool install rust-just
 
+      - name: Install dependencies
+        run: uv sync --dev --no-progress --no-install-project
+
       - name: Install project
-        run: uv sync --dev
+        run: uv sync --dev --no-progress
 
       - name: Run test suite
         run: just test

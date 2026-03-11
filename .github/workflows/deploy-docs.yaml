@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         run: uv sync --dev --no-progress --no-install-project
 
-      - name: Install dependencies
+      - name: Install project
         run: uv sync --dev --no-progress
 
       - name: Generate schema documentation
