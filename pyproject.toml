@@ -50,6 +50,7 @@ exclude = [
 ]
 include = [
   "project/sqlalchemy/",
+  "scripts/",
 ]
 # Release the SQL Alchemy files
 [tool.hatch.build.hooks.custom]
