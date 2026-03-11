@@ -91,7 +91,7 @@ model: _test-schema lint
 
 # Build model and docs
 [group('model development')]
-site: gen-project lint gen-doc
+site: gen-project lint gen-doc _gen_ftddd _gen_sqla _gen_harmony
 
 # Deploy documentation site to Github Pages
 [group('deployment')]

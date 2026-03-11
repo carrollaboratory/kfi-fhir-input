@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "uv-dynamic-versioning"]
+requires = ["hatchling", "uv-dynamic-versioning", "tomli"]
 build-backend = "hatchling.build"
 
 [project]
@@ -26,6 +26,8 @@ dev = [
     "jupyter>=1.0.0",
     "mknotebooks>= 0.8.0",
     "ftd-dd @ git+https://github.com/carrollaboratory/ftd-dd",
+    "hatchling>=1.27.0",
+    "tomli>=2.0.0"
 ]
 
 # See https://hatch.pypa.io/latest/config/build/#file-selection for how to
@@ -39,6 +41,23 @@ source = "uv-dynamic-versioning"
 vcs = "git"
 style = "pep440"
 fallback-version = "0.0.0"
+
+[tool.hatch.build.targets.sdist]
+exclude = [
+  ".direnv",
+  ".venv",
+  "scratch"
+]
+
+# Release the SQL Alchemy files
+[tool.hatch.build.hooks.custom]
+path = "scripts/hatch_build.py"
+
+# Moving this into the python script to make the changes more portable.
+# Will leave this around for a bit in case I discover something breaking.
+# [tool.hatch.build.targets.wheel]
+# packages = ["kfi_fhir_input"]
+# include = ["kfi_fhir_input/*.csv"]
 
 # Ref.: https://docs.pytest.org/en/stable/reference/reference.html#configuration-options
 [tool.pytest.ini_options]
