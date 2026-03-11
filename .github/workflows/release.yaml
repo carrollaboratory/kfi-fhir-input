@@ -59,7 +59,7 @@ jobs:
         run: |
           python -c "
           from pathlib import Path
-          import tomllib
+          import tomli as tomllib
           root = Path('.').resolve()
           with open(root / 'pyproject.toml', 'rb') as f:
               pyproject = tomllib.load(f)
