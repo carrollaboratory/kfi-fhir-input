@@ -44,7 +44,7 @@ prefixes:
   unknown: https://need-more-info.org
 
   # I think the linter is wrong on this one, but we'll use the recommendation
-  # to quiet the warnings. 
+  # to quiet the warnings.
   # biolink: https://biolink.github.io/biolink-model/
   #biolink: https://w3id.org/biolink/vocab/
 
@@ -58,21 +58,22 @@ imports:
   - linkml:types
   - access_policy
   - relative_date_time
-  - age_at 
+  - age_at
   - participant_assertion
   - practitioner
   - associated_party
   - institution
   - participant
   - person
-  - period 
-  - practitioner_role 
+  - research_subject
+  - period
+  - practitioner_role
   - practitioner
   - study_membership
   - research_study
   - research_study_collection
   - sample
-  - file 
+  - file
   - file_location
   - family_relationship
   - family
@@ -82,18 +83,18 @@ classes:
     description: This is a placeholder for the experimental linkml:any behavior for unions
     abstract: true
   HasExternalId:
-    description: Has an external ID 
+    description: Has an external ID
     title: Has
     abstract: true
-    slots: 
+    slots:
       - external_id
   Record:
     description: One row / entity within the database
     title: Record
-    is_a: HasExternalId 
+    is_a: HasExternalId
     abstract: true
     slots:
-    - id 
+      - id
 slots:
   id:
     title: ID
@@ -101,32 +102,41 @@ slots:
     identifier: true
     required: true
     range: string
-    multivalued: false 
-  external_id: 
+    multivalued: false
+  external_id:
     title: External Identifiers
     description: Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP
-    required: false 
-    range: uriorcurie 
-    multivalued: true 
+    required: false
+    range: uriorcurie
+    multivalued: true
+    annotations:
+      # This is for convenience in my initial tests with SQLA.
+      sqlalchemy.association_proxy: external_id
   name:
     title: Name
     description: Name of the entity.
     range: string
     required: false
   description:
-    title: Description 
+    title: Description
     description: More details associated with the given resource
-    range: string 
-    required: false
-  website: 
-    title: Website 
-    description: URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.
-    required: false 
-    multivalued: false 
-    range: uri 
-  label:
-    title: Label 
-    description: Alias such as acronym and alternate names.
-    required: false 
-    multivalued: true 
     range: string
+    required: false
+  website:
+    title: Website
+    description: URL describing the entity this represents. This can include a formal website, such as the Entity's website, or to an online document describing the entity.
+    required: false
+    multivalued: false
+    range: uri
+  label:
+    title: Label
+    description: Alias such as acronym and alternate names.
+    required: false
+    multivalued: true
+    range: string
+  study_membership_id:
+    title: Study Membership ID
+    description: Study Membership Global ID (group)
+    range: string
+    required: true
+    multivalued: false
