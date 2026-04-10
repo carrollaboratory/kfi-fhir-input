@@ -103,7 +103,10 @@ profile_default/
 ipython_config.py
 
 # pyenv
-.python-version
+# Let's allow the toml file to continue to be permissive, but
+# prevent users from having to deal with the broken 3.14 when
+# cloning the model 
+#.python-version
 
 # pipenv
 #   According to pypa/pipenv#598, it is recommended to include Pipfile.lock in version control.
