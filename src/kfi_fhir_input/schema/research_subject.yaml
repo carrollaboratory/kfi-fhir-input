@@ -1,0 +1,28 @@
+---
+id: https://carrollaboratory.github.io/kfi-fhir-input/resarch_subject
+name: kfi-fhir-input-research-subject
+imports:
+  - linkml:types
+  - kfi_fhir_input
+classes:
+  ResearchSubject:
+    title: Research Subject
+    description: Participant enrolled in a study
+    annotations:
+      fhir_resource: ResearchSubject
+      fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-Study-Participant
+    slots:
+      - research_subject_id
+      - participant_id
+      - study_membership_id
+    slot_usage:
+      research_subject_id:
+        identifier: true
+        required: true
+slots:
+  research_subject_id:
+    title: Research Subject ID
+    description: Research Subject Global ID (ResearchSubject)
+    range: string
+    required: false
+    multivalued: false
