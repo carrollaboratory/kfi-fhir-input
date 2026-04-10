@@ -265,17 +265,6 @@
 
 
 
-      StudyMembership : participant_id
-
-
-
-
-
-        StudyMembership --&gt; "1..*" Participant : participant_id
-        click Participant href "../Participant/"
-
-
-
       StudyMembership : research_study_id
 
 
@@ -313,12 +302,6 @@
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
 <td>Access Policy Global ID</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../participant_id/">participant_id</a></td>
-<td>1..* <br/> <a href="../Participant/">Participant</a></td>
-<td>The Global ID for the Participant</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -366,12 +349,8 @@ from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slots:
 - study_membership_id
 - access_policy_id
-- participant_id
 - research_study_id
 slot_usage:
-  participant_id:
-    name: participant_id
-    multivalued: true
   study_membership_id:
     name: study_membership_id
     identifier: true
@@ -387,9 +366,6 @@ description: Grouping subject participation within a research study is helpful t
 title: Study Membership
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
 slot_usage:
-  participant_id:
-    name: participant_id
-    multivalued: true
   study_membership_id:
     name: study_membership_id
     identifier: true
@@ -404,6 +380,7 @@ attributes:
     alias: study_membership_id
     owner: StudyMembership
     domain_of:
+    - ResearchSubject
     - StudyMembership
     range: string
     required: true
@@ -423,24 +400,6 @@ attributes:
     range: AccessPolicy
     required: true
     multivalued: false
-  participant_id:
-    name: participant_id
-    description: The Global ID for the Participant
-    title: Participant ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: participant_id
-    owner: StudyMembership
-    domain_of:
-    - ParticipantAssertion
-    - Participant
-    - Person
-    - StudyMembership
-    - Sample
-    - NCPIFile
-    range: Participant
-    required: true
-    multivalued: true
   research_study_id:
     name: research_study_id
     description: The Global ID for the Research Study.

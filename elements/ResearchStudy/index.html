@@ -640,6 +640,10 @@ attributes:
     multivalued: true
   study_acknowledgement:
     name: study_acknowledgement
+    annotations:
+      sqlalchemy.association_proxy:
+        tag: sqlalchemy.association_proxy
+        value: external_id
     description: Any attribution or acknowledgements relevant to the study. This can
       include but is not limited to funding sources, organizational affiliations or
       sponsors.
@@ -697,6 +701,10 @@ attributes:
     multivalued: true
   external_id:
     name: external_id
+    annotations:
+      sqlalchemy.association_proxy:
+        tag: sqlalchemy.association_proxy
+        value: external_id
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers

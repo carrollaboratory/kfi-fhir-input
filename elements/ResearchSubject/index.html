@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/HasExternalId/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/ResearchSubject/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.1" name="generator"/>
-<title>Class: Has (HasExternalId) - kfi-fhir-input</title>
+<title>Class: Research Subject (ResearchSubject) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-has-hasexternalid">
+<a class="md-skip" href="#class-research-subject-researchsubject">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: Has (HasExternalId)
+              Class: Research Subject (ResearchSubject)
             
           </span>
 </div>
@@ -171,15 +171,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -198,6 +189,15 @@
 </a>
 <nav aria-label="Identifier and Mapping Information" class="md-nav">
 <ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#annotations">
+<span class="md-ellipsis">
+      
+        Annotations
+      
+    </span>
+</a>
+</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#schema-source">
 <span class="md-ellipsis">
@@ -257,56 +257,30 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-has-hasexternalid">Class: Has (HasExternalId)</h1>
-<p><em>Has an external ID</em></p>
-<ul>
-<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
-</ul>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputHasExternalId">kfi_fhir_sparks:HasExternalId</a></p>
+<h1 id="class-research-subject-researchsubject">Class: Research Subject (ResearchSubject)</h1>
+<p><em>Participant enrolled in a study</em></p>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputResearchSubject">kfi_fhir_sparks:ResearchSubject</a></p>
 <div class="mermaid"> classDiagram
-    class HasExternalId
-    click HasExternalId href "../HasExternalId/"
-      HasExternalId &lt;|-- Record
-        click Record href "../Record/"
-      HasExternalId &lt;|-- Practitioner
-        click Practitioner href "../Practitioner/"
-      HasExternalId &lt;|-- Institution
-        click Institution href "../Institution/"
-      HasExternalId &lt;|-- Participant
-        click Participant href "../Participant/"
-      HasExternalId &lt;|-- ResearchStudy
-        click ResearchStudy href "../ResearchStudy/"
-      HasExternalId &lt;|-- ResearchStudyCollection
-        click ResearchStudyCollection href "../ResearchStudyCollection/"
-      HasExternalId &lt;|-- Sample
-        click Sample href "../Sample/"
-      HasExternalId &lt;|-- Aliquot
-        click Aliquot href "../Aliquot/"
-      HasExternalId &lt;|-- NCPIFile
-        click NCPIFile href "../NCPIFile/"
-      HasExternalId &lt;|-- Family
-        click Family href "../Family/"
+    class ResearchSubject
+    click ResearchSubject href "../ResearchSubject/"
+      ResearchSubject : participant_id
 
-      HasExternalId : external_id
+
+
+
+
+        ResearchSubject --&gt; "1" Participant : participant_id
+        click Participant href "../Participant/"
+
+
+
+      ResearchSubject : research_subject_id
+
+      ResearchSubject : study_membership_id
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><strong>HasExternalId</strong><ul>
-<li><a href="../Record/">Record</a></li>
-<li><a href="../Practitioner/">Practitioner</a></li>
-<li><a href="../Institution/">Institution</a></li>
-<li><a href="../Participant/">Participant</a></li>
-<li><a href="../ResearchStudy/">ResearchStudy</a></li>
-<li><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></li>
-<li><a href="../Sample/">Sample</a></li>
-<li><a href="../Aliquot/">Aliquot</a></li>
-<li><a href="../NCPIFile/">NCPIFile</a></li>
-<li><a href="../Family/">Family</a></li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -319,14 +293,45 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
+<td><a href="../research_subject_id/">research_subject_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Research Subject Global ID (ResearchSubject)</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../participant_id/">participant_id</a></td>
+<td>1 <br/> <a href="../Participant/">Participant</a></td>
+<td>The Global ID for the Participant</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../study_membership_id/">study_membership_id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Study Membership Global ID (group)</td>
 <td>direct</td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
+<h3 id="annotations">Annotations</h3>
+<table>
+<thead>
+<tr>
+<th>property</th>
+<th>value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fhir_resource</td>
+<td>ResearchSubject</td>
+</tr>
+<tr>
+<td>fhir_profile</td>
+<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-Study-Participant</td>
+</tr>
+</tbody>
+</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -342,11 +347,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:HasExternalId</td>
+<td>kfi_fhir_sparks:ResearchSubject</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:HasExternalId</td>
+<td>kfi_fhir_sparks:ResearchSubject</td>
 </tr>
 </tbody>
 </table>
@@ -354,42 +359,93 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: HasExternalId
-description: Has an external ID
-title: Has
+<pre><code class="language-yaml">name: ResearchSubject
+annotations:
+  fhir_resource:
+    tag: fhir_resource
+    value: ResearchSubject
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-Study-Participant
+description: Participant enrolled in a study
+title: Research Subject
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-abstract: true
 slots:
-- external_id
+- research_subject_id
+- participant_id
+- study_membership_id
+slot_usage:
+  research_subject_id:
+    name: research_subject_id
+    identifier: true
+    required: true
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: HasExternalId
-description: Has an external ID
-title: Has
+<pre><code class="language-yaml">name: ResearchSubject
+annotations:
+  fhir_resource:
+    tag: fhir_resource
+    value: ResearchSubject
+  fhir_profile:
+    tag: fhir_profile
+    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-Study-Participant
+description: Participant enrolled in a study
+title: Research Subject
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-abstract: true
+slot_usage:
+  research_subject_id:
+    name: research_subject_id
+    identifier: true
+    required: true
 attributes:
-  external_id:
-    name: external_id
-    annotations:
-      sqlalchemy.association_proxy:
-        tag: sqlalchemy.association_proxy
-        value: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
+  research_subject_id:
+    name: research_subject_id
+    description: Research Subject Global ID (ResearchSubject)
+    title: Research Subject ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: external_id
-    owner: HasExternalId
+    identifier: true
+    alias: research_subject_id
+    owner: ResearchSubject
     domain_of:
-    - HasExternalId
-    range: uriorcurie
-    required: false
-    multivalued: true
+    - ResearchSubject
+    range: string
+    required: true
+    multivalued: false
+  participant_id:
+    name: participant_id
+    description: The Global ID for the Participant
+    title: Participant ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: participant_id
+    owner: ResearchSubject
+    domain_of:
+    - ParticipantAssertion
+    - Participant
+    - Person
+    - ResearchSubject
+    - Sample
+    - NCPIFile
+    range: Participant
+    required: true
+  study_membership_id:
+    name: study_membership_id
+    description: Study Membership Global ID (group)
+    title: Study Membership ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: study_membership_id
+    owner: ResearchSubject
+    domain_of:
+    - ResearchSubject
+    - StudyMembership
+    range: string
+    required: true
+    multivalued: false
 
 </code></pre>
 </details>

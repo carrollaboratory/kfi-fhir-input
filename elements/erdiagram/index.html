@@ -343,6 +343,10 @@ ResearchStudyCollection {
     EnumCollectionStatus collection_status  
     uriorcurieList external_id  
 }
+ResearchSubject {
+    string research_subject_id  
+    string study_membership_id  
+}
 Sample {
     string sample_id  
     uriorcurie sample_type  
@@ -391,12 +395,12 @@ PractitionerRole ||--|o Practitioner : "practitioner_id"
 ResearchStudy ||--|o ResearchStudy : "parent_study_id"
 ResearchStudy ||--}| AssociatedParty : "study_personnel"
 ResearchStudyCollection ||--}| ResearchStudy : "research_study_collection_member_id"
+ResearchSubject ||--|| Participant : "participant_id"
 Sample ||--|o AgeAt : "age_at_collection"
 Sample ||--|o Sample : "parent_sample_id"
 Sample ||--|| Participant : "participant_id"
 StudyMembership ||--|| AccessPolicy : "access_policy_id"
 StudyMembership ||--|| ResearchStudy : "research_study_id"
-StudyMembership ||--}| Participant : "participant_id"
 
 </div>
 </article>

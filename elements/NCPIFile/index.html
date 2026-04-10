@@ -554,7 +554,7 @@ attributes:
     - ParticipantAssertion
     - Participant
     - Person
-    - StudyMembership
+    - ResearchSubject
     - Sample
     - NCPIFile
     range: Participant
@@ -698,6 +698,10 @@ attributes:
     required: false
   external_id:
     name: external_id
+    annotations:
+      sqlalchemy.association_proxy:
+        tag: sqlalchemy.association_proxy
+        value: external_id
     description: Other identifiers for this entity, eg, from the submitting study
       or in systems link dbGaP
     title: External Identifiers
