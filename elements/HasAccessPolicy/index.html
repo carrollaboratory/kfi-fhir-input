@@ -5,10 +5,10 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
-<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/FileLocation/" rel="canonical"/>
+<link href="https://carrollaboratory.github.io/kfi-fhir-input/elements/HasAccessPolicy/" rel="canonical"/>
 <link href="../../assets/images/favicon.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.7.1" name="generator"/>
-<title>Class: File Location (FileLocation) - kfi-fhir-input</title>
+<title>Class: Has an access policy (HasAccessPolicy) - kfi-fhir-input</title>
 <link href="../../assets/stylesheets/main.484c7ddc.min.css" rel="stylesheet"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
@@ -23,7 +23,7 @@
 <input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
 <label class="md-overlay" for="__drawer"></label>
 <div data-md-component="skip">
-<a class="md-skip" href="#class-file-location-filelocation">
+<a class="md-skip" href="#class-has-an-access-policy-hasaccesspolicy">
           Skip to content
         </a>
 </div>
@@ -47,7 +47,7 @@
 <div class="md-header__topic" data-md-component="header-topic">
 <span class="md-ellipsis">
             
-              Class: File Location (FileLocation)
+              Class: Has an access policy (HasAccessPolicy)
             
           </span>
 </div>
@@ -189,15 +189,6 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="#usages">
-<span class="md-ellipsis">
-      
-        Usages
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
 <span class="md-ellipsis">
       
@@ -207,15 +198,6 @@
 </a>
 <nav aria-label="Identifier and Mapping Information" class="md-nav">
 <ul class="md-nav__list">
-<li class="md-nav__item">
-<a class="md-nav__link" href="#annotations">
-<span class="md-ellipsis">
-      
-        Annotations
-      
-    </span>
-</a>
-</li>
 <li class="md-nav__item">
 <a class="md-nav__link" href="#schema-source">
 <span class="md-ellipsis">
@@ -275,38 +257,56 @@
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<h1 id="class-file-location-filelocation">Class: File Location (FileLocation)</h1>
-<p><em>Details relating to the links where documents are found</em></p>
-<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputFileLocation">kfi_fhir_sparks:FileLocation</a></p>
+<h1 id="class-has-an-access-policy-hasaccesspolicy">Class: Has an access policy (HasAccessPolicy)</h1>
+<p><em>Links to an access policy</em></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
+<p>URI: <a href="https://carrollaboratory.github.io/kif-fhir-inputHasAccessPolicy">kfi_fhir_sparks:HasAccessPolicy</a></p>
 <div class="mermaid"> classDiagram
-    class FileLocation
-    click FileLocation href "../FileLocation/"
+    class HasAccessPolicy
+    click HasAccessPolicy href "../HasAccessPolicy/"
+      HasAccessPolicy &lt;|-- HasExternalId
+        click HasExternalId href "../HasExternalId/"
+      HasAccessPolicy &lt;|-- ParticipantAssertion
+        click ParticipantAssertion href "../ParticipantAssertion/"
+      HasAccessPolicy &lt;|-- Person
+        click Person href "../Person/"
+      HasAccessPolicy &lt;|-- ResearchSubject
+        click ResearchSubject href "../ResearchSubject/"
+      HasAccessPolicy &lt;|-- StudyMembership
+        click StudyMembership href "../StudyMembership/"
       HasAccessPolicy &lt;|-- FileLocation
-        click HasAccessPolicy href "../HasAccessPolicy/"
+        click FileLocation href "../FileLocation/"
+      HasAccessPolicy &lt;|-- FamilyRelationship
+        click FamilyRelationship href "../FamilyRelationship/"
+      HasAccessPolicy &lt;|-- FileMetaData
+        click FileMetaData href "../FileMetaData/"
 
-      FileLocation : access_policy_id
+      HasAccessPolicy : access_policy_id
 
 
 
 
 
-        FileLocation --&gt; "1" AccessPolicy : access_policy_id
+        HasAccessPolicy --&gt; "1" AccessPolicy : access_policy_id
         click AccessPolicy href "../AccessPolicy/"
 
 
-
-      FileLocation : file_location_id
-
-      FileLocation : file_name
-
-      FileLocation : location_uri
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../HasAccessPolicy/">HasAccessPolicy</a><ul>
-<li><strong>FileLocation</strong></li>
+<li><strong>HasAccessPolicy</strong><ul>
+<li><a href="../HasExternalId/">HasExternalId</a></li>
+<li><a href="../ParticipantAssertion/">ParticipantAssertion</a></li>
+<li><a href="../Person/">Person</a></li>
+<li><a href="../ResearchSubject/">ResearchSubject</a></li>
+<li><a href="../StudyMembership/">StudyMembership</a></li>
+<li><a href="../FileLocation/">FileLocation</a></li>
+<li><a href="../FamilyRelationship/">FamilyRelationship</a></li>
+<li><a href="../FileMetaData/">FileMetaData</a></li>
 </ul>
 </li>
 </ul>
@@ -322,74 +322,14 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../file_location_id/">file_location_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>Location details (this is not a global ID)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../location_uri/">location_uri</a></td>
-<td>1 <br/> <a href="../Uri/">Uri</a></td>
-<td>The URI at which this data can be accessed</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../file_name/">file_name</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>The file's name (no path)</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
 <td>Access Policy Global ID</td>
-<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
-</tr>
-</tbody>
-</table>
-<h2 id="usages">Usages</h2>
-<table>
-<thead>
-<tr>
-<th>used by</th>
-<th>used in</th>
-<th>type</th>
-<th>used</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../NCPIFile/">NCPIFile</a></td>
-<td><a href="../file_location_id/">file_location_id</a></td>
-<td>range</td>
-<td><a href="./">FileLocation</a></td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>fhir_resource</td>
-<td>DocumentReference</td>
-</tr>
-<tr>
-<td>fhir_profile</td>
-<td>https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file</td>
-</tr>
-<tr>
-<td>fhir_element</td>
-<td>content</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://carrollaboratory.github.io/kfi-fhir-input</li>
@@ -405,11 +345,11 @@
 <tbody>
 <tr>
 <td>self</td>
-<td>kfi_fhir_sparks:FileLocation</td>
+<td>kfi_fhir_sparks:HasAccessPolicy</td>
 </tr>
 <tr>
 <td>native</td>
-<td>kfi_fhir_sparks:FileLocation</td>
+<td>kfi_fhir_sparks:HasAccessPolicy</td>
 </tr>
 </tbody>
 </table>
@@ -417,101 +357,24 @@
 <!-- TODO: investigate https://stackoverflow.com/questions/37606292/how-to-create-tabbed-code-blocks-in-mkdocs-or-sphinx -->
 <h3 id="direct">Direct</h3>
 <details>
-<pre><code class="language-yaml">name: FileLocation
-annotations:
-  fhir_resource:
-    tag: fhir_resource
-    value: DocumentReference
-  fhir_profile:
-    tag: fhir_profile
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
-  fhir_element:
-    tag: fhir_element
-    value: content
-description: Details relating to the links where documents are found
-title: File Location
+<pre><code class="language-yaml">name: HasAccessPolicy
+description: Links to an access policy
+title: Has an access policy
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: HasAccessPolicy
+abstract: true
 slots:
-- file_location_id
-- location_uri
-- file_name
-slot_usage:
-  file_location_id:
-    name: file_location_id
-    identifier: true
-    range: string
-    required: true
-    multivalued: false
+- access_policy_id
 
 </code></pre>
 </details>
 <h3 id="induced">Induced</h3>
 <details>
-<pre><code class="language-yaml">name: FileLocation
-annotations:
-  fhir_resource:
-    tag: fhir_resource
-    value: DocumentReference
-  fhir_profile:
-    tag: fhir_profile
-    value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
-  fhir_element:
-    tag: fhir_element
-    value: content
-description: Details relating to the links where documents are found
-title: File Location
+<pre><code class="language-yaml">name: HasAccessPolicy
+description: Links to an access policy
+title: Has an access policy
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: HasAccessPolicy
-slot_usage:
-  file_location_id:
-    name: file_location_id
-    identifier: true
-    range: string
-    required: true
-    multivalued: false
+abstract: true
 attributes:
-  file_location_id:
-    name: file_location_id
-    description: Location details (this is not a global ID)
-    title: File Location
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    identifier: true
-    alias: file_location_id
-    owner: FileLocation
-    domain_of:
-    - NCPIFile
-    - FileLocation
-    range: string
-    required: true
-    multivalued: false
-  location_uri:
-    name: location_uri
-    description: The URI at which this data can be accessed
-    title: Location URI
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: location_uri
-    owner: FileLocation
-    domain_of:
-    - FileLocation
-    range: uri
-    required: true
-    multivalued: false
-  file_name:
-    name: file_name
-    description: The file's name (no path)
-    title: File Name
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: file_name
-    owner: FileLocation
-    domain_of:
-    - FileLocation
-    range: string
-    required: true
-    multivalued: false
   access_policy_id:
     name: access_policy_id
     description: Access Policy Global ID
@@ -519,7 +382,7 @@ attributes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
     alias: access_policy_id
-    owner: FileLocation
+    owner: HasAccessPolicy
     domain_of:
     - HasAccessPolicy
     - AccessPolicy

@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -263,6 +272,20 @@
 <div class="mermaid"> classDiagram
     class ResearchSubject
     click ResearchSubject href "../ResearchSubject/"
+      HasAccessPolicy &lt;|-- ResearchSubject
+        click HasAccessPolicy href "../HasAccessPolicy/"
+
+      ResearchSubject : access_policy_id
+
+
+
+
+
+        ResearchSubject --&gt; "1" AccessPolicy : access_policy_id
+        click AccessPolicy href "../AccessPolicy/"
+
+
+
       ResearchSubject : participant_id
 
 
@@ -279,8 +302,23 @@
       ResearchSubject : study_membership_id
 
 
+
+
+
+        ResearchSubject --&gt; "1" StudyMembership : study_membership_id
+        click StudyMembership href "../StudyMembership/"
+
+
+
+
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasAccessPolicy/">HasAccessPolicy</a><ul>
+<li><strong>ResearchSubject</strong></li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -306,9 +344,15 @@
 </tr>
 <tr>
 <td><a href="../study_membership_id/">study_membership_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
+<td>1 <br/> <a href="../StudyMembership/">StudyMembership</a></td>
 <td>Study Membership Global ID (group)</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Access Policy Global ID</td>
+<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
 </tr>
 </tbody>
 </table>
@@ -370,6 +414,7 @@ annotations:
 description: Participant enrolled in a study
 title: Research Subject
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: HasAccessPolicy
 slots:
 - research_subject_id
 - participant_id
@@ -378,6 +423,7 @@ slot_usage:
   research_subject_id:
     name: research_subject_id
     identifier: true
+    range: string
     required: true
 
 </code></pre>
@@ -395,10 +441,12 @@ annotations:
 description: Participant enrolled in a study
 title: Research Subject
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: HasAccessPolicy
 slot_usage:
   research_subject_id:
     name: research_subject_id
     identifier: true
+    range: string
     required: true
 attributes:
   research_subject_id:
@@ -443,7 +491,22 @@ attributes:
     domain_of:
     - ResearchSubject
     - StudyMembership
-    range: string
+    range: StudyMembership
+    required: true
+    multivalued: false
+  access_policy_id:
+    name: access_policy_id
+    description: Access Policy Global ID
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: access_policy_id
+    owner: ResearchSubject
+    domain_of:
+    - HasAccessPolicy
+    - AccessPolicy
+    - StudyMembership
+    range: AccessPolicy
     required: true
     multivalued: false
 

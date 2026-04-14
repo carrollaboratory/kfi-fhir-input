@@ -400,13 +400,109 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Practitioner/">Practitioner</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Institution/">Institution</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Participant/">Participant</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Person/">Person</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../ResearchSubject/">ResearchSubject</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
 <td><a href="../StudyMembership/">StudyMembership</a></td>
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>range</td>
 <td><a href="./">AccessPolicy</a></td>
 </tr>
 <tr>
+<td><a href="../ResearchStudy/">ResearchStudy</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Sample/">Sample</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../NCPIFile/">NCPIFile</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
 <td><a href="../FileLocation/">FileLocation</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../FileMetaData/">FileMetaData</a></td>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>range</td>
+<td><a href="./">AccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../Family/">Family</a></td>
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>range</td>
 <td><a href="./">AccessPolicy</a></td>
@@ -560,9 +656,9 @@ attributes:
     alias: access_policy_id
     owner: AccessPolicy
     domain_of:
+    - HasAccessPolicy
     - AccessPolicy
     - StudyMembership
-    - FileLocation
     range: string
     required: true
     multivalued: false

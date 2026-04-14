@@ -266,10 +266,6 @@
 <div class="mermaid"> classDiagram
     class Record
     click Record href "../Record/"
-      HasExternalId &lt;|-- Record
-        click HasExternalId href "../HasExternalId/"
-
-
       Record &lt;|-- RelativeDateTime
         click RelativeDateTime href "../RelativeDateTime/"
       Record &lt;|-- AgeAt
@@ -277,22 +273,16 @@
       Record &lt;|-- AssociatedParty
         click AssociatedParty href "../AssociatedParty/"
 
-
-      Record : external_id
-
       Record : id
 
 
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../HasExternalId/">HasExternalId</a><ul>
 <li><strong>Record</strong><ul>
 <li><a href="../RelativeDateTime/">RelativeDateTime</a></li>
 <li><a href="../AgeAt/">AgeAt</a></li>
 <li><a href="../AssociatedParty/">AssociatedParty</a></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -312,12 +302,6 @@
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Unique Identifier for a table entry</td>
 <td>direct</td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -353,7 +337,6 @@
 description: One row / entity within the database
 title: Record
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: HasExternalId
 abstract: true
 slots:
 - id
@@ -366,7 +349,6 @@ slots:
 description: One row / entity within the database
 title: Record
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: HasExternalId
 abstract: true
 attributes:
   id:
@@ -384,24 +366,6 @@ attributes:
     range: string
     required: true
     multivalued: false
-  external_id:
-    name: external_id
-    annotations:
-      sqlalchemy.association_proxy:
-        tag: sqlalchemy.association_proxy
-        value: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: external_id
-    owner: Record
-    domain_of:
-    - HasExternalId
-    range: uriorcurie
-    required: false
-    multivalued: true
 
 </code></pre>
 </details>

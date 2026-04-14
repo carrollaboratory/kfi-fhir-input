@@ -290,8 +290,6 @@
 
       AgeAt : as_date
 
-      AgeAt : external_id
-
       AgeAt : id
 
       AgeAt : value_type
@@ -309,11 +307,8 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../HasExternalId/">HasExternalId</a><ul>
 <li><a href="../Record/">Record</a><ul>
 <li><strong>AgeAt</strong></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -357,12 +352,6 @@
 <td>1 <br/> <a href="../String/">String</a></td>
 <td>Unique Identifier for a table entry</td>
 <td><a href="../Record/">Record</a></td>
-</tr>
-<tr>
-<td><a href="../external_id/">external_id</a></td>
-<td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
-<td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../HasExternalId/">HasExternalId</a></td>
 </tr>
 </tbody>
 </table>
@@ -569,24 +558,6 @@ attributes:
     range: string
     required: true
     multivalued: false
-  external_id:
-    name: external_id
-    annotations:
-      sqlalchemy.association_proxy:
-        tag: sqlalchemy.association_proxy
-        value: external_id
-    description: Other identifiers for this entity, eg, from the submitting study
-      or in systems link dbGaP
-    title: External Identifiers
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: external_id
-    owner: AgeAt
-    domain_of:
-    - HasExternalId
-    range: uriorcurie
-    required: false
-    multivalued: true
 
 </code></pre>
 </details>

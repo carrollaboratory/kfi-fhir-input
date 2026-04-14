@@ -1408,7 +1408,7 @@ slots:
     domain_of:
     - ResearchSubject
     - StudyMembership
-    range: string
+    range: StudyMembership
     required: true
     multivalued: false
   access_policy_id:
@@ -1418,11 +1418,11 @@ slots:
     title: Access Policy ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
-    owner: FileLocation
+    owner: StudyMembership
     domain_of:
+    - HasAccessPolicy
     - AccessPolicy
     - StudyMembership
-    - FileLocation
     range: AccessPolicy
     required: true
     multivalued: false
@@ -2307,7 +2307,7 @@ slots:
     owner: ResearchSubject
     domain_of:
     - ResearchSubject
-    range: string
+    range: ResearchSubject
     required: false
     multivalued: false
   period_id:
@@ -4005,14 +4005,26 @@ classes:
     - linkml:Any
     abstract: true
     class_uri: linkml:Any
+  HasAccessPolicy:
+    name: HasAccessPolicy
+    definition_uri: https://carrollaboratory.github.io/kif-fhir-inputHasAccessPolicy
+    description: Links to an access policy
+    title: Has an access policy
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    abstract: true
+    slots:
+    - access_policy_id
+    class_uri: kfi_fhir_sparks:HasAccessPolicy
   HasExternalId:
     name: HasExternalId
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputHasExternalId
     description: Has an external ID
     title: Has
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    is_a: HasAccessPolicy
     abstract: true
     slots:
+    - access_policy_id
     - external_id
     class_uri: kfi_fhir_sparks:HasExternalId
   Record:
@@ -4021,10 +4033,8 @@ classes:
     description: One row / entity within the database
     title: Record
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    is_a: HasExternalId
     abstract: true
     slots:
-    - external_id
     - id
     class_uri: kfi_fhir_sparks:Record
   AccessPolicy:
@@ -4083,7 +4093,6 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/relative-date-time
     is_a: Record
     slots:
-    - external_id
     - id
     - offset
     - offset_end
@@ -4098,7 +4107,6 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/age-at
     is_a: Record
     slots:
-    - external_id
     - id
     - ageAt__value_type
     - ageAt__age
@@ -4146,7 +4154,9 @@ classes:
       Measurements, etc.
     title: Participant Assertion
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
+    is_a: HasAccessPolicy
     slots:
+    - access_policy_id
     - participant_assertion_id
     - ParticipantAssertion_participant_id
     - age_at_event
@@ -4193,6 +4203,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - Practitioner_practitioner_id
     - name
@@ -4221,7 +4232,6 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
     is_a: Record
     slots:
-    - external_id
     - id
     - name
     - role
@@ -4247,6 +4257,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/institution
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - Institution_institution_id
     - name
@@ -4272,6 +4283,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/participant
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - Participant_participant_id
     - birthsex
@@ -4307,7 +4319,9 @@ classes:
     description: Relate one or more participants to a single person entity
     title: Person
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/person
+    is_a: HasAccessPolicy
     slots:
+    - access_policy_id
     - Person_person_id
     - Person_participant_id
     slot_usage:
@@ -4335,7 +4349,9 @@ classes:
     description: Participant enrolled in a study
     title: Research Subject
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/resarch_subject
+    is_a: HasAccessPolicy
     slots:
+    - access_policy_id
     - ResearchSubject_research_subject_id
     - participant_id
     - study_membership_id
@@ -4343,6 +4359,7 @@ classes:
       research_subject_id:
         name: research_subject_id
         identifier: true
+        range: string
         required: true
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/resarch_subject/ResearchSubject
   Period:
@@ -4407,6 +4424,7 @@ classes:
       as All Participants or Participants From a Particular Consent Group, etc.
     title: Study Membership
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/study-membership
+    is_a: HasAccessPolicy
     slots:
     - StudyMembership_study_membership_id
     - access_policy_id
@@ -4415,6 +4433,7 @@ classes:
       study_membership_id:
         name: study_membership_id
         identifier: true
+        range: string
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/study-membership/StudyMembership
   ResearchStudy:
     name: ResearchStudy
@@ -4430,6 +4449,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - ResearchStudy_research_study_id
     - study_title
@@ -4462,6 +4482,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - ResearchStudyCollection_research_study_collection_id
     - ResearchStudyCollection_description
@@ -4497,6 +4518,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - Sample_sample_id
     - parent_sample_id
@@ -4537,6 +4559,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/sample
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - Aliquot_aliquot_id
     - availability_status
@@ -4570,6 +4593,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/ncpi-file
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - participant_id
     - file_format
@@ -4608,11 +4632,12 @@ classes:
     description: Details relating to the links where documents are found
     title: File Location
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-location
+    is_a: HasAccessPolicy
     slots:
+    - access_policy_id
     - FileLocation_file_location_id
     - location_uri
     - file_name
-    - access_policy_id
     slot_usage:
       file_location_id:
         name: file_location_id
@@ -4634,7 +4659,9 @@ classes:
     description: A relationship between individuals in a pedigree or family.
     title: Family Relationship
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family-relationship
+    is_a: HasAccessPolicy
     slots:
+    - access_policy_id
     - family_relationship_id
     - patient_id
     - relative_id
@@ -4656,6 +4683,7 @@ classes:
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/family
     is_a: HasExternalId
     slots:
+    - access_policy_id
     - external_id
     - Family_family_global_id
     - family_id
@@ -4683,7 +4711,9 @@ classes:
     description: Representation of file metadata for NCPI
     title: File Meta Data
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data
+    is_a: HasAccessPolicy
     slots:
+    - access_policy_id
     - FileMetaData_file_meta_data_id
     - meta_data_type
     - assay_strategy
@@ -4715,7 +4745,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-04-10T20:24:35'
-source_file_size: 5048
-generation_date: '2026-04-10T20:24:48'
+source_file_date: '2026-04-14T21:57:45'
+source_file_size: 5234
+generation_date: '2026-04-14T21:57:59'
 

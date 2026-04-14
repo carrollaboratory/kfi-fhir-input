@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -263,6 +272,20 @@
 <div class="mermaid"> classDiagram
     class FamilyRelationship
     click FamilyRelationship href "../FamilyRelationship/"
+      HasAccessPolicy &lt;|-- FamilyRelationship
+        click HasAccessPolicy href "../HasAccessPolicy/"
+
+      FamilyRelationship : access_policy_id
+
+
+
+
+
+        FamilyRelationship --&gt; "1" AccessPolicy : access_policy_id
+        click AccessPolicy href "../AccessPolicy/"
+
+
+
       FamilyRelationship : family_relationship_id
 
       FamilyRelationship : knowledge_source
@@ -311,7 +334,13 @@
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../HasAccessPolicy/">HasAccessPolicy</a><ul>
+<li><strong>FamilyRelationship</strong></li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -352,6 +381,12 @@
 <td>1 <br/> <a href="../EnumRelationshipKnowledgeSource/">EnumRelationshipKnowledgeSource</a></td>
 <td>The source for the reltionship term</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Access Policy Global ID</td>
+<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
 </tr>
 </tbody>
 </table>
@@ -413,6 +448,7 @@ annotations:
 description: A relationship between individuals in a pedigree or family.
 title: Family Relationship
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: HasAccessPolicy
 slots:
 - family_relationship_id
 - patient_id
@@ -435,6 +471,7 @@ annotations:
 description: A relationship between individuals in a pedigree or family.
 title: Family Relationship
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: HasAccessPolicy
 attributes:
   family_relationship_id:
     name: family_relationship_id
@@ -550,6 +587,21 @@ attributes:
     domain_of:
     - FamilyRelationship
     range: EnumRelationshipKnowledgeSource
+    required: true
+    multivalued: false
+  access_policy_id:
+    name: access_policy_id
+    description: Access Policy Global ID
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: access_policy_id
+    owner: FamilyRelationship
+    domain_of:
+    - HasAccessPolicy
+    - AccessPolicy
+    - StudyMembership
+    range: AccessPolicy
     required: true
     multivalued: false
 

@@ -275,6 +275,17 @@
       HasExternalId &lt;|-- Aliquot
         click HasExternalId href "../HasExternalId/"
 
+      Aliquot : access_policy_id
+
+
+
+
+
+        Aliquot --&gt; "1" AccessPolicy : access_policy_id
+        click AccessPolicy href "../AccessPolicy/"
+
+
+
       Aliquot : aliquot_id
 
       Aliquot : availability_status
@@ -311,8 +322,11 @@
 </div>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
+<li><a href="../HasAccessPolicy/">HasAccessPolicy</a><ul>
 <li><a href="../HasExternalId/">HasExternalId</a><ul>
 <li><strong>Aliquot</strong></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -368,6 +382,12 @@
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
 <td><a href="../HasExternalId/">HasExternalId</a></td>
+</tr>
+<tr>
+<td><a href="../access_policy_id/">access_policy_id</a></td>
+<td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Access Policy Global ID</td>
+<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
 </tr>
 </tbody>
 </table>
@@ -625,6 +645,21 @@ attributes:
     range: uriorcurie
     required: false
     multivalued: true
+  access_policy_id:
+    name: access_policy_id
+    description: Access Policy Global ID
+    title: Access Policy ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: access_policy_id
+    owner: Aliquot
+    domain_of:
+    - HasAccessPolicy
+    - AccessPolicy
+    - StudyMembership
+    range: AccessPolicy
+    required: true
+    multivalued: false
 
 </code></pre>
 </details>
