@@ -2,35 +2,36 @@
 research_study_id: "SD_ME0WME0W"
 study_title: "Mr. Meow's Memorable Meme Emporium"
 study_status: completed
-study_design: 
-  -  SEVCO:01029 # Just guessing here to be Clinical Trial. 
+study_design:
+  - SEVCO:01029 # Just guessing here to be Clinical Trial.
   # These codes were all stolen from the KF example study in the IG
-study_condition: 
+study_condition:
   - MSH:D001932 #Brain Neoplasms
+access_policy_id: acp-0001
 study_focus:
   - MSH:D010372 #Pediatrics
 external_id:
   - ICANHAZ
   - DBGAP:phs00fur.v2.p2
 study_acknowledgement:
-  - "Please cite/reference the use of dbGaP data by including the dbGaP 
-    accession phs00fur.v2.p2. Additionally, use the following statement to 
+  - "Please cite/reference the use of dbGaP data by including the dbGaP
+    accession phs00fur.v2.p2. Additionally, use the following statement to
     acknowledge the submitter(s) of this study-
 
-      The data from this study phs00fur was made available pre-publication 
-      without embargo to support rapid and collaborative research in pediatric 
-      cancer via the NCI's Cancer Research Data Commons 
-      (https://datacommons.cancer.gov). This availability is made possible 
-      with the support of Mr. Meow's Memorable Meme Emporium (grant No. 
-      123456-21S9) and Gabriella Miller Kids First Pediatric Research 
-      Program (X01 CA654321). Initial data generation efforts and coordination 
-      costs were supported by a number of philanthropic and industry partners 
-      with further details at cbtn.org.
+    The data from this study phs00fur was made available pre-publication
+    without embargo to support rapid and collaborative research in pediatric
+    cancer via the NCI's Cancer Research Data Commons
+    (https://datacommons.cancer.gov). This availability is made possible
+    with the support of Mr. Meow's Memorable Meme Emporium (grant No.
+    123456-21S9) and Gabriella Miller Kids First Pediatric Research
+    Program (X01 CA654321). Initial data generation efforts and coordination
+    costs were supported by a number of philanthropic and industry partners
+    with further details at cbtn.org.
 
-      Suggested Acknowledgement Statement for secondary users-The results 
-      analyzed and <published or shown> here are based in whole or in part 
-      analyzing the study phs002517 and were accessed from the NCI's Cancer 
-      Research Data Commons (https://datacommons.cancer.gov)."
+    Suggested Acknowledgement Statement for secondary users-The results
+    analyzed and <published or shown> here are based in whole or in part
+    analyzing the study phs002517 and were accessed from the NCI's Cancer
+    Research Data Commons (https://datacommons.cancer.gov)."
 description: "Example KF research study."
-study_personnel: 
+study_personnel:
   - asp0001

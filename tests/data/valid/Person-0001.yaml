@@ -1,4 +1,5 @@
 ---
 person_id: pr-0001
-participant_id: 
+access_policy_id: acp-0001
+participant_id:
   - par-01234
