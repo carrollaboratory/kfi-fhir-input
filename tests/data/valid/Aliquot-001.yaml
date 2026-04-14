@@ -1,6 +1,7 @@
 ---
 aliquot_id: aliquot0001
 sample_id: sample001
-availability_status: available 
+availability_status: available
 volume: 1.0
-volume_units: ucum:ml 
+volume_units: ucum:ml
+access_policy_id: acp-0001

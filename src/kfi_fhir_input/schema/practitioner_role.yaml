@@ -1,25 +1,25 @@
 id: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
 name: kfi-fhir-input-practitioner-role
 imports:
-  - linkml:types 
+  - linkml:types
   - kfi_fhir_input
-  - practitioner 
-  - institution 
+  - practitioner
+  - institution
 classes:
   PractitionerRole:
-    title: Practitioner Role 
+    title: Practitioner Role
     description: PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
-    # is_a: Record 
+    # is_a: Record
     annotations:
-      fhir_resource: PractitionerRole 
+      fhir_resource: PractitionerRole
 
-    slots: 
+    slots:
       - practitioner_role_id
-      - institution_id 
-      - practitioner_id 
-      - period_id 
+      - institution_id
+      - practitioner_id
+      - period_id
     slot_usage:
-      practitioner_role_id: 
+      practitioner_role_id:
         identifier: true
         required: true
         range: string
@@ -27,5 +27,5 @@ slots:
   practitioner_role_id:
     title: Practitioner Role ID
     description: Global ID for this record
-    range: PractitionerRole  
+    range: PractitionerRole
     required: false

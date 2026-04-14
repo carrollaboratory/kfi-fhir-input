@@ -19,3 +19,4 @@ body_site,"Location information for the observation, including site, laterality,
 body_location,Any location qualifiers,string,,,,,
 body_laterality,Laterality information for the condition site,string,,,,,
 cancer_stage,Cancer staging information,string,,,,,
+access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id

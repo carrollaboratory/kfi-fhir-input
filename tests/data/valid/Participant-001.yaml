@@ -1,14 +1,15 @@
 ---
 participant_id: par-01234
-birthsex: male 
-race: 
-  - asian 
+birthsex: male
+race:
+  - asian
 ethnicity: not_hispanic_or_latino
-population: cdc_rec:2034-7  # Chinese
-dob: '2017'
+population: cdc_rec:2034-7 # Chinese
+dob: "2017"
 dob_method: year_only
 age_at_last_vital: rt-0001
+access_policy_id: acp-0001
 is_deceased: False
 family_global_id: fam-12345
 sample_id:
-  - sample001 
+  - sample001

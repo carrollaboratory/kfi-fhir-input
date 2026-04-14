@@ -1,48 +1,49 @@
 ---
 id: https://carrollaboratory.github.io/kfi-fhir-input/file-location
 name: kfi-fhir-input-file-location
-imports: 
-  - linkml:types 
-  - kfi_fhir_input 
+imports:
+  - linkml:types
+  - kfi_fhir_input
 classes:
   FileLocation:
-    title: File Location    
+    title: File Location
     description: Details relating to the links where documents are found
     #is_a: Record
-    annotations: 
-      fhir_resource: DocumentReference 
+    annotations:
+      fhir_resource: DocumentReference
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-drs-file
-      fhir_element: content 
-    slots: 
+      fhir_element: content
+    is_a: HasAccessPolicy
+    slots:
       - file_location_id
       - location_uri
-      - file_name 
-      - access_policy_id    # content.extension[location-access].valueReference
+      - file_name
+      # - access_policy_id    # content.extension[location-access].valueReference
     slot_usage:
       file_location_id:
-        multivalued: false 
-        identifier: true 
+        multivalued: false
+        identifier: true
         required: true
         range: string
 slots:
   file_location_id:
-    title: File Location 
+    title: File Location
     description: Location details (this is not a global ID)
-    required: true 
-    range: FileLocation 
-    multivalued: true 
+    required: true
+    range: FileLocation
+    multivalued: true
   # At this point, I'm assuming these are all going to have at least one DRS attachment
-  # However, I don't know if we can expect more than that. If we do have other 
+  # However, I don't know if we can expect more than that. If we do have other
   # sources, then we may want to designate which locations are DRS....not sure
-  location_uri: 
+  location_uri:
     title: Location URI
     description: The URI at which this data can be accessed
-    required: true 
-    multivalued: false 
+    required: true
+    multivalued: false
     range: uri
-  file_name: 
-    title: File Name 
+  file_name:
+    title: File Name
     description: The file's name (no path)
-    required: true 
-    multivalued: false 
+    required: true
+    multivalued: false
     range: string

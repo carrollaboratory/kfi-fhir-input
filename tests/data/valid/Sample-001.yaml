@@ -1,12 +1,13 @@
 ---
-sample_id: sample001 
+sample_id: sample001
 sample_type: UMLS:C0005834
 participant_id: par-01234
 age_at_collection: age-0001
 collection_method: SNOMED:129316008
 collection_site: SNOMED:2453002
-availability_status: available 
+availability_status: available
+access_policy_id: acp-0001
 quantity: 1.0
-quantity_units: ucum:ml 
-#aliquot_id: 
+quantity_units: ucum:ml
+#aliquot_id:
 #  - aliquot0001.b

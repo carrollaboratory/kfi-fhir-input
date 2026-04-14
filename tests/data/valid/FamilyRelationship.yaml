@@ -2,5 +2,6 @@
 family_relationship_id: fr-0001
 patient_id: par-01234
 relative_id: par-431
-relationship: mother 
+relationship: mother
 knowledge_source: traditional
+access_policy_id: acp-0001

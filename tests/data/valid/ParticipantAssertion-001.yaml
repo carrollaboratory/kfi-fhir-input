@@ -1,14 +1,15 @@
 ---
 participant_assertion_id: ob-0001
 participant_id: par-01234
+access_policy_id: acp-0001
 age_at_event: age-0001
 age_at_assertion: age-0002
 age_at_onset: age-0003
 age_at_resolution: age-0003
 entity_asserter: doctor
-assertion_type: measurement 
+assertion_type: measurement
 assertion_code: LOINC:8302-2
-assertion_text: Body Height 
+assertion_text: Body Height
 assertion_source: NCIT:C17176 # Survey
 value_number: 18
 value_units: in # inches

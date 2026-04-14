@@ -82,16 +82,23 @@ classes:
     class_uri: linkml:Any
     description: This is a placeholder for the experimental linkml:any behavior for unions
     abstract: true
+  HasAccessPolicy:
+    description: Links to an access policy
+    title: Has an access policy
+    abstract: true
+    slots:
+      - access_policy_id
   HasExternalId:
     description: Has an external ID
     title: Has
     abstract: true
+    is_a: HasAccessPolicy
     slots:
       - external_id
   Record:
     description: One row / entity within the database
     title: Record
-    is_a: HasExternalId
+    # is_a: HasExternalId
     abstract: true
     slots:
       - id
@@ -137,6 +144,6 @@ slots:
   study_membership_id:
     title: Study Membership ID
     description: Study Membership Global ID (group)
-    range: string
+    range: StudyMembership
     required: true
     multivalued: false

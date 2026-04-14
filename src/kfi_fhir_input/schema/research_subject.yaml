@@ -11,6 +11,7 @@ classes:
     annotations:
       fhir_resource: ResearchSubject
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-Study-Participant
+    is_a: HasAccessPolicy
     slots:
       - research_subject_id
       - participant_id
@@ -19,10 +20,11 @@ classes:
       research_subject_id:
         identifier: true
         required: true
+        range: string
 slots:
   research_subject_id:
     title: Research Subject ID
     description: Research Subject Global ID (ResearchSubject)
-    range: string
+    range: ResearchSubject
     required: false
     multivalued: false
