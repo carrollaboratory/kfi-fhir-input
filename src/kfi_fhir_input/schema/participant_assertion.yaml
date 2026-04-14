@@ -1,35 +1,36 @@
 id: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion
 name: kfi-fhir-input-participant-assertion
 imports:
-  - linkml:types 
+  - linkml:types
   - kfi_fhir_input
   - age_at
 classes:
   ParticipantAssertion:
-    title: Participant Assertion 
+    title: Participant Assertion
     description: Assertion about a particular Participant. May include Conditions, Measurements, etc.
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+    is_a: HasAccessPolicy
     attributes:
 
     slots:
-      - participant_assertion_id 
-      - participant_id 
+      - participant_assertion_id
+      - participant_id
       - age_at_event
       - age_at_assertion
-      - age_at_onset 
+      - age_at_onset
       - age_at_resolution
-      - entity_asserter 
+      - entity_asserter
       - other_condition_modifiers
-      - assertion_type 
+      - assertion_type
       - assertion_code
       - assertion_text
       - assertion_source
-      - value_code 
-      - value_string 
+      - value_code
+      - value_string
       - value_number
       - value_units
-      - body_site 
+      - body_site
       - body_location
       - body_laterality
       - cancer_stage
@@ -43,91 +44,91 @@ slots:
   participant_assertion_id:
     title: Participant Assertion ID
     description: Participant Assertion Global ID
-    range: string         
+    range: string
     identifier: true
     required: true
     multivalued: false
   age_at_event:
-    title: Age At Event 
+    title: Age At Event
     description: The date or age at which the event relating to this assertion occured.
-    required: false 
-    multivalued: false 
+    required: false
+    multivalued: false
     range: AgeAt
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: component[ageAtEvent] or maybe effectiveDateTime
       fhir_resource: Observation
   age_at_assertion:
-    title: Age At Assertion 
+    title: Age At Assertion
     description: The date or age at which this condition is being asserted.
-    required: false 
-    multivalued: false 
+    required: false
+    multivalued: false
     range: AgeAt
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: component[ageAtAssertion]
       fhir_resource: Observation
   age_at_onset:
-    title: Age At Onset 
+    title: Age At Onset
     description: The age of onset for this condition. Could be expressed with a
-                 term, an age, or an age range.
-    required: false 
-    multivalued: false 
+      term, an age, or an age range.
+    required: false
+    multivalued: false
     range: AgeAt
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: component[ageAtOnset]
       fhir_resource: Observation
   age_at_resolution:
-    title: Age At Resolution 
-    description: The age at which this condition was resolved, abated, or cured. 
-                 Should be left empty in cases of current active status. Could 
-                 be expressed with a term, an age, or an age range.
-    required: false 
-    multivalued: false 
+    title: Age At Resolution
+    description: The age at which this condition was resolved, abated, or cured.
+      Should be left empty in cases of current active status. Could
+      be expressed with a term, an age, or an age range.
+    required: false
+    multivalued: false
     range: AgeAt
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: component[ageAtResolution]
       fhir_resource: Observation
-  entity_asserter: 
-    title: Entity Asserter 
-    description: Who recorded this assertion about the Participant? This can 
-                 support understanding the differences between self-report, 
-                 doctor, trained research staff.
-    required: false 
-    multivalued: false 
-    range: EnumEntityAsserter 
+  entity_asserter:
+    title: Entity Asserter
+    description: Who recorded this assertion about the Participant? This can
+      support understanding the differences between self-report,
+      doctor, trained research staff.
+    required: false
+    multivalued: false
+    range: EnumEntityAsserter
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_extension: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/entity-asserter
       fhir_resource: Observation
   other_condition_modifiers:
-    title: Other Condition Modifiers 
+    title: Other Condition Modifiers
     description: Any additional modifiers for this condition, such as severity.
-    required: false 
-    multivalued: false 
+    required: false
+    multivalued: false
     range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: component[otherModifiers]
       fhir_resource: Observation
   assertion_type:
-    title: Assertion Type 
+    title: Assertion Type
     description: Describe the type of assertion being made.
-    required: true 
-    multivalued: false 
+    required: true
+    multivalued: false
     range: EnumAssertionType
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: category
       fhir_resource: Observation
   assertion_code:
-    title: Assertion Code 
+    title: Assertion Code
     description: The structured term defining the meaning of the assertion.
-    required: true 
-    multivalued: false 
-    range: uriorcurie 
+    required: true
+    multivalued: false
+    range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: code.coding
@@ -136,39 +137,39 @@ slots:
     title: Assertion Text
     description: Detailed description / free text about this assertion.
     required: false
-    multivalued: false 
-    range: string 
+    multivalued: false
+    range: string
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: code.text
       fhir_resource: Observation
   assertion_source:
     title: Assertion Source
-    description: Where or how was this this assertion about the Participant 
-                 recorded? This can support understanding the differences 
-                 between surveys, automated EHR extraction, manual chart 
-                 abstraction, etc.
-    required: false 
+    description: Where or how was this this assertion about the Participant
+      recorded? This can support understanding the differences
+      between surveys, automated EHR extraction, manual chart
+      abstraction, etc.
+    required: false
     multivalued: false
-    range: uriorcurie 
+    range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
-      fhir_element: method 
+      fhir_element: method
       fhir_resource: Observation
   value_code:
-    title: Value Code 
-    description: Value as code 
-    required: false 
-    multivalued: false 
-    range: uriorcurie 
+    title: Value Code
+    description: Value as code
+    required: false
+    multivalued: false
+    range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: valueCodeableConcept
       fhir_resource: Observation
   value_string:
-    title: Value String 
-    description: Value as string 
-    required: false 
+    title: Value String
+    description: Value as string
+    required: false
     multivalued: false
     range: string
     annotations:
@@ -176,9 +177,9 @@ slots:
       fhir_element: valueString
       fhir_resource: Observation
   value_number:
-    title: Value Number 
+    title: Value Number
     description: Value as numer
-    required: false 
+    required: false
     multivalued: false
     range: float
     annotations:
@@ -187,31 +188,31 @@ slots:
       fhir_resource: Observation
   value_units:
     title: Value Units
-    description: The structured term defining the units of the value (ucum). 
-    required: false 
+    description: The structured term defining the units of the value (ucum).
+    required: false
     multivalued: false
     range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_resource: Observation
   body_site:
-    title: Body Site 
-    description: Location information for the observation, including site, 
-                 laterality, and other qualifiers as appropriate. Multiple 
-                 observations may be required if the same assertion is made in 
-                 many locations, or complete location details can be provided 
-                 in an NCPI Condition Summary.
-    required: false 
+    title: Body Site
+    description: Location information for the observation, including site,
+      laterality, and other qualifiers as appropriate. Multiple
+      observations may be required if the same assertion is made in
+      many locations, or complete location details can be provided
+      in an NCPI Condition Summary.
+    required: false
     multivalued: false
     range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
-      fhir_element: bodySite 
+      fhir_element: bodySite
       fhir_resource: Observation
   body_location:
-    title: Body Location 
+    title: Body Location
     description: Any location qualifiers
-    required: false 
+    required: false
     multivalued: false
     range: uriorcurie
     annotations:
@@ -219,9 +220,9 @@ slots:
       fhir_extension: http://hl7.org/fhir/us/mcode/StructureDefinition/mcode-body-location-qualifier
       fhir_resource: Observation
   body_laterality:
-    title: Laterality Qualifier  
+    title: Laterality Qualifier
     description: Laterality information for the condition site
-    required: false 
+    required: false
     multivalued: false
     range: uriorcurie
     annotations:
@@ -231,53 +232,53 @@ slots:
   cancer_stage:
     title: Cancer Stage
     description: Cancer staging information
-    required: false 
-    multivalued: false 
-    range: uriorcurie 
+    required: false
+    multivalued: false
+    range: uriorcurie
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
       fhir_element: component[stage]
       fhir_resource: Observation
 enums:
   EnumEntityAsserter:
-    description: Who recorded this assertion about the Participant? This can 
-                  support understanding the differences between self-report, 
-                  doctor, trained research staff.
+    description: Who recorded this assertion about the Participant? This can
+      support understanding the differences between self-report,
+      doctor, trained research staff.
     permissible_values:
       self_report:
-        title: Self Report 
-        description: The participant reported the assertion 
-      doctor: 
+        title: Self Report
+        description: The participant reported the assertion
+      doctor:
         title: Doctor
         description: Physician
       staff:
-        title: Trained Research Staff 
-        description: Trained research staff 
-  EnumAssertionType: 
-    description: Provides options to describe the expressed semantics of a condition. 
-    permissible_values: 
-      phenotypic_feature: 
+        title: Trained Research Staff
+        description: Trained research staff
+  EnumAssertionType:
+    description: Provides options to describe the expressed semantics of a condition.
+    permissible_values:
+      phenotypic_feature:
         title: Phenotypic Feature
         description: This is a phenotypic feature
         meaning: ncpi_cond_type:Phenotypic-Feature
-      disease: 
-        title: disease 
-        description: Disease 
+      disease:
+        title: disease
+        description: Disease
         meaning: ncpi_cond_type:Disease
-      comorbidity: 
-        title: comorbidity 
+      comorbidity:
+        title: comorbidity
         description: Comorbidity
         meaning: ncpi_cond_type:Comorbidity
-      histology: 
-        title: histology 
-        description: Histology 
+      histology:
+        title: histology
+        description: Histology
         meaning: ncpi_cond_type:Histology
-      clinical_finding: 
-        title: clinical-finding 
-        description: Clinical Finding 
+      clinical_finding:
+        title: clinical-finding
+        description: Clinical Finding
         meaning: ncpi_cond_type:Clinical-Finding
       ehr_billing_code:
-        title: EHR Billing Code 
+        title: EHR Billing Code
         description: From an EHR billing record, which may indicate only investigation into a possible diagnosis.
         meaning: ncpi_cond_type:EHR-Condition-Code
       measurement:

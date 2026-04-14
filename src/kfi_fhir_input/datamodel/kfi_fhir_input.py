@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-11T16:07:51
+# Generation date: 2026-04-14T16:51:36
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -141,6 +141,10 @@ class PersonPersonId(extended_str):
     pass
 
 
+class ResearchSubjectResearchSubjectId(extended_str):
+    pass
+
+
 class PeriodPeriodId(extended_str):
     pass
 
@@ -192,7 +196,30 @@ class FileMetaDataFileMetaDataId(extended_str):
 Any = Any
 
 @dataclass(repr=False)
-class HasExternalId(YAMLRoot):
+class HasAccessPolicy(YAMLRoot):
+    """
+    Links to an access policy
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS["HasAccessPolicy"]
+    class_class_curie: ClassVar[str] = "kfi_fhir_sparks:HasAccessPolicy"
+    class_name: ClassVar[str] = "HasAccessPolicy"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.HasAccessPolicy
+
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class HasExternalId(HasAccessPolicy):
     """
     Has an external ID
     """
@@ -203,6 +230,7 @@ class HasExternalId(YAMLRoot):
     class_name: ClassVar[str] = "HasExternalId"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.HasExternalId
 
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -214,7 +242,7 @@ class HasExternalId(YAMLRoot):
 
 
 @dataclass(repr=False)
-class Record(HasExternalId):
+class Record(YAMLRoot):
     """
     One row / entity within the database
     """
@@ -379,7 +407,7 @@ class AgeAt(Record):
 
 
 @dataclass(repr=False)
-class ParticipantAssertion(YAMLRoot):
+class ParticipantAssertion(HasAccessPolicy):
     """
     Assertion about a particular Participant. May include Conditions, Measurements, etc.
     """
@@ -391,6 +419,7 @@ class ParticipantAssertion(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ParticipantAssertion
 
     participant_assertion_id: Union[str, ParticipantAssertionParticipantAssertionId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     assertion_type: Union[str, "EnumAssertionType"] = None
     assertion_code: Union[str, URIorCURIE] = None
@@ -496,6 +525,7 @@ class Practitioner(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Practitioner
 
     practitioner_id: Union[str, PractitionerPractitionerId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     name: Optional[str] = None
     email: Optional[str] = None
     institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
@@ -596,6 +626,7 @@ class Institution(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Institution
 
     institution_id: Union[str, InstitutionInstitutionId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     name: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -623,6 +654,7 @@ class Participant(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Participant
 
     participant_id: Union[str, ParticipantParticipantId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     race: Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]] = None
     ethnicity: Union[str, "EnumEthnicity"] = None
     birthsex: Optional[Union[str, "EnumBirthSex"]] = None
@@ -685,7 +717,7 @@ class Participant(HasExternalId):
 
 
 @dataclass(repr=False)
-class Person(YAMLRoot):
+class Person(HasAccessPolicy):
     """
     Relate one or more participants to a single person entity
     """
@@ -697,6 +729,7 @@ class Person(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Person
 
     person_id: Union[str, PersonPersonId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     participant_id: Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -710,6 +743,42 @@ class Person(YAMLRoot):
         if not isinstance(self.participant_id, list):
             self.participant_id = [self.participant_id] if self.participant_id is not None else []
         self.participant_id = [v if isinstance(v, ParticipantParticipantId) else ParticipantParticipantId(v) for v in self.participant_id]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class ResearchSubject(HasAccessPolicy):
+    """
+    Participant enrolled in a study
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["resarch_subject/ResearchSubject"]
+    class_class_curie: ClassVar[str] = "kfi:resarch_subject/ResearchSubject"
+    class_name: ClassVar[str] = "ResearchSubject"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchSubject
+
+    research_subject_id: Union[str, ResearchSubjectResearchSubjectId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    participant_id: Union[str, ParticipantParticipantId] = None
+    study_membership_id: Union[str, StudyMembershipStudyMembershipId] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.research_subject_id):
+            self.MissingRequiredField("research_subject_id")
+        if not isinstance(self.research_subject_id, ResearchSubjectResearchSubjectId):
+            self.research_subject_id = ResearchSubjectResearchSubjectId(self.research_subject_id)
+
+        if self._is_empty(self.participant_id):
+            self.MissingRequiredField("participant_id")
+        if not isinstance(self.participant_id, ParticipantParticipantId):
+            self.participant_id = ParticipantParticipantId(self.participant_id)
+
+        if self._is_empty(self.study_membership_id):
+            self.MissingRequiredField("study_membership_id")
+        if not isinstance(self.study_membership_id, StudyMembershipStudyMembershipId):
+            self.study_membership_id = StudyMembershipStudyMembershipId(self.study_membership_id)
 
         super().__post_init__(**kwargs)
 
@@ -782,7 +851,7 @@ class PractitionerRole(YAMLRoot):
 
 
 @dataclass(repr=False)
-class StudyMembership(YAMLRoot):
+class StudyMembership(HasAccessPolicy):
     """
     Grouping subject participation within a research study is helpful to provide definitive lists of participants that
     fit a specific criteria such as All Participants or Participants From a Particular Consent Group, etc.
@@ -796,7 +865,6 @@ class StudyMembership(YAMLRoot):
 
     study_membership_id: Union[str, StudyMembershipStudyMembershipId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
-    participant_id: Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]] = None
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -809,12 +877,6 @@ class StudyMembership(YAMLRoot):
             self.MissingRequiredField("access_policy_id")
         if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
             self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
-
-        if self._is_empty(self.participant_id):
-            self.MissingRequiredField("participant_id")
-        if not isinstance(self.participant_id, list):
-            self.participant_id = [self.participant_id] if self.participant_id is not None else []
-        self.participant_id = [v if isinstance(v, ParticipantParticipantId) else ParticipantParticipantId(v) for v in self.participant_id]
 
         if self._is_empty(self.research_study_id):
             self.MissingRequiredField("research_study_id")
@@ -838,6 +900,7 @@ class ResearchStudy(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchStudy
 
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     study_status: Union[str, "EnumStudyStatus"] = None
     study_personnel: Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]] = None
     study_title: Optional[str] = None
@@ -907,6 +970,7 @@ class ResearchStudyCollection(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchStudyCollection
 
     research_study_collection_id: Union[str, ResearchStudyCollectionResearchStudyCollectionId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     collection_title: str = None
     research_study_collection_type: Union[str, "EnumResearchCollectionType"] = None
     collection_status: Union[str, "EnumCollectionStatus"] = None
@@ -968,6 +1032,7 @@ class Sample(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Sample
 
     sample_id: Union[str, SampleSampleId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     sample_type: Union[str, URIorCURIE] = None
     parent_sample_id: Optional[Union[str, SampleSampleId]] = None
@@ -1048,6 +1113,7 @@ class Aliquot(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Aliquot
 
     aliquot_id: Union[str, AliquotAliquotId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     sample_id: Union[str, SampleSampleId] = None
     availability_status: Optional[Union[str, "EnumSpecimenAvailability"]] = None
     volume: Optional[float] = None
@@ -1093,6 +1159,7 @@ class NCPIFile(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.NCPIFile
 
     file_global_id: Union[str, NCPIFileFileGlobalId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     file_format: Union[str, URIorCURIE] = None
     file_location_id: Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]] = None
@@ -1164,7 +1231,7 @@ class NCPIFile(HasExternalId):
 
 
 @dataclass(repr=False)
-class FileLocation(YAMLRoot):
+class FileLocation(HasAccessPolicy):
     """
     Details relating to the links where documents are found
     """
@@ -1176,9 +1243,9 @@ class FileLocation(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileLocation
 
     file_location_id: Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     location_uri: Union[str, URI] = None
     file_name: str = None
-    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.file_location_id):
@@ -1197,16 +1264,11 @@ class FileLocation(YAMLRoot):
         if not isinstance(self.file_name, str):
             self.file_name = str(self.file_name)
 
-        if self._is_empty(self.access_policy_id):
-            self.MissingRequiredField("access_policy_id")
-        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
-            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
-
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class FamilyRelationship(YAMLRoot):
+class FamilyRelationship(HasAccessPolicy):
     """
     A relationship between individuals in a pedigree or family.
     """
@@ -1218,6 +1280,7 @@ class FamilyRelationship(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FamilyRelationship
 
     family_relationship_id: Union[str, FamilyRelationshipFamilyRelationshipId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     patient_id: Union[str, ParticipantParticipantId] = None
     relative_id: Union[str, ParticipantParticipantId] = None
     relationship: Union[str, "EnumFamilyRelationship"] = None
@@ -1265,6 +1328,7 @@ class Family(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Family
 
     family_global_id: Union[str, FamilyFamilyGlobalId] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     family_id: str = None
     family_type: Union[str, "EnumFamilyType"] = None
     description: Optional[str] = None
@@ -1300,7 +1364,7 @@ class Family(HasExternalId):
 
 
 @dataclass(repr=False)
-class FileMetaData(YAMLRoot):
+class FileMetaData(HasAccessPolicy):
     """
     Representation of file metadata for NCPI
     """
@@ -1312,6 +1376,7 @@ class FileMetaData(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.FileMetaData
 
     file_meta_data_id: Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     meta_data_type: Union[str, "EnumFileMetaDataType"] = None
     assay_strategy: Union[str, URIorCURIE] = None
     platform_instrument: Union[str, URIorCURIE] = None
@@ -2322,6 +2387,9 @@ slots.website = Slot(uri=KFI_FHIR_SPARKS.website, name="website", curie=KFI_FHIR
 slots.label = Slot(uri=KFI_FHIR_SPARKS.label, name="label", curie=KFI_FHIR_SPARKS.curie('label'),
                    model_uri=KFI_FHIR_SPARKS.label, domain=None, range=Optional[Union[str, list[str]]])
 
+slots.study_membership_id = Slot(uri=KFI_FHIR_SPARKS.study_membership_id, name="study_membership_id", curie=KFI_FHIR_SPARKS.curie('study_membership_id'),
+                   model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=Union[str, StudyMembershipStudyMembershipId])
+
 slots.access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.access_policy_id, domain=None, range=Union[str, AccessPolicyAccessPolicyId])
 
@@ -2469,14 +2537,14 @@ slots.patient_knowledge_source = Slot(uri=KFI['participant/patient_knowledge_sou
 slots.person_id = Slot(uri=KFI['person/person_id'], name="person_id", curie=KFI.curie('person/person_id'),
                    model_uri=KFI_FHIR_SPARKS.person_id, domain=None, range=Optional[Union[str, PersonPersonId]])
 
+slots.research_subject_id = Slot(uri=KFI['resarch_subject/research_subject_id'], name="research_subject_id", curie=KFI.curie('resarch_subject/research_subject_id'),
+                   model_uri=KFI_FHIR_SPARKS.research_subject_id, domain=None, range=Optional[Union[str, ResearchSubjectResearchSubjectId]])
+
 slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[str, PeriodPeriodId]])
 
 slots.practitioner_role_id = Slot(uri=KFI['practitioner_role/practitioner_role_id'], name="practitioner_role_id", curie=KFI.curie('practitioner_role/practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner_role_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])
-
-slots.study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
-                   model_uri=KFI_FHIR_SPARKS.study_membership_id, domain=None, range=str)
 
 slots.research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="research_study_id", curie=KFI.curie('research_study/research_study_id'),
                    model_uri=KFI_FHIR_SPARKS.research_study_id, domain=None, range=Union[str, ResearchStudyResearchStudyId])
@@ -2730,16 +2798,16 @@ slots.Person_person_id = Slot(uri=KFI['person/person_id'], name="Person_person_i
 slots.Person_participant_id = Slot(uri=KFI['participant/participant_id'], name="Person_participant_id", curie=KFI.curie('participant/participant_id'),
                    model_uri=KFI_FHIR_SPARKS.Person_participant_id, domain=Person, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
 
+slots.ResearchSubject_research_subject_id = Slot(uri=KFI['resarch_subject/research_subject_id'], name="ResearchSubject_research_subject_id", curie=KFI.curie('resarch_subject/research_subject_id'),
+                   model_uri=KFI_FHIR_SPARKS.ResearchSubject_research_subject_id, domain=ResearchSubject, range=Union[str, ResearchSubjectResearchSubjectId])
+
 slots.Period_period_id = Slot(uri=KFI['period/period_id'], name="Period_period_id", curie=KFI.curie('period/period_id'),
                    model_uri=KFI_FHIR_SPARKS.Period_period_id, domain=Period, range=Union[str, PeriodPeriodId])
 
 slots.PractitionerRole_practitioner_role_id = Slot(uri=KFI['practitioner_role/practitioner_role_id'], name="PractitionerRole_practitioner_role_id", curie=KFI.curie('practitioner_role/practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.PractitionerRole_practitioner_role_id, domain=PractitionerRole, range=Union[str, PractitionerRolePractitionerRoleId])
 
-slots.StudyMembership_participant_id = Slot(uri=KFI['participant/participant_id'], name="StudyMembership_participant_id", curie=KFI.curie('participant/participant_id'),
-                   model_uri=KFI_FHIR_SPARKS.StudyMembership_participant_id, domain=StudyMembership, range=Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]])
-
-slots.StudyMembership_study_membership_id = Slot(uri=KFI['study-membership/study_membership_id'], name="StudyMembership_study_membership_id", curie=KFI.curie('study-membership/study_membership_id'),
+slots.StudyMembership_study_membership_id = Slot(uri=KFI_FHIR_SPARKS.study_membership_id, name="StudyMembership_study_membership_id", curie=KFI_FHIR_SPARKS.curie('study_membership_id'),
                    model_uri=KFI_FHIR_SPARKS.StudyMembership_study_membership_id, domain=StudyMembership, range=Union[str, StudyMembershipStudyMembershipId])
 
 slots.ResearchStudy_research_study_id = Slot(uri=KFI['research_study/research_study_id'], name="ResearchStudy_research_study_id", curie=KFI.curie('research_study/research_study_id'),

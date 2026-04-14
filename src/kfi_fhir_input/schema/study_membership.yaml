@@ -12,11 +12,13 @@ classes:
       helpful to provide definitive lists of participants that fit
       a specific criteria such as All Participants or Participants
       From a Particular Consent Group, etc.
+    is_a: HasAccessPolicy
     slots:
       - study_membership_id
       - access_policy_id
       - research_study_id
     slot_usage:
       study_membership_id:
+        range: string
         identifier: true
 slots:

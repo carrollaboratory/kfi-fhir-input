@@ -92,6 +92,7 @@ linkml_meta = LinkMLMeta({'default_prefix': 'kfi_fhir_sparks',
                  'institution',
                  'participant',
                  'person',
+                 'research_subject',
                  'period',
                  'practitioner_role',
                  'practitioner',
@@ -784,7 +785,7 @@ class AccessPolicy(ConfiguredBaseModel):
                                              'required': True}},
          'title': 'Access Policy'})
 
-    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
     description: Optional[str] = Field(default=None, title="Description", description="""More details associated with the given resource""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy',
                        'Practitioner',
                        'ResearchStudy',
@@ -821,7 +822,54 @@ class AccessPolicy(ConfiguredBaseModel):
          'domain_of': ['AccessPolicy']} })
 
 
-class ParticipantAssertion(ConfiguredBaseModel):
+class Period(ConfiguredBaseModel):
+    """
+    Time period associated with some FHIR resource
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/period',
+         'slot_usage': {'period_id': {'description': 'ID for period (not a global ID)',
+                                      'identifier': True,
+                                      'name': 'period_id',
+                                      'range': 'string',
+                                      'required': True}},
+         'title': 'Period'})
+
+    period_id: str = Field(default=..., title="Period ID", description="""ID for period (not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
+    start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
+    end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
+
+
+class PractitionerRole(ConfiguredBaseModel):
+    """
+    PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'PractitionerRole'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role',
+         'slot_usage': {'practitioner_role_id': {'identifier': True,
+                                                 'name': 'practitioner_role_id',
+                                                 'range': 'string',
+                                                 'required': True}},
+         'title': 'Practitioner Role'})
+
+    practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
+    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
+    practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
+    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
+
+
+class HasAccessPolicy(ConfiguredBaseModel):
+    """
+    Links to an access policy
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'abstract': True,
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input',
+         'title': 'Has an access policy'})
+
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
+
+
+class ParticipantAssertion(HasAccessPolicy):
     """
     Assertion about a particular Participant. May include Conditions, Measurements, etc.
     """
@@ -846,7 +894,7 @@ class ParticipantAssertion(ConfiguredBaseModel):
          'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership',
+                       'ResearchSubject',
                        'Sample',
                        'NCPIFile']} })
     age_at_event: Optional[str] = Field(default=None, title="Age At Event", description="""The date or age at which the event relating to this assertion occured.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
@@ -970,9 +1018,10 @@ class ParticipantAssertion(ConfiguredBaseModel):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
-class Person(ConfiguredBaseModel):
+class Person(HasAccessPolicy):
     """
     Relate one or more participants to a single person entity
     """
@@ -991,70 +1040,54 @@ class Person(ConfiguredBaseModel):
     participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership',
+                       'ResearchSubject',
                        'Sample',
                        'NCPIFile']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
-class Period(ConfiguredBaseModel):
+class ResearchSubject(HasAccessPolicy):
     """
-    Time period associated with some FHIR resource
+    Participant enrolled in a study
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/period',
-         'slot_usage': {'period_id': {'description': 'ID for period (not a global ID)',
-                                      'identifier': True,
-                                      'name': 'period_id',
-                                      'range': 'string',
-                                      'required': True}},
-         'title': 'Period'})
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_profile': {'tag': 'fhir_profile',
+                                          'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-Study-Participant'},
+                         'fhir_resource': {'tag': 'fhir_resource',
+                                           'value': 'ResearchSubject'}},
+         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/resarch_subject',
+         'slot_usage': {'research_subject_id': {'identifier': True,
+                                                'name': 'research_subject_id',
+                                                'range': 'string',
+                                                'required': True}},
+         'title': 'Research Subject'})
 
-    period_id: str = Field(default=..., title="Period ID", description="""ID for period (not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
-    start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-    end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-
-
-class PractitionerRole(ConfiguredBaseModel):
-    """
-    PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
-                                           'value': 'PractitionerRole'}},
-         'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role',
-         'slot_usage': {'practitioner_role_id': {'identifier': True,
-                                                 'name': 'practitioner_role_id',
-                                                 'range': 'string',
-                                                 'required': True}},
-         'title': 'Practitioner Role'})
-
-    practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
-    institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
-    practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
-    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
+    research_subject_id: str = Field(default=..., title="Research Subject ID", description="""Research Subject Global ID (ResearchSubject)""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchSubject']} })
+    participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
+                       'Participant',
+                       'Person',
+                       'ResearchSubject',
+                       'Sample',
+                       'NCPIFile']} })
+    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchSubject', 'StudyMembership']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
-class StudyMembership(ConfiguredBaseModel):
+class StudyMembership(HasAccessPolicy):
     """
     Grouping subject participation within a research study is helpful to provide definitive lists of participants that fit a specific criteria such as All Participants or Participants From a Particular Consent Group, etc.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/study-membership',
-         'slot_usage': {'participant_id': {'multivalued': True,
-                                           'name': 'participant_id'},
-                        'study_membership_id': {'identifier': True,
-                                                'name': 'study_membership_id'}},
+         'slot_usage': {'study_membership_id': {'identifier': True,
+                                                'name': 'study_membership_id',
+                                                'range': 'string'}},
          'title': 'Study Membership'})
 
-    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership']} })
-    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
-    participant_id: list[str] = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
-                       'Participant',
-                       'Person',
-                       'StudyMembership',
-                       'Sample',
-                       'NCPIFile']} })
+    study_membership_id: str = Field(default=..., title="Study Membership ID", description="""Study Membership Global ID (group)""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchSubject', 'StudyMembership']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
     research_study_id: str = Field(default=..., title="Research Study ID", description="""The Global ID for the Research Study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['StudyMembership', 'ResearchStudy']} })
 
 
-class FileLocation(ConfiguredBaseModel):
+class FileLocation(HasAccessPolicy):
     """
     Details relating to the links where documents are found
     """
@@ -1074,10 +1107,10 @@ class FileLocation(ConfiguredBaseModel):
     file_location_id: str = Field(default=..., title="File Location", description="""Location details (this is not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile', 'FileLocation']} })
     location_uri: str = Field(default=..., title="Location URI", description="""The URI at which this data can be accessed""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
     file_name: str = Field(default=..., title="File Name", description="""The file's name (no path)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileLocation']} })
-    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'FileLocation']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
-class FamilyRelationship(ConfiguredBaseModel):
+class FamilyRelationship(HasAccessPolicy):
     """
     A relationship between individuals in a pedigree or family.
     """
@@ -1119,9 +1152,10 @@ class FamilyRelationship(ConfiguredBaseModel):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'exception[KnowledgeSource]'}},
          'domain_of': ['FamilyRelationship']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
-class HasExternalId(ConfiguredBaseModel):
+class HasExternalId(HasAccessPolicy):
     """
     Has an external ID
     """
@@ -1129,7 +1163,10 @@ class HasExternalId(ConfiguredBaseModel):
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input',
          'title': 'Has'})
 
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class Practitioner(HasExternalId):
@@ -1157,7 +1194,10 @@ class Practitioner(HasExternalId):
                        'NCPIFile',
                        'Family']} })
     practitioner_title: Optional[str] = Field(default=None, title="Title", description="""The title of the Investigator, eg, \"Assistant Professor\"""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class Institution(HasExternalId):
@@ -1175,7 +1215,10 @@ class Institution(HasExternalId):
 
     institution_id: str = Field(default=..., title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'AssociatedParty', 'Institution']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class Participant(HasExternalId):
@@ -1203,7 +1246,7 @@ class Participant(HasExternalId):
     participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership',
+                       'ResearchSubject',
                        'Sample',
                        'NCPIFile']} })
     birthsex: Optional[EnumBirthSex] = Field(default=None, title="Birth Sex", description="""Sex assigned at birth (or pre-natal observed sex)""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_extension': {'tag': 'fhir_extension',
@@ -1223,7 +1266,10 @@ class Participant(HasExternalId):
     patient_knowledge_source: Optional[EnumPatientKnowledgeSource] = Field(default=None, title="Patient Knowledge Source", description="""The source of the knowledge represented by this Patient resource.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant']} })
     family_global_id: Optional[str] = Field(default=None, title="Family Global ID", description="""The family the participant is a part of""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Family']} })
     sample_id: Optional[list[str]] = Field(default=[], title="Sample ID", description="""Samples associated with this participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample', 'Aliquot']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class ResearchStudy(HasExternalId):
@@ -1255,11 +1301,16 @@ class ResearchStudy(HasExternalId):
                        'NCPIFile',
                        'Family']} })
     study_condition: Optional[list[str]] = Field(default=[], title="Study Condition", description="""The primary focus(es) of the study. This is specific to the disease. MeSH terms are preferred.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
-    study_acknowledgement: Optional[list[str]] = Field(default=[], title="Study Acknowledgement", description="""Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
+    study_acknowledgement: Optional[list[str]] = Field(default=[], title="Study Acknowledgement", description="""Any attribution or acknowledgements relevant to the study. This can include but is not limited to funding sources, organizational affiliations or sponsors.""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['ResearchStudy']} })
     study_status: EnumStudyStatus = Field(default=..., title="Study Status", description="""The current state of the study.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_design: Optional[list[str]] = Field(default=[], title="Study Design", description="""Study Design and Study Type ([example ValueSet can be found here](https://hl7.org/fhir/valueset-study-design.html))""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
     study_personnel: list[str] = Field(default=..., title="Study Personnel", description="""Every study must have at least one Primary Contact defined. Additional personnel such as Primary Investigator(s), Administrator(s), Collaborator(s) or other roles may also be included. If there are no appropriate individuals who can serve as primary contact for a study, an organization may be provided.""", json_schema_extra = { "linkml_meta": {'domain_of': ['ResearchStudy']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class ResearchStudyCollection(HasExternalId):
@@ -1290,7 +1341,10 @@ class ResearchStudyCollection(HasExternalId):
     research_study_collection_member_id: list[str] = Field(default=..., title="Research Study Collection Member ID", description="""ID associated with a member of the collection (Research Study, Dataset, etc)""", json_schema_extra = { "linkml_meta": {'annotations': {'target_slot': {'tag': 'target_slot',
                                          'value': 'research_study_id'}},
          'domain_of': ['ResearchStudyCollection']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class Sample(HasExternalId):
@@ -1318,7 +1372,7 @@ class Sample(HasExternalId):
     participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership',
+                       'ResearchSubject',
                        'Sample',
                        'NCPIFile']} })
     sample_type: str = Field(default=..., title="Sample Type", description="""The type of material of which this Sample is comprised""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'type'},
@@ -1395,7 +1449,10 @@ class Sample(HasExternalId):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'collection[].quantity.units'}},
          'domain_of': ['Sample']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class Aliquot(HasExternalId):
@@ -1447,7 +1504,10 @@ class Aliquot(HasExternalId):
                                            'value': 'Specimen'}},
          'domain_of': ['Aliquot']} })
     sample_id: str = Field(default=..., title="Sample ID", description="""Sample Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Participant', 'Sample', 'Aliquot']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class NCPIFile(HasExternalId):
@@ -1464,7 +1524,7 @@ class NCPIFile(HasExternalId):
     participant_id: str = Field(default=..., title="Participant ID", description="""The Global ID for the Participant""", json_schema_extra = { "linkml_meta": {'domain_of': ['ParticipantAssertion',
                        'Participant',
                        'Person',
-                       'StudyMembership',
+                       'ResearchSubject',
                        'Sample',
                        'NCPIFile']} })
     file_format: str = Field(default=..., title="File Format", description="""The file format used ([EDAM](http://edamontology.org) where possible)""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
@@ -1483,10 +1543,13 @@ class NCPIFile(HasExternalId):
                        'NCPIFile',
                        'Family']} })
     file_global_id: str = Field(default=..., title="File Global ID", description="""File Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['NCPIFile']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
-class Record(HasExternalId):
+class Record(ConfiguredBaseModel):
     """
     One row / entity within the database
     """
@@ -1495,7 +1558,6 @@ class Record(HasExternalId):
          'title': 'Record'})
 
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
 class RelativeDateTime(Record):
@@ -1509,7 +1571,6 @@ class RelativeDateTime(Record):
     offset_end: Optional[int] = Field(default=None, title="Offset End", description="""The end of a relative date/time range""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
     offset_type: EnumOffsetType = Field(default=..., title="Offset Type", description="""What is the datatype associated with the offset (days, years, etc)""", json_schema_extra = { "linkml_meta": {'domain_of': ['RelativeDateTime']} })
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
 class AgeAt(Record):
@@ -1526,7 +1587,6 @@ class AgeAt(Record):
     age_code: Optional[str] = Field(default=None, title="Age Code", description="""Age expressed as an enumerated value representing an age category""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
     as_date: Optional[date] = Field(default=None, title="Age As Date", description="""Event Date (rather than age)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AgeAt']} })
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
 class AssociatedParty(Record):
@@ -1547,10 +1607,9 @@ class AssociatedParty(Record):
     associated_party_practitioner_role_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner Role)", description="""Associated Party (is Practitioner Role)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     associated_party_institution_id: Optional[str] = Field(default=None, title="Associated Party (Institution)", description="""Associated Party (is Institution)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
 
 
-class FileMetaData(ConfiguredBaseModel):
+class FileMetaData(HasAccessPolicy):
     """
     Representation of file metadata for NCPI
     """
@@ -1588,6 +1647,7 @@ class FileMetaData(ConfiguredBaseModel):
     workflow_type: Optional[str] = Field(default=None, title="Workflow Type", description="""e.g., alignment, somatic""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     workflow_tool: Optional[str] = Field(default=None, title="Workflow Tool", description="""e.g., BAM-MEM, GATK-Haplotype Caller""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
     samples: Optional[list[str]] = Field(default=[], title="Samples associated with the file's content", description="""e.g., Reference(sample)""", json_schema_extra = { "linkml_meta": {'domain_of': ['FileMetaData']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 class Family(HasExternalId):
@@ -1615,16 +1675,21 @@ class Family(HasExternalId):
                        'Family']} })
     consanguinity: Optional[EnumConsanguinity] = Field(default=None, title="Consanguinity", description="""Is there known or suspected consanguinity in this study family?""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
     family_focus: Optional[str] = Field(default=None, title="Family Focus", description="""What is this study family investigating? EG, a specific condition""", json_schema_extra = { "linkml_meta": {'domain_of': ['Family']} })
-    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'domain_of': ['HasExternalId']} })
+    external_id: Optional[list[str]] = Field(default=[], title="External Identifiers", description="""Other identifiers for this entity, eg, from the submitting study or in systems link dbGaP""", json_schema_extra = { "linkml_meta": {'annotations': {'sqlalchemy.association_proxy': {'tag': 'sqlalchemy.association_proxy',
+                                                          'value': 'external_id'}},
+         'domain_of': ['HasExternalId']} })
+    access_policy_id: str = Field(default=..., title="Access Policy ID", description="""Access Policy Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['AccessPolicy', 'StudyMembership', 'HasAccessPolicy']} })
 
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
 AccessPolicy.model_rebuild()
-ParticipantAssertion.model_rebuild()
-Person.model_rebuild()
 Period.model_rebuild()
 PractitionerRole.model_rebuild()
+HasAccessPolicy.model_rebuild()
+ParticipantAssertion.model_rebuild()
+Person.model_rebuild()
+ResearchSubject.model_rebuild()
 StudyMembership.model_rebuild()
 FileLocation.model_rebuild()
 FamilyRelationship.model_rebuild()
