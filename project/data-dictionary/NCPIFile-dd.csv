@@ -9,3 +9,4 @@ file_hash,Value of hashing the file,string,,,,,
 file_hash_type,"Algorithm used to calculate the hash (and size, where applicable)",string,,,,,
 description,More details associated with the given resource,string,,,,,
 file_global_id,File Global ID,string,,,,,
+access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id

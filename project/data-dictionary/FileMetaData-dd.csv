@@ -12,3 +12,4 @@ adaptor_trimmed,"True, False",string,,,,,
 reference_genome,"GRCh37, GRCh38",string,,,,,
 workflow_type,"e.g., alignment, somatic",string,,,,,
 workflow_tool,"e.g., BAM-MEM, GATK-Haplotype Caller",string,,,,,
+access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id

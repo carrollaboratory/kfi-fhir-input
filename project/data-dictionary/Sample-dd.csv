@@ -12,3 +12,4 @@ availability_status,Can this Sample be requested for further analysis?,enumerati
 storage_method,"How is the Sample stored, eg, Frozen or with additives (e.g. https://terminology.hl7.org/5.3.0/ValueSet-v2-0493.html)",string,,,,,
 quantity,The total quantity of the specimen,number,,,,,
 quantity_units,Units associated with the quantity (ucum),string,,,,,
+access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id

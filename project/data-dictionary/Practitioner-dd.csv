@@ -6,3 +6,4 @@ institution_id,The institution this record is associated with.,string,,,,,Foreig
 practitioner_role_id,Global ID for this record,string,,,,,Foreign Key: PractitionerRole.practitioner_role_id
 description,More details associated with the given resource,string,,,,,
 practitioner_title,"The title of the Investigator, eg, ""Assistant Professor""",string,,,,,
+access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
