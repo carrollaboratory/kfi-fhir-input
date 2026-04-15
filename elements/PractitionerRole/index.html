@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -272,6 +281,9 @@
 <div class="mermaid"> classDiagram
     class PractitionerRole
     click PractitionerRole href "../PractitionerRole/"
+      Period &lt;|-- PractitionerRole
+        click Period href "../Period/"
+
       PractitionerRole : institution_id
 
 
@@ -283,16 +295,9 @@
 
 
 
-      PractitionerRole : period_id
+      PractitionerRole : period_end
 
-
-
-
-
-        PractitionerRole --&gt; "0..1" Period : period_id
-        click Period href "../Period/"
-
-
+      PractitionerRole : period_start
 
       PractitionerRole : practitioner_id
 
@@ -309,7 +314,10 @@
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><strong>PractitionerRole</strong> [ <a href="../Period/">Period</a>]</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -340,10 +348,16 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../period_id/">period_id</a></td>
-<td>0..1 <br/> <a href="../Period/">Period</a></td>
-<td>Reference to a time period which defines a Start and End datatime period</td>
-<td>direct</td>
+<td><a href="../period_start/">period_start</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>Start attribute for a FHIR period data type</td>
+<td><a href="../Period/">Period</a></td>
+</tr>
+<tr>
+<td><a href="../period_end/">period_end</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>End attribute for a FHIR period data type</td>
+<td><a href="../Period/">Period</a></td>
 </tr>
 </tbody>
 </table>
@@ -424,11 +438,12 @@ description: PractitionerRole covers the recording of the location and types of 
   that Practitioners are able to provide for an organization.
 title: Practitioner Role
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+mixins:
+- Period
 slots:
 - practitioner_role_id
 - institution_id
 - practitioner_id
-- period_id
 slot_usage:
   practitioner_role_id:
     name: practitioner_role_id
@@ -449,6 +464,8 @@ description: PractitionerRole covers the recording of the location and types of 
   that Practitioners are able to provide for an organization.
 title: Practitioner Role
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+mixins:
+- Period
 slot_usage:
   practitioner_role_id:
     name: practitioner_role_id
@@ -499,23 +516,32 @@ attributes:
     - PractitionerRole
     range: Practitioner
     required: false
-  period_id:
-    name: period_id
-    description: Reference to a time period which defines a Start and End datatime
-      period.
-    title: Period ID
+  period_start:
+    name: period_start
+    description: Start attribute for a FHIR period data type.
+    title: Start
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    alias: period_id
+    slot_uri: kfi:start
+    alias: period_start
     owner: PractitionerRole
     domain_of:
-    - AssociatedParty
     - Period
-    - PractitionerRole
-    range: Period
+    range: date
     required: false
-    multivalued: false
-    inlined: false
+  period_end:
+    name: period_end
+    description: End attribute for a FHIR period data type.
+    title: End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    slot_uri: kfi:end
+    alias: period_end
+    owner: PractitionerRole
+    domain_of:
+    - Period
+    range: date
+    required: false
 
 </code></pre>
 </details>

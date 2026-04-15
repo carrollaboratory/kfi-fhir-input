@@ -182,6 +182,8 @@ AccessPolicy {
     EnumAccessPolicyCodeList access_policy_code  
     string disease_limitation  
     EnumConsentStateCodes status  
+    date period_start  
+    date period_end  
 }
 AgeAt {
     EnumAgeValueType value_type  
@@ -294,9 +296,8 @@ ParticipantAssertion {
     uriorcurie cancer_stage  
 }
 Period {
-    string period_id  
-    date start  
-    date end  
+    date period_start  
+    date period_end  
 }
 Person {
     string person_id  
@@ -311,6 +312,8 @@ Practitioner {
 }
 PractitionerRole {
     string practitioner_role_id  
+    date period_start  
+    date period_end  
 }
 Record {
     string id  
@@ -400,7 +403,6 @@ Practitioner ||--|o Institution : "institution_id"
 Practitioner ||--|o PractitionerRole : "practitioner_role_id"
 Practitioner ||--|| AccessPolicy : "access_policy_id"
 PractitionerRole ||--|o Institution : "institution_id"
-PractitionerRole ||--|o Period : "period_id"
 PractitionerRole ||--|o Practitioner : "practitioner_id"
 ResearchStudy ||--|o ResearchStudy : "parent_study_id"
 ResearchStudy ||--|| AccessPolicy : "access_policy_id"

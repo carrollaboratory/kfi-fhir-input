@@ -469,10 +469,6 @@
          <lastmod>2026-04-15</lastmod>
     </url>
     <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/end/</loc>
-         <lastmod>2026-04-15</lastmod>
-    </url>
-    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/entity_asserter/</loc>
          <lastmod>2026-04-15</lastmod>
     </url>
@@ -645,7 +641,15 @@
          <lastmod>2026-04-15</lastmod>
     </url>
     <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/period_end/</loc>
+         <lastmod>2026-04-15</lastmod>
+    </url>
+    <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/period_id/</loc>
+         <lastmod>2026-04-15</lastmod>
+    </url>
+    <url>
+         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/period_start/</loc>
          <lastmod>2026-04-15</lastmod>
     </url>
     <url>
@@ -738,10 +742,6 @@
     </url>
     <url>
          <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/spatial_qualifier/</loc>
-         <lastmod>2026-04-15</lastmod>
-    </url>
-    <url>
-         <loc>https://carrollaboratory.github.io/kfi-fhir-input/elements/start/</loc>
          <lastmod>2026-04-15</lastmod>
     </url>
     <url>

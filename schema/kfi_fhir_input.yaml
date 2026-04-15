@@ -2310,6 +2310,34 @@ slots:
     range: ResearchSubject
     required: false
     multivalued: false
+  period_start:
+    name: period_start
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_start
+    description: Start attribute for a FHIR period data type.
+    title: Start
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    mappings:
+    - kfi:start
+    slot_uri: kfi:start
+    owner: Period
+    domain_of:
+    - Period
+    range: date
+    required: false
+  period_end:
+    name: period_end
+    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_end
+    description: End attribute for a FHIR period data type.
+    title: End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    mappings:
+    - kfi:end
+    slot_uri: kfi:end
+    owner: Period
+    domain_of:
+    - Period
+    range: date
+    required: false
   period_id:
     name: period_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
@@ -2318,15 +2346,13 @@ slots:
     title: Period ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    owner: PractitionerRole
+    owner: AssociatedParty
     domain_of:
     - AssociatedParty
-    - Period
-    - PractitionerRole
     range: Period
     required: false
     multivalued: false
-    inlined: false
+    inlined: true
   practitioner_role_id:
     name: practitioner_role_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
@@ -3513,30 +3539,6 @@ slots:
     - AgeAt
     range: date
     required: false
-  period__start:
-    name: period__start
-    description: Start attribute for a FHIR period data type.
-    title: Start
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/start
-    alias: start
-    owner: Period
-    domain_of:
-    - Period
-    range: date
-    required: false
-  period__end:
-    name: period__end
-    description: End attribute for a FHIR period data type.
-    title: End
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/end
-    alias: end
-    owner: Period
-    domain_of:
-    - Period
-    range: date
-    required: false
   nCPIFile__file_global_id:
     name: nCPIFile__file_global_id
     description: File Global ID
@@ -3635,7 +3637,7 @@ slots:
     range: Period
     required: false
     multivalued: true
-    inlined: false
+    inlined: true
   Institution_institution_id:
     name: Institution_institution_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
@@ -3764,26 +3766,6 @@ slots:
     range: string
     required: true
     multivalued: false
-  Period_period_id:
-    name: Period_period_id
-    definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    description: ID for period (not a global ID)
-    title: Period ID
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    is_a: period_id
-    domain: Period
-    slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/period_id
-    identifier: true
-    alias: period_id
-    owner: Period
-    domain_of:
-    - Period
-    is_usage_slot: true
-    usage_slot_name: period_id
-    range: string
-    required: true
-    multivalued: false
-    inlined: false
   PractitionerRole_practitioner_role_id:
     name: PractitionerRole_practitioner_role_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
@@ -4048,6 +4030,8 @@ classes:
       to a particular set of data.
     title: Access Policy
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
+    mixins:
+    - Period
     slots:
     - AccessPolicy_access_policy_id
     - description
@@ -4057,6 +4041,8 @@ classes:
     - access_policy_code
     - disease_limitation
     - accessPolicy__status
+    - period_start
+    - period_end
     slot_usage:
       access_policy_id:
         name: access_policy_id
@@ -4368,30 +4354,10 @@ classes:
     description: Time period associated with some FHIR resource
     title: Period
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
+    mixin: true
     slots:
-    - Period_period_id
-    - period__start
-    - period__end
-    slot_usage:
-      period_id:
-        name: period_id
-        description: ID for period (not a global ID)
-        identifier: true
-        range: string
-        required: true
-    attributes:
-      start:
-        name: start
-        description: Start attribute for a FHIR period data type.
-        title: Start
-        range: date
-        required: false
-      end:
-        name: end
-        description: End attribute for a FHIR period data type.
-        title: End
-        range: date
-        required: false
+    - period_start
+    - period_end
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/period/Period
   PractitionerRole:
     name: PractitionerRole
@@ -4404,11 +4370,14 @@ classes:
       services that Practitioners are able to provide for an organization.
     title: Practitioner Role
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
+    mixins:
+    - Period
     slots:
     - PractitionerRole_practitioner_role_id
     - institution_id
     - practitioner_id
-    - period_id
+    - period_start
+    - period_end
     slot_usage:
       practitioner_role_id:
         name: practitioner_role_id
@@ -4745,7 +4714,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-04-15T13:25:24'
+source_file_date: '2026-04-15T18:30:39'
 source_file_size: 5234
-generation_date: '2026-04-15T13:25:39'
+generation_date: '2026-04-15T18:30:52'
 

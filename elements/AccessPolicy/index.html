@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -272,6 +281,9 @@
 <div class="mermaid"> classDiagram
     class AccessPolicy
     click AccessPolicy href "../AccessPolicy/"
+      Period &lt;|-- AccessPolicy
+        click Period href "../Period/"
+
       AccessPolicy : access_policy_code
 
 
@@ -311,6 +323,10 @@
 
       AccessPolicy : disease_limitation
 
+      AccessPolicy : period_end
+
+      AccessPolicy : period_start
+
       AccessPolicy : status
 
 
@@ -326,7 +342,10 @@
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><strong>AccessPolicy</strong> [ <a href="../Period/">Period</a>]</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -385,6 +404,18 @@
 <td>1 <br/> <a href="../EnumConsentStateCodes/">EnumConsentStateCodes</a></td>
 <td>Indicates the state of the consent</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../period_start/">period_start</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>Start attribute for a FHIR period data type</td>
+<td><a href="../Period/">Period</a></td>
+</tr>
+<tr>
+<td><a href="../period_end/">period_end</a></td>
+<td>0..1 <br/> <a href="../Date/">Date</a></td>
+<td>End attribute for a FHIR period data type</td>
+<td><a href="../Period/">Period</a></td>
 </tr>
 </tbody>
 </table>
@@ -561,6 +592,8 @@ description: Limitations and/or requirements that define how a user may gain acc
   to a particular set of data.
 title: Access Policy
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+mixins:
+- Period
 slots:
 - access_policy_id
 - description
@@ -613,6 +646,8 @@ description: Limitations and/or requirements that define how a user may gain acc
   to a particular set of data.
 title: Access Policy
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+mixins:
+- Period
 slot_usage:
   access_policy_id:
     name: access_policy_id
@@ -787,6 +822,32 @@ attributes:
     range: string
     required: false
     multivalued: false
+  period_start:
+    name: period_start
+    description: Start attribute for a FHIR period data type.
+    title: Start
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    slot_uri: kfi:start
+    alias: period_start
+    owner: AccessPolicy
+    domain_of:
+    - Period
+    range: date
+    required: false
+  period_end:
+    name: period_end
+    description: End attribute for a FHIR period data type.
+    title: End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    slot_uri: kfi:end
+    alias: period_end
+    owner: AccessPolicy
+    domain_of:
+    - Period
+    range: date
+    required: false
 
 </code></pre>
 </details>

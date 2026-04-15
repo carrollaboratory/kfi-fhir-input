@@ -180,6 +180,15 @@
 </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#mixin-usage">
+<span class="md-ellipsis">
+      
+        Mixin Usage
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#usages">
 <span class="md-ellipsis">
       
@@ -263,11 +272,14 @@
 <div class="mermaid"> classDiagram
     class Period
     click Period href "../Period/"
-      Period : end
+      Period &lt;|-- AccessPolicy
+        click AccessPolicy href "../AccessPolicy/"
+      Period &lt;|-- PractitionerRole
+        click PractitionerRole href "../PractitionerRole/"
 
-      Period : period_id
+      Period : period_end
 
-      Period : start
+      Period : period_start
 
 
 </div>
@@ -284,22 +296,35 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../period_id/">period_id</a></td>
-<td>1 <br/> <a href="../String/">String</a></td>
-<td>ID for period (not a global ID)</td>
-<td>direct</td>
-</tr>
-<tr>
-<td><a href="../start/">start</a></td>
+<td><a href="../period_start/">period_start</a></td>
 <td>0..1 <br/> <a href="../Date/">Date</a></td>
 <td>Start attribute for a FHIR period data type</td>
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../end/">end</a></td>
+<td><a href="../period_end/">period_end</a></td>
 <td>0..1 <br/> <a href="../Date/">Date</a></td>
 <td>End attribute for a FHIR period data type</td>
 <td>direct</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mixin-usage">Mixin Usage</h2>
+<table>
+<thead>
+<tr>
+<th>mixed into</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../AccessPolicy/">AccessPolicy</a></td>
+<td>Limitations and/or requirements that define how a user may gain access to a p...</td>
+</tr>
+<tr>
+<td><a href="../PractitionerRole/">PractitionerRole</a></td>
+<td>PractitionerRole covers the recording of the location and types of services t...</td>
 </tr>
 </tbody>
 </table>
@@ -316,12 +341,6 @@
 <tbody>
 <tr>
 <td><a href="../AssociatedParty/">AssociatedParty</a></td>
-<td><a href="../period_id/">period_id</a></td>
-<td>range</td>
-<td><a href="./">Period</a></td>
-</tr>
-<tr>
-<td><a href="../PractitionerRole/">PractitionerRole</a></td>
 <td><a href="../period_id/">period_id</a></td>
 <td>range</td>
 <td><a href="./">Period</a></td>
@@ -360,36 +379,10 @@
 description: Time period associated with some FHIR resource
 title: Period
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+mixin: true
 slots:
-- period_id
-slot_usage:
-  period_id:
-    name: period_id
-    description: ID for period (not a global ID)
-    identifier: true
-    range: string
-    required: true
-attributes:
-  start:
-    name: start
-    description: Start attribute for a FHIR period data type.
-    title: Start
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    rank: 1000
-    domain_of:
-    - Period
-    range: date
-    required: false
-  end:
-    name: end
-    description: End attribute for a FHIR period data type.
-    title: End
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    rank: 1000
-    domain_of:
-    - Period
-    range: date
-    required: false
+- period_start
+- period_end
 
 </code></pre>
 </details>
@@ -399,55 +392,34 @@ attributes:
 description: Time period associated with some FHIR resource
 title: Period
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-slot_usage:
-  period_id:
-    name: period_id
-    description: ID for period (not a global ID)
-    identifier: true
-    range: string
-    required: true
+mixin: true
 attributes:
-  start:
-    name: start
+  period_start:
+    name: period_start
     description: Start attribute for a FHIR period data type.
     title: Start
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    rank: 1000
-    alias: start
-    owner: Period
-    domain_of:
-    - Period
-    range: date
-    required: false
-  end:
-    name: end
-    description: End attribute for a FHIR period data type.
-    title: End
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    rank: 1000
-    alias: end
-    owner: Period
-    domain_of:
-    - Period
-    range: date
-    required: false
-  period_id:
-    name: period_id
-    description: ID for period (not a global ID)
-    title: Period ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     rank: 1000
-    identifier: true
-    alias: period_id
+    slot_uri: kfi:start
+    alias: period_start
     owner: Period
     domain_of:
-    - AssociatedParty
     - Period
-    - PractitionerRole
-    range: string
-    required: true
-    multivalued: false
-    inlined: false
+    range: date
+    required: false
+  period_end:
+    name: period_end
+    description: End attribute for a FHIR period data type.
+    title: End
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    slot_uri: kfi:end
+    alias: period_end
+    owner: Period
+    domain_of:
+    - Period
+    range: date
+    required: false
 
 </code></pre>
 </details>
