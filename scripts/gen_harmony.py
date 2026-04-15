@@ -199,7 +199,9 @@ def generate_harmony_files(schema_path, output_base):
                 enum_val.mappings.append(
                     {
                         "code": code,
-                        "display": pv_def.description or "",
+                        # Let's assume we'll be use description only when our
+                        # mapped code's display differs from the local display
+                        "display": pv_def.description or pv_def.title,
                         "system": system,
                         "md_link": md_link,
                     }
