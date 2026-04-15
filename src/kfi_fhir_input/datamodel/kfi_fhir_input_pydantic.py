@@ -765,13 +765,26 @@ class EnumConsanguinity(str, Enum):
 
 
 
-class AccessPolicy(ConfiguredBaseModel):
+class Period(ConfiguredBaseModel):
+    """
+    Time period associated with some FHIR resource
+    """
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/period',
+         'mixin': True,
+         'title': 'Period'})
+
+    period_start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period'], 'slot_uri': 'kfi:start'} })
+    period_end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period'], 'slot_uri': 'kfi:end'} })
+
+
+class AccessPolicy(Period):
     """
     Limitations and/or requirements that define how a user may gain access to a particular set of data.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/access-policy',
+         'mixins': ['Period'],
          'slot_usage': {'access_policy_id': {'description': 'Access policy '
                                                             'communicates the '
                                                             'limitations and/or '
@@ -820,32 +833,18 @@ class AccessPolicy(ConfiguredBaseModel):
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy'},
                          'fhir_resource': {'tag': 'fhir_resource', 'value': 'Consent'}},
          'domain_of': ['AccessPolicy']} })
+    period_start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period'], 'slot_uri': 'kfi:start'} })
+    period_end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period'], 'slot_uri': 'kfi:end'} })
 
 
-class Period(ConfiguredBaseModel):
-    """
-    Time period associated with some FHIR resource
-    """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/period',
-         'slot_usage': {'period_id': {'description': 'ID for period (not a global ID)',
-                                      'identifier': True,
-                                      'name': 'period_id',
-                                      'range': 'string',
-                                      'required': True}},
-         'title': 'Period'})
-
-    period_id: str = Field(default=..., title="Period ID", description="""ID for period (not a global ID)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
-    start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-    end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period']} })
-
-
-class PractitionerRole(ConfiguredBaseModel):
+class PractitionerRole(Period):
     """
     PractitionerRole covers the recording of the location and types of services that Practitioners are able to provide for an organization.
     """
     linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'annotations': {'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'PractitionerRole'}},
          'from_schema': 'https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role',
+         'mixins': ['Period'],
          'slot_usage': {'practitioner_role_id': {'identifier': True,
                                                  'name': 'practitioner_role_id',
                                                  'range': 'string',
@@ -855,7 +854,8 @@ class PractitionerRole(ConfiguredBaseModel):
     practitioner_role_id: str = Field(default=..., title="Practitioner Role ID", description="""Global ID for this record""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
     institution_id: Optional[str] = Field(default=None, title="Institution", description="""The institution this record is associated with.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'Institution', 'PractitionerRole']} })
     practitioner_id: Optional[str] = Field(default=None, title="Practitioner ID", description="""The Global ID for the PractitionerRole that links a Practitioner to their Institution.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'PractitionerRole']} })
-    period_id: Optional[str] = Field(default=None, title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
+    period_start: Optional[date] = Field(default=None, title="Start", description="""Start attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period'], 'slot_uri': 'kfi:start'} })
+    period_end: Optional[date] = Field(default=None, title="End", description="""End attribute for a FHIR period data type.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Period'], 'slot_uri': 'kfi:end'} })
 
 
 class HasAccessPolicy(ConfiguredBaseModel):
@@ -1601,7 +1601,7 @@ class AssociatedParty(Record):
 
     name: Optional[str] = Field(default=None, title="Name", description="""Name of the entity.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Practitioner', 'AssociatedParty', 'Institution']} })
     role: Optional[EnumResearchStudyPartyRole] = Field(default=None, title="Role", description="""Research Study Party Role""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
-    period_id: Optional[list[str]] = Field(default=[], title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty', 'Period', 'PractitionerRole']} })
+    period_id: Optional[list[str]] = Field(default=[], title="Period ID", description="""Reference to a time period which defines a Start and End datatime period.""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     classifier: Optional[list[EnumResearchStudyPartyOrganizationType]] = Field(default=[], title="Classifier", description="""Research Study Party Organization Type (what type of institution is party)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     associated_party_practitioner_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner)", description="""Associated Party (is Practitioner).""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
     associated_party_practitioner_role_id: Optional[str] = Field(default=None, title="Associated Party (Practitioner Role)", description="""Associated Party (is Practitioner Role)""", json_schema_extra = { "linkml_meta": {'domain_of': ['AssociatedParty']} })
@@ -1683,8 +1683,8 @@ class Family(HasExternalId):
 
 # Model rebuild
 # see https://pydantic-docs.helpmanual.io/usage/models/#rebuilding-a-model
-AccessPolicy.model_rebuild()
 Period.model_rebuild()
+AccessPolicy.model_rebuild()
 PractitionerRole.model_rebuild()
 HasAccessPolicy.model_rebuild()
 ParticipantAssertion.model_rebuild()

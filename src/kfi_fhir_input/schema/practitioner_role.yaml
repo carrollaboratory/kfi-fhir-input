@@ -5,6 +5,7 @@ imports:
   - kfi_fhir_input
   - practitioner
   - institution
+  - period
 classes:
   PractitionerRole:
     title: Practitioner Role
@@ -12,12 +13,12 @@ classes:
     # is_a: Record
     annotations:
       fhir_resource: PractitionerRole
-
+    mixins:
+      - Period
     slots:
       - practitioner_role_id
       - institution_id
       - practitioner_id
-      - period_id
     slot_usage:
       practitioner_role_id:
         identifier: true

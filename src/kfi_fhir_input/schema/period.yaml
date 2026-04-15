@@ -1,40 +1,38 @@
 id: https://carrollaboratory.github.io/kfi-fhir-input/period
 name: kfi-fhir-input-period
 imports:
-  - linkml:types 
+  - linkml:types
   - kfi_fhir_input
-classes:  
+classes:
   Period:
-    title: Period 
-    description: Time period associated with some FHIR resource     
+    title: Period
+    mixin: true
+    description: Time period associated with some FHIR resource
     # is_a: Record
-    attributes:
-      start:
-        title: Start 
-        description: Start attribute for a FHIR period data type. 
-        range: date
-        required: false
-      end: 
-        title: End 
-        description: End attribute for a FHIR period data type. 
-        range: date
-        required: false
-    slots: 
-      - period_id
-    slot_usage:
-      period_id:
-        range: string 
-        identifier: true 
-        required: true
-        description: ID for period (not a global ID)
+    slots:
+      - period_start
+      - period_end
+
 slots:
+  period_start:
+    title: Start
+    description: Start attribute for a FHIR period data type.
+    range: date
+    required: false
+    slot_uri: kfi:start
+  period_end:
+    title: End
+    description: End attribute for a FHIR period data type.
+    range: date
+    required: false
+    slot_uri: kfi:end
   period_id:
     title: Period ID
-    description: Reference to a time period which defines a Start and End datatime period. 
-    range: Period 
+    description: Reference to a time period which defines a Start and End datatime period.
+    range: Period
     required: false
     inlined: false
     multivalued: false
     #annotations:
     #  db_column: period_id
-    #  target_slot: id 
+    #  target_slot: id

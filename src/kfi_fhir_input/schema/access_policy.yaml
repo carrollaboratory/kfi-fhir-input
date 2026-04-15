@@ -1,133 +1,135 @@
 id: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
 name: kfi-fhir-input-access-policy
 imports:
-  - linkml:types 
+  - linkml:types
   - kfi_fhir_input
 classes:
   AccessPolicy:
-    title: Access Policy  
+    title: Access Policy
     description: Limitations and/or requirements that define how a user may gain access to a particular set of data.
-    # is_a: HasExternalId 
+    # is_a: HasExternalId
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
     attributes:
-      status: 
-        title: Status 
+      status:
+        title: Status
         description: Indicates the state of the consent.
-        range: EnumConsentStateCodes 
-        required: true 
+        range: EnumConsentStateCodes
+        required: true
         multivalued: false
         annotations:
           fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
           fhir_element: status
           fhir_resource: Consent
+    mixins:
+      - Period
     slots:
-      - access_policy_id 
-      - description 
-      - data_access_type 
+      - access_policy_id
+      - description
+      - data_access_type
       - website
-      - consent_scope 
+      - consent_scope
       - access_policy_code
       - disease_limitation
     slot_usage:
       access_policy_id:
         range: string
-        required: true 
-        identifier: true 
+        required: true
+        identifier: true
         description: Access policy communicates the limitations and/or requirements that define how a user may gain access to a particular set of data.
 slots:
   access_policy_id:
-    title: Access Policy ID 
-    description: Access Policy Global ID 
-    range: AccessPolicy 
-    multivalued: false 
+    title: Access Policy ID
+    description: Access Policy Global ID
+    range: AccessPolicy
+    multivalued: false
     required: true
-  disease_limitation: 
-    description: Disease Use Limitations  
-    required: false 
-    range: string 
-    multivalued: false 
+  disease_limitation:
+    description: Disease Use Limitations
+    required: false
+    range: string
+    multivalued: false
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
       fhir_element: provision.purpose
       fhir_resource: Consent
   access_policy_code:
-    title: Access Policy Code 
+    title: Access Policy Code
     description: A classification of the type of consents found in a consent statement.
-    required: true 
-    multivalued: true 
+    required: true
+    multivalued: true
     range: EnumAccessPolicyCode
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
       fhir_element: category
       fhir_resource: Consent
-  data_access_type: 
-    title: Access Type 
+  data_access_type:
+    title: Access Type
     description: Type of access restrictions on file downloads ( open | registered | controlled )
-    multivalued: false 
-    required: true 
-    range: EnumDataAccessType 
+    multivalued: false
+    required: true
+    range: EnumDataAccessType
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
       fhir_extension: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition-access-type
       fhir_resource: Consent
   consent_scope:
-    title: Consent Scope 
+    title: Consent Scope
     description: Which of the four areas this resource covers (extensible)
-    required: true 
-    multivalued: false 
+    required: true
+    multivalued: false
     range: EnumConsentScope
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-research-access-policy
-      fhir_resource: Consent 
-      fhir_element: scope 
+      fhir_resource: Consent
+      fhir_element: scope
 enums:
   EnumAccessPolicyCode:
     description: Type of research use case allowed
     permissible_values:
-      gru: 
-        title: GRU 
+      gru:
+        title: GRU
         meaning: ncpi_data_access_code:GRU
-        description: General Research Use 
-      hmb: 
-        title: HMB 
-        meaning: ncpi_data_access_code:HMB 
-        description: Health/Medical/Biomedical 
-      ds: 
-        title: DS 
-        meaning: ncpi_data_access_code:DS 
+        description: General Research Use
+      hmb:
+        title: HMB
+        meaning: ncpi_data_access_code:HMB
+        description: Health/Medical/Biomedical
+      ds:
+        title: DS
+        meaning: ncpi_data_access_code:DS
         description: Disease-Specific (Disease/Trait/Exposure)
-      irb: 
-        title: IRB 
-        meaning: ncpi_data_access_code:IRB 
-        description: IRB Approval Required 
-      pub: 
-        title: PUB 
-        meaning: ncpi_data_access_code:PUB 
-        description: Publication Required 
-      col: 
-        title: COL 
-        meaning: ncpi_data_access_code:COL 
-        description: Collaboration Required 
-      npu: 
-        title: NPU 
-        meaning: ncpi_data_access_code:NPU 
-        description: Not-for-profit use only 
-      mds: 
-        title: MDS 
-        meaning: ncpi_data_access_code:MDS 
-        description: Methods 
-      gso: 
-        title: GSO 
-        meaning: ncpi_data_access_code:GSO 
-        description: Genetic Studies only 
-      gsr: 
-        title: GSR 
-        meaning: ncpi_data_access_code:GSR 
+      irb:
+        title: IRB
+        meaning: ncpi_data_access_code:IRB
+        description: IRB Approval Required
+      pub:
+        title: PUB
+        meaning: ncpi_data_access_code:PUB
+        description: Publication Required
+      col:
+        title: COL
+        meaning: ncpi_data_access_code:COL
+        description: Collaboration Required
+      npu:
+        title: NPU
+        meaning: ncpi_data_access_code:NPU
+        description: Not-for-profit use only
+      mds:
+        title: MDS
+        meaning: ncpi_data_access_code:MDS
+        description: Methods
+      gso:
+        title: GSO
+        meaning: ncpi_data_access_code:GSO
+        description: Genetic Studies only
+      gsr:
+        title: GSR
+        meaning: ncpi_data_access_code:GSR
         description: Genomic Summary Results
       rd:
         title: RD
-        meaning: ncpi_data_access_code:RD 
+        meaning: ncpi_data_access_code:RD
         description: Related Diseases
       duo_0000004:
         title: no restriction
@@ -225,7 +227,7 @@ enums:
     description: The four anticipated uses for the Consent Resource.
     permissible_values:
       adr:
-        title: Advanced Care Directive 
+        title: Advanced Care Directive
         meaning: hl7_consent_scope:adr
       research:
         title: Research
@@ -234,25 +236,25 @@ enums:
         title: Patient Privacy
         meaning: hl7_consent_scope:patient-privacy
       treatment:
-        title: Treatment 
+        title: Treatment
         meaning: hl7_consent_scope:treatment
-  EnumConsentStateCodes: 
+  EnumConsentStateCodes:
     description: Indicates the state of the consent.
-    permissible_values: 
+    permissible_values:
       draft:
         title: Draft
         meaning: hl7_consent_state_codes:draft
       proposed:
-        title: Proposed 
+        title: Proposed
         meaning: hl7_consent_state_codes:proposed
       active:
-        title: Active 
+        title: Active
         meaning: hl7_consent_state_codes:active
       rejected:
-        title: Rejected 
+        title: Rejected
         meaning: hl7_consent_state_codes:rejected
       inactive:
-        title: Inactive 
+        title: Inactive
         meaning: hl7_consent_state_codes:inactive
       entered_in_error:
         title: Entered in Error
@@ -261,17 +263,17 @@ enums:
     description: Enumerated list of access type codes such as 'Open Access', 'Registered Access' and 'Controlled Access'
     permissible_values:
       open:
-        title: Open Access 
-        meaning: ncpi_data_access_type:open 
+        title: Open Access
+        meaning: ncpi_data_access_type:open
       registered:
-        title: Registered 
-        meaning: ncpi_data_access_type:registered 
-      controlled: 
-        title: Controlled 
-        meaning: ncpi_data_access_type:controlled 
+        title: Registered
+        meaning: ncpi_data_access_type:registered
+      controlled:
+        title: Controlled
+        meaning: ncpi_data_access_type:controlled
       gsr_restricted:
-        title: GSR Restricted 
-        meaning: ncpi_data_access_type:gsr-restricted 
+        title: GSR Restricted
+        meaning: ncpi_data_access_type:gsr-restricted
       gsr_allowed:
-        title: GSR Allowed 
+        title: GSR Allowed
         meaning: ncpi_data_access_type:gsr-allowed
