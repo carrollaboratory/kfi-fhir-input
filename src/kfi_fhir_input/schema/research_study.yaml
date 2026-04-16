@@ -10,7 +10,7 @@ classes:
   ResearchStudy:
     title: Research Study
     description: The NCPI Research Study FHIR resource represents an individual research effort and acts as a grouper or “container” for that effort’s study participants and their related data files.
-    is_a: HasExternalId
+    # is_a: HasExternalId
     annotations:
       fhir_resource: ResearchStudy
     slots:
@@ -24,6 +24,8 @@ classes:
       - study_status
       - study_design
       - study_personnel
+      - external_id
+      - access_policy_id
     slot_usage:
       research_study_id:
         description: The Global ID for the Research Study.

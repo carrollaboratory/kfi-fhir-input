@@ -13,3 +13,4 @@ is_deceased: False
 family_global_id: fam-12345
 sample_id:
   - sample001
+research_study_id: "SD_ME0WME0W"

@@ -15,3 +15,4 @@ deceased_rel,Implementers can provide relativeDateTime if information is availab
 patient_knowledge_source,The source of the knowledge represented by this Patient resource.,enumeration,,,,"traditional=The knowledge comes from traditional sources like a form filled out by a patient or information copied from an external traditional source like government records.;inferred=The knowledge is inferred from indirect evidence. For example, the existence of one patient's mother can be inferred from the existence of the patient.",
 family_global_id,The family the participant is a part of,string,,,,,Foreign Key: Family.family_global_id
 access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
+research_study_id,The Global ID for the Research Study.,string,,,,,Foreign Key: ResearchStudy.research_study_id
