@@ -2319,9 +2319,10 @@ slots:
     mappings:
     - kfi:start
     slot_uri: kfi:start
-    owner: Period
+    owner: PractitionerRole
     domain_of:
     - Period
+    - PractitionerRole
     range: date
     required: false
   period_end:
@@ -2333,9 +2334,10 @@ slots:
     mappings:
     - kfi:end
     slot_uri: kfi:end
-    owner: Period
+    owner: PractitionerRole
     domain_of:
     - Period
+    - PractitionerRole
     range: date
     required: false
   period_id:
@@ -2351,8 +2353,9 @@ slots:
     - AssociatedParty
     range: Period
     required: false
-    multivalued: false
+    multivalued: true
     inlined: true
+    inlined_as_list: true
   practitioner_role_id:
     name: practitioner_role_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role/practitioner_role_id
@@ -3638,6 +3641,7 @@ slots:
     required: false
     multivalued: true
     inlined: true
+    inlined_as_list: true
   Institution_institution_id:
     name: Institution_institution_id
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/institution/institution_id
@@ -4229,7 +4233,9 @@ classes:
     slot_usage:
       period_id:
         name: period_id
+        required: false
         multivalued: true
+        inlined: false
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/associated_party/AssociatedParty
   Institution:
     name: Institution
@@ -4354,7 +4360,6 @@ classes:
     description: Time period associated with some FHIR resource
     title: Period
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/period
-    mixin: true
     slots:
     - period_start
     - period_end
@@ -4370,8 +4375,6 @@ classes:
       services that Practitioners are able to provide for an organization.
     title: Practitioner Role
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/practitioner_role
-    mixins:
-    - Period
     slots:
     - PractitionerRole_practitioner_role_id
     - institution_id
@@ -4714,7 +4717,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-04-15T18:30:39'
+source_file_date: '2026-04-16T15:17:37'
 source_file_size: 5234
-generation_date: '2026-04-15T18:30:52'
+generation_date: '2026-04-16T15:17:49'
 
