@@ -11,3 +11,4 @@ access_policy_id: acp-0001
 is_deceased: True
 deceased_rel: rt-0003
 family_global_id: fam-12345
+research_study_id: "SD_ME0WME0W"
