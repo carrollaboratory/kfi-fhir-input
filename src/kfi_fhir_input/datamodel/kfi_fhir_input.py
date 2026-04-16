@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-15T13:26:40
+# Generation date: 2026-04-16T10:16:07
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -2549,7 +2549,7 @@ slots.period_end = Slot(uri=KFI.end, name="period_end", curie=KFI.curie('end'),
                    model_uri=KFI_FHIR_SPARKS.period_end, domain=None, range=Optional[Union[str, XSDDate]])
 
 slots.period_id = Slot(uri=KFI['period/period_id'], name="period_id", curie=KFI.curie('period/period_id'),
-                   model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[dict, Period]])
+                   model_uri=KFI_FHIR_SPARKS.period_id, domain=None, range=Optional[Union[Union[dict, Period], list[Union[dict, Period]]]])
 
 slots.practitioner_role_id = Slot(uri=KFI['practitioner_role/practitioner_role_id'], name="practitioner_role_id", curie=KFI.curie('practitioner_role/practitioner_role_id'),
                    model_uri=KFI_FHIR_SPARKS.practitioner_role_id, domain=None, range=Optional[Union[str, PractitionerRolePractitionerRoleId]])

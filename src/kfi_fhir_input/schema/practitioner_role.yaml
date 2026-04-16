@@ -13,17 +13,20 @@ classes:
     # is_a: Record
     annotations:
       fhir_resource: PractitionerRole
-    mixins:
-      - Period
+    #mixins:
+    #  - Period
     slots:
       - practitioner_role_id
       - institution_id
       - practitioner_id
+      - period_start # I don't like any of my options with inline/multivalue so just forcing them in
+      - period_end
     slot_usage:
       practitioner_role_id:
         identifier: true
         required: true
         range: string
+
 slots:
   practitioner_role_id:
     title: Practitioner Role ID

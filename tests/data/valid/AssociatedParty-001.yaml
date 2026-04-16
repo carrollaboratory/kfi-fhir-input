@@ -3,8 +3,8 @@
 id: asp0001
 role: primary_investigator
 name: Cat McStevens
-classifier: 
+classifier:
   - academic
 associated_party_practitioner_role_id: prol-0001
-period_id: 
-  - prd-00001
+period_id:
+  - period_start: "2020-10-01"

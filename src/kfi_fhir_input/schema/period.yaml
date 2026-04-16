@@ -6,7 +6,7 @@ imports:
 classes:
   Period:
     title: Period
-    mixin: true
+    #mixin: true
     description: Time period associated with some FHIR resource
     # is_a: Record
     slots:
@@ -31,8 +31,5 @@ slots:
     description: Reference to a time period which defines a Start and End datatime period.
     range: Period
     required: false
-    inlined: false
-    multivalued: false
-    #annotations:
-    #  db_column: period_id
-    #  target_slot: id
+    inlined: true
+    multivalued: true

@@ -1,22 +1,22 @@
 id: https://carrollaboratory.github.io/kfi-fhir-input/associated_party
 name: kfi-fhir-input-associated-party
 imports:
-  - linkml:types 
+  - linkml:types
   - kfi_fhir_input
-  - practitioner 
+  - practitioner
   - institution
-  - period 
+  - period
 classes:
   AssociatedParty:
-    title: Associated Party 
+    title: Associated Party
     description: Sponsors, collaborators, and other parties affiliated with a research study.
     is_a: Record
     annotations:
       fhir_resource: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/research-study-associated-party
     slots:
-      - name 
-      - role 
-      - period_id 
+      - name
+      - role
+      - period_id
       - classifier
       - associated_party_practitioner_id
       - associated_party_practitioner_role_id
@@ -24,77 +24,79 @@ classes:
     slot_usage:
       period_id:
         multivalued: true
-slots: 
-  role: 
-    title: Role 
-    description: Research Study Party Role 
+        inlined: false
+        required: false
+slots:
+  role:
+    title: Role
+    description: Research Study Party Role
     range: EnumResearchStudyPartyRole
-    required: false 
-  classifier: 
-    title: Classifier 
+    required: false
+  classifier:
+    title: Classifier
     description: Research Study Party Organization Type (what type of institution is party)
     range: EnumResearchStudyPartyOrganizationType
-    required: false 
-    multivalued: true 
+    required: false
+    multivalued: true
   # Each individial associated party can have one party:
-  #   Practitioner 
-  #   Practitioner Role 
+  #   Practitioner
+  #   Practitioner Role
   #   Institution
   associated_party_practitioner_id:
     title: Associated Party (Practitioner)
-    description: Associated Party (is Practitioner). 
+    description: Associated Party (is Practitioner).
     range: Practitioner
-    required: false 
+    required: false
     multivalued: false
   associated_party_practitioner_role_id:
     title: Associated Party (Practitioner Role)
-    description: Associated Party (is Practitioner Role) 
-    range: PractitionerRole 
-    required: false 
+    description: Associated Party (is Practitioner Role)
+    range: PractitionerRole
+    required: false
     multivalued: false
   associated_party_institution_id:
     title: Associated Party (Institution)
     description: Associated Party (is Institution)
-    range: Institution 
-    required: false 
+    range: Institution
+    required: false
     multivalued: false
   party:
-    title: Associated Party 
-    description: Individual or organization associated with study 
+    title: Associated Party
+    description: Individual or organization associated with study
     range: Any
     annotations:
       db_column: associated_party_id
-    any_of: 
-      #- range: Practitioner 
+    any_of:
+      #- range: Practitioner
       #- range: Institution
-      - range: PractitionerRole 
+      - range: PractitionerRole
 enums:
   EnumResearchStudyPartyOrganizationType:
-    description: Research Study Party Organization Type 
+    description: Research Study Party Organization Type
     permissible_values:
-      nih: 
-        title: NIH 
-        meaning: hl7_rsp_org_type:nih 
-      fda: 
+      nih:
+        title: NIH
+        meaning: hl7_rsp_org_type:nih
+      fda:
         title: FDA
-        meaning: hl7_rsp_org_type:fda 
-      academic: 
+        meaning: hl7_rsp_org_type:fda
+      academic:
         title: Academic
-        meaning: hl7_rsp_org_type:academic 
-      government: 
-        title: Government 
-        meaning: hl7_rsp_org_type:government 
+        meaning: hl7_rsp_org_type:academic
+      government:
+        title: Government
+        meaning: hl7_rsp_org_type:government
       nonprofit:
-        title: Nonprofit 
-        meaning: hl7_rsp_org_type:nonprofit 
+        title: Nonprofit
+        meaning: hl7_rsp_org_type:nonprofit
       industry:
-        title: Industry 
-        meaning: hl7_rsp_org_type:industry 
+        title: Industry
+        meaning: hl7_rsp_org_type:industry
   EnumResearchStudyPartyRole:
     description: This is a ResearchStudy's party role.
     permissible_values:
       sponsor:
-        title: sponsor 
+        title: sponsor
         meaning: hl7_rsp_role:sponsor
       lead_sponsor:
         title: lead-sponsor
