@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-16T10:16:07
+# Generation date: 2026-04-16T15:09:49
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -204,12 +204,18 @@ class HasAccessPolicy(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.HasAccessPolicy
 
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.access_policy_id):
             self.MissingRequiredField("access_policy_id")
         if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
             self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
+        if self._is_empty(self.research_study_id):
+            self.MissingRequiredField("research_study_id")
+        if not isinstance(self.research_study_id, ResearchStudyResearchStudyId):
+            self.research_study_id = ResearchStudyResearchStudyId(self.research_study_id)
 
         super().__post_init__(**kwargs)
 
@@ -227,6 +233,7 @@ class HasExternalId(HasAccessPolicy):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.HasExternalId
 
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -424,6 +431,7 @@ class ParticipantAssertion(HasAccessPolicy):
 
     participant_assertion_id: Union[str, ParticipantAssertionParticipantAssertionId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     assertion_type: Union[str, "EnumAssertionType"] = None
     assertion_code: Union[str, URIorCURIE] = None
@@ -530,6 +538,7 @@ class Practitioner(HasExternalId):
 
     practitioner_id: Union[str, PractitionerPractitionerId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     name: Optional[str] = None
     email: Optional[str] = None
     institution_id: Optional[Union[str, InstitutionInstitutionId]] = None
@@ -631,6 +640,7 @@ class Institution(HasExternalId):
 
     institution_id: Union[str, InstitutionInstitutionId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     name: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -659,6 +669,7 @@ class Participant(HasExternalId):
 
     participant_id: Union[str, ParticipantParticipantId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     race: Union[Union[str, "EnumRace"], list[Union[str, "EnumRace"]]] = None
     ethnicity: Union[str, "EnumEthnicity"] = None
     birthsex: Optional[Union[str, "EnumBirthSex"]] = None
@@ -734,6 +745,7 @@ class Person(HasAccessPolicy):
 
     person_id: Union[str, PersonPersonId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[Union[str, ParticipantParticipantId], list[Union[str, ParticipantParticipantId]]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
@@ -765,6 +777,7 @@ class ResearchSubject(HasAccessPolicy):
 
     research_subject_id: Union[str, ResearchSubjectResearchSubjectId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     study_membership_id: Union[str, StudyMembershipStudyMembershipId] = None
 
@@ -889,7 +902,7 @@ class StudyMembership(HasAccessPolicy):
 
 
 @dataclass(repr=False)
-class ResearchStudy(HasExternalId):
+class ResearchStudy(YAMLRoot):
     """
     The NCPI Research Study FHIR resource represents an individual research effort and acts as a grouper or
     “container” for that effort’s study participants and their related data files.
@@ -902,9 +915,9 @@ class ResearchStudy(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchStudy
 
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
-    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     study_status: Union[str, "EnumStudyStatus"] = None
     study_personnel: Union[Union[str, AssociatedPartyId], list[Union[str, AssociatedPartyId]]] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     study_title: Optional[str] = None
     parent_study_id: Optional[Union[str, ResearchStudyResearchStudyId]] = None
     study_focus: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
@@ -912,6 +925,7 @@ class ResearchStudy(HasExternalId):
     study_condition: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
     study_acknowledgement: Optional[Union[str, list[str]]] = empty_list()
     study_design: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
+    external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.research_study_id):
@@ -929,6 +943,11 @@ class ResearchStudy(HasExternalId):
         if not isinstance(self.study_personnel, list):
             self.study_personnel = [self.study_personnel] if self.study_personnel is not None else []
         self.study_personnel = [v if isinstance(v, AssociatedPartyId) else AssociatedPartyId(v) for v in self.study_personnel]
+
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
 
         if self.study_title is not None and not isinstance(self.study_title, str):
             self.study_title = str(self.study_title)
@@ -955,11 +974,15 @@ class ResearchStudy(HasExternalId):
             self.study_design = [self.study_design] if self.study_design is not None else []
         self.study_design = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.study_design]
 
+        if not isinstance(self.external_id, list):
+            self.external_id = [self.external_id] if self.external_id is not None else []
+        self.external_id = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.external_id]
+
         super().__post_init__(**kwargs)
 
 
 @dataclass(repr=False)
-class ResearchStudyCollection(HasExternalId):
+class ResearchStudyCollection(YAMLRoot):
     """
     Collections of research data including, but not limited, to Consortia, Programs, adhoc collections of Studies and
     datasets among other types of collections.
@@ -972,14 +995,15 @@ class ResearchStudyCollection(HasExternalId):
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.ResearchStudyCollection
 
     research_study_collection_id: Union[str, ResearchStudyCollectionResearchStudyCollectionId] = None
-    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     collection_title: str = None
     research_study_collection_type: Union[str, "EnumResearchCollectionType"] = None
     collection_status: Union[str, "EnumCollectionStatus"] = None
     research_study_collection_member_id: Union[Union[str, ResearchStudyResearchStudyId], list[Union[str, ResearchStudyResearchStudyId]]] = None
+    access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     description: Optional[str] = None
     label: Optional[Union[str, list[str]]] = empty_list()
     website: Optional[Union[str, URI]] = None
+    external_id: Optional[Union[Union[str, URIorCURIE], list[Union[str, URIorCURIE]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.research_study_collection_id):
@@ -1008,6 +1032,11 @@ class ResearchStudyCollection(HasExternalId):
             self.research_study_collection_member_id = [self.research_study_collection_member_id] if self.research_study_collection_member_id is not None else []
         self.research_study_collection_member_id = [v if isinstance(v, ResearchStudyResearchStudyId) else ResearchStudyResearchStudyId(v) for v in self.research_study_collection_member_id]
 
+        if self._is_empty(self.access_policy_id):
+            self.MissingRequiredField("access_policy_id")
+        if not isinstance(self.access_policy_id, AccessPolicyAccessPolicyId):
+            self.access_policy_id = AccessPolicyAccessPolicyId(self.access_policy_id)
+
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
 
@@ -1017,6 +1046,10 @@ class ResearchStudyCollection(HasExternalId):
 
         if self.website is not None and not isinstance(self.website, URI):
             self.website = URI(self.website)
+
+        if not isinstance(self.external_id, list):
+            self.external_id = [self.external_id] if self.external_id is not None else []
+        self.external_id = [v if isinstance(v, URIorCURIE) else URIorCURIE(v) for v in self.external_id]
 
         super().__post_init__(**kwargs)
 
@@ -1035,6 +1068,7 @@ class Sample(HasExternalId):
 
     sample_id: Union[str, SampleSampleId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     sample_type: Union[str, URIorCURIE] = None
     parent_sample_id: Optional[Union[str, SampleSampleId]] = None
@@ -1116,6 +1150,7 @@ class Aliquot(HasExternalId):
 
     aliquot_id: Union[str, AliquotAliquotId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     sample_id: Union[str, SampleSampleId] = None
     availability_status: Optional[Union[str, "EnumSpecimenAvailability"]] = None
     volume: Optional[float] = None
@@ -1162,6 +1197,7 @@ class NCPIFile(HasExternalId):
 
     file_global_id: Union[str, NCPIFileFileGlobalId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     file_format: Union[str, URIorCURIE] = None
     file_location_id: Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]] = None
@@ -1246,6 +1282,7 @@ class FileLocation(HasAccessPolicy):
 
     file_location_id: Union[Union[str, FileLocationFileLocationId], list[Union[str, FileLocationFileLocationId]]] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     location_uri: Union[str, URI] = None
     file_name: str = None
 
@@ -1283,6 +1320,7 @@ class FamilyRelationship(HasAccessPolicy):
 
     family_relationship_id: Union[str, FamilyRelationshipFamilyRelationshipId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     patient_id: Union[str, ParticipantParticipantId] = None
     relative_id: Union[str, ParticipantParticipantId] = None
     relationship: Union[str, "EnumFamilyRelationship"] = None
@@ -1331,6 +1369,7 @@ class Family(HasExternalId):
 
     family_global_id: Union[str, FamilyFamilyGlobalId] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     family_id: str = None
     family_type: Union[str, "EnumFamilyType"] = None
     description: Optional[str] = None
@@ -1379,6 +1418,7 @@ class FileMetaData(HasAccessPolicy):
 
     file_meta_data_id: Union[Union[str, FileMetaDataFileMetaDataId], list[Union[str, FileMetaDataFileMetaDataId]]] = None
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
+    research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     meta_data_type: Union[str, "EnumFileMetaDataType"] = None
     assay_strategy: Union[str, URIorCURIE] = None
     platform_instrument: Union[str, URIorCURIE] = None

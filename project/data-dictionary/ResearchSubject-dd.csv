@@ -3,3 +3,4 @@ research_subject_id,Research Subject Global ID (ResearchSubject),string,,,,,
 participant_id,The Global ID for the Participant,string,,,,,Foreign Key: Participant.participant_id
 study_membership_id,Study Membership Global ID (group),string,,,,,Foreign Key: StudyMembership.study_membership_id
 access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
+research_study_id,The Global ID for the Research Study.,string,,,,,Foreign Key: ResearchStudy.research_study_id

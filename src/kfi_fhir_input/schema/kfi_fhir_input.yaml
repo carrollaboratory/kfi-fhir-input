@@ -88,9 +88,10 @@ classes:
     abstract: true
     slots:
       - access_policy_id
+      - research_study_id
   HasExternalId:
     description: Has an external ID
-    title: Has
+    title: Has External ID
     abstract: true
     is_a: HasAccessPolicy
     slots:

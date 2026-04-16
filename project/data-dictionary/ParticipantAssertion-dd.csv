@@ -20,3 +20,4 @@ body_location,Any location qualifiers,string,,,,,
 body_laterality,Laterality information for the condition site,string,,,,,
 cancer_stage,Cancer staging information,string,,,,,
 access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
+research_study_id,The Global ID for the Research Study.,string,,,,,Foreign Key: ResearchStudy.research_study_id

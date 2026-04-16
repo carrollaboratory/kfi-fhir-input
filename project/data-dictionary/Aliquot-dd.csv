@@ -6,3 +6,4 @@ volume_units,Units associated with the volume (ucum),string,,,,,
 concentration,What is the concentration of the analyte in the Aliquot?,string,,,,,
 sample_id,Sample Global ID,string,,,,,Foreign Key: Sample.sample_id
 access_policy_id,Access Policy Global ID,string,,,,,Foreign Key: AccessPolicy.access_policy_id
+research_study_id,The Global ID for the Research Study.,string,,,,,Foreign Key: ResearchStudy.research_study_id
