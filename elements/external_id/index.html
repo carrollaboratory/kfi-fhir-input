@@ -444,28 +444,8 @@ Alias: external_id</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
-<td>Collections of research data including, but not limited, to Consortia, Progra...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Aliquot/">Aliquot</a></td>
-<td>A Portion of a sample extracted from a participant</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../ResearchStudy/">ResearchStudy</a></td>
-<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../HasExternalId/">HasExternalId</a></td>
 <td>Has an external ID</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Family/">Family</a></td>
-<td>Group of Participants that are related</td>
 <td>no</td>
 </tr>
 <tr>
@@ -479,8 +459,8 @@ Alias: external_id</p>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../Participant/">Participant</a></td>
-<td>Research oriented patient</td>
+<td><a href="../Family/">Family</a></td>
+<td>Group of Participants that are related</td>
 <td>no</td>
 </tr>
 <tr>
@@ -489,8 +469,28 @@ Alias: external_id</p>
 <td>no</td>
 </tr>
 <tr>
+<td><a href="../Participant/">Participant</a></td>
+<td>Research oriented patient</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td>A Portion of a sample extracted from a participant</td>
+<td>no</td>
+</tr>
+<tr>
 <td><a href="../Practitioner/">Practitioner</a></td>
 <td>For our purposes, this will be an investigator</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ResearchStudy/">ResearchStudy</a></td>
+<td>The NCPI Research Study FHIR resource represents an individual research effor...</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
+<td>Collections of research data including, but not limited, to Consortia, Progra...</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -559,6 +559,8 @@ rank: 1000
 alias: external_id
 domain_of:
 - HasExternalId
+- ResearchStudy
+- ResearchStudyCollection
 range: uriorcurie
 required: false
 multivalued: true

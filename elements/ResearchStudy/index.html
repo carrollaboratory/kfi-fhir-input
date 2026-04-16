@@ -171,15 +171,6 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="#inheritance">
-<span class="md-ellipsis">
-      
-        Inheritance
-      
-    </span>
-</a>
-</li>
-<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -281,9 +272,6 @@
 <div class="mermaid"> classDiagram
     class ResearchStudy
     click ResearchStudy href "../ResearchStudy/"
-      HasExternalId &lt;|-- ResearchStudy
-        click HasExternalId href "../HasExternalId/"
-
       ResearchStudy : access_policy_id
 
 
@@ -346,16 +334,7 @@
 
 
 </div>
-<h2 id="inheritance">Inheritance</h2>
-<ul>
-<li><a href="../HasAccessPolicy/">HasAccessPolicy</a><ul>
-<li><a href="../HasExternalId/">HasExternalId</a><ul>
-<li><strong>ResearchStudy</strong></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<!-- no inheritance hierarchy -->
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -431,13 +410,13 @@
 <td><a href="../external_id/">external_id</a></td>
 <td>* <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
 <td>Other identifiers for this entity, eg, from the submitting study or in system...</td>
-<td><a href="../HasExternalId/">HasExternalId</a></td>
+<td>direct</td>
 </tr>
 <tr>
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
 <td>Access Policy Global ID</td>
-<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
+<td>direct</td>
 </tr>
 </tbody>
 </table>
@@ -453,6 +432,54 @@
 </thead>
 <tbody>
 <tr>
+<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../HasExternalId/">HasExternalId</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../ParticipantAssertion/">ParticipantAssertion</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Practitioner/">Practitioner</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Institution/">Institution</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Participant/">Participant</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Person/">Person</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../ResearchSubject/">ResearchSubject</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
 <td><a href="../StudyMembership/">StudyMembership</a></td>
 <td><a href="../research_study_id/">research_study_id</a></td>
 <td>range</td>
@@ -467,6 +494,48 @@
 <tr>
 <td><a href="../ResearchStudyCollection/">ResearchStudyCollection</a></td>
 <td><a href="../research_study_collection_member_id/">research_study_collection_member_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Sample/">Sample</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Aliquot/">Aliquot</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../NCPIFile/">NCPIFile</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../FileLocation/">FileLocation</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../FamilyRelationship/">FamilyRelationship</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../FileMetaData/">FileMetaData</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>range</td>
+<td><a href="./">ResearchStudy</a></td>
+</tr>
+<tr>
+<td><a href="../Family/">Family</a></td>
+<td><a href="../research_study_id/">research_study_id</a></td>
 <td>range</td>
 <td><a href="./">ResearchStudy</a></td>
 </tr>
@@ -525,7 +594,6 @@ description: The NCPI Research Study FHIR resource represents an individual rese
   and their related data files.
 title: Research Study
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: HasExternalId
 slots:
 - research_study_id
 - study_title
@@ -537,6 +605,8 @@ slots:
 - study_status
 - study_design
 - study_personnel
+- external_id
+- access_policy_id
 slot_usage:
   research_study_id:
     name: research_study_id
@@ -559,7 +629,6 @@ description: The NCPI Research Study FHIR resource represents an individual rese
   and their related data files.
 title: Research Study
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-is_a: HasExternalId
 slot_usage:
   research_study_id:
     name: research_study_id
@@ -578,6 +647,7 @@ attributes:
     alias: research_study_id
     owner: ResearchStudy
     domain_of:
+    - HasAccessPolicy
     - StudyMembership
     - ResearchStudy
     range: string
@@ -734,6 +804,8 @@ attributes:
     owner: ResearchStudy
     domain_of:
     - HasExternalId
+    - ResearchStudy
+    - ResearchStudyCollection
     range: uriorcurie
     required: false
     multivalued: true
@@ -749,6 +821,8 @@ attributes:
     - HasAccessPolicy
     - AccessPolicy
     - StudyMembership
+    - ResearchStudy
+    - ResearchStudyCollection
     range: AccessPolicy
     required: true
     multivalued: false

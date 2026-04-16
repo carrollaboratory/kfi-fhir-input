@@ -447,6 +447,8 @@ attributes:
     - HasAccessPolicy
     - AccessPolicy
     - StudyMembership
+    - ResearchStudy
+    - ResearchStudyCollection
     range: AccessPolicy
     required: true
     multivalued: false
@@ -460,6 +462,7 @@ attributes:
     alias: research_study_id
     owner: StudyMembership
     domain_of:
+    - HasAccessPolicy
     - StudyMembership
     - ResearchStudy
     range: ResearchStudy

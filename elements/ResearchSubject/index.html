@@ -297,6 +297,17 @@
 
 
 
+      ResearchSubject : research_study_id
+
+
+
+
+
+        ResearchSubject --&gt; "1" ResearchStudy : research_study_id
+        click ResearchStudy href "../ResearchStudy/"
+
+
+
       ResearchSubject : research_subject_id
 
       ResearchSubject : study_membership_id
@@ -352,6 +363,12 @@
 <td><a href="../access_policy_id/">access_policy_id</a></td>
 <td>1 <br/> <a href="../AccessPolicy/">AccessPolicy</a></td>
 <td>Access Policy Global ID</td>
+<td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
+</tr>
+<tr>
+<td><a href="../research_study_id/">research_study_id</a></td>
+<td>1 <br/> <a href="../ResearchStudy/">ResearchStudy</a></td>
+<td>The Global ID for the Research Study</td>
 <td><a href="../HasAccessPolicy/">HasAccessPolicy</a></td>
 </tr>
 </tbody>
@@ -506,9 +523,26 @@ attributes:
     - HasAccessPolicy
     - AccessPolicy
     - StudyMembership
+    - ResearchStudy
+    - ResearchStudyCollection
     range: AccessPolicy
     required: true
     multivalued: false
+  research_study_id:
+    name: research_study_id
+    description: The Global ID for the Research Study.
+    title: Research Study ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: false
+    alias: research_study_id
+    owner: ResearchSubject
+    domain_of:
+    - HasAccessPolicy
+    - StudyMembership
+    - ResearchStudy
+    range: ResearchStudy
+    required: true
 
 </code></pre>
 </details>

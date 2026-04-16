@@ -1331,9 +1331,11 @@ slots:
     title: External Identifiers
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     slot_uri: kfi_fhir_sparks:external_id
-    owner: HasExternalId
+    owner: ResearchStudyCollection
     domain_of:
     - HasExternalId
+    - ResearchStudy
+    - ResearchStudyCollection
     range: uriorcurie
     required: false
     multivalued: true
@@ -1418,11 +1420,13 @@ slots:
     title: Access Policy ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/access-policy
     slot_uri: https://carrollaboratory.github.io/kfi-fhir-input/access-policy/access_policy_id
-    owner: StudyMembership
+    owner: ResearchStudyCollection
     domain_of:
     - HasAccessPolicy
     - AccessPolicy
     - StudyMembership
+    - ResearchStudy
+    - ResearchStudyCollection
     range: AccessPolicy
     required: true
     multivalued: false
@@ -2379,6 +2383,7 @@ slots:
     identifier: false
     owner: ResearchStudy
     domain_of:
+    - HasAccessPolicy
     - StudyMembership
     - ResearchStudy
     range: ResearchStudy
@@ -4000,17 +4005,19 @@ classes:
     abstract: true
     slots:
     - access_policy_id
+    - research_study_id
     class_uri: kfi_fhir_sparks:HasAccessPolicy
   HasExternalId:
     name: HasExternalId
     definition_uri: https://carrollaboratory.github.io/kif-fhir-inputHasExternalId
     description: Has an external ID
-    title: Has
+    title: Has External ID
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input
     is_a: HasAccessPolicy
     abstract: true
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     class_uri: kfi_fhir_sparks:HasExternalId
   Record:
@@ -4147,6 +4154,7 @@ classes:
     is_a: HasAccessPolicy
     slots:
     - access_policy_id
+    - research_study_id
     - participant_assertion_id
     - ParticipantAssertion_participant_id
     - age_at_event
@@ -4194,6 +4202,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - Practitioner_practitioner_id
     - name
@@ -4250,6 +4259,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - Institution_institution_id
     - name
@@ -4276,6 +4286,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - Participant_participant_id
     - birthsex
@@ -4314,6 +4325,7 @@ classes:
     is_a: HasAccessPolicy
     slots:
     - access_policy_id
+    - research_study_id
     - Person_person_id
     - Person_participant_id
     slot_usage:
@@ -4344,6 +4356,7 @@ classes:
     is_a: HasAccessPolicy
     slots:
     - access_policy_id
+    - research_study_id
     - ResearchSubject_research_subject_id
     - participant_id
     - study_membership_id
@@ -4419,10 +4432,7 @@ classes:
       s study participants and their related data files."
     title: Research Study
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research_study
-    is_a: HasExternalId
     slots:
-    - access_policy_id
-    - external_id
     - ResearchStudy_research_study_id
     - study_title
     - parent_study_id
@@ -4433,6 +4443,8 @@ classes:
     - study_status
     - study_design
     - study_personnel
+    - external_id
+    - access_policy_id
     slot_usage:
       research_study_id:
         name: research_study_id
@@ -4452,10 +4464,7 @@ classes:
       Programs, adhoc collections of Studies and datasets among other types of collections.
     title: Research Study Collection
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/research-study-collection
-    is_a: HasExternalId
     slots:
-    - access_policy_id
-    - external_id
     - ResearchStudyCollection_research_study_collection_id
     - ResearchStudyCollection_description
     - collection_title
@@ -4464,6 +4473,8 @@ classes:
     - website
     - collection_status
     - research_study_collection_member_id
+    - external_id
+    - access_policy_id
     slot_usage:
       research_study_collection_id:
         name: research_study_collection_id
@@ -4491,6 +4502,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - Sample_sample_id
     - parent_sample_id
@@ -4532,6 +4544,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - Aliquot_aliquot_id
     - availability_status
@@ -4566,6 +4579,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - participant_id
     - file_format
@@ -4607,6 +4621,7 @@ classes:
     is_a: HasAccessPolicy
     slots:
     - access_policy_id
+    - research_study_id
     - FileLocation_file_location_id
     - location_uri
     - file_name
@@ -4634,6 +4649,7 @@ classes:
     is_a: HasAccessPolicy
     slots:
     - access_policy_id
+    - research_study_id
     - family_relationship_id
     - patient_id
     - relative_id
@@ -4656,6 +4672,7 @@ classes:
     is_a: HasExternalId
     slots:
     - access_policy_id
+    - research_study_id
     - external_id
     - Family_family_global_id
     - family_id
@@ -4686,6 +4703,7 @@ classes:
     is_a: HasAccessPolicy
     slots:
     - access_policy_id
+    - research_study_id
     - FileMetaData_file_meta_data_id
     - meta_data_type
     - assay_strategy
@@ -4717,7 +4735,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-04-16T15:17:37'
-source_file_size: 5234
-generation_date: '2026-04-16T15:17:49'
+source_file_date: '2026-04-16T20:12:42'
+source_file_size: 5272
+generation_date: '2026-04-16T20:12:55'
 
