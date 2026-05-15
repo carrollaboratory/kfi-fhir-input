@@ -33,7 +33,7 @@ license: MIT
 prefixes:
   cdc_rec:
     prefix_prefix: cdc_rec
-    prefix_reference: https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC
+    prefix_reference: urn:oid:2.16.840.1.113883.6.238
   cdc_unk:
     prefix_prefix: cdc_unk
     prefix_reference: https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion
@@ -4735,7 +4735,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-04-16T20:12:42'
-source_file_size: 5272
-generation_date: '2026-04-16T20:12:55'
+source_file_date: '2026-05-15T16:25:31'
+source_file_size: 5316
+generation_date: '2026-05-15T16:25:45'
 
