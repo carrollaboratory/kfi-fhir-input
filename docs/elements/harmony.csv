@@ -81,16 +81,16 @@ With coded datatypes, this null flavor may only be used if the vocabulary bindin
 unk,Unknown,EnumBirthSex,Participant,birthsex,UNK,"*Description:**A proper value is applicable, but not known.
 Usage Notes: This means the actual value is not known. If the only thing that is unknown is how to properly express the value in the necessary constraints (value set, datatype, etc.), then the OTH or UNC flavor should be used. No properties should be included for a datatype with this property unless:
 Those properties themselves directly translate to a semantic of 'unknown'. (E.g. a local code sent as a translation that conveys 'unknown') Those properties further qualify the nature of what is unknown. (E.g. specifying a use code of 'H' and a URL prefix of 'tel:' to convey that it is the home phone number that is unknown.)",http://terminology.hl7.org/CodeSystem/v3-NullFlavor,LinkML gen-harmony
-american_indian_or_alaskan_native,American Indian or Alaskan Native,EnumRace,Participant,race,1002-5,American Indian or Alaskan Native,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
-asian,Asian,EnumRace,Participant,race,2028-9,Asian,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
-black_or_african_american,Black or African American,EnumRace,Participant,race,2054-5,Black or African American,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
-native_hawaiian_or_pacific_islander,Native Hawaiian or Other Pacific Islander,EnumRace,Participant,race,2076-8,Native Hawaiian or Other Pacific Islander,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
-white,White,EnumRace,Participant,race,2106-3,White,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
-other_race,Other Race,EnumRace,Participant,race,2131-1,Other Race,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
+american_indian_or_alaskan_native,American Indian or Alaskan Native,EnumRace,Participant,race,1002-5,American Indian or Alaskan Native,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
+asian,Asian,EnumRace,Participant,race,2028-9,Asian,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
+black_or_african_american,Black or African American,EnumRace,Participant,race,2054-5,Black or African American,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
+native_hawaiian_or_pacific_islander,Native Hawaiian or Other Pacific Islander,EnumRace,Participant,race,2076-8,Native Hawaiian or Other Pacific Islander,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
+white,White,EnumRace,Participant,race,2106-3,White,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
+other_race,Other Race,EnumRace,Participant,race,2131-1,Other Race,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
 unknown,unknown,EnumRace,Participant,race,UNK,unknown,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,LinkML gen-harmony
 asked_but_unknown,asked but unknown,EnumRace,Participant,race,ASKU,asked but unknown,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,LinkML gen-harmony
-hispanic_or_latino,hispanic_or_latino,EnumEthnicity,Participant,ethnicity,2135-2,Hispanic or Latino,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
-not_hispanic_or_latino,not_hispanic_or_latino,EnumEthnicity,Participant,ethnicity,2186-5,Not Hispanic or Latino,https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC,LinkML gen-harmony
+hispanic_or_latino,hispanic_or_latino,EnumEthnicity,Participant,ethnicity,2135-2,Hispanic or Latino,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
+not_hispanic_or_latino,not_hispanic_or_latino,EnumEthnicity,Participant,ethnicity,2186-5,Not Hispanic or Latino,urn:oid:2.16.840.1.113883.6.238,LinkML gen-harmony
 unknown,unknown,EnumEthnicity,Participant,ethnicity,UNK,unknown,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,LinkML gen-harmony
 asked_but_unknown,asked_but_unknown,EnumEthnicity,Participant,ethnicity,ASKU,asked but unknown,http://terminology.hl7.org/CodeSystem/v3-NullFlavor,LinkML gen-harmony
 exact,exact,EnumDobMethod,Participant,dob_method,exact,Exact,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method,LinkML gen-harmony

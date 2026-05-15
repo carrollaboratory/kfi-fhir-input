@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-16T15:09:49
+# Generation date: 2026-04-20T15:49:01
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -63,7 +63,7 @@ metamodel_version = "1.7.0"
 version = None
 
 # Namespaces
-CDC_REC = CurieNamespace('cdc_rec', 'https://phinvads.cdc.gov/baseStu3/CodeSystem/PH_RaceAndEthnicity_CDC')
+CDC_REC = CurieNamespace('cdc_rec', 'urn:oid:2.16.840.1.113883.6.238')
 CDC_UNK = CurieNamespace('cdc_unk', 'https://vsac.nlm.nih.gov/valueset/2.16.840.1.113762.1.4.1021.103/expansion')
 DUO = CurieNamespace('duo', 'http://purl.obolibrary.org/obo/duo.owl')
 EDAM = CurieNamespace('edam', 'https://edamontology.org')
