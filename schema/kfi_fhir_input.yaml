@@ -72,7 +72,7 @@ prefixes:
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type
   ncpi_data_access_type:
     prefix_prefix: ncpi_data_access_type
-    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type
+    prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type
   ncpi_data_access_code:
     prefix_prefix: ncpi_data_access_code
     prefix_reference: https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/
@@ -4735,7 +4735,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-05-15T16:39:44'
+source_file_date: '2026-06-17T20:34:21'
 source_file_size: 5316
-generation_date: '2026-05-15T16:39:56'
+generation_date: '2026-06-17T20:34:34'
 
