@@ -1,0 +1,5 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+id,,integer,,,,,
+code,Symbol in syntax defined by the system,string,,,,,
+display,Human friendly representation,string,,,,,
+system,Identify of the terminology system,string,,,,,

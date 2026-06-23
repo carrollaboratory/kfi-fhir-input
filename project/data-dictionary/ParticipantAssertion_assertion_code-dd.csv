@@ -1,0 +1,3 @@
+variable_name,description,data_type,min,max,units,enumerations,comment
+ParticipantAssertion_participant_assertion_id,Autocreated FK slot,string,,,,,Foreign Key: ParticipantAssertion.participant_assertion_id
+assertion_code_id,The structured term defining the meaning of the assertion.,integer,,,,,Foreign Key: Coding.id

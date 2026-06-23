@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-04-20T15:49:01
+# Generation date: 2026-06-23T11:47:40
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -83,7 +83,7 @@ LINKML = CurieNamespace('linkml', 'https://w3id.org/linkml/')
 NCPI_COLLECTION_TYPE = CurieNamespace('ncpi_collection_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/collection-type')
 NCPI_COND_TYPE = CurieNamespace('ncpi_cond_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/')
 NCPI_DATA_ACCESS_CODE = CurieNamespace('ncpi_data_access_code', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-code/')
-NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type')
+NCPI_DATA_ACCESS_TYPE = CurieNamespace('ncpi_data_access_type', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type')
 NCPI_DOB_METHOD = CurieNamespace('ncpi_dob_method', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-date-of-birth-method')
 NCPI_FAMILY_TYPES = CurieNamespace('ncpi_family_types', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/ncpi-family-types')
 NCPI_PATIENT_KNOWLEDGE_SOURCE = CurieNamespace('ncpi_patient_knowledge_source', 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/patient-knowledge-source')
@@ -434,7 +434,7 @@ class ParticipantAssertion(HasAccessPolicy):
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
     assertion_type: Union[str, "EnumAssertionType"] = None
-    assertion_code: Union[str, URIorCURIE] = None
+    assertion_code: Union[Union[dict, "Coding"], list[Union[dict, "Coding"]]] = None
     age_at_event: Optional[Union[str, AgeAtId]] = None
     age_at_assertion: Optional[Union[str, AgeAtId]] = None
     age_at_onset: Optional[Union[str, AgeAtId]] = None
@@ -443,7 +443,7 @@ class ParticipantAssertion(HasAccessPolicy):
     other_condition_modifiers: Optional[Union[str, URIorCURIE]] = None
     assertion_text: Optional[str] = None
     assertion_source: Optional[Union[str, URIorCURIE]] = None
-    value_code: Optional[Union[str, URIorCURIE]] = None
+    value_code: Optional[Union[Union[dict, "Coding"], list[Union[dict, "Coding"]]]] = empty_list()
     value_string: Optional[str] = None
     value_number: Optional[float] = None
     value_units: Optional[Union[str, URIorCURIE]] = None
@@ -470,8 +470,9 @@ class ParticipantAssertion(HasAccessPolicy):
 
         if self._is_empty(self.assertion_code):
             self.MissingRequiredField("assertion_code")
-        if not isinstance(self.assertion_code, URIorCURIE):
-            self.assertion_code = URIorCURIE(self.assertion_code)
+        if not isinstance(self.assertion_code, list):
+            self.assertion_code = [self.assertion_code] if self.assertion_code is not None else []
+        self.assertion_code = [v if isinstance(v, Coding) else Coding(**as_dict(v)) for v in self.assertion_code]
 
         if self.age_at_event is not None and not isinstance(self.age_at_event, AgeAtId):
             self.age_at_event = AgeAtId(self.age_at_event)
@@ -497,8 +498,9 @@ class ParticipantAssertion(HasAccessPolicy):
         if self.assertion_source is not None and not isinstance(self.assertion_source, URIorCURIE):
             self.assertion_source = URIorCURIE(self.assertion_source)
 
-        if self.value_code is not None and not isinstance(self.value_code, URIorCURIE):
-            self.value_code = URIorCURIE(self.value_code)
+        if not isinstance(self.value_code, list):
+            self.value_code = [self.value_code] if self.value_code is not None else []
+        self.value_code = [v if isinstance(v, Coding) else Coding(**as_dict(v)) for v in self.value_code]
 
         if self.value_string is not None and not isinstance(self.value_string, str):
             self.value_string = str(self.value_string)
@@ -1400,6 +1402,39 @@ class Family(HasExternalId):
 
         if self.family_focus is not None and not isinstance(self.family_focus, URIorCURIE):
             self.family_focus = URIorCURIE(self.family_focus)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass(repr=False)
+class Coding(YAMLRoot):
+    """
+    A Coding is a representation of a defined concept using a symbol from a defined "code system"
+    """
+    _inherited_slots: ClassVar[list[str]] = []
+
+    class_class_uri: ClassVar[URIRef] = KFI["coding/Coding"]
+    class_class_curie: ClassVar[str] = "kfi:coding/Coding"
+    class_name: ClassVar[str] = "Coding"
+    class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Coding
+
+    code: str = None
+    system: Union[str, URI] = None
+    display: Optional[str] = None
+
+    def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.code):
+            self.MissingRequiredField("code")
+        if not isinstance(self.code, str):
+            self.code = str(self.code)
+
+        if self._is_empty(self.system):
+            self.MissingRequiredField("system")
+        if not isinstance(self.system, URI):
+            self.system = URI(self.system)
+
+        if self.display is not None and not isinstance(self.display, str):
+            self.display = str(self.display)
 
         super().__post_init__(**kwargs)
 
@@ -2481,7 +2516,7 @@ slots.assertion_type = Slot(uri=KFI['participant-assertion/assertion_type'], nam
                    model_uri=KFI_FHIR_SPARKS.assertion_type, domain=None, range=Union[str, "EnumAssertionType"])
 
 slots.assertion_code = Slot(uri=KFI['participant-assertion/assertion_code'], name="assertion_code", curie=KFI.curie('participant-assertion/assertion_code'),
-                   model_uri=KFI_FHIR_SPARKS.assertion_code, domain=None, range=Union[str, URIorCURIE])
+                   model_uri=KFI_FHIR_SPARKS.assertion_code, domain=None, range=Union[Union[dict, Coding], list[Union[dict, Coding]]])
 
 slots.assertion_text = Slot(uri=KFI['participant-assertion/assertion_text'], name="assertion_text", curie=KFI.curie('participant-assertion/assertion_text'),
                    model_uri=KFI_FHIR_SPARKS.assertion_text, domain=None, range=Optional[str])
@@ -2490,7 +2525,7 @@ slots.assertion_source = Slot(uri=KFI['participant-assertion/assertion_source'],
                    model_uri=KFI_FHIR_SPARKS.assertion_source, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.value_code = Slot(uri=KFI['participant-assertion/value_code'], name="value_code", curie=KFI.curie('participant-assertion/value_code'),
-                   model_uri=KFI_FHIR_SPARKS.value_code, domain=None, range=Optional[Union[str, URIorCURIE]])
+                   model_uri=KFI_FHIR_SPARKS.value_code, domain=None, range=Optional[Union[Union[dict, Coding], list[Union[dict, Coding]]]])
 
 slots.value_string = Slot(uri=KFI['participant-assertion/value_string'], name="value_string", curie=KFI.curie('participant-assertion/value_string'),
                    model_uri=KFI_FHIR_SPARKS.value_string, domain=None, range=Optional[str])
@@ -2809,6 +2844,15 @@ slots.ageAt__as_date = Slot(uri=KFI['age-at/as_date'], name="ageAt__as_date", cu
 
 slots.nCPIFile__file_global_id = Slot(uri=KFI['ncpi-file/file_global_id'], name="nCPIFile__file_global_id", curie=KFI.curie('ncpi-file/file_global_id'),
                    model_uri=KFI_FHIR_SPARKS.nCPIFile__file_global_id, domain=None, range=URIRef)
+
+slots.coding__code = Slot(uri=KFI['coding/code'], name="coding__code", curie=KFI.curie('coding/code'),
+                   model_uri=KFI_FHIR_SPARKS.coding__code, domain=None, range=str)
+
+slots.coding__display = Slot(uri=KFI['coding/display'], name="coding__display", curie=KFI.curie('coding/display'),
+                   model_uri=KFI_FHIR_SPARKS.coding__display, domain=None, range=Optional[str])
+
+slots.coding__system = Slot(uri=KFI['coding/system'], name="coding__system", curie=KFI.curie('coding/system'),
+                   model_uri=KFI_FHIR_SPARKS.coding__system, domain=None, range=Union[str, URI])
 
 slots.AccessPolicy_access_policy_id = Slot(uri=KFI['access-policy/access_policy_id'], name="AccessPolicy_access_policy_id", curie=KFI.curie('access-policy/access_policy_id'),
                    model_uri=KFI_FHIR_SPARKS.AccessPolicy_access_policy_id, domain=AccessPolicy, range=Union[str, AccessPolicyAccessPolicyId])
