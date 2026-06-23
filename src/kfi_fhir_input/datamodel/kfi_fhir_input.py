@@ -1,5 +1,5 @@
 # Auto generated from kfi_fhir_input.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-06-23T11:47:40
+# Generation date: 2026-06-23T15:49:21
 # Schema: kfi-fhir-input
 #
 # id: https://carrollaboratory.github.io/kfi-fhir-input
@@ -182,6 +182,10 @@ class FamilyRelationshipFamilyRelationshipId(extended_str):
 
 
 class FamilyFamilyGlobalId(extended_str):
+    pass
+
+
+class CodingId(RecordId):
     pass
 
 
@@ -433,8 +437,8 @@ class ParticipantAssertion(HasAccessPolicy):
     access_policy_id: Union[str, AccessPolicyAccessPolicyId] = None
     research_study_id: Union[str, ResearchStudyResearchStudyId] = None
     participant_id: Union[str, ParticipantParticipantId] = None
+    assertion_code: Union[Union[str, CodingId], list[Union[str, CodingId]]] = None
     assertion_type: Union[str, "EnumAssertionType"] = None
-    assertion_code: Union[Union[dict, "Coding"], list[Union[dict, "Coding"]]] = None
     age_at_event: Optional[Union[str, AgeAtId]] = None
     age_at_assertion: Optional[Union[str, AgeAtId]] = None
     age_at_onset: Optional[Union[str, AgeAtId]] = None
@@ -443,7 +447,7 @@ class ParticipantAssertion(HasAccessPolicy):
     other_condition_modifiers: Optional[Union[str, URIorCURIE]] = None
     assertion_text: Optional[str] = None
     assertion_source: Optional[Union[str, URIorCURIE]] = None
-    value_code: Optional[Union[Union[dict, "Coding"], list[Union[dict, "Coding"]]]] = empty_list()
+    value_code: Optional[Union[Union[str, CodingId], list[Union[str, CodingId]]]] = empty_list()
     value_string: Optional[str] = None
     value_number: Optional[float] = None
     value_units: Optional[Union[str, URIorCURIE]] = None
@@ -463,16 +467,16 @@ class ParticipantAssertion(HasAccessPolicy):
         if not isinstance(self.participant_id, ParticipantParticipantId):
             self.participant_id = ParticipantParticipantId(self.participant_id)
 
-        if self._is_empty(self.assertion_type):
-            self.MissingRequiredField("assertion_type")
-        if not isinstance(self.assertion_type, EnumAssertionType):
-            self.assertion_type = EnumAssertionType(self.assertion_type)
-
         if self._is_empty(self.assertion_code):
             self.MissingRequiredField("assertion_code")
         if not isinstance(self.assertion_code, list):
             self.assertion_code = [self.assertion_code] if self.assertion_code is not None else []
-        self.assertion_code = [v if isinstance(v, Coding) else Coding(**as_dict(v)) for v in self.assertion_code]
+        self.assertion_code = [v if isinstance(v, CodingId) else CodingId(v) for v in self.assertion_code]
+
+        if self._is_empty(self.assertion_type):
+            self.MissingRequiredField("assertion_type")
+        if not isinstance(self.assertion_type, EnumAssertionType):
+            self.assertion_type = EnumAssertionType(self.assertion_type)
 
         if self.age_at_event is not None and not isinstance(self.age_at_event, AgeAtId):
             self.age_at_event = AgeAtId(self.age_at_event)
@@ -500,7 +504,7 @@ class ParticipantAssertion(HasAccessPolicy):
 
         if not isinstance(self.value_code, list):
             self.value_code = [self.value_code] if self.value_code is not None else []
-        self.value_code = [v if isinstance(v, Coding) else Coding(**as_dict(v)) for v in self.value_code]
+        self.value_code = [v if isinstance(v, CodingId) else CodingId(v) for v in self.value_code]
 
         if self.value_string is not None and not isinstance(self.value_string, str):
             self.value_string = str(self.value_string)
@@ -1407,7 +1411,7 @@ class Family(HasExternalId):
 
 
 @dataclass(repr=False)
-class Coding(YAMLRoot):
+class Coding(Record):
     """
     A Coding is a representation of a defined concept using a symbol from a defined "code system"
     """
@@ -1418,11 +1422,17 @@ class Coding(YAMLRoot):
     class_name: ClassVar[str] = "Coding"
     class_model_uri: ClassVar[URIRef] = KFI_FHIR_SPARKS.Coding
 
+    id: Union[str, CodingId] = None
     code: str = None
     system: Union[str, URI] = None
     display: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, CodingId):
+            self.id = CodingId(self.id)
+
         if self._is_empty(self.code):
             self.MissingRequiredField("code")
         if not isinstance(self.code, str):
@@ -2516,7 +2526,7 @@ slots.assertion_type = Slot(uri=KFI['participant-assertion/assertion_type'], nam
                    model_uri=KFI_FHIR_SPARKS.assertion_type, domain=None, range=Union[str, "EnumAssertionType"])
 
 slots.assertion_code = Slot(uri=KFI['participant-assertion/assertion_code'], name="assertion_code", curie=KFI.curie('participant-assertion/assertion_code'),
-                   model_uri=KFI_FHIR_SPARKS.assertion_code, domain=None, range=Union[Union[dict, Coding], list[Union[dict, Coding]]])
+                   model_uri=KFI_FHIR_SPARKS.assertion_code, domain=None, range=Union[Union[str, CodingId], list[Union[str, CodingId]]])
 
 slots.assertion_text = Slot(uri=KFI['participant-assertion/assertion_text'], name="assertion_text", curie=KFI.curie('participant-assertion/assertion_text'),
                    model_uri=KFI_FHIR_SPARKS.assertion_text, domain=None, range=Optional[str])
@@ -2525,7 +2535,7 @@ slots.assertion_source = Slot(uri=KFI['participant-assertion/assertion_source'],
                    model_uri=KFI_FHIR_SPARKS.assertion_source, domain=None, range=Optional[Union[str, URIorCURIE]])
 
 slots.value_code = Slot(uri=KFI['participant-assertion/value_code'], name="value_code", curie=KFI.curie('participant-assertion/value_code'),
-                   model_uri=KFI_FHIR_SPARKS.value_code, domain=None, range=Optional[Union[Union[dict, Coding], list[Union[dict, Coding]]]])
+                   model_uri=KFI_FHIR_SPARKS.value_code, domain=None, range=Optional[Union[Union[str, CodingId], list[Union[str, CodingId]]]])
 
 slots.value_string = Slot(uri=KFI['participant-assertion/value_string'], name="value_string", curie=KFI.curie('participant-assertion/value_string'),
                    model_uri=KFI_FHIR_SPARKS.value_string, domain=None, range=Optional[str])

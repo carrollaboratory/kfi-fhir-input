@@ -23,8 +23,8 @@ classes:
       - age_at_resolution
       - entity_asserter
       - other_condition_modifiers
-      - assertion_type
       - assertion_code
+      - assertion_type
       - assertion_text
       - assertion_source
       - value_code
@@ -129,6 +129,7 @@ slots:
     description: The structured term defining the meaning of the assertion.
     required: true
     multivalued: true
+    inlined: false
     range: Coding
     annotations:
       fhir_profile: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
