@@ -1030,14 +1030,14 @@ class ParticipantAssertion(HasAccessPolicy):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    assertion_type: EnumAssertionType = Field(default=..., title="Assertion Type", description="""Describe the type of assertion being made.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'category'},
+    assertion_code: list[str] = Field(default=..., title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+                                          'value': 'code.coding'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    assertion_code: list[Coding] = Field(default=..., title="Assertion Code", description="""The structured term defining the meaning of the assertion.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
-                                          'value': 'code.coding'},
+    assertion_type: EnumAssertionType = Field(default=..., title="Assertion Type", description="""Describe the type of assertion being made.""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element', 'value': 'category'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
                          'fhir_resource': {'tag': 'fhir_resource',
@@ -1055,7 +1055,7 @@ class ParticipantAssertion(HasAccessPolicy):
                          'fhir_resource': {'tag': 'fhir_resource',
                                            'value': 'Observation'}},
          'domain_of': ['ParticipantAssertion']} })
-    value_code: Optional[list[Coding]] = Field(default=[], title="Value Code", description="""Value as code""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
+    value_code: Optional[list[str]] = Field(default=[], title="Value Code", description="""Value as code""", json_schema_extra = { "linkml_meta": {'annotations': {'fhir_element': {'tag': 'fhir_element',
                                           'value': 'valueCodeableConcept'},
                          'fhir_profile': {'tag': 'fhir_profile',
                                           'value': 'https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion'},
@@ -1691,7 +1691,7 @@ class AssociatedParty(Record):
     id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
-class Coding(ConfiguredBaseModel):
+class Coding(Record):
     """
     A Coding is a representation of a defined concept using a symbol from a defined \"code system\"
     """
@@ -1701,6 +1701,7 @@ class Coding(ConfiguredBaseModel):
     code: str = Field(default=..., title="Code", description="""Symbol in syntax defined by the system""", json_schema_extra = { "linkml_meta": {'domain_of': ['Coding']} })
     display: Optional[str] = Field(default=None, title="Display", description="""Human friendly representation""", json_schema_extra = { "linkml_meta": {'domain_of': ['Coding']} })
     system: str = Field(default=..., title="System", description="""Identify of the terminology system""", json_schema_extra = { "linkml_meta": {'domain_of': ['Coding']} })
+    id: str = Field(default=..., title="ID", description="""Unique Identifier for a table entry. This is probably not the Global ID""", json_schema_extra = { "linkml_meta": {'domain_of': ['Record']} })
 
 
 class FileMetaData(HasAccessPolicy):

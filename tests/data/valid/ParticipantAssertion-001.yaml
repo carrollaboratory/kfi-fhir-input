@@ -8,7 +8,6 @@ age_at_onset: age-0003
 age_at_resolution: age-0003
 entity_asserter: doctor
 assertion_type: measurement
-assertion_code: LOINC:8302-2
 assertion_text: Body Height
 assertion_source: NCIT:C17176 # Survey
 value_number: 18
