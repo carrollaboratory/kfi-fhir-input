@@ -43,11 +43,11 @@ active,Active,EnumConsentStateCodes,AccessPolicy,status,active,Active,http://hl7
 rejected,Rejected,EnumConsentStateCodes,AccessPolicy,status,rejected,Rejected,http://hl7.org/fhir/consent-state-codes,LinkML gen-harmony
 inactive,Inactive,EnumConsentStateCodes,AccessPolicy,status,inactive,Inactive,http://hl7.org/fhir/consent-state-codes,LinkML gen-harmony
 entered_in_error,Entered in Error,EnumConsentStateCodes,AccessPolicy,status,entered-in-error,Entered in Error,http://hl7.org/fhir/consent-state-codes,LinkML gen-harmony
-open,Open Access,EnumDataAccessType,AccessPolicy,data_access_type,open,Open Access,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type,LinkML gen-harmony
-registered,Registered,EnumDataAccessType,AccessPolicy,data_access_type,registered,Registered,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type,LinkML gen-harmony
-controlled,Controlled,EnumDataAccessType,AccessPolicy,data_access_type,controlled,Controlled,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type,LinkML gen-harmony
-gsr_restricted,GSR Restricted,EnumDataAccessType,AccessPolicy,data_access_type,gsr-restricted,GSR Restricted,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type,LinkML gen-harmony
-gsr_allowed,GSR Allowed,EnumDataAccessType,AccessPolicy,data_access_type,gsr-allowed,GSR Allowed,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem-research-data-access-type,LinkML gen-harmony
+open,Open Access,EnumDataAccessType,AccessPolicy,data_access_type,open,Open Access,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type,LinkML gen-harmony
+registered,Registered,EnumDataAccessType,AccessPolicy,data_access_type,registered,Registered,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type,LinkML gen-harmony
+controlled,Controlled,EnumDataAccessType,AccessPolicy,data_access_type,controlled,Controlled,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type,LinkML gen-harmony
+gsr_restricted,GSR Restricted,EnumDataAccessType,AccessPolicy,data_access_type,gsr-restricted,GSR Restricted,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type,LinkML gen-harmony
+gsr_allowed,GSR Allowed,EnumDataAccessType,AccessPolicy,data_access_type,gsr-allowed,GSR Allowed,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/research-data-access-type,LinkML gen-harmony
 phenotypic_feature,Phenotypic Feature,EnumAssertionType,ParticipantAssertion,assertion_type,Phenotypic-Feature,This is a phenotypic feature,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/,LinkML gen-harmony
 disease,disease,EnumAssertionType,ParticipantAssertion,assertion_type,Disease,Disease,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/,LinkML gen-harmony
 comorbidity,comorbidity,EnumAssertionType,ParticipantAssertion,assertion_type,Comorbidity,Comorbidity,https://nih-ncpi.github.io/ncpi-fhir-ig-2/CodeSystem/condition-type/,LinkML gen-harmony

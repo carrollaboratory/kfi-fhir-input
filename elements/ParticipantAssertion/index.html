@@ -332,6 +332,15 @@
 
       ParticipantAssertion : assertion_code
 
+
+
+
+
+        ParticipantAssertion --&gt; "1..*" Coding : assertion_code
+        click Coding href "../Coding/"
+
+
+
       ParticipantAssertion : assertion_source
 
       ParticipantAssertion : assertion_text
@@ -393,6 +402,15 @@
 
 
       ParticipantAssertion : value_code
+
+
+
+
+
+        ParticipantAssertion --&gt; "*" Coding : value_code
+        click Coding href "../Coding/"
+
+
 
       ParticipantAssertion : value_number
 
@@ -476,7 +494,7 @@
 </tr>
 <tr>
 <td><a href="../assertion_code/">assertion_code</a></td>
-<td>1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>1..* <br/> <a href="../Coding/">Coding</a></td>
 <td>The structured term defining the meaning of the assertion</td>
 <td>direct</td>
 </tr>
@@ -494,7 +512,7 @@
 </tr>
 <tr>
 <td><a href="../value_code/">value_code</a></td>
-<td>0..1 <br/> <a href="../Uriorcurie/">Uriorcurie</a></td>
+<td>* <br/> <a href="../Coding/">Coding</a></td>
 <td>Value as code</td>
 <td>direct</td>
 </tr>
@@ -897,9 +915,9 @@ attributes:
     owner: ParticipantAssertion
     domain_of:
     - ParticipantAssertion
-    range: uriorcurie
+    range: Coding
     required: true
-    multivalued: false
+    multivalued: true
   assertion_text:
     name: assertion_text
     annotations:
@@ -968,9 +986,9 @@ attributes:
     owner: ParticipantAssertion
     domain_of:
     - ParticipantAssertion
-    range: uriorcurie
+    range: Coding
     required: false
-    multivalued: false
+    multivalued: true
   value_string:
     name: value_string
     annotations:
