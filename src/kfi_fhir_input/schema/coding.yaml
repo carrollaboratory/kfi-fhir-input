@@ -1,0 +1,28 @@
+id: https://carrollaboratory.github.io/kfi-fhir-input/coding
+name: kfi-fhir-input-coding
+imports:
+  - linkml:types
+  - kfi_fhir_input
+classes:
+  Coding:
+    title: Coding
+    description: A Coding is a representation of a defined concept using a symbol from a defined "code system"
+    attributes:
+      code:
+        title: Code
+        description: Symbol in syntax defined by the system
+        required: true
+        multivalued: false
+        range: string
+      display:
+        title: Display
+        description: Human friendly representation
+        required: false
+        multivalued: false
+        range: string
+      system:
+        title: System
+        description: Identify of the terminology system
+        required: true
+        multivalued: false
+        range: uri
