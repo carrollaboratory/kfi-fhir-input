@@ -487,15 +487,15 @@
 <td>direct</td>
 </tr>
 <tr>
-<td><a href="../assertion_type/">assertion_type</a></td>
-<td>1 <br/> <a href="../EnumAssertionType/">EnumAssertionType</a></td>
-<td>Describe the type of assertion being made</td>
-<td>direct</td>
-</tr>
-<tr>
 <td><a href="../assertion_code/">assertion_code</a></td>
 <td>1..* <br/> <a href="../Coding/">Coding</a></td>
 <td>The structured term defining the meaning of the assertion</td>
+<td>direct</td>
+</tr>
+<tr>
+<td><a href="../assertion_type/">assertion_type</a></td>
+<td>1 <br/> <a href="../EnumAssertionType/">EnumAssertionType</a></td>
+<td>Describe the type of assertion being made</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -634,8 +634,8 @@ slots:
 - age_at_resolution
 - entity_asserter
 - other_condition_modifiers
-- assertion_type
 - assertion_code
+- assertion_type
 - assertion_text
 - assertion_source
 - value_code
@@ -872,29 +872,6 @@ attributes:
     range: uriorcurie
     required: false
     multivalued: false
-  assertion_type:
-    name: assertion_type
-    annotations:
-      fhir_profile:
-        tag: fhir_profile
-        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
-      fhir_element:
-        tag: fhir_element
-        value: category
-      fhir_resource:
-        tag: fhir_resource
-        value: Observation
-    description: Describe the type of assertion being made.
-    title: Assertion Type
-    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
-    rank: 1000
-    alias: assertion_type
-    owner: ParticipantAssertion
-    domain_of:
-    - ParticipantAssertion
-    range: EnumAssertionType
-    required: true
-    multivalued: false
   assertion_code:
     name: assertion_code
     annotations:
@@ -918,6 +895,30 @@ attributes:
     range: Coding
     required: true
     multivalued: true
+    inlined: false
+  assertion_type:
+    name: assertion_type
+    annotations:
+      fhir_profile:
+        tag: fhir_profile
+        value: https://nih-ncpi.github.io/ncpi-fhir-ig-2/StructureDefinition/ncpi-participant-assertion
+      fhir_element:
+        tag: fhir_element
+        value: category
+      fhir_resource:
+        tag: fhir_resource
+        value: Observation
+    description: Describe the type of assertion being made.
+    title: Assertion Type
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    alias: assertion_type
+    owner: ParticipantAssertion
+    domain_of:
+    - ParticipantAssertion
+    range: EnumAssertionType
+    required: true
+    multivalued: false
   assertion_text:
     name: assertion_text
     annotations:

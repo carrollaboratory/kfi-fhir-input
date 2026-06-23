@@ -1766,8 +1766,7 @@ slots:
     range: Coding
     required: true
     multivalued: true
-    inlined: true
-    inlined_as_list: true
+    inlined: false
   assertion_text:
     name: assertion_text
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/assertion_text
@@ -1839,8 +1838,6 @@ slots:
     range: Coding
     required: false
     multivalued: true
-    inlined: true
-    inlined_as_list: true
   value_string:
     name: value_string
     definition_uri: https://carrollaboratory.github.io/kfi-fhir-input/participant-assertion/value_string
@@ -4207,8 +4204,8 @@ classes:
     - age_at_resolution
     - entity_asserter
     - other_condition_modifiers
-    - assertion_type
     - assertion_code
+    - assertion_type
     - assertion_text
     - assertion_source
     - value_code
@@ -4738,7 +4735,9 @@ classes:
       from a defined "code system"
     title: Coding
     from_schema: https://carrollaboratory.github.io/kfi-fhir-input/coding
+    is_a: Record
     slots:
+    - id
     - coding__code
     - coding__display
     - coding__system
@@ -4813,7 +4812,7 @@ classes:
     class_uri: https://carrollaboratory.github.io/kfi-fhir-input/file-meta-data/FileMetaData
 metamodel_version: 1.7.0
 source_file: kfi_fhir_input.yaml
-source_file_date: '2026-06-23T20:10:52'
+source_file_date: '2026-06-23T21:19:25'
 source_file_size: 5316
-generation_date: '2026-06-23T20:11:06'
+generation_date: '2026-06-23T21:19:39'
 

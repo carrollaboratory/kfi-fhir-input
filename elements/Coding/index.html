@@ -171,6 +171,15 @@
     </label>
 <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
 <li class="md-nav__item">
+<a class="md-nav__link" href="#inheritance">
+<span class="md-ellipsis">
+      
+        Inheritance
+      
+    </span>
+</a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#slots">
 <span class="md-ellipsis">
       
@@ -263,15 +272,26 @@
 <div class="mermaid"> classDiagram
     class Coding
     click Coding href "../Coding/"
+      Record &lt;|-- Coding
+        click Record href "../Record/"
+
       Coding : code
 
       Coding : display
+
+      Coding : id
 
       Coding : system
 
 
 </div>
-<!-- no inheritance hierarchy -->
+<h2 id="inheritance">Inheritance</h2>
+<ul>
+<li><a href="../Record/">Record</a><ul>
+<li><strong>Coding</strong></li>
+</ul>
+</li>
+</ul>
 <h2 id="slots">Slots</h2>
 <table>
 <thead>
@@ -300,6 +320,12 @@
 <td>1 <br/> <a href="../Uri/">Uri</a></td>
 <td>Identify of the terminology system</td>
 <td>direct</td>
+</tr>
+<tr>
+<td><a href="../id/">id</a></td>
+<td>1 <br/> <a href="../String/">String</a></td>
+<td>Unique Identifier for a table entry</td>
+<td><a href="../Record/">Record</a></td>
 </tr>
 </tbody>
 </table>
@@ -361,6 +387,7 @@ description: A Coding is a representation of a defined concept using a symbol fr
   a defined "code system"
 title: Coding
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: Record
 attributes:
   code:
     name: code
@@ -405,6 +432,7 @@ description: A Coding is a representation of a defined concept using a symbol fr
   a defined "code system"
 title: Coding
 from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+is_a: Record
 attributes:
   code:
     name: code
@@ -443,6 +471,21 @@ attributes:
     domain_of:
     - Coding
     range: uri
+    required: true
+    multivalued: false
+  id:
+    name: id
+    description: Unique Identifier for a table entry. This is probably not the Global
+      ID
+    title: ID
+    from_schema: https://carrollaboratory.github.io/kfi-fhir-input
+    rank: 1000
+    identifier: true
+    alias: id
+    owner: Coding
+    domain_of:
+    - Record
+    range: string
     required: true
     multivalued: false
 
